@@ -1,0 +1,42 @@
+#! /bin/sh
+#demo for SUDREFSVMASTER
+
+out=gatherZR.su
+model=model10Layers
+nr=48
+dr=0.025
+r1=0.
+zs=.005
+u1=0.0
+u2=2.0
+nu=300
+f1=2
+f2=50
+dt=0.004
+tmax=4
+directwave=0
+F1=0
+F2=0
+F3=1
+wu=10
+ww=25                       
+fr=1
+hanning=1
+tau=7.07
+nproc=1
+nfreqproc=
+verbose=1
+recfile=
+
+set -x
+rm -f $file
+sudrefsvmaster model=$model r1=$r1 nr=$nr dr=$dr zs=$zs tau=$tau \
+	       u1=$u1 u2=$u2 nu=$nu f1=$f1 f2=$f2 dt=$dt tmax=$tmax \
+               fr=$fr F1=$F1 F2=$F2 F3=$F3 wu=$wu ww=$ww \
+	       verbose=$verbose recfile=$recfile \
+	       hanning=$hanning nfreqproc=$nfreqproc nproc=$nproc \
+	       directwave=$directwave > $out 
+
+suxwigb < $out d1=.004 x1end=$tend perc=$perc \
+	  d1num=.25 f1=0 clip=$clip \
+	  grid1=dot x1beg=$tbeg x2beg=$xbeg x2end=$xend

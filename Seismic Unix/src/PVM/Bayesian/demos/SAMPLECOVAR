@@ -1,0 +1,34 @@
+#! /bin/sh
+#DEMO for dataCovar
+set -x
+
+#creating realizations
+suplane nt=251 ntr=32 | suaddnoise sn=1 > data1 
+suplane nt=251 ntr=32 > data2
+sudiff data1 data2 > noise 
+rm -f data1 data2
+
+realizations=noise
+nreal=32
+t1=0
+t2=1
+scale=1
+exponential=1
+window=0
+verbose=1
+inverse=1
+cov=covar
+invcov=invcovar
+
+dataCovar				\
+	realizations=$realizations	\
+	nreal=$nreal			\
+	t1=$t1				\
+	t2=$t2				\
+	scale=$scale			\
+	exponential=$exponential	\
+	window=$window			\
+	verbose=$verbose		\
+	cov=$cov			\
+	inverse=$inverse		\
+	invcov=$invcov

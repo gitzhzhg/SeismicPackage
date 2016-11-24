@@ -1,0 +1,39 @@
+#! /bin/sh
+#DEMO for gaussSampling
+#set -x
+
+#setting number of realizations
+number=10
+i=1
+
+covariance=alpha
+mean=model10LayersInitial
+exponential=1
+impedance=0
+p=1
+s=0
+r=0
+targetbeg=1.00
+targetend=1.08
+dz=0.01
+verbose=1
+output=realizations
+>$output
+
+while [ $i -le $number ]
+do 
+        gaussSampling				\
+		covariance=$covariance		\
+		mean=$mean			\
+		exponential=$exponential	\
+		impedance=$impedance		\
+		p=$p				\
+		s=$s				\
+		r=$r				\
+		targetbeg=$targetbeg		\
+		targetend=$targetend		\
+		dz=$dz				\
+		verbose=$verbose >> $output
+	i=`expr $i + 1`
+        echo "Realization: $i" 
+done

@@ -1,7 +1,7 @@
 # SeismicPackage
 Open source seismic packages collected from varieties of websites
 
-# OpenSource Packages List
+# Open Source Packages List
 ** C/C++ codes
 
 * Seismic Unix(Release 44) - http://www.cwp.mines.edu/cwpcodes/

@@ -1,0 +1,392 @@
+% $Id: SEGY_Documentation.tex,v 1.1 2004/06/21 21:23:36 cmhogan Exp $
+\documentclass[10pt]{article}
+\usepackage{xspace}
+\title{SEGY manipulation libraries documentation}
+\author{Chad M. Hogan}
+\date{June 18 2004}
+
+\newcommand{\segy}{{\scriptsize SEGY}\xspace}
+\newcommand{\crewes}{{\scriptsize CREWES}\xspace}
+\newcommand{\ascii}{{\scriptsize ASCII}\xspace}
+\newcommand{\ebcdic}{{\scriptsize EBCDIC}\xspace}
+\newcommand{\cdp}{{\scriptsize CDP}\xspace}
+
+
+\begin{document}
+\maketitle
+
+\noindent
+This article documents the \segy manipulation libraries found in the
+\crewes software collection. Specifically documented are the functions:
+\begin{itemize}
+\item {\tt SEGY\_GetBinaryHeader}
+\item {\tt SEGY\_GetTextHeader}
+\item {\tt SEGY\_GetTrace}
+\item {\tt SEGY\_ReadBinaryHeader}
+\item {\tt SEGY\_ReadTextHeader}
+\item {\tt SEGY\_ReadTrace}
+\item {\tt SEGY\_WriteBinaryHeader}
+\item {\tt SEGY\_WriteGathers}
+\item {\tt SEGY\_WriteStack}
+\item {\tt SEGY\_WriteTextHeader}
+\item {\tt SEGY\_WriteTrace}
+\end{itemize}
+This set of functions is designed to generate standards-compliant
+\segy rev. 1 (May, 2002) files. It includes a full \ebcdic (or \ascii,
+if you must) text header, a binary header, and traces with trace
+headers and data written in big-endian (or little-endian, if you must)
+format.
+
+\subsection*{Warning}
+I am not 100\% comfortable with my geometry calculations within the
+sample functions {\tt SEGY\_WriteGathers} and {\tt SEGY\_WriteStack}. I
+think they're correct, but it is difficult for me to test them
+exhaustively. If you are writing \segy and you are confident in your
+setting but you think that the produced \segy file is in error with
+respect to geometry, it's entirely possible that you are correct.
+Please contact me and we'll discuss it.
+
+\section{A Short Introduction to SEGY}
+
+The \segy data format was first defined a long, long time ago. It
+arranges things for the convenience of punch-card users, it defaults
+to \ebcdic text format, and big-endian data. The intent of this
+library is to write a relatively easy-to-use library of \segy writing
+utilities. These are meant to be used as tools incorporated into
+larger programs, so they are not optimized for use directly from the
+command line in order to save a random amount of seismic data to a
+file. 
+
+The \segy data format consists of three main parts. The first 3200
+bytes in a file is defined as a text header. This text header,
+usually in \ebcdic, describes various notes and details that may be
+interesting to processing and interpreting staff. Although conventions
+are defined, this block is fairly free-form and cannot be reliably
+used to automate processing (for example). It is meant to be read by
+humans, not computers. This is more of a job for the next part of the
+\segy file.
+
+Following the 3200-byte text header is the binary header. The binary
+header is 400 bytes of strictly ordered numbers, usually in big-endian
+format. These numbers define parameters about the entire data set
+contained in the file. The line number, the sampling interval, the
+number of samples per trace, the sorting of the traces, and many other
+parameters are set in this binary header. These elements are designed
+to allow computers to quickly understand the data within the file so
+that they can reliably read and process the traces.
+
+The final part of the \segy file contains the traces themselves. Each
+trace has two parts: a trace header and the trace data. The trace
+header contains information specific to each trace in binary
+format. This will contain information such as the trace number, the
+source location for the trace, the receiver group location, the time
+sample interval, and many others. Following this trace header is the
+actual trace series consisting of all the samples one after
+another as a string of binary numbers. There is no ``end of trace''
+marker, which is why it is important to ensure that the number of
+samples is correctly specified in the binary and trace headers.
+
+For a thorough explanation of the \segy data format, please see the
+{\scriptsize SEG} website at {\tt http://www.seg.org}.
+
+\section{Quick Start and Examples}
+So, you want to just get on with it and write some \segy already?  Ok.
+This is your section. The first thing to do is to generate your data.
+You'll want it arranged in one of the following ways:
+\begin{itemize}
+\item In gathers (\cdp or shot). 
+\item In a stack.
+\end{itemize}
+
+In the case of gathers, then you will have the entire set of gathers
+stored in a cell array, with one cell for each gather. Within each
+gather, the traces will be arranged in an $N \times M$ array, where
+$N$ is the number of samples in each trace, and $M$ is the number of
+traces in the gather. For example, we'll imagine that you have all of
+your gathers stored in a cell array called {\tt gathers}. The third
+gather in this set is:
+
+\begin{verbatim}
+thirdgather = gathers{3};
+\end{verbatim}
+
+The second trace within this gather is referenced like this:
+
+\begin{verbatim}
+secondtrace = thirdgather(:, 2);
+\end{verbatim}
+
+\subsection{SEGY\_WriteGathers}
+
+This function is written mostly as an example for you to follow if you
+are interested in generating \segy in your own programs. However, it
+is directly useful if you are willing to manipulate your data into the
+format required by this function.
+
+If you can put your data into that format, then you are entirely set
+for writing \segy data. You simply use the {\tt SEGY\_WriteGathers}
+function as follows:
+
+\begin{verbatim}
+SEGY_WriteGathers(filename, gathers, dt, type, g1, g2, text, num);
+\end{verbatim}
+Where {\tt filename} is a string containing the full path to the
+filename that you want to write, {\tt gathers} is your cell array of
+gathers as previously described, {\tt dt} is the sampling interval in
+second, {\tt type} is a string containing either 'cdp' or 'shot' to
+describe the type of gather, {\tt g1} and {\tt g2} are geometry
+parameters that will be described shortly, {\tt text} is the text
+header format -- either 'ebcdic' or 'ascii', and {\tt num} is the
+number format -- either 'b' for big-endian or 'l' for little endian.
+
+The two geometry parameters {\tt g1} and {\tt g2} require a bit of
+explanation. They mean different things for the different kinds of
+gathers.
+\subsubsection{Writing \cdp gathers}
+To write a \cdp gather, you need two elements for the geometry. The
+first parameter, {\tt g1}, represents the horizontal distance between
+the depth points within a given gather. If your \cdp gathers are each
+separated by 100 meters, then {\tt g1} will be 100.
+
+The second parameter, {\tt g2}, represents the offset interval from
+the shot point to the receivers within the gathers. So, if the offsets
+in a particular \cdp gather are something like: 0, 100, 200, 300,
+\ldots; then your interval is 100. Note that this particular function
+assumes you have a zero offset shot. Since I imagine that this library
+will primarily be used for writing synthetic data, this isn't a bad
+thing.
+
+From this, geometry will be calculated. It is assumed that the first
+trace in the gather is the zero-offset gather, and the last trace is
+the longest-offset gather. Obviously this is going to be
+a very limited sort of geometry. If you have more complicated data and
+geometry, then you will have to create your own writing function using
+the more lower level functions described later.
+
+\subsubsection{Writing shot gathers}
+To write a shot gather, you need two elements for the geometry that
+are slightly different from the \cdp case. The first parameter, {\tt
+  g1}, represents the distance between each shot point. If your shots
+are separated by 50 meters, then {\tt g1} will be 50. 
+
+The second parameter, {\tt g2}, represents the offset interval between
+receivers. So if you have receivers placed every 100 meters, then {\tt
+  g2} will be 100. 
+
+Once again, this functionality is limited. It is assumed that there
+will be an odd number of traces in this gather. The first and last
+trace are the longest offset traces (on either side of the shot) and
+the middle trace is a zero-offset trace. If this does not fit your
+needs, then you will have to create your own custom writing routine
+using the lower level functions described in the rest of this
+document.
+
+\subsubsection{Example}
+This function call will generate a \segy file in {\tt /tmp/test.segy}
+using the gathers in {\tt cdpgathers}. The gathers are sampled every 2
+milliseconds, and they are sorted into \cdp gathers. Each gather's
+\cdp is separated by 50 meters, and the shot-to-receiver interval is
+100 meters.
+\begin{verbatim}
+    SEGY_WriteGathers('/tmp/test.segy', cdpgathers, 0.002, ...
+                      'cdp', 50, 100, 'ebcdic', 'b');
+\end{verbatim}
+
+\subsection{SEGY\_WriteStack}
+This is another example function that you may use if it is
+convenient. It is much more likely that this will be useful to you for
+writing stacks, as stack geometry is a lot simpler than gather
+geometry.
+
+It is called as follows:
+\begin{verbatim}
+SEGY_WriteStack(filename, stack, dt, separation, text, num);
+\end{verbatim}
+
+Where {\tt filename} is a string containing the filename to write,
+{\tt stack} is an $N \times M$ array of $N$ samples for each of $M$
+traces in the stack. {\tt dt} is the sample interval in seconds, {\tt
+  separation} is the horizontal separation distance between each
+stacked trace, {\tt text} is either 'ebcdic' or 'ascii', and {\tt num}
+is either 'b' for big-endian or 'l' for little-endian. 
+
+\subsubsection{Example}
+
+This call will save the stack in {\tt stackdata} into the file {\tt
+  /tmp/stacked.segy} with a sample interval of 2 ms. The text will be
+  written in \ebcdic and the data in big-endian format. 
+\begin{verbatim}
+SEGY_WriteStack{'/tmp/stacked.segy', stackdata, 0.002, 100, ...
+                'ebcdic', 'b');
+\end{verbatim}
+
+\section{Driving Functions}
+These functions do all the heavy lifting, when writing \segy files. I
+think of them in two separate groups. The first group is the
+``retrieving a template'' group:
+\begin{itemize}
+\item {\tt SEGY\_GetTextHeader}
+\item {\tt SEGY\_GetBinaryHeader}
+\item {\tt SEGY\_GetTrace}
+\end{itemize}
+These functions return a template of sorts that can be used as a
+starting point for your own binary header, text header, and trace when
+you're writing \segy.
+
+The next group is the ``writing to file'' group:
+\begin{itemize}
+\item {\tt SEGY\_WriteTextHeader}
+\item {\tt SEGY\_WriteBinaryHeader}
+\item {\tt SEGY\_WriteTrace}
+\end{itemize}
+
+\subsection{SEGY\_GetTextHeader}
+This function will return a text header that is initialized to be the
+correct size as a standard text header for a \segy file. It will be
+returned to you in \ascii, but this is ok because {\tt
+  SEGY\_WriteTextHeader} expects an \ascii header input as an
+argument. All of the \ascii vs. \ebcdic stuff is worked out via
+arguments to the writing functions. Don't try to manipulate \ebcdic
+directly yourself -- the 1970s are long over.
+
+The text header itself is a 3200 byte string of information. Take a
+look at it if you like, and modify it in place to fill in the blanks.
+Do {\bf not} change the size of this array. The text header is
+generally used purely as notes to the users of the data, so you can
+frequently just get a text header as it is, and write it directly
+without any changes.
+\begin{verbatim}
+thead = SEGY_GetTextHeader;
+\end{verbatim}
+
+\subsection{SEGY\_GetBinaryHeader}
+This function returns an initialized structure that represents all of
+the data found in a \segy binary header. The details of the \segy
+binary header are documented exhaustively in lots of places. One thing
+worth noting is that I tend to name the binary header elements in the
+same way as Seismic Unix names them. If you are familiar with Seismic
+Unix keywords, then you know all of the keywords for this structure as
+well. 
+
+\begin{verbatim}
+bhead = SEGY_GetBinaryHeader;
+\end{verbatim}
+
+A few of the more important header elements that you probably want to
+set in every \segy file are:
+
+\begin{description}
+\item[bhead.jobid] job id number
+\item[bhead.lino] line number, one line per reel
+\item[bhead.reno] reel number
+\item[bhead.hdt] sampling interval in microseconds, this reel
+\item[bhead.dto] sampling interval in microseconds, in field
+\item[bhead.hns] number of samples per trace, this reel
+\item[bhead.nso] number of samples, in field
+\item[bhead.tsort] trace sorting code
+\end{description}
+
+\subsection{SEGY\_GetTrace}
+This function returns a template for a \segy trace. As with the other
+functions, you get a trace, and then you modify the things that you
+want to change. You also have to add in the data for the trace. This
+trace structure includes both the trace header and the trace data
+itself. So you can use retrieve one template, then for every trace
+simply replace the time series data for each new trace, and also
+update the relevant geometry and trace id number information.
+
+\begin{verbatim}
+trace = SEGY_GetTrace;
+\end{verbatim}
+
+Here are a few of the most important trace header elements. Again,
+they follow Seismic Unix keyword names.
+
+\begin{description}
+\item[trace.tracl] trace sequence number within the line
+\item[trace.tracr] trace sequence number within the reel
+\item[trace.fldr] field record number
+\item[trace.ep] energy source point number
+\item[trace.cdp] ensemble number (doesn't have to be cdp)
+\item[trace.cdpt] trace number within the ensemble
+\item[trace.offset] distance from source to receiver
+\item[trace.sx] x source coordinate
+\item[trace.gx] x group coordinate
+\item[trace.dt] sample interval in microseconds
+\item[trace.data] the time series, as an array
+\end{description}
+
+Some of these elements will likely be the same for every single trace
+within a line. For example, {\tt trace.dt} is probably going to be the
+same for every trace. Others must be altered, usually in a non-trivial
+way, to accomodate the geometry of the shooting.
+
+
+\subsection{SEGY\_WriteTextHeader}
+
+This function will write the text header to the \segy file.
+
+\begin{verbatim}
+SEGY_WriteTextHeader(FILE, thead, format);
+\end{verbatim}
+
+{\tt FILE} is the opened file handle for the \segy file, {\tt thead}
+is the text header as returned by {\tt SEGY\_GetTextHeader} and
+subsequently modified, {\tt format} is equal to 'ebdic' or 'ascii'.
+You should probably choose 'ebcdic' unless you know otherwise, because
+\ebcdic conforms to the original \segy standard.
+
+If there is a text header already in the file that you are writing to,
+it will be overwritten without warning. You cannot use this function
+to insert a text header in front of a binary header and/or traces. It
+will simply overwrite the first 3200 bytes of a file without regard
+for what exists in those 3200 bytes.
+
+\subsection{SEGY\_WriteBinaryHeader}
+
+This function writes the binary header to the file.
+
+\begin{verbatim}
+ SEGY_WriteBinaryHeader(FILE, bhead);
+\end{verbatim}
+
+{\tt FILE} is the opened file handle for the \segy file, and {\tt
+  bhead} is the binary header as returned by the {\tt
+  SEGY\_GetBinaryHeader} function and subsequently modified. Note that
+endianness is determined within your call to {\tt fopen}, and is not a
+part of this library.
+
+If there is a binary header in the file, this function will overwrite
+it without warning. This function will overwrite the bytes from 3201
+to 3600 (inclusive) without regard for what exists in those
+bytes. Therefore, you cannot use this to insert a binary header into a
+file that does not have one. 
+
+\subsection{SEGY\_WriteBinaryHeader}
+
+This function will write a \segy trace to the file. 
+
+\begin{verbatim}
+SEGY_WriteTrace(FILE, trace);
+\end{verbatim}
+
+{\tt FILE} is the opened file handle for the \segy file and {\tt
+  trace} is the trace as returned by the {\tt SEGY\_GetTrace} function
+  and subsequently modified. Note that endianness is determined within
+  your call to the {\tt fopen}, and is not a part of this library.
+
+The trace will be written to the file at exactly the point where the
+current file pointer resides. If you do not understand the previous
+sentence, then simply ensure that you include the following line
+before you try to use the function {\tt SEGY\_WriteTrace}:
+
+\begin{verbatim}
+fseek(FILE, 0, 'eof');
+\end{verbatim}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

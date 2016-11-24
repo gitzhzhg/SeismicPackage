@@ -1,0 +1,734 @@
+/* SURECGAUSS: $Revision: 1.14 $ ; $Date: 2003/08/19 21:24:44 $	*/
+
+#include "su.h"
+#include "segy.h"
+#include "header.h"
+#include "par.h"
+#include <signal.h>
+
+/*********************** self documentation ******************************/
+char *sdoc[]={
+"									",
+" SURECGAUSS --- Applies a RECursive GAUSSian or GAUSSian derivative	",
+"		filter with standard deviation sigma. The filter is  	",
+"	 isotropic and applied in the space domain.			",
+"									",
+" surecgauss < stdin [optional parameters ] > stdout			",
+"									",
+" Required parameters:						  	",
+" stdin=		input data					",
+"									",
+" Optional Parameters:							",
+" sigma=2		smoothing parameter				",
+" order=0	0 for zeroth derivative					",
+"		1 for first derivative					",
+"		2 for second derivative					",
+" 									",
+" Notes: For sigma<=8 and order=1,2 the filter is constructed using	",
+" Deriche's method. For sigma > 8 and order=0 the filter is constructed ",
+" using van Vliet's method.						",
+
+NULL};
+
+/*
+ *	Credits: 
+ *		CWP: Carlos Pacheco, march 2006
+ */
+/**************** end self doc *******************************************/
+
+/* prototypes of functions used internally */
+void qdscale(complex *d, int nd, int sigma,complex *dnew);
+void parfrac(complex *d, int nd, complex *A);
+void buildfilter(complex *A, complex *d, double *num1, double *den1, 
+			double *num2, double *den2);
+void applyvanvliet(double *x,int n, double *num1, double *den1, 
+			double *num2, double *den2, double *y);
+void scalevv(float sigma, double *num1, double *den1, double *num2, 
+			double *den2, double *num1s, double *num2s);
+void deriche(int order, float sigma, double a0, double a1, double b0, 
+			double b1, double c0, double c1, double w0, 
+			double w1,  double **num, double **den);
+void scalenum(int order, float sigma, double **num, double **den, 
+			double **nums);
+void applyderiche(double *x, int n, double **nums, double **den, double *y);
+
+segy tr;
+
+int
+main(int argc, char **argv)
+{
+	int nx1,nx2;	/* numbers of samples		*/	
+	int ix1,ix2;	/* sample indices		*/
+	int order;	/* order of the filter		*/
+	float sigma;	/* filter dimension (in number of samples) */
+	
+	complex *A=NULL;	/* partial fraction coefficients	   */
+	complex *d=NULL,*dnew=NULL; /* poles of the filter		*/
+	double *num1=NULL,*num2=NULL; /* filter coefficients for Van Vliet's*/
+	double *num1s=NULL,*num2s=NULL;
+	double *den1=NULL,*den2=NULL; /* filter coefficients for Van Vliet's */
+	double *x=NULL,*y=NULL;   /* temporary arrays	 */
+
+	double **num=NULL,**nums=NULL;   /* Deriche's numerator coefficients */
+	double **den=NULL;	  /* Deriche's denominator coefficients	*/
+	float **data=NULL;	  /* array of input data		*/
+	float **v=NULL;		/* intermediate array			*/
+	float **outdata=NULL;	 /* array of filtered data  */
+
+	FILE *tracefp=NULL;	/* temp file to hold traces		*/
+	FILE *hfp;		/* temp file to hold trace headers	*/
+	
+	/* hook up getpar to handle the parameters */
+	initargs(argc, argv);
+	requestdoc(1);
+
+	/* Get parameters from command line */
+	if (!getparint("order",&order)) order=0;
+	if (!getparfloat("sigma",&sigma)) sigma=2.0;
+
+	/* Get info from first trace */
+	if (!gettr(&tr))  err("can't get first trace");
+	if (tr.trid != TRID_DEPTH)  warn("tr.trid=%d",tr.trid);
+	nx1=tr.ns;
+	
+	/* Store traces in tmpfile while getting a count of number of traces */
+	tracefp=etmpfile();
+	hfp=etmpfile();
+	nx2=0;
+	do {
+		++nx2;
+		efwrite(&tr,HDRBYTES, 1, hfp);
+		efwrite(tr.data, FSIZE, nx1, tracefp);
+	} while (gettr(&tr));
+	erewind(tracefp);
+	erewind(hfp);
+
+	/* Allocate space */
+	data=alloc2float(nx1,nx2);
+	v= alloc2float(nx1,nx2);
+	outdata= alloc2float(nx1,nx2);   
+	
+	/* Read data from temporal array */
+	for (ix2=0; ix2<nx2; ++ix2){
+		efread(data[ix2],FSIZE,nx1,tracefp);
+	}
+	
+       
+
+	/* Determine filter coefficients */
+	switch (order){
+	double a00,a01,b00,b01,c00,c01,w00,w01;
+	double a10,a11,b10,b11,c10,c11,w10,w11;
+	double a20,a21,b20,b21,c20,c21,w20,w21;
+	
+	case 0:
+	  if (sigma<=8.0){
+
+		/* Apply Deriche's method */
+		a00=1.67972922323;
+		a01=3.73482982691;
+		b00=1.78319065445;
+		b01=1.72282976633;
+		c00=-0.68027835018;
+		c01=-0.25983004789;
+		w00=0.63181131745;
+		w01=1.99692768324;
+		/* Make numerator and and denominator coefficients */
+		num=alloc2double(2,4);
+		den=alloc2double(2,4);
+		deriche(order,sigma,a00,a01,b00,b01,c00,c01,w00,w01,num,den);
+		/* Scale numerator filter coefficient */
+		nums=alloc2double(2,4);
+		scalenum(order,sigma,num,den,nums);
+		/* Apply Deriche's recursive filter */
+		/* Apply filter in the fast dimension */
+		x=alloc1double(nx1);
+		y=alloc1double(nx1);
+		for (ix2=0; ix2<nx2; ++ix2){
+			for(ix1=0; ix1<nx1; ++ix1){
+				x[ix1]=data[ix2][ix1];
+			}
+			applyderiche(x,nx1,nums,den,y);
+			for (ix1=0; ix1<nx1; ++ix1){
+				v[ix2][ix1]=y[ix1];
+			}
+		}
+		/* Apply filter in the slow dimension */
+		x=alloc1double(nx2);
+		y=alloc1double(nx2);
+		for (ix1=0; ix1<nx1; ++ix1){
+			for (ix2=0; ix2<nx2; ++ix2){
+				x[ix2]=v[ix2][ix1];
+			}
+			applyderiche(x,nx1,nums,den,y);
+			for (ix2=0; ix2<nx2; ++ix2){
+				outdata[ix2][ix1]=y[ix2];
+			}
+		}
+	  } else {
+		/* Apply van Vliet's method*/ 
+		d=alloc1complex(4);
+		d[0].r=1.13228;
+		d[0].i=1.28114;
+		d[1].r=1.13228;
+		d[1].i=-1.28114;
+		d[2].r=1.78534;
+		d[2].i=0.46763;
+		d[3].r=1.78534;
+		d[3].i=-0.46763;
+		/* Rescale the poles to meet required variance sigma */
+		dnew=alloc1complex(4);
+		qdscale(d,4,sigma,dnew);
+		/* Find coefficients of partial fraction expansion */
+		A=alloc1complex(8);
+		parfrac(dnew,4,A);
+		/* Construc filter coefficients of parallel implementation */
+		num1=alloc1double(4);
+		den1=alloc1double(4);
+		num2=alloc1double(4);
+		den2=alloc1double(4);
+		buildfilter(A,dnew,num1,den1,num2,den2);
+		/* Scale numerator filter coefficient */
+		num1s=alloc1double(4);
+		num2s=alloc1double(4);
+		scalevv(sigma,num1,den1,num2,den2,num1s,num2s);
+		/* Apply recursive filter to the data */
+		/* Apply filter in the fast dimension */
+		x=alloc1double(nx1);
+		y=alloc1double(nx1);
+		for (ix2=0; ix2<nx2; ++ix2){
+			for(ix1=0; ix1<nx1; ++ix1){
+				x[ix1]=data[ix2][ix1];
+		}
+			applyvanvliet(x,nx1,num1s,den1,num2s,den2,y);
+			for (ix1=0; ix1<nx1; ++ix1){
+				v[ix2][ix1]=y[ix1];
+			}
+		}
+		/* Apply filter in the slow dimension */
+		x=alloc1double(nx2);
+		y=alloc1double(nx2);
+		for (ix1=0; ix1<nx1; ++ix1){
+			for (ix2=0; ix2<nx2; ++ix2){
+				x[ix2]=v[ix2][ix1];
+			}
+			applyvanvliet(x,nx2,num1,den1,num2,den2,y);
+			for (ix2=0; ix2<nx2; ++ix2){
+				outdata[ix2][ix1]=y[ix2];
+			}
+		}
+	  }
+	  break;
+
+	case 1:
+	  /* Apply Deriche's method */
+	  a10=0.64940240084;
+	  a11=0.95573707607;
+	  b10=1.51597266707;
+	  b11=1.52676087347;
+	  c10=-0.64721052766;
+	  c11=-4.53069230445;
+	  w10=2.07189536587;
+	  w11=0.67190559576;
+	  /* Make numerator and denominator coefficients */
+	  num=alloc2double(2,4);
+	  den=alloc2double(2,4);
+	  deriche(order,sigma,a10,a11,b10,b11,c10,c11,w10,w11,num,den);
+	  /* Scale numerator filter coefficient */
+	  nums=alloc2double(2,4);
+	  scalenum(order,sigma,num,den,nums);
+	  /* Apply Deriche's recursive filter */
+	  /* Apply filter in the fast dimension */
+	  x=alloc1double(nx1);
+	  y=alloc1double(nx1);
+	  for (ix2=0; ix2<nx2; ++ix2){
+		for(ix1=0; ix1<nx1; ++ix1){
+			x[ix1]=data[ix2][ix1];
+		}
+		applyderiche(x,nx1,nums,den,y);
+		for (ix1=0; ix1<nx1; ++ix1){
+			v[ix2][ix1]=y[ix1];
+		}
+	  }
+	  /* Apply filter in the slow dimension */
+	  x=alloc1double(nx2);
+	  y=alloc1double(nx2);
+	  for (ix1=0; ix1<nx1; ++ix1){
+		for (ix2=0; ix2<nx2; ++ix2){
+			x[ix2]=v[ix2][ix1];
+		}
+		applyderiche(x,nx2,nums,den,y);
+		for (ix2=0; ix2<nx2; ++ix2){
+			outdata[ix2][ix1]=y[ix2];
+		}
+	  }
+	  break;
+	  
+	case 2:
+	  /* Apply Deriche's method */
+	  a20=0.32245705100;
+	  a21=-1.73828439635;
+	  b20=1.31380549265;
+	  b21=1.24021813932;
+	  c20=-1.33122755937;
+	  c21=3.66070356719;
+	  w20=2.16560413574;
+	  w21=0.74798887454;
+	  /* Make numerator and denominator coefficients */
+	  num=alloc2double(2,4);
+	  den=alloc2double(2,4);
+	  deriche(order,sigma,a20,a21,b20,b21,c20,c21,w20,w21,num,den);
+	  /* Scale numerator filter coefficient */
+	  nums=alloc2double(2,4);
+	  scalenum(order,sigma,num,den,nums);
+	  /* Apply Deriche's recursive filter */
+	  /* Apply filter in the fast dimension */
+	  x=alloc1double(nx1);
+	  y=alloc1double(nx1);
+	  for (ix2=0; ix2<nx2; ++ix2){
+		for(ix1=0; ix1<nx1; ++ix1){
+			x[ix1]=data[ix2][ix1];
+		}
+			applyderiche(x,nx1,nums,den,y);
+		for (ix1=0; ix1<nx1; ++ix1){
+			v[ix2][ix1]=y[ix1];
+		}
+	  }
+	  /* Apply filter in the slow dimension */
+	  x=alloc1double(nx2);
+	  y=alloc1double(nx2);
+	  for (ix1=0; ix1<nx1; ++ix1){
+		for (ix2=0; ix2<nx2; ++ix2){
+			x[ix2]=v[ix2][ix1];
+		}
+		applyderiche(x,nx2,nums,den,y);
+		for (ix2=0; ix2<nx2; ++ix2){
+			outdata[ix2][ix1]=y[ix2];
+		}
+	  }
+	  break;
+	}   
+	
+	/* Output filtered data */
+	erewind(hfp);
+	for (ix2=0; ix2<nx2; ++ix2) {
+		efread(&tr, HDRBYTES, 1, hfp);
+		for (ix1=0; ix1<nx1; ++ix1)
+			tr.data[ix1]=outdata[ix2][ix1];
+	  	puttr(&tr);
+	}
+	efclose(hfp);
+
+	return(CWP_Exit());
+}
+
+
+ void qdscale(complex *d, int nd, int sigma, complex *dnew)
+/******************************************************************************
+qdscale - finds the optimum value of q that yields the specified 
+	  variance sigma^2 and then rescales the poles using the found q value
+*******************************************************************************
+Input:
+d	array with poles for sigma=2
+nd	number of poles
+sigma	standard deviation of the new filter
+
+Output:
+dnew	rescaled poles for the filter
+*****************************************************************************/
+{
+  int i;	 /* index number */
+  float qi;			/* initial q value for search */
+  float dq;			/* q interval */
+  float var;		   /* variance */
+  float aux;		   /* auxiliary variable */
+  complex one;
+  complex aux1,aux2,aux3;	/* auxiliary variable to store complex operations */
+  float *amp,*ampr;		/* absolute value of pole and rescaled pole */
+  float *angle,*angler;	/* angle of pole and rescaled pole */
+
+  amp=alloc1float(nd);
+  ampr=alloc1float(nd);
+  angle=alloc1float(nd);
+  angler=alloc1float(nd);
+  one.r=1.0;
+  one.i=0.0;
+  qi=1.00;
+  dq=0.01;
+  var=0.0;
+  while (var<sigma*sigma){
+	aux=0.0;
+	for (i=0; i<nd; ++i){
+	amp[i]=rcabs(d[i]);
+	ampr[i]=pow(amp[i],1.0/qi);
+	angle[i]=atan(d[i].i/d[i].r);
+	angler[i]=angle[i]/qi;
+	dnew[i].r=ampr[i]*cos(angler[i]);
+	dnew[i].i=ampr[i]*sin(angler[i]);
+	aux1=cmul(csub(dnew[i],one),csub(dnew[i],one));
+	aux2=cinv(aux1);;
+	aux3=crmul(cmul(dnew[i],aux2),2);
+	aux=aux+aux3.r;
+	}
+	var=aux;
+	qi=qi+dq;
+  }
+}
+
+void parfrac(complex *d, int nd, complex *A)
+/**********************************************************************
+parfrac - find coefficients after partial fraction expansion of the 
+		series filter for parallel implementation of the filter.	
+************************************************************************
+Input:
+d	poles of the series implementation
+nd	number of poles
+
+Output:
+A	complex coefficients of partial fraction expansion
+************************************************************************/
+{
+  int i,j;		   /* sample index */
+  complex aux,one;	   /* auxiliary  complex variables */
+  float c;		   /* auxiliary real variable */
+  
+  c=pow(pow(rcabs(d[0]),2)-2*d[0].r+1,2)*pow(pow(rcabs(d[2]),2)-2*d[2].r+1,2)*(1/pow(rcabs(d[0]),2))*(1/pow(rcabs(d[2]),2));
+  one.r=1.0;
+  one.i=0.0;
+
+  /* Causal coefficients */
+  for(i=0; i<4; ++i){
+	aux.r=1.0;
+	aux.i=0.0;
+	for(j=0; j<4; ++j){
+	if(abs(i-j)>0){
+	aux=cmul(aux,csub(one,cmul(cinv(d[j]),d[i])));
+	}
+	}
+	for(j=4; j<8; ++j){
+	aux=cmul(aux,csub(one,cmul(d[j-4],d[i])));
+	}
+	A[i]=cmul(cinv(aux),crmul(cmul(cmul(d[i],d[i]),cmul(d[i],d[i])),c));
+  }
+  /* Anticausal coefficients */
+  for(i=0; i<4; ++i){
+	aux.r=1.0;
+	aux.i=0.0;
+	for(j=0; j<4; ++j){
+	aux=cmul(aux,csub(one,cmul(cinv(d[j]),cinv(d[i]))));
+	}
+	for(j=4; j<8; ++j){
+	if(abs(i+4-j)>0){
+	aux=cmul(aux,csub(one,cmul(d[j-4],cinv(d[i]))));
+	}
+	}
+	A[i+4]=cmul(cinv(aux),crmul(cmul(cmul(cinv(d[i]),cinv(d[i])),cmul(cinv(d[i]),cinv(d[i]))),c));
+  }
+
+}
+
+void buildfilter(complex *A, complex *d, double *num1, double *den1, double *num2, double *den2)
+/************************************************************************
+buildfilter - creates the numerator and denominator recursive filter 
+              coefficients for both the causal and anti-causal 
+              implementation of the parallel filter.
+*******************************************************************************
+Input:
+A	   partial fraction coefficients
+
+Output:
+nc	  numerator coefficients of causal filter
+dc	  denominator coefficients of causal filter
+na	  numerator coefficients of anticausal filter
+da	  denominator coefficients of anticausal filter
+*************************************************************************/
+{
+	int i;
+	double d0_pow2,d2_pow2;	/* auxiliary constants */
+	double n00,n01,n20,n21,d01,d02,d21,d22; /* Second order coefficients */
+	
+	d0_pow2=pow(rcabs(d[0]),2);
+	d2_pow2=pow(rcabs(d[2]),2);
+
+	/* Build 2nd order causal filter */
+	n00=2*A[0].r;
+	n20=2*A[2].r;
+	n01=2*(A[0].i*d[0].i - A[0].r*d[0].r)/d0_pow2;
+	n21=2*(A[2].i*d[2].i - A[2].r*d[2].r)/d2_pow2;
+	d01=-2*d[0].r/d0_pow2;
+	d21=-2*d[2].r/d2_pow2;
+	d02=1/d0_pow2;
+	d22=1/d2_pow2;
+	/* Build 4th order causal filter */
+	num1[0]=n00 + n20;
+	num1[1]=n00*d21 + n20*d01 + n01 + n21;
+	num1[2]=n00*d22 + n20*d02 + n01*d21 + n21*d01;
+	num1[3]=n01*d22 + n21*d02;
+	den1[0]=d01 + d21;
+	den1[1]=d02 + d22 + d01*d21;
+	den1[2]=d01*d22 + d21*d02;
+	den1[3]=d02*d22;
+	/* Build 4th order anticausal filter */
+	for(i=0; i<3; ++i){
+		den2[i]=den1[i];
+		num2[i]=num1[i+1]-den1[i]*num1[0];
+	}
+	den2[3]=den1[3];
+	num2[3]=-den1[3]*num1[0];
+
+}
+	
+void applyvanvliet(double *x,int n, double *num1, double *den1, 
+				double *num2, double *den2, double *y)
+/*************************************************************************
+applyvanvliet - applies the recursive gaussian filter using van Vliet's 
+			method but implemented in parallel
+**************************************************************************
+Input:
+x		input array
+n		length of the array
+num1,num2	numerator filter coefficients
+den1,den2	denominator filter coefficients 
+
+Output:
+y		filtered output array
+***************************************************************************/
+{
+	int i;	/* sample index */
+
+	/* apply first in the forward direction */
+	double ym4=0;
+	double ym3=0;
+	double ym2=0;
+	double ym1=0;
+	double xm3=0;
+	double xm2=0;
+	double xm1=0;
+	for(i=0; i<n; ++i){
+		double xi=x[i];
+		double yi=num1[0]*xi + num1[1]*xm1 + num1[2]*xm2 + num1[3]*xm3 -
+			(den1[0]*ym1 + den1[1]*ym2 + den1[2]*ym3 + den1[3]*ym4);
+		y[i] =yi;
+		ym4=ym3; ym3=ym2; ym2=ym1; ym1=yi; xm3=xm2; xm2=xm1; xm1=xi;
+	}
+	/* apply second in the backward direction */
+     {
+	double yp4=0;
+	double yp3=0;
+	double yp2=0;
+	double yp1=0;
+	double xp4=0;
+	double xp3=0;
+	double xp2=0;
+	double xp1=0;
+	for(i=n-1; i>=0; --i){
+		double xi=x[i];
+		double yi= num2[0]*xp1 + num2[1]*xp2 + num2[2]*xp3 + num2[3]*xp4 -
+			(den2[0]*yp1 + den2[1]*yp2 + den2[2]*yp3 + den2[3]*yp4);
+		y[i] +=yi;
+		yp4=yp3; yp3=yp2; yp2=yp1; yp1=yi;xp4=xp3; xp3=xp2; xp2=xp1; xp1=xi;
+	}
+       }
+
+}
+
+void deriche(int order,float sigma, double a0, double a1, 
+		double b0, double b1, double c0, double c1, double w0, 
+		double w1, double **num, double **den)
+/***************************************************************************
+deriche -  find the numerator and denominator coefficients for the 
+           recursive filter using Derihe's methodology
+***************************************************************************
+Input:
+order		order of the filter (0,1 or 2)
+a0,a1,b0,b1,c0,c1,w0,w1		filter parameters
+Output:
+num		numerator coefficients
+den		denominator coefficents
+****************************************************************************/
+{
+	int i;
+
+	/* Calculate first the causal filter coefficients */
+	num[0][0]=a0+c0;
+	num[1][0]=exp(-b1/sigma)*(c1*sin(w1/sigma) - (c0+2*a0)*cos(w1/sigma)) + exp(-b0/sigma)*(a1*sin(w0/sigma) - (2*c0 + a0)*cos(w0/sigma));
+	num[2][0]=2*exp(-(b0+b1)/sigma)*((a0+c0)*cos(w1/sigma)*cos(w0/sigma) - cos(w1/sigma)*a1*sin(w0/sigma) - cos(w0/sigma)*c1*sin(w1/sigma)) + c0*exp(-2*b0/sigma) + a0*exp(-2*b1/sigma);
+	num[3][0]=exp(-(b1+2*b0)/sigma)*(c1*sin(w1/sigma) - cos(w1/sigma)*c0) + exp(-(b0+2*b1)/sigma)*(a1*sin(w0/sigma) - cos(w0/sigma)*a0);
+
+	den[0][0]=-2*exp(-b1/sigma)*cos(w1/sigma) - 2*exp(-b0/sigma)*cos(w0/sigma);
+	den[1][0]=4*cos(w1/sigma)*cos(w0/sigma)*exp(-(b0+b1)/sigma) + exp(-2*b1/sigma) + exp(-2*b0/sigma);
+	den[2][0]=-2*cos(w0/sigma)*exp(-(b0+2*b1)/sigma) - 2*cos(w1/sigma)*exp(-(b1+2*b0)/sigma);
+	den[3][0]=exp(-2*(b0+b1)/sigma);
+
+	/* Calculate second the anticausal coefficients */
+	if (order==0 || order==2){
+		for (i=0; i<4; ++i){
+			den[i][1]=den[i][0];
+		}
+		for (i=0; i<3; ++i){
+			num[i][1]=num[i+1][0]-den[i][0]*num[0][0];
+		}
+		num[3][1]=-den[3][0]*num[0][0];
+	}
+	else{
+		for (i=0; i<4; ++i){
+			den[i][1]=den[i][0];
+		}
+		for (i=0; i<3; ++i){
+			num[i][1]=-(num[i+1][0]-den[i][0]*num[0][0]);
+		}
+		num[3][1]=den[3][0]*num[0][0];
+	}
+
+}	 
+
+void applyderiche(double *x, int n, double **nums, 
+				double **den, double *y) 
+/********************************************************************** 
+applyderiche - applies recursive filter to the input array x and 
+          yields filtered array y
+************************************************************************
+Input:
+x		input array
+n		array dimensions	 
+nums, den	filter coefficients
+
+Output:
+y	 	gaussian filtered array
+*********************************************************************/
+{
+	int i;													/* sample index */
+
+	/* apply first in the forward direction */
+	float ym4=0;
+	float ym3=0;
+	float ym2=0;
+	float ym1=0;
+	float xm3=0;
+	float xm2=0;
+	float xm1=0;
+	for(i=0; i<n; ++i){
+		float xi=x[i];
+		float yi=nums[0][0]*xi + nums[1][0]*xm1 + nums[2][0]*xm2 + nums[3][0]*xm3 -
+			(den[0][0]*ym1 + den[1][0]*ym2 + den[2][0]*ym3 + den[3][0]*ym4);
+		y[i] =yi;
+		ym4=ym3; ym3=ym2; ym2=ym1; ym1=yi; xm3=xm2; xm2=xm1; xm1=xi;
+	}
+	/* apply second in the backward direction */
+       {
+	float yp4=0;
+	float yp3=0;
+	float yp2=0;
+	float yp1=0;
+	float xp4=0;
+	float xp3=0;
+	float xp2=0;
+	float xp1=0;
+	for(i=n-1; i>=0; --i){
+		float xi=x[i];
+		float yi= nums[0][1]*xp1 + nums[1][1]*xp2 + nums[2][1]*xp3 + nums[3][1]*xp4 -
+			(den[0][1]*yp1 + den[1][1]*yp2 + den[2][1]*yp3 + den[3][1]*yp4);
+		y[i] +=yi;
+		yp4=yp3; yp3=yp2; yp2=yp1; yp1=yi; xp4=xp3; xp3=xp2; xp2=xp1; xp1=xi;
+	}
+       }
+
+}	
+
+void scalenum(int order, float sigma, double **num, double **den, double **nums)
+/***************************************************************************** 
+scalenum - scales the	Deriche's numerator coefficients to normalize 
+the filter
+*****************************************************************************
+Input:
+order	order of the filter
+num	numerator coefficients to be rescaled
+den	denominator coefficients
+
+Output:
+nums	 rescaled numerator coefficients
+****************************************************************************/
+{
+	int i,j;											 /* sample indices */
+	int n, m;											/* number of samples */
+	float scale;									 /* scale number */
+	double *x;											/* input unit impulse */
+	double *y;											/* impulse response of the filter */ 
+	
+	n=1+20*ceil(sigma);
+	x=alloc1double(n);
+	for(i=0; i<n; ++i){
+		x[i]=0.0;
+	} 
+	y=alloc1double(n);
+	m=ceil(n/2);
+	x[m]=1.0;
+	applyderiche(x, n, num, den,y);
+	scale=0.0;
+	if(order==0){
+		for(i=0; i<n; ++i){
+			scale +=y[i];
+		}
+	}
+	if (order==1){
+		for(i=0; i<n; ++i){
+			double t=i-m;
+			scale +=t*y[i];
+		}
+	}
+	if (order==2){
+		for(i=0; i<n; ++i){
+			double t=i-m;
+			scale +=t*t*y[i];
+		}
+		scale=0.5*scale;
+	}
+	
+	for (i=0; i<4; ++i){
+		for (j=0; j<2; ++j){
+			nums[i][j]=num[i][j]/scale;
+		}
+	} 
+
+}
+
+
+void scalevv(float sigma, double *num1, double *den1, 
+          double *num2, double *den2, double *num1s, double *num2s)
+/*************************************************************************
+scalevv -  scales the	Deriche's numerator coefficients to normalize the 
+     filter
+**************************************************************************
+Input:
+num1,num2	numerator coefficients to be rescaled
+den1,den2	denominator coefficients
+
+Output:
+num1s,num2s	rescaled numerator coefficients
+****************************************************************************/
+{
+	int i;	/* sample indices */
+	int n, m;	/* number of samples */
+	double scale;	/* scale number */
+	double *x;	/* input unit impulse */
+	double *y;	/* impulse response of the filter */ 
+	
+	n=1+20*ceil(sigma);
+	x=alloc1double(n);
+	for(i=0; i<n; ++i){
+		x[i]=0.0;
+	} 
+	y=alloc1double(n);
+	m=ceil(n/2);
+	x[m]=1.0;
+	applyvanvliet(x, n, num1, den1, num2, den2, y);
+	scale=0.0;
+	for(i=0; i<n; ++i){
+		scale +=y[i];
+	}
+
+	for (i=0; i<4; ++i){
+		num1s[i]=num1[i]/scale;
+		num2s[i]=num2[i]/scale;
+	}
+} 

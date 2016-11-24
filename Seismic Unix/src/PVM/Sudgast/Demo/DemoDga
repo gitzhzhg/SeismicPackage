@@ -1,0 +1,25 @@
+data=/u/elbert/wgouveia/summer/dga/demo
+input=$data/datademo.su
+xcor=$data/xcor
+path=/u/elbert/wgouveia/pvm/RIOS
+
+#create xcorrelation table
+$path/sustxcor datafile=$input \
+	 xcorrfile=$xcor sources=20 receivers=43 \
+	 cmps=62 maxfold=20 windbeg=0.5 windend=1.5 maxlag=160 verbose=1
+
+#run sudgast, but first initialize pvm
+
+echo "Starting pvm ..."
+pvmd host &
+
+timex $path/sudgast suffix=demo \
+	      sources=20 receivers=43 \
+	      maxfold=20 maxlag=160 minstatic=-20 maxstatic=20 numbits=128\
+       	      evolutions=10 iterations=200 popsize=40 populations=6\
+	      firstcg=2 maxiteratcg=40 \
+	      maxevol=2 workdir=$data \
+	      datafile=$input \
+	      xcorrfile=$xcor \
+	      dx=100 verbose=1 cmps=62 crossprob=.6 mutprob=.01 \
+	      uphill=1 smooth=0

@@ -1,0 +1,22 @@
+#! /bin/sh
+data=/u/elbert/wgouveia/summer/dga/demo
+input=$data/datademo.su
+xcor=$data/xcor
+path=/u/elbert/wgouveia/pvm/RIOS
+
+dt=.004
+
+$path/sustapply sources=20 receivers=43 maxfold=20 cmps=62 \
+	datafile=$input \
+	staticsfile=$data/answer.demo.4 \
+	verbose=1 | 
+sustatic hdrs=1 sign=-1 |
+sustack |
+suxwigb f1=0 d1=$dt d1num=.5 f2=1 d2=1 d2num=5 perc=99 \
+	x1beg=.5 x1end=1.5 \
+	wbox=8 hbox=6 \
+	grid1=dot \
+	labelsize=30 labelfont="Helvetica-Bold" \
+	title='Output stacked section for the statics demo' \
+	label1='Time(s)' label2='Trace #' \
+	titlesize=32&

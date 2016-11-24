@@ -1,0 +1,615 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:0cm;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0cm;
+	margin-left:0cm;
+	font-size:13.5pt;
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+p
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+code
+	{font-family:"Courier New";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:36.0pt;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:36.0pt;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+span.apple-converted-space
+	{mso-style-name:apple-converted-space;}
+span.argumentname
+	{mso-style-name:argument_name;}
+.MsoChpDefault
+	{font-family:"Calibri",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-CA>
+
+<div class=WordSection1>
+
+<p class=MsoNormal><b><span lang=EN-US>PickTool Help</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>PickTool is a MATLAB facility for picking
+seismic data that is designed to run on top of a seismic display that already
+exists in a MATLAB figure. This means that PickTool will not plot your data and
+expects you to give it the handle of the Figure or Axes in which your data is
+displayed. Then PickTool will adjust the size of the figure (usually making it
+larger) and make room for some additional controls to be placed to the right of
+the seismic display. These tools facilitate the automatic picking of horizons
+on the seismic section and the subsequent editing of these picks. Editing is
+generally required because it is difficult, perhaps impossible, to have an
+automatic picker that always does what the eye wants. These picking controls
+are grouped into three separated boxes. The topmost is labelled “Horizon
+Autopicking” and contains controls for automatically picking and repicking
+horizons, loading a save horizons file, deleting, sorting, or listing horizons,
+and changing horizon color.  The second group is labelled “Pickediting” and
+contains tools to edit already picked horizons (adjust the automatic picks) and
+to save you results to a file. </span></p>
+
+<p class=MsoNormal><b><i><span lang=EN-US>NOTE: At present, if you close your
+window without clicking either “Stop and save” or “Stop and save as” you will
+lose your work and no warning will be given.</span></i></b></p>
+
+<p class=MsoNormal><span lang=EN-US>At this time, the autopicking facility is
+encoded in the function <i>picker</i> while the editing of picks is done with <i>editlines</i>.
+The controls that PickTool places on the seismic window are intended to
+facilitate the easy usage of these two tools and to allow the picks to be save
+in an organized fashion to disk. The picks are stored in a MATLAB structure,
+called the <i>pickstruc</i>, that at present has eight (8) fields.  A given
+pickstruc  can contain any number of horizons but they should all come from the
+same seismic line.  Logically, a pickstruc can handle 2D or 3D data but at
+present PickTool only works well in 2D. The eight fields of a pickstruc are all
+cell arrays and must be the same length. While it is possible for knowledgeable
+MATLAB users to create their own pickstruc’s, it is expected that most will
+prefer to let PickTool do this for them.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>PICKSTRUC fields:</span></b></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+lang=EN-US>1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.hornames … a cell array or horizon
+names. Each entry in the array is the name of a particular horizon as a text
+string. For example, pickstruc.hornames{1}=’tecla’; and
+pickstruc.hornammes{2}=’dakota’; initializes a pickstruc with two horizons,
+tecla and dakota. </span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.horcolors … a cell array of RGB color
+specifications for each horizon, given in the same order as in hornames. In
+MATLAB RGB color specifications are vectors of length 3 of the form [r g b]
+where r,g,b are numbers between 0 and 1 giving the strength of red, green, and
+blue respectively. Thus [1 0 0] is red, [0 0 1] is blue, and [0 1 1] is yellow.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>3)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.horpicks … a cell array of the picks
+for each horizon. For horizon number k, the pickstruc.horpicks{k} is an n-by-3
+matrix where n is the number of picks. The first column gives the pick times,
+while columns 2 and 3 are the x and y coordinates respectively. For 2D data the
+y coordinates can be set to any constant value such as 0. The pick times are
+real numbers in seconds but can be NaN (not a number) to denote a missing pick.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>4)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.horattrs … a cell array of horizon
+attributes associated with each pick. For each horizon, these are n-by-m
+matrices where n is the number of picks and m is the number of attributes.
+Eventually PickTool will facilitate the extraction of a variety of attributes,
+but at present there are only two: pick amplitude and amplitude of the Hilbert
+envelope. Only scalar attributes are supported.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>5)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.horattrnames … a cell array of the
+names of the horizon attributes found in pickstruc.horattrs. For a given
+horizon, if pickstruc.horattrs{k} is a matrix with m columns, then
+pickstruc.horattrnames{k} must be a cell array with m text strings.  Thus
+pickstruc.horattrnames is a cell array of cell arrays.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>6)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.horpicktypes … a cell array of text
+strings, one per horizon, denoting the type of autopicking that was performed.
+These might be things like ‘nearest peak’, ‘nearest trough’, or ‘nearest – to +
+zero crossing’ where nearest refers to the guide points discussed in the next
+field. These strings are provided by <i>picker</i> and at present there are 12
+possibilities. So see the complete list use the command picker(‘methods’).</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>7)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>pickstruc.horguides … For each horizon this is an
+n-by-3 matrix giving the guide points used to inform the autopicker of the
+general shape and location of the event of interest. PickTool provides the
+ability to define these points by mouse clicks made directly on the seismic
+image.</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span lang=EN-US>8)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN-US>pickstruc.horfwys … For each horizon, this is a scalar value giving
+the width (in seconds) of a fairway centered on the guide points (see the
+previous field) withing which the autopicker is constrained to obtain its
+results.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Launching PickTool</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>It is recommended that you read the launch
+instructions found by typing <i>help picktool</i> at the MATLAB prompt. 
+Nevertheless, the simplest way to start using PickTool is to first ensure that
+your seismic data is displayed in a Matlab figure and that figure is the
+current figure. Usually, a figure can be made current by clicking in it.
+Alternatively most figures have a unique number which is an integer shown in
+the title bar of the figure. You can click anywhere in the figure to make it
+current or, alternatively, the command <i>figure(figno)</i> where figno is the
+figure number will make the figure current. Then, launch PickTool by typing <i>picktool(gcf)
+</i>where gcf means <i>getcurrentfigure </i> and causes Matlab to return the
+current figure number.  After this command PickTool will resize the figure and
+the seismic image to allow easier picking and to make room for the necessary
+controls which will appear to the right of the seismic axes. PickTool will also
+offer the chance to load a saved pickstruc file from a previous session.  Note
+that it is entirely possibly to load mistakenly a pickstruc from an entirely different
+line and the user must take care to ensure this does not happen. </span></p>
+
+<p class=MsoNormal><b><i><span lang=EN-US>Special instructions for Plotimage:</span></i></b><span
+lang=EN-US> If you have plotted your data in plotimage, then PickTool is
+already integrated into that program but the feature is currently hidden while
+being tested. To activate PickTool in plotimage, make sure the plotimage window
+is current (click in it) and then type the command: </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&gt;&gt; enablepicktool</span></p>
+
+<p class=MsoNormal><span lang=EN-US>This will cause a new button to appear in
+the lower left of the plotimage window with the label “Launch PickTool”. Push
+this button.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Autopicking horizons</span></b></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+lang=EN-US>1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>Click the ‘New horizon’ button and provide a
+name and choose a color for the horizon. When you push the OK button after
+specifying a color, a window with instructions will appear.  You should read
+these at least once in life. This window can be left open in case you wish to
+refer to it later.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>Next, you will probably want to zoom in time to
+magnify the zone of the intended event. Push the zoom button and draw a zoom
+rectangle with the mouse.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>3)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>Now you need to define the guide points on the
+event. These are points that guide the autopicker and you should define a point
+every time the event you are picking changes dip or character. At this point,
+you need to decide if you are picking a peak, trough or zero crossing and try
+to make your guide points conform to this decision. You define these points
+simply by clicking with the left mouse button. You don’t have to click them in
+any particular order because they will be sorted by spatial location.  This
+means that you cannot specify an event that is double valued in time (i.e. has
+more than one time at a given x). The only way at present to handle a
+double-valued event is to pick it as two or more separate horizons.  As you
+pick these points, try not to pick too many. With reasonable quality data from
+a sedimentary basin, you should be able to pick a strong event across several
+thousand traces with a dozen or so guide points. Subtle or discontinuous events
+will require more points. You can always re-pick the horizon and add more
+points. Also, try to pick roughly the same phase across the section. Don’t pick
+a peak sometimes and a trough other times. You can delete guide points by
+left-clicking on an already defined point. Finally, when you are ready to send
+these guide points to the autopicker, click the right mouse button.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US>4)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>When the right mouse button is clicked to signal
+the guide points have been defined, a new window will appear that allows you to
+specify the time width of the picking fairway and also to specify exactly how the
+picks will be made (the picking method). The picking fairway is a time zone
+centered on the guide points (linearly interpolated between guide points)
+within which the autopicks must occur. The default half-width is .020 sec
+meaning that the autopicks will never be more than +/- 20ms from the guide event. 
+You specify picking method with a popup menu at the bottom of this window.
+These methods are defined by <i>picker</i> and can change if a new method is
+created. Choose this method carefully and make sure your choice is consistent
+with you guide points.  This means, for example, that if you picked your guide
+points on a trough, don’t choose to autopick on a peak.  Once you have chosen
+your method, click the ‘done button and the <i>picker</i> will run and the
+results will be posted on top of your seismic. Another dialog will appear
+giving you the choice of keeping this result, autopicking again, or discarding
+the result. If the result looks reasonable with only a few problems, then
+choose to keep it. If you choose “autopick again” you can re-specify the
+picking fairway and choose a different picking method but you cannot change the
+guide points. If you want to change the guide points, then you must choose to
+accept this result and then re-pick it with the “Repick horizon” button.</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span lang=EN-US>5)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN-US>When you accept the result, you will then be asked to choose what to
+do about missing picks or to extend the event to the section edge. Missing
+picks are filled with simple linear interpolation and the extension to the
+edges is done with constant-time extrapolation.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Other actions in the Autopicking category
+include:</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“Load horizons” … allows a saved pick file to be
+loaded. You will be given the option to discard any current picks or merge them
+with the one you are loading. This gives you a way to combine two pick files.
+Be sure you have saved your current picks before choosing “discard”.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“Repick horizon” … much the same as picking it
+from the start except that your previous guide points are displayed and you
+start by either adding to them or deleting some of them.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“Delete horizon” … allows one or more horizons
+to be deleted.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“Sort horizons” … sorts horizons into order of
+increasing average time (or depth).</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“Legend on/off” … guess what this does</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“Change horizon color” … also obvious</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span lang=EN-US
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>“List defined horizons” … shows a list of all of
+your horizons and the picking method used.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Pick editing</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>These tools allow you to change or adjust
+the pick made by the autopicker. You can do almost anything here given enough
+patience. The edits are all done with the ‘left’, ‘middle’, and ‘right’ mouse
+buttons. Since it is common for computers to have a mouse with two button or
+even a single button, it is helpful to understand how to simulate a ‘right’
+mouse button when you don’t have such a button.  As the table below shows, you
+simulate a ‘right’ button click with ‘control-click-left’ button. This means
+that you hold down the ‘control’ key (or ‘ctrl’) as you click the left button.
+If you have only one mouse button, it is the ‘left’ button. </span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 summary=Note
+ align=left width=576 style='width:432.0pt;border-collapse:collapse;border:
+ none;margin-left:6.75pt;margin-right:6.75pt'>
+ <thead>
+  <tr>
+   <td style='border:solid #CCCCCC 1.0pt;background:#EAEAEA;padding:4.5pt 3.75pt 4.5pt 3.75pt'>
+   <p class=MsoNormal style='margin-bottom:7.5pt;line-height:normal'><b><span
+   lang=EN-US style='color:black'>Button Type</span></b></p>
+   </td>
+   <td width=220 style='width:164.75pt;border:solid #CCCCCC 1.0pt;border-left:
+   none;background:#EAEAEA;padding:4.5pt 3.75pt 4.5pt 3.75pt'>
+   <p class=MsoNormal style='margin-bottom:7.5pt;line-height:normal'><b><span
+   lang=EN-US style='color:black'>Microsoft Windows</span></b></p>
+   </td>
+   <td width=234 style='width:175.45pt;border:solid #CCCCCC 1.0pt;border-left:
+   none;background:#EAEAEA;padding:4.5pt 3.75pt 4.5pt 3.75pt'>
+   <p class=MsoNormal style='margin-bottom:7.5pt;line-height:normal'><b><span
+   lang=EN-US style='color:black'>Linux</span></b></p>
+   </td>
+   <td width=314 style='width:235.15pt;border:solid #CCCCCC 1.0pt;border-left:
+   none;background:#EAEAEA;padding:4.5pt 3.75pt 4.5pt 3.75pt'>
+   <p class=MsoNormal style='margin-bottom:7.5pt;line-height:normal'><b><span
+   lang=EN-US style='color:black'>Mac</span></b></p>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td valign=top style='border-top:none;border-left:inset #CCCCCC 1.0pt;
+  border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>'left'</span></p>
+  </td>
+  <td width=220 valign=top style='width:164.75pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>Click left mouse button.</span></p>
+  </td>
+  <td width=234 valign=top style='width:175.45pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>Click left mouse button.</span></p>
+  </td>
+  <td width=314 valign=top style='width:235.15pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>Click left mouse button.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border-top:none;border-left:inset #CCCCCC 1.0pt;
+  border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>'middle'</span></p>
+  </td>
+  <td width=220 valign=top style='width:164.75pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>Either of the following:</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><b><span lang=EN-US>Shift</span></b><span lang=EN-US>-click
+  left mouse button.</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span lang=EN-US>Click both left and right mouse buttons.</span></p>
+  </td>
+  <td width=234 valign=top style='width:175.45pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>Either of the following:</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><b><span lang=EN-US>Shift</span></b><span lang=EN-US>-click
+  left mouse button.</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span lang=EN-US>Click middle mouse button.</span></p>
+  </td>
+  <td width=314 valign=top style='width:235.15pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>Any one of the following:</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><b><span lang=EN-US>Shift</span></b><span lang=EN-US>-click
+  left mouse button.</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span lang=EN-US>Click middle mouse button.</span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+  margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:
+  normal'><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>·<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span lang=EN-US>Click both left and right mouse buttons.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border-top:none;border-left:inset #CCCCCC 1.0pt;
+  border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span lang=EN-US>'right'</span></p>
+  </td>
+  <td width=220 valign=top style='width:164.75pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b><span lang=EN-US>Control</span></b><span lang=EN-US>-click left
+  mouse button or click right mouse button.</span></p>
+  </td>
+  <td width=234 valign=top style='width:175.45pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b><span lang=EN-US>Control</span></b><span lang=EN-US>-click left mouse
+  button or click right mouse button.</span></p>
+  </td>
+  <td width=314 valign=top style='width:235.15pt;border-top:none;border-left:
+  none;border-bottom:solid #CCCCCC 1.0pt;border-right:solid #CCCCCC 1.0pt;
+  background:white;padding:2.25pt 3.75pt 2.25pt 3.75pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b><span lang=EN-US>Control</span></b><span lang=EN-US>-click left
+  mouse button or click right mouse button.</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>To edit picks, click the ‘Start editing
+picks’ button and the button will turn yellow indicating that pick editing is
+on. Now, click the ‘left’ mouse button on the horizon that you with to edit and
+the horizon will change its appearance showing individual picks a small
+circles. You will generally want to zoom in to enlarge the area to be edited.
+Note that clicking the ‘left’ mouse button off of any event will cause them all
+to return to normal appearance but the ‘Start editing picks’ button will still
+be yellow. This is just a temporary suspension of editing. Clicking on any
+horizon will put it in edit mode. Once the horizon is in edit mode you can move
+picks either individually or in groups. Individual pick moves are done with the
+‘left’ button while group moves are done with the ‘right’ button. To move an
+individual pick, click and drag it (‘left’ button) from the old to the new
+location. Not that by default picks are allowed to move only vertically so that
+the pick stays on the trace it was originally made on. You can change this
+behavior with the ‘motion’ popup but be careful, you should usually use the
+default.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Groups of picks can be moved all at once by
+clicking and dragging with the ‘right’ mouse button.  By default, the entire
+horizon is considered as a single group so a ‘right’ click and drag on any
+point will move the entire horizon. This is generally not a good thing.
+Instead, you will want to define a smaller group by ‘anchoring’ the end points
+of the group. A point can be anchored by a ‘right’ click on it without any
+drag. When a point is anchored it will be shown with a larger red circle around
+the point. If you anchor two points on the same horizon that are some distance
+apart, then you can move all of the points between the anchors as a group. This
+is done by right clicking on a point between the anchors and dragging it. There
+are two types of group move: ‘constant drag’ and ‘elastic drag’ and you can
+choose which by a popup menu. With ‘constant drag’, all points in the group
+move by the same displacement as the point that you are dragging. This means
+that it does not matter which point you click-and-drag. For ‘elastic drag’ only
+the point you clicked on gets the full displacement and the displacement
+decreases linearly to zero at the end anchors. Once defined, anchors will
+remain until you clear them or close the Figure window. They are not saved in
+the pickstruc so they will not be present in your next editing session.  You
+can clear a single anchor by simply ‘right’ clicking on it a second time. The
+‘Clear anchors’ button will clear all anchors on all horizons.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Saving your work</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>While editing, it is good practice to save
+your picks frequently. You do this by clicking the ‘Stop and save’ or the ‘Stop
+and save as’ buttons. Clicking either button turns off pick editing (the ‘Start
+editing picks’ button will return to grey from yellow) and saves the picks to
+disk. The ‘save as’ button will prompt for a new file name. This is the only
+way to save your work and you should do it often. To resume editing after
+saving, simply click ‘Start editing picks’ again. The save picks file is simply
+a MATLAB binary file with a single variable in it named <i>pickstruc</i>. You
+can load a saved pick file into the MATLAB workspace with the <i>load</i>
+command and do anything you want with it.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Final thoughts</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>You can learn more about <i>PickTool</i>
+and <i>picker</i> by reading their online help:</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&gt;&gt; help picktool</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Or</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&gt;&gt; help picker</span></p>
+
+<p class=MsoNormal><span lang=EN-US>If you have a new picking method that you
+want to try, study the function <i>picker</i> and add your method to it as a
+new method by copying the example of an existing method. If you do this
+properly, then <i>PickTool</i> will automatically be informed of your new
+method and facilitate its use.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Much more can be done with this technology
+and it is hoped that others will be inspired to try further extensions.  Some
+possibilities are:</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>First break picking of a bunch of shots</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>3D picking</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>Joint PP and PS interpretation</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>Horizon attribute computation and analysis</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span lang=EN-US
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>Well tying and inversion</span></p>
+
+</div>
+
+</body>
+
+</html>

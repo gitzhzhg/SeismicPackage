@@ -1,0 +1,20 @@
+#! /bin/sh
+# shell for running unif2 --- uniformly sampled Cshot model
+# data is smoothed with smo2d
+set -v
+
+
+nx=250 dx=80 fx=0.0  labelx="Distance (km)"
+nz=500 dz=20 fz=.0  labelz="Depth (km)"
+ninf=5 npmax=201 
+xsmoothing=10 zsmoothing=10
+
+
+# echo the ../model.dir/model file; take first 2 columns of data
+cat ../model.dir/model | awk '{ print $1 " " $2 }' |
+unif2  ninf=$ninf  npmax=$npmax \
+	nz=$nz dz=$dz fz=$fz nx=$nx dx=$dx fx=$fx \
+	v0=11750,15750,22410,15750,19900,30000  > temp
+smooth2 < temp n2=$nx n1=$nz r2=$xsmoothing r1=$zsmoothing > junkv
+
+ exit

@@ -1,0 +1,41 @@
+%Parameter file 2D - Surface waves from a surface source
+gfdFile	=	'pay+noise.geo' %'refRayl10S10.geo'    %Geological definition file
+xMin        0       %Starting X point within geological model
+lengthX		2000     %1500    %1000 	%X samples of the calculated model
+lengthZ		700      %400     %300     %700		%Z
+contBlk =   'block'  %'cont' or 'block' for parameter (Vp, etc.) gradients
+%
+shotDepth	10   %350		%Depth of the energy source
+shotX		1000       %750     %500       %200		%X position of the energy source
+centreFreq	30      %25      %12.5    %25		%Frequency in Herz at centre of wavelet
+timeSrc     1       %1 - Ricker, 2 - windowed cosine, 3 - minimum phase
+cycleSrc    3.5     %1.5    %1 No. of cycles (windowed cosine only)
+energySrc	10      %24		%Code number of the energy source (10,11,12,13,21,22,23)
+%						10-explosion, 11-Z_rupture, 12-double couple, 13-squeeze bulge
+%						21-Z_monopole, 22-X_monopole, 23-external XZ twist
+%                       31 - vertExpl
+%
+Dt			.00045  %.000333  %.0003   %Sample rate in seconds
+Dxz			3.0     %2.5       %2.0     %Sample rate in metres
+nstep        2161	%2161    %600    %801     %1200    %1275     %801     %576     %701     %1501		%Number of time steps
+%                   %Boundary codes: <=0 rigid, 1-Clayton Engquist, 7-mirror, 8-free
+iLbnd		1		%Boundary code left      = 0, 1, 7
+iRbnd		1		%Boundary code right    <= 0, 1,  , 8
+iTbnd		8		%Boundary code top      <= 0, 1,  , 8
+iBbnd		1		%Boundary code bottom   <= 0, 1,  , 8
+%wncvar  =   'c3p45s225min'      %Wave number correction file ('' indicates no corrections)
+%wncvar  =   'c3p30s15min'      %Wave number correction file ('' indicates no corrections)
+%wncvar  =   'c3p20s10min'      %Wave number correction file ('' indicates no corrections)
+%wncvar  =   'c3p20s10m50'      %Wave number correction file ('' indicates no corrections)
+wncvar  =   ''      %Wave number correction file ('' indicates no corrections)
+
+trX			550       %250		%X position of the well in the case of 'Z' acquisition
+trZ			0		%Z level of flat 'X' acquisition
+nframes		108     %80      %120     %80      %125      %150		%Number of movie frames (< nstep)
+mvXmax		2005		%X length of the displayed model
+mvZmax		1005		%Z
+mvPlot		2		%Code number of the movie plot (2,3,4,5)
+%						2-displacement, 3-pressure/twist, 4-abs amp displacement, 5-arrows
+mvAmp		500		%Amplitude for movie code 4 (larger is higher amplitude)
+mvClip		.5		%Amplitude clip level - fraction of 1 (1 is unclipped)
+mvTif	=	''		%Character string included in the movie tiff files ('' indicates no tiff file)

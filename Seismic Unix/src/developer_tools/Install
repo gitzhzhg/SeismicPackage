@@ -1,0 +1,18 @@
+#!/bin/sh
+#-----------------------------------------------------------------------
+# install the build to a system architecture tree
+#-----------------------------------------------------------------------
+
+ARCH=` uname -srp | sed 's/.[0-9]*-[^ ]*//' | sed 's/ /_/g' `
+
+if [ -d ../${ARCH} ]
+   then
+
+   mv ../${ARCH} ../.jnk
+   rm -rf ../.jnk &
+
+fi
+
+mkdir ../${ARCH}
+cp ../make.log ../logs/make.log_${ARCH}
+mv ../bin ../lib ../include ../make.log ../${ARCH}

@@ -1,0 +1,115 @@
+# Run tests in ...par/lib
+SHELL = /bin/sh
+
+# Adapt the flags in the following paragraph to your system
+ROOT = $(CWPROOT)
+OPTC = -g
+
+B = $(ROOT)/bin
+I = $(ROOT)/include
+L = $(ROOT)/lib
+
+CFLAGS= $(OPTC) -I$I
+LFLAGS= -L$L -lpar -lcwp -lm
+
+
+# Can comment out if your make knows about C libs
+.c.a:
+	@$(CC) -c $(CFLAGS) $<
+	@ar rv $@ $*.o
+	@rm -f $*.o
+
+# Comment out unless your ar needs ranlib and you don't have it
+#.c.a:
+#	@$(CC) -c $(CFLAGS) $<
+#	@lorder $*.o | tsort | xargs ar qv $@
+#	@rm -f $*.o
+# Note: if you don't have xargs, alternate lorder line is:
+#	@ar rv $@ `lorder $*.o | tsort`
+
+
+T=Test
+
+STD =			\
+	$T/ealloc
+
+SPECIAL =		\
+	$T/errpkge	\
+	$T/getpars	\
+	$T/syscalls	\
+	$T/subcalls	\
+	$T/filestat
+
+
+test:	$(STD) $(SPECIAL)
+
+
+$(STD):	$$(@F).c
+	$(CC) $(CFLAGS) -DTEST $? $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	-$@ <$@.in >$@.out
+
+$T/errpkge:	errpkge.c
+	$(CC) $(CFLAGS) -DTEST $? $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	@echo "Running benchmark"
+	-$T/errpkge not_here
+
+$T/getpars:	getpars.c
+	$(CC) $(CFLAGS) -DTEST $? $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	@echo getpars ready--running TEST 1: get scalar
+	-$T/getpars v=123
+	@pause
+	@echo getpars ready--running TEST 2: get vector
+	-$T/getpars vh=1,2,3
+	@pause
+	@echo getpars ready--running TEST 3: get parfile
+	-$T/getpars par=Test/parfile
+
+$T/syscalls:	syscalls.c
+	$(CC) $(CFLAGS) -DTEST $? $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	@echo syscalls--testing redirected STDIN
+	@echo "Should get 3 standard lines + eread selfdoc.c
+	-$T/syscalls <selfdoc.c
+
+$T/subcalls:	subcalls.c
+	$(CC) $(CFLAGS) -DTEST $? $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	@echo subcalls--testing redirected STDIN
+	@echo "Should get 3 standard lines + eread selfdoc.c
+	-$T/subcalls <selfdoc.c
+	
+$T/filestat:	filestat.c
+	$(CC) $(CFLAGS) -DTEST $(@F).c $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	@echo filestat--testing STDIN, STDOUT, argv[1]
+	@echo "Should get TTY, TTY, DISK:"
+	-$T/filestat filestat.c
+	@echo "Should get DISK, PIPE, DIRECTORY:"
+	-$T/filestat <filestat.c /usr | cat
+	@echo "Should get PIPE, DISK, DISK:"
+	-cat filestat.c | $T/filestat filestat.c >/usr/tmp/junkxxx
+	@echo "Should get TTY, TTY, DISK:"
+	-$T/filestat /dev/null
+
+
+compare:
+	@-for i in $(STD)			;\
+	do					 \
+		echo "diff $$i.std $$i.out" 	;\
+		diff $$i.std $$i.out	 	;\
+	done
+
+remake:
+	@-rm $(STD) $(SPECIAL)
+	make -f Mk.test
+clean:
+	rm -f junk* core a.out

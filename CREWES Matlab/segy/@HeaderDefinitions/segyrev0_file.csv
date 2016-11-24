@@ -1,0 +1,28 @@
+Name,startByte,endByte,Type,Recommended,Description,Comment,Interpretation
+jobid,1,4,int32,,Job identification number,,
+lino,5,8,int32,*,Line number,(only one line per reel),
+reno,9,12,int32,*,Reel number,,
+ntrpr,13,14,int16,*,Number of data traces per record ,(includes dummy and zero traces inserted to fill out the record or common depth point),
+nart,15,16,int16,*,Number of auxiliary traces per record,"(includes sweep, timing, gain, sync, and all other nondata traces).",
+hdt,17,18,uint16,*,Sample interval in microseconds ,(for this reel of data).,
+dto,19,20,uint16,,Sample interval in microseconds ,(for original field recording).,
+hns,21,22,uint16,*,Number of samples per data trace,(for this reel of data).,
+nso,23,24,uint16,,Number of samples per data trace,(for original field recording).,
+format,25,26,int16,*,Data sample format code,,"1 = floating point (4 byte) , 2 = fixed point (4 bytes), 3 = fixed point (2 bytes), 4 = fixed point w/gain code"
+fold,27,28,int16,*,CDP fold ,(expected number of data traces per CDP ensemble).,
+tsort,29,30,int16,,Trace sorting code,,"1 = as recorded (no sorting), 2 = CDP ensemble, 3 = single fold continuous profile, 4 = horizontally stacked"
+vscode,31,32,int16,,Vertical sum code,,"1 = no sum, 2 = two sum, ...., N = N sum  (N = 32,767)"
+hsfs,33,34,int16,,Sweep frequency at start,,
+hsfe,35,36,int16,,Sweep frequency at end,,
+hslen,37,38,int16,,Sweep length in milliseconds,,
+hstyp,39,40,int16,,Sweep type code,,"1= linear, 2= parabolic, 3 = exponential, 4 = other"
+schn,41,42,int16,,Trace number of sweep channel.,,
+hstas,43,44,int16,,Sweep trace taper length in msec at start if tapered,(the taper starts at zero time and is effective for this length),
+hstae,45,46,int16,,Sweep trace taper length in msec at end,(the ending taper starts at sweep length minus the taper length at end),
+htatyp,47,48,int16,,Taper type,,"1 = linear,2 = cos2,3 = other"
+hcorr,49,50,int16,,Correlated data traces,,"1 = no,2=yes"
+bgrcv,51,52,int16,,Binary gain recovered,,"1 = yes,2=no"
+rcvm,53,54,int16,,Amplitude recovery method,,"1=none,2=spherical divergence,3=AGC,4=other"
+mfeet,55,56,int16,,Measurement system,,"1 = meters, 2= feet"
+polyt,57,58,int16,,Impulse signal polarity,,"1 = Increase in pressure or upward geophone case movement gives negative number on tape, 2 = Increase in pressure or upward geophone case movement  gives  positive number on tape"
+vpol,59,60,int16,,Vibratory polarity code,Seismic signal lags pilot signal by:,"1=337.5°  to   22.5°,2=  22.5°  to   67.5°,3=  67.5°  to 112.5°,4=112.5°  to 157.5°,5=157.5°  to 202.5°,6=202.5°  to 247.5°,7=247.5°  to 292.5°,8=292.5°  to 337.5°,"

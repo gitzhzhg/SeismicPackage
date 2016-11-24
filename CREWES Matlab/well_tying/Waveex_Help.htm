@@ -1,0 +1,581 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{mso-style-link:"Footnote Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Calibri",sans-serif;}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+code
+	{font-family:"Courier New";}
+span.MsoPlaceholderText
+	{color:gray;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:.5in;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:.5in;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+span.apple-converted-space
+	{mso-style-name:apple-converted-space;}
+span.argumentname
+	{mso-style-name:argument_name;}
+span.FootnoteTextChar
+	{mso-style-name:"Footnote Text Char";
+	mso-style-link:"Footnote Text";}
+.MsoChpDefault
+	{font-family:"Calibri",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US>
+
+<div class=WordSection1>
+
+<p class=MsoNormal><b>WaveEx Help</b></p>
+
+<p class=MsoNormal><i>WaveEx</i> is an interactive tool that facilitates the
+exploration of seismic wavelet estimation from well logs. Currently there are
+three wavelet estimation mechanisms available: (1) smoothness constrained match
+filtering, (3) the Roy White method (either frequency domain or time domain),
+and (3) a simple method that constrains the wavelet to have the same amplitude
+spectrum as the seismic data (but smoothed), a constant phase spectrum (i.e. a
+phase rotation), and a constant time delay.  These three methods will be called
+<i>match, roywhite</i>, and <i>simple</i> respectively for convenience. A
+separate tool exists for each method but all three tools are built on top of
+the WaveEx engine. These tools are <i>waveex_match</i>, <i>waveex_rw</i>, and <i>waveex_simple</i>.
+</p>
+
+<p class=MsoNormal>Figure 1 shows main <i>WaveEx</i> window as configured by <i>waveex_match</i>,
+red bold letters denote key parts that will now be described.  The tool title
+(A) identifies this as the match filter WaveEx tool. Only the algorithm
+parameters panel (I) changes with each tool.  The traces axes (B) shows four
+traces identified in the legend as trace, model trace, reflectivity, and
+estimated r. Trace refers to the seismic traces that is to be matched to the
+reflectivity. Initially only two traces will be seen in this panel because the
+model trace and the estimated reflectivity (estimated r) can only be calculated
+once a wavelet has been estimated. Also indicated in this panel is the wavelet
+extraction gate denoted by the dotted green lines. In this case the gate is at
+its maximum size (the length of the reflectivity).  This gate can be adjusted
+either by clicking and dragging the green lines or by typing in time values in
+panel (I). </p>
+
+<p class=MsoNormal>Panels (C) and (D) show time variant estimates of phase and
+delay. Initially these panels will have only 1 curve each which represents the
+estimates before any wavelet processing. Once a wavelet has been estimated,
+there will be both before and after curves. The before curves will never change
+as new wavelet estimates are made but there will be unique after curves for
+each wavelet.  These time variant estimates are controlled by the two
+parameters in panel (H). These are the “Time window size” and the “window
+increment”. The former is the half-width of a Gaussian window used to localize
+the signals being compared while the latter is the increment between adjacent
+windows. Window positions are taken at this increment from the start of the
+reflectivity to the end. In each window the best (least squares) phase rotation
+and the best time delay (corresponding to the maximum of the crosscorrelation)
+are estimated. Values are interpolated and extrapolated to cover the entire
+time range.</p>
+
+<p class=MsoNormal>Panel (E) shows a measure (PEP) comparing the model trace to
+the trace, and another measure (PRR) the estimated reflectivity to the
+reflectivity. Let <span style='font-size:11.0pt;line-height:107%;font-family:
+"Calibri",sans-serif;position:relative;top:4.0pt'><img width=25 height=19
+src="Waveex_Help_files/image001.png"></span> be the trace, <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=26 height=19 src="Waveex_Help_files/image002.png"></span> the
+well reflectivity, and <span style='font-size:11.0pt;line-height:107%;
+font-family:"Calibri",sans-serif;position:relative;top:4.0pt'><img width=30
+height=19 src="Waveex_Help_files/image003.png"></span> the estimated wavelet. Generally
+<span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=26 height=19
+src="Waveex_Help_files/image002.png"></span> will be a shorter time series than
+<span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=25 height=19
+src="Waveex_Help_files/image001.png"></span> as shown in Figure 1. The model
+trace is calculated as <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=118 height=19
+src="Waveex_Help_files/image004.png"></span> where <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:3.0pt'><img width=8 height=19 src="Waveex_Help_files/image005.png"></span> denotes
+convolution. WaveEx always truncates the convolution to the length of <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=26 height=19
+src="Waveex_Help_files/image006.png"></span>.  The reflectivity estimate is
+calculated from <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=109 height=19
+src="Waveex_Help_files/image007.png"></span> where <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=27 height=19 src="Waveex_Help_files/image008.png"></span> is
+a bandlimited inverse to <span style='font-size:11.0pt;line-height:107%;
+font-family:"Calibri",sans-serif;position:relative;top:4.0pt'><img width=30
+height=19 src="Waveex_Help_files/image003.png"></span>. (The band limits come
+from the filter parameters prescribed in panel (I).) The comparisons of <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=35 height=19
+src="Waveex_Help_files/image009.png"></span> to <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=25 height=19 src="Waveex_Help_files/image001.png"></span> and
+<span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=30 height=19
+src="Waveex_Help_files/image010.png"></span> to <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=26 height=19 src="Waveex_Help_files/image002.png"></span> offers
+two different means of assessing the quality of the estimated wavelet. Both
+comparisons are done in the same wave with the comparison of <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=35 height=19
+src="Waveex_Help_files/image009.png"></span> to <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=25 height=19 src="Waveex_Help_files/image001.png"></span> being
+called PEP (Portion of Energy Predicted) and the comparison of <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=30 height=19
+src="Waveex_Help_files/image010.png"></span> to <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=26 height=19 src="Waveex_Help_files/image002.png"></span> being
+called PRR (Portion of Reflectivity Resolved). The wavelet inverse, <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=27 height=19 src="Waveex_Help_files/image008.png"></span>,
+used to create <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=30 height=19
+src="Waveex_Help_files/image010.png"></span> was bandlimited so the actual
+calculation of PRR compares <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=30 height=19
+src="Waveex_Help_files/image010.png"></span> to <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=32 height=19
+src="Waveex_Help_files/image011.png"></span> where the latter is a bandlimited
+version of the true reflectivity <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=26 height=19
+src="Waveex_Help_files/image006.png"></span>. PEP is calculated from</p>
+
+<p class=MsoNormal>                                                                           <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:8.5pt'><img width=167 height=34
+src="Waveex_Help_files/image012.png"></span>.                                                             (1)</p>
+
+<p class=MsoNormal>The term being subtracted from 1 in this expression is the
+ratio of the energy (sum of squares of samples) of the residual trace to the
+energy of the trace. PEP is 1 if the model trace matches the residual trace
+exactly and less than 1 in any real case<a href="#_ftn1" name="_ftnref1"
+title=""><span class=MsoFootnoteReference><span class=MsoFootnoteReference><span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif'>[1]</span></span></span></a>.
+PRR is calculated in a similar fashion as</p>
+
+<p class=MsoNormal>                                                                          <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:8.5pt'><img width=171 height=34
+src="Waveex_Help_files/image013.png"></span>.                                                             (2)</p>
+
+<p class=MsoNormal>Equations (1) and (2) are made time-variant by applying them
+to Gaussian-windowed traces just as was described for time-variant phase and
+delay previously.</p>
+
+<p class=MsoNormal><img width=802 height=352 id="Picture 1"
+src="Waveex_Help_files/image014.jpg"></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;line-height:107%'>Figure 1:
+The main figure window for the match filter wavelet explorer (WaveEx).
+Designated by large red letters are: (A) The window title. (B) The trace
+display panel showing the seismic trace (trace), the model trace (reflectivity
+convolved with estimated wavelet), the well-derived reflectivity
+(reflectivity), and the estimated reflectivity (trace convolved with
+bandlimited wavelet inverse). (C) Time-variant phase estimates before and after
+wavelet deconvolution. (D) Time-variant delay estimates before and after
+wavelet deconvolution. (E) Time-variant PEP and PRR after wavelet
+deconvolution. (F) The estimated-wavelets panel showing two wavelet estimates.
+(G) The Spectra panel showing the spectra of the estimated wavelets and the
+trace spectrum. (H) Control panel with time-variant analysis controls. (I)
+Control panel with wavelet estimation controls. </span></p>
+
+<p class=MsoNormal>Shown in panel (F) in Figure 1 is the estimated-wavelets
+panel which shows in this case two estimates have been made. The legend shows
+these wavelets with auto-generated names created by stringing together the
+parameters in the wavelet-estimation panel (I) for each wavelet. These
+parameters are in the same order as they appear in the panel (top to bottom)
+and will be discussed shortly. The “current wavelet” is shown with a thicker
+line than the other(s) and in this case is the red curve. The results in panels
+(C), (D), and (E) are for the current wavelet only.  By right clicking on any
+wavelet in this panel, you can either make it current or delete it. Making the
+wavelet current will cause a re-draw in panels (C), (D), and (E) to show
+results for that wavelet. Annotated in text with each wavelet are four
+additional quality control parameters. These are not time variant but are
+calculated for the entire length of the reflectivity. Denoted ccs is the
+maximum of the crosscorrelation between the seismic trace and the model trace
+and denoted pep is the Portion of Energy Predicted for these two traces. This
+PEP is a sort of bulk average for the time-variant measure shown in panel (H).
+Also annotated on each wavelet are ccr,  the maximum of the crosscorrelation
+between the bandlimited reflectivity and the estimated reflectivity, and prr
+the Portion of Reflectivity Resolved. In the case shown in Figure 1, the two
+wavelets differ only in <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=29 height=19
+src="Waveex_Help_files/image015.png"></span> the maximum frequency of the
+passband.  This is indicated by the last number in their auto-generated names
+and is 125 Hz for the blue wavelet and 80 Hz for the red wavelet. The ccs and
+pep values are identical for the two wavelets but the red wavelet has higher
+values for both ccr and prr. This is entirely due to the reflectivity estimate
+being less noisy when bandlimited to 80 Hz as opposed to 125 Hz. This
+illustrates the fundamental difference between ccs-pep and ccr-prr. The former
+measure the quality of the trace model and are both dominated by the strong
+signal near the dominant frequency of the wavelet. The latter measure the
+quality of the reflectivity estimate and are much more strongly affected by 
+frequencies throughout the specified band limits.</p>
+
+<p class=MsoNormal>Panel (F) in Figure 1 shows the spectra of the wavelets in
+panel (E) together with the spectrum of the seismic trace in the extraction
+gate. In this case the wavelet spectra differ only on the high frequency end
+due to their different band limits.</p>
+
+<p class=MsoNormal>Panel (H) allows the time-variant analysis parameters to be
+specified. These are <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=26 height=19
+src="Waveex_Help_files/image016.png"></span>, the half-width of the Gaussian
+window, and <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=23 height=19
+src="Waveex_Help_files/image017.png"></span>, the time increment between
+windows. Both values are specified in seconds and it is important to keep <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=70 height=19
+src="Waveex_Help_files/image018.png"></span>. A good rule of thumb is to make  <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=26 height=19
+src="Waveex_Help_files/image016.png"></span> are least four times larger than <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=26 height=19
+src="Waveex_Help_files/image019.png"></span> The curves shown in panels (C), (D),
+and (E) are determined by these parameters and are computed at the time of
+wavelet estimation. However, you can change these values and cause the curve to
+be recomputed by right-clicking on the wavelet and selecting it after entering
+new values.</p>
+
+<p class=MsoNormal><b>Match filter wavelet estimation parameters</b></p>
+
+<p class=MsoNormal>Figure 2 shows the wavelet estimation parameters for the
+match filter algorithm. This method deiv3ed directly from the convolutional
+model which can be expressed as <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=114 height=19
+src="Waveex_Help_files/image020.png"></span> with <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:3.0pt'><img width=8 height=19 src="Waveex_Help_files/image005.png"></span> being
+convolution.  Forming a convolution matrix from <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:4.0pt'><img width=26 height=19 src="Waveex_Help_files/image002.png"></span> allows
+this to be written as a matrix equation <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=48 height=20
+src="Waveex_Help_files/image021.png"></span>, where <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=10 height=19
+src="Waveex_Help_files/image022.png"></span> is that convolution matrix and <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=11 height=20
+src="Waveex_Help_files/image023.png"></span> and <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=7 height=20
+src="Waveex_Help_files/image024.png"></span> are column vectors containing the
+wavelet and the trace.  Choosing length(<span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=11 height=20
+src="Waveex_Help_files/image023.png"></span>)&lt; length(<span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=7 height=20
+src="Waveex_Help_files/image024.png"></span>) allows a least-squares solution <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=121 height=20
+src="Waveex_Help_files/image025.png"></span> where the superscript <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:3.0pt'><img width=9 height=19 src="Waveex_Help_files/image026.png"></span> denotes
+a transpose.  When modified to include a slowness constraint this becomes <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=184 height=20
+src="Waveex_Help_files/image027.png"></span> where <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=18 height=19
+src="Waveex_Help_files/image028.png"></span><b> </b>is a second derivative
+finite difference matrix and <span style='font-size:11.0pt;line-height:107%;
+font-family:"Calibri",sans-serif;position:relative;top:3.0pt'><img width=36
+height=19 src="Waveex_Help_files/image029.png"></span> is the <i>smoothness
+parameter </i>which controls the relative weight of misfit minimization versus
+imposed smoothness.  Setting <span style='font-size:11.0pt;line-height:107%;
+font-family:"Calibri",sans-serif;position:relative;top:3.0pt'><img width=36
+height=19 src="Waveex_Help_files/image030.png"></span> gives a standard least
+squares solution with no imposed smoothness bias.</p>
+
+<p class=MsoNormal>The first two parameters prescribe the top and bottom of the
+wavelet extraction gate. The wavelet will represent an average or effective
+wavelet over this gate. Making the gate smaller to focus on a zone of interest
+may give better resolution in that zone but will generally be less effective
+elsewhere. Extremely small gates will not generally have sufficient statistics
+to achieve a good estimate. This can be judged by paying close attention to the
+wavelet quality measures in panels (C), (D), and (E) and as annotated in panel
+(F). The gate times are specified in seconds and may either be typed into the
+boxes or determined by clicking and dragging the green lines in the traces
+panel (panel (B) of figure 1).</p>
+
+<p class=MsoNormal>The third parameter in Figure 2 is “percent time zero” and
+controls the causal nature of the estimate. A fully causal wavelet will have <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:3.0pt'><img width=33 height=19 src="Waveex_Help_files/image031.png"></span> (hereafter
+called time zero) as the first wavelet sample while placing time zero as the
+center sample is very non-causal. Intuitively, the point here is to decide if
+the reflectivity estimate at a given sample is entirely determined by samples
+at later times (the fully causal case) or if samples at earlier times are also
+important. This parameter specifies the location of time zero and the value
+shown of 50% means that it is in the middle or symmetric position. This is
+often the best choice even if the wavelet is expected to be fully causal. A
+value of 0 means fully causal but generally gives worse performance than a
+small number like 5 or 10.</p>
+
+<p class=MsoNormal>The next parameter, wavelet length, is specified as a
+fraction of the extraction gate. The value of 0.4 here means that the wavelet
+length will be 0.4 times the gate which in this case means <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=134 height=19
+src="Waveex_Help_files/image032.png"></span> sec. This value is constrained to
+be positive and less than 1 to ensure that the wavelet is overdetermined by the
+gate and thus a least-squares solution is possible.</p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:139.5pt;margin-bottom:
+8.0pt;margin-left:1.5in'><span style='font-size:10.0pt;line-height:107%'><img
+width=266 height=346 id="Picture 3" src="Waveex_Help_files/image033.png"></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:139.5pt;margin-bottom:
+8.0pt;margin-left:1.5in'><span style='font-size:10.0pt;line-height:107%'>Figure
+2: A close-up of the wavelet estimation control panel (panel (I) of Figure 1)
+for the match filter wavelet estimation method.</span></p>
+
+<p class=MsoNormal>The smoothness parameter controls the time-domain smoothness
+of the wavelet estimate.  The smoothness constraint is introduced into the
+least-squares estimation by modifying the normal objective function from a
+simple misfit between trace and model trace to misfit plus a smoothness
+measure.  The smoothness measure is the L2 norm of the second derivative and
+the smoothness parameter controls the relative weights of smoothness and misfit
+in the overall objective function.  The value of 1 (shown) is the default and
+means that smoothness and misfit are given equal weight.  A value of 0 means
+that only misfit is considered.  There is no upper limit to this parameter but
+extremely large value tend to give unrealistic estimates.</p>
+
+<p class=MsoNormal>The stability parameter is used only in the wavelet
+inversion that is needed to calculate the reflectivity estimate.  Essentially
+identical to the white noise parameter in spiking decon, this value tends to
+stabilize the inversion.  It should be a non-negative number less than 1.  The
+wavelet inverse is calculated by least squares matching of the wavelet to an
+impulse and then has the filter band limits applied.  The degree of causality
+of the inverse is controlled to be the same as that as the wavelet estimate as
+determined by “Pct time zero”.</p>
+
+<p class=MsoNormal>The final two parameters are the filter band limits. These
+control the zero-phase, Butterworth, bandpass filter that is applied to both
+the wavelet and the wavelet inverse. They are specified in Hz.</p>
+
+<p class=MsoNormal>Pushing the “Apply” button causes a new wavelet estimate
+with the specified parameters.  Wavelet estimates accumulate in panels (F) and
+(G) as they are created. The most recent wavelet is set to be current by
+default and its time variant analyses are displayed in panels (C), (D), and
+(E).  Any wavelet can be deleted or selected (made current) by right clicking
+on it in panel (F).  Note that you must directly on the curve and this can be
+difficult in a noisy part of the wavelet.  Choosing a smooth part addresses this.</p>
+
+<p class=MsoNormal><b>Roy White wavelet estimation parameters</b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:139.5pt;margin-bottom:
+8.0pt;margin-left:1.5in'><img width=294 height=353 id="Picture 2"
+src="Waveex_Help_files/image034.png"></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:139.5pt;margin-bottom:
+8.0pt;margin-left:1.5in'><span style='font-size:10.0pt;line-height:107%'>Figure
+3: A close-up of the wavelet estimation control panel (panel (I) of Figure 1)
+for the Roy White wavelet estimation method.</span></p>
+
+<p class=MsoNormal>The Roy White wavelet estimation method (White, 1980; Walden
+and White, 1998) is also based on the convolutional trace model but proceeds
+slightly differently from the match filter approach.  Starting again from the
+convolutional model <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=114 height=19
+src="Waveex_Help_files/image020.png"></span>, we first cross correlate both
+sides with the reflectivity to get <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:3.0pt'><img width=207 height=19
+src="Waveex_Help_files/image035.png"></span> where <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:3.0pt'><img width=15 height=19 src="Waveex_Help_files/image036.png"></span> denotes
+cross correlation.  Let <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=130 height=19
+src="Waveex_Help_files/image037.png"></span> which is the autocorrelation of
+the reflectivity and let <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=129 height=19
+src="Waveex_Help_files/image038.png"></span> which is the cross correlation of
+the reflectivity with the seismic trace. Then we have <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=139 height=19
+src="Waveex_Help_files/image039.png"></span> which says that <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=38 height=19
+src="Waveex_Help_files/image040.png"></span> can be used to estimate the
+wavelet but we must deconvolve <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=38 height=19
+src="Waveex_Help_files/image041.png"></span> from it.  Let <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=42 height=19
+src="Waveex_Help_files/image042.png"></span> denote the convolutional inverse
+to <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=38 height=19
+src="Waveex_Help_files/image041.png"></span> and we have </p>
+
+<p class=MsoNormal>                                                                                <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=143 height=19
+src="Waveex_Help_files/image043.png"></span>                                                                 (3).</p>
+
+<p class=MsoNormal>In the frequency domain this is easily accomplished by a
+simple division.  However White goes further and incorporates a
+frequency-dependent weighting factor, <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=46 height=19
+src="Waveex_Help_files/image044.png"></span> that down weights noisy
+frequencies.  The final formula for the Roy White frequency domain method is</p>
+
+<p class=MsoNormal>                                         <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:8.5pt'><img width=177 height=31
+src="Waveex_Help_files/image045.png"></span>  where <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:10.5pt'><img width=148 height=34
+src="Waveex_Help_files/image046.png"></span>                           (4)</p>
+
+<p class=MsoNormal>Where <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=32 height=19
+src="Waveex_Help_files/image047.png"></span> is the maximum of <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=41 height=20
+src="Waveex_Help_files/image048.png"></span>, <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.0pt'><img width=33 height=19
+src="Waveex_Help_files/image049.png"></span> is the maximum of <span
+style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;
+position:relative;top:4.5pt'><img width=57 height=25
+src="Waveex_Help_files/image050.png"></span> and <span style='font-size:11.0pt;line-height:107%;font-family:"Calibri",sans-serif;position:relative;
+top:3.0pt'><img width=62 height=19 src="Waveex_Help_files/image051.png"></span> is
+a small constant.  Also, all of the spectra in formula (4) must be smoothed.</p>
+
+<p class=MsoNormal>Figure 3 shows the wavelet estimation control panel for the
+Roy White method.  The first prameter is actually a binary choice of either
+time domain or frequency domain solutions.  The time-domain solution proceeds
+from equation (3) but uses a smoothness constraint much like the match filter
+method.  It produces similar results to the match filter method but is
+conceptually distinct in that the latter deconvolves the reflectivity from the
+trace while the former deconvolves the autocorrelation of the reflectivity from
+the cross correlation of the reflectivity with the trace.  </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+<div><br clear=all>
+
+<hr align=left size=1 width="33%">
+
+<div id=ftn1>
+
+<p class=MsoFootnoteText><a href="#_ftnref1" name="_ftn1" title=""><span
+class=MsoFootnoteReference><span class=MsoFootnoteReference><span
+style='font-size:10.0pt;line-height:107%;font-family:"Calibri",sans-serif'>[1]</span></span></span></a>
+It is technically possible for PEP to be negative if the model trace is very
+poor.</p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

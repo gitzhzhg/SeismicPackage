@@ -1,0 +1,87 @@
+Sudgast   CWP Proprietary Software       U-30
+
+Proprietary to the Consortium Project on Inversion of Complex Structure
+until  5 Jan 1997.
+
+This is the software package sudgast. Sudgast stands for Seismic Unix 
+Distributed Genetic Algorithm Statics estimation. To use this code you 
+should have installed a recent version of the CWP/SU Free Software
+package and PVM v2.4 (Parallel Virtual Machine). 
+
+All the source files that form the library libdga.a are in the directory
+sudagst/lib. Typing make will build this library. In the directory main
+you will find the following source codes:
+
+sudgast.c:	Main program for sudgast (the master program)
+process.c:	The slave program
+sustapply.c:	Apply statics provided by sudgast on the data
+sustxcor.c:	Builds crosscorrelation table for the stacking procedure
+suaddstatics.c:	Add random, surface consistent statics on seismic data
+		sets
+
+Go to the directory main and type make to compile all those codes. 
+
+
+IMPORTANT !
+PVM REQUIRES that the executable codes for sudgast.c and process.c be
+installed in the directory ~/pvm/DIR, where DIR depends on the machine
+you are working on. DIR can be set to the following values: 
+
+      DIR       Machine
+    --------    -------
+    AFX8        Alliant FX/8
+    BFLY        BBN Butterfly TC2000
+    C2MP        Convex
+    CM2         Thinking Machines CM-2
+    CRAY        Cray
+    HP9K        HP 9000 (Snake)
+    I860        Intel RX Hypercube
+    IPSC        Intel IPSC/2
+    NEXT        NeXT
+    PMAX        Dec/Mips arch (3100, 5000, etc.)
+    RIOS        IBM/RS6000
+    SGI         Silicon Graphics IRIS
+    SUN3        Sun 3
+    SUN4        Sun 4, 4c, sparc, etc.
+    SYMM        Sequent Symmetry
+    TITN        Stardent Titan
+    UVAX        Dec/Microvax
+
+You SHOULD create this directory before attempting to install sudgast.
+
+You will also need to change the line in main/Makefile
+that reads:
+
+B = $(HOME)/pvm/RIOS
+
+to the appropriate path for your system.
+
+
+Among all the programs listed above only sudgast.c and process.c use the 
+PVM library, so only those should have their respective executable files
+in ~/pvm/DIR. However, as a (possible) convenience for the user all executable
+files (sudgast, process, sustxcor, sustapply and suaddstatics) are
+installed in this directory.
+
+The following is a step by step list that you should follow in order to 
+install sudgast.
+
+1) Install a current release of the CWP/SU Free software package
+2) Install PVM v2.4
+3) Create the directory ~/pvm/DIR  (edit main/Makefile accordingly)
+4) From the current directory type cd lib and then make
+5) From the current directory type cd main and then make
+6) run sudgast, sustxcor, sustapply and suaddstatics for standard CWP
+   selfdoc documentation
+
+To run the sudgast demo go from the current directory to the Demo 
+directory and read the README file there.
+
+If you have questions about this code please contact:
+
+
+John Stockwell	 | john@dix.Mines.EDU
+Center for Wave Phenomena (The Home of Seismic Un*x)
+Colorado School of Mines
+Golden, CO 80401 | http://www.cwp.mines.edu/cwpcodes
+voice: (303) 273-3049  |    fax: (303) 273-3478.

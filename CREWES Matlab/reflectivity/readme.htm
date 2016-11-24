@@ -1,0 +1,71 @@
+<html><head><title>Reflectivity Modelling Software</title>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css"></head><body>
+<h1>Relectivity Modelling Software</h1>
+
+<h2>Associated Reading</h2>
+<a href="http://www.crewes.org/Reports/2004/2004_13.pdf">Seismic modelling with the reflectivity method</a> by Yongwang Ma, Luiz Loures, and Gary F. Margrave<br>
+
+<h2>Description</h2>
+The software named 'reflectivity' is
+used to model seismic wave propagation in stratified earth models. Files provided for
+this release are located in the directory .../software/reflectivity. The main
+program is named 'reflectivity.m'. Subroutines are (by order called):<br><br>
+
+<table>
+<tbody><tr bgcolor="#cccccc"><td>
+    hanning_window.m
+    </td><td>
+    calculate tapering window for slowness and frequency
+</td></tr>
+<tr><td>
+    slowness.m
+    </td><td>
+    convert wave velocities into squared slowness
+</td></tr>
+<tr bgcolor="#cccccc"><td>
+    Rm_matrix.m
+    </td><td>
+    calculate the total reflection coefficient matrices between
+    two interfaces
+</td></tr>
+<tr><td>
+    RT.m
+    </td><td>
+    calculate reflection and transmission coefficient matrices across an
+interface (called by Rm_matrix.m)
+</td></tr>
+<tr bgcolor="#cccccc"><td>
+    free_surface.m
+    </td><td>
+    calculate reflection coefficient matrices at the free surface
+</td></tr>
+<tr><td>
+    bessels.m
+    </td><td>
+    calculate Bessel's functions of the first kind (J0 and J1); this routine
+runs faster than Matlab's built in Bessel function script (besselj.m).
+</td></tr>
+</tbody></table><br>
+
+This code has been tested under MATLAB 7 (R14), running on both Microsoft
+Windows and Linux platforms.<br><br>
+
+As a function, 'reflectivity.m' requires three inputs, which
+are vectors and matrices.  These variables can be loaded into the Matlab workspace
+from parameter files residing in the directory. 'reflecivity_test.m' demonstrates one way to do this.
+Three sample input files are given as examples; 1) model.dat, the earth model
+used in modelling; 2) geometry.dat, receiver offsets; and 3) parameter.par, the physical
+parameters used in modelling.<br><br>
+
+<h2>Useful References</h2>
+Aki, K., and Richards, P. G., 1980, Quantitative seismology, Theory and Methods:
+Volume I: W. H. Freeman and Company.<br><br>
+Kennett, B. L. N., 1983, Seismic wave propagation in stratified media: Cambridge
+University Press.<br><br>
+Ma, Y., Loures, L., and Margrave, G. F., 2004, Seismic modelling with the reflectivity method: CREWES
+Research Report <strong>16</strong><br><br>
+Muller, G., 1985, The relectivity method: a tutorial: J. Geophys., <strong>58</strong>, 153-174.<br><br>
+
+</body></html>

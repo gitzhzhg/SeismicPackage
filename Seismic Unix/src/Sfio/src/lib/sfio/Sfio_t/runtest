@@ -1,0 +1,87 @@
+#########################################################################
+# Invocation arguments are:						#
+#	-lLIBRARY: a library to be linked with, e.g., -lpthread		#
+#	-ut: testing the uni-threaded libsfio.a (default)		#
+#	-mt: testing the multi-threaded libsfio-mt.a			#
+#	-v: verbose, print the compilation command			#
+#	-c: continue testing after a test fails				#
+#	-whatever_else: bad argument, will be ignored.			#
+#	tests: test cases to be run. If no test specified,		#
+#		all tests will be run.					#
+#									#
+# Below are a few example test runs:					#
+#	runtest:							#
+#		tests the uni-threaded library.				#
+#	runtest -mt:							#
+#		tests the multi-threaded library on a BSD platform.	#
+#	runtest -mt -lpthread:						#
+#		tests the multi-threaded library on a			#
+#		Linux/Irix/Solaris platform.				#
+#	runtest -mt -lcma:						#
+#		tests the multi-threaded library on a HPUX platform.	#
+#		The argument -lcma defines the thread library.		#
+#									#
+# Written by Kiem-Phong Vo 						#
+#########################################################################
+
+verbose=0
+exit_on_fail=1
+files=""
+LIBS="../libsfio.a ../Stdio_b/libstdio.a"
+HDRS="-I../Stdio_s -I.."
+DEFS="-Dvt_threaded=0"
+XLIBS=""
+
+while test "$1" != ""
+do
+	case $1 in
+	-l*) 	XLIBS="$XLIBS $1";
+		;;
+	-v)	verbose=1;
+		;;
+	-c)	exit_on_fail=0;
+		;;
+	-ut)	LIBS="../libsfio.a ../Stdio_b/libstdio.a";
+		DEFS="-Dvt_threaded=0";
+		;;
+	-mt)	LIBS="../libsfio-mt.a ../Stdio_b/libstdio-mt.a ../../vthread/libvthread.a";
+		DEFS="-Dvt_threaded=1";
+		;;
+	-*)	echo "Hmm, unknown argument: $1";
+		;;
+	*)	files="${files} $1";
+		;;
+	esac
+	shift
+done
+
+if test "$CC" = ""; then CC="cc"; fi
+
+if test "$files" = ""
+then
+	files="*.c"
+fi
+
+LIBS="$LIBS $XLIBS"
+
+if test "$verbose" = 1
+then echo "Compiler invocation: $CC -g $DEFS $HDRS xxx.c $LIBS -o ./t"
+fi
+
+for i in $files
+do
+	echo "-- $i:"
+	status=""
+	if $CC -g $DEFS $HDRS $i $LIBS -o ./t
+	then
+		if ./t
+		then	rm ./t; status=Passed
+		else	status=Failed
+		fi
+	else	status="Not compiled"
+	fi
+	echo "	$status"
+	if test "$status" != "Passed"
+	then if test "$exit_on_fail" = "1"; then exit; fi
+	fi
+done

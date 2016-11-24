@@ -1,0 +1,51 @@
+# Run tests in ...cwp/lib
+SHELL = /bin/sh
+
+# Adapt the flags in the following paragraph to your system
+ROOT = $(CWPROOT)
+OPTC = -g
+
+B = $(ROOT)/bin
+I = $(ROOT)/include
+L = $(ROOT)/lib
+
+CFLAGS= $(OPTC) -I$I
+LFLAGS= -L$L -lcwp -lm
+
+T=Test
+
+TESTS =			\
+	$T/swapbyte
+
+
+test:	$(STD)
+
+$(PROGS):	$D $$(@F).c
+	$(CC) $(CFLAGS) $(@F).c $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo $(@F) installed in $B
+
+$(TESTS):	$$(@F).c
+	$(CC) $(CFLAGS) -DTEST $(@F).c $(LFLAGS) -o $@
+	@chmod 755 $@
+	@echo "testdriver: $(@F) installed in $T"
+	-$@ <$@.in >$@.out
+
+compare:
+	@-for i in $(STD)			;\
+	do					 \
+		echo "diff $$i.std $$i.out" 	;\
+		diff $$i.std $$i.out	 	;\
+	done
+
+remake:
+	@-rm $(STD) $(SPECIAL)
+	make -f Mk.test
+clean:
+	rm -f junk* core a.out
+
+# Can comment out if your make knows about C libs
+.c.a:
+	@$(CC) -c $(CFLAGS) $<
+	@ar rv $@ $*.o
+	@rm -f $*.o

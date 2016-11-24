@@ -1,0 +1,29 @@
+Wed May 28 21:51:59 EDT 2003
+	Change terror.h and the runtest script in Sfio_t to strictly
+	use Sfio functions when running regression tests. Previously,
+	sprintf and vsprintf from Stdio were used. This causes linkage
+	problems on some architecture.
+
+
+Sat Jun 21 09:36:05 EDT 2003
+	sfsetbuf.c was changed to take a hint from sfsetbuf(f,f,blksz).
+        blksz is used for aligning disk block boundary while reading data to
+        optimize data transfer from disk (eg, via direct I/O). blksz can be
+        at most f->size/2 so that data movement in buffer can be optimized.
+        blksz should also be a power-of-2 for optimal disk seeks.
+
+	features/common was changed so that the executable test to generate
+	va_copy(), etc. will not dump core on certain platforms.
+
+Fri Aug 22 17:00:51 EDT 2003
+	sfmove() was fixed so that record definition is done via sfgetr().
+	This clears up issue with partial records being multiply handled
+	in different sfmove() calls.
+
+	sfasprintf and sfvasprintf were added to reflect the new Stdio functions.
+
+	Fix the use of argv.c and argv.i when processing %c in sfvprintf().
+
+	Prototypes of *printf and *scanf functions were changed to return ssize_t
+	instead of int. This breaks compatibility with Stdio but in some sense is
+	more correct.

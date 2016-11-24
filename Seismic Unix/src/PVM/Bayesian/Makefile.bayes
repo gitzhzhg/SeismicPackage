@@ -1,0 +1,26 @@
+# Makefile.bayes -- additional configurations.
+
+BPVM = $(PVM_ROOT)/bin/$(PVM_ARCH)
+
+# Target flags for standard 'make' installs
+#IBTARGET = $$(@F)
+#PVMBTARGET = $$(@F).c
+
+# Target flags for 'GNU make' installs
+IBTARGET = $I/Bayesian/%: %
+PVMBTARGET = $(BPVM)/%: %.c
+
+
+# Some convenient abbreviations
+IBAYES = $I/Bayesian
+IPVM = $(PVM_ROOT)/include
+LPVM = $(PVM_ROOT)/lib/$(PVM_ARCH)
+
+#OPTC
+#OPTC = -O -Wall
+
+#OPTC for SGIs
+#OPTC = -TARG:platform=ip30 -OPT:Olimit=3160 -O3 -mips4 -64 -mp -fullwarn -woff 1233
+
+# Special include files
+BAYESCFLAGS = -I$I -I$(IBAYES) -I$(IPVM) $(OPTC) $(ENDIANFLAG)

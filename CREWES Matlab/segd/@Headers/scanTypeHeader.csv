@@ -1,0 +1,24 @@
+name,startByte,endByte,startNibble,endNibble,format,description
+scanTypeNumber,1,1,1,2,bcd,"Scan type number (1-99); see scanTypesPerRecord, byte 28, general header block 1 "
+channelSetNumber,2,2,3,4,bcd,"Channel set number (1-99).; See channelSetsPerScanType,  byte 29, general header block 1"
+channelSetStartTime,3,4,5,8,ubin,"Channel set start time. (0-131,070 ms in 2 ms increments)"
+channelSetEndTime,5,6,9,12,ubin,"Channel set end time. (0-131,070 ms in 2 ms increments)"
+descaleMultiplierExtendedResolution,7,7,13,14,ubin,Optional byte which extends descale muliplier resolution
+descaleMultiplier,8,8,15,16,sbin,Descale multiplier (2^-31.75-2^31.75)
+numberOfChannelsThisSet,9,10,17,20,bcd,Number of channels in this channel set (0-9999)
+channelType,11,11,21,21,bcd,Channel type identification
+samplesPerChannel,12,12,23,23,bcd,"Samples per channel (1-512 == 2^0-2^9); See baseScanInterval, byte 23, general header block 1"
+channelGain,12,12,24,24,bcd,Channel gain control method
+aliasFilterFrequency,13,14,25,28,bcd,Alias filter frequency (0-9999 Hz).
+aliasFilterSlope,15,16,30,32,bcd,Alias filter slope in dB per octave (0-999 dB in 1-dB steps)
+lowCutFilter,17,18,33,36,bcd,Low-cut filter setting (0-9999 Hz)
+lowCutFilterSlope,19,20,38,40,bcd,Low-cut filter slope in dB per octave (0-999 dB in 1-dB steps)
+firstNotchFilter,21,22,41,44,bcd,Notch1 frequency setting (0-999.9 Hz)
+secondNotchFilter,23,24,45,48,bcd,Notch2 frequency setting (0-999.9 Hz)
+thirdNotchFilter,25,26,49,52,bcd,Notch3 frequency setting (0-999.9 Hz)
+extendedChannelSetNumber,27,28,53,56,ubin,Extended channel set number
+extendedHeaderFlag,29,29,57,57,ubin,Extended header flag (Set to 1 to indicate that the extended header contains additional information on this channel set)
+traceHeaderExtension,29,29,58,58,ubin,"Trace header extension; see traceHeaderExtension, byte 10, Demux Trace Header"
+verticalStack,30,30,59,60,ubin,"Vertical stack (0 = trace data intentionally set to zero, one if no stack, N = effective stack order)"
+streamerNumber,31,31,61,62,ubin,Streamer cable number (required for streamer data only)
+arrayForming,32,32,63,64,ubin,Array forming
