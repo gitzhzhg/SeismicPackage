@@ -1,0 +1,10 @@
+#!/bin/bash
+HERE=$(pwd)
+export CLASSPATH=$HOME/bin/classes
+host=$1 port=$2
+if [ -z $host ] ; then
+	echo "vncviewer: usage $ vncviewer host port"
+	exit 1
+fi
+java VncViewer HOST $host PORT $port &
+cd $HERE

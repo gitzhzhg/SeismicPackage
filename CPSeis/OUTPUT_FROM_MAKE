@@ -1,0 +1,197 @@
+         OUTPUT_FROM_MAKE for cbyt on fusbc006
+               (found in CPSEIS_HOME)
+
+-------------------------------------------------------
+making program  cbyt  in  x86_64_intel91_lam
+-------------------------------------------------------
+ifort -nofor_main -i-static -o cbyt cbyt.o
+
+----> LIBS          = MYLIBS  SPWSLIBS  CPSLIB
+----> SYSLIBS       = SPS_LIBS  FOR_LIBS  GUI_LIBS  MATH_LIBS  JAVA_LIBS
+----> OBJS_AND_LIBS = OBJS  MATH_LIBS  LIBS
+
+Note: INTEL_LIBS is empty.
+Note: FOR_LIBS is actually C++ libraries.
+Note: Fortran libraries are not needed when linking with ifort (fortran compiler).
+Note: C++ libraries are not needed if -cxxlib is added to the ifort command.
+
+HERE IS THE ORIGINAL ORDER OF LIBRARIES LINKED IN:
+----> link: SPWSLIBS
+            OBJS_AND_LIBS  =  OBJS  MATH_LIBS  MYLIBS  SPWSLIBS  CPSLIB
+            SYSLIBS        =  SPS_LIBS  FOR_LIBS  GUI_LIBS  MATH_LIBS  JAVA_LIBS
+            SPWSLIBS
+            CPSLIB
+            FFTW_LIBS
+            INTEL_LIBS
+            MATH_LIBS
+            MPI_LIBS
+Note that SPWSLIBS is listed three times.
+Note that MATH_LIBS is listed three times.
+Note that CPSLIB is listed two times.
+
+HERE IS A SIMPLER ORDER WHICH WORKS:
+----> link: SPWSLIBS
+            OBJS  MYLIBS  SPWSLIBS  SPWSLIBS
+            CPSLIB
+            SPS_LIBS
+            FFTW_LIBS  FOR_LIBS  GUI_LIBS  JAVA_LIBS
+            MPI_LIBS  MATH_LIBS
+Note that SPWSLIBS is still listed three times.  Leaving any one of them out
+causes undefined externals, apparently because there are circular dependencies,
+and apparently there is something in OBJS which requires SPWSLIBS to precede
+OBJ. although I have not researched this anomaly.
+----
+Note that the simpler order is specific to spws motif programs, since it uses
+the library variables explicitly instead of the composite variables LIBS,
+SYSLIBS, and OBJS_AND_LIBS which are set differently for non-motif and
+non-spws programs.  The simpler order also eliminates the XDrawRectangle
+unsatisfied external for msepita in the Woodlands and Park Row.  However,
+the simpler order causes other system unsatisfieds on modi (Park Row).
+Therefore the global fix is to keep the original more complicated and redundant
+order, and to make it even more redundant by adding the X/motif libraries a
+second time (at the end).
+
+for cbyt etcetera on modi.
+
+----> makefile            includes  makefile.spws
+----> makefile.spws       includes  makefile.platforms
+----> makefile.platforms  includes  makefile.x86_64_intel91_lam
+
+HERE IS THE ORIGINAL ORDER OF LIBRARIES LINKED IN:
+HERE IS THE ORIGINAL ORDER OF LIBRARIES LINKED IN:
+HERE IS THE ORIGINAL ORDER OF LIBRARIES LINKED IN:
+
+SPWSLIBS:                (defined in makefile.spws)
+ SPWS LIBS HERE (see list below)
+
+OBJS:
+  segy_crou.o string_crou.o swap.o wisdom.o wrdc_crou.o cbyt_window.o
+
+MATH_LIBS:             (defined in makefile.x86_64_intel91_lam)
+ -lpthread -lc
+ /Appl/Tools/Linux-x86_64/intel/fce/lib/libimf.so
+ /Appl/Tools/Linux-x86_64/intel/fce/lib/libguide.so
+MOVED -lpthread -lc after libguide (above).
+ORIGINALLY, -lpthread -lc was before libguide, which required MATH_LIBS
+to be listed twice to satisfy unsatisfied externals.
+ 
+SPWSLIBS:                (defined in makefile.spws)
+ SPWS LIBS HERE (see list below)
+
+CPSLIB:                (defined in makefile.spws)
+ /home/tstoeckley/development/svn/trunk/cpseis/platforms/x86_64_intel91_lam/lib/libcps.a
+
+SPS_LIBS:                (defined in makefile.platforms)
+ /home/tstoeckley/development/svn/trunk/cpseis/platforms/x86_64_intel91_lam/lib/libcgm.a
+
+FOR_LIBS:               (defined in makefile.x86_64_intel91_lam)
+ /usr/lib64/libstdc++.so.5
+ /usr/lib/gcc-lib/x86_64-redhat-linux/3.3.4/libstdc++.a
+
+GUI_LIBS:               (defined in makefile.x86_64_intel91_lam)
+ /home/tstoeckley/lib/libXm.a
+ /home/tstoeckley/lib/libXmu.a
+ /home/tstoeckley/lib/libXp.a
+ /home/tstoeckley/lib/libXext.a
+ /home/tstoeckley/lib/libXt.a
+ /home/tstoeckley/lib/libSM.a
+ /home/tstoeckley/lib/libICE.a
+ /home/tstoeckley/lib/libX11.a
+
+MATH_LIBS:             (defined in makefile.x86_64_intel91_lam)
+ -lpthread -lc
+ /Appl/Tools/Linux-x86_64/intel/fce/lib/libimf.so
+ /Appl/Tools/Linux-x86_64/intel/fce/lib/libguide.so
+
+JAVA_LIBS:             (defined in makefile.x86_64_intel91_lam)
+ -L/apps/fusiongeo/thirdparty/jdk/platforms/x86_64_intel91_lam/jre/lib/amd64
+ -L/apps/fusiongeo/thirdparty/jdk/platforms/x86_64_intel91_lam/jre/lib/amd64/server
+ -ljava -ljvm -lverify
+
+SPWSLIBS:                (defined in makefile.spws)
+ SPWS LIBS HERE (see list below)
+
+CPSLIB:                   (defined in makefile.spws)
+ /home/tstoeckley/development/svn/trunk/cpseis/platforms/x86_64_intel91_lam/lib/libcps.a
+
+FFTW_LIBS:                (defined in makefile.spws)
+ /apps/fusiongeo/thirdparty/fftw-2.1.5/platforms/x86_64_intel91/lib/libfftw.a
+ /apps/fusiongeo/thirdparty/fftw-2.1.5/platforms/x86_64_intel91/lib/librfftw.a
+
+INTEL_LIBS:               (defined in makefile.x86_64_intel91_lam)
+    (empty)
+
+INTEL_LIBS:               (defined in makefile.spws)
+ /opt/intel/fce/10.0.025/lib/libimf.a
+ /opt/intel/fce/10.0.025/lib/libguide.a
+ /opt/intel/fce/10.0.025/lib/libguide_stats.a
+
+MATH_LIBS:             (defined in makefile.x86_64_intel91_lam)
+ -lpthread -lc
+ /Appl/Tools/Linux-x86_64/intel/fce/lib/libimf.so
+ /Appl/Tools/Linux-x86_64/intel/fce/lib/libguide.so
+
+MPI_LIBS:                (defined in makefile.spws)
+ /apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib/libmpi.a
+ /apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib/liblam.a
+ /apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib/liblamf77mpi.a
+ /apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib/libmpi.a
+ /apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib/liblam.a
+
+-------------------------------------------------------
+program  cbyt  in  x86_64_intel91_lam  finished  Thu Feb  4 14:48:07 MST 2010
+creating install directory
+mkdir -p /home/tstoeckley/development/svn/trunk/cpseis/platforms/x86_64_intel91_lam/bin/
+copying program to install directory
+cp cbyt /home/tstoeckley/development/svn/trunk/cpseis/platforms/x86_64_intel91_lam/bin/
+-------------------------------------------------------
+
+THE FOLLOWING SPWS LIBRARIES WERE FOUND IN THE THREE PLACES MENTIONED ABOVE:
+THE FOLLOWING SPWS LIBRARIES WERE FOUND IN THE THREE PLACES MENTIONED ABOVE:
+THE FOLLOWING SPWS LIBRARIES WERE FOUND IN THE THREE PLACES MENTIONED ABOVE:
+
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libfggui.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libfgxp.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libfg2d.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libfgmap.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libfgqc.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libstatgui.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcube.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libpick.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libvfgui.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libvaplots.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libdp.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libvfgui.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libvf.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libvu.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libtrslib.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libplot.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libvect.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libimage.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libinterp.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcubeio.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libhardcopy.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libipc.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libwbox.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libnet.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libgeom.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libwproc.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libstat.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/liboprim.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libmodel.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcell.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libtfio.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libutlib.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcpsprim.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libtransform.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libinitusage.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcprim.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcurves.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libsl.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libsp.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libcolor.a
+ /home/tstoeckley/development/svn/trunk/cpseis/spws_home/spws/lib/x86_64_intel91_lam/libjseis.a
+ 
+THE ABOVE SPWS LIBRARIES WERE FOUND IN THE THREE PLACES MENTIONED EARLIER.
+THE ABOVE SPWS LIBRARIES WERE FOUND IN THE THREE PLACES MENTIONED EARLIER.
+THE ABOVE SPWS LIBRARIES WERE FOUND IN THE THREE PLACES MENTIONED EARLIER.

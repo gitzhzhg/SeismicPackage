@@ -1,0 +1,27 @@
+#!/bin/bash
+# find which modules fortran 90 file uses
+if [ -z $1 ] ; then
+	echo "Provide a fortran 90 file to parse"
+	exit 1
+else
+	FILE=$1
+fi
+BASE=$(basename $FILE .f90)
+echo " $BASE : $FILE \\"
+trap "rm -f .junk$$;exit 1" 1 2 3 6 9 11 12 15
+cat $FILE |
+	grep "use " |
+	grep _module |
+	egrep -v "^\!" |
+	egrep -v "\!use" |
+	awk 'BEGIN{FS=","}{print $1}' |
+	sort -u |
+	awk '{printf("\t%s.mod \\\n",$2);}' |
+	egrep -v "${BASE}_module" >.junk$$
+LINES=$(wc -l .junk$$ | awk '{print $1}')
+LINES=$((LINES-1))
+if [ "$((LINES>0))" = "1" ] ; then
+	head -$LINES <.junk$$
+	tail -1 <.junk$$ | sed 's: \\$::g'
+fi
+rm -f .junk$$

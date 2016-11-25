@@ -1,0 +1,259 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : install_spws_program_everywhere
+# Category   : stand-alone
+# Written    : 2004-05-24   by: Tom Stoeckley
+# Revised    : 2004-05-24   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script to install an SPWS program everywhere.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is a utility to install an SPWS program on all architectures.
+#
+# This script performs the following tasks:
+#
+#   (1) Tags all the latest versions of source code in all source code
+#       directories with the same date used by install_spws_program
+#       to identify the installed programs.
+#
+#   (2) Runs "gmake install" on an appropriate node (and the desired
+#       platform) for each desired architecture.
+#
+# For example:  If the tag is 21May2004, installed programs will be
+#               identified with extension 21May2004.
+#
+# You must type the following:
+#
+#                  install_spws_program_everywhere <program>
+#
+# where <program> is the name of the program executable (not the full path).
+#
+# Task (1) is performed on the local node where this script is run.
+# This node must support RCS.
+#
+# Task (2) is performed by rsh to each node listed in the
+# installation_locations file.
+#
+# Currently, the following architectures are supported, although this can
+# be changed by editing the installation_locations file:
+#
+#           node         platform                architecture
+#           ----         --------                ------------
+#           hoeplc03     linuxab75_motif_1_2     ix86-intel-linux
+#           hotce03      sol62_debug             sparc-sun-solaris
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#         SPWSDIR          normally ~spws
+#         SPWSMAKEDIR      normally ~spws/making
+#         SPWSINSTALLDIR   normally ~spws/install or /usr/app/vendors/spws
+#         ARCHITECTURE     normally sparc-sun-solaris or ix86-intel-linux
+#         USER             must be spws
+#
+# Note: ~spws/install is simply a link to /usr/app/vendors/spws.
+#
+# The following file must exist:
+#
+#                $SPWSMAKEDIR/installation_locations
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2004-05-24  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: install_spws_program_everywhere,v 1.3 2004/06/08 19:25:25 wjdone Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo environment variable SPWSDIR not set.
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo environment variable SPWSMAKEDIR not set.
+     exit
+endif
+
+if($?SPWSINSTALLDIR == 0 || $SPWSINSTALLDIR == "") then
+     echo environment variable SPWSINSTALLDIR not set.
+     exit
+endif
+
+if($?ARCHITECTURE == 0 || $ARCHITECTURE == "") then
+     echo environment variable ARCHITECTURE not set.
+     exit
+endif
+
+
+if($?USER == 0 || $USER != "spws") then
+     echo environment variable USER must be spws.
+     exit
+endif
+
+
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+
+
+if(! -f $SPWSMAKEDIR/installation_locations) then
+     echo missing installation_locations file.
+     exit
+endif
+
+
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+
+
+set program = $1
+
+if($program == "") then
+  echo "missing program name"
+  exit 1
+endif
+
+set dotag = $2
+
+
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+
+
+set platnodes = `cat $SPWSMAKEDIR/installation_locations`
+
+set tag = "auto-`date +%d``date +%b``date +%Y`"
+
+if($dotag == "tag") then
+  echo "Will tag ALL rcs files $tag"
+else
+  echo "Will NOT tag rcs files"
+endif
+
+
+##------------------------- tag the RCS files ------------------------------##
+##------------------------- tag the RCS files ------------------------------##
+##------------------------- tag the RCS files ------------------------------##
+
+
+if($dotag == "tag") then
+    $SPWSMAKEDIR/tag_rcs_files_everywhere $tag
+endif
+
+#echo ""
+#
+#set directory = $SPWSDIR/programs/$program
+#if(-d $directory && -d $directory/RCS) then
+#   echo tagging RCS files in $directory
+#   rcs -n${tag}: $directory/RCS/*
+#endif
+#
+#foreach directory ($SPWSDIR/include/*)
+#   if(-d $directory && -d $directory/RCS) then
+#      echo tagging RCS files in $directory
+#      rcs -n${tag}: $directory/RCS/*
+#   endif
+#end
+#
+#foreach directory ($SPWSDIR/include)
+#   if(-d $directory && -d $directory/RCS) then
+#      echo tagging RCS files in $directory
+#      rcs -n${tag}: $directory/RCS/*
+#   endif
+#end
+#
+#foreach directory ($SPWSDIR/app-defaults)
+#   if(-d $directory && -d $directory/RCS) then
+#      echo tagging RCS files in $directory
+#      rcs -n${tag}: $directory/RCS/*
+#   endif
+#end
+#
+#foreach directory ($SPWSDIR/oop/*)
+#   if(-d $directory && -d $directory/RCS) then
+#      echo tagging RCS files in $directory
+#      rcs -n${tag}: $directory/RCS/*
+#   endif
+#end
+#
+#foreach directory ($SPWSDIR/util/*)
+#   if(-d $directory && -d $directory/RCS) then
+#      echo tagging RCS files in $directory
+#      rcs -n${tag}: $directory/RCS/*
+#   endif
+#end
+
+
+##------------------------- install the program ----------------------------##
+##------------------------- install the program ----------------------------##
+##------------------------- install the program ----------------------------##
+
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set node     = $platnode:r
+   set platform = $platnode:e
+   set progpath = $SPWSDIR/programs/$program/$platform
+   set command  = "cd $progpath; gmake install"
+
+   echo ""
+   echo "using node $node to install the $platform version of program $program"
+   echo ""
+
+   rsh $node $command
+end
+
+echo ""
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

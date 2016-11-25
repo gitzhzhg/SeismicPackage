@@ -1,0 +1,671 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fxryt" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FXRYTPROCESS" title="FXRYT Process" rows="24" columns="80">
+    <Label keyword="LABEL_METHOD" alignment="left">METHOD  =~</Label>
+    <Field keyword="METHOD" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RESTART" alignment="left">RESTART=</Label>
+    <Field keyword="RESTART" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RMIMAGES" alignment="left">RMIMAGES=</Label>
+    <Field keyword="RMIMAGES" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_VEL">SELECT PATH_VEL</Button>
+    <Label keyword="EQLAB_PATH_VEL" alignment="left">=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_IMG">SELECT PATH_IMG</Button>
+    <Label keyword="EQLAB_PATH_IMG" alignment="left">=</Label>
+    <Field keyword="PATH_IMG" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_DAT" alignment="left">PATH_DAT=</Label>
+    <Field keyword="PATH_DAT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SRC" alignment="left">PATH_SRC=</Label>
+    <Field keyword="PATH_SRC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOT1ST" alignment="left">SHOT1ST~=</Label>
+    <Field keyword="SHOT1ST" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOTEND" alignment="left">SHOTEND~=</Label>
+    <Field keyword="SHOTEND" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOTINC" alignment="left">SHOTINC=</Label>
+    <Field keyword="SHOTINC" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOTSIZ" alignment="left">SHOTSIZ=</Label>
+    <Field keyword="SHOTSIZ" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_TYPE" alignment="left">SRC_TYPE=</Label>
+    <Field keyword="SRC_TYPE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_FREQ" alignment="left">SRC_FREQ=</Label>
+    <Field keyword="SRC_FREQ" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_ZLOC" alignment="left">SRC_ZLOC=</Label>
+    <Field keyword="SRC_ZLOC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_AMPL" alignment="left">SRC_AMPL=</Label>
+    <Field keyword="SRC_AMPL" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_TDEL" alignment="left">SRC_TDEL=</Label>
+    <Field keyword="SRC_TDEL" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MIN" alignment="left">FREQ_MIN=</Label>
+    <Field keyword="FREQ_MIN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX=</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BETA" alignment="left">BETA=</Label>
+    <Field keyword="BETA" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_THETA" alignment="left">THETA=</Label>
+    <Field keyword="THETA" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_HDR" alignment="left">FAST_HDR =</Label>
+    <Field keyword="FAST_HDR" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLOW_HDR" alignment="left">SLOW_HDR =</Label>
+    <Field keyword="SLOW_HDR" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT=</Label>
+    <Field keyword="X_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT=</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_TOT" alignment="left">Z_TOT=</Label>
+    <Field keyword="Z_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_ORG" alignment="left">X_ORG=</Label>
+    <Field keyword="X_ORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_ORG" alignment="left">Y_ORG=</Label>
+    <Field keyword="Y_ORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_ORG" alignment="left">Z_ORG=</Label>
+    <Field keyword="Z_ORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC=</Label>
+    <Field keyword="X_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC=</Label>
+    <Field keyword="Y_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_INC" alignment="left">Z_INC=</Label>
+    <Field keyword="Z_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT_IMG" alignment="left">X_TOT_IMG=</Label>
+    <Field keyword="X_TOT_IMG" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_METHOD" xPos="1" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD" xPos="11" yPos="1" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RESTART" xPos="19" yPos="1" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RESTART" xPos="27" yPos="1" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RMIMAGES" xPos="36" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMIMAGES" xPos="45" yPos="1" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATH_VEL" xPos="1" yPos="3" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VEL" xPos="17" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="18" yPos="3" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATH_IMG" xPos="1" yPos="4" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_IMG" xPos="17" yPos="4" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_IMG" xPos="18" yPos="4" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_DAT" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_DAT" xPos="10" yPos="5" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_SRC" xPos="1" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SRC" xPos="10" yPos="6" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SHOT1ST" xPos="1" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOT1ST" xPos="10" yPos="8" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SHOTEND" xPos="21" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOTEND" xPos="30" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SHOTINC" xPos="41" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOTINC" xPos="49" yPos="8" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SHOTSIZ" xPos="57" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOTSIZ" xPos="65" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_TYPE" xPos="1" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_TYPE" xPos="10" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SRC_FREQ" xPos="21" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_FREQ" xPos="30" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_ZLOC" xPos="41" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_ZLOC" xPos="50" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_AMPL" xPos="59" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_AMPL" xPos="68" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_TDEL" xPos="1" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_TDEL" xPos="10" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MIN" xPos="21" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MIN" xPos="30" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="41" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="50" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BETA" xPos="1" yPos="11" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BETA" xPos="6" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_THETA" xPos="21" yPos="11" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="THETA" xPos="27" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_HDR" xPos="1" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_HDR" xPos="11" yPos="13" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLOW_HDR" xPos="19" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_HDR" xPos="29" yPos="13" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="1" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="7" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="19" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="25" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z_TOT" xPos="37" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_TOT" xPos="43" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_ORG" xPos="1" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_ORG" xPos="7" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_ORG" xPos="19" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_ORG" xPos="25" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z_ORG" xPos="37" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_ORG" xPos="43" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="1" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="7" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="19" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="25" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z_INC" xPos="37" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_INC" xPos="43" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT_IMG" xPos="1" yPos="17" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT_IMG" xPos="11" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="METHOD">
+      <Tip>Choose the type of migration. RYTOV or SS(SPLIT STEP).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - METHOD<br> Choose the type of migration. RYTOV or SS(SPLIT STEP).</center></b>
+<pre> Default = RYTOV
+ Allowed = RYTOV
+ Allowed = SS
+ Allowed = RYTOVI
+ Allowed = SSI
+ The rytov ans split step algorithms are supported, as well as impulse
+ response modeling with these two algorithms.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RESTART">
+      <Tip>Choose YES to restart a job</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - RESTART<br>  Choose YES to restart a job</center></b>
+<pre> Default = NO
+ Allowed =
+ Jobs that ended prematurely can be restarted. A restart job will
+ read in the old image file and start with the next profile in
+ the imaging sequence</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMIMAGES">
+      <Tip>None</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - RMIMAGES<br>  None</center></b>
+<pre> Default = YES
+ Allowed =
+ Rmeove the image checkpoint files when done</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VEL">
+      <Tip>The velocity model file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SELECT_PATH_VEL<br> The velocity model file.</center></b>
+<pre> Default = NONE   ! this is the default value from a list of options.
+ Allowed = char(120)
+ A file containing velocity data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL">
+      <Tip>The velocity model file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PATH_VEL<br> The velocity model file.</center></b>
+<pre> Default = NONE   ! this is the default value from a list of options.
+ Allowed = char(120)
+ A file containing velocity data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_IMG">
+      <Tip>A base name for the output image file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SELECT_PATH_IMG<br> A base name for the output image file.</center></b>
+<pre> Default = NONE ! this is the default value from a list of options.
+ Allowed = char(120)
+ A base name to be used for checkpointing image data.
+ A cpu dependent extension will be added to this name.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_IMG">
+      <Tip>A base name for the output image file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PATH_IMG<br> A base name for the output image file.</center></b>
+<pre> Default = NONE ! this is the default value from a list of options.
+ Allowed = char(120)
+ A base name to be used for checkpointing image data.
+ A cpu dependent extension will be added to this name.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_DAT">
+      <Tip>The seimic input data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PATH_DAT<br> The seimic input data.</center></b>
+<pre> Default = NONE   ! this is the default value from a list of options.
+ Allowed = char(120)
+ A file containing velocity data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC">
+      <Tip>The source wavelet file .</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PATH_SRC<br> The source wavelet file .</center></b>
+<pre> Default = NONE   ! this is the default value from a list of options.
+ Allowed = char(120)
+ A file containing a source wavelet trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOT1ST">
+      <Tip>The first shot profile to image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SHOT1ST<br> The first shot profile to image.</center></b>
+<pre> Default = 1   ! this is the default value from a list of options.
+ Allowed = &gt;0
+ The first shot profile to image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOTEND">
+      <Tip>The last shot profile to image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SHOTEND<br> The last shot profile to image.</center></b>
+<pre> Default = 99999
+ Allowed = &gt;0
+ The last shot profile to image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOTINC">
+      <Tip>Image every shotinc'th shot profile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SHOTINC<br> Image every shotinc'th shot profile.</center></b>
+<pre> Default = 1   ! this is the default value from a list of options.
+ Allowed = &gt;0
+ A skip parameter for imageing shot profiles. You will image
+ shot1st, shot1st+shotinc, shot1st+2*shotinc, etc.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOTSIZ">
+      <Tip>The maximum expected size of a shot profile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SHOTSIZ<br> The maximum expected size of a shot profile.</center></b>
+<pre> Default = 240   ! this is the default value from a list of options.
+ Allowed = &gt;0
+ The maximum expected size of a shot profile.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_TYPE">
+      <Tip>Choose the source wavelet type</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SRC_TYPE<br> Choose the source wavelet type</center></b>
+<pre> Default = RICKER   ! this is the default value from a list of options.
+ Allowed = RICKER
+ Allowed = GAUSS
+ Allowed = FILE
+ Allowed = NONE
+ If SRC_TYPE=FILE, the source wavelet will be read from PATH_SRC.
+ IF SRC_TYPE=NONE, a post stack migration is assumed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_FREQ">
+      <Tip>Choose the source wavelet center greq when type=RICKER or GAUSS</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SRC_FREQ<br> Choose the source wavelet center greq when type=RICKER or GAUSS</center></b>
+<pre> Default = 15.0
+ Allowed = &gt; 0
+ Center frequency of analytic source wavelets</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_ZLOC">
+      <Tip>Choose the source wavelet depth location</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SRC_ZLOC<br> Choose the source wavelet depth location</center></b>
+<pre> Default = 1.0
+ Allowed =
+ Source depth = src_zloc * source_center_wavelength
+              = src_zloc * C0 / src_freq
+ Best to locate the source at a grid location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_AMPL">
+      <Tip>Choose the source wavelet center freq when type=RICKER or GAUSS</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SRC_AMPL<br> Choose the source wavelet center freq when type=RICKER or GAUSS</center></b>
+<pre> Default = 1.0
+ Allowed =
+ Amplitude scalar for the source.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_TDEL">
+      <Tip>Choose the source wavelet time delay</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SRC_TDEL<br> Choose the source wavelet time delay</center></b>
+<pre> Default = 0.0666
+ Allowed =
+ Time delay the source wavelet. A reasonable value is 1/src_freq.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MIN">
+      <Tip>Minimum frequency in herz</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - FREQ_MIN<br> Minimum frequency in herz</center></b>
+<pre> Default = 1.0
+ Allowed =
+ Minimum frequency</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency in herz</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - FREQ_MAX<br>  Maximum frequency in herz</center></b>
+<pre> Default = 45.0
+ Allowed =
+ Maximim frequency</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BETA">
+      <Tip>grid step control</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - BETA<br>  grid step control</center></b>
+<pre> Default = 0.2
+ Allowed = 0.1 - 1.0
+ Substeps the downward continution step size</pre></head></html>]]></Text>
+     </Help>
+     <Help component="THETA">
+      <Tip>Dip limit in degrees</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - THETA<br>  Dip limit in degrees</center></b>
+<pre> Default = 60.0
+ Allowed =
+ A parameter for dip limitation</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_HDR">
+      <Tip>Header word to use for binning data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - FAST_HDR<br> Header word to use for binning data.</center></b>
+<pre> Default = 17
+ Allowed =
+ Header word to use for binning data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLOW_HDR">
+      <Tip>Header word to use for binning data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - SLOW_HDR<br>  Header word to use for binning data.</center></b>
+<pre> Default = 18
+ Allowed =
+ Header word to use for binning data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Computational grid count in X direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - X_TOT<br>  Computational grid count in X direction</center></b>
+<pre> Default = 1024
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Computational grid count in Y direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - Y_TOT<br>  Computational grid count in Y direction</center></b>
+<pre> Default = 1
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_TOT">
+      <Tip>Computational grid count in Z direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - Z_TOT<br>  Computational grid count in Z direction</center></b>
+<pre> Default = 501
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_ORG">
+      <Tip>Computational grid origin in X direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - X_ORG<br>  Computational grid origin in X direction</center></b>
+<pre> Default = 0.0
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_ORG">
+      <Tip>Computational grid origin in Y direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - Y_ORG<br>  Computational grid origin in Y direction</center></b>
+<pre> Default = 0.0
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_ORG">
+      <Tip>Computational grid origin in Z direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - Z_ORG<br>  Computational grid origin in Z direction</center></b>
+<pre> Default = 0.0
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Computational grid size in X direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - X_INC<br>  Computational grid size in X direction</center></b>
+<pre> Default = 10.0
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Computational grid size in Y direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - Y_INC<br>  Computational grid size in Y direction</center></b>
+<pre> Default = 10.0
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_INC">
+      <Tip>Computational grid size in Z direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - Z_INC<br>  Computational grid size in Z direction</center></b>
+<pre> Default = 5.0
+ Allowed =
+ Helpless</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT_IMG">
+      <Tip>The size of the imaging window in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - X_TOT_IMG<br>  The size of the imaging window in the X direction.</center></b>
+<pre> Default = 1024
+ Allowed =
+ All shot images are summed into a window of size X_TOT_IMG.
+ Individual shots are imaged into a window of size X_TOT.
+ The shot window is a sliding window within the X_TOT_IMG window,
+ which represents the overall image and model.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxryt - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fxryt">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FXRYT
+ Category   : migrations
+ Written    : 2001-01-16   by: R.S.Day
+ Revised    : 2006-04-25   by: Ioan Vlad  Remove unused variables.
+ Maturity   : production
+ Purpose    : Migration of pre stack shot data via the Rytov algorithm.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ This process can perform either a 2D pre-stack shot profile depth migration,
+ or a post-stack 2D depth migration. The depth migration algorithm operates by
+ downward continuing data in the frequency domain. If the velocity model has
+ no lateral changes, then the algorithm reverts to the classic phase shift
+ migration. If there are lateral velocity changes in the model, there are
+ additional ffts between X and Kx to correct for the effect of the lateral
+ velocity changes. The theory involved is in the papers of Huang et al.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 14. 2006-04-25  I. Vlad    Remove unused variables.
+ 13. 2005-08-09  Goodger    Changed sizeof(data(1,1) in routine image_wrstk
+ 12. 2005-01-31  R.S.Day    Promoted to beta.
+ 11. 2004-06-10  R.S.Day    Argument change to fxryt_extrapolate
+ 10. 2004-03-15  R.S.Day    Renamed rytov to fxryt to be consistent with
+                            other fx primitives modules.
+  9. 2003-04-22  R.S.Day    Updated for changes to modgrid module
+  8. 2002-09-06  R.S.Day    Fixed sign error in rytov_extrapolate to be
+                            consistent with fxshot conventions.
+  7. 2002-08-26  R.S.Day    Corrected incompatabilities with fxex. Introduced
+                            stand_alone flag and scratch array pxy. Added calls
+                            to dbug_set_message. Added fft arguments to
+                            rytov_prim_create routine.
+  6. 2001-10-29  R.S.Day    Changes for new modgrid_data_stats prototype
+  5. 2001-10-17  R.S.Day    Eliminated obsolete features to make ifc
+                            compiler happy
+  4. 2001-08-07  R.S.Day    Added pathchoose primitive on the GUI. Argument
+                            change for rytov_prim_create and
+                            rytov_prim_initialize. Corrected amplitudes so the
+                            it is consistent with cazmig. Changed rytov_elr
+                            to rytov_extrpolate. Added call to rytov_print_par
+                            Corrected bug in rytov_butterworth. Min frequency
+                            clip made consistent with cazmig. Added call
+                            cazmig_comp_ref to compute reference velocity.
+                            rytov_scan_shot changed to rytov_scan_group.
+  3. 2001-06-05  R.S.Day    Added rytov_prim_create, rytov_prim_initialize for
+                            calls from cazmig. Added variable tw_sign to
+                            control the fft sign conventions. Can be called
+                            by cazmig to perform 3D post stack migration.
+                            Added rytov_comp_ref, rytov_perturb.
+  2. 2001-05-03  R.S.Day    Modified portions of the program to handle 3D
+                            data. Will do post stack migration if source type
+                            is set to NONE. real-complex FFTs replaced
+                            complex-complex transforms for the t-w
+                            transform. Replaced x to kx transforms with x-y to
+                            kx-ky 2D transforms. Eliminated use of the velgrid
+                            module, and use modgrid now. Many-many changes!
+  1. 2001-01-16  R.S.Day    Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

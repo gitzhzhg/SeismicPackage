@@ -1,0 +1,100 @@
+<CPS_v1 type="WORKFILE"/>
+
+<PROCESS name="PROJECT_DATA">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1)
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  PROJECT = NONE,   ACCOUNT = "",     USER_NAME = bmenger,
+  ROUTING_NAME = "",                  ADDRESS = "",     PHONE   = "",
+  USER_LEVEL = REGULAR,               SURVEY_UNITS = FEET,
+  TR_UNITS_TYP = TIME,                TR_UNITS = " SECONDS",
+  MODE = "3D Mode", ORIGIN_EAST = 0,  ORIGIN_NORTH = 0, X_GRID_DIST = 1,
+  Y_GRID_DIST = 1,  ANGLE   = 0,      HANDEDNESS = RIGHT,
+  DX11    = 1,      DX12    = 0,      DX21    = 0,      DX22    = 1,
+  DN11    = 1,      DN12    = 0,      DN21    = 0,      DN22    = 1,
+  SURVEY_EAST = (), SURVEY_NORTH = (),                  GRID_X  = (),
+  GRID_Y  = (),     X_RESIDUAL = (),  Y_RESIDUAL = ()
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="JOB_DATA">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1),       TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 251,    NWIH    = 64,     NUM_CPUS = 1
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  JOBNAME = testfunction,             JOB_COMMENT = "",
+  SUB_PROJECT = NONE,                 QUEUE   = A,      MAIL_OPT = NO,
+  HISTORY_OPT = MODEL,                PDN_USERID = bmenger,
+  MACHINE = Linux,  RERUN   = NO,     PATHNAME_TRCIO = ~bmenger/cpsdata/,
+  PATHNAME_DIR = /home/bmenger/Desktop/cpseis/opencfe/etc/,
+  NUM_CPUS = 1,     NUM_NODES = 1,    PRIORITY = 0,     TSTAMP_INC = 1000,
+  STD_LIBS = BETALIB,
+  REC_KEEPING = "NO    Job Summary File",
+  PCPS_REPORT_OPT = "Do not include worker printout",
+  TRSCAN_OPT = BASIC,                 CALLING_PROGRAM = CPS,
+  DEBUG_LEVEL = "NO DEBUG",           RLOCATION = LOCAL,
+  TRACE_LENGTH = 1, TSTRT   = 0,      DT      = 0.004,  NDPT    = 251,
+  NWIH    = 64,     CUSTOM_EXEC_B = "",
+  CUSTOM_EXEC_A = "",                 CUSTOM_LAM = NO,
+  CUSTOM_MODULES = (),                CUSTOM_COMPILE = (),
+  CUSTOM_LINK = (), CUSTOM_NODES = (),
+  PROCESS_LIST = (PROJECT_DATA, JOB_DATA, RNSYN, HEADSUM, INTEGRATE),
+  FRONTEND_PATH = /home/bmenger/Desktop/cpseis/opencfe/etc/
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="RNSYN">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1),       TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 251,    NWIH    = 64,     NUM_CPUS = 1,     NUMTR   = 1,
+  GATHERED = NO
+ </GLOBALS>
+ <CONTROLS>
+  NEED_LABEL = YES, NSCRATCH = 0,     NSTORE  = 251
+ </CONTROLS>
+ <PARAMETERS>
+  OPT_TR  = SAME,   SDEV    = 1,      HDR_LINE = 8,     LINE_INIT = 0,
+  LINE_INC = 1,     LINE_LAST = 0,    LINE_TOT = 1,     HDR_CMP = 7,
+  CMP_INIT = 0,     CMP_INC = 1,      CMP_LAST = 0,     CMP_TOT = 1,
+  HDR_OFF = 6,      OFF_INIT = 0,     OFF_INC = 1,      OFF_LAST = 0,
+  OFF_TOT = 1
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="HEADSUM">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1),       TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 251,    NWIH    = 64,     NUM_CPUS = 1,     NUMTR   = 1,
+  GATHERED = NO
+ </GLOBALS>
+ <CONTROLS>
+  NTAPES  = 0,      NEED_REQUEST = NO,                  NEED_LABEL = NO,
+  TWOSETS = NO,     NSCRATCH = 0,     NSTORE  = 768,    IFTD    = NO,
+  NDISK   = 0,      SETUP_ONLY = NO
+ </CONTROLS>
+ <PARAMETERS>
+  HDR_FLAG = 0,     HIST_LAV = YES
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="INTEGRATE">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1),       TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 251,    NWIH    = 64,     NUM_CPUS = 1,     NUMTR   = 1,
+  GATHERED = NO
+ </GLOBALS>
+ <CONTROLS>
+  PARALLEL_SAFE = YES
+ </CONTROLS>
+ <PARAMETERS>
+  WINDOW_LENGTH = 80
+ </PARAMETERS>
+</PROCESS>

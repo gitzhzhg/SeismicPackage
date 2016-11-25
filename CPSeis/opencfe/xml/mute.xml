@@ -1,0 +1,591 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="mute" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MUTEPROCESS" title="MUTE Process" rows="24" columns="80">
+    <Label keyword="COMMENT_KILLUNDESIRABLESAMPLESAT" alignment="center">Kill undesirable samples at top or bottom of trace.</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MUTE" alignment="left">OPT_MUTE=</Label>
+    <Field keyword="OPT_MUTE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMMENT" alignment="left">COMMENT=</Label>
+    <Field keyword="COMMENT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_TAPER" alignment="left">LEN_TAPER=</Label>
+    <Field keyword="LEN_TAPER" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_MUTE" alignment="left">VEL_MUTE=</Label>
+    <Field keyword="VEL_MUTE" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_INTERP" alignment="left">HDR_INTERP=</Label>
+    <Field keyword="HDR_INTERP" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SFNZV" alignment="left">OPT_SFNZV=</Label>
+    <Field keyword="OPT_SFNZV" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="70" editable="no" sensitive="yes"/>
+    <ArraySet keyword="OFF_ARRAYSET" label="OFF         TIME        X_VALUES    Y_VALUES">
+     <Array keyword="OFF" type="float" maxLength="12 " columnName="OFF" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="TIME" type="float" maxLength="12 " columnName="TIME" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="X_VALUES" type="float" maxLength="12 " columnName="X_VALUES" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="Y_VALUES" type="float" maxLength="12 " columnName="Y_VALUES" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_KILLUNDESIRABLESAMPLESAT" xPos="0" yPos="1" xSize="51" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="0" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="9" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MUTE" xPos="13" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MUTE" xPos="22" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_COMMENT" xPos="0" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT" xPos="9" yPos="5" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_LEN_TAPER" xPos="0" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_TAPER" xPos="10" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="19" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="27" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_MUTE" xPos="31" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_MUTE" xPos="42" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="51" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="59" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="0" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="8" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="17" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="23" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_INTERP" xPos="31" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_INTERP" xPos="42" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_SFNZV" xPos="51" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SFNZV" xPos="61" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATHNAME" xPos="0" yPos="11" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="15" yPos="11" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="16" yPos="11" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="16" yPos="12" xSize="70" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_ARRAYSET" xPos="0" yPos="14" xSize="51" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces will be processed.  Otherwise, only traces
+ with a flag set in header word HDR_FLAG will be processed.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MUTE">
+      <Tip>Type of operation for the mute process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - OPT_MUTE<br> Type of operation for the mute process.</center></b>
+<pre> Default = FILE_HEAD
+ Allowed = FILE_HEAD   Head mute using time values in mute file.
+ Allowed = FILE_TAIL   Tail mute using time values in mute file.
+ Allowed = OT_HEAD     Head mute by offset and time.
+ Allowed = OT_TAIL     Tail mute by offset and time.
+ Allowed = OT_3D_HEAD  Head mute by offset, time and grid.
+ Allowed = OT_3D_TAIL  Tail mute by offset, time and grid.
+ Allowed = VEL_HEAD    Head mute by velocity method.
+ Allowed = VEL_TAIL    Tail mute by velocity method.
+ Allowed = SET_HEAD    Set head mute header value from trace sample values.
+ Allowed = SET_TAIL    Set tail mute header value from trace sample values.
+ Allowed = REST_HEAD   Restore head mute from head mute header value.
+ Allowed = REST_TAIL   Restore tail mute from tail mute header value.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT">
+      <Tip>One line comment for history file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - COMMENT<br> One line comment for history file.</center></b>
+<pre> Default = blank
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_TAPER">
+      <Tip>Length of cosine taper, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - LEN_TAPER<br> Length of cosine taper, in seconds.</center></b>
+<pre> Default = 0.060
+ Allowed = real&gt;=0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word designating offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - HDR_OFF<br> Header word designating offset.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_MUTE">
+      <Tip>Velocity that defines mute function slope for velocity mute method.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - VEL_MUTE<br> Velocity that defines mute function slope for velocity mute method.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;=0.0
+ 
+ Mute time = (offset / VEL_MUTE) + TIM_ADD.
+ 
+ Setting VEL_MUTE = 0.0 is equivalent to infinite velocity = zero slowness.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Additional mute time for velocity mute method.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - TIM_ADD<br> Additional mute time for velocity mute method.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ 
+ Mute time = (offset / VEL_MUTE) + TIM_ADD.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word for arbitrary x coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - HDR_X<br> Header word for arbitrary x coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 0 - NWIH
+ Header word for arbitrary x coordinate to use in specifying grid and offset
+ varying mute.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word for arbitrary y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - HDR_Y<br> Header word for arbitrary y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 0 - NWIH
+ Header word for arbitrary y coordinate to use in specifying grid and offset
+ varying mute.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_INTERP">
+      <Tip>Header used for interpolation in a mute by file option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - HDR_INTERP<br> Header used for interpolation in a mute by file option.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ User specified header word for interpolation in a mute by file option. If
+ HDR_INTERP = 0 then use the header word specified in the mute file (this is
+ the recommended choice.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SFNZV">
+      <Tip>Option whether to set mute header to the first non-zero value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - OPT_SFNZV<br> Option whether to set mute header to the first non-zero value.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If OPT_SFNZV = YES, then set the head/tail mute header word to the index of
+ the first/last non-zero sample in the trace (normal operation).
+ If OPT_SFNZV = NO, then set the head/tail mute header word to the index of
+ the first sample after/before the specified mute time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Pathname for the mute file to be used by the MUTE process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PATHNAME<br> Pathname for the mute file to be used by the MUTE process.</center></b>
+<pre> Default = NONE
+ Allowed = char*60</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OFF">
+      <Tip>Array of increasing offsets for offset-time mute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - OFF<br> Array of increasing offsets for offset-time mute.</center></b>
+<pre> Default =  -
+ Allowed = real (array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME">
+      <Tip>Array of mute time values for offset-time mute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - TIME<br> Array of mute time values for offset-time mute.</center></b>
+<pre> Default =  -
+ Allowed = real (array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_VALUES">
+      <Tip>Array of HDR_X values for spatially varying mute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - X_VALUES<br> Array of HDR_X values for spatially varying mute.</center></b>
+<pre> Default = 0
+ Allowed = real (array)
+ Array of HDR_X values for specifying spatially varying mute.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_VALUES">
+      <Tip>Array of HDR_Y values for spatially varying mute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - Y_VALUES<br> Array of HDR_Y values for spatially varying mute.</center></b>
+<pre> Default = 0
+ Allowed = real (array)
+ Array of HDR_Y values for specifying spatially varying mute.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mute - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="mute">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R O C E S S
+ 
+ Name       : MUTE
+ Category   : amplitude_mod
+ Written    : 1986-04-08   by: Mike Howard
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Kill undesirable samples at top or bottom of trace.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ 
+ Nominal Head Mute Operation
+ 
+ For all options other than the SET options, MUTE will zero all trace samples
+ with a time less than the specified mute time.  It will then taper the sample
+ values using a cosine taper of 0.0 at the mute time, tapering up to 1.0 at
+ (mute time + LEN_TAPER).  Finally, it will set the head mute header word to
+ the index of the first non-zero sample.
+ 
+ 
+ Nominal Tail Mute Operation
+ 
+ For all options other than the SET options, MUTE will zero all trace samples
+ with a time greater than the specified mute time.  It will then taper the
+ sample values using a cosine taper of 0.0 at the mute time, tapering up to
+ 1.0 at (mute time - LEN_TAPER).  Finally, it will set the tail mute header
+ word to the index of the last non-zero sample.
+ 
+ 
+ Definition of Mute Header Word Values
+ 
+ The head/tail mute header word values are defined as the "index of the
+ first/last desirable sample in the trace," where "index" of a sample means
+ the  sequential number of the sample in the trace such that the first sample
+ in the trace, whose time is TSTRT, has an index of 1.  (This means that mute
+ header word values are referenced to TSTRT, not zero time.)
+ 
+ 
+ Mute Header Word Values for Dead Traces
+ 
+ For dead traces, header word 25 is set to 0.0.
+ 
+ 
+ SET and RESTORE Options
+ 
+ The SET options set the head/tail mute header word values to the index of
+ the first/last non-zero trace sample value.  (See OPT_SFNZV Option, below,
+ for an exception to this.)  The SET option does not zero any sample values.
+ 
+ The RESTORE options function the same as the nominal mute operation except
+ that the mute time is the time associated with the mute header word values
+ and the mute header word values are not reset.  RESTORE options can be used
+ to reapply a previous mute.
+ 
+ 
+ OPT_SFNZV Option
+ 
+ If you want to set the mute header word values without regard to whether
+ there is a dead section in the trace, set OPT_SFNZV = N.  This will override
+ the normal operation of setting head/tail mute header word values to the
+ index of the first/last non-zero sample.  (OPT_SFNZV = Y gives normal
+ operation.)
+ 
+ 
+ FILE Options
+ 
+ The format for mute files was changed in 1995 to allow operation for 3D data.
+ Even though the new format is the only one being written now, MUTE will
+ recognize the old format and use it properly for 2D data.
+ 
+ In the new format, offsets will be considered negative: (a) if header words
+ used are 6,46,0 and header 47 is less than header 46; or (b) if header words
+ used are 6,33,34 and header 35 is less than header 33.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         ADVICE FOR USERS
+ 
+ 
+ Mute Header Word Values and Operation of TSEL and SHFT
+ 
+ If the TSEL process is used to change TSTRT, it will change the mute header
+ words also, since mute header word values are referenced to TSTRT.  If TSTRT
+ increases/decreases by n samples, the head and tail mute header words will
+ decrease/increase by n.
+ 
+ A bulk shift of a trace, such as a static shift made by the SHFT process, will
+ change the mute header word values since the first/last desirable sample time
+ changes but TSTRT does not.  Thus, if the first/last desirable sample time
+ increases/decreases by n samples, the head and tail mute headers will
+ increase/decrease by n.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          REVISION HISTORY
+ 
+     Date        Author    Description
+     ----        ------    -----------
+ 51. 2006-09-11  Stoeckley Add call to pc_register_array_names for SeisSpace.
+050. 2006-01-10  B. Menger   Removed Unused Variables.
+ 49. 2005-01-17  Baumel    Enable VEL_MUTE = 0.0 (the default value!) to work
+                            correctly (equivalent to infinite velocity = zero
+                            slowness) for VEL_HEAD and VEL_TAIL options.
+ 48. 2002-05-06  Vunderink Added parallel control parameters
+ 47. 2002-04-22  Stoeckley Set head mute to bottom of trace when mute goes
+                            below end of trace.
+ 46. 2001-10-18  Stoeckley Move trap subroutine to different location in code
+                            to make the intel compiler happy; also remove
+                            call to pc_verify_scalar.
+ 45. 2001-08-24  Stoeckley Add file selection box and file status message.
+ 44. 2001-04-04  Stoeckley Change wrapup flag; allow #headers &gt; 64.
+ 43. 2000-08-30  O'Brien   Implemented inter_module to fix OT_3D operations
+ 42. 2000-08-23  O'Brien   Adopted one trap per header word in place of one
+                             trap for all header words.
+                           HDR_X now defaults to HDR_MIDPOINT_XGRID (7)
+                           HDR_Y now defaults to HDR_MIDPOINT_YGRID (8)
+ 41. 2000-08-17  O'Brien   Fixed typo X_VALEUS --&gt; X_VALUES in pc_put() call
+ 40. 2000-08-10  O'Brien   Documentation update to accomodate changes to
+                             header word naming convention... variable names
+                             made to be consistent with new convention.
+                           Rearranged OFFset,TIME sorts in update to properly
+                             handle 3-D parameter lists.
+                           Added logic in mute_list_consistency() to remove
+                             rows of FNIL from lists.
+ 39. 2000-06-14  O'Brien   Fixed bug in OFF and TIME traps
+ 38. 2000-05-25  O'Brien   Reworked trapping routines for linked lists
+                           Allow true OT_3D_HEAD and OT_3D_TAIL muting
+ 37. 2000-05-17  O'Brien   Implemented EzGUI Layout
+ 36. 2000-03-02  O'Brien   Fixed bug in velocity mute option.
+ 35. 2000-02-23  O'Brien   Reworked several GUI traps.
+ 34. 2000-02-08  O'Brien   Various adjustments for GUI response.
+ 33. 2000-02-01  O'Brien   Revised document regarding dead trace headers.
+ 32. 2000-01-31  O'Brien   Removed FILENAME_LENGTH parameter as it's now
+                             available through pathcheck_module
+ 31. 2000-01-27  O'Brien   Reorganized calls to pc_get_global and use
+                             pc_put_process in place of pc_put where
+                             appropriate.
+ 30. 2000-01-20  O'Brien   Revised logic in traps for OPT_SFNZV
+                             and PATHNAME. Added LAV calculation after
+                             muting in accord with new "process
+                             responsibilities" document.
+ 29. 1999-12-30  O'Brien   Adjusted comment in Revision history item 27.
+ 28. 1999-12-29  O'Brien   Brought xml tags up to date
+ 27. 1999-12-08  O'Brien   Added RCS Identifyer variable.
+                           Fixed time registration in offset-time mode
+ 26. 1999-10-15  O'Brien   Properly allocate offset array
+ 25. 1999-09-13  O'Brien   Updates for conformance with new pc_module
+ 24. 1999-08-31  O'Brien   Full f90 conversion.
+ 23. 1998-11-10  Vunderink Begin using the f90 compiler.
+ 22. 1998-04-27  Vunderink Added HWFNZ parameter for options 8 and 9.
+ 21. 1998-03-04  Vunderink Fixed bug in options 8 and 9 in using T0.
+ 20. 1995-01-03  Stoeckley Add new type of 3D mute file.
+ 19. 1992-07-16  Peterson  When OFF(1) is greater than OFF(NOFF), invert
+                           OFF and TIME arrays for easier interpolation.
+ 18. 1992-03-10  Peterson  Correct options 8 and 9 to utilize T0.
+ 17. 1992-02-27  Stoeckley Allow offsets on mute file comment cards to
+                           be in decreasing order.
+ 16. 1992-02-19  Troutt    Add logic for new header word 64 which contains
+                           the tail mute index. HW64 represents the index
+                           of the last "desirable" value in the trace.
+                           This update includes the addition of options
+                           10 and 11 plus the setting of HW64 for options
+                           4,5,6, and 9.
+ 15. 1992-02-17  Troutt    Fixed a bug with options 8 and 9 (mutes
+                           from a file) which previously disabled the
+                           cosine taper for these options.
+ 14. 1992-01-16  Stoeckley Replace call to STATREPL with STATREPY.
+ 13. 1992-01-10  Stoeckley Add option for tail mute times from a file,
+                           plus replace nils on mute file by interpolated
+                           values, plus add capability to use mute file
+                           with comment card indirect addressing, plus
+                           add automatic optional negative offsets when
+                           using a mute file.
+ 12. 1991-10-24  Peterson  Add option for head mute times from a file.
+ 11. 1991-06-10  Peterson  Correction in SUBROUTINE MUTEAPL to COMMON
+                           /MUTEP1/.   Had left out new NHF parameter.
+ 10. 1991-06-03  Peterson  Added parameter to selectivly mute by header
+                           word.  HF#
+  9. 1990-06-26  Howard    Make internally callable.
+  8. 1990-03-15  Troutt    Add checks at setup for LIN and BAS increasing
+  7. 1988-09-23  Ball      NWIH and NWPT Conversion
+  6. 1988-06-01  Baumel    Add OPT=7; make conventions more like Conseis.
+  5. 1988-04-22  Baumel    Put in CPSPRT calls.
+  4. 1987-04-30  Howard    Fix GETS call in OPT=3.
+  3. 1987-04-08  Hanson    Add NCODE for history records.
+  2. 1986-07-15  Baumel    Add options 4,5,6
+  1. 1986-04-08  Howard    Original version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

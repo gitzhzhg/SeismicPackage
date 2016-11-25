@@ -1,0 +1,41 @@
+#! /bin/csh -f
+
+# tag_rcs_files
+#
+# $Id: tag_rcs_files,v 1.1 2004/05/25 22:03:20 spws Exp spws $
+#
+# Run this script to tag the RCS files in the specified ~spws directory.
+#
+# Simply type this:
+#
+#               tag_rcs_files  <directory>  <tag>
+#
+# where  <directory> is the desired RCS directory (full path).
+# where  <tag>       specifies the tag to be used.
+
+#-------------------------------------------------------------------------------
+
+set directory = $1
+set tag       = $2
+
+if($directory == "") then
+     echo RCS directory argument not set
+     exit
+endif
+
+if($tag == "") then
+     echo tag argument not set
+     exit
+endif
+
+#-------------------------------------------------------------------------------
+
+    echo ""
+    echo "tagging files with tag $tag in $directory"
+
+    rcs -n${tag}: $directory/* >& /dev/null
+
+    echo ""
+
+#-------------------------------------------------------------------------------
+

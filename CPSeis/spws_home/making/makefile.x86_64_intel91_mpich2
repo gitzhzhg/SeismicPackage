@@ -1,0 +1,116 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##-------------------------- x86_64_intel91_mpich2 -------------------------------##
+##-------------------------- x86_64_intel91_mpich2 -------------------------------##
+##-------------------------- x86_64_intel91_mpich2 -------------------------------##
+
+
+permitted_architectures = x86_64
+permitted_hosts          = modi
+permitted_hosts         += fusbc006.fusiongeo.local
+permitted_hosts         += bellum
+permitted_hosts         += helios.fusiongeo.local
+permitted_hosts         += mustang
+permitted_hosts         += helios02.fusiongeo.local
+permitted_hosts         += achilles
+
+FC         = mpif90 -c -g
+FC_LINK    = mpif90 -g
+
+### gcc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+CC         = mpicc -c -g -Wall -mcmodel=medium -DLINUX -DLINUXI -D_REENTRANT \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+
+CC_LINK    = mpicc
+
+CXX        = mpiCC -c -g -fPIC -O2 -mcmodel=medium -parallel -unroll -DNEED_UNDERSCORE \
+                                                -DLINUX -DLINUXI -DLINUXI91 \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+####### g++ was used by mistake instead of icpc for CXX until 2010 feb 5:
+CXX        = mpiCC -c -g -Wall -mcmodel=medium -DLINUX -DLINUXI \
+#                                             -D_FILE_OFFSET_BITS=64 \
+#                                             -DIA64 -D_64LINUXI91
+
+CXX_LINK   = mpif90 -nofor_main -i-static -cxxlib
+CXX_DEPEND = mpiCC -MM -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+AR_LINK    = ar -ursv
+SO_LINK    = mpiCC -shared -g
+
+MODEXT     = .mod
+MODFLAG    = -I
+
+FOR_LIBS   = 
+#FOR_LIBS   = /usr/lib64/libstdc++.so.5 \
+#             /usr/lib/gcc-lib/x86_64-redhat-linux/3.3.4/libstdc++.a
+
+
+#             /usr/lib/gcc-lib/x86_64-redhat-linux/3.2.3/libstdc++.a \
+
+GUI_LIBS    = -L/usr/lib64 -lXm -lXmu -lXp -lXext -lXt -lSM -lICE -lX11
+
+ifeq ($(CPSEIS_LOCATION), woodlands)
+  GUI_LIBS    = /usr/X11R6/lib64/libXm.a \
+                /usr/X11R6/lib64/libXmu.a \
+                /usr/X11R6/lib64/libXp.a \
+                /usr/X11R6/lib64/libXext.a \
+                /usr/X11R6/lib64/libXt.a \
+                /usr/X11R6/lib64/libSM.a \
+                /usr/X11R6/lib64/libICE.a \
+                /usr/X11R6/lib64/libX11.a
+endif
+ifeq ($(CPSEIS_LOCATION), parkrow)
+  GUI_LIBS    = /usr/X11R6/lib64/libXm.a \
+                /usr/X11R6/lib64/libXmu.a \
+                /usr/X11R6/lib64/libXp.a \
+                /usr/X11R6/lib64/libXext.a \
+                /usr/X11R6/lib64/libXt.a \
+                /usr/X11R6/lib64/libSM.a \
+                /usr/X11R6/lib64/libICE.a \
+                /usr/X11R6/lib64/libX11.a
+endif
+
+ifeq ($(CPSEIS_LOCATION), boulder)
+  GUI_LIBS    = -L/usr/lib64 -lXm -lXmu -lXp -lXext -lXt -lSM -lICE -lX11
+endif
+
+GUI_LIBS    = -L/usr/X11R6/lib64 -lXm -lXmu -lXp -lXext -lXt -lSM -lICE -lX11
+
+#MATH_LIBS  = /usr/lib64/libm.a \
+#             /usr/lib64/libpthread.a \
+#             /usr/lib64/libc.a
+MATH_LIBS = /usr/lib64/libm.a -lpthread -lc
+
+ifeq ($(CPSEIS_LOCATION), boulder)
+  MATH_LIBS += /apps/GPTools/Linux-x86_64/intel/lib/libimf.so
+  MATH_LIBS += /apps/GPTools/Linux-x86_64/intel/lib/libguide.so
+endif
+
+ifeq ($(CPSEIS_LOCATION), parkrow)
+  MATH_LIBS += /opt/intel/fce/10.0.025/lib/libimf.so
+  MATH_LIBS += /opt/intel/fce/10.0.025/lib/libguide.so
+endif
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/amd64 -L$(JAVA_HOME)/jre/lib/amd64/server \
+            -ljava -ljvm -lverify
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)/include/linux /usr/include /usr/X11R6/include
+INCDIRS += /usr/X11R6/include/X11
+INCDIRS += /usr/X11R6/include/Xm
+INCDIRS += /usr/X11R6/include/Xmu
+INCDIRS += /usr/X11R6/include/Xp
+INCDIRS += /usr/X11R6/include/Xext
+INCDIRS += /usr/X11R6/include/Xt
+INCDIRS += /usr/X11R6/include/SM
+INCDIRS += /usr/X11R6/include/ICE
+INCDIRS += /usr/include/X11
+INCDIRS += /usr/include/Xm
+INCDIRS += /usr/include/X11/Xm
+INCDIRS += /usr/include/X11/Xmu
+INCDIRS += /usr/include/X11/Xp
+INCDIRS += /usr/include/X11/Xext
+INCDIRS += /usr/include/X11/Xt
+INCDIRS += /usr/include/X11/SM
+INCDIRS += /usr/include/X11/ICE

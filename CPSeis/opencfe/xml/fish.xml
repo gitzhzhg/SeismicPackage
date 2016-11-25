@@ -1,0 +1,993 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fish" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FISHPROCESS" title="FISH Process" rows="24" columns="80">
+    <Label keyword="COMMENT_INPUTANDOUTPUTTRACESPECI" alignment="center">Input and Output Trace Specifications</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEAD_END" alignment="left">DEAD_END=</Label>
+    <Field keyword="DEAD_END" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INPUTANDOUTPUTSTATICFILE" alignment="center">Input and Output Static File Specifications</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="COMMENT_SOURCEFILE" alignment="left">Source file:</Label>
+    <Label keyword="LABEL_HDR_SRC" alignment="left">HDR_SRC=</Label>
+    <Field keyword="HDR_SRC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SX" alignment="left">HDR_SX=</Label>
+    <Field keyword="HDR_SX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SY" alignment="left">HDR_SY=</Label>
+    <Field keyword="HDR_SY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_RECEIVERFILE" alignment="left">Receiver file:</Label>
+    <Label keyword="LABEL_HDR_REC" alignment="left">HDR_REC=</Label>
+    <Field keyword="HDR_REC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RX" alignment="left">HDR_RX=</Label>
+    <Field keyword="HDR_RX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RY" alignment="left">HDR_RY=</Label>
+    <Field keyword="HDR_RY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_SRC">Select PATH_SRC</Button>
+    <Label keyword="EQLAB_PATH_SRC" alignment="left">=</Label>
+    <Field keyword="PATH_SRC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_SRC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_REC">Select PATH_REC</Button>
+    <Label keyword="EQLAB_PATH_REC" alignment="left">=</Label>
+    <Field keyword="PATH_REC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_REC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_CORR_FILES" alignment="left">CORR_FILES=</Label>
+    <Field keyword="CORR_FILES" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_CORR" alignment="left">LEN_CORR=</Label>
+    <Field keyword="LEN_CORR" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MS" alignment="center">ms</Label>
+    <Label keyword="LABEL_NO_DEAD" alignment="left">NO_DEAD=</Label>
+    <Field keyword="NO_DEAD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_STATICCALCULATIONPARAMET" alignment="center">Static Calculation Parameters</Label>
+    <Border keyword="BORDER3"/>
+    <Label keyword="LABEL_NUM_ITER" alignment="left">NUM_ITER  =</Label>
+    <Field keyword="NUM_ITER" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_COMP" alignment="left">NUM_COMP=</Label>
+    <Field keyword="NUM_COMP" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_CMP" alignment="left">NUM_CMP =</Label>
+    <Field keyword="NUM_CMP" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_STATIC" alignment="left">MAX_STATIC=</Label>
+    <Field keyword="MAX_STATIC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">ms</Label>
+    <Label keyword="LABEL_ICC_MIN" alignment="left">ICC_MIN =</Label>
+    <Field keyword="ICC_MIN" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOLD_MIN" alignment="left">FOLD_MIN=</Label>
+    <Field keyword="FOLD_MIN" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONVERGE" alignment="left">CONVERGE  =</Label>
+    <Field keyword="CONVERGE" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="center">ms</Label>
+    <Label keyword="LABEL_SCC_MIN" alignment="left">SCC_MIN =</Label>
+    <Field keyword="SCC_MIN" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_ASYM" alignment="left">MAX_ASYM=</Label>
+    <Field keyword="MAX_ASYM" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_INPUTANDOUTPUTTRACESPECI" xPos="18" yPos="1" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="2" xSize="76" ySize="3"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="21" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="30" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEAD_END" xPos="40" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEAD_END" xPos="49" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INPUTANDOUTPUTSTATICFILE" xPos="15" yPos="6" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="7" xSize="76" ySize="9"/>
+     <Constraints component="COMMENT_SOURCEFILE" xPos="3" yPos="8" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SRC" xPos="19" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SRC" xPos="27" yPos="8" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SX" xPos="38" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SX" xPos="45" yPos="8" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SY" xPos="49" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SY" xPos="56" yPos="8" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_RECEIVERFILE" xPos="3" yPos="9" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_REC" xPos="19" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_REC" xPos="27" yPos="9" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_RX" xPos="38" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RX" xPos="45" yPos="9" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_RY" xPos="49" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RY" xPos="56" yPos="9" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_SRC" xPos="3" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_SRC" xPos="18" yPos="10" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SRC" xPos="19" yPos="10" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SRC_INFO" xPos="19" yPos="11" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_REC" xPos="3" yPos="12" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_REC" xPos="18" yPos="12" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_REC" xPos="19" yPos="12" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_REC_INFO" xPos="19" yPos="13" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CORR_FILES" xPos="19" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CORR_FILES" xPos="30" yPos="14" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_CORR" xPos="38" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_CORR" xPos="47" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MS" xPos="55" yPos="14" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NO_DEAD" xPos="60" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NO_DEAD" xPos="68" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_STATICCALCULATIONPARAMET" xPos="21" yPos="17" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="18" xSize="76" ySize="5"/>
+     <Constraints component="LABEL_NUM_ITER" xPos="12" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ITER" xPos="23" yPos="19" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_COMP" xPos="36" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_COMP" xPos="45" yPos="19" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_CMP" xPos="54" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_CMP" xPos="63" yPos="19" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_STATIC" xPos="12" yPos="20" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_STATIC" xPos="23" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="30" yPos="20" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ICC_MIN" xPos="36" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ICC_MIN" xPos="45" yPos="20" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOLD_MIN" xPos="54" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_MIN" xPos="63" yPos="20" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONVERGE" xPos="12" yPos="21" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONVERGE" xPos="23" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="30" yPos="21" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SCC_MIN" xPos="36" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCC_MIN" xPos="45" yPos="21" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_ASYM" xPos="54" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_ASYM" xPos="63" yPos="21" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are used for the statics solution.
+ Otherwise, only traces with a flag set in header word HDR_FLAG are used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEAD_END">
+      <Tip>Whether to stop before outputting any traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - DEAD_END<br> Whether to stop before outputting any traces.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ 
+ If this parameter is YES, this will be a dead-end process which does not
+ output any traces, but the job uses fewer resources and runs faster.
+ 
+ If this parameter is NO, all input traces will have the newly-derived
+ static shift applied and will be output, in the same order they were
+ received.
+ 
+ Static files and correlation files will always be written, regardless of the
+ value of DEAD_END.
+ 
+ Stopping before outputting any traces reduces the required temporary disk
+ space by a factor of at least 5, and more commonly by about 10 on average.
+ The disk savings are more significant when trace correlation windows are
+ small.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SRC">
+      <Tip>Header word(s) to use to identify source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_SRC<br> Header word(s) to use to identify source locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (source sequential ground position - header word  46)
+ Allowed = GROUP (original source group number      - header word   9)
+ Allowed = LNSP  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = GRID  (source grid coordinates           - header words 33 and 34)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ GROUP coordinates:
+  The original source group number should generally be used for 2D and 3D
+  surveys if a source occupies the same location more than once.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Grid coordinates are not allowed for the SISC process.
+ 
+ Sequential ground position coordinates should not be used for the SISC
+ process for 3D surveys because there is no way to identify separate lines,
+ which must be integrated independently.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SX">
+      <Tip>First header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_SX<br> First header word to use for designating source locations.</center></b>
+<pre> Default = 46
+ Allowed = 46  (source sequential ground position - header word  46)
+ Allowed = 9   (original source group number      - header word   9)
+ Allowed = 29  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 33  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SY">
+      <Tip>Second header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_SY<br> Second header word to use for designating source locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (source sequential ground position - header word  46)
+ Allowed = 0   (original source group number      - header word   9)
+ Allowed = 26  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 34  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_REC">
+      <Tip>Header word(s) to use to identify receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_REC<br> Header word(s) to use to identify receiver locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (receiver sequential ground position - header word  47)
+ Allowed = LNSP  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = GRID  (receiver grid coordinates           - header words 35 and 36)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Grid coordinates are not allowed for the SISC process.
+ 
+ Sequential ground position coordinates should not be used for the SISC
+ process for 3D surveys because there is no way to identify separate lines,
+ which must be integrated independently.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RX">
+      <Tip>First header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_RX<br> First header word to use for designating receiver locations.</center></b>
+<pre> Default = 47
+ Allowed = 47  (receiver sequential ground position - header word  47)
+ Allowed = 28  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 35  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RY">
+      <Tip>Second header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HDR_RY<br> Second header word to use for designating receiver locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (receiver sequential ground position - header word  47)
+ Allowed = 27  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 36  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_SRC">
+      <Tip>Choose PATH_SRC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - SELECT_PATH_SRC<br> Choose PATH_SRC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC">
+      <Tip>Pathname for the file which will contain source statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PATH_SRC<br> Pathname for the file which will contain source statics.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_SRC = NONE, then no source statics will be calculated.
+ PATH_SRC and PATH_REC cannot both be set to NONE.
+ Static files will will have an extension named after the static process.
+ 
+ For the SISC process, a static increment file with the extension .inc is
+ also saved.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.  The iteration count will
+ be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC_INFO">
+      <Tip>Status of PATH_SRC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PATH_SRC_INFO<br> Status of PATH_SRC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_REC">
+      <Tip>Choose PATH_REC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - SELECT_PATH_REC<br> Choose PATH_REC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_REC">
+      <Tip>Pathname for the file which will contain receiver statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PATH_REC<br> Pathname for the file which will contain receiver statics.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_REC = NONE, then no receiver statics will be calculated.
+ PATH_SRC and PATH_REC cannot both be set to NONE.
+ Static files will will have an extension named after the static process.
+ 
+ For the SISC process, a static increment file with the extension .inc is
+ also saved.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.  The iteration count will
+ be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_REC_INFO">
+      <Tip>Status of PATH_REC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PATH_REC_INFO<br> Status of PATH_REC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="CORR_FILES">
+      <Tip>Type of static correlation files to save.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - CORR_FILES<br> Type of static correlation files to save.</center></b>
+<pre> Default = TRC8
+ Allowed = TRC8 (save TRCIO byte files with the extension .trc8)
+ Allowed = NONE (do not save correlation files)
+ 
+ The names of the static correlation files will be the same as PATH_SRC and
+ PATH_REC except for the extension.
+ 
+ Choice NONE is not allowed for the FISH and SISC processes.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.
+ 
+ A CBYT option allows the correlation files to be plotted and edited easily.
+ This option automatically updates the statics files based on correlation
+ edits.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_CORR">
+      <Tip>Length of each side of the correlation function (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - LEN_CORR<br> Length of each side of the correlation function (milliseconds).</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt;= MAX_STATIC.
+ 
+ The plotted correlations will be twice this length (since both sides are
+ plotted.)
+ 
+ This value, plus the number of iterations, determines the length of the
+ correlation traces output to byte files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NO_DEAD">
+      <Tip>Whether to omit dead traces from the output correlation files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - NO_DEAD<br> Whether to omit dead traces from the output correlation files.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ Setting NO_DEAD = YES may be desirable if the correlation files are very
+ large and consist mostly of dead traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ITER">
+      <Tip>Number of iterations to do to solve the statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - NUM_ITER<br> Number of iterations to do to solve the statics.</center></b>
+<pre> Default =  3
+ Allowed =  int &gt;= 1
+ 
+ Normally more than 3 iterations are not required.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_COMP">
+      <Tip>Maximum number of CMPs to composite prior to correlating.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - NUM_COMP<br> Maximum number of CMPs to composite prior to correlating.</center></b>
+<pre> Default = 5
+ Allowed = int &gt;= 1
+ 
+ Partial composite over CMPs (common midpoints) prior to correlation reduces
+ the effects of random and linear noise.  Some partial composite prior to
+ correlation is beneficial even on good data.
+ 
+ For example: For a source file solution, several traces with the same
+ source ground position will be composited over several CMPs, and then
+ correlated with a base trace which is a full stack over the same CMPs.
+ This helps attenuate energy that is not flat with offset, such as linear
+ interference or multiples, and may also help the solution when random noise
+ is a problem.
+ 
+ NOTE: A CMP consists of all traces sharing common (nearest integer) values
+ of header words 7 and 8.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_CMP">
+      <Tip>Maximum number of CMPs to composite to form a base trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - NUM_CMP<br> Maximum number of CMPs to composite to form a base trace.</center></b>
+<pre> Default = 1
+ Allowed = int &gt;= 1
+ 
+ Usually NUM_CMP should be set to 1, unless NUM_COMP = 1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_STATIC">
+      <Tip>Maximum static shift (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - MAX_STATIC<br> Maximum static shift (milliseconds).</center></b>
+<pre> Default = 40.0
+ Allowed = real &gt; 0.0
+ 
+ This is the maximum static that is solved for in any one iteration.
+ The final static (accumulated over all iterations) could exceed this
+ value for a few ground positions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ICC_MIN">
+      <Tip>Minimum individual correlation coefficient to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - ICC_MIN<br> Minimum individual correlation coefficient to use.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 &lt;= real &lt; 1.0
+ 
+ If the correlation coefficient for an individual correlation is less than
+ ICC_MIN, then that correlation will not be added to the stacked correlation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_MIN">
+      <Tip>Minimum fold for base trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - FOLD_MIN<br> Minimum fold for base trace.</center></b>
+<pre> Default = -1
+ Allowed = -1 or int &gt;= 1
+ 
+ CDPs are composited if necessary to reach the desired minimum fold.
+ If FOLD_MIN = -1, then half the average fold is used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONVERGE">
+      <Tip>Convergence criterion (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - CONVERGE<br> Convergence criterion (milliseconds).</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= 0.0
+ 
+ Iterations are terminated when the maximum absolute change in any static
+ value is less than CONVERGE.  The number of iterations will not exceed
+ NUM_ITER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCC_MIN">
+      <Tip>Minimum stacked correlation coefficient to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - SCC_MIN<br> Minimum stacked correlation coefficient to use.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 &lt;= real &lt; 1.0
+ 
+ If the correlation coefficient for a stacked correlation is less than
+ SCC_MIN, then the static value will be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_ASYM">
+      <Tip>Maximum assymetry allowed at edges of line when compositing CMPs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - MAX_ASYM<br> Maximum assymetry allowed at edges of line when compositing CMPs.</center></b>
+<pre> Default = -1
+ Allowed = -1 or int &gt;= 0
+ 
+ If MAX_ASYM = -1, then the larger of either FOLD_MIN or NUM_CMP/2 is used as
+ a constraint.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="Correlation Window Specifications" rows="24" columns="80">
+    <Label keyword="LABEL_WIN_OPT" alignment="left">WIN_OPT=</Label>
+    <Field keyword="WIN_OPT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_ADD" alignment="left">WIN_TIM_ADD=</Label>
+    <Field keyword="WIN_TIM_ADD" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_LEN" alignment="left">WIN_TIM_LEN=</Label>
+    <Field keyword="WIN_TIM_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="WIN_COOR_X_ARRAYSET" label="WIN_COOR_XWIN_COOR_YWIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="WIN_COOR_X" type="float" maxLength="10 " columnName="WIN_COOR_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_COOR_Y" type="float" maxLength="10 " columnName="WIN_COOR_Y" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_OPT" xPos="5" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_OPT" xPos="13" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_TIM_ADD" xPos="20" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_ADD" xPos="32" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_TIM_LEN" xPos="42" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_LEN" xPos="54" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="15" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="20" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="30" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X_ARRAYSET" xPos="8" yPos="4" xSize="45" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_OPT">
+      <Tip>Method to use for specifying trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_OPT<br> Method to use for specifying trace windows.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE   (window defined by time measure from mute)
+ Allowed = GRID   (window varies laterally, or same window everywhere)
+ 
+ Segments of the input traces used in this process are defined by these
+ windows.
+ 
+ Option GRID specifies the trace windows by linked arrays of window top and
+ window bottom values which may vary lateraly (spatially) over arbitrarily
+ chosen coordinates.
+ 
+ Option MUTE specifies the trace windows by specifying the time from the
+ mute time to the top of the window, and the length of the window.
+ 
+ Some processes might disable the MUTE option if it is not appropriate
+ for that process.  In this case, the GRID option will be the default
+ and only option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_ADD">
+      <Tip>Time at top of window = mute time + WIN_TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_TIM_ADD<br> Time at top of window = mute time + WIN_TIM_ADD.</center></b>
+<pre> Default = 0.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_TIM_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_TIM_LEN<br> Time at bottom of window = time at top of window + WIN_TIM_LEN.</center></b>
+<pre> Default = 1.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) (one window).
+ Allowed = any number of values &gt;= top of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) (one window).
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fish - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fish">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FISH      (File Shift)
+ Category   : statics
+ Written    : 1989-03-27   by: Tom Stoeckley
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : 2D and 3D surface consistent residual statics process.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+  Purpose:       This is a residual static program designed to
+                 derive surface consistent static files from
+                 2D and 3D reflection data.
+ 
+  Method:        This process derives statics by correlating traces
+                 to a base (or pilot) trace at the same CMP location.
+                 In contrast to IMS, this process stacks the
+                 correlations for a given ground position, instead of
+                 picking each correlation separately and doing an
+                 iterative solution.  Also, a partial stack of traces
+                 with the same ground position is done, followed by a
+                 correlation with a base stacked over the same CMP
+                 range.
+ 
+  Advantages:    Events that are not flat in a CMP gather, such as
+                 multiples or linear interference, cause less damage
+                 than they might with IMS.  Also, lateral structural
+                 variations have less influence because both traces
+                 being correlated are stacked over the same CMP range.
+ 
+  Editing:       This process outputs stacked correlation files in
+                 addition to the statics files.  The correlation files
+                 can be viewed in CBYT in order to help edit the statics
+                 files.  The statics files can also be edited in ISEP
+                 or MSEPITA.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ FISH Operation Summary:
+ 
+   1. Correlate each trace in a shot profile with a base trace formed by
+      compositing all remaining traces in that trace's CMP.  Since all
+      correlation is done within a given CMP, there should be no contamination
+      of the solution by structure.
+ 
+   2. Composite the correlations for individual traces in the shot profile
+      and pick the time shift from the composited correlation.  This is the
+      static shift for this shot location.
+ 
+   3. Repeat steps 1 and 2 for all shot profiles to find the source static for
+      all the source locations.
+ 
+   4. Repeat steps 1 - 3 exchanging the word "source" (or "shot") with
+      "receiver" to find the receiver static for all the receiver locations.
+ 
+   5. FISH can be iterated by applying the static solution and repeating the
+      algorithm (steps 1 - 4).  Two or three iterations are usually sufficient.
+ 
+ 
+ FISH can partially composite traces prior to the correlation step:
+ 
+   1. Consider a range of several CMPs.  Composite over this CMP range the
+      traces that belong to the shot profile in question.
+ 
+   2. Now composite over the same CMP range the remaining traces from the
+      CMPs and use this composite as the base.  (Note that compositing of
+      traces within the shot profile and compositing of traces to form their
+      base is done over the same CMP range so structural contamination is
+      avoided.)
+ 
+   3. Correlate the composited shot profile traces with the composited base
+      traces and proceed as described above.
+ 
+ This compositing step helps attenuate energy that is not flat with offset,
+ such as linear interference and multiples, and may also help the solution
+ when random noise is a problem.  Correlation is still done within the same
+ CMP range so there is no contamination by structure.  Five CMPs is a typical
+ number to composite and is helpful even on good data.
+ 
+ 
+ 3D Work:
+ 
+ FISH can be used on 2D or 3D data, although it may be quite time consuming on
+ 3D data.  The process CC3D is designed specifically for 3D work and should
+ give results very similar to FISH and run substantially faster.
+ 
+ 
+ Advantages of FISH:
+ 
+   1. FISH is good at solving for large and abrupt statics.
+ 
+   2. It gives more precise results than SISC (but less precise than IMS).
+ 
+   3. Because FISH composites correlations before picking (and optionally
+      composites before correlating) it works better on noisy data than other
+      statics processes.  It will give usable results on data so poor that all
+      other statics processes will fail.
+ 
+   4. FISH allows stacked correlations to be displayed and edited.  This is
+      essential for most data.
+ 
+ 
+ Disadvantages of FISH:
+ 
+   1. FISH is blind to certain types of statics that equally effect all
+      traces in a CMP.
+ 
+   2. Editing the correlations may not be obvious.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 35. 2006-12-04  D. Glover  Added NULLIFY statements for Intel compiler.
+ 34. 2001-10-18  Stoeckley  Add file selection boxes and file status messages.
+ 33. 2001-05-14  Stoeckley  Change wrapup flag.
+ 32. 2000-10-20  Stoeckley  Documentation change only to clarify the definition
+                             of the NUM_COMP parameter.
+ 31. 2000-09-27  Stoeckley  Fix bug in FISH_BUILD_BASE_TRACES (which caused
+                             base traces to always be single stacked traces)
+                             and FISH_ALGORITHM (which skipped some traces).
+ 30. 2000-08-08  Stoeckley  Minor documentation change regarding header words
+                             7, 8, WIN_HDR_X, and WIN_HDR_Y.
+ 29. 2000-07-20  Stoeckley  Removed two lines of code which tested the ERROR
+                             variable before it was defined; fix default for
+                             the CONVERGE parameter (from 40 to 1).
+ 28. 2000-06-16  Stoeckley  Converted from old system.
+ 27. 1998-12-15  Vunderink  Begin using the f90 compiler.
+ 26. 1997-08-18  Vunderink  Initialize IR in FISHBEG1 for the case where
+                             only one statics file.
+ 25. 1997-08-14  Vunderink  Fixed bug caused by typo in update yesterday
+ 24. 1997-08-13  Vunderink  Fixed bug in spatial window which was causing
+                             the traces to be windowed on output
+ 23. 1997-08-11  Vunderink  Added spatial correlation window
+ 22. 1996-10-09  Stoeckley  Changed #RUN default from -1 to 0.
+ 21. 1996-09-26  Vunderink  Added RLSTAPE and removed SORTDIR keywords.
+ 20. 1996-06-20  Vunderink  Removed unused variable from print statement
+ 19. 1995-11-02  Vunderink  The program will now determine the number of
+                             bits required to store the sequential trace
+                             number.  If the number of bits is less than
+                             21, then packed word for each trace is still
+                             split into 3 equal part of 21 bits each.
+                             Otherwise, the required number of bits are
+                             allocated to store the trace number and the
+                             remaining bits are split into 2 equal parts.
+ 18. 1995-09-28  Vunderink  Add STOP and BYTSAV keywords.
+ 17. 1994-05-20  Troutt     Make code for removal of $SORTDIR file conditional.
+ 16. 1994-05-16  Stoeckley  Changes to FISHPOND regarding FORTRAN direct
+                             access file LTAPE.  Instead of one file w/
+                             up to 4 records, there are now 4 sequential
+                             files (LTAPE1-4).  Latest Unicos version was
+                             allocating 4 buffers (each with size of record
+                             as given in OPEN) which used too much memory.
+ 15. 1994-02-11  Troutt     Add error check for HPALLOC call.
+ 14. 1994-01-24  Stoeckley  Add keywords SORTDIR, SHEAD, RHEAD, and MHEAD.
+                             (Do not yet implement the use of keywords
+                             SHEAD, RHEAD, and MHEAD.)
+                             Also add call to get_nparm.
+ 13. 1993-11-03  Stoeckley  Change DTROTSI argument to use $SORTDIR
+                             file system for the large trace file.
+                             Also break up the cmp/base trace file into
+                             two files (lun5 and lun6).
+ 12. 1993-11-03  Stoeckley  Make changes to explicitely save CMP info,
+                             rather than assuming that (hdr46 + hdr47)/2
+                             uniquely identifies a midpoint.  Needed for
+                             3-D data where source and receiver ground
+                             positions are on different systems.  Needed
+                             to replace FISIBEG1,2 (in FISIUTIL) with
+                             FISHBEG1,2 (new routine in this process),
+                             plus make changes in subroutines FISH,
+                             FISHPOND, FISHADJ, FISHLIM.
+ 11. 1993-03-23  Troutt     Add PATH parameter to allow stacked correla-
+                             tions to be put into BYTE file(s).
+ 10. 1992-02-25  Troutt     Add logic for tail mute HW64 by updating
+                             primitive FISIUTIL (routine FISISHFT).
+  9. 1991-03-05  Troutt     Changed LTAPE in FISHPOND from alpha name to
+                             unit number for direct access i/o file. Unicos
+                             aborted at the OPEN. Using GETLUN to get a
+                             unique unit number.
+                             Also added /GLOBALS/ to FISHPOND so NDPT would
+                             have a value.
+  8. 1990-10-23  Peterson   Include error and abort arguments on calls to
+                             HPALLOC and HPDEALLC.
+  7. 1990-06-19  Stoeckley  Replace some routines by calls to FISIUTIL
+                             routines.
+  6. 1989-06-02  Stoeckley  Change FISHSORT to better version.
+  5. 1989-05-26  Stoeckley  Add if-check in FISHSORT to prohibit operand
+                             range error which sometimes occurs when not
+                             compiled with DEBUG option.
+  4. 1989-05-25  Stoeckley  Add check for dead traces.
+  3. 1989-05-15  Stoeckley  Change use of parameter HF#.
+  2. 1989-05-08  Stoeckley  Change MXSH and MXPK from seconds to millisecs.
+  1. 1989-03-27  Stoeckley  Minor print format changes.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

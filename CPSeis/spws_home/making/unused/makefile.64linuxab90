@@ -1,0 +1,84 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##----------------------------- 64linuxab90 ------------------------------##
+##----------------------------- 64linuxab90 ------------------------------##
+##----------------------------- 64linuxab90 ------------------------------##
+
+
+permitted_architectures = ix86-intel-linux
+permitted_hosts         = unrestricted
+
+FC         = ab6490_f90 -c -en -O2  -fpic -m64 -YDEALLOC=MINE
+FC_AB90EP  = ab6490_f90 -c -en -O2  -fpic -m64 -YDEALLOC=MINE
+FC_O1      = ab6490_f90 -c -en -O1  -fpic -m64 -YDEALLOC=MINE
+FC_FLOATIO = ab6490_f90 -c -en -O2  -fpic -m64 -YDEALLOC=MINE
+FC_INTERPOLATE = ab6490_f90 -c -en -O2  -fpic -m64 -YDEALLOC=MINE
+FC_KMIG    = ab6490_f90 -c -en -O2  -fpic -YDEALLOC=MINE
+FC_PPIO    = ab6490_f90 -c -en -O2  -fpic -m64 -YDEALLOC=MINE \
+                                               -YEXT_NAMES=LCS -YEXT_SFX=_ 
+FC_UNDER   = ab6490_f90 -c -en -O2  -fpic -m64 -YDEALLOC=MINE \
+                                               -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_LINK    = ab6490_f90
+
+CC         = gcc -c -O3 -Wall -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64 \
+                                                     -DIA64
+CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64 \
+                                                     -DIA64
+CC_IBSMA   = g++ -c -O3 -Wall -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64 \
+                                                     -DIA64
+CC_LINK    = gcc
+
+CXX        = g++ -c     -Wall -DLINUX -DLINUXA -fpic -D_FILE_OFFSET_BITS=64 \
+                                                     -DIA64
+CXX_IBSMA  = g++ -c     -Wall -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64 \
+                                                     -DIA64
+CXX_LINK   = g++
+CXX_DEPEND = g++ -MM          -DLINUX -DLINUXA -fpic -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared 
+
+MODEXT     = .mod
+MODFLAG    = -p
+
+# The following worked some time in hoeplt06
+# FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran90/lib64 \
+#                -lU77 -lfio -lf90math -lf77math -lV77 -lc
+FOR_LIBS   = /usr/lib64/libstdc++.so.5 \
+             -L/apps/compilers/absoft/ProFortran90/lib64 \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+
+# The following worked some time in hoeplt06
+# GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+#                 -L/usr/X11R6/lib64 -dy -lXp -lXext -lXt -lX11
+GUI_LIBS   = /usr/X11R6/lib64/libXm.a \
+             /usr/X11R6/lib64/libXmu.a \
+             /usr/X11R6/lib64/libXp.a \
+             /usr/X11R6/lib64/libXext.a \
+             /usr/X11R6/lib64/libXt.a \
+             /usr/X11R6/lib64/libSM.a \
+             /usr/X11R6/lib64/libICE.a \
+             /usr/X11R6/lib64/libX11.a
+
+MATH_LIBS  = -lm -lpthread  
+
+
+
+# The following worked some time in hoeplt06
+# OTHER_LIBS = -L/usr/lib/i386-redhat-linux7/lib -lc -L/usr/lib -lc_p \
+#              -L/usr/lib/gcc-lib/i386-redhat-linux7/2.96 -lgcc \
+#              -L/usr/lib/gcc-lib/i386-redhat-linux/3.2.3 -lsupc++
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+# The following worked some time in hoeplt06
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += /usr/include

@@ -1,0 +1,690 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="vpick" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="VPICKPROCESS" title="VPICK Process" rows="24" columns="80">
+    <Label keyword="COMMENT_VPICKVELOCITYPICK" alignment="center">VPICK (Velocity PICK)</Label>
+    <Label keyword="COMMENT_AUTOMATICALLYREVISESTACK" alignment="center">Automatically revise stacking velocity functions.</Label>
+    <Button keyword="SELECT_PATHNAME_VEL_IN">Select PATHNAME_VEL_IN</Button>
+    <Label keyword="EQLAB_PATHNAME_VEL_IN" alignment="left">=</Label>
+    <Field keyword="PATHNAME_VEL_IN" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_VEL_IN_INFO" type="string" maxLength="78" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_VEL_OUT">Select PATHNAME_VEL_OUT</Button>
+    <Label keyword="EQLAB_PATHNAME_VEL_OUT" alignment="left">=</Label>
+    <Field keyword="PATHNAME_VEL_OUT" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_VEL_OUT_INFO" type="string" maxLength="78" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_SMOOTH" alignment="left">TIM_SMOOTH=</Label>
+    <Field keyword="TIM_SMOOTH" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SECONDS" alignment="center">seconds</Label>
+    <Label keyword="LABEL_SAMP_INT" alignment="left">SAMP_INT=</Label>
+    <Field keyword="SAMP_INT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">seconds</Label>
+    <Label keyword="LABEL_CMP_SMOOTH" alignment="left">CMP_SMOOTH=</Label>
+    <Field keyword="CMP_SMOOTH" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMP_INC" alignment="left">CMP_INC =</Label>
+    <Field keyword="CMP_INC" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONSTRAINT" alignment="left">CONSTRAINT=</Label>
+    <Field keyword="CONSTRAINT" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NCPUS" alignment="left">NCPUS   =</Label>
+    <Field keyword="NCPUS" type="string" maxLength="5" editable="no" sensitive="yes"/>
+    <ArraySet keyword="TIMES_ARRAYSET" label="TIMES       RMO_MIN     RMO_MAX     OFF_MAX">
+     <Array keyword="TIMES" type="float" maxLength="12 " columnName="TIMES" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="RMO_MIN" type="float" maxLength="12 " columnName="RMO_MIN" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="RMO_MAX" type="float" maxLength="12 " columnName="RMO_MAX" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="OFF_MAX" type="float" maxLength="12 " columnName="OFF_MAX" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_VPICKVELOCITYPICK" xPos="29" yPos="1" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_AUTOMATICALLYREVISESTACK" xPos="15" yPos="2" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_VEL_IN" xPos="1" yPos="4" xSize="23" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_VEL_IN" xPos="24" yPos="4" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL_IN" xPos="25" yPos="4" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL_IN_INFO" xPos="25" yPos="5" xSize="78" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_VEL_OUT" xPos="1" yPos="7" xSize="23" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_VEL_OUT" xPos="24" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL_OUT" xPos="25" yPos="7" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL_OUT_INFO" xPos="25" yPos="8" xSize="78" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_SMOOTH" xPos="1" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_SMOOTH" xPos="12" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SECONDS" xPos="22" yPos="10" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SAMP_INT" xPos="39" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAMP_INT" xPos="48" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="58" yPos="10" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CMP_SMOOTH" xPos="1" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMP_SMOOTH" xPos="12" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMP_INC" xPos="39" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMP_INC" xPos="48" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONSTRAINT" xPos="1" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONSTRAINT" xPos="12" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NCPUS" xPos="39" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NCPUS" xPos="48" yPos="14" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIMES_ARRAYSET" xPos="1" yPos="16" xSize="54" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_PATHNAME_VEL_IN">
+      <Tip>Choose PATHNAME_VEL_IN using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - SELECT_PATHNAME_VEL_IN<br> Choose PATHNAME_VEL_IN using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL_IN">
+      <Tip>Pathname for the input reference stacking velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PATHNAME_VEL_IN<br> Pathname for the input reference stacking velocity file.</center></b>
+<pre> Default =
+ Allowed = char
+ 
+ Pathname for the input reference velocity file containing the best stacking
+ velocity functions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL_IN_INFO">
+      <Tip>Status of PATHNAME_VEL_IN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PATHNAME_VEL_IN_INFO<br> Status of PATHNAME_VEL_IN.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_VEL_OUT">
+      <Tip>Choose PATHNAME_VEL_OUT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - SELECT_PATHNAME_VEL_OUT<br> Choose PATHNAME_VEL_OUT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL_OUT">
+      <Tip>Pathname for the (improved) output stacking velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PATHNAME_VEL_OUT<br> Pathname for the (improved) output stacking velocity file.</center></b>
+<pre> Default =
+ Allowed = char
+ 
+ Pathname for the output velocity file containing the stacking velocity
+ functions that have been revised by VPICK.
+ 
+ NOTE: Velocity functions on the output velocity file will be in the order
+ of the input and output trace gathers.  But for parallel jobs, velocity
+ functions on the output velocity file will not be in any expected order.
+ For most purposes this should not matter.  For example, NMO no longer
+ requires input velocity functions to be in any particular order.  However,
+ remember that the VA program can always be used to sort or resample the
+ velocity functions on a velocity file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL_OUT_INFO">
+      <Tip>Status of PATHNAME_VEL_OUT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PATHNAME_VEL_OUT_INFO<br> Status of PATHNAME_VEL_OUT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIM_SMOOTH">
+      <Tip>Length of time running average smoothing for velocity functions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - TIM_SMOOTH<br> Length of time running average smoothing for velocity functions.</center></b>
+<pre> Default = 0.3
+ Allowed = real &gt; 0.0
+ 
+ Length of the temporal running average smoothing, in seconds, for output
+ velocity functions.
+ 
+ NOTE: Since SAMP_INT is not yet implemented, output velocity functions
+ will always have a time sample interval of 0.5 * TIM_SMOOTH.
+ 
+ NOTE: Remember that time smoothing and resampling can be performed
+ afterwards by the VA program instead of (or in addition to) any time
+ smoothing or resampling performed by this process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAMP_INT">
+      <Tip>Desired time sample interval for output velocity functions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - SAMP_INT<br> Desired time sample interval for output velocity functions.</center></b>
+<pre> Default = 0.1
+ Allowed = 0.5 * TIM_SMOOTH &gt;= real &gt; 0.0
+ 
+           ++++++++++++++ NOT YET IMPLEMENTED +++++++++++++
+ 
+ Desired time sample interval, in seconds, for output velocity functions.
+ SAMP_INT cannot be greater than 0.5 * TIM_SMOOTH.
+ 
+ NOTE: Since SAMP_INT is not yet implemented, output velocity functions
+ will always have a time sample interval of 0.5 * TIM_SMOOTH.
+ 
+ NOTE: Remember that time smoothing and resampling can be performed
+ afterwards by the VA program instead of (or in addition to) any time
+ smoothing or resampling performed by this process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMP_SMOOTH">
+      <Tip>Number of CMPs for running average smooth of velocity functions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - CMP_SMOOTH<br> Number of CMPs for running average smooth of velocity functions.</center></b>
+<pre> Default =  3
+ Allowed = int &gt;= 0
+ 
+ Velocity functions are calculated for each input CMP, then laterally smoothed
+ over the number of input CMP gathers specified by CMP_SMOOTH.  Thus, the
+ picked velocity functions will not change too abruptly.  Normally CMP_SMOOTH
+ should be set to 3 or more.  (But see the following notes.)
+ 
+ NOTE: Some smoothing takes place even when CMP_SMOOTH is 1.  To eliminate
+ all smoothing between CMPs, set CMP_SMOOTH to 0.
+ 
+ NOTE: For parallel jobs, CMP_SMOOTH must be set to zero and any desired
+ lateral smoothing must be performed in the VA program.  This is required
+ when running a parallel job, because adjacent CMP gathers will normally be
+ processed by different CPUs who are not communicating with each other.
+ To smooth velocity functions laterally in such cases, use the VA program.
+ 
+ NOTE: Even for scalar jobs, CMP_SMOOTH should be set to zero for 3D data,
+ because otherwise the end of one line will be mixed with the beginning
+ of the next line.  If the data are not sorted by CMP, undesirable mixing
+ will occur even with 2D data.  Also be aware that the mixing done in this
+ process is not symmetric, because earlier CMPs are mixed into later CMPs but
+ not vice versa.  If any of these behaviors are undesirable, CMP_SMOOTH
+ should be set to zero and any desired lateral smoothing should be
+ performed in the VA program.
+ 
+ NOTE: Remember that lateral smoothing can be performed afterwards by
+ the VA program instead of (or in addition to) any lateral smoothing
+ performed by this process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMP_INC">
+      <Tip>Output velocity function lateral spacing in number of input CMPs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - CMP_INC<br> Output velocity function lateral spacing in number of input CMPs.</center></b>
+<pre> Default =  10
+ Allowed = int &gt; 0
+ 
+           ++++++++++++++ NOT YET IMPLEMENTED +++++++++++++
+ 
+ One velocity function will be output for each CMP_INC input CMPs.
+ 
+ NOTE: Since CMP_INC is not yet implemented, one velocity function will
+ be output for each input CMP.
+ 
+ NOTE: Remember that lateral resampling can be performed afterwards by
+ the VA program instead of (or in addition to) any lateral resampling
+ performed by this process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONSTRAINT">
+      <Tip>Option on type of velocity function constraint.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - CONSTRAINT<br> Option on type of velocity function constraint.</center></b>
+<pre> Default = RMO
+ Allowed = RMO       (Constraint is +/- residual moveout, in seconds.)
+ Allowed = MINMAX    (Constraint is min. and max. values of velocity.)
+ Allowed = TOLERANCE (Constraint is +/- tolerance on velocity.)
+ Allowed = FRACTION  (Constraint is +/- fractional change in velocity.)
+ 
+ If CONSTRAINT=RMO, then RMO_MIN is the smallest (negative) residual moveout
+ and RMO_MAX is the largest (positive) residual moveout, in seconds, for the
+ specified zero-offset time.
+ 
+ If CONSTRAINT=MINMAX, then RMO_MIN is the minimum velocity and RMO_MAX is the
+ maximum velocity for the specified zero-offset time.
+ 
+ If CONSTRAINT=TOLERANCE, then RMO_MIN is the smallest (negative) change in
+ velocity and RMO_MAX is the largest change in velocity for the specified
+ zero-offset time.
+ 
+ If CONSTRAINT=FRACTION, then RMO_MIN is the smallest (negative) fractional
+ change in velocity and RMO_MAX is the largest fractional change in velocity
+ for the specified zero-offset time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NCPUS">
+      <Tip>Number of processors in the job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - NCPUS<br> Number of processors in the job.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIMES">
+      <Tip>Array of zero offset times for specifying velocity constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - TIMES<br> Array of zero offset times for specifying velocity constraints.</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_MIN">
+      <Tip>Array of lower velocity constraints (seconds or fractional).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - RMO_MIN<br> Array of lower velocity constraints (seconds or fractional).</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)
+ 
+ RMO_MIN is the type of constraint defined by CONSTRAINT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_MAX">
+      <Tip>Array of upper velocity constraints (seconds or fractional).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - RMO_MAX<br> Array of upper velocity constraints (seconds or fractional).</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)
+ 
+ RMO_MAX is the type of constraint defined by CONSTRAINT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MAX">
+      <Tip>Array of maximum offsets at specified zero offset times.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - OFF_MAX<br> Array of maximum offsets at specified zero offset times.</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)
+ 
+ OFF_MAX is active for CONSTRAINT=RMO only.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vpick - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="vpick">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : VPICK
+ Category   : velocity_analysis
+ Written    : 1991-04-23   by: Bill Harlan
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Automatic stacking velocity picking of input CMPs.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ VPICK automatically estimates normal-moveout corrections for each input
+ CMP gather.  The velocity functions picked by VPICK are constrained to be
+ within a user specified deviation from the reference stacking velocities
+ contained in the velocity file PATHNAME_VEL_IN.
+ 
+ The input data is NMO corrected with the revised stacking velocities and then
+ output.  The revised stacking velocities are written to the velocity file
+ PATHNAME_VEL_OUT.
+ 
+ VPICK internally performs a semblance stacking velocity analysis on each CMP
+ gather.  Semblance panels are muted to exclude all velocities not satisfying
+ the constraints.  Stacking velocity functions are perturbed until the total
+ (integrated) semblance along each velocity function is maximized.
+ 
+ (Automatic moveout correction of CMPs that have been NMO corrected is
+ provided by the VTRIM process.)
+ 
+ (The VTRIM process was formerly part of the old Cray VPICK process.)
+ 
+-------------------------------------------------------------------------------
+                     CONSTRAINTS ON ESTIMATED VELOCITY
+ 
+ The allowed deviations of the estimated velocity functions from the reference
+ functions can be time dependent and are of a type defined by CONSTRAINT.
+ 
+ The allowed range of residual moveout correction is specified by a linked
+ array of RMO_MIN, RMO_MAX, TIMES and OFF_MAX values where:
+ 
+       TIMES is the array of zero-offset times in seconds.
+ 
+       OFF_MAX is the array of maximum offset values.
+ 
+   If CONSTRAINT=RMO:
+ 
+       RMO_MIN is the array of the smallest (negative) residual moveout
+       correction allowed, in seconds, for the specified zero-offset time
+       at the specified far offset.
+ 
+       RMO_MAX is the array of the largest (positive) residual moveout
+       correction allowed, in seconds, for the specified zero-offset time
+       at the specified far offset.
+ 
+   If CONSTRAINT=MINMAX:
+ 
+       RMO_MIN is the array of the minimum velocity for the specified
+       zero-offset time.
+ 
+       RMO_MAX is the array of the maximum velocity for the specified
+       zero-offset time.
+ 
+   If CONSTRAINT=TOLERANCE:
+ 
+       RMO_MIN is the array of the smallest (negative) change in
+       velocity for the specified zero-offset time.
+ 
+       RMO_MAX is the array of the largest (positive) change in
+       velocity for the specified zero-offset time.
+ 
+   If CONSTRAINT=FRACTION:
+ 
+       RMO_MIN is the array of the smallest (negative) fractional
+       change in velocity for the specified zero-offset time.
+ 
+       RMO_MAX is the array of the largest (positive) fractional
+       change in velocity for the specified zero-offset time.
+ 
+ At least two constraints per second should be made.  VPICK converts
+ all constraints to squared slowness for interpolation.
+ 
+-------------------------------------------------------------------------------
+          OUTPUT VELOCITY FUNCTION TEMPORAL SMOOTHING AND SAMPLING
+ 
+ TIM_SMOOTH is the length of a temporal running average smoothing operator
+ applied to the estimated velocity functions.  Output velocity functions will
+ have a time sample interval of SAMP_INT, which cannot be greater than
+ 0.5 * TIM_SMOOTH.
+ 
+ NOTE: Currently SAMP_INT is not implemented, and output velocity functions
+ will always have a time sample interval of 0.5 * TIM_SMOOTH.
+ 
+ NOTE: Remember that time smoothing and resampling can be performed
+ afterwards by the VA program instead of (or in addition to) any time
+ smoothing or resampling performed by this process.
+ 
+-------------------------------------------------------------------------------
+           OUTPUT VELOCITY FUNCTION LATERAL SMOOTHING AND INCREMENT
+ 
+ Velocity functions are calculated for each input CMP, then laterally smoothed
+ over the number of input CMP gathers specified by CMP_SMOOTH.  Thus, the
+ picked velocity functions will not change too abruptly.  Normally CMP_SMOOTH
+ should be set to 3 or more.
+ 
+ NOTE: Some smoothing takes place even when CMP_SMOOTH is 1.  To eliminate
+ all smoothing between CMPs, set CMP_SMOOTH to 0.
+ 
+ NOTE: For parallel jobs, CMP_SMOOTH must be set to zero and any desired
+ lateral smoothing must be performed in the VA program.  This is required
+ when running a parallel job, because adjacent CMP gathers will normally be
+ processed by different CPUs who are not communicating with each other.
+ To smooth velocity functions laterally in such cases, use the VA program.
+ 
+ NOTE: Even for scalar jobs, CMP_SMOOTH should be set to zero for 3D data,
+ because otherwise the end of one line will be mixed with the beginning
+ of the next line.  If the data are not sorted by CMP, undesirable mixing
+ will occur even with 2D data.  Also be aware that the mixing done in this
+ process is not symmetric, because earlier CMPs are mixed into later CMPs but
+ not vice versa.  If any of these behaviors are undesirable, CMP_SMOOTH
+ should be set to zero and any desired lateral smoothing should be
+ performed in the VA program.
+ 
+ One velocity function will be output for each CMP_INC input CMPs.
+ 
+ NOTE: Currently CMP_INC is not yet implemented.  Therefore one velocity
+ function will be output for each input CMP.
+ 
+ NOTE: Remember that lateral smoothing and resampling can be performed
+ afterwards by the VA program instead of (or in addition to) any lateral
+ smoothing or resampling performed by this process.
+ 
+-------------------------------------------------------------------------------
+                      RESTRICTIONS ON CMP GATHER SIZE
+ 
+ Picking will not be performed on a CMP if (1) the CMP gather contains fewer
+ than eight live traces or (2) the nearest live trace offset is more than
+ half the farthest live trace offset.  Instead, reference velocities will
+ be used, without change, for output and NMO corrections.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Preprocessing:
+ 
+ Preprocessing of input data should be the same as for any semblance velocity
+ analysis.  Normally this consists of a strong amplitude balancing (XP) and a
+ filter (e.g. 8-45 Hz).  Compositing over midpoint may help in areas of low
+ signal to noise ratio.
+ 
+ 
+ Examples of Constraints:
+ 
+   If CONSTRAINT=RMO, MIN and MAX are allowed residual moveout.
+            Example:  [MIN = -0.05 (seconds) and MAX = 0.06 (seconds)]
+ 
+   If CONSTRAINT=MINMAX, MIN and MAX are allowed minimum and maximum
+       velocity.
+        Example:  [MIN = 7800 (feet/sec) and MAX = 8600 (feet/sec)]
+ 
+   If CONSTRAINT=TOLERANCE, MIN and MAX are allowed positive and negative
+   changes in velocity.
+        Example:  [MIN = -300 (feet/sec) and MAX = 250 (feet/sec)]
+ 
+   If CONSTRAINT=FRACTION, MIN and MAX are allowed positive and negative
+   fractional changes in velocity.
+        Example:  [MIN = -0.04 (unitless) and MAX = 0.05 (unitless)]
+ 
+ 
+ Residual Velocity Analysis:
+ 
+ If you wish to perform a residual velocity analysis you can apply a reverse
+ NMO correction to your already corrected data (using a constant velocity or a
+ single velocity function) and then perform a velocity analysis done in the
+ normal fashion.  The difference between the velocity field resulting from the
+ velocity analysis and the velocity field used for the reverse NMO is the
+ "residual velocity."
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+046. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+ 45. 2005-12-22  Stoeckley  Make parallel.  Add ability to set CMP_SMOOTH
+                             to zero.  Add documentation.
+ 44. 2005-08-09  Goodger    Change argument ierr from intent(out) to
+                            intent(inout) to make the absoft 9.0 compiler
+                            happy.
+ 43. 2003-06-17  Goodger    Add use getlun_module.
+ 42. 2001-10-18  Stoeckley  Add file selection boxes and file status messages.
+ 41. 2001-04-04  Stoeckley  Fix GUI bug which did not allow array input.
+ 40. 2001-02-27  Stoeckley  Fix bug involving X and Y coordinate values in
+                             the output velocity file; change the X and Y
+                             coordinate header words in the output file to
+                             match those in the input velocity file.
+ 39. 2001-02-12  Stoeckley  Add warning in documentation about the fact that
+                             negative trace times are treated incorrectly.
+ 38. 2001-01-26  Stoeckley  Move most of the code into a new primitive named
+                             VTRIMMER where it can be used by both VTRIM and
+                             VPICK; remove code which re-muted the data;
+                             change header word named constants to those in
+                             the NAMED_CONSTANTS module; fixed a bug which
+                             incorrectly used velocity files with headers 7,8
+                             or 17,18; fixed a number of bugs in the moved
+                             code (see the VTRIMMER revision history for
+                             details); implement CONSTRAINT.
+ 37. 2001-01-22  Stoeckley  Fix error which was using PATHNAME_VEL_IN for
+                             output instead of PATHNAME_VEL_OUT.
+ 36. 2000-12-28  Stoeckley  Continue conversion to new system; SAMP_INT,
+                             CMP_INC, and CONSTRAINT not yet implemented.
+ 35. 2000-12-15  Coleman    Converted to new system.
+ 34. 1996-06-20  Vunderink  Added SAVE FILENO to VPICKFNEW subroutine
+ 33. 1995-04-03  Harlan     Allow more than 1999 picks per function.
+ 32. 1994-10-17  Harlan     Shorten dcode card to 80 characters. Fortran!
+ 31. 1994-10-07  Harlan     Yet another typo in internal NMC dcode card.
+ 30. 1994-10-06  Harlan     Fix problem interpolating input file headers.
+ 29. 1994-08-29  Harlan     Update documentation.
+ 28. 1994-07-18  Harlan     Fix another NCODE typo calling NMC.
+ 27. 1994-07-15  Harlan     Fix NCODE problem calling NMC internally.
+ 26. 1994-07-15  Harlan     Bad input interpolation default, header 7&amp;8.
+ 25. 1994-07-15  Harlan     Add more scratch memory.
+ 24. 1994-06-29  Harlan     Fix bottom mute.
+ 23. 1994-05-06  Harlan     Allow OUTFILE="NONE"
+ 22. 1994-04-27  Harlan     Change name to VPICK; add header word NHYVEL
+         for 3D; call NMC internally for input velocity interpolation;
+         get header words from VELFILE.
+ .....................................................................
+ Lower revisions refer to earlier name VPIK
+ 21. 1994-03-04  Harlan     Double resolution of semblances, slower by 2.
+ 20. 1994-02-23  Harlan      Avoid SQRT of negative number in VPICKRMT3.
+ 19. 1993-05-04  Harlan      Make variable IMIN static in VPICKPARM.
+ 18. 1993-04-29  Harlan      Initialization in VPICKSPCK for new compiler.
+ 17. 1993-02-12  Harlan      Fix VPICKCOMP for bottom zero padding.
+ 16. 1992-09-03  Harlan      Allow initial velocities outside constraints
+ 15. 1992-07-31  Harlan      Add "FLAT" option for VFILE.
+ 14. 1992-03-24  Harlan      I-O negative moveouts as negative velocities
+ 13. 1992-02-14  Harlan      Ignore dead traces when averaging headers.
+ 12. 1992-02-03  Harlan      Increase resolution of internal semblances.
+ 11. 1992-01-24  Harlan      Reduce significant digits in veloc. file.
+ 10. 1992-01-24  Harlan      Changes to documentation only.
+ 9.  1991-12-30  Harlan      If can't pick, apply moveout anyway.
+ 8.  1991-12-20  Harlan      Output of VPICK uses smoothed velocities.
+ 7.  1991-11-26  Harlan      Minor changes in comments to *.cpr file.
+ 6.  1991-10-31  Harlan      Check for dead gathers. Insure N &lt; NTRMAX.
+ 5.  1991-10-02  Harlan      ASCII semblance plots to *.cpr file.
+ 4.  1991-08-01  Harlan      Add smoothing of picks over midpoint.
+ 3.  1991-06-20  Harlan      Adjust to UNICOS changes in CLOSFIL.
+ 2.  1991-06-05  Harlan      Add new constraint options.
+ 1.  1991-04-23  Harlan      Original version
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,672 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="madc" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MADCPROCESS" title="MADC Process" rows="26" columns="80">
+    <Label keyword="COMMENT_MULTIPLEATTENUATIONBYDOW" alignment="center">Multiple Attenuation by Downward Continuation</Label>
+    <Label keyword="LABEL_VEL_CONT" alignment="left">VEL_CONT=</Label>
+    <Field keyword="VEL_CONT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX=</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEPTH_INC" alignment="left">DEPTH_INC=</Label>
+    <Field keyword="DEPTH_INC" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_MAX" alignment="left">OFF_MAX=</Label>
+    <Field keyword="OFF_MAX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_LOC" alignment="left">HDR_LOC=~</Label>
+    <Field keyword="HDR_LOC" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_CHANNELS" alignment="left">NUM_CHANNELS=</Label>
+    <Field keyword="NUM_CHANNELS" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_OP" alignment="left">LEN_OP=</Label>
+    <Field keyword="LEN_OP" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LAG" alignment="left">LAG=</Label>
+    <Field keyword="LAG" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD=</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN1" alignment="left">WIN_LEN1=</Label>
+    <Field keyword="WIN_LEN1" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_BEG1" alignment="left">WIN_BEG1=</Label>
+    <Field keyword="WIN_BEG1" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_WIN1" alignment="left">VEL_WIN1=</Label>
+    <Field keyword="VEL_WIN1" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN2" alignment="left">WIN_LEN2=</Label>
+    <Field keyword="WIN_LEN2" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_BEG2" alignment="left">WIN_BEG2=</Label>
+    <Field keyword="WIN_BEG2" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_WIN2" alignment="left">VEL_WIN2=</Label>
+    <Field keyword="VEL_WIN2" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <ArraySet keyword="DEPTHS_ARRAYSET" label="DEPTHS   COORS">
+     <Array keyword="DEPTHS" type="float" maxLength="9  " columnName="DEPTHS" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="COORS" type="float" maxLength="10 " columnName="COORS" editable="yes" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Button keyword="CALC_DEPTHS">CALC_DEPTHS</Button>
+    <Label keyword="LABEL_PATHNAME_PICK" alignment="left">PATHNAME_PICK=</Label>
+    <Field keyword="PATHNAME_PICK" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_MULTIPLEATTENUATIONBYDOW" xPos="11" yPos="1" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VEL_CONT" xPos="2" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_CONT" xPos="11" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="20" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="29" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEPTH_INC" xPos="36" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEPTH_INC" xPos="46" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MAX" xPos="56" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MAX" xPos="64" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_LOC" xPos="2" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LOC" xPos="11" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_CHANNELS" xPos="20" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_CHANNELS" xPos="33" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="2" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="11" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_OP" xPos="20" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OP" xPos="33" yPos="7" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LAG" xPos="42" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LAG" xPos="46" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="56" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="66" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN1" xPos="2" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN1" xPos="11" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_BEG1" xPos="20" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_BEG1" xPos="29" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_WIN1" xPos="38" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_WIN1" xPos="47" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN2" xPos="2" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN2" xPos="11" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_BEG2" xPos="20" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_BEG2" xPos="29" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_WIN2" xPos="38" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_WIN2" xPos="47" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="2" yPos="12" xSize="32" ySize="11"/>
+     <Constraints component="DEPTHS_ARRAYSET" xPos="2" yPos="13" xSize="22" ySize="9" xStretch="true" yStretch="true"/>
+     <Constraints component="CALC_DEPTHS" xPos="2" yPos="24" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATHNAME_PICK" xPos="2" yPos="25" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_PICK" xPos="16" yPos="25" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="VEL_CONT">
+      <Tip>Velocity to use for downward continuation and reflector boundary.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - VEL_CONT<br> Velocity to use for downward continuation and reflector boundary.</center></b>
+<pre> Default = 1500
+ Allowed = real &gt; 0.0
+ VEL_CONT is the RMS velocity from the surface to the multiple generating
+ reflector.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency for MADC to process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - FREQ_MAX<br> Maximum frequency for MADC to process.</center></b>
+<pre> Default = 0.5 * Nyquist
+ Allowed = Nyquist &gt; real &gt; 0.0
+ Do not set FREQ_MAX higher than necessary as runtime is proportional to
+ FREQ_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEPTH_INC">
+      <Tip>Depth increment for the downward continuation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - DEPTH_INC<br> Depth increment for the downward continuation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MAX">
+      <Tip>Maximum offset in the input profiles.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - OFF_MAX<br> Maximum offset in the input profiles.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_LOC">
+      <Tip>Header word for surveyed coordinate of traces in input profile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - HDR_LOC<br> Header word for surveyed coordinate of traces in input profile.</center></b>
+<pre> Default = 14
+ Allowed = 11, 14
+ HDR_LOC is the header word for surveyed coordinate corresponding to the
+ entries in COORS.  If input is shot profiles, HDR_LOC should be set to 14
+ (receiver inline surveyed coordinate).  If input is receiver profiles,
+ HDR_LOC should be set to 11 (source inline surveyed coordinate).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_CHANNELS">
+      <Tip>Maximum number of traces in an input (shot or receiver) profile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - NUM_CHANNELS<br> Maximum number of traces in an input (shot or receiver) profile.</center></b>
+<pre> Default = 32
+ Allowed = int &gt; 1
+ NUM_CHANNELS is used to set the size of the spatial FFT.  If an input shot or
+ receiver profile is found with more traces than NUM_CHANNELS, MADC will abort.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODE">
+      <Tip>Mode of MADC operation (type of output traces).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - MODE<br> Mode of MADC operation (type of output traces).</center></b>
+<pre> Default = DEMULT
+ Allowed = DEMULT  (Output demultiple data - normal production mode.)
+ Allowed = MULT    (Output predicted multiples.)
+ Allowed = ACORR   (Output autocorrelation of downward continued traces.)
+ Allowed = CCORR   (Crosscorrelation of continued traces with input traces.)
+ Allowed = OPER    (Output transfer function operators.)
+ DEMULT mode is the normal production mode.  The other modes produce diagnostic
+ output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OP">
+      <Tip>Operator length, in seconds, for Weiner filter transfer function.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - LEN_OP<br> Operator length, in seconds, for Weiner filter transfer function.</center></b>
+<pre> Default = 0.2
+ Allowed = real &gt; LAG and LEN_OP &lt; 1.0
+ Operator length, in seconds, for the least squares transfer function
+ calculation (Weiner filter).  LEN_OP should be long enough to include complex
+ water bottom events.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LAG">
+      <Tip>Operator lag, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - LAG<br> Operator lag, in seconds.</center></b>
+<pre> Default = 0.04
+ Allowed = real &gt;= 0.0 and &lt; LEN_OP
+                      [we need help understanding this one]</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent, for the Wiener filter calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - DIAG_LOAD<br> Diagonal load, in percent, for the Wiener filter calculation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0 and &lt; 100.0
+ Normally DIAG_LOAD should be 10% or greater.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN1">
+      <Tip>Length of the first window for transfer function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - WIN_LEN1<br> Length of the first window for transfer function calculation.</center></b>
+<pre> Default = trace length
+ Allowed = real &gt; 0.0 and &lt;= end time
+ Length, in seconds, of the first window for transfer function calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_BEG1">
+      <Tip>Top of the first window for transfer function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - WIN_BEG1<br> Top of the first window for transfer function calculation.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ Beginning time, in seconds, of the first window for transfer function
+ calculation.  If WIN_BEG1 = 0.0, then use the the water bottom time from the
+ boundary information.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_WIN1">
+      <Tip>Moveout velocity for the first window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - VEL_WIN1<br> Moveout velocity for the first window.</center></b>
+<pre> Default = 2000.0
+ Allowed = real &gt; 0.0
+ VEL_WIN1 is used to determine the top of the first window as a function of
+ offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN2">
+      <Tip>Length of the second window for transfer function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - WIN_LEN2<br> Length of the second window for transfer function calculation.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ Length, in seconds, of the second window for transfer function calculation.
+ If WIN_BEG2 = 0.0, then the second window (hence WIN_LEN2) is not used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_BEG2">
+      <Tip>Top of the second window for transfer function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - WIN_BEG2<br> Top of the second window for transfer function calculation.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ Beginning time, in seconds, of the second window for transfer function
+ calculation.
+ If WIN_BEG2 = 0.0, then the second window is not used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_WIN2">
+      <Tip>Moveout velocity for the second window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - VEL_WIN2<br> Moveout velocity for the second window.</center></b>
+<pre> Default = 2000.0
+ Allowed = real &gt; 0.0
+ VEL_WIN2 is used to determine the top of the second window as a function of
+ offset.
+ If WIN_BEG2 = 0.0, then the second window (hence VEL_WIN2) is not used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEPTHS">
+      <Tip>Array of depths from the surface to the lower boundary.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - DEPTHS<br> Array of depths from the surface to the lower boundary.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0 (array)
+ DEPTHS is an array (maximum of 200 entries) of depths from the surface to the
+ lower boundary corresponding to entries in COORS.  DEPTHS entries should have
+ units of feet or meters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COORS">
+      <Tip>Array of coordinates corresponding to entries in DEPTHS.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - COORS<br> Array of coordinates corresponding to entries in DEPTHS.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0 (array)
+ COORS is an array (maximum of 200 entries) of values of HDR_LOC corresponding
+ to entries in DEPTHS.  COORS entries must be increasing.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CALC_DEPTHS">
+      <Tip>Recalculate DEPTHS and COORS from PATHNAME_PICK and VEL_CONT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - CALC_DEPTHS<br> Recalculate DEPTHS and COORS from PATHNAME_PICK and VEL_CONT.</center></b>
+<pre> Default = -
+ 
+ PATHNAME_PICK is a front-end parameter only.  Its used to
+ automatically fill in entries in the DEPTHS and COORS arrays which are used
+ by the back-end process.  Use of PATHNAME_PICK is optional.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_PICK">
+      <Tip>Pathname for the lower boundary pickfile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - PATHNAME_PICK<br> Pathname for the lower boundary pickfile.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ PATHNAME_PICK is a front-end parameter only.  Its used to
+ automatically fill in entries in the DEPTHS and COORS arrays which are used
+ by the back-end process.  Use of PATHNAME_PICK is optional.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>madc - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="madc">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : MADC   (Multiple Attenuation by Downward Continuation)
+ Category   : filters
+ Written    : 1989-02-08   by: Bill Troutt  (Conseis version by John Reed)
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : 2D Multiple Attenuation by Downward Continuation.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Function
+ 
+ MADC is designed to remove all orders of reverberation and peg-leg multiples
+ in 2D data caused by a shallow dipping reflector (typically the water
+ bottom).  The process does not exploit differences in velocities between
+ primary and multiple events, so multiples with velocities comparable to the
+ primary velocity and short offset data can be processed successfully.
+ 
+ 
+ Algorithm
+ 
+ MADC works by downward continuing the recorded wavefield forward in time to
+ the specified boundary, then back to the surface. This operation generates a
+ new profile in which the timing of each event should match the peg-leg
+ multiple of that event in the original profile.  Wiener least-squares transfer
+ functions are derived which convert each downward-continued trace to the same
+ trace in the original profile.  These transfer functions represent the phase
+ and amplitude of the multiple response.  For water bottom multiples, they are
+ about 180 degrees.  After convolving the downward-continued traces with the
+ transfer functions, the modeled multiple energy is subtracted from the
+ original data and this profile is output.
+ 
+ 
+ Modes of Operation
+ 
+ MADC will operate in five different modes; the last four produce diagnostic
+ output.
+ 
+       MODE                Operation
+ 
+       DEMULT  Output demultiple data.  This is the normal production mode.
+ 
+       MULT    Output predicted multiples.
+ 
+       ACORR   Output the autocorrelation of the downward continued traces.
+ 
+       CCORR   Output the crosscorrelation of the downward continued traces
+               with the input traces.
+ 
+       OPER    Output transfer function convolutional operators.
+ 
+ 
+ One or Two Multiple Estimation Windows
+ 
+ MADC allows the multiple predicting Weiner filter operation to be run with
+ one time window or with two separate windows.  If two are used, multiples are
+ estimated and subtracted twice (once for each window.  This is done after the
+ expensive step of downward continuation, adding only a small incremental cost
+ for the second window.
+ 
+ Since reverberation and peg-leg multiples may have different responses, it
+ should be possible to remove both types by using two windows.  Substantial
+ improvement has been seen with two windows as compared with one.
+ 
+ 
+ Reference
+ 
+ Wiggins, J., W., 1988, Attenuation of Complex Water-Bottom Multiples by Wave-
+ Equation-Based Prediction and Subtraction: Geophysics, 53, 1527-1539.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ One or Two Passes of MADC
+ 
+ For nearly flat multiple generators, one pass of the program on shot profiles
+ should be sufficient. If the multiple generator is structurally complex, it
+ will be necessary to run the program twice, once on shot profiles and once on
+ receiver profiles. This ensures that peg-leg multiples from both source and
+ receiver contributions are removed.
+ 
+ 
+ Pre-Processing for MADC
+ 
+ MADC should be used early in the processing sequence and should be preceded
+ by a deterministic expansion, such as TPOW or GDIV.  Data should be frequency
+ filtered with a high-cut frequency of FREQ_MAX.  The head mute should be
+ placed above the water bottom event.
+ 
+ Data input to MADC must be either shot gathers with increasing receiver
+ surveyed coordinate or in receiver gathers with increasing shot surveyed
+ coordinate.  There are no special processing requirements after MADC has been
+ run. If two passes of MADC are necessary, then it is recommended that each
+ pass be a separate job (common shot MADC followed by common receiver MADC).
+ 
+ 
+ Sample MADC Processing Sequence
+ 
+     Input shot profile data with headers applied
+ 
+     Apply any gun delays
+ 
+     Apply an initial MUTE to input data above the water bottom
+ 
+     Apply deterministic amplitude balance (such as TPOW, PWR = 2.0)
+ 
+     GATHER (shot profiles)
+ 
+     MADC - on shot gathers, HDR_LOC = 14  (continue normal processing here if
+            common receiver MADC is not necessary)
+ 
+     TSORT, HDR_PRI = 14,  HDR_SEC = 11
+ 
+     GATHER (receiver profiles)
+ 
+     MADC - on receiver gathers, HDR_LOC = 11
+ 
+     Continue normal processing sequence
+ 
+ 
+ Suggestions for Making the Pickfile
+ 
+ 1.  A pickfile containing times to the water bottom (or other multiple
+ producing reflector) is used, together with the multiple velocity, to
+ automatically fill in entries in the DEPTHS and COORS arrays which are used
+ by the back-end process.  The pickfile is specified by PATHNAME_PICK and the
+ multiple velocity by VEL_CONT; their use is optional.
+ 
+ 2.  Migrate the near trace section and output to a byte file.  Use FKMIG and
+ the water velocity for this step.  The migration step is necessary if the
+ water bottom is not very flat.  MADC is based on image rays while the zero
+ offset section is based on normal incidence rays.  If the data are not
+ migrated the wrong water depth could be assigned to a particular shot or
+ receiver location.  For very flat water bottoms, the migration step is not
+ necessary.
+ 
+ 3. In CBYT, pick the water bottom.
+ 
+       Select MUTE PICKING option.  (Set offset = 14 for common source MADC or
+       offset = 11 for common receiver MADC and inline bin = 0 for both cases.)
+       Use the option to interpolate/extrapolate fully.  Pick the dominant
+       water bottom lobe.  (Note that you are allowed to have a maximum of 200
+       picks.)
+ 
+ If you are going to run two passes of MADC (source and receiver), then you
+ must pick two separate files, one for sources and one for receivers.  These
+ can be picked from the same near trace data, but the picking options must be
+ different for the two files.
+ 
+ The pickfile should be specified in the PATHNAME_PICK parameter.  VEL_MUTE
+ should be set to the water velocity in the area, typically 1500 m/s.
+ 
+ 4. To run common source MADC the receiver surveyed coordinate (header word
+ 14) must be in increasing order.
+ 
+ 5. To run common receiver MADC the source surveyed coordinate (header word
+ 11) must be in increasing order.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author       Description
+     ----       ------       -----------
+ 25. 2006-09-11 Stoeckley    Add call to pc_register_array_names for SeisSpace.
+024. 2006-01-10  B. Menger   Removed Unused Variables.
+ 23. 2001-12-10 Selzler     Change "(*)" arrays to "(:)" for Intel compiler
+ 22. 2001-01-29 Selzler     Work around Absoft compiler bug.
+ 21. 2000-12-14 Selzler     Conversion to f90 and new cps.
+ 20. 1999-05-19 Wuenscher   Documentation change only.
+ 19. 1998-11-10 Vunderink   Begin using the f90 compiler.
+ 18. 1997-07-02 Vunderink   Added CARDS parameter and 2nd DCODE card
+                            to correct problem of more than 200 cards
+                            in one DCODE.
+ 17. 1997-03-19 Vunderink   Increased memory used by X2KC! and T2FRC
+                            primitives
+ 16. 1997-02-18 Vunderink   Change check for dead trace from HW(2) to
+                            ISAMAX. Also added CPU timing.
+ 15. 1995-05-04 Troutt      Increase array size XS,ZS 100 to 200.
+ 14. 1992-04-02 Troutt      Correct User Doc (no code changed here - just
+                            the CFE) regarding OPRL and LAG.  It is LAG
+                            that must be less than minimum ZS, not OPRL.
+ 13. 1992-03-19 Troutt      Add tail mute restore (call MUTEHW).  The mute
+                            restoration here reapplies a 60-mil taper.
+                            This code has been changed to match MUTE's
+                            algorithm.
+ 12. 1991-09-18  Troutt     Check for dead traces in DO 19900 and skip to
+                            end of loop. This is really only needed when
+                            whole group is dead which causes OPFILT to
+                            blow up on a zero autocorrelation.
+ 11. 1990-04-25  Howard     Make compatible with STRIN change.
+ 10. 1990-03-14  Troutt     Add logic for only 1 trace in 1st group(s).
+                            The 1st group(s) is(are) deleted. This could
+                            most likely happen for common receiver
+                            gathers in a taper zone. The program is
+                            unable to compute DX until it has at least
+                            a 2-trace group.
+ 9.  1989-12-13  Troutt     Fix formatted writes of TMAX and FMAX for
+                            DCODE
+ 8.  1989-09-20  Troutt     Moved code for applying taper to ends of oper-
+                            ator so that MODE=OPER shows taper.
+                            Changed logic to use storage for working
+                            trace (and hdr) arrays instead of using the
+                            2ndary arrays in the MAD! call. 2ndary arrays
+                            were renamed to HDR2 and TR2 and are used to
+                            output one trace at a time via an internal
+                            call to GATHR.  All of the main logic for the
+                            old 2ndary arrays (HDR1, TR1) remains intact,
+                            except that they now reside in storage via
+                            pointers.
+ 7.  1989-05-02  Troutt     Corrected value of NPARM to 268.
+ 6.  1989-03-20  Troutt     Removed all references to scratch array SCR4.
+ 5.  1989-03-09  Troutt     Fixed indexing bug in clearing D! frequency.
+                            Also corrected call to REPP to reference VEL
+                            instead of NTRT.
+ 4.  1989-03-02  Troutt     Turned off debug printout and finished
+                            documentation. Ready for user checkout.
+ 3.  1989-02-27  Troutt     Checkout of all modes of output finished.
+                            Implemented parameters OFFMAX and HZ#.
+ 2.  1989-02-17  Troutt     Checkout of MODE=TRACE finished. Began adding
+                            additional options.  Use STROT,STRINI to
+                            handle unaltered input traces.
+ 1.  1989-02-08  Troutt     Began original "conversion" (redesign) from
+                            CONSEIS. Used FKAP (CPS) for starting code.
+                            Began with MODE=TRACE only.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

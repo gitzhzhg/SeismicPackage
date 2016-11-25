@@ -1,0 +1,1316 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dabra" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="INPUTANDOUTPUT" title="Input and Output" rows="26" columns="80">
+    <Label keyword="COMMENT_ANALYSEDIPANDABRAHORIZON" alignment="center">analyse Dip and ABRA horizon slices</Label>
+    <Label keyword="LABEL_NUMTR" alignment="left">NUMTR    =</Label>
+    <Field keyword="NUMTR" type="string" maxLength="4" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFINPUTANDOUTPUTDA" alignment="left">Number of input and output data volumes.</Label>
+    <Label keyword="LABEL_NDPT" alignment="left">NDPT     =</Label>
+    <Field keyword="NDPT" type="string" maxLength="4" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFHORIZONSONINPUTA" alignment="left">Number of horizons on input and output traces.</Label>
+    <Label keyword="LABEL_HDR_IDENT" alignment="left">HDR_IDENT   =</Label>
+    <Field keyword="HDR_IDENT" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDCONTAININGTRAC" alignment="left">Header word containing trace identification.</Label>
+    <Label keyword="LABEL_HORIZON_UNIT" alignment="left">HORIZON_UNIT=</Label>
+    <Field keyword="HORIZON_UNIT" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WHETHERHORIZONSAREINTIME" alignment="left">Whether horizons are in time or depth.</Label>
+    <Label keyword="COMMENT_EDIT_BETA" alignment="left">EDIT_BETA =</Label>
+    <Field keyword="EDIT_BETA" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_BETAATTRIBUTEHORIZONS" alignment="left">BETA attribute horizons.</Label>
+    <Label keyword="LABEL_NEED_BETA" alignment="left">NEED_BETA   =</Label>
+    <Field keyword="NEED_BETA" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ID_BETA" alignment="left">ID_BETA   =</Label>
+    <Field keyword="ID_BETA" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_EDIT_XDIP" alignment="left">EDIT_XDIP =</Label>
+    <Field keyword="EDIT_XDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_XDIPATTRIBUTEHORIZONS" alignment="left">XDIP attribute horizons.</Label>
+    <Label keyword="LABEL_NEED_XDIP" alignment="left">NEED_XDIP   =</Label>
+    <Field keyword="NEED_XDIP" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ID_XDIP" alignment="left">ID_XDIP   =</Label>
+    <Field keyword="ID_XDIP" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_EDIT_YDIP" alignment="left">EDIT_YDIP =</Label>
+    <Field keyword="EDIT_YDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_YDIPATTRIBUTEHORIZONS" alignment="left">YDIP attribute horizons.</Label>
+    <Label keyword="LABEL_NEED_YDIP" alignment="left">NEED_YDIP   =</Label>
+    <Field keyword="NEED_YDIP" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ID_YDIP" alignment="left">ID_YDIP   =</Label>
+    <Field keyword="ID_YDIP" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_EDIT_VAV" alignment="left">EDIT_VAV  =</Label>
+    <Field keyword="EDIT_VAV" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_AVERAGEVELOCITYHORIZONS" alignment="left">Average velocity horizons.</Label>
+    <Label keyword="LABEL_NEED_VAV" alignment="left">NEED_VAV    =</Label>
+    <Field keyword="NEED_VAV" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ID_VAV" alignment="left">ID_VAV    =</Label>
+    <Field keyword="ID_VAV" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_WEIGHTHORIZONS" alignment="left">Weight horizons.</Label>
+    <Label keyword="LABEL_NEED_WEIGHT" alignment="left">NEED_WEIGHT =</Label>
+    <Field keyword="NEED_WEIGHT" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ID_WEIGHT" alignment="left">ID_WEIGHT =</Label>
+    <Field keyword="ID_WEIGHT" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_HORIZONTIMEDEPTHS" alignment="left">Horizon time/depths.</Label>
+    <Label keyword="LABEL_NEED_DEPTH" alignment="left">NEED_DEPTH  =</Label>
+    <Field keyword="NEED_DEPTH" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ID_DEPTH" alignment="left">ID_DEPTH  =</Label>
+    <Field keyword="ID_DEPTH" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_DATAVOLUME" alignment="center">Data Volume:</Label>
+    <Border keyword="BORDER1"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X  =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y  =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDSCONTAININGXAN" alignment="left">Header words containing X and Y coordinates.</Label>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FIRSTXANDYBINCENTER" alignment="left">First X and Y bin center.</Label>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC  =</Label>
+    <Field keyword="X_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC  =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_XANDYBININCREMENT" alignment="left">X and Y bin increment.</Label>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST =</Label>
+    <Field keyword="X_LAST" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST =</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_LASTXANDYBINCENTER" alignment="left">Last X and Y bin center.</Label>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT  =</Label>
+    <Field keyword="X_TOT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT  =</Label>
+    <Field keyword="Y_TOT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFXANDYBINS" alignment="left">Number of X and Y bins.</Label>
+    <Label keyword="LABEL_MBYTES" alignment="left">MBYTES =</Label>
+    <Field keyword="MBYTES" type="string" maxLength="13" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFMEGABYTESOFPERMA" alignment="left">Number of megabytes of permanent memory required.</Label>
+    <Layout>
+     <Constraints component="COMMENT_ANALYSEDIPANDABRAHORIZON" xPos="20" yPos="1" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUMTR" xPos="1" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR" xPos="11" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFINPUTANDOUTPUTDA" xPos="18" yPos="3" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NDPT" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NDPT" xPos="11" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFHORIZONSONINPUTA" xPos="18" yPos="4" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_IDENT" xPos="1" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_IDENT" xPos="14" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDCONTAININGTRAC" xPos="21" yPos="6" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HORIZON_UNIT" xPos="1" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HORIZON_UNIT" xPos="14" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_WHETHERHORIZONSAREINTIME" xPos="21" yPos="7" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_EDIT_BETA" xPos="1" yPos="9" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EDIT_BETA" xPos="12" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_BETAATTRIBUTEHORIZONS" xPos="18" yPos="9" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NEED_BETA" xPos="46" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NEED_BETA" xPos="59" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ID_BETA" xPos="65" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ID_BETA" xPos="76" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_EDIT_XDIP" xPos="1" yPos="10" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EDIT_XDIP" xPos="12" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_XDIPATTRIBUTEHORIZONS" xPos="18" yPos="10" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NEED_XDIP" xPos="46" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NEED_XDIP" xPos="59" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ID_XDIP" xPos="65" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ID_XDIP" xPos="76" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_EDIT_YDIP" xPos="1" yPos="11" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EDIT_YDIP" xPos="12" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_YDIPATTRIBUTEHORIZONS" xPos="18" yPos="11" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NEED_YDIP" xPos="46" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NEED_YDIP" xPos="59" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ID_YDIP" xPos="65" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ID_YDIP" xPos="76" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_EDIT_VAV" xPos="1" yPos="12" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EDIT_VAV" xPos="12" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_AVERAGEVELOCITYHORIZONS" xPos="18" yPos="12" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NEED_VAV" xPos="46" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NEED_VAV" xPos="59" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ID_VAV" xPos="65" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ID_VAV" xPos="76" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_WEIGHTHORIZONS" xPos="18" yPos="13" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NEED_WEIGHT" xPos="46" yPos="13" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NEED_WEIGHT" xPos="59" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ID_WEIGHT" xPos="65" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ID_WEIGHT" xPos="76" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HORIZONTIMEDEPTHS" xPos="18" yPos="14" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NEED_DEPTH" xPos="46" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NEED_DEPTH" xPos="59" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ID_DEPTH" xPos="65" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ID_DEPTH" xPos="76" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_DATAVOLUME" xPos="1" yPos="16" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="2" yPos="17" xSize="16" ySize="7"/>
+     <Constraints component="BORDER2" xPos="19" yPos="17" xSize="16" ySize="7"/>
+     <Constraints component="LABEL_HDR_X" xPos="3" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="11" yPos="18" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="20" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="28" yPos="18" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDSCONTAININGXAN" xPos="36" yPos="18" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="3" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="11" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="20" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="28" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FIRSTXANDYBINCENTER" xPos="36" yPos="19" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="3" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="11" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="20" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="28" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_XANDYBININCREMENT" xPos="36" yPos="20" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="3" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="11" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="20" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="28" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_LASTXANDYBINCENTER" xPos="36" yPos="21" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="3" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="11" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="20" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="28" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFXANDYBINS" xPos="36" yPos="22" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MBYTES" xPos="1" yPos="25" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MBYTES" xPos="9" yPos="25" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFMEGABYTESOFPERMA" xPos="24" yPos="25" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="NUMTR">
+      <Tip>Number of input and output data volumes to slice.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NUMTR<br> Number of input and output data volumes to slice.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NDPT">
+      <Tip>Number of horizons on input and output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NDPT<br> Number of horizons on input and output traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_IDENT">
+      <Tip>Header word containing trace identification.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - HDR_IDENT<br> Header word containing trace identification.</center></b>
+<pre> Default = 48
+ Allowed = 1-NWIH   (normally 48-55 or 65-NWIH)
+ 
+ The following identification integers must reside in the specified
+ header word of each trace:
+ 
+     91  The weights                                      (calculated by KA).
+     85  The output average velocity                          (edited by KA).
+    181  The residual NMO velocity ratio       (BETA attribute edited by KA).
+    188  The structural dip in the X direction (XDIP attribute edited by KA).
+    189  The structural dip in the Y direction (YDIP attribute edited by KA).
+      1  The time or depth of the horizon.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HORIZON_UNIT">
+      <Tip>Whether horizons are in time or depth.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - HORIZON_UNIT<br> Whether horizons are in time or depth.</center></b>
+<pre> Default = depth
+ Allowed = time or depth
+ 
+ This parameter is needed only when calculating interval velocities from
+ the average velocity horizons.  The algorithm is different depending on
+ whether the time/depth trace contains horizon times or horizon depths.
+ 
+ This parameter is used only when applying interval velocity constraints
+ to the BETA attribute.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EDIT_BETA">
+      <Tip>Whether to edit the BETA attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - EDIT_BETA<br> Whether to edit the BETA attribute horizons.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The output BETA attribute horizons will be the edited and smoothed versions
+ of the input BETA attribute horizons.
+ 
+ BETA = (input average velocity / output average velocity)**2 - 1
+ 
+ sqrt(BETA + 1) = input average velocity / output average velocity.
+ 
+ The output edited BETA attribute horizons might contain nil values unless
+ REPLACE_NILS_AFTER and REPLACE_NILS_AFTER_CONSTRAINTS say to replace nil
+ values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NEED_BETA">
+      <Tip>Whether the BETA attribute horizons are required input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NEED_BETA<br> Whether the BETA attribute horizons are required input.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ID_BETA">
+      <Tip>Identification in HDR_IDENT for the BETA attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - ID_BETA<br> Identification in HDR_IDENT for the BETA attribute horizons.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="EDIT_XDIP">
+      <Tip>Whether to edit the XDIP attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - EDIT_XDIP<br> Whether to edit the XDIP attribute horizons.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The output XDIP attribute horizons will be the edited and smoothed versions
+ of the input XDIP attribute volume.
+ 
+ The output edited XDIP attribute horizons might contain nil values unless
+ REPLACE_NILS_AFTER says to replace nil values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NEED_XDIP">
+      <Tip>Whether the XDIP attribute horizons are required input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NEED_XDIP<br> Whether the XDIP attribute horizons are required input.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ID_XDIP">
+      <Tip>Identification in HDR_IDENT for the XDIP attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - ID_XDIP<br> Identification in HDR_IDENT for the XDIP attribute horizons.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="EDIT_YDIP">
+      <Tip>Whether to edit the YDIP attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - EDIT_YDIP<br> Whether to edit the YDIP attribute horizons.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The output YDIP attribute horizons will be the edited and smoothed versions
+ of the input YDIP attribute horizons.
+ 
+ The output edited YDIP attribute horizons might contain nil values unless
+ REPLACE_NILS_AFTER says to replace nil values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NEED_YDIP">
+      <Tip>Whether the YDIP attribute horizons are required input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NEED_YDIP<br> Whether the YDIP attribute horizons are required input.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ID_YDIP">
+      <Tip>Identification in HDR_IDENT for the YDIP attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - ID_YDIP<br> Identification in HDR_IDENT for the YDIP attribute horizons.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="EDIT_VAV">
+      <Tip>Whether to edit the average velocity horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - EDIT_VAV<br> Whether to edit the average velocity horizons.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ These horizons will be calculated from the input average velocity horizons
+ and the edited BETA horizons.
+ 
+ The output modified average velocity horizons will never contain nil or
+ zero values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NEED_VAV">
+      <Tip>Whether the average velocity horizons are required input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NEED_VAV<br> Whether the average velocity horizons are required input.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ID_VAV">
+      <Tip>Identification in HDR_IDENT for the average velocity horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - ID_VAV<br> Identification in HDR_IDENT for the average velocity horizons.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NEED_WEIGHT">
+      <Tip>Whether the weights are required input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NEED_WEIGHT<br> Whether the weights are required input.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ID_WEIGHT">
+      <Tip>Identification in HDR_IDENT for the weights.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - ID_WEIGHT<br> Identification in HDR_IDENT for the weights.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NEED_DEPTH">
+      <Tip>Whether the horizon time/depths are required input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NEED_DEPTH<br> Whether the horizon time/depths are required input.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ID_DEPTH">
+      <Tip>Identification in HDR_IDENT for the horizon time/depths.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - ID_DEPTH<br> Identification in HDR_IDENT for the horizon time/depths.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word containing the X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - HDR_X<br> Header word containing the X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word containing the Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - HDR_Y<br> Header word containing the Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>X coordinate of first bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - X_INIT<br> X coordinate of first bin center.</center></b>
+<pre> Default =  1.0
+ Allowed = real (in units of header word HDR_X).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Y coordinate of first bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - Y_INIT<br> Y coordinate of first bin center.</center></b>
+<pre> Default =  1.0
+ Allowed = real (in units of header word HDR_X).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Bin increment in X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - X_INC<br> Bin increment in X direction.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0 (in units of header word HDR_X).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Bin increment in Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - Y_INC<br> Bin increment in Y direction.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0 (in units of header word HDR_X).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>X coordinate of last bin center. Minimum value of HDR_X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - X_LAST<br> X coordinate of last bin center. Minimum value of HDR_X.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt;= X_INIT (in units of header word HDR_X).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Y coordinate of last bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - Y_LAST<br> Y coordinate of last bin center.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt;= Y_INIT (in units of header word HDR_X).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Total number of bins in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - X_TOT<br> Total number of bins in the X direction.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Total number of bins in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - Y_TOT<br> Total number of bins in the Y direction.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MBYTES">
+      <Tip>Number of megabytes of permanent memory required.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - MBYTES<br> Number of megabytes of permanent memory required.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="ANALYSISWINDOWSIZE" title="Analysis Window Size" rows="24" columns="80">
+    <Label keyword="COMMENT_THISANALYSISWINDOWISUSED" alignment="center">This analysis window is used for anomaly editing and for smoothing.</Label>
+    <ArraySet keyword="WINSIZE_HORIZNUM_ARRAYSET" label="WINSIZE_HORIZNUM NUM_TR_X NUM_TR_Y">
+     <Array keyword="WINSIZE_HORIZNUM" type="int" maxLength="17 " columnName="WINSIZE_HORIZNUM" editable="yes" sensitive="yes" columnSize="17"/>
+     <Array keyword="NUM_TR_X" type="int" maxLength="9  " columnName="NUM_TR_X" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="NUM_TR_Y" type="int" maxLength="9  " columnName="NUM_TR_Y" editable="yes" sensitive="yes" columnSize="9"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_THISANALYSISWINDOWISUSED" xPos="5" yPos="1" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="WINSIZE_HORIZNUM_ARRAYSET" xPos="18" yPos="3" xSize="38" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WINSIZE_HORIZNUM">
+      <Tip>Horizon number for specifying NUM_TR_X and NUM_TR_Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - WINSIZE_HORIZNUM<br> Horizon number for specifying NUM_TR_X and NUM_TR_Y.</center></b>
+<pre> Default = 1
+ Allowed = valid horizon number (1 to NDPT)
+ 
+ This is the horizon number for which the user wishes to specify the following
+ parameters which describe the analysis window size:
+           NUM_TR_X  (size in the X direction is 2 * NUM_TR_X + 1)
+           NUM_TR_Y  (size in the Y direction is 2 * NUM_TR_Y + 1)
+ 
+ The horizon numbers must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified horizons, and flat
+ extrapolations will be performed above the first specified horizon and below
+ the last specified horizon.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_X">
+      <Tip>Number of traces on each side in X dir in analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NUM_TR_X<br> Number of traces on each side in X dir in analysis window.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ This is the number of traces on each side of the center trace in the
+ analysis window.
+ 
+ The analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute horizons.
+ 
+ The analysis window size is specified with the following two parameters:
+           NUM_TR_X  (size in the X direction is 2 * NUM_TR_X + 1)
+           NUM_TR_Y  (size in the Y direction is 2 * NUM_TR_Y + 1)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_Y">
+      <Tip>Number of traces on each side in Y dir in analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - NUM_TR_Y<br> Number of traces on each side in Y dir in analysis window.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ This is the number of traces on each side of the center trace in the
+ analysis window.
+ 
+ The analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute horizons.
+ 
+ The analysis window size is specified with the following two parameters:
+           NUM_TR_X  (size in the X direction is 2 * NUM_TR_X + 1)
+           NUM_TR_Y  (size in the Y direction is 2 * NUM_TR_Y + 1)</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="VELOCITYCONSTRAINTEDITING" title="Velocity Constraint Editing" rows="24" columns="80">
+    <Label keyword="COMMENT_APPLYVELOCITYCONSTRAINTS" alignment="center">Apply velocity constraints to the BETA attribute horizons.</Label>
+    <Label keyword="COMMENT_BETAVALUESARESETTONILIFV" alignment="center">BETA values are set to nil if velocity changes fall outside the constraints.</Label>
+    <Label keyword="COMMENT_NILBETAVALUESAREOPTIONAL" alignment="center">Nil BETA values are optionally replaced after applying constraints.</Label>
+    <Label keyword="COMMENT_APPLY_VAV_CONSTRAINTS" alignment="left">APPLY_VAV_CONSTRAINTS  =</Label>
+    <Field keyword="APPLY_VAV_CONSTRAINTS" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYAVERAGEVELOCITYCONS" alignment="left">Apply average velocity constraints.</Label>
+    <Label keyword="COMMENT_APPLY_VINT_CONSTRAINTS" alignment="left">APPLY_VINT_CONSTRAINTS =</Label>
+    <Field keyword="APPLY_VINT_CONSTRAINTS" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYINTERVALVELOCITYCON" alignment="left">Apply interval velocity constraints.</Label>
+    <ArraySet keyword="VAV_HORIZNUM_ARRAYSET" label="VAV_HORIZNUM  VAV_MIN_PERCENT VAV_MAX_PERCENT">
+     <Array keyword="VAV_HORIZNUM" type="int" maxLength="14 " columnName="VAV_HORIZNUM" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="VAV_MIN_PERCENT" type="float" maxLength="16 " columnName="VAV_MIN_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="VAV_MAX_PERCENT" type="float" maxLength="16 " columnName="VAV_MAX_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <ArraySet keyword="VINT_HORIZNUM_ARRAYSET" label="VINT_HORIZNUM VINT_MIN_PERCENTVINT_MAX_PERCENT">
+     <Array keyword="VINT_HORIZNUM" type="int" maxLength="14 " columnName="VINT_HORIZNUM" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="VINT_MIN_PERCENT" type="float" maxLength="16 " columnName="VINT_MIN_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="VINT_MAX_PERCENT" type="float" maxLength="16 " columnName="VINT_MAX_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <Label keyword="LABEL_REPLACE_NILS_AFTER_CONSTRA" alignment="left">REPLACE_NILS_AFTER_CONSTRAINTS =</Label>
+    <Field keyword="REPLACE_NILS_AFTER_CONSTRAINTS" type="comboBox" maxLength="42" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_APPLYVELOCITYCONSTRAINTS" xPos="10" yPos="1" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BETAVALUESARESETTONILIFV" xPos="1" yPos="2" xSize="76" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NILBETAVALUESAREOPTIONAL" xPos="5" yPos="3" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_VAV_CONSTRAINTS" xPos="2" yPos="5" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_VAV_CONSTRAINTS" xPos="26" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYAVERAGEVELOCITYCONS" xPos="31" yPos="5" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_VINT_CONSTRAINTS" xPos="2" yPos="6" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_VINT_CONSTRAINTS" xPos="26" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYINTERVALVELOCITYCON" xPos="31" yPos="6" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VAV_HORIZNUM_ARRAYSET" xPos="18" yPos="8" xSize="49" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="VINT_HORIZNUM_ARRAYSET" xPos="18" yPos="15" xSize="49" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_REPLACE_NILS_AFTER_CONSTRA" xPos="2" yPos="22" xSize="32" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE_NILS_AFTER_CONSTRAINTS" xPos="34" yPos="22" xSize="42" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="APPLY_VAV_CONSTRAINTS">
+      <Tip>Whether to apply average velocity constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - APPLY_VAV_CONSTRAINTS<br> Whether to apply average velocity constraints.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ The VAV_MIN_PERCENT and VAV_MAX_PERCENT arrays will not be used if this
+ parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_VINT_CONSTRAINTS">
+      <Tip>Whether to apply interval velocity constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - APPLY_VINT_CONSTRAINTS<br> Whether to apply interval velocity constraints.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ The VINT_MIN_PERCENT and VINT_MAX_PERCENT arrays will not be used if this
+ parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAV_HORIZNUM">
+      <Tip>Horizon number for specifying average velocity contraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VAV_HORIZNUM<br> Horizon number for specifying average velocity contraints.</center></b>
+<pre> Default = 1
+ Allowed = valid horizon number (1 to NDPT)
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ This is the horizon number for which the user wishes to specify the following
+ parameters:
+               VAV_MIN_PERCENT
+               VAV_MAX_PERCENT
+ 
+ The horizon numbers must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified horizons, and flat
+ extrapolations will be performed above the first specified horizon and below
+ the last specified horizon.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAV_MIN_PERCENT">
+      <Tip>Minimum percentage of average velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VAV_MIN_PERCENT<br> Minimum percentage of average velocity to accept.</center></b>
+<pre> Default = 75.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ This array is not used if APPLY_VAV_CONSTRAINTS is NO.
+ 
+ Average velocities smaller than the specified threshhold will cause the
+ corresponding value in the BETA attribute horizon to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAV_MAX_PERCENT">
+      <Tip>Maximum percentage of average velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VAV_MAX_PERCENT<br> Maximum percentage of average velocity to accept.</center></b>
+<pre> Default = 125.0
+ Allowed = 100.0 or greater
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ This array is not used if APPLY_VAV_CONSTRAINTS is NO.
+ 
+ Average velocities larger than the specified threshhold will cause the
+ corresponding value in the BETA attribute horizon to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT_HORIZNUM">
+      <Tip>Horizon number for specifying interval velocity contraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VINT_HORIZNUM<br> Horizon number for specifying interval velocity contraints.</center></b>
+<pre> Default = 1
+ Allowed = valid horizon number (1 to NDPT)
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ This is the horizon number for which the user wishes to specify the following
+ parameters:
+               VINT_MIN_PERCENT
+               VINT_MAX_PERCENT
+ 
+ The horizon numbers must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified horizons, and flat
+ extrapolations will be performed above the first specified horizon and below
+ the last specified horizon.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT_MIN_PERCENT">
+      <Tip>Minimum percentage of interval velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VINT_MIN_PERCENT<br> Minimum percentage of interval velocity to accept.</center></b>
+<pre> Default = 75.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ This array is not used if APPLY_VINT_CONSTRAINTS is NO.
+ 
+ Interval velocities smaller than the specified threshhold will cause the
+ corresponding value in the BETA attribute horizon to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT_MAX_PERCENT">
+      <Tip>Maximum percentage of interval velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VINT_MAX_PERCENT<br> Maximum percentage of interval velocity to accept.</center></b>
+<pre> Default = 125.0
+ Allowed = 100.0 or greater
+ 
+ This parameter is used to edit the BETA attribute horizons.
+ 
+ This array is not used if APPLY_VINT_CONSTRAINTS is NO.
+ 
+ Interval velocities larger than the specified threshhold will cause the
+ corresponding value in the BETA attribute horizon to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLACE_NILS_AFTER_CONSTRAINTS">
+      <Tip>Whether and how to replace nil BETA values after constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - REPLACE_NILS_AFTER_CONSTRAINTS<br> Whether and how to replace nil BETA values after constraints.</center></b>
+<pre> Default = do not replace nils
+ Allowed = use bilinear interpolation
+ Allowed = replace nils with zeroes
+ Allowed = do not replace nils
+ 
+ This parameter is used after applying velocity constraints to the BETA
+ attribute horizons.
+ 
+ Bilinear interpolation simply replaces nils with linearly interpolated values.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="ANOMALYEDITING" title="Anomaly Editing" rows="24" columns="80">
+    <Label keyword="COMMENT_APPLYANOMALYEDITINGTOTHE" alignment="center">Apply anomaly editing to the BETA or XDIP or YDIP attribute volume.</Label>
+    <Label keyword="COMMENT_ATTRIBUTEVALUESARESETTON" alignment="center">Attribute values are set to nil if they are anomalous.</Label>
+    <Label keyword="COMMENT_REMOVE_BAD_VALUES" alignment="left">REMOVE_BAD_VALUES     =</Label>
+    <Field keyword="REMOVE_BAD_VALUES" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_REMOVEANOMALOUSVALUESBAS" alignment="left">Remove anomalous values based on standard deviation.</Label>
+    <Label keyword="COMMENT_USE_WEIGHTED_EDIT" alignment="left">USE_WEIGHTED_EDIT     =</Label>
+    <Field keyword="USE_WEIGHTED_EDIT" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEWEIGHTVOLUMEFORSTANDA" alignment="left">Use weight volume for standard deviation calculation.</Label>
+    <Label keyword="LABEL_EDITING_PERCENT_VALID" alignment="left">EDITING_PERCENT_VALID =</Label>
+    <Field keyword="EDITING_PERCENT_VALID" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOFANALYSISWINDOWR" alignment="left">Percent of analysis window required to contain valid picks.</Label>
+    <ArraySet keyword="STDEV_HORIZNUM_ARRAYSET" label="STDEV_HORIZNUM STDEV">
+     <Array keyword="STDEV_HORIZNUM" type="int" maxLength="15 " columnName="STDEV_HORIZNUM" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="STDEV" type="float" maxLength="5  " columnName="STDEV" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_APPLYANOMALYEDITINGTOTHE" xPos="6" yPos="1" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_ATTRIBUTEVALUESARESETTON" xPos="11" yPos="2" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_REMOVE_BAD_VALUES" xPos="2" yPos="4" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="REMOVE_BAD_VALUES" xPos="25" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_REMOVEANOMALOUSVALUESBAS" xPos="32" yPos="4" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_WEIGHTED_EDIT" xPos="2" yPos="5" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_WEIGHTED_EDIT" xPos="25" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEWEIGHTVOLUMEFORSTANDA" xPos="32" yPos="5" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_EDITING_PERCENT_VALID" xPos="2" yPos="6" xSize="23" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EDITING_PERCENT_VALID" xPos="25" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOFANALYSISWINDOWR" xPos="32" yPos="6" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="STDEV_HORIZNUM_ARRAYSET" xPos="14" yPos="8" xSize="23" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="REMOVE_BAD_VALUES">
+      <Tip>Whether to remove anomalous values based on standard deviation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - REMOVE_BAD_VALUES<br> Whether to remove anomalous values based on standard deviation.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The USE_WEIGHTED_EDIT parameter and the STDEV array will not be used if
+ this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_WEIGHTED_EDIT">
+      <Tip>Whether to use weight volume for standard deviation calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - USE_WEIGHTED_EDIT<br> Whether to use weight volume for standard deviation calculation.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Constant weights will be used if this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EDITING_PERCENT_VALID">
+      <Tip>Percent of window required to contain valid picks for editing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - EDITING_PERCENT_VALID<br> Percent of window required to contain valid picks for editing.</center></b>
+<pre> Default = 60.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ horizons.
+ 
+ The analysis window size is specified with the following two parameters:
+           NUM_TR_X  (size in the X direction is 2 * NUM_TR_X + 1)
+           NUM_TR_Y  (size in the Y direction is 2 * NUM_TR_Y + 1)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STDEV_HORIZNUM">
+      <Tip>Horizon number on trace for specifying standard deviation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - STDEV_HORIZNUM<br> Horizon number on trace for specifying standard deviation.</center></b>
+<pre> Default = 1
+ Allowed = valid horizon number (1 to NDPT)
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ This is the horizon number for which the user wishes to specify STDEV.
+ 
+ The horizon numbers must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified horizons, and flat
+ extrapolations will be performed above the first specified horizon and below
+ the last specified horizon.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STDEV">
+      <Tip>Maximum number of standard deviations to allow.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - STDEV<br> Maximum number of standard deviations to allow.</center></b>
+<pre> Default = 3.0
+ Allowed = 0.0 or greater
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Each value in the attribute volume is compared with the mean value
+ calculated from an analysis window centered at that value.  A value
+ will be set to nil if it differs from the mean value by more than
+ the specified number of standard deviations.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SMOOTHING" title="Smoothing" rows="32" columns="80">
+    <Label keyword="COMMENT_SMOOTHTHEBETAORXDIPORYDI" alignment="center">Smooth the BETA or XDIP or YDIP attribute volume after anomaly editing is finish</Label>
+    <Label keyword="COMMENT_THEANOMALYEDITINGWILLHAV" alignment="center">The anomaly editing will have set some attribute values to nil.</Label>
+    <Label keyword="COMMENT_NILATTRIBUTEVALUESAREOPT" alignment="center">Nil attribute values are optionally replaced before or after smoothing.</Label>
+    <Label keyword="COMMENT_BEFORESMOOTHING" alignment="left">Before smoothing:</Label>
+    <Border keyword="BORDER3"/>
+    <Label keyword="LABEL_REPLACE_NILS_BEFORE" alignment="left">REPLACE_NILS_BEFORE =</Label>
+    <Field keyword="REPLACE_NILS_BEFORE" type="comboBox" maxLength="42" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SMOOTHING" alignment="left">Smoothing:</Label>
+    <Border keyword="BORDER4"/>
+    <Label keyword="COMMENT_APPLY_SMOOTHING" alignment="left">APPLY_SMOOTHING         =</Label>
+    <Field keyword="APPLY_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_SMOOTHTHEEDITEDATTRIBUTE" alignment="left">Smooth the edited attribute volume.</Label>
+    <Label keyword="COMMENT_USE_WEIGHTED_SMOOTHING" alignment="left">USE_WEIGHTED_SMOOTHING  =</Label>
+    <Field keyword="USE_WEIGHTED_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEWEIGHTVOLUMEFORSMOOTH" alignment="left">Use weight volume for smoothing.</Label>
+    <Label keyword="COMMENT_USE_DISTANCE_SMOOTHING" alignment="left">USE_DISTANCE_SMOOTHING  =</Label>
+    <Field keyword="USE_DISTANCE_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEINVERSEDISTANCEFORSMO" alignment="left">Use inverse distance for smoothing.</Label>
+    <Label keyword="COMMENT_USE_TAPERED_SMOOTHING" alignment="left">USE_TAPERED_SMOOTHING   =</Label>
+    <Field keyword="USE_TAPERED_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USETAPEREDEDGESFORSMOOTH" alignment="left">Use tapered edges for smoothing.</Label>
+    <Label keyword="LABEL_CENTER_WEIGHT_PERCENT" alignment="left">CENTER_WEIGHT_PERCENT   =</Label>
+    <Field keyword="CENTER_WEIGHT_PERCENT" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOFCENTERWEIGHTFOR" alignment="left">Percent of center weight for inverse distance smoothing.</Label>
+    <Label keyword="LABEL_TAPERED_WEIGHT_PERCENT" alignment="left">TAPERED_WEIGHT_PERCENT  =</Label>
+    <Field keyword="TAPERED_WEIGHT_PERCENT" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOFSMOOTHINGDISTAN" alignment="left">Percent of smoothing distance to taper.</Label>
+    <Label keyword="LABEL_SMOOTHING_PERCENT_VALID" alignment="left">SMOOTHING_PERCENT_VALID =</Label>
+    <Field keyword="SMOOTHING_PERCENT_VALID" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="left">Percent of analysis window required to contain valid picks.</Label>
+    <Label keyword="LABEL_SMOOTHING_TRIM_PERCENT" alignment="left">SMOOTHING_TRIM_PERCENT  =</Label>
+    <Field keyword="SMOOTHING_TRIM_PERCENT" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOFDATATOTRIMWHENS" alignment="left">Percent of data to trim when smoothing.</Label>
+    <Label keyword="COMMENT_AFTERSMOOTHING" alignment="left">After smoothing:</Label>
+    <Border keyword="BORDER5"/>
+    <Label keyword="LABEL_REPLACE_NILS_AFTER" alignment="left">REPLACE_NILS_AFTER  =</Label>
+    <Field keyword="REPLACE_NILS_AFTER" type="comboBox" maxLength="42" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ADDITIONALSMOOTHINGOFBET" alignment="left">Additional smoothing of BETA:</Label>
+    <Border keyword="BORDER6"/>
+    <Label keyword="COMMENT_SMOOTH_KAPPA_VOLUME" alignment="left">SMOOTH_KAPPA_VOLUME     =</Label>
+    <Field keyword="SMOOTH_KAPPA_VOLUME" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_SMOOTHTHEEDITEDANDSMOOTH" alignment="left">Smooth the edited and smoothed BETA volume using KAPPA.</Label>
+    <Label keyword="LABEL_VERTICAL_SMOOTHING_DIST" alignment="left">VERTICAL_SMOOTHING_DIST =</Label>
+    <Field keyword="VERTICAL_SMOOTHING_DIST" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_VERTICALSMOOTHINGDISTANC" alignment="left">Vertical smoothing distance in time/depth units.</Label>
+    <Layout>
+     <Constraints component="COMMENT_SMOOTHTHEBETAORXDIPORYDI" xPos="2" yPos="1" xSize="83" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_THEANOMALYEDITINGWILLHAV" xPos="11" yPos="2" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NILATTRIBUTEVALUESAREOPT" xPos="7" yPos="3" xSize="71" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BEFORESMOOTHING" xPos="1" yPos="5" xSize="17" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="2" yPos="6" xSize="75" ySize="3"/>
+     <Constraints component="LABEL_REPLACE_NILS_BEFORE" xPos="4" yPos="7" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE_NILS_BEFORE" xPos="25" yPos="7" xSize="42" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SMOOTHING" xPos="1" yPos="10" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER4" xPos="2" yPos="11" xSize="75" ySize="10"/>
+     <Constraints component="COMMENT_APPLY_SMOOTHING" xPos="4" yPos="12" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_SMOOTHING" xPos="29" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SMOOTHTHEEDITEDATTRIBUTE" xPos="36" yPos="12" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_WEIGHTED_SMOOTHING" xPos="4" yPos="13" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_WEIGHTED_SMOOTHING" xPos="29" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEWEIGHTVOLUMEFORSMOOTH" xPos="36" yPos="13" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_DISTANCE_SMOOTHING" xPos="4" yPos="14" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_DISTANCE_SMOOTHING" xPos="29" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEINVERSEDISTANCEFORSMO" xPos="36" yPos="14" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_TAPERED_SMOOTHING" xPos="4" yPos="15" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_TAPERED_SMOOTHING" xPos="29" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USETAPEREDEDGESFORSMOOTH" xPos="36" yPos="15" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CENTER_WEIGHT_PERCENT" xPos="4" yPos="16" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CENTER_WEIGHT_PERCENT" xPos="29" yPos="16" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOFCENTERWEIGHTFOR" xPos="36" yPos="16" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TAPERED_WEIGHT_PERCENT" xPos="4" yPos="17" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPERED_WEIGHT_PERCENT" xPos="29" yPos="17" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOFSMOOTHINGDISTAN" xPos="36" yPos="17" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMOOTHING_PERCENT_VALID" xPos="4" yPos="18" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMOOTHING_PERCENT_VALID" xPos="29" yPos="18" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="36" yPos="18" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMOOTHING_TRIM_PERCENT" xPos="4" yPos="19" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMOOTHING_TRIM_PERCENT" xPos="29" yPos="19" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOFDATATOTRIMWHENS" xPos="36" yPos="19" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_AFTERSMOOTHING" xPos="1" yPos="22" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER5" xPos="2" yPos="23" xSize="75" ySize="3"/>
+     <Constraints component="LABEL_REPLACE_NILS_AFTER" xPos="4" yPos="24" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE_NILS_AFTER" xPos="25" yPos="24" xSize="42" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_ADDITIONALSMOOTHINGOFBET" xPos="1" yPos="27" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER6" xPos="2" yPos="28" xSize="75" ySize="4"/>
+     <Constraints component="COMMENT_SMOOTH_KAPPA_VOLUME" xPos="4" yPos="29" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SMOOTH_KAPPA_VOLUME" xPos="29" yPos="29" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SMOOTHTHEEDITEDANDSMOOTH" xPos="36" yPos="29" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VERTICAL_SMOOTHING_DIST" xPos="4" yPos="30" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VERTICAL_SMOOTHING_DIST" xPos="29" yPos="30" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_VERTICALSMOOTHINGDISTANC" xPos="44" yPos="30" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="REPLACE_NILS_BEFORE">
+      <Tip>Whether and how to replace nil attribute values before smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - REPLACE_NILS_BEFORE<br> Whether and how to replace nil attribute values before smoothing.</center></b>
+<pre> Default = do not replace nils
+ Allowed = use bilinear interpolation
+ Allowed = replace nils with zeroes
+ Allowed = do not replace nils
+ 
+ This parameter is used before smoothing the selected BETA or XDIP or
+ YDIP attribute horizons.
+ 
+ Bilinear interpolation simply replaces nils with linearly interpolated values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_SMOOTHING">
+      <Tip>Whether to smooth the BETA or XDIP or YDIP attribute horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - APPLY_SMOOTHING<br> Whether to smooth the BETA or XDIP or YDIP attribute horizons.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The attribute horizons will be smoothed over the specified analysis window.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_WEIGHTED_SMOOTHING">
+      <Tip>Whether to use the weight volume for smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - USE_WEIGHTED_SMOOTHING<br> Whether to use the weight volume for smoothing.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ SMOOTHING_TRIM_PERCENT must be set to zero in order to use this option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_DISTANCE_SMOOTHING">
+      <Tip>Whether to use inverse distance for smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - USE_DISTANCE_SMOOTHING<br> Whether to use inverse distance for smoothing.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ NO causes a stronger smoothing by weighting all traces the same, regardless
+ of their distances from the middle trace.
+ 
+ SMOOTHING_TRIM_PERCENT must be set to zero in order to use this option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_TAPERED_SMOOTHING">
+      <Tip>Whether to use a taper at the edge of the smoothing area.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - USE_TAPERED_SMOOTHING<br> Whether to use a taper at the edge of the smoothing area.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ NO causes a stronger smoothing by weighting all traces the same, regardless
+ of their distances from the middle trace.
+ 
+ SMOOTHING_TRIM_PERCENT must be set to zero in order to use this option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CENTER_WEIGHT_PERCENT">
+      <Tip>Percent of center weight to use for inverse distance smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - CENTER_WEIGHT_PERCENT<br> Percent of center weight to use for inverse distance smoothing.</center></b>
+<pre> Default = 20.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to set the weight of the center trace when inverse
+ distance weights are used for smoothing.  If this parameter were not used,
+ the center trace would always get 100% of the weight because the inverse
+ distance would be infinite.
+ 
+ A smaller percent weights the center trace less, causing a stronger smoothing.
+ A larger percent weights the center trace more, causing a weaker smoothing.
+ 
+ This parameter is not used if USE_DISTANCE_SMOOTHING is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPERED_WEIGHT_PERCENT">
+      <Tip>Percent of the distance to taper for tapered smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - TAPERED_WEIGHT_PERCENT<br> Percent of the distance to taper for tapered smoothing.</center></b>
+<pre> Default = 20.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to set the size of the tapered area at the edge of
+ the smoothing area.  for example, if this parameter is set to 20, the
+ outer 20% of the smoothing distance will be tapered (lower weights grading
+ to zero) and the inner 80% will have constant weights.
+ 
+ A smaller percent produces a narrower taper, causing a stronger smoothing.
+ A larger percent produces a wider taper, causing a weaker smoothing.
+ 
+ This parameter is not used if USE_TAPERED_SMOOTHING is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMOOTHING_PERCENT_VALID">
+      <Tip>Percent of window required to contain valid picks for smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - SMOOTHING_PERCENT_VALID<br> Percent of window required to contain valid picks for smoothing.</center></b>
+<pre> Default = 60.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ horizons.
+ 
+ The analysis window size is specified with the following two parameters:
+           NUM_TR_X  (size in the X direction is 2 * NUM_TR_X + 1)
+           NUM_TR_Y  (size in the Y direction is 2 * NUM_TR_Y + 1)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMOOTHING_TRIM_PERCENT">
+      <Tip>Percent of data in window to trim when smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - SMOOTHING_TRIM_PERCENT<br> Percent of data in window to trim when smoothing.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ horizons.
+ 
+ This parameter specifies how much of the data in the analysis window
+ should be trimmed while smoothing.
+ 
+ The value 0.0 causes a mean value to be calculated (no trimming).
+ The value 100.0 causes a median value to be calculated (100% trimming).
+ 
+ Only the non-nil values are used to calculate the trimmed mean.
+ If SMOOTHING_TRIM_PERCENT is greater than zero, USE_WEIGHTED_SMOOTHING,
+ USE_DISTANCE_SMOOTHING and USE_TAPERED_SMOOTHING are not used (i.e. all
+ data points have the same weight).
+ 
+ The analysis window size is specified with the following two parameters:
+           NUM_TR_X  (size in the X direction is 2 * NUM_TR_X + 1)
+           NUM_TR_Y  (size in the Y direction is 2 * NUM_TR_Y + 1)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLACE_NILS_AFTER">
+      <Tip>Whether and how to replace nil attribute values after smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - REPLACE_NILS_AFTER<br> Whether and how to replace nil attribute values after smoothing.</center></b>
+<pre> Default = do not replace nils
+ Allowed = use bilinear interpolation
+ Allowed = replace nils with zeroes
+ Allowed = do not replace nils
+ Allowed = reset interpolated values back to nil
+ 
+ This parameter is used after smoothing the selected BETA or XDIP or
+ YDIP attribute horizons.
+ 
+ Bilinear interpolation simply replaces nils with linearly interpolated values.
+ 
+ Resetting interpolated values to nil after smoothing will replace smoothed
+ values with nil for those values which were originally nil before the
+ REPLACE_NILS_BEFORE action was taken.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMOOTH_KAPPA_VOLUME">
+      <Tip>Whether to smooth the BETA volume using KAPPA.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - SMOOTH_KAPPA_VOLUME<br> Whether to smooth the BETA volume using KAPPA.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the BETA volume using KAPPA.
+ The KAPPA horizons will be smoothed laterally over the specified analysis
+ window, and then the KAPPA traces will be smoothed vertically using the
+ VERTICAL_SMOOTHING_DIST parameter.
+ 
+ This is an additional action which is performed after the BETA volume
+ has been edited and smoothed in the normal manner.
+ 
+ KAPPA = input interval velocity / output interval velocity.
+ GAMMA = input average velocity / output average velocity.
+ GAMMA = sqrt(BETA + 1)
+ BETA  = GAMMA**2 - 1
+ 
+ These steps are performed:
+  (1) Any nils in the BETA volume are interpolated.
+  (2) The BETA volume is converted to a GAMMA volume.
+  (3) The GAMMA volume is converted to a KAPPA volume.
+  (4) Any nils originally in the BETA volume are restored in the KAPPA volume.
+  (5) The KAPPA volume is smoothed laterally.
+  (6) Any nils in the smoothed KAPPA volume are interpolated.
+  (7) The KAPPA volume is smoothed vertically.
+  (8) The smoothed KAPPA volume is converted to a GAMMA volume.
+  (9) The GAMMA volume is converted to a BETA volume.
+ (10) Any nils originally in the BETA volume are restored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VERTICAL_SMOOTHING_DIST">
+      <Tip>Vertical smoothing distance for KAPPA in time/depth units.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - VERTICAL_SMOOTHING_DIST<br> Vertical smoothing distance for KAPPA in time/depth units.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ This parameter is used with the SMOOTH_KAPPA_VOLUME parameter.
+ No vertical smoothing is performed if this parameter is zero.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dabra - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dabra">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DABRA              (analyse Dip and ABRA horizon slices)
+ Category   : migrations
+ Written    : 2003-06-19   by: Tom Stoeckley
+ Revised    : 2005-01-31   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Analyze and edit a combo of input horizon slices for tomography.
+ Portability: No known limitations, but see note below.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process prepares data for tomography by analyzing and editing a
+ combination of horizon-sliced 3D data input volumes which are in trace format.
+ Each horizon corresponds to one sample point in all the traces.
+ 
+ Possible input and output traces at each CMP are the following:
+ 
+      91  The weights                                      (calculated by KA).
+      85  The output average velocity                          (edited by KA).
+     181  The residual NMO velocity ratio       (BETA attribute edited by KA).
+     188  The structural dip in the X direction (XDIP attribute edited by KA).
+     189  The structural dip in the Y direction (YDIP attribute edited by KA).
+       1  The time or depth of the horizon                (created by SLICER).
+ 
+    Header word HDR_IDENT identifies the type of information each trace
+    contains.  These header word values are listed above.
+ 
+    Not all input traces are required; only those which are needed to
+    prepare the requested output traces are needed.  The GUI lists the
+    required input traces dynamically depending on the current state
+    of the process parameters.
+ 
+ This process performs the following steps in the indicated order:
+ 
+    (1) Removes anomalous values from the ATTRIBUTE horizons.
+    (2) Optionally replaces nil values in the ATTRIBUTE horizons.
+    (3) Smooths the ATTRIBUTE horizons.
+    (4) Optionally replaces nil values in the ATTRIBUTE horizons.
+  If the ATTRIBUTE horizons are BETA, also performs the following steps:
+    (5) Edits the input average velocities using the edited BETA horizons.
+    (6) Applies velocity constraints to the edited BETA horizons.
+    (7) Optionally replaces nil values in the new edited BETA horizons.
+    (8) Edits input average velocities again using new edited BETA horizons.
+    (9) Always replaces nil values in the new edited average velocity horizons.
+ 
+ Notes regarding the above steps:
+ 
+    Anomalies:   Values in the ATTRIBUTE horizons are set to nil where they
+      (1)        differ from the mean in the surrounding data window by
+                 more than the specified standard deviations.
+ 
+    Smoothing:   Values in the ATTRIBUTE horizons are reset to the mean of all
+      (3)        non-nil values in the surrounding data window.
+ 
+    Constraints: Values in the edited BETA horizons are set to nil where the
+      (6)        differences between the input and edited average or inteval
+                 velocities are outside of the specified constraints.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+  7. 2005-01-31  Stoeckley  Add SMOOTH_KAPPA_VOLUME, VERTICAL_SMOOTHING_DIST,
+                             USE_TAPERED_SMOOTHING, and TAPERED_WEIGHT_PERCENT.
+  6. 2003-10-23  Stoeckley  Add REPLACE_NILS_AFTER_CONSTRAINTS and
+                             SMOOTHING_TRIM_PERCENT; add an option
+                             to REPLACE_NILS_AFTER.
+  5. 2003-10-02  Stoeckley  Add nullify calls before the memman_nullify calls
+                             to satisfy Portland Group compiler.
+  4. 2003-09-29  Stoeckley  Fix GAMMA = sqrt(BETA+1) which was upside down;
+                             fix bug with the application of interval velocity
+                             contraints for the top horizon.
+  3. 2003-08-22  Stoeckley  Fix calculation of standard deviation; remove
+                             requirement that VAV must always be input when
+                             BETA is edited; add parameter HORIZON_UNIT.
+  2. 2003-07-30  Stoeckley  Remove special treatment of input depth horizon.
+  1. 2003-06-19  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

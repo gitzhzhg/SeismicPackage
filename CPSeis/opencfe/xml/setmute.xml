@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="setmute" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SETMUTEPROCESS" title="SETMUTE Process" rows="24" columns="80">
+    <Label keyword="COMMENT_SETMUTEPROCESS" alignment="center">SETMUTE Process</Label>
+    <Label keyword="COMMENT_SETTHEHEADMUTEHEADERWORD" alignment="center">Set the head mute header word based on an amplitude threshold.</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FACTOR" alignment="left">FACTOR=</Label>
+    <Field keyword="FACTOR" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AMPL_SET" alignment="left">AMPL_SET=</Label>
+    <Field keyword="AMPL_SET" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MUTE_ADD" alignment="left">MUTE_ADD=</Label>
+    <Field keyword="MUTE_ADD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NOTESETMUTEONLYSETSTHEHE" alignment="center">Note: SETMUTE only sets the (head) mute header word but does not</Label>
+    <Label keyword="COMMENT_APPLYTHISMUTEIFYOUWISHTO" alignment="center">apply this mute. If you wish to apply the mute, follow SETMUTE</Label>
+    <Label keyword="COMMENT_BYTHEMUTEPROCESSUSINGOPT" alignment="center">by the MUTE process using OPT_MUTE = REST_HEAD.</Label>
+    <Layout>
+     <Constraints component="COMMENT_SETMUTEPROCESS" xPos="24" yPos="1" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_SETTHEHEADMUTEHEADERWORD" xPos="2" yPos="2" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="24" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="29" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FACTOR" xPos="8" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FACTOR" xPos="15" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AMPL_SET" xPos="34" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AMPL_SET" xPos="43" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MUTE_ADD" xPos="20" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MUTE_ADD" xPos="29" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NOTESETMUTEONLYSETSTHEHE" xPos="1" yPos="11" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLYTHISMUTEIFYOUWISHTO" xPos="2" yPos="12" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BYTHEMUTEPROCESSUSINGOPT" xPos="10" yPos="13" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Whether amplitude threshold is RELATIVE (to LAV) or FIXED.</Tip>
+      <Text><![CDATA[<html>
+<b><center>setmute - MODE<br> Whether amplitude threshold is RELATIVE (to LAV) or FIXED.</center></b>
+<pre> Default = RELATIVE
+ Allowed = RELATIVE
+ Allowed = FIXED
+ 
+ If MODE = RELATIVE, the amplitude threshold is relative to the LAV of each
+ trace; in particular, the head mute index is set to the position of the
+ first sample whose absolute value &gt;= FACTOR * trace LAV (possibly adjusted
+ by MUTE_ADD).
+ 
+ If MODE = FIXED, the amplitude threshold is fixed; in particular, the
+ head mute index is set to the position of the first trace sample whose
+ absolute value &gt;= AMPL_SET (possibly adjusted by MUTE_ADD).</pre></html>]]></Text>
+     </Help>
+     <Help component="FACTOR">
+      <Tip>Factor for the RELATIVE operation method.</Tip>
+      <Text><![CDATA[<html>
+<b><center>setmute - FACTOR<br> Factor for the RELATIVE operation method.</center></b>
+<pre> Default = 0.01
+ Allowed: 1.0 &gt; real &gt; 0.0
+ If MODE = RELATIVE, then the head mute index is set to the position of the
+ first sample whose absolute value &gt;= FACTOR * trace LAV (possibly adjusted
+ by MUTE_ADD).</pre></html>]]></Text>
+     </Help>
+     <Help component="AMPL_SET">
+      <Tip>Absolute threshold for the FIXED operation method.</Tip>
+      <Text><![CDATA[<html>
+<b><center>setmute - AMPL_SET<br> Absolute threshold for the FIXED operation method.</center></b>
+<pre> Default = 0.01
+ Allowed = real &gt; 0.0
+ If MODE = FIXED, then the head mute index is set to the position of the
+ first sample whose absolute value &gt;= AMPL_SET (possibly adjusted by
+ MUTE_ADD).</pre></html>]]></Text>
+     </Help>
+     <Help component="MUTE_ADD">
+      <Tip>Time, in seconds, to add to mute position defined by threshold.</Tip>
+      <Text><![CDATA[<html>
+<b><center>setmute - MUTE_ADD<br> Time, in seconds, to add to mute position defined by threshold.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ In setting the head mute index, this amount (in seconds) is added to the
+ position of the first trace sample whose absolute value meets or exceeds
+ the specified amplitude threshold.
+ 
+ Positive MUTE_ADD shifts the head mute index downwards.
+ Negative MUTE_ADD shifts the head mute index upwards.</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>setmute - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="setmute">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SETMUTE
+ Category   : amplitude_mod
+ Written    : 1998-01-09   by: Chuck I. Burch
+ Revised    : 2000-12-14   by: Bob Baumel
+ Maturity   : production   2001-07-13
+ Purpose    : Set the head mute header word based on an amplitude threshold.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ SETMUTE sets the head mute header word (number 2) to the index of the first
+ trace sample whose absolute value meets or exceeds a specified amplitude
+ threshold, possibly adjusted by the MUTE_ADD parameter.
+ 
+ If MODE = RELATIVE, the amplitude threshold is relative to the LAV of each
+ trace; in particular, the head mute index is set to the position of the
+ first sample whose absolute value &gt;= FACTOR * trace LAV (possibly adjusted
+ by MUTE_ADD).
+ 
+ If MODE = FIXED, the amplitude threshold is fixed; in particular, the
+ head mute index is set to the position of the first sample whose absolute
+ value &gt;= AMPL_SET (possibly adjusted by MUTE_ADD).
+ 
+ In either mode (RELATIVE or FIXED), if no trace sample meets the condition
+ for setting the head mute index, then the trace is assumed to be dead, in
+ which case SETMUTE actually kills the trace.
+ 
+ This process is intended primarily to establish mutes on contractor processed
+ post-stack data.
+ 
+ SETMUTE only sets the (head) mute header word, but DOES NOT APPLY this mute.
+ If you wish to apply the mute, you must follow SETMUTE by the MUTE process
+ using OPT_MUTE = REST_HEAD.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+  9. 2001-07-13  Bob Baumel   Changed wrapped_up flag to skip_wrapup. PROD.
+  8. 2000-11-15  Bob Baumel   Added note to doc and CFE screen about following
+                              SETMUTE with MUTE process if wish to apply mute.
+  7. 2000-10-30  Bob Baumel   Added new MUTE_ADD capability.
+  6. 2000-03-28  Bob Baumel   Added gui_def to doc (no changes in code).
+  5. 2000-03-22  Bob Baumel   Clean up code; implement new header conventions.
+  4. 1999-11-17  David Sharp  Converted from old system.
+  3. 1998-12-18  Vunderink    Begin using the f90 compiler.
+  2. 1998-01-12  Vunderink    Changed some do loop ranges and kill trace
+                              if no value meets or exceeds the threshold.
+  1. 1998-01-09  C I Burch    Initial version.
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

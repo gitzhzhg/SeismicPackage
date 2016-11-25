@@ -1,0 +1,539 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="gstk" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="GSTKPROCESS" title="GSTK Process" rows="24" columns="80">
+    <Label keyword="COMMENT_STACKTRACESWITHOUTREQUIR" alignment="center">Stack traces without requirement of sorting into stack gathers.</Label>
+    <Label keyword="LABEL_NTIM" alignment="left">NTIM=</Label>
+    <Field keyword="NTIM" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TVFSE" alignment="left">TVFSE=</Label>
+    <Field keyword="TVFSE" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MDT" alignment="left">OPT_MDT=</Label>
+    <Field keyword="OPT_MDT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_INL" alignment="left">HDR_INL=</Label>
+    <Field keyword="HDR_INL" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_INIT" alignment="left">INL_INIT=</Label>
+    <Field keyword="INL_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_INC" alignment="left">INL_INC=</Label>
+    <Field keyword="INL_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_WID" alignment="left">INL_WID=</Label>
+    <Field keyword="INL_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_LAST" alignment="left">INL_LAST=</Label>
+    <Field keyword="INL_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_TOT" alignment="left">INL_TOT=</Label>
+    <Field keyword="INL_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CRL" alignment="left">HDR_CRL=</Label>
+    <Field keyword="HDR_CRL" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_INIT" alignment="left">CRL_INIT=</Label>
+    <Field keyword="CRL_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_INC" alignment="left">CRL_INC=</Label>
+    <Field keyword="CRL_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_WID" alignment="left">CRL_WID=</Label>
+    <Field keyword="CRL_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_LAST" alignment="left">CRL_LAST=</Label>
+    <Field keyword="CRL_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_TOT" alignment="left">CRL_TOT=</Label>
+    <Field keyword="CRL_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC=</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_WID" alignment="left">OFF_WID=</Label>
+    <Field keyword="OFF_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_LAST" alignment="left">OFF_LAST=</Label>
+    <Field keyword="OFF_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT=</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_STACKTRACESWITHOUTREQUIR" xPos="4" yPos="1" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NTIM" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NTIM" xPos="9" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TVFSE" xPos="24" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TVFSE" xPos="32" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="1" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="9" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="24" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="32" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MDT" xPos="1" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MDT" xPos="9" yPos="7" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="1" yPos="9" xSize="72" ySize="15"/>
+     <Constraints component="LABEL_HDR_INL" xPos="2" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_INL" xPos="11" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_INIT" xPos="2" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_INIT" xPos="11" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_INC" xPos="27" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_INC" xPos="35" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_WID" xPos="51" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_WID" xPos="59" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_LAST" xPos="2" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_LAST" xPos="11" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_TOT" xPos="27" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_TOT" xPos="35" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CRL" xPos="2" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CRL" xPos="11" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_INIT" xPos="2" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_INIT" xPos="11" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_INC" xPos="27" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_INC" xPos="35" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_WID" xPos="51" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_WID" xPos="59" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_LAST" xPos="2" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_LAST" xPos="11" yPos="18" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_TOT" xPos="27" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_TOT" xPos="35" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="2" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="11" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="2" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="11" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="27" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="35" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_WID" xPos="51" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_WID" xPos="59" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_LAST" xPos="2" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_LAST" xPos="11" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="27" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="35" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="NTIM">
+      <Tip>Number of Traces In Memory.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - NTIM<br> Number of Traces In Memory.</center></b>
+<pre> Default = 5000
+ Allowed = int &gt; 0
+ Generally NTIM should be set large enough so that disk swapping is minimized,
+ but small enough to avoid restrictions on memory availability or cost.
+ 
+ For operation in conjunction with DMO, NTIM should be set to a minimum
+ of the number of bins in a rectangular array that might be populated by a DMO
+ broadcast operator for the largest offset.  Larger values may increase
+ efficiency, but at some point limits on memory availability and memory cost
+ will establish an upper limit on NTIM.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TVFSE">
+      <Tip>Time Varying Fold of Stack Exponential stack scaling method.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - TVFSE<br> Time Varying Fold of Stack Exponential stack scaling method.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0-1.0
+ The Time Varying Fold of Stack Exponential method scales stacked traces by
+ dividing trace samples by the time varying number of live samples stacked
+ together raised to the TVFSE power.  TVFSE = 0.0 does no scaling.  This is an
+ industry-standard method.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Starting time for the stacked traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - TIM_BEG<br> Starting time for the stacked traces.</center></b>
+<pre> Default = TSTRT
+ Allowed = real
+ Stacked traces will be dead before TIM_BEG if TSTRT &lt; TIM_BEG.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Ending time for the stacked traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - TIM_END<br> Ending time for the stacked traces.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TIM_BEG
+ Stacked traces will be dead after TIM_END if TIM_END &lt; end of trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MDT">
+      <Tip>Option for handling Missing or Dead input Traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OPT_MDT<br> Option for handling Missing or Dead input Traces.</center></b>
+<pre> Default = DEL
+ Allowed = DEL
+ Allowed = FILL
+ Allowed = KILL
+ Output traces corresponding to missing or dead input traces are deleted
+ (OPT_MDT = DEL), filled in (OPT_MDT = FILL) or killed (OPT_MDT = KILL).
+ FILL option should be used only when GSTK is a part of a DMO or other
+ migration process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_INL">
+      <Tip>Header word for inline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - HDR_INL<br> Header word for inline coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_INIT">
+      <Tip>Value of HDR_INL for center of first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - INL_INIT<br> Value of HDR_INL for center of first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_INC">
+      <Tip>Increment between bins in inline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - INL_INC<br> Increment between bins in inline direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_WID">
+      <Tip>Width of bins in inline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - INL_WID<br> Width of bins in inline direction.</center></b>
+<pre> Default = INL_INC
+ Allowed = INL_INC &gt;= real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_LAST">
+      <Tip>Value of HDR_INL for center of last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - INL_LAST<br> Value of HDR_INL for center of last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= INL_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_TOT">
+      <Tip>Total number of bins in inline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - INL_TOT<br> Total number of bins in inline direction.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CRL">
+      <Tip>Header word for crossline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - HDR_CRL<br> Header word for crossline coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_INIT">
+      <Tip>Value of HDR_CRL for center of first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CRL_INIT<br> Value of HDR_CRL for center of first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_INC">
+      <Tip>Increment between bins in crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CRL_INC<br> Increment between bins in crossline direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_WID">
+      <Tip>Width of bins in crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CRL_WID<br> Width of bins in crossline direction.</center></b>
+<pre> Default = CRL_INC
+ Allowed = CRL_INC &gt;= real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_LAST">
+      <Tip>Value of HDR_CRL for center of last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CRL_LAST<br> Value of HDR_CRL for center of last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= CRL_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_TOT">
+      <Tip>Total number of bins in crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CRL_TOT<br> Total number of bins in crossline direction.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word for offsets.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - HDR_OFF<br> Header word for offsets.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>Value of HDR_OFF for center of first offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OFF_INIT<br> Value of HDR_OFF for center of first offset bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Increment between offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OFF_INC<br> Increment between offset bins.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_WID">
+      <Tip>Width of offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OFF_WID<br> Width of offset bins.</center></b>
+<pre> Default = OFF_INC
+ Allowed = OFF_INC &gt;= real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_LAST">
+      <Tip>Value of HDR_OFF for center of last offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OFF_LAST<br> Value of HDR_OFF for center of last offset bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= OFF_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Total number of offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OFF_TOT<br> Total number of offset bins.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gstk - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="gstk">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : GSTK     (Gatherless STacK)
+ Category   : stacks
+ Written    : 1986-10-02   by: Mike Howard
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Stack traces without requirement of sorting into stack gathers.
+ Portability: No known limitations.
+ Parallel   : NO
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ GSTK sets up a rectangular bin array based on HDR_INL, HDR_CRL and HDR_OFF,
+ with the bins occupying memory that is swapped to disk.  Input traces
+ assigned to the same bin are stacked together into a single stacked trace.
+ Stack scaling is controlled by the TVFSE parameter, which functions the same
+ as in STK.
+ 
+ 
+ 2D vs. 3D Operation
+ 
+       For 2D operation and for a 2D line from a 3D survey:
+              CRL_TOT should be set to 1, which causes GSTK to ignore the
+              crossline direction.
+ 
+       For 3D operation, compositing offsets within GSTK:
+              generally INL_TOT &gt; 1, CRL_TOT &gt; 1 and OFF_TOT = 1.
+              (set OFF_INIT to 0.0)
+ 
+       For 3D common offset operation:
+              generally INL_TOT &gt; 1, CRL_TOT &gt; 1 and OFF_TOT = 1.
+              (set OFF_INIT to the nominal offset of the job)
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Memory Allocation
+ 
+ Generally NTIM should be set large enough so that disk swapping is minimized,
+ but small enough to control cost and avoid restrictions on memory
+ availability.
+ 
+ For operation in conjunction with DMO, NTIM should be set to a minimum
+ of the number of bins in a rectangular array that might be populated by a DMO
+ broadcast operator for the largest offset within the job.  Larger values may
+ increase efficiency, but at some point limits on memory availability and
+ memory cost will establish an upper limit on NTIM.
+ 
+ 
+ Source and Receiver Locations After DMO or Stack
+ 
+ Even though GSTK calculates values for source and receiver surveyed
+ coordinate header words, source and receiver locations after DMO or stack are
+ not well defined.
+ 
+ If TVFSE paramter is greater than 0.0, the memory or disk size will be
+ doubled. For DMO stacking, TVFSE should be 0.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author    Description
+     ----        ------    -----------
+014. 2006-06-20  B. Menger   Removed Unused Variables.
+ 13. 2005-10-10  Stoeckley Added missing category STACKS.
+ 12. 2002-03-07  Chiu      Change the NTIM default from 1 to 5000.
+ 11. 2001-08-27  Chiu      Add "maxrecords" parameter to temptfile_open
+                           to increase the file size if necessary.
+ 10. 2001-06-18  Chiu      Replace all trcio calls by temptfile calls
+                           PRODUCTION.
+ 9.  2001-05-14  Chiu      Fix frontend problem in pattern_stop2
+ 8.  2001-03-21  Chiu      Add pc_get_update_state() /= PC_GUI in checking
+                           parameters.
+ 7.  2001-02-14  Chiu      Change wrapped_up to skip_wrapup.
+ 6.  2000-09-05  Chiu      Conform with stack creteria with front and end mute.
+ 5.  2000-07-20  Chiu      Use new coordinate for header 7 and 8.
+ 4.  2000-06-14  Chiu      Add Gui.
+ 3.  2000-03-21  Chiu      Remove PC_BACKEND check for pc_put_contol.
+ 2.  2000-01-27  Chiu      header word 32 of filled in traces are set to -1.
+ 1.  1999-12-07  Chiu      Convert into new CPS.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fktr" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FKTRPROCESS" title="fktr Process" rows="24" columns="80">
+    <Label keyword="COMMENT_GENERATEFKPLANETRACES" alignment="center">Generate F-K Plane Traces</Label>
+    <Label keyword="COMMENT_PRODUCEFKAMPLITUDETRACES" alignment="center">Produce F-K amplitude traces for generating F-K color plots</Label>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX =</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HZPS" alignment="left">HZPS =</Label>
+    <Field keyword="HZPS" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TR_MAX" alignment="left">TR_MAX =</Label>
+    <Field keyword="TR_MAX" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PANEL" alignment="left">HDR_PANEL =</Label>
+    <Field keyword="HDR_PANEL" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PANEL_INIT" alignment="left">PANEL_INIT =</Label>
+    <Field keyword="PANEL_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PANEL_INC" alignment="left">PANEL_INC =</Label>
+    <Field keyword="PANEL_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_GENERATEFKPLANETRACES" xPos="26" yPos="1" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_PRODUCEFKAMPLITUDETRACES" xPos="10" yPos="2" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="27" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="40" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HZPS" xPos="27" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HZPS" xPos="40" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TR_MAX" xPos="27" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_MAX" xPos="40" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_PANEL" xPos="27" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PANEL" xPos="40" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PANEL_INIT" xPos="27" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PANEL_INIT" xPos="40" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PANEL_INC" xPos="27" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PANEL_INC" xPos="40" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency to use in the F-K transform.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fktr - FREQ_MAX<br> Maximum frequency to use in the F-K transform.</center></b>
+<pre> Default = 0.5 * Nyquist
+ Allowed = real &gt; 0.0</pre></html>]]></Text>
+     </Help>
+     <Help component="HZPS">
+      <Tip>Frequency range, in Hz, for each second on output traces.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fktr - HZPS<br> Frequency range, in Hz, for each second on output traces.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0
+ Frequency range on output traces is HZPS Hz for each second.  TSTRT for output
+ traces is always 0.0 since traces start with zero frequency.</pre></html>]]></Text>
+     </Help>
+     <Help component="TR_MAX">
+      <Tip>Maximum number of traces in any input panel.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fktr - TR_MAX<br> Maximum number of traces in any input panel.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0
+ TR_MAX is used for memory and disk management and not for defining an input
+ panel.  Only the first TR_MAX traces of any input panel will be used.</pre></html>]]></Text>
+     </Help>
+     <Help component="HDR_PANEL">
+      <Tip>Header word used to define input panels.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fktr - HDR_PANEL<br> Header word used to define input panels.</center></b>
+<pre> Default = 3
+ Allowed = 1 - NWIH
+ HDR_PANEL value should be a constant within an input panel and change between
+ input panels.
+ 
+ Normally HDR_PANEL should be set to 3 for shot gathers and CMPS, etc. and set
+ to 8 for stacked and migrated sections.</pre></html>]]></Text>
+     </Help>
+     <Help component="PANEL_INIT">
+      <Tip>Value of HDR_PANEL for the first panel.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fktr - PANEL_INIT<br> Value of HDR_PANEL for the first panel.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+     <Help component="PANEL_INC">
+      <Tip>Increment of HDR_PANEL values between panels.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fktr - PANEL_INC<br> Increment of HDR_PANEL values between panels.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fktr - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fktr">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FKTR   (Generate F-K Plane Traces)
+ Category   : transforms
+ Written    : 1989-01-12   by: Bill Troutt
+ Revised    : 2001-01-04   by: Stephen Chiu
+ Maturity   : production   2001-01-15
+ Purpose    : Produce F-K amplitude traces for generating F-K color plots.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ FKTR is used to transform X-T domain traces to F-K traces for producing F-K
+ color plots.  Inputs are usually shot profiles, receiver profiles, CMP
+ gathers or segments of stacked or migrated sections.  Normally input panels
+ comprise no more than a few hundred traces each, but the number of traces in
+ an input panel could, in principle, be many thousands of traces.
+ 
+ FKTR outputs FFT_X + 1 traces for each input panel, where FFT_X is the
+ smallest possible spatial FFT size greater than TR_MAX.  (FFT size can be any
+ product of whole number powers of 2, 3 or 5.)  FFT_T (the temporal FFT size)
+ is the smallest possible FFT size greater than the input NDPT.
+ 
+ 
+ Output Globals
+ 
+ FKTR modifies the globals for the sample interval and number of samples
+ (DT and NDPT) as follows:
+ 
+       DT(out)      = 1. / (DT(in)*FFT_T*HZPS)
+ 
+       NDPT(out)    = FREQ_MAX / (1./(DT(in)*FFT_T)) + 1
+ 
+ These new values imply output_trace_length = [(NDPT(out)-1) * DT(out)].  You
+ will find the new values for sample interval and trace length listed in the
+ SETUP section of the .rpt file.  You will need them should you output the
+ results of FKTR to disk or tape for later input by CPS. Note that TSTRT is
+ always set to 0.0 on output.
+ 
+ 
+ Output Trace Headers
+ 
+ Since this process always outputs more traces than it inputs, headers for the
+ additional traces must be created.  The headers for the last input trace in a
+ panel are repeated as needed to provide the needed headers.  In addition,
+ header words 2(mute), 3(gather), 4(tr# in gather) and 64(mute) are updated.
+ Header word 6 is set to the "wavenumber" (range -FFT_X/2 to +FFT_X/2) for
+ each output trace.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+ CPS dip convention is that positive dips correspond to positive K
+ (wavenumbers).  An event with positive dip increases in time with increasing
+ trace number.  The sketches illustrate positive dip.
+ 
+         INPUT                     OUTPUT
+         -----                     ------
+       trace number ----->        "trace" number ----->
+                                         -Kn  -  - 0  +  +  +Kn
+       t    \                    "  Fo             \
+       i     \                   t   .              \
+       m      \                  i   .               \
+       e       \ (+)             m   .                \
+                \                e   .                 \
+       |         \               "  Fmax                \
+       |          \              |
+       V           \             V
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 
+ 13. 2001-01-15 Chiu       Fix problem in FK spectrum.
+ 12. 2000-12-08 Stoeckley  Change wrapup flag.
+ 11. 2000-07-14 Coleman    Converted to new system.
+ 10. 1998-12-18 Vunderink  Begin using the f90 compiler.
+ 9.  1997-03-19 Vunderink  Increased memory used by X2KCC and T2FRC
+                           primitives
+ 8.  1993-10-08 Troutt     Set HW6 to the "wavenumber" (-N-2 to N-2) on
+                           output.  Add to Note 3.
+ 7.  1992-03-20 Troutt     Set HW64 to NDPT.
+ 6.  1991-03-26 Troutt     Make sure that TSTRT global is 0.0 on output.
+ 5.  1989-12-13 Troutt     Fix formatted write of FMAX for DCODE.
+ 4.  1989-09-21 Troutt     Changed logic to use storage for working trace
+                           (and header) arrays instead of using  2ndary
+                           arrays in the FKTR call.  The 2ndary arrays
+                           were renamed to HDR2 and TR2 and are used to
+                           output 1 trace at a time via an internal call
+                           to GATHR.  All of the main logic for the old
+                           2ndary arrays (HDR1, TR1) remains intact,
+                           except that they now reside in storage via
+                           pointers.
+ 3.  1989-07-12 Troutt     Reversed order of output "traces" to match dip
+                           convention in other CPS programs (negative
+                           wave numbers come out 1st).
+ 2.  1989-03-08 Troutt     Fixed call to REPP to reference HZPS instead
+                           of NTRT.
+ 1.  1989-01-12 Troutt     Original version (no transpose to disk).
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

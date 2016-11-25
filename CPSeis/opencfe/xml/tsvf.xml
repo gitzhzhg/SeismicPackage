@@ -1,0 +1,715 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="tsvf" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TSVFPROCESS" title="TSVF Process" rows="24" columns="80">
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_F1FREQ_LOW_NONE" alignment="center">F1 = FREQ_LOW_NONE</Label>
+    <Label keyword="LABEL_LEN_OP" alignment="left">LEN_OP=</Label>
+    <Field keyword="LEN_OP" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SEC" alignment="center">sec</Label>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_F2FREQ_LOW_FULL" alignment="center">F2 = FREQ_LOW_FULL</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_F3FREQ_HIGH_FULL" alignment="center">F3 = FREQ_HIGH_FULL</Label>
+    <Label keyword="COMMENT_F4FREQ_HIGH_NONE" alignment="center">F4 = FREQ_HIGH_NONE</Label>
+    <ArraySet keyword="COOR_X_ARRAYSET" label="COOR_X  COOR_Y  TIME  FILTER_TYPE F1   F2   F3   F4   PHASE">
+     <Array keyword="COOR_X" type="float" maxLength="8  " columnName="COOR_X" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="COOR_Y" type="float" maxLength="8  " columnName="COOR_Y" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="TIME" type="float" maxLength="6  " columnName="TIME" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="FILTER_TYPE" type="string" maxLength="12 " columnName="FILTER_TYPE" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="FREQ_LOW_NONE" type="float" maxLength="5  " columnName="F1" editable="yes" sensitive="yes" columnSize="5"/>
+     <Array keyword="FREQ_LOW_FULL" type="float" maxLength="5  " columnName="F2" editable="yes" sensitive="yes" columnSize="5"/>
+     <Array keyword="FREQ_HIGH_FULL" type="float" maxLength="5  " columnName="F3" editable="yes" sensitive="yes" columnSize="5"/>
+     <Array keyword="FREQ_HIGH_NONE" type="float" maxLength="5  " columnName="F4" editable="yes" sensitive="yes" columnSize="5"/>
+     <Array keyword="PHASE" type="float" maxLength="5  " columnName="PHASE" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_MODE" xPos="5" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="10" yPos="0" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_X" xPos="27" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_F1FREQ_LOW_NONE" xPos="42" yPos="0" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_LEN_OP" xPos="5" yPos="1" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OP" xPos="12" yPos="1" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SEC" xPos="20" yPos="1" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="27" yPos="1" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="33" yPos="1" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_F2FREQ_LOW_FULL" xPos="42" yPos="1" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="27" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="36" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_F3FREQ_HIGH_FULL" xPos="42" yPos="2" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_F4FREQ_HIGH_NONE" xPos="42" yPos="3" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COOR_X_ARRAYSET" xPos="5" yPos="5" xSize="62" ySize="18" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Mode describing spatial variation of the filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - MODE<br> Mode describing spatial variation of the filter.</center></b>
+<pre> Default = TIME_ONLY
+ Allowed = TIME_ONLY (Filter may vary in time only.)
+ Allowed = MUTE      (Specified times are relative to the mute time.)
+ Allowed = GRID      (Times and frequencies are specified on a 3D grid.)
+ 
+ If MODE = TIME_ONLY, the filter may vary in time only.  There is only one
+ set of frequencies and times.
+ 
+ If MODE = MUTE, same as TIME_ONLY but specified times are relative to the
+ mute time, so that mute time acts as "zero."
+ 
+ If MODE = GRID, times and frequencies are specified on a 3D grid.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word for arbitrary X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - HDR_X<br> Header word for arbitrary X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ 
+ Header word for arbitrary X coordinate to use in specifying spatially varying
+ filters.
+ 
+ Active only if MODE_SPACE = GRID.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OP">
+      <Tip>Length of convolutional operators in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - LEN_OP<br> Length of convolutional operators in seconds.</center></b>
+<pre> Default = 0.4
+ Allowed = real &gt; 0.0
+ 
+ High frequencies and wide tapers are associated with short operators while
+ low frequencies and narrow tapers require longer operators.   A LEN_OP value
+ of 0.4 sec is barely adequate for a 10 Hz center-taper frequency with 4 Hz
+ taper width.  Lower center-taper frequencies and/or narrower taper widths will
+ require longer operators.  Specifying a LEN_OP value that is too small
+ truncates the operator causing undesirable overshoot and ripple in the
+ frequency domain.
+ 
+ This operator length is used for all filters.
+ Larger values of LEN_OP will increase run time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word for arbitrary Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - HDR_Y<br> Header word for arbitrary Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH
+ 
+ Header word for arbitrary Y coordinate to use in specifying spatially varying
+ filters.
+ 
+ Active only if MODE_SPACE = GRID.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are filtered.  Otherwise, only traces with
+ a flag set in header word HDR_FLAG are filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COOR_X">
+      <Tip>Array of HDR_X coordinates for spatially varying filters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - COOR_X<br> Array of HDR_X coordinates for spatially varying filters.</center></b>
+<pre> Default = 0.0
+ Allowed = real (array)
+ 
+ This parameter is specified separately for each filter time and location.
+ 
+ The X and Y coordinates must lie on lines of constant Y coordinate, but
+ the number or values of the X coordinates need not be the same for each Y
+ coordinate.
+ 
+ The X coordinates must be specified in ascending order.
+ The Y coordinates must be specified in ascending order.
+ 
+ The X and Y coordinates must be specified in such a way that all X
+ coordinates for a given Y coordinate are grouped together.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COOR_Y">
+      <Tip>Array of HDR_Y coordinates for spatially varying filters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - COOR_Y<br> Array of HDR_Y coordinates for spatially varying filters.</center></b>
+<pre> Default = 0.0
+ Allowed = real (array)
+ 
+ This parameter is specified separately for each filter time and location.
+ 
+ The X and Y coordinates must lie on lines of constant Y coordinate, but
+ the number or values of the X coordinates need not be the same for each Y
+ coordinate.
+ 
+ The X coordinates must be specified in ascending order.
+ The Y coordinates must be specified in ascending order.
+ 
+ The X and Y coordinates must be specified in such a way that all X
+ coordinates for a given Y coordinate are grouped together.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME">
+      <Tip>Control point time, in seconds, associated with each filter band.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - TIME<br> Control point time, in seconds, associated with each filter band.</center></b>
+<pre> Default = 0.0
+ Allowed = real (array)
+ 
+ Increasing control point times, in seconds, where each time is the time where
+ the associated filter band is applied exactly as specified.  Adjacent filter
+ bands grade in the time interval between their associated times.
+ 
+ This parameter is specified separately for each filter time and location.
+ 
+ At least one control time must be specified for each (X,Y) location, but
+ the number of control times can vary from one location to another.
+ 
+ All control times for a given (X,Y) location must be specified in ascending
+ order before specifying the control times for the next (X,Y) location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILTER_TYPE">
+      <Tip>Type of filter to use (BANDPASS, HIGHPASS, LOWPASS or ALLPASS).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - FILTER_TYPE<br> Type of filter to use (BANDPASS, HIGHPASS, LOWPASS or ALLPASS).</center></b>
+<pre> Default = BANDPASS
+ Allowed = BANDPASS, HIGHPASS, LOWPASS or ALLPASS (array)
+ 
+ If FILTER_TYPE = BANDPASS, the user must specify FREQ_LOW_NONE, FREQ_LOW_FULL
+ FREQ_HIGH_FULL and FREQ_HIGH_NONE.
+ 
+ If FILTER_TYPE = HIGHPASS, the user must specify FREQ_LOW_NONE, FREQ_LOW_FULL.
+ FREQ_HIGH_FULL and FREQ_HIGH_NONE are set to Nyquist by TSVF.
+ 
+ If FILTER_TYPE = LOWPASS, FREQ_LOW_NONE, FREQ_LOW_FULL are set to 0.0 by TSVF.
+ FREQ_HIGH_FULL and FREQ_HIGH_NONE must be set by the user.
+ 
+ If FILTER_TYPE = ALLPASS, TSVF sets FREQ_LOW_NONE, FREQ_LOW_FULL to 0.0 and
+ FREQ_HIGH_FULL and FREQ_HIGH_NONE to Nyquist.  (The ALLPASS filter allows a
+ phase rotation without altering the amplitude spectrum.)
+ 
+ This parameter is specified separately for each filter time and location.
+ 
+ This filter type can be specified by simply typing the first letter of
+ the type (B, H, L, or A) in either upper or lower case.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Low frequency limit where amp spectrum diminishes to zero, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - FREQ_LOW_NONE<br> Low frequency limit where amp spectrum diminishes to zero, in Hz.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 =&lt; FREQ_LOW_NONE =&lt; FREQ_LOW_FULL (array)
+ 
+ This parameter is specified separately for each filter time and location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_FULL">
+      <Tip>Low frequency point where amp spectrum is full pass, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - FREQ_LOW_FULL<br> Low frequency point where amp spectrum is full pass, in Hz.</center></b>
+<pre> Default = 0.0
+ Allowed = FREQ_LOW_NONE =&lt; FREQ_LOW_FULL =&lt; FREQ_HIGH_FULL  (array)
+ 
+ This parameter is specified separately for each filter time and location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>High frequency point where amp spectrum is full pass, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - FREQ_HIGH_FULL<br> High frequency point where amp spectrum is full pass, in Hz.</center></b>
+<pre> Default = Nyquist
+ Allowed = FREQ_LOW_FULL =&lt; FREQ_HIGH_FULL =&lt; FREQ_HIGH_NONE (array)
+ 
+ This parameter is specified separately for each filter time and location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_NONE">
+      <Tip>High frequency limit where amp spectrum diminishes to zero, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - FREQ_HIGH_NONE<br> High frequency limit where amp spectrum diminishes to zero, in Hz.</center></b>
+<pre> Default = Nyquist
+ Allowed = FREQ_HIGH_FULL =&lt; FREQ_HIGH_NONE =&lt; Nyquist (array)
+ 
+ This parameter is specified separately for each filter time and location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHASE">
+      <Tip>Phase, in degrees, associated with each filter band.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - PHASE<br> Phase, in degrees, associated with each filter band.</center></b>
+<pre> Default = 0.0
+ Allowed = real (array)
+ 
+ This parameter is specified separately for each filter time and location.
+ 
+ This parameter can range between -180 and +180, or between 0 and 360,
+ as desired.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsvf - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="tsvf">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TSVF      (Time and Space Varying Filter)
+ Category   : filters
+ Written    : 1986-07-17   by: Bob Baumel
+ Revised    : 2006-09-11   by: B. Menger
+ Maturity   : production
+ Purpose    : Perform time and space varying frequency filtering.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            GENERAL DESCRIPTION
+ 
+ 
+ TSVF is a time and space varying frequency filter process operating in the
+ time domain.  Depth data may also be filtered, but you must use appropriate
+ spatial (in the depth (z) direction) frequencies to obtain good results.
+ A typical 4mil (sample rate) time section has maximum(nyquist) frequency of
+ 125 hz, but a typical 30foot (sample rate) depth section has a maximum freq-
+ uency of only 16.67 cycles per kilofoot.  Therefore, a full bandpass for
+ depth is 0-16.67Hz, but 0-125Hz for time.
+ 
+ Individual filter bands with linear tapers are specified by the
+ parameters: FREQ_LOW_NONE, FREQ_LOW_FULL, FREQ_HIGH_FULL, FREQ_HIGH_NONE,
+ PHASE, FILTER_TYPE and TIME.  Allowed values for FILTER_TYPE are BANDPASS,
+ HIGHPASS, LOWPASS and ALLPASS.  (The ALLPASS filter allows a phase rotation
+ without altering the amplitude spectrum.)
+ 
+ Each filter band is applied to the trace exactly as specified at the time
+ associated with that band.  The first filter band is applied from the top of
+ the trace to the time specified for that band.  The last filter band is
+ applied from the time specified for that band to the bottom of the trace.
+ For adjacent bands the filter applied to the trace grades linearly between
+ the two bands in the interval between the times associated with those
+ adjacent bands.
+ 
+ 
+                         Allowed Frequency Values
+ Any frequencies from 0.0 to the Nyquist frequency is allowed.  Nyquist can
+ be computed by the following: Nyq = 0.5/(sample rate)
+ 
+                            Spatial Variation
+ 
+ In the TIME_ONLY mode, the filter can vary in time only.  There is only one
+ set of frequencies and times.
+ 
+ In the MUTE mode, the specified times are relative to the head mute time, so
+ that the head mute time acts as "zero."  Otherwise this mode is the same as
+ the TIME_ONLY mode.
+ 
+ In the GRID mode, times and filter bands are specified on a 3D grid.  In this
+ mode filter bands specified at different grid intersections can be entirely
+ independent, that is, there is no restriction that the same frequencies or
+ number of bands be used.
+ 
+ 
+                             Detailed Operation
+ 
+ TIME_ONLY mode:
+ 
+    (Steps 1 - 4 happen at Setup time.)
+ 
+    1.  Calculate a filter band for EACH SAMPLE of the trace by linear
+    interpolation between the times associated with each specified filter
+    band and round the interpolated frequencies to whole numbers.  (Before the
+    time for the first specified band and after the time for the last
+    specified band the bands are extrapolated as constants.)
+ 
+    2.  Find the total range of frequencies represented in the specified
+    filter bands.  These frequencies (whole numbers only) are the allowed
+    frequencies for the filter bands that will actually be applied to the
+    traces.
+ 
+    3.  Determine all the possible distinct lowpass filter bands using the
+    allowed frequencies.  Calculate the time domain operators for these
+    lowpass filter bands and store them in an array that is indexed by their
+    defining frequencies so they can be easily recovered.
+ 
+    4.  When processing traces, for each set of samples with the same
+    interpolated filter band, retrieve the lowpass operators with the
+    appropriate frequencies and combine them to form the desired lowpass,
+    highpass or bandpass operator.  Apply the operator as a convolutional
+    operator to filter the trace.  (Because the frequencies change by only
+    1.0 Hz at a time, no overlap between adjacent bands in time is needed.)
+ 
+    (Details of the algorithm used to form highpass or bandpass operators from
+    lowpass operators are shown in the Algorithm Description section.)
+ 
+ 
+ MUTE mode:
+ 
+    Operation in the MUTE mode is identical to operation in the TIME_ONLY mode
+    except that times associated with user specified filter bands are
+    interpreted as relative to the head mute time.  (That is, the head mute
+    time acts as "zero" time.)
+ 
+ 
+ GRID mode:
+ 
+    At Setup time, operation in GRID mode is similar to operation in TIME_ONLY
+    mode with the following differences.
+ 
+      1. Interpolation of filter bands to every sample is performed at all
+         the 3D grid intersections specified.
+ 
+      2. The range of allowed frequencies is based on the entire range of
+         frequencies specified at all the 3D grid intersections.
+ 
+    When processing traces, linear interpolation is performed first in the
+    X direction and then in the Y direction to determine the filter band
+    values for each trace sample.  Then the trace is filtered in the same
+    fashion as in TIME_ONLY mode.
+ 
+ 
+                              Mute Header Words
+ 
+ Although filter tails are added to traces by TSVF, the values of the mute
+ header words are not changed by the process.  The specified filter always
+ begins at the top of the trace and ends at the bottom of the trace regardless
+ of the mute header word values.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Filter Band Times
+ 
+ Because TSVF does not use the overlap and taper method to achieve time
+ variation, the user specified times associated with filter bands are
+ "control point" times and not transition times.  Each filter band is applied
+ to the trace exactly as specified at the time associated with that band.
+ 
+ 
+ Width of Tapers
+ 
+ It is necessary to use non-zero taper widths when specifying filter bands in
+ order to limit the amplitude of ripple on the operator.  Using wide tapers
+ produces a compact, center weighted operator, but this also reduces frequency
+ selectivity.  A taper width that is 40% of the center-taper frequency gives
+ good control over operator ripple, but 20% allows significant ripple after
+ the first sidelobe.
+ 
+ 
+ Operator Length
+ 
+ High frequencies and wide tapers are associated with short operators while
+ low frequencies and narrow tapers require longer operators.   A LEN_OP value
+ of 0.4 sec is barely adequate for a 10 Hz center-taper frequency with 4 Hz
+ taper width.  Lower center-taper frequencies and/or narrower taper widths will
+ require longer operators.  Specifying a LEN_OP value that is too small
+ truncates the operator causing undesirable overshoot and ripple in the
+ frequency domain.
+ 
+ For low frequencies it may be desirable to use a frequency domain filter,
+ such as GENFILT, rather than making LEN_OP very long.
+ 
+-------------------------------------------------------------------------------
+                INTERPOLATION AMONG THE X AND Y COORDINATES
+ 
+ Using the GRID mode, this process interpolates among control points
+ distributed on a 2D plane.  The algorithm is bilinear interpolation, first
+ in the X direction along lines of constant Y coordinate, and then in the
+ Y direction between the two bracketing Y lines.
+ 
+ There must be one or more lines of constant Y coordinate.  The spacing
+ between these lines can be variable.  Each line must contain one or more
+ control points.  The spacing between the control points can be variable
+ along the line.  The number and distribution of control points can vary
+ from one line to another.  No two control points can occupy the same
+ location.
+ 
+ To get an interpolated point at location (XCOORD,YCOORD), this algorithm
+ first finds the two lines bracketing YCOORD.  Then, on each line, the
+ algorithm finds the two control points bracketing XCOORD.  Finally, the
+ algorithm calculates the weights to use for the four control points to
+ determine an interpolated value.
+ 
+ Example of a valid distribution of control points on a plane, showing the
+ interpolation procedure:
+ 
+ The control points are marked with the # character.
+ The interpolated point is marked with the $ character.
+ 
+      line YCOORD1 --&gt;   - - - # - - - - # - - - - - - - - # - # - - -
+ 
+ 
+      line YCOORD2 --&gt;   - - # - # - - # - - #-----# - - - - - - - - -
+                                               |
+                                               |
+                                               $
+                                               |
+      line YCOORD3 --&gt;   - - - - #-------------------# - - - - - # - -
+ 
+      line YCOORD4 --&gt;   - - - - - - - - # - - - - - - - # - - - - - -
+ 
+ 
+                                     XCOORD ------&gt;
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 45. 2006-09-11  B. Menger  Added delta-frequency &lt; 1.0 for depth domain.
+044. 2006-01-10  B. Menger  Removed Unused Variables.
+ 43. 2005-03-22  Ried       Made sure # of points in filter was odd
+ 42. 2003-06-17  Stoeckley  Simplify code by using new linked array feature
+                             in PC_REGISTER_ARRAY_NAMES.
+ 41. 2002-05-06  Vunderink  Added parallel control parameters
+ 40. 2001-02-26  Stoeckley  Fix inadvertent switching of columns F3 and F4.
+ 39. 2001-02-12  Stoeckley  Fix call to pc_put_options_field which was causing
+                             the GUI to be inoperative.
+ 38. 2001-01-31  Stoeckley  Fixed bug which had inactivated the GUI MODE box.
+ 37. 2000-12-14  Stoeckley  Re-implemented from scratch with new algorithm.
+ 36. 2000-08-25  O'Brien    Fixed bug in tsvf_rsamp_tran_pts(), where
+                             transition times of the lowest XY grid
+                             coordinate were used everywhere, preventing
+                             spacially varying transition zones when
+                             MODE_SPACE==GRID and MODE_TIME==TRANSITIONS.
+ 35. 2000-08-10  O'Brien    Documentation update to accomodate changes to
+                             header word naming convention... variable names
+                             made to be consistent with new convention.
+                             Missing grid values now interpolated/replicated
+                             along the X axis.
+                            Fix bug when retrieving filters for
+                             MODE_SPACE=='GRID'.
+                            Added filter parameter GUI sensitivity settings.
+                            Added messages to assist users wanting
+                             time-invariant filters.
+                            Adjusted traps to accomodate non-essential filter
+                             parameters.
+ 34. 2000-06-16  O'Brien    Fix FRONTEND_UPDATE traps for filter parameters.
+                            Improve accounting for NSTORE, NSCRATCH values.
+ 33. 2000-05-24  O'Brien    Implement EzGUI Layout.
+                             Adjust link list handling.
+ 32. 2000-03-16  O'Brien    Force LEN_OP to be an integer number of samples
+                             long (cosmetics for front end).
+ 31. 2000-03-01  O'Brien    Straightened out inquire() logic in wrapup that
+                             was causing 'Unconnected unit' error.
+                             Brought documentation closer to a current state
+ 30. 2000-02-21  O'Brien    TROT_QC impelemented.
+                             Add inline interpolation/replication of filter
+                             parameters to missing grid nodes.
+ 29. 2000-02-11  O'Brien    Revised array traps.
+ 28. 2000-02-08  O'Brien    Put in some GUI sensitivity flags for testing
+ 27. 2000-02-03  O'Brien    Implemented MODE_SPACE='GRID' options.
+                             Changed array association tests to adapt to
+                             new behavior in pc_module.
+                             PATHNAME_QC implemented.
+ 26. 2000-01-14  O'Brien    Remove debugging routine fltr_filtrgs.
+                             Reinstate use fltr_module.
+ 25. 2000-01-13  O'Brien    Revised traps, added GUI pull-down lists.
+ 24. 1999-12-29  O'Brien    Force array sizes .ge. 0 in tsvf_trap.
+ 23. 1999-12-21  O'Brien    Made tsvf_update and tsvf_initialize public
+ 22. 1999-12-17  O'Brien    Full f90 conversion.
+ 21. 1998-11-10  Vunderink  Begin using the f90 compiler.
+ 20. 1998-05-18  Vunderink  Added OPT=6.
+ 19. 1997-11-19  Vunderink  Fixed NCODE to output names for F1, F2, and
+                             TZL parameters in OPT=4 and 5 which are unique
+                             from parameters for OPT= 1, 2, and 3.
+ 18. 1997-11-17  Vunderink  Fixed bug in saving filters for reuse in
+                             OPT=4 and 5.
+ 17. 1997-07-17  Vunderink  Changed assign command for temporary files.
+ 16. 1997-07-16  Vunderink  Added OPT=4 and 5.
+ 15. 1997-02-25  Goodger    Fix ncode to output unique names on TTIM,TZL
+                             parameters for ATB. Calculate nparm.
+ 14. 1996-07-02  Goodger    Put variable IT2 in a SAVE statement.
+ 13. 1989-07-19  Troutt     Swapped locations of input trace and filter
+                             output in SCRATCH to avoid addressing problems
+                             in FILTGS.  Also cleared NTZ in setup before
+                             main DCODE, fixed problem in History File
+                             with multiple TSVF's-job.
+ 12. 1989-07-10  Troutt     Put END-OF-TRACE time in TTIM(nfilt) for
+                             history file.
+ 11. 1989-06-21  Troutt     Added parameter HF# for flagged traces.
+ 10. 1989-06-01  Troutt     Renamed program from TVF to TSVF
+                             (Began w- USER10:[CPS.FILTERS]TVF.CFT;15).
+                             Deleted code which accomodated old-old jobs
+                             (prior to linked arrays), including #FILT
+                             and IPRT parameters.
+                             Allowed user to spatially vary the times
+                             for filter application as in CONSEIS TVF:
+                             added parameters OPT, HB#, HL#, BAS, &amp; LIN;
+                             replaced TLAST array w- TTIM array, and
+                             OVLP parameter w- TZL array.
+ 9.  1988-09-23  Howard     NWIH and NWPT conversion.
+ 8.  1988-08-17  Baumel     Match change in TVFBPS primitive.
+ 7.  1988-07-28  Baumel     Use new DCODE-NCODE tables.
+ 6.  1988-06-02  Baumel     TVF leaves mute header word alone.
+ 5.  1988-04-23  Baumel     Add CPSPRT calls.
+ 4.  1987-04-14  Wang       Fixed bug involving zero in mute header word.
+ 3.  1987-04-09  Hanson     Added NCODE for history records.
+ 2.  1987-01-16  Baumel     Added IPRT (print switch).
+ 1.  1986-07-17  Baumel     Original Version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

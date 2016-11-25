@@ -1,0 +1,2562 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ktmig" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCREEN1" title="IMAGE_DEFINITON..." rows="36" columns="80">
+    <Border keyword="BORDER1" title=" General Parameters"/>
+    <Label keyword="LABEL_ALL_OUT" alignment="left">ALL_OUT     =</Label>
+    <Field keyword="ALL_OUT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ONE_IMAGE" alignment="left">ONE_IMAGE =</Label>
+    <Field keyword="ONE_IMAGE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SUM_REDUCE" alignment="left">OPT_SUM_REDUCE=</Label>
+    <Field keyword="OPT_SUM_REDUCE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_GROUP" alignment="left">OPT_GROUP  =</Label>
+    <Field keyword="OPT_GROUP" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_GROUP" alignment="left">HDR_GROUP  =</Label>
+    <Field keyword="HDR_GROUP" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUTPUT" alignment="left">OPT_OUTPUT  =</Label>
+    <Field keyword="OPT_OUTPUT" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIMENSION" alignment="left">DIMENSION =</Label>
+    <Field keyword="DIMENSION" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DT_INTERP" alignment="left">DT_INTERP =</Label>
+    <Field keyword="DT_INTERP" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REMOVE_IMAGE" alignment="left">REMOVE_IMAGE=</Label>
+    <Field keyword="REMOVE_IMAGE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DIR" alignment="left">OPT_DIR   =</Label>
+    <Field keyword="OPT_DIR" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AZIMUTH" alignment="left">AZIMUTH   =</Label>
+    <Field keyword="AZIMUTH" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ROOT_IMAGE" alignment="left">ROOT_IMAGE  =</Label>
+    <Field keyword="ROOT_IMAGE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_STACK" alignment="left">OPT_STACK   =</Label>
+    <Field keyword="OPT_STACK" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_TROT" alignment="left">OPT_TROT=</Label>
+    <Field keyword="OPT_TROT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TROT" alignment="left">NUM_TROT=</Label>
+    <Field keyword="NUM_TROT" type="int" maxLength="13" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_ROOT_TROT">Select ROOT_TROT</Button>
+    <Label keyword="EQLAB_ROOT_TROT" alignment="left">=</Label>
+    <Field keyword="ROOT_TROT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2" title=" Default Image Coordinates"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SORT_ORDER" alignment="left">SORT_ORDER =</Label>
+    <Field keyword="SORT_ORDER" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT=</Label>
+    <Field keyword="X_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT=</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INIT" alignment="left">TIM_INIT=</Label>
+    <Field keyword="TIM_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC =</Label>
+    <Field keyword="X_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INC" alignment="left">TIM_INC =</Label>
+    <Field keyword="TIM_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC =</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST=</Label>
+    <Field keyword="X_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST=</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_LAST" alignment="left">TIM_LAST=</Label>
+    <Field keyword="TIM_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_LAST" alignment="left">OFF_LAST=</Label>
+    <Field keyword="OFF_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT =</Label>
+    <Field keyword="X_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT =</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_TOT" alignment="left">TIM_TOT =</Label>
+    <Field keyword="TIM_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT =</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_STEP" alignment="left">OPT_STEP=</Label>
+    <Field keyword="OPT_STEP" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUT_INT" alignment="left">OPT_OUT_INT=</Label>
+    <Field keyword="OPT_OUT_INT" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_OUT_INT" alignment="left">LEN_OUT_INT=</Label>
+    <Field keyword="LEN_OUT_INT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="STEP_TIM_ARRAYSET" label="STEP_TIM       STEP_TIM_INC">
+     <Array keyword="STEP_TIM" type="float" maxLength="15 " columnName="STEP_TIM" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="STEP_TIM_INC" type="float" maxLength="16 " columnName="STEP_TIM_INC" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <Border keyword="BORDER3" title=" Sparse Parameters"/>
+    <Label keyword="LABEL_OPT_SPARSE" alignment="left">OPT_SPARSE=</Label>
+    <Field keyword="OPT_SPARSE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="SP_X_INIT_ARRAYSET" label="SP_X_INIT  SP_X_INC   SP_X_LAST  SP_X_TOT">
+     <Array keyword="SP_X_INIT" type="float" maxLength="11 " columnName="SP_X_INIT" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SP_X_INC" type="float" maxLength="11 " columnName="SP_X_INC" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SP_X_LAST" type="float" maxLength="11 " columnName="SP_X_LAST" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SP_X_TOT" type="int" maxLength="11 " columnName="SP_X_TOT" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <ArraySet keyword="SP_Y_INIT_ARRAYSET" label="SP_Y_INIT  SP_Y_INC   SP_Y_LAST  SP_Y_TOT">
+     <Array keyword="SP_Y_INIT" type="float" maxLength="11 " columnName="SP_Y_INIT" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SP_Y_INC" type="float" maxLength="11 " columnName="SP_Y_INC" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SP_Y_LAST" type="float" maxLength="11 " columnName="SP_Y_LAST" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SP_Y_TOT" type="int" maxLength="11 " columnName="SP_Y_TOT" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="BORDER1" xPos="1" yPos="0" xSize="78" ySize="9"/>
+     <Constraints component="LABEL_ALL_OUT" xPos="2" yPos="1" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ALL_OUT" xPos="15" yPos="1" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ONE_IMAGE" xPos="26" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ONE_IMAGE" xPos="37" yPos="1" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SUM_REDUCE" xPos="49" yPos="1" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SUM_REDUCE" xPos="64" yPos="1" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_GROUP" xPos="2" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_GROUP" xPos="14" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_GROUP" xPos="26" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_GROUP" xPos="38" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_OUTPUT" xPos="2" yPos="3" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUTPUT" xPos="15" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DIMENSION" xPos="26" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIMENSION" xPos="37" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DT_INTERP" xPos="49" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DT_INTERP" xPos="60" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REMOVE_IMAGE" xPos="2" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REMOVE_IMAGE" xPos="15" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DIR" xPos="26" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DIR" xPos="37" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_AZIMUTH" xPos="49" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AZIMUTH" xPos="60" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ROOT_IMAGE" xPos="2" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ROOT_IMAGE" xPos="15" yPos="5" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_STACK" xPos="2" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_STACK" xPos="15" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_TROT" xPos="26" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TROT" xPos="35" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_TROT" xPos="44" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TROT" xPos="53" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_ROOT_TROT" xPos="2" yPos="7" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_ROOT_TROT" xPos="19" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ROOT_TROT" xPos="20" yPos="7" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="10" xSize="78" ySize="13"/>
+     <Constraints component="LABEL_HDR_X" xPos="2" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="9" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="20" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="27" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SORT_ORDER" xPos="38" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SORT_ORDER" xPos="50" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_X_INIT" xPos="2" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="9" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="20" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="27" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INIT" xPos="38" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INIT" xPos="47" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="59" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="68" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="2" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="9" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="20" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="27" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INC" xPos="38" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INC" xPos="47" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="59" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="68" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="2" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="9" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="20" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="27" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_LAST" xPos="38" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_LAST" xPos="47" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_LAST" xPos="59" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_LAST" xPos="68" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="2" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="9" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="20" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="27" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_TOT" xPos="38" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_TOT" xPos="47" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="59" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="68" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_STEP" xPos="2" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_STEP" xPos="11" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OUT_INT" xPos="21" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUT_INT" xPos="33" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_OUT_INT" xPos="44" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OUT_INT" xPos="56" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STEP_TIM_ARRAYSET" xPos="2" yPos="18" xSize="34" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="BORDER3" xPos="1" yPos="24" xSize="78" ySize="12"/>
+     <Constraints component="LABEL_OPT_SPARSE" xPos="2" yPos="25" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SPARSE" xPos="13" yPos="25" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SP_X_INIT_ARRAYSET" xPos="2" yPos="27" xSize="47" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="SP_Y_INIT_ARRAYSET" xPos="2" yPos="31" xSize="47" ySize="4" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="ALL_OUT">
+      <Tip>Output all specified image traces?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ALL_OUT<br> Output all specified image traces?</center></b>
+<pre> Default = YES
+ Allowed = YES  (Output all specified image traces.)
+ Allowed = NO   (Output only image traces corresponding to input traces.)
+ If ALL_OUT=YES, the output will be all the image traces specified by the
+ output grid parameters including those that do not correspond to input
+ traces.
+ 
+ Output of image traces may be further restricted if the SPARSE option is
+ turned on.
+ 
+ ALL_OUT should be set to YES when generating broadcast patterns.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ONE_IMAGE">
+      <Tip>Should KTMIG produce a single image regardless of input offset?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ONE_IMAGE<br> Should KTMIG produce a single image regardless of input offset?</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES
+ If ONE_IMAGE = YES, then a single image is produced regardless of input
+ offsets.  Header word 6 for output traces is set to the center value of the
+ offset bin associated with the offset of the first input trace.  The imaging
+ aperture is determined by this same offset bin.
+ 
+ If ONE_IMAGE = NO, then a separate image is created for each offset bin
+ occupied by an input trace.  In this case a new image is created each time an
+ input trace occupies a different offset bin.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SUM_REDUCE">
+      <Tip>Type of sum reduce at output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_SUM_REDUCE<br> Type of sum reduce at output.</center></b>
+<pre> Default = GLOBAL
+ Allowed = LOCAL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_GROUP">
+      <Tip>Define image groups by header word HDR_GROUP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_GROUP<br> Define image groups by header word HDR_GROUP.</center></b>
+<pre> Default = NO
+ Allowed = NO  KMIG will not define groups by header word HDR_GROUP.
+ Allowed = YES KMIG will     define groups by header word HDR_GROUP.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_GROUP">
+      <Tip>Header word to define groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - HDR_GROUP<br> Header word to define groups.</center></b>
+<pre> Default = 55
+ Allowed = 1-64 KMIG will define groups by header word HDR_GROUP.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUTPUT">
+      <Tip>Choice of output type desired.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_OUTPUT<br> Choice of output type desired.</center></b>
+<pre> Default = IMAGE
+ Allowed = IMAGE  (Production output of the normal migration image.)
+ Allowed = VEL    (Diagnostic output of the migration velocity field.)
+ Allowed = TIME   (Diagnostic output of the two-way travel time.)
+ Allowed = AA     (Diagnostic output of the anti-aliasing coefficients.)
+ Allowed = AMPL   (Diagnostic output of the migration amplitude.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIMENSION">
+      <Tip>Whether to use a 3D, 2D or multiple 2D algorithm.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIMENSION<br> Whether to use a 3D, 2D or multiple 2D algorithm.</center></b>
+<pre> Default = 3D
+ Allowed = 2D
+ Allowed = MULT_2D
+ Allowed = 3D
+ If DIMENSION = 3D, then a 3D algorithm is used and both "X" parameters and
+ "Y" parameters are active.  The migration velocity file must be 3D.
+ 
+ If DIMENSION = 2D, then a 2D algorithm is used, all "X" parameters pertain to
+ the inline direction, all "Y" parameters are ignored and the aperture has
+ extent in the inline direction only.  Only one 2D line can be migrated in
+ each job.  The migration velocity file may be 2D or 3D.
+ 
+ If DIMENSION = MULT_2D, then a 2D algorithm is used, all "X" parameters
+ pertain to the inline direction and the aperture has extent in the inline
+ direction only.  HOWEVER the "Y" parameters must be set appropriately for
+ the HDR_Y values in the separate 2D lines.  Several 2D lines can be migrated
+ in one job.  The migration velocity file must be 3D.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DT_INTERP">
+      <Tip>Interpolate input to DT_INTERP sample interval before imaging.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DT_INTERP<br> Interpolate input to DT_INTERP sample interval before imaging.</center></b>
+<pre> Default = 0.001
+ Allowed = DT &gt;= real &gt; 0.0
+ Interpolate input traces to DT_INTERP sample interval, in seconds, before
+ imaging.  DT_INTERP must divide input DT evenly.
+ 
+ Input trace samples are interpolated (if necessary) to a sample interval of
+ DT_INTERP seconds prior to imaging to insure adequate temporal resolution
+ of the output image.  Normally 0.001 or 0.002 seconds is adequate.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REMOVE_IMAGE">
+      <Tip>Remove the image files when the job is completed.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - REMOVE_IMAGE<br> Remove the image files when the job is completed.</center></b>
+<pre> Default = YES
+ Allowed = YES (KTMIG will remove the image files at the end of the job.)
+ Allowed = NO  (KTMIG will not remove the image files at the end of the job.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DIR">
+      <Tip>Perform forward (migration) or inverse (modeling) operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_DIR<br> Perform forward (migration) or inverse (modeling) operation.</center></b>
+<pre> Default = FORWARD
+ Allowed = FORWARD  (Perform time migration.)
+ Allowed = INVERSE  (Perform modeling or inverse time migration.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AZIMUTH">
+      <Tip>Azimuth angle, in degrees, for inverse time migration.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - AZIMUTH<br> Azimuth angle, in degrees, for inverse time migration.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ Azimuth is measured in degrees clockwise from north looking down to the
+ direction from source to receiver (compass angle).  Source and receiver
+ locations in the modeled data will be determined by AZIMUTH and offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ROOT_IMAGE">
+      <Tip>Root name of image file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ROOT_IMAGE<br> Root name of image file names.</center></b>
+<pre> Default = NONE
+ Allowed = character
+ KTMIG places image traces for each CPU in a separate temporary disk file.
+ If ROOT_IMAGE is other than NONE, KTMIG will construct the image files
+ using the pathname prefix ROOT_IMAGE.
+ 
+ If ROOT_IMAGE = NONE, KTMIG will construct the image files using a default.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_STACK">
+      <Tip>Stack the output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_STACK<br> Stack the output traces.</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ If OPT_STACK=YES  KMIG will     stack the output traces from all pes.
+ If OPT_STACK=NO   KMIG will not stack the output traces from all pes.
+ If OPT_STACK=NO and OPT_TROT=LAST
+ KMIG will write the image traces from each pe to a separate FILE
+ whose name will be defined by ROOT_TROT with the pe index and '.trc' apended.
+ KMIG will also write a list of those file names and the number of
+ traces written to the file to an ascii file.
+ whose name will be defined by ROOT_TROT with '.list' apended.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_TROT">
+      <Tip>Write output to trot file every NUM_TROT traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_TROT<br> Write output to trot file every NUM_TROT traces.</center></b>
+<pre> Default = NO
+ Allowed = YES
+ Allowed = NO
+ Allowed = LAST
+ If OPT_TROT=YES  KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces.
+ If OPT_TROT=NO   KMIG will write the current image to file ROOT_TROT
+ If OPT_TROT=LAST KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces and after the last input trace.
+ KMIG will print a banner starting with kmig_image_trot stating the number
+ of input traces contained in the image at output time.
+ Header word HDR_FOLD is set to the number of input traces in the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TROT">
+      <Tip>Write output to trot file every NUM_TROT traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - NUM_TROT<br> Write output to trot file every NUM_TROT traces.</center></b>
+<pre> Default = 999999
+ Allowed = INT&gt;0
+ If OPT_TROT=YES  KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces.
+ If OPT_TROT=NO   KMIG will write the current image to file ROOT_TROT
+ If OPT_TROT=LAST KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces and after the last input trace.
+ KMIG will print a banner starting with kmig_image_trot stating the number
+ of input traces contained in the image at output time.
+ Header word HDR_FOLD is set to the number of input traces in the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_ROOT_TROT">
+      <Tip>Select file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SELECT_ROOT_TROT<br> Select file name.</center></b>
+<pre> If OPT_TROT=YES  KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces.
+ If OPT_TROT=NO   KMIG will write the current image to file ROOT_TROT
+ If OPT_TROT=LAST KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces and after the last input trace.
+ KMIG will print a banner starting with kmig_image_trot stating the number
+ of input traces contained in the image at output time.
+ Header word HDR_FOLD is set to the number of input traces in the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ROOT_TROT">
+      <Tip>Output file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ROOT_TROT<br> Output file name.</center></b>
+<pre> Default = NONE
+ Allowed = character
+ If OPT_TROT=YES  KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces.
+ If OPT_TROT=NO   KMIG will write the current image to file ROOT_TROT
+ If OPT_TROT=LAST KMIG will write the current image to file ROOT_TROT
+ every NUM_TROT input traces and after the last input trace.
+ KMIG will print a banner starting with kmig_image_trot stating the number
+ of input traces contained in the image at output time.
+ Header word HDR_FOLD is set to the number of input traces in the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word for the x-coordinate of the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - HDR_X<br> Header word for the x-coordinate of the output image volume.</center></b>
+<pre> Default = 7
+ Allowed = 7, 8, 17, 18
+ Allowed values for HDR_X and HDR_Y respectively are (7, 8); (8, 7); (17, 18);
+ and (18, 17).  No other combinations are permitted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word for the y-coordinate of the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - HDR_Y<br> Header word for the y-coordinate of the output image volume.</center></b>
+<pre> Default = 8
+ Allowed = 7, 8, 17, 18
+ Allowed values for HDR_X and HDR_Y respectively are (7, 8); (8, 7); (17, 18);
+ and (18, 17).  No other combinations are permitted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_ORDER">
+      <Tip>Sort order of input and output data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SORT_ORDER<br> Sort order of input and output data.</center></b>
+<pre> Default = X_IS_FAST
+ Allowed = X_IS_FAST
+ Allowed = Y_IS_FAST
+ If SORT_ORDER = X_IS_FAST, then HDR_X is the more rapidly changing header
+ word and HDR_Y is the more slowly changing header word for both input and
+ output.
+ 
+ If SORT_ORDER = Y_IS_FAST, then HDR_Y is the more rapidly changing header
+ word and HDR_X is the more slowly changing header word for both input and
+ output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>First value of HDR_X in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - X_INIT<br> First value of HDR_X in the output image volume.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>First value of HDR_Y in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - Y_INIT<br> First value of HDR_Y in the output image volume.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INIT">
+      <Tip>Time of the first sample in the output image traces, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_INIT<br> Time of the first sample in the output image traces, in seconds.</center></b>
+<pre> Default = TSTRT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>Value at the center of the first offset bin, in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_INIT<br> Value at the center of the first offset bin, in feet or meters.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt; 0.0
+ KTMIG uses header word 6 to determine an input trace's offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment between HDR_X values in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - X_INC<br> Increment between HDR_X values in the output image volume.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment between HDR_Y values in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - Y_INC<br> Increment between HDR_Y values in the output image volume.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INC">
+      <Tip>Time sample interval, in seconds, in the output image traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_INC<br> Time sample interval, in seconds, in the output image traces.</center></b>
+<pre> Default = DT
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Increment of offset values between offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_INC<br> Increment of offset values between offset bins.</center></b>
+<pre> Default = 200
+ Allowed = real &gt; 0.0
+ Increment of offset values between offset bins, in feet or meters.  OFF_INC is
+ also equal to the width of an offset bin.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Last value of HDR_X in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - X_LAST<br> Last value of HDR_X in the output image volume.</center></b>
+<pre> Default = 100
+ Allowed = real &gt;= X_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Last value of HDR_Y in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - Y_LAST<br> Last value of HDR_Y in the output image volume.</center></b>
+<pre> Default = 100
+ Allowed = real &gt;= Y_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_LAST">
+      <Tip>Time of the last sample in the output image traces, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_LAST<br> Time of the last sample in the output image traces, in seconds.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= TIM_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_LAST">
+      <Tip>Value at the center of the last offset bin, in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_LAST<br> Value at the center of the last offset bin, in feet or meters.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= OFF_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Total number of HDR_X values in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - X_TOT<br> Total number of HDR_X values in the output image volume.</center></b>
+<pre> Default = 101
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Total number of HDR_Y values in the output image volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - Y_TOT<br> Total number of HDR_Y values in the output image volume.</center></b>
+<pre> Default = 101
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_TOT">
+      <Tip>Total number of samples in the output image traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_TOT<br> Total number of samples in the output image traces.</center></b>
+<pre> Default = NDPT
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Total number of offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_TOT<br> Total number of offset bins.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_STEP">
+      <Tip>Variable depth step option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_STEP<br> Variable depth step option.</center></b>
+<pre> Default = CONSTANT
+ Allowed = CONSTANT - use a constant depth step size of DEP_INC
+ Allowed = VARIABLE - use defined arrays of step size - depth - frequency</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUT_INT">
+      <Tip>What method for interpolating output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_OUT_INT<br> What method for interpolating output traces.</center></b>
+<pre> Default = LINEAR
+ Allowed = LINEAR   (Use linear   interpolation for output traces. )
+ Allowed = LAGRANGE (Use lagrange interpolation for output traces. )
+ Allowed = NEAREST  (Use nearest  interpolation for output traces. )
+ Allowed = NONE     (Use no       interpolation for output traces. )</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OUT_INT">
+      <Tip>Half length of output trace interpolation operator.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - LEN_OUT_INT<br> Half length of output trace interpolation operator.</center></b>
+<pre> Default = 10
+ Allowed = int&gt;0
+ When OPT_OUT_INT=LAGRANGE the output trace is interpolation from the
+ image trace using a lagrange operator whose length to either side is
+ LEN_OUT_INT * output time or depth samples</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STEP_TIM">
+      <Tip>Depth values for variable depth increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - STEP_TIM<br> Depth values for variable depth increment.</center></b>
+<pre> Default = 0
+ Allowed = real (array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STEP_TIM_INC">
+      <Tip>Depth increment values at step_tim.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - STEP_TIM_INC<br> Depth increment values at step_tim.</center></b>
+<pre> Default = 0
+ Allowed = real (array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SPARSE">
+      <Tip>Whether to use sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_SPARSE<br> Whether to use sparse output.</center></b>
+<pre> Default = NO
+ Allowed = NO      (Do not use sparse output.)
+ Allowed = YES     (Use sparse output.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_X_INIT">
+      <Tip>First value of HDR_X in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_X_INIT<br> First value of HDR_X in the sparse output.</center></b>
+<pre> Default = 1.0
+ Allowed = real (array)
+ SP_X parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_X_INC">
+      <Tip>Increment between HDR_X values in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_X_INC<br> Increment between HDR_X values in the sparse output.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0 (array)
+ SP_X parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_X_LAST">
+      <Tip>Last value of HDR_X in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_X_LAST<br> Last value of HDR_X in the sparse output.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= SP_X_INIT (array)
+ SP_X parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_X_TOT">
+      <Tip>Total number of HDR_X values in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_X_TOT<br> Total number of HDR_X values in the sparse output.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0 (array)
+ SP_X parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_Y_INIT">
+      <Tip>First value of HDR_Y in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_Y_INIT<br> First value of HDR_Y in the sparse output.</center></b>
+<pre> Default = 1.0
+ Allowed = real (array)
+ SP_Y parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_Y_INC">
+      <Tip>Increment between HDR_Y values in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_Y_INC<br> Increment between HDR_Y values in the sparse output.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0 (array)
+ SP_Y parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_Y_LAST">
+      <Tip>Last value of HDR_Y in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_Y_LAST<br> Last value of HDR_Y in the sparse output.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= SP_Y_INIT (array)
+ SP_Y parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SP_Y_TOT">
+      <Tip>Total number of HDR_Y values in the sparse output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SP_Y_TOT<br> Total number of HDR_Y values in the sparse output.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0 (array)
+ SP_Y parameters are linked arrays with each row defining additional output.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="APERTURE_OFFMUTE..." rows="26" columns="80">
+    <Border keyword="BORDER4" title=" Aperture Parameters"/>
+    <Label keyword="LABEL_OPT_AP_UNITS" alignment="left">OPT_AP_UNITS =</Label>
+    <Field keyword="OPT_AP_UNITS" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AP_TIM_INC" alignment="left">AP_TIM_INC   =</Label>
+    <Field keyword="AP_TIM_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONST_VEL_ANG" alignment="left">CONST_VEL_ANG=</Label>
+    <Field keyword="CONST_VEL_ANG" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIST_AP_X_MAX" alignment="left">DIST_AP_X_MAX=</Label>
+    <Field keyword="DIST_AP_X_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIST_AP_Y_MAX" alignment="left">DIST_AP_Y_MAX=</Label>
+    <Field keyword="DIST_AP_Y_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIST_AP_X_INC" alignment="left">DIST_AP_X_INC=</Label>
+    <Field keyword="DIST_AP_X_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIST_AP_Y_INC" alignment="left">DIST_AP_Y_INC=</Label>
+    <Field keyword="DIST_AP_Y_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GRID_AP_X_MAX" alignment="left">GRID_AP_X_MAX=</Label>
+    <Field keyword="GRID_AP_X_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GRID_AP_Y_MAX" alignment="left">GRID_AP_Y_MAX=</Label>
+    <Field keyword="GRID_AP_Y_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GRID_AP_X_INC" alignment="left">GRID_AP_X_INC=</Label>
+    <Field keyword="GRID_AP_X_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GRID_AP_Y_INC" alignment="left">GRID_AP_Y_INC=</Label>
+    <Field keyword="GRID_AP_Y_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TIM_AP_X_ARRAYSET" label="TIM_AP_X   DIST_AP_X  GRID_AP_X  ANG_AP_X">
+     <Array keyword="TIM_AP_X" type="float" maxLength="11 " columnName="TIM_AP_X" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="DIST_AP_X" type="float" maxLength="11 " columnName="DIST_AP_X" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="GRID_AP_X" type="float" maxLength="11 " columnName="GRID_AP_X" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="ANG_AP_X" type="float" maxLength="11 " columnName="ANG_AP_X" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <ArraySet keyword="TIM_AP_Y_ARRAYSET" label="TIM_AP_Y   DIST_AP_Y  GRID_AP_Y  ANG_AP_Y">
+     <Array keyword="TIM_AP_Y" type="float" maxLength="11 " columnName="TIM_AP_Y" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="DIST_AP_Y" type="float" maxLength="11 " columnName="DIST_AP_Y" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="GRID_AP_Y" type="float" maxLength="11 " columnName="GRID_AP_Y" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="ANG_AP_Y" type="float" maxLength="11 " columnName="ANG_AP_Y" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Border keyword="BORDER5" title=" Offset Mute Parameters"/>
+    <Label keyword="LABEL_OFF_X_MAX" alignment="left">OFF_X_MAX    =</Label>
+    <Field keyword="OFF_X_MAX" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_Y_MAX" alignment="left">OFF_Y_MAX    =</Label>
+    <Field keyword="OFF_Y_MAX" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="OFFSETS_ARRAYSET" label="OFFSETS    OFF_TIM">
+     <Array keyword="OFFSETS" type="float" maxLength="11 " columnName="OFFSETS" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="OFF_TIM" type="float" maxLength="11 " columnName="OFF_TIM" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="BORDER4" xPos="1" yPos="0" xSize="78" ySize="17"/>
+     <Constraints component="LABEL_OPT_AP_UNITS" xPos="2" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AP_UNITS" xPos="16" yPos="1" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_AP_TIM_INC" xPos="25" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AP_TIM_INC" xPos="39" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONST_VEL_ANG" xPos="51" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONST_VEL_ANG" xPos="65" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIST_AP_X_MAX" xPos="2" yPos="3" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIST_AP_X_MAX" xPos="16" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIST_AP_Y_MAX" xPos="29" yPos="3" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIST_AP_Y_MAX" xPos="43" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIST_AP_X_INC" xPos="2" yPos="4" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIST_AP_X_INC" xPos="16" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIST_AP_Y_INC" xPos="29" yPos="4" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIST_AP_Y_INC" xPos="43" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GRID_AP_X_MAX" xPos="2" yPos="5" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GRID_AP_X_MAX" xPos="16" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GRID_AP_Y_MAX" xPos="29" yPos="5" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GRID_AP_Y_MAX" xPos="43" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GRID_AP_X_INC" xPos="2" yPos="6" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GRID_AP_X_INC" xPos="16" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GRID_AP_Y_INC" xPos="29" yPos="6" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GRID_AP_Y_INC" xPos="43" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_AP_X_ARRAYSET" xPos="2" yPos="8" xSize="47" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="TIM_AP_Y_ARRAYSET" xPos="2" yPos="12" xSize="47" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="BORDER5" xPos="1" yPos="18" xSize="78" ySize="8"/>
+     <Constraints component="LABEL_OFF_X_MAX" xPos="2" yPos="19" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_X_MAX" xPos="16" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_Y_MAX" xPos="30" yPos="19" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_Y_MAX" xPos="44" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFFSETS_ARRAYSET" xPos="2" yPos="21" xSize="25" ySize="4" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_AP_UNITS">
+      <Tip>Units to use for aperture parameter values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_AP_UNITS<br> Units to use for aperture parameter values.</center></b>
+<pre> Default = GRID
+ Allowed = DIST  (Use feet or meters.)
+ Allowed = GRID  (Use grid units (header word 7 and 8 units).)
+ Allowed = ANG   (Use angle in degrees.)
+ The value of OPT_AP_UNITS determines which arrays of the aperture parameters
+ linked arrays are active.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AP_TIM_INC">
+      <Tip>Time increment for the travel time map, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - AP_TIM_INC<br> Time increment for the travel time map, in seconds.</center></b>
+<pre> Default = Use 10 * TIM_INC
+ Allowed = real &gt; 0.0
+ The travel time map from input trace to output trace is computed on a coarse
+ time grid with an increment of AP_TIM_INC seconds.  The coarse time map is
+ linearly interpolated to form the applied time map.
+ 
+ Increasing TIME_TAB may reduce memory and decrease CPU time at the expense of
+ reduced mapping accuracy.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_VEL_ANG">
+      <Tip>Constant velocity used only for aperture angle calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - CONST_VEL_ANG<br> Constant velocity used only for aperture angle calculations.</center></b>
+<pre> Default = 2000.0
+ Allowed = real &gt;= 0.0
+ Calculations that relate aperture in distance or grid units to aperture in
+ angle require an approximate depth conversion.  The CONST_VEL_ANG value is
+ used only for that depth conversion.  Aperture values expressed in angle are
+ approximate.
+ 
+ If CONST_VEL_ANG = 0.0, then do not use aperture expressed in angle.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AP_X_MAX">
+      <Tip>Maximum half-aperture in the x direction, in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AP_X_MAX<br> Maximum half-aperture in the x direction, in feet or meters.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AP_Y_MAX">
+      <Tip>Maximum half-aperture in y direction, in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AP_Y_MAX<br> Maximum half-aperture in y direction, in feet or meters.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AP_X_INC">
+      <Tip>Spacing within aperture and travel time table.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AP_X_INC<br> Spacing within aperture and travel time table.</center></b>
+<pre> Default = -1 = 5. * X_INC
+ Allowed = real
+ For depth imaging this defines the maximum size of travel time tables.
+ Increasing this increases memory linearly and CPU nonlinearly.
+ The travel time table is computed and saved using a spacing of DIST_AP_X_INC
+ between locations within the table. The larger DIST_AP_X_INC gets the less CPU
+ time and memory is recquired at the cost of decreased accuracy.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AP_Y_INC">
+      <Tip>Y spacing within precomputed tables.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AP_Y_INC<br> Y spacing within precomputed tables.</center></b>
+<pre> Default = -1 = 5 * Y_INC
+ Allowed = real
+ kdmig precomputes a number of tables on a coarse horizontal grid.
+ DIST_AP_Y_INC defines the Y spacing within these tables.
+ Needed values are computed from these tables via linear interpolation.
+ Decreasing DIST_AP_Y_INC increases memory linearly and CPU nonlinearly.
+ 
+ For depth migration:
+ The travel time table is computed and saved using a spacing of AP_Y_INC
+ between locations within the table. The larger AP_Y_INC gets the less CPU
+ time and memory is recquired at the cost of decreased accuracy.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRID_AP_X_MAX">
+      <Tip>Maximum half-aperture in the x direction, in grid units.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - GRID_AP_X_MAX<br> Maximum half-aperture in the x direction, in grid units.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRID_AP_Y_MAX">
+      <Tip>Maximum half-aperture in y direction, in grid units.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - GRID_AP_Y_MAX<br> Maximum half-aperture in y direction, in grid units.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRID_AP_X_INC">
+      <Tip>Spacing within aperture and travel time table.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - GRID_AP_X_INC<br> Spacing within aperture and travel time table.</center></b>
+<pre> Default = -1 = 5. * X_INC
+ Allowed = real
+ For depth imaging this defines the maximum size of travel time tables.
+ Increasing this increases memory linearly and CPU nonlinearly.
+ The travel time table is computed and saved using a spacing of GRID_AP_X_INC
+ between locations within the table. The larger GRID_AP_X_INC gets the less CPU
+ time and memory is recquired at the cost of decreased accuracy.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRID_AP_Y_INC">
+      <Tip>Y spacing within precomputed tables.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - GRID_AP_Y_INC<br> Y spacing within precomputed tables.</center></b>
+<pre> Default = -1 = 5 * Y_INC
+ Allowed = real
+ kdmig precomputes a number of tables on a coarse horizontal grid.
+ GRID_AP_Y_INC defines the Y spacing within these tables.
+ Needed values are computed from these tables via linear interpolation.
+ Decreasing GRID_AP_Y_INC increases memory linearly and CPU nonlinearly.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_AP_X">
+      <Tip>Array of times, in seconds, corresponding to AP_X values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_AP_X<br> Array of times, in seconds, corresponding to AP_X values.</center></b>
+<pre> Default = -
+ Allowed = real  (linked array)
+ Array of times, in seconds, corresponding to values of half-aperture in the
+ x direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AP_X">
+      <Tip>Array of values of half-aperture to use in x direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AP_X<br> Array of values of half-aperture to use in x direction.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0  (linked array)
+ Array of time dependent half-aperture values to use in the x direction, in
+ feet or meters.  Actual values used will not exceed AP_MAX_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRID_AP_X">
+      <Tip>Array of values of half-aperture to use in x direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - GRID_AP_X<br> Array of values of half-aperture to use in x direction.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0  (linked array)
+ Array of time dependent half-aperture values to use in the x direction, in
+ grid units.  Actual values used will not exceed AP_MAX_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_AP_X">
+      <Tip>Array of values of half-aperture to use in x direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ANG_AP_X<br> Array of values of half-aperture to use in x direction.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0  (linked array)
+ Array of time dependent half-aperture values to use in the x direction, in
+ degrees.  Actual values used will not exceed AP_MAX_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_AP_Y">
+      <Tip>Array of times, in seconds, corresponding to AP_Y values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_AP_Y<br> Array of times, in seconds, corresponding to AP_Y values.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ Array of times, in seconds, corresponding to values of half-aperture in the
+ y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AP_Y">
+      <Tip>Array of values of half-aperture to use in y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AP_Y<br> Array of values of half-aperture to use in y direction.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0  (linked array)
+ Array of time dependent half-aperture values to use in the y direction, in
+ feet or meters.  Actual values used will not exceed AP_MAX_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRID_AP_Y">
+      <Tip>Array of values of half-aperture to use in y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - GRID_AP_Y<br> Array of values of half-aperture to use in y direction.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0  (linked array)
+ Array of time dependent half-aperture values to use in the y direction, in
+ grid units.  Actual values used will not exceed AP_MAX_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_AP_Y">
+      <Tip>Array of values of half-aperture to use in y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ANG_AP_Y<br> Array of values of half-aperture to use in y direction.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0  (linked array)
+ Array of time dependent half-aperture values to use in the y direction, in
+ degrees.  Actual values used will not exceed AP_MAX_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_X_MAX">
+      <Tip>Maximum component of offset in the x direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_X_MAX<br> Maximum component of offset in the x direction.</center></b>
+<pre> Default = (OFF_TOT-1)*OFF_INC+OFF_INIT+OFF_INC/2
+ Allowed = real &gt; 0.0
+ Maximum component of offset in the x direction, in feet or meters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_Y_MAX">
+      <Tip>Maximum component of offset in the y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_Y_MAX<br> Maximum component of offset in the y direction.</center></b>
+<pre> Default = (OFF_TOT-1)*OFF_INC+OFF_INIT+OFF_INC/2
+ Allowed = real &gt; 0.0
+ Maximum component of offset in the y direction, in feet or meters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFFSETS">
+      <Tip>Array of values of maximum offset corresponding to OFF_TIM values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFFSETS<br> Array of values of maximum offset corresponding to OFF_TIM values.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0 (linked array)
+ Array of values of maximum offset, in feet or meters, corresponding to
+ OFF_TIM values.  OFF_TIM and OFFSETS constitute a time-offset mute for KTMIG.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TIM">
+      <Tip>Array of times, in seconds, corresponding to OFFSETS values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_TIM<br> Array of times, in seconds, corresponding to OFFSETS values.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ Array of times, in seconds, corresponding to maximum offset values.  OFF_TIM
+ and OFFSETS constitute a time-offset mute for KTMIG.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN3" title="POLYGON_VELOC_ANISOTROPY..." rows="30" columns="80">
+    <Border keyword="BORDER6" title=" Polygon Parameters"/>
+    <Label keyword="LABEL_OPT_POLY" alignment="left">OPT_POLY =</Label>
+    <Field keyword="OPT_POLY" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="X_POLY_ARRAYSET" label="X_POLY     Y_POLY     ID_POLY">
+     <Array keyword="X_POLY" type="float" maxLength="11 " columnName="X_POLY" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="Y_POLY" type="float" maxLength="11 " columnName="Y_POLY" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="ID_POLY" type="int" maxLength="8  " columnName="ID_POLY" editable="yes" sensitive="yes" columnSize="8"/>
+    </ArraySet>
+    <Button keyword="SELECT_PATH_POLY_LOAD">Select LOAD_POLY</Button>
+    <Label keyword="EQLAB_PATH_POLY_LOAD" alignment="left">=</Label>
+    <Field keyword="PATH_POLY_LOAD" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_POLY">Select PATH_POLY</Button>
+    <Label keyword="EQLAB_PATH_POLY" alignment="left">=</Label>
+    <Field keyword="PATH_POLY" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER7" title=" Anisotropic Velocity Parameter"/>
+    <Label keyword="LABEL_OPT_ANISO" alignment="left">OPT_ANISO=</Label>
+    <Field keyword="OPT_ANISO" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VTRC" alignment="left">OPT_VTRC=</Label>
+    <Field keyword="OPT_VTRC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_VTRC" alignment="left">PATH_VTRC=</Label>
+    <Field keyword="PATH_VTRC" type="string" maxLength="107" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VEL" alignment="left">OPT_VEL=</Label>
+    <Field keyword="OPT_VEL" type="comboBox" maxLength="14" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONST_VEL_MIG" alignment="left">CONST_VEL_MIG =</Label>
+    <Field keyword="CONST_VEL_MIG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_VEL">Select PATH_VEL</Button>
+    <Label keyword="EQLAB_PATH_VEL" alignment="left">=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_ETA" alignment="left">OPT_ETA=</Label>
+    <Field keyword="OPT_ETA" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONST_ETA" alignment="left">CONST_ETA     =</Label>
+    <Field keyword="CONST_ETA" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_ETA">Select PATH_ETA</Button>
+    <Label keyword="EQLAB_PATH_ETA" alignment="left">=</Label>
+    <Field keyword="PATH_ETA" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_NEAR" alignment="left">TIM_NEAR =</Label>
+    <Field keyword="TIM_NEAR" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_FAR" alignment="left">TIM_FAR  =</Label>
+    <Field keyword="TIM_FAR" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_FAR" alignment="left">OFF_FAR   =</Label>
+    <Field keyword="OFF_FAR" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VA" alignment="left">OPT_VA=</Label>
+    <Field keyword="OPT_VA" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="FCTR_VEL_ARRAYSET" label="FCTR_VEL      FCTR_ETA">
+     <Array keyword="FCTR_VEL" type="float" maxLength="14 " columnName="FCTR_VEL" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="FCTR_ETA" type="float" maxLength="14 " columnName="FCTR_ETA" editable="yes" sensitive="yes" columnSize="14"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="BORDER6" xPos="1" yPos="0" xSize="78" ySize="11"/>
+     <Constraints component="LABEL_OPT_POLY" xPos="2" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_POLY" xPos="12" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="X_POLY_ARRAYSET" xPos="2" yPos="3" xSize="33" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_POLY_LOAD" xPos="2" yPos="7" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_POLY_LOAD" xPos="19" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_POLY_LOAD" xPos="20" yPos="7" xSize="43" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_POLY" xPos="2" yPos="9" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_POLY" xPos="19" yPos="9" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_POLY" xPos="20" yPos="9" xSize="48" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="BORDER7" xPos="1" yPos="12" xSize="78" ySize="18"/>
+     <Constraints component="LABEL_OPT_ANISO" xPos="2" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_ANISO" xPos="12" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_VTRC" xPos="38" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VTRC" xPos="47" yPos="13" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_VTRC" xPos="1" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VTRC" xPos="11" yPos="14" xSize="107" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_VEL" xPos="18" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VEL" xPos="26" yPos="16" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CONST_VEL_MIG" xPos="44" yPos="16" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONST_VEL_MIG" xPos="59" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_VEL" xPos="2" yPos="17" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VEL" xPos="18" yPos="17" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="19" yPos="17" xSize="50" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_OPT_ETA" xPos="18" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_ETA" xPos="26" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CONST_ETA" xPos="44" yPos="19" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONST_ETA" xPos="59" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_ETA" xPos="2" yPos="20" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_ETA" xPos="18" yPos="20" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_ETA" xPos="19" yPos="20" xSize="50" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_TIM_NEAR" xPos="2" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_NEAR" xPos="12" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_FAR" xPos="30" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_FAR" xPos="40" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_FAR" xPos="54" yPos="22" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_FAR" xPos="65" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_VA" xPos="2" yPos="24" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VA" xPos="9" yPos="24" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="FCTR_VEL_ARRAYSET" xPos="17" yPos="24" xSize="31" ySize="4" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_POLY">
+      <Tip>Whether to use polygon arrays, polygon file or no polygon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_POLY<br> Whether to use polygon arrays, polygon file or no polygon.</center></b>
+<pre> Default = NONE
+ Allowed = NONE
+ Allowed = ARRAY_POLY
+ Allowed = PATH_POLY
+ If OPT_POLY = NONE, then no polygon restriction will be used.
+ 
+ If OPT_POLY = ARRAY_POLY, then define polygons by arrays on GUI (X_POLY,
+ Y_POLY and ID_POLY).
+ 
+ If OPT_POLY = PATH_POLY, then define polygons by polygon file whose pathname
+ is entered in PATH_POLY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_POLY">
+      <Tip>Array of x-coordinate polygon vertex values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - X_POLY<br> Array of x-coordinate polygon vertex values.</center></b>
+<pre> Default = -
+ Allowed = real (array)
+ Array of x-coordinate polygon vertex values linked with Y_POLY and ID_POLY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_POLY">
+      <Tip>Array of y-coordinate polygon vertex values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - Y_POLY<br> Array of y-coordinate polygon vertex values.</center></b>
+<pre> Default = -
+ Allowed = real (array)
+ Array of y-coordinate polygon vertex values linked with X_POLY and ID_POLY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ID_POLY">
+      <Tip>Array of polygon identifiers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - ID_POLY<br> Array of polygon identifiers.</center></b>
+<pre> Default = 1
+ Allowed = int (array)
+ Array of polygon identifiers linked with X_POLY and ID_POLY.  All vertex
+ values linked with the same ID_POLY value pertain to the same polygon.
+ Different polygons must have different ID_POLY values.  All array entries
+ associated with the same polygon must be consecutive.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_POLY_LOAD">
+      <Tip>polygon path name for immediately loading polygon to gui.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SELECT_PATH_POLY_LOAD<br> polygon path name for immediately loading polygon to gui.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_POLY_LOAD">
+      <Tip>Pathname for polygon file to load immediately to gui.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PATH_POLY_LOAD<br> Pathname for polygon file to load immediately to gui.</center></b>
+<pre> Default = -
+ Allowed = char
+ 
+ Polygon files for this option are ascii files whose first three columns
+ carry the same information as X_POLY, Y_POLY and ID_POLY, respectively.
+ Any columns beyond three are ignored. The third column for ID_POLY is
+ optional. If not present, the ID_POLY is set to the value of 1 for all
+ vertices. Values is the three columns should be separated by spaces.
+ 
+ If successfully opened and processed the polygon vertex values are
+ immediately entered into the X_POLY, Y_POLY and ID_POLY arrays on the
+ gui. These can then be saved in the work file. The name of the file
+ associated with these coordinates is NOT saved in the work file and
+ is only read in the gui stage.
+ 
+ Currently, there is a limit of 100 vertices that can be read in this
+ manner.
+ 
+ NOTE: parameter OPT_POLY must be set to option ARRAY_POLY to use
+       the polygon read in using this option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_POLY">
+      <Tip>polygon path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SELECT_PATH_POLY<br> polygon path name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_POLY">
+      <Tip>Pathname for polygon file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PATH_POLY<br> Pathname for polygon file.</center></b>
+<pre> Default = -
+ Allowed = char
+ Polygon files are ascii files whose first three columns carry the same
+ information as X_POLY, Y_POLY and ID_POLY respectively and can have an
+ optional fourth column carrying header value information.  Only the first
+ three columns are used by KTMIG.
+ 
+ The SETPOLY process requires polygon files with four columns.  Files prepared
+ for SETPOLY can be used with KTMIG, although the fourth column will be
+ ignored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_ANISO">
+      <Tip>Isotropic or type of anisotropic method to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_ANISO<br> Isotropic or type of anisotropic method to use.</center></b>
+<pre> Default = ISOTROPIC
+ Allowed = ISOTROPIC   (Do not use an anisotropic method.)
+ Allowed = ANISOTROPIC (Use vertical transverse isotropic (VTI) method.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VTRC">
+      <Tip>Whether to write a vleocity trace file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_VTRC<br> Whether to write a vleocity trace file.</center></b>
+<pre> Default = NO
+ Allowed = NO    Do not write a velocity trace file.
+ Allowed = MODEL Write the velocity trace file using the model grid.
+ Allowed = IMAGE Write the velocity trace file using the image grid.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VTRC">
+      <Tip>Path name for model coefficient trace file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PATH_VTRC<br> Path name for model coefficient trace file.</center></b>
+<pre> Default = NONE
+ Allowed = CHAR</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VEL">
+      <Tip>Whether to use constant or spatially varying velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_VEL<br> Whether to use constant or spatially varying velocity.</center></b>
+<pre> Default = CONSTANT
+ Allowed = PATH
+ Allowed = CONSTANT
+ 
+ If OPT_VEL = CONSTANT, then constant velocity migration will be used,
+ using the velocity specified by parameter CONST_VEL_MIG.
+ 
+ If OPT_VEL = PATH, then use spatially varying velocities defined in
+ the file whose pathname is entered in PATH_VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_VEL_MIG">
+      <Tip>Constant velocity used for imaging (not for angle calculations).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - CONST_VEL_MIG<br> Constant velocity used for imaging (not for angle calculations).</center></b>
+<pre> Default = 2000
+ Allowed = real &gt;= 0.0
+ If CONST_VEL_ANG = 0.0, then use PATH_VEL for the migration velocity.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VEL">
+      <Tip>velocity path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SELECT_PATH_VEL<br> velocity path name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL">
+      <Tip>Pathname for migration stacking velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PATH_VEL<br> Pathname for migration stacking velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ For 3D the velocity file specified by PATHNAME_VEL must use the header words
+ specified by HDR_X and HDR_Y as coordinates.  For 2D it must use the header
+ word specified by HDR_X as coordinate.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_ETA">
+      <Tip>Whether to use constant or spatialy varying eta.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_ETA<br> Whether to use constant or spatialy varying eta.</center></b>
+<pre> Default = CONSTANT
+ Allowed = PATH
+ Allowed = CONSTANT
+ 
+ If OPT_ETA = CONSTANT, use constant value for eta, specified in parameter
+ CONST_ETA.
+ 
+ If OPT_ETA = PATH, use spatially varying values for eta, defined in a
+ file whose path is entered in PATH_ETA.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_ETA">
+      <Tip>Constant eta parameter for transverse isotropic media.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - CONST_ETA<br> Constant eta parameter for transverse isotropic media.</center></b>
+<pre> Default = 0.0
+ Allowed = 1.0 &gt; CONST_ETA &gt;= 0.0
+ CONST_ETA is the parameter indicating the (constant) amount of anisotropy in
+ transverse isotropic media.  KTMIG modifies the migration operator to be
+ consistent with the CONST_ETA value specified.
+ 
+ CONST_ETA = 0.0 indicates a medium that is isotropic and no anisotropic
+ correction is made.  CONST_ETA = 0.1 is a typical value for a transverse
+ isotropic medium.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_ETA">
+      <Tip>eta path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - SELECT_PATH_ETA<br> eta path name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_ETA">
+      <Tip>Pathname of file containing varying eta information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PATH_ETA<br> Pathname of file containing varying eta information.</center></b>
+<pre> Default = -
+ Allowed = char
+ PATH_ETA is the pathname of a file containing variable eta information for a
+ medium with variable transverse isotropy.  KTMIG modifies the migration
+ operator to be consistent with the eta values specified.
+ 
+ The file specified by PATH_ETA is an ordinary CPS velocity file that carries
+ eta values rather than velocity values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_NEAR">
+      <Tip>Mute time, in seconds, for near trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_NEAR<br> Mute time, in seconds, for near trace.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ TIM_NEAR is used to adjust the migration velocity when doing anisotropic
+ migration.  TIM_NEAR is not a mute parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_FAR">
+      <Tip>Mute time, in seconds, for the far offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_FAR<br> Mute time, in seconds, for the far offset.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ TIM_FAR is used to adjust the migration velocity when doing anisotropic
+ migration.  TIM_FAR is not a mute parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_FAR">
+      <Tip>Far offset, corresponding to TIM_FAR.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OFF_FAR<br> Far offset, corresponding to TIM_FAR.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ OFF_FAR is used to adjust the migration velocity when doing anisotropic
+ migration.  OFF_FAR is not a mute parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VA">
+      <Tip>Whether migration velocity analysis (FCTR_VEL array) is active.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_VA<br> Whether migration velocity analysis (FCTR_VEL array) is active.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If OPT_VA = YES, then the FCTR_VEL array is active for migration velocity
+ analysis.
+ 
+ If OPT_VA = NO, then the FCTR_VEL array is inactive.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FCTR_VEL">
+      <Tip>Array of velocity multipliers for migration velocity analysis.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FCTR_VEL<br> Array of velocity multipliers for migration velocity analysis.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0  (array)
+ KTMIG produces a sequence of velocity fields by multiplying the input
+ velocity field (including any anisotropic adjustment) by each of the elements
+ of the FCTR_VEL array in turn.  It then uses each of these velocity fields to
+ produce an output image.  As many output images are created as the number of
+ elements in the FCTR_VEL array.
+ 
+ Output image traces are labeled in header word 24 with the index number of
+ the FCTR_VEL array corresponding to that image (from 1 to the total number of
+ multipliers) and in header word 63 with the corresponding velocity
+ multiplier.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FCTR_ETA">
+      <Tip>Eta scale factors.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FCTR_ETA<br> Eta scale factors.</center></b>
+<pre> Default = 1
+ Allowed = real (array) &gt; 0
+ Multiple images are constructed for the different imaging velocity scales
+ in Velocity .
+ The time imaging velocity is the input eta * FCTR_ETA
+ The depth imaging travel time is
+ the computed time for the input velocity / FCTR_ETA</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN4" title="GENERAL" rows="42" columns="80">
+    <Button keyword="DISPLAY_INFO">DISPLAY_INFO</Button>
+    <Border keyword="BORDER8" title=" Parallel IO Parameters"/>
+    <Label keyword="LABEL_DIV_TYPE" alignment="left">DIV_TYPE      =</Label>
+    <Field keyword="DIV_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_USE_PPIO" alignment="left">OPT_USE_PPIO=</Label>
+    <Field keyword="OPT_USE_PPIO" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MAP_APPLY" alignment="left">OPT_MAP_APPLY=</Label>
+    <Field keyword="OPT_MAP_APPLY" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CPUS_PER_GROUP" alignment="left">CPUS_PER_GROUP=</Label>
+    <Field keyword="CPUS_PER_GROUP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PAR_GROUPS" alignment="left">PAR_GROUPS  =</Label>
+    <Field keyword="PAR_GROUPS" type="string" maxLength="7" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_CPUS" alignment="left">NUM_CPUS     =</Label>
+    <Field keyword="NUM_CPUS" type="string" maxLength="8" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MAP_PRINT" alignment="left">OPT_MAP_PRINT=</Label>
+    <Field keyword="OPT_MAP_PRINT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FIRST_MAP_PRINT" alignment="left">FIRST_MAP_PRINT=</Label>
+    <Field keyword="FIRST_MAP_PRINT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LAST_MAP_PRINT" alignment="left">LAST_MAP_PRINT=</Label>
+    <Field keyword="LAST_MAP_PRINT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER9" title=" Anti-alias Parameters"/>
+    <Label keyword="LABEL_NUM_AA" alignment="left">NUM_AA     =</Label>
+    <Field keyword="NUM_AA" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIST_AA" alignment="left">DIST_AA     =</Label>
+    <Field keyword="DIST_AA" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NORM_AA" alignment="left">NORM_AA=</Label>
+    <Field keyword="NORM_AA" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER10" title=" Amplitude Parameters"/>
+    <Label keyword="LABEL_OPT_AMPLITUDE" alignment="left">OPT_AMPLITUDE=</Label>
+    <Field keyword="OPT_AMPLITUDE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_AMP_COSINE" alignment="left">OPT_AMP_COSINE=</Label>
+    <Field keyword="OPT_AMP_COSINE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWR_AMP_SCALE_INP" alignment="left">PWR_AMP_SCALE_INP=</Label>
+    <Field keyword="PWR_AMP_SCALE_INP" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_AMP_SCALE_INP" alignment="left">MIN_AMP_SCALE_INP=</Label>
+    <Field keyword="MIN_AMP_SCALE_INP" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWR_AMP_SCALE_OUT" alignment="left">PWR_AMP_SCALE_OUT=</Label>
+    <Field keyword="PWR_AMP_SCALE_OUT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_AMP_SCALE_OUT" alignment="left">MIN_AMP_SCALE_OUT=</Label>
+    <Field keyword="MIN_AMP_SCALE_OUT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER11" title=" Filter Parameters"/>
+    <Label keyword="LABEL_PWR_FILT" alignment="left">PWR_FILT   =</Label>
+    <Field keyword="PWR_FILT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PHASE_FILT" alignment="left">PHASE_FILT  =</Label>
+    <Field keyword="PHASE_FILT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER12" title=" Reporting Parameters"/>
+    <Label keyword="LABEL_PRINT_INC" alignment="left">PRINT_INC  =</Label>
+    <Field keyword="PRINT_INC" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRINT_MEMORY" alignment="left">PRINT_MEMORY=</Label>
+    <Field keyword="PRINT_MEMORY" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRINT_DEBUG" alignment="left">PRINT_DEBUG=</Label>
+    <Field keyword="PRINT_DEBUG" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER13" title=" Stack Scaling Parameters"/>
+    <Label keyword="LABEL_OPT_FOS_SCALE" alignment="left">OPT_FOS_SCALE =</Label>
+    <Field keyword="OPT_FOS_SCALE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOS_PWR" alignment="left">FOS_PWR     =</Label>
+    <Field keyword="FOS_PWR" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOS_TIM_INIT" alignment="left">FOS_TIM_INIT=</Label>
+    <Field keyword="FOS_TIM_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOS_TIM_INC" alignment="left">FOS_TIM_INC   =</Label>
+    <Field keyword="FOS_TIM_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOS_TIM_LAST" alignment="left">FOS_TIM_LAST=</Label>
+    <Field keyword="FOS_TIM_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOS_TIM_TOT" alignment="left">FOS_TIM_TOT =</Label>
+    <Field keyword="FOS_TIM_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER14" title=" Stretch Mute Parameter"/>
+    <Label keyword="LABEL_OPT_DOPP" alignment="left">OPT_DOPP   =</Label>
+    <Field keyword="OPT_DOPP" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DOPPLER" alignment="left">DOPPLER     =</Label>
+    <Field keyword="DOPPLER" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER15" title=" Turning Wave Mute Parameter"/>
+    <Label keyword="LABEL_OPT_MUTE_TURN" alignment="left">OPT_MUTE_TURN  =</Label>
+    <Field keyword="OPT_MUTE_TURN" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER16" title=" Tapering Parameter"/>
+    <Label keyword="LABEL_TIM_TAPER" alignment="left">TIM_TAPER  =</Label>
+    <Field keyword="TIM_TAPER" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="DISPLAY_INFO" xPos="1" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER8" xPos="1" yPos="2" xSize="78" ySize="5"/>
+     <Constraints component="LABEL_DIV_TYPE" xPos="2" yPos="3" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIV_TYPE" xPos="17" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_USE_PPIO" xPos="28" yPos="3" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_USE_PPIO" xPos="41" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_MAP_APPLY" xPos="51" yPos="3" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MAP_APPLY" xPos="65" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CPUS_PER_GROUP" xPos="2" yPos="4" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CPUS_PER_GROUP" xPos="17" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PAR_GROUPS" xPos="28" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PAR_GROUPS" xPos="41" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_CPUS" xPos="51" yPos="4" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_CPUS" xPos="65" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MAP_PRINT" xPos="2" yPos="5" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MAP_PRINT" xPos="16" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FIRST_MAP_PRINT" xPos="27" yPos="5" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FIRST_MAP_PRINT" xPos="43" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LAST_MAP_PRINT" xPos="52" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LAST_MAP_PRINT" xPos="67" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER9" xPos="1" yPos="8" xSize="78" ySize="3"/>
+     <Constraints component="LABEL_NUM_AA" xPos="2" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_AA" xPos="14" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIST_AA" xPos="27" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIST_AA" xPos="40" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NORM_AA" xPos="52" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NORM_AA" xPos="60" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER10" xPos="1" yPos="12" xSize="78" ySize="5"/>
+     <Constraints component="LABEL_OPT_AMPLITUDE" xPos="2" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AMPLITUDE" xPos="16" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_AMP_COSINE" xPos="35" yPos="13" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AMP_COSINE" xPos="50" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PWR_AMP_SCALE_INP" xPos="2" yPos="14" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWR_AMP_SCALE_INP" xPos="20" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_AMP_SCALE_INP" xPos="35" yPos="14" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_AMP_SCALE_INP" xPos="53" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PWR_AMP_SCALE_OUT" xPos="2" yPos="15" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWR_AMP_SCALE_OUT" xPos="20" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_AMP_SCALE_OUT" xPos="35" yPos="15" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_AMP_SCALE_OUT" xPos="53" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER11" xPos="1" yPos="18" xSize="78" ySize="3"/>
+     <Constraints component="LABEL_PWR_FILT" xPos="2" yPos="19" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWR_FILT" xPos="14" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PHASE_FILT" xPos="27" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PHASE_FILT" xPos="40" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER12" xPos="1" yPos="22" xSize="78" ySize="3"/>
+     <Constraints component="LABEL_PRINT_INC" xPos="2" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRINT_INC" xPos="14" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRINT_MEMORY" xPos="27" yPos="23" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRINT_MEMORY" xPos="40" yPos="23" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PRINT_DEBUG" xPos="49" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRINT_DEBUG" xPos="61" yPos="23" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER13" xPos="1" yPos="26" xSize="78" ySize="4"/>
+     <Constraints component="LABEL_OPT_FOS_SCALE" xPos="2" yPos="27" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FOS_SCALE" xPos="17" yPos="27" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FOS_PWR" xPos="30" yPos="27" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOS_PWR" xPos="43" yPos="27" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOS_TIM_INIT" xPos="55" yPos="27" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOS_TIM_INIT" xPos="68" yPos="27" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOS_TIM_INC" xPos="2" yPos="28" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOS_TIM_INC" xPos="17" yPos="28" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOS_TIM_LAST" xPos="30" yPos="28" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOS_TIM_LAST" xPos="43" yPos="28" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOS_TIM_TOT" xPos="55" yPos="28" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOS_TIM_TOT" xPos="68" yPos="28" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER14" xPos="1" yPos="31" xSize="78" ySize="3"/>
+     <Constraints component="LABEL_OPT_DOPP" xPos="2" yPos="32" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DOPP" xPos="14" yPos="32" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DOPPLER" xPos="27" yPos="32" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DOPPLER" xPos="40" yPos="32" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER15" xPos="1" yPos="35" xSize="78" ySize="3"/>
+     <Constraints component="LABEL_OPT_MUTE_TURN" xPos="2" yPos="36" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MUTE_TURN" xPos="18" yPos="36" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER16" xPos="1" yPos="39" xSize="78" ySize="3"/>
+     <Constraints component="LABEL_TIM_TAPER" xPos="2" yPos="40" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_TAPER" xPos="14" yPos="40" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="DISPLAY_INFO">
+      <Tip>Button that displays memory and disk requirements when pressed.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DISPLAY_INFO<br> Button that displays memory and disk requirements when pressed.</center></b>
+<pre> Default = -
+ Allowed = -
+ Pressing the DISPLAY_INFO button causes memory and disk requirements to be
+ calculated and displayed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIV_TYPE">
+      <Tip>Type of image node divison.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIV_TYPE<br> Type of image node divison.</center></b>
+<pre> Default = ROUND
+ Allowed = ROUND for round robin distribution
+ Allowed = BLOCK for block distribution
+ Allowed = ZERO  to distrubte to pe 0 only.
+ Allowed = ALL   to distrubte to all pes.
+ 
+ DIV_TYPE defines the type of Y node division among pes
+   0 = round robin, 1 = block, 2 = 0 only, 3 = all
+ 
+   DIV_TYPE=ROUND, Round robin division
+   means for a job with NY_MIG=100, Number of PES=4
+   pe 0 gets Y nodes 1,5, 9,..., 97
+   pe 1 gets Y nodes 2,6,10,..., 98
+   pe 2 gets Y nodes 3,7,11,..., 99
+   pe 3 gets Y nodes 4,8,12,...,100
+ 
+   DIV_TYPE=BLOCK, Block division
+   means for a job with NY_MIG=100, Number of PES=4
+   pe 0 gets Y nodes  1- 25
+   pe 1 gets Y nodes 26- 50
+   pe 2 gets Y nodes 51- 75
+   pe 3 gets Y nodes 76-100
+ 
+   DIV_TYPE=ZERO, 0 only division
+   means for a job with NY_MIG=100, Number of PES=4
+   pe 0 gets Y nodes  1-100
+   pe 1 gets Y nodes  0-  0
+   pe 2 gets Y nodes  0-  0
+   pe 3 gets Y nodes  0-  0
+ 
+   DIV_TYPE=ALL, all division
+   means for a job with NY_MIG=100, Number of PES=4
+   pe 0 gets Y nodes  1-100
+   pe 1 gets Y nodes  1-100
+   pe 2 gets Y nodes  1-100
+   pe 3 gets Y nodes  1-100
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_USE_PPIO">
+      <Tip>Use ppio for trace io.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_USE_PPIO<br> Use ppio for trace io.</center></b>
+<pre> Default = YES
+ Allowed = YES use ppio routines.
+ Allowed = NO use TRCIO routines.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MAP_APPLY">
+      <Tip>What method for interpolating output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_MAP_APPLY<br> What method for interpolating output traces.</center></b>
+<pre> Default = MAP_APPLY_I
+ Allowed = MAP_APPLY_C Use MAP_APPLY_C   which does not include gradients.
+ Allowed = MAP_APPLY_F Use MAP_APPLY_F   which does not include gradients.
+ Allowed = MAP_APPLY_G Use MAP_APPLY_G   which does     include gradients.
+ Allowed = MAP_APPLY_H Use MAP_APPLY_H   which includes gradients and paz.
+ Allowed = MAP_APPLY_I Use MAP_APPLY_H_C which includes gradients and paz.
+ KMIG will use MAP_APPLY_C when MIG_TYPE = DMO or OPT_OUTPUT .ne. IMAGE</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CPUS_PER_GROUP">
+      <Tip>Number of cpus per parallel processing group.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - CPUS_PER_GROUP<br> Number of cpus per parallel processing group.</center></b>
+<pre> Default = 1
+ Allowed = 1 &lt;= int &lt;= number pes in job
+ kdmig will break the NUM_CPUS = number of pes in the job, processors
+ into PAR_GROUPS groups of processors.
+ Each group will have a maximum of CPUS_PER_GROUP proecessors in the job,
+ and will image a subset of the input traces and construct
+ an image indiependantly from th eother groups.  At the end
+ of processing the separate images will be summed to gether
+ by kdmig and the result output on all pes.
+ It is strongly reccommended that you set the number of
+ processors, NUM_CPUS, in a job be a multiple of CPUS_PER_GROUP,
+ so each group will have the same number of processors.  It is
+ also best that all processors in a job be the same speed.
+ 
+ The maximum number of processors in any group is :
+ m_pe_grp = ( NUM_CPUS + par_groups - 1 ) / par_groups
+ The number of groups which use m_pe_grp - 1 processors is :
+ n_pe_grp_2 = par_groups * m_pe_grp - NUM_CPUS
+ The number of groups which use m_pe_grp - 1 processors is :
+ n_pe_grp_1 = NUM_CPUS - n_pe_grp_2</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PAR_GROUPS">
+      <Tip>Number of independent groups of parallel processors to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PAR_GROUPS<br> Number of independent groups of parallel processors to use.</center></b>
+<pre> Default = 1
+ Allowed = number of  CPUs in job &gt;= int &gt; 0
+ KTMIG associates CPUs into PAR_GROUPS independent groups.  Each group will
+ receive a different subset of the input traces and will produce an image
+ independent of the other groups.  The separate images produced by the groups
+ are composited together to form the output image.
+ 
+ Each group should have the same number of CPUs (the number of CPUs in the job
+ should be a multiple of PAR_GROUPS).
+ 
+ If PAR_GROUPS = 1, then all CPUs contribute to a single common image.
+ 
+ If PAR_GROUPS = number of CPUs, then each CPU produces an image independent
+ of the other CPUs and these separate images are composited to
+ form the output.
+ 
+ Generally you should set PAR_GROUPS to the largest value that permits the
+ image subset for each CPU to fit in memory.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_CPUS">
+      <Tip>Total number of cpus in job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - NUM_CPUS<br> Total number of cpus in job.</center></b>
+<pre> Default = 1
+ Allowed = 1 &lt;= int &lt;= number pes in job
+ kdmig will break the NUM_CPUS = number of pes in the job, processors
+ into PAR_GROUPS groups of processors.
+ Each group will have a maximum of CPUS_PER_GROUP proecessors in the job,
+ and will image a subset of the input traces and construct
+ an image indiependantly from th eother groups.  At the end
+ of processing the separate images will be summed to gether
+ by kdmig and the result output on all pes.
+ It is strongly reccommended that you set the number of
+ processors, NUM_CPUS, in a job be a multiple of CPUS_PER_GROUP,
+ so each group will have the same number of processors.  It is
+ also best that all processors in a job be the same speed.
+ 
+ The maximum number of processors in any group is :
+ m_pe_grp = ( NUM_CPUS + par_groups - 1 ) / par_groups
+ The number of groups which use m_pe_grp - 1 processors is :
+ n_pe_grp_2 = par_groups * m_pe_grp - NUM_CPUS
+ The number of groups which use m_pe_grp - 1 processors is :
+ n_pe_grp_1 = NUM_CPUS - n_pe_grp_2</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MAP_PRINT">
+      <Tip>What level of map print.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_MAP_PRINT<br> What level of map print.</center></b>
+<pre> Default = 0
+ Allowed = int&gt;= 0
+ Higher values of OPT_MAP_PRINT print the map values at more stages
+ in the computation.
+ opt_map_print .eq. -1 .or. opt_map_print .ge. 1 after ksum_map_compute.
+ opt_map_print .eq. -2 .or. opt_map_print .ge. 2 after ksum_map_gradient.
+ opt_map_print .eq. -3 .or. opt_map_print .ge. 3 after ksum_paz_interpolate.
+ opt_map_print .eq. -4 .or. opt_map_print .ge. 4 after ksum_mute_turn.
+ opt_map_print .eq. -5 .or. opt_map_print .ge. 5 after ksum_doppler_apply.
+ opt_map_print .eq. -6 .or. opt_map_print .ge. 6 after ksum_map_apply.
+ Maps for x,y image node locations FIRST_MAP_PRINT to LAST_MAP_PRINT
+ are printed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FIRST_MAP_PRINT">
+      <Tip>First x,y imag enode to print map for.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FIRST_MAP_PRINT<br> First x,y imag enode to print map for.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;= 0
+ Maps for x,y image node locations FIRST_MAP_PRINT to LAST_MAP_PRINT
+ are printed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LAST_MAP_PRINT">
+      <Tip>Last x,y imag enode to print map for.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - LAST_MAP_PRINT<br> Last x,y imag enode to print map for.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;= 0
+ Maps for x,y image node locations FIRST_MAP_PRINT to LAST_MAP_PRINT
+ are printed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_AA">
+      <Tip>Maximum number of anti-alias filters to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - NUM_AA<br> Maximum number of anti-alias filters to use.</center></b>
+<pre> Default = 31
+ Allowed = int &gt; 0
+ KTMIG uses the Claerbout integration method for anti-aliasing which makes a
+ number of copies of the input trace, each with a different anti-alias filter
+ applied.
+ 
+ NUM_AA = 31 is usually sufficient, NUM_AA = 40 is probably excessive.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIST_AA">
+      <Tip>Effective output trace physical spacing, in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DIST_AA<br> Effective output trace physical spacing, in feet or meters.</center></b>
+<pre> Default = compute default from transformation grid
+ Allowed = real &gt; 0.0
+ The effective output trace physical spacing, in feet or meters, for use in
+ calculating the anti-alias filter.  It should be roughly the average of
+ the inline and the crossline physical spacing of output traces.  Larger
+ distances produce more severe anti-aliasing, so using the larger of the
+ inline or the crossline output trace physical spacing is the most
+ conservative approach.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NORM_AA">
+      <Tip>Antialias normalization.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - NORM_AA<br> Antialias normalization.</center></b>
+<pre> Default = MAX_AMP
+ Allowed = MAX_AMP Preserve maximum ampplitude.
+ Allowed = NONE    No antialias nrmaliazation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_AMPLITUDE">
+      <Tip>Type of amplitude treatment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_AMPLITUDE<br> Type of amplitude treatment.</center></b>
+<pre> Default = HPHILLIPS
+ Allowed = HPHILLIPS
+ Allowed = HCONOCO
+ Allowed = USER
+ To get the heritage Conoco   ampltiude scaling use OPT_AMPLITUDE = HCONOCO
+ To get the heritage Phillips ampltiude scaling use OPT_AMPLITUDE = HPHILLIPS
+ To get some other            amplitude scaling use OPT_AMPLITUDE = USER
+ OPT_AMPLITUDE  = HCONOCO sets
+ OPT_AMP_COSINE = HCONOCO,   PWR_AMP_SCALE_INP = +0., PWR_AMP_SCALE_OUT = -0.
+ OPT_AMPLITUDE  = HPHILLIPS sets
+ OPT_AMP_COSINE = HPHILLIPS, PWR_AMP_SCALE_INP = +1., PWR_AMP_SCALE_OUT = -1.
+ OPT_AMPLITUDE  = USER allows an arbitray combination of parameters.
+ OPT_AMP_COSINE, PWR_AMP_SCALE_INP, PWR_AMP_SCALE_OUT
+ The v(t) amplitude scaling computes a v(t) curved ray amplitude correction
+ This assumes no divergence correction has been applied to the input data
+ prior to input to imaging.
+ Heritage Conoco's ampltiude scaling was cos(dip)
+ this assumes a divergence correction has been applied to the input data
+ prior to input to imaging and zero offset.
+ Heritage Philip's ampltiude scaling was
+ ( time / depth ) * cos(source)**2+cos(reciever)**2)
+ this assumes no divergence correction has been applied to the input data
+ prior to input to imaging.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_AMP_COSINE">
+      <Tip>Type of cosine dip samplitude scaling.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_AMP_COSINE<br> Type of cosine dip samplitude scaling.</center></b>
+<pre> Default = HCONOCO
+ Allowed = HCONOCO
+ Allowed = HPHILLIPS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWR_AMP_SCALE_INP">
+      <Tip>Scale input data by (TIME-MIN_AMP_SCALE_INP)**PWR_AMP_SCALE_INP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PWR_AMP_SCALE_INP<br> Scale input data by (TIME-MIN_AMP_SCALE_INP)**PWR_AMP_SCALE_INP.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Apply an amplitude scaling of (TIME - MIN_AMP_SCALE_INP) ** PWR_AMP_SCALE_INP
+ to each input trace before imaging.
+ Using PWR_AMP_SCALE_INP = 0. yields no amplitude scaling before imaging.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_AMP_SCALE_INP">
+      <Tip>Scale input data by (TIME-MIN_AMP_SCALE_INP)**PWR_AMP_SCALE_INP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - MIN_AMP_SCALE_INP<br> Scale input data by (TIME-MIN_AMP_SCALE_INP)**PWR_AMP_SCALE_INP.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Apply an amplitude scaling of (TIME - MIN_AMP_SCALE_INP) ** PWR_AMP_SCALE_INP
+ to each input trace before imaging.
+ Using PWR_AMP_SCALE_INP = 0. yields no amplitude scaling before imaging.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWR_AMP_SCALE_OUT">
+      <Tip>Scale output data by (TIME-MIN_AMP_SCALE_OUT)**PWR_AMP_SCALE_OUT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PWR_AMP_SCALE_OUT<br> Scale output data by (TIME-MIN_AMP_SCALE_OUT)**PWR_AMP_SCALE_OUT.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Apply an amplitude scaling of (TIME - MIN_AMP_SCALE_OUT) ** PWR_AMP_SCALE_OUT
+ to each output trace after imaging.
+ Using PWR_AMP_SCALE_OUT = 0. yields no amplitude scaling after imaging.
+ For time migration TIME will be output time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_AMP_SCALE_OUT">
+      <Tip>Scale output data by (TIME-MIN_AMP_SCALE_OUT)**PWR_AMP_SCALE_OUT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - MIN_AMP_SCALE_OUT<br> Scale output data by (TIME-MIN_AMP_SCALE_OUT)**PWR_AMP_SCALE_OUT.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Apply an amplitude scaling of (TIME - MIN_AMP_SCALE_OUT) ** PWR_AMP_SCALE_OUT
+ to each output trace after imaging.
+ Using PWR_AMP_SCALE_OUT = 0. yields no amplitude scaling after imaging.
+ For time migration TIME will be output time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWR_FILT">
+      <Tip>Power for (frequency ** PWR_FILT) filter applied to input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PWR_FILT<br> Power for (frequency ** PWR_FILT) filter applied to input.</center></b>
+<pre> Default = 0.5 for 2D, 1.0 for 3D
+ Allowed = real &gt; 0.0
+ Theoretical values are PWR_FILT = 0.5 for 2D migration and PWR_FILT = 1.0 for
+ 3D migration.  (But migrating a single line from a 3D survey to a single
+ output line is really 2D so in that case PWR_FILT should be 0.5.)
+ 
+ Lower values of PWR_FILT emphasize low frequencies, higher values of PWR_FILT
+ emphasize high frequencies.  Adjusting the PWR_FILT value allows you to
+ adjust the image frequency balance and the apparent amount of noise in the
+ image.  This may be desirable for some datasets.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHASE_FILT">
+      <Tip>Phase shift, in degrees, to apply to the input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PHASE_FILT<br> Phase shift, in degrees, to apply to the input traces.</center></b>
+<pre> Default = 45 for 2D, 90 for 3D
+ Allowed = 45 or 90
+ Theoretically correct values are PHASE_FILT = 45 for 2D migration and
+ PHASE_FILT = 90 for 3D migration.  (But migrating a single line from a 3D
+ survey to a single output line is really 2D so in that case PHASE_FILT should
+ be 45.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRINT_INC">
+      <Tip>Number of input traces between migration status prints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PRINT_INC<br> Number of input traces between migration status prints.</center></b>
+<pre> Default = 1000
+ Allowed = int &gt; 0
+ KTMIG writes informational text on CPU time and elapsed time and location of
+ input and output traces for the first few input traces and again after every
+ additional PRINT_INC input traces.
+ 
+ PRINT_INC = 0 disables migration status prints.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRINT_MEMORY">
+      <Tip>Whether memory allocation details will be printed in .rpt file?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PRINT_MEMORY<br> Whether memory allocation details will be printed in .rpt file?</center></b>
+<pre> Default = YES
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRINT_DEBUG">
+      <Tip>Print debug information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PRINT_DEBUG<br> Print debug information.</center></b>
+<pre> Default = BRIEF
+ Allowed = NONE     - no debug information is printed.
+ Allowed = BRIEF    - default debug information is printed.
+ Allowed = DETAILED - detailed debug information is printed.
+ Allowed = DEBUG    - full debug information is printed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_FOS_SCALE">
+      <Tip>Whether stack scaling is used.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_FOS_SCALE<br> Whether stack scaling is used.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If OPT_FOS_SCALE = YES, then stack scaling is used.
+ 
+ If OPT_FOS_SCALE = NO, then stack scaling is not used and fold of stack
+ sampling
+ is disabled.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOS_PWR">
+      <Tip>Fold of Stack Exponential for stack scaling.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FOS_PWR<br> Fold of Stack Exponential for stack scaling.</center></b>
+<pre> Default = 0.0
+ Allowed = 1.0 &gt;= FOS_PWR &gt;= 0.0
+ Perform stack scaling of output trace sample values by dividing the
+ composited trace sample value by the local fold raised to the FOS_PWR power.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOS_TIM_INIT">
+      <Tip>First time for sampling fold of stack, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FOS_TIM_INIT<br> First time for sampling fold of stack, in seconds.</center></b>
+<pre> Default = TSTRT
+ Allowed = real &gt;= TSTRT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOS_TIM_INC">
+      <Tip>Increment between times to sample fold of stack, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FOS_TIM_INC<br> Increment between times to sample fold of stack, in seconds.</center></b>
+<pre> Default = DT
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOS_TIM_LAST">
+      <Tip>Last time for sampling fold of stack, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FOS_TIM_LAST<br> Last time for sampling fold of stack, in seconds.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt;= FOS_TIM_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOS_TIM_TOT">
+      <Tip>Number of times for sampling fold of stack.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - FOS_TIM_TOT<br> Number of times for sampling fold of stack.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DOPP">
+      <Tip>Whether a stretch mute (Doppler mute) is used.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_DOPP<br> Whether a stretch mute (Doppler mute) is used.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If OPT_DOPP = YES, then use a stretch mute.
+ 
+ If OPT_DOPP = NO, then do not use a stretch mute.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DOPPLER">
+      <Tip>Doppler mute (stretch mute) parameter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - DOPPLER<br> Doppler mute (stretch mute) parameter.</center></b>
+<pre> Default = 3.0
+ Allowed = real &gt; 1.0
+ In general, the imaging operation causes a short time interval on the input
+ trace to occupy a larger time interval on the image trace.  DOPPLER is the
+ maximum time stretch factor allowed by the stretch mute.  Portions of the
+ migration operator that would produce a time stretch factor greater than
+ DOPPLER are muted off.
+ 
+ Larger values of DOPPLER correspond to less severe muting.  Very large values
+ may introduce low frequency artifacts.
+ 
+ Smaller values of DOPPLER may eliminate steep dips.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MUTE_TURN">
+      <Tip>Mute events whose input time decreases with output time or depth.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OPT_MUTE_TURN<br> Mute events whose input time decreases with output time or depth.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ If OPT_MUTE_TURN = NO,  then allow any input time to output relation ship.
+ If OPT_MUTE_TURN = YES, then mute when input time decreases
+                         with output time or depth.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_TAPER">
+      <Tip>Kirchhoff summation taper length, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - TIM_TAPER<br> Kirchhoff summation taper length, in seconds.</center></b>
+<pre> Default = 15 * output dt
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ktmig - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ktmig">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : KTMIG  (Kirchhoff Time MIGration)
+ Category   : migrations
+ Written    : 2001-09-14   by: Stephen Chiu
+ Revised    : 2006-08-29   by: D. Glover
+ Maturity   : production
+ Purpose    : 2D and 3D Kirchhoff time migration.
+ Portability: No known limitations.
+ Parallel   : YES
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           GENERAL DESCRIPTION
+ 
+ 
+ KTMIG is a general 2D or 3D Kirchhoff time migration process that will
+ operate in either the migrate or the model direction.
+ 
+ 
+ Coordinates
+ 
+ HDR_X and HDR_Y define the midpoint header words used as coordinates for
+ input traces and the OUTPUT image volume.  Allowed values for HDR_X and HDR_Y
+ are (7,8); (8,7); (17,18) or (18,17) only.  KTMIG always determines the
+ offset of input traces from header word 6.
+ 
+     If HDR_X and HDR_Y = 7,8 or 8,7 (grid coordinates), then KTMIG uses
+     input trace header words 7 and 8 for midpoint and 33, 34, 35 and 36 for
+     azimuth.  Header words 17 and 18 for output traces are calculated using
+     the CPS grid transform.
+ 
+     If HDR_X and HDR_Y = 17,18 or 18,17 (surveyed coordinates), then KTMIG
+     uses input trace header words 17 and 18 for midpoint and 11, 12, 14 and
+     15 for azimuth.  Header words 7 and 8 for output traces are calculated
+     using the CPS grid transform.
+ 
+ Coordinates of the stacking velocity file specified by PATH_VEL must be
+ identical to header words HDR_X and HDR_Y for 3D and to HDR_X for 2D.
+ 
+ 
+ Default Output Image Volume
+ 
+ Trace midpoint locations in the default OUTPUT image volume are specified by
+ the parameters HDR_X, X_INIT, X_INC, X_LAST, X_TOT and similar parameters for
+ the y-coordinate.  Additional parameters specify the time and offset
+ dimensions of the default output image volume.
+ 
+ Input trace midpoints need not agree exactly with trace locations defined by
+ the default output image volume.
+ 
+ The output image volume defined by the x-coordinate, y-coordinate, time and
+ offset parameters is the DEFAULT output image volume.  Depending on the
+ values assigned to the ALL_OUT, POLYGON and SPARSE parameters and input trace
+ offset values, the traces actually output may be a subset of the default
+ output image volume.
+ 
+ 
+ Output Images and Offset Bins
+ 
+ The parameters OFF_INIT, OFF_INC, OFF_LAST and OFF_TOT define a set of offset
+ bins.
+ 
+ If ONE_IMAGE = NO, then:
+ 
+     1.  Each KTMIG output image is associated with an offset bin.  Header
+     word 6 for output traces is set to the associated offset bin center
+     value.
+ 
+     2.  KTMIG migrates each offset bin separately, that is, only input traces
+     with header word 6 within a particular offset bin contribute to the
+     output image associated with that offset bin.
+ 
+     3.  The current image is output and a new one started whenever the input
+     trace stream changes to a different offset bin.
+ 
+     4.  Output images are produced only for those offset bins that are
+     occupied by input traces.
+ 
+     5.  Input traces with offset outside the range of the offset bins are
+     ignored.
+ 
+ If ONE_IMAGE = YES, then:
+ 
+     1.  Only a single image is produced regardless of input trace offset.
+ 
+     2.  Header word 6 for output traces is set to the center value of the
+     offset bin associated with the offset of the first input trace.  The
+     imaging aperture is determined by this same offset bin.
+ 
+ ONE_IMAGE = YES should only be used if virtually all input traces have offset
+ that lies within the offset bin associated with the first input trace.
+ 
+ 
+ Aperture Specification
+ 
+ The AP_MAX_X and AP_MAX_Y parameters specify the size of a rectangular
+ aperture, centered on the input trace midpoint.  No imaging will occur beyond
+ this aperture regardless of other parameter values.
+ 
+ Additionally a time dependent elliptical aperture is defined in the horizontal
+ plane with foci at the source and receiver locations.  The semi-major axis
+ (parallel to the source-receiver direction) is given by
+ offset/2 + AP_X(time), where AP_X is time dependent.  The semi-minor axis
+ (perpendicular to the source-receiver direction) is given by AP_Y(time),
+ where AP_Y is time dependent.
+ 
+ In any azimuthal direction from the input trace mid-point, no imaging will
+ occur outside the closer of either the rectangular or the elliptical aperture.
+ 
+ Three sets of aperture parameters are available, allowing you to specify
+ aperture in distance (feet or meters), grid units (units of header words 7
+ and 8) or angle in degrees.
+ 
+ 
+ Anisotropic Migration
+ 
+ KTMIG can perform transverse isotropic migration.  Eta can be specified by
+ either CONST_ETA (constant) or PATH_ETA (file containing variable eta
+ values).  The parameters TIM_NEAR, TIM_FAR and OFF_FAR specify a pseudo-mute
+ that defines the onset of noticable anisotropy within a CMP.  The anisotropic
+ migration algorithm should not significantly affect the moveout of events at
+ offsets within the pseudo-mute.
+ 
+ 
+ Offset Mute
+ 
+ The OFFSETS and OFF_TIM linked arrays constitute a time-offset mute for KTMIG.
+ This mute determines the offset of input traces that may contribute to image
+ traces at a given time.  This constraint is in addition to the restriction
+ imposed by the aperture parameters.
+ 
+ The time-offset mute can help eliminate artifacts caused by non-physical
+ mapping.  A stronger mute will reduce run-time.
+ 
+ 
+ Filter
+ 
+ KTMIG applies a filter to the input traces to correct for the effect of the
+ Kirchhoff sum.  This filter has a (frequency ** PWR_FILT) component and a
+ phase rotation component.  Theoretical values of PWR_FILT are 0.5 for 2D and
+ 1.0 for 3D.  Theoretical values of PHASE_FILT are 45 degrees for 2D and 90
+ degrees for 3D.  Lower values of PWR_FILT emphasize low frequencies, higher
+ values of PWR_FILT emphasize high frequencies.  Adjusting the PWR_FILT value
+ allows you to adjust the image frequency balance and the apparent amount of
+ noise in the image.  This may be desirable for some datasets.
+ 
+ 
+ Amplitude Balance and Stack Scaling
+ 
+ Because aperture usually increases with trace time, an output trace usually
+ receives contributions from fewer input traces shallow and from more traces
+ deep.  This may cause an amplitude imbalance on output traces.  A fold of
+ stack scaling can be applied to compensate for this imbalance.  Fold of stack
+ scaling divides the composited output trace sample value by the local fold
+ raised to a power.
+ 
+ Normally fold of stack scaling is disabled in KTMIG and any output amplitude
+ imbalance is corrected using a process such as MVXP, DBGAIN, TPOW or EXO.
+ 
+ 
+ Diagnostic Output
+ 
+ KTMIG can produce diagnostic outputs of velocity, two-way travel time,
+ amplitude factor or anti-alias coefficient if the appropriate option is
+ selected in OPT_OUTPUT.  When producing diagnostic outputs, a single trace
+ should be input and ALL_OUT set to YES.  Output trace samples will be dead
+ outside the specified aperture.
+ 
+ For normal imaging operation, set OPT_OUTPUT to IMAGE.
+ 
+ 
+ Polygons
+ 
+ The polygon parameters allow you to define one or more closed polygons on the
+ x-y image plane.  If one or more polygons are defined, then imaging is
+ performed only to traces within the polygons or on a polygon boundary.  All
+ traces in the coordinate volume will be output, but those outside the
+ polygons will be dead.
+ 
+ Polygons can be specified with the X_POLY, Y_POLY and ID_POLY linked array
+ parameters.  X and Y coordinates for a vertex are specified by X_POLY and
+ Y_POLY.
+ 
+     1.  All vertices for a single polygon must be entered sequentially
+     (clockwise or counterclockwise).
+ 
+     2.  All vertices for a single polygon must be in consecutive rows.
+ 
+     3.  All vertices for a single polygon must have the same value of
+     ID_POLY.
+ 
+     4.  Different polygons must have different values of ID_POLY (starting
+     with 1 and incrementing by 1).
+ 
+ Alternatively, polygons can be specified by a polygon file.  Polygon files
+ are ascii files whose first three columns carry the same information as
+ X_POLY, Y_POLY and ID_POLY respectively and can have an optional fourth
+ column carrying header value information.  Only the first three columns are
+ used by KTMIG.
+ 
+ The SETPOLY process requires polygon files with four columns.  Files prepared
+ for SETPOLY can be used with KTMIG, although the fourth column will be
+ ignored.
+ 
+ 
+ Sparse Output
+ 
+ It is often desirable to output a few lines or scattered CMPs rather than the
+ entire default image volume.  The sparse output option allows you to define
+ one or more distinct grids of output traces where each such grid is a subset
+ of the default image volume.
+ 
+ The first row of the SP_X parameter linked arrays defines a set of HDR_X
+ values and the first row of the SP_Y parameter linked arrays defines a set of
+ HDR_Y values.  This row defines a grid of output traces whose midpoints have
+ the HDR_X and HDR_Y values in common.  (Output trace midpoints are the
+ intersection of the HDR_X and HDR_Y values specified in the first row.)
+ 
+ Each additional row of the SP_X and SP_Y parameter linked arrays defines a
+ separate grid of output trace locations.
+ 
+ The sparse output volume is the union of all of the grids defined by the
+ entries in the SP_X and SP_Y parameter linked arrays.
+ 
+ HDR_X and HDR_Y values specified by the sparse output parameters must agree
+ exactly with trace locations defined by the default output image volume.
+ 
+ 
+ Parallelization
+ 
+ KTMIG associates CPUs into PAR_GROUPS number of independent CPU groups.
+ 
+     1.  The input dataset is partitioned into PAR_GROUPS distinct subsets,
+     with each group receiving one subset of the input dataset.
+ 
+     2.  All CPUs within a group receive the same input traces.
+ 
+     3.  Each group has its own entire image volume that is separate from the
+     image volumes associated with other groups.
+ 
+     4.  The image volume for each group is partitioned into subsets with
+     one subset for each CPU.  Each CPU will image only to the image subset
+     with which it is associated.
+ 
+ Each group should have the same number of CPUs (the number of CPUs in the job
+ should be a multiple of PAR_GROUPS).
+ 
+ If PAR_GROUPS = 1, then all CPUs contribute to a single common image.
+ 
+ If PAR_GROUPS = number of CPUs, then each CPU produces an image independent
+ of the other CPUs and these separate images are composited by KTMIG to form
+ the output.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ General
+ 
+     HDR_X and HDR_Y will normally be 7,8 (or 8,7).
+ 
+     If HDR_X and HDR_Y = 7,8 (or 8,7), then header words 7, 8, 33, 34, 35
+     and 36 on input traces must NOT be integerized (rounded).
+ 
+     If HDR_X and HDR_Y = 17,18 (or 18,17), then header words 17, 18, 11, 12,
+     14 and 15 on input traces must NOT be integerized (rounded).
+ 
+     The CPS grid transform must be set properly in CFE.
+ 
+     Coordinates of the stacking velocity file specified by PATH_VEL must be
+     identical to header words HDR_X and HDR_Y for 3D and to HDR_X for 2D.
+ 
+     All CPUs in a parallel job should have the same speed.
+ 
+ 
+ 2D vs. 3D
+ 
+ If DIMENSION = 2D, then a 2D algorithm is used, all "X" parameters pertain to
+ the inline direction, all "Y" parameters are ignored and the aperture has
+ extent in the inline direction only.  Only one 2D line can be migrated at
+ once.
+ 
+ If DIMENSION = 3D, then a 3D algorithm is used and both "X" parameters and
+ "Y" parameters are active.
+ 
+ PWR_FILT and PHASE_FILT have different default values for 2D and for 3D; be
+ sure to set them properly.
+ 
+ 
+ Input Trace Offset and Sort Order
+ 
+ Input data should always be sorted to common offsets.
+ 
+     For 3D before-stack work:
+     Usually one offset at a time is migrated and ONE_IMAGE is set to YES so
+     that input traces with offset values at a bin edge do not trigger a new
+     image.
+ 
+     For 2D before-stack work:
+     Usually ONE_IMAGE is set to NO and the entire line is migrated at once.
+     In this case input traces occupying a new offset bin will trigger the
+     start of a new image.
+ 
+ 
+ Output Trace Sort Order
+ 
+ Sort order of output traces from fastest to slowest:
+ 
+     If SORT_ORDER = X_IS FAST: HDR_X, HDR_Y, offset bin as occupied and
+     index of FCTR_VEL array.
+ 
+     If SORT_ORDER = Y_IS FAST: HDR_Y, HDR_X, offset bin as occupied and
+     index of FCTR_VEL array.
+ 
+ It may be necessary to sort output traces to the desired order.
+ 
+ 
+ Before Stack vs. After Stack Migration
+ 
+ For after stack (zero-offset) migration using KTMIG the offset header word of
+ input traces should be set to zero and you should set ONE_IMAGE = YES,
+ OFF_TOT = 1 and OFF_INIT = 0.0.  For before stack migration, the offset
+ parameters should be set to define the desired offset bins.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author   Description
+     ----        ------   -----------
+025. 2006-08-29  D. Glover Added NULLIFY statements for Intel compiler.
+ 24  2006-07-18  RSDay    Detect cps or seisspace setting for num_cpus
+ 23  2006-06-22  Hanson   Add opt_map_print.
+ 22  2006-04-18  Hanson   Register arrays.
+ 21  2006-01-09  Hanson   Fix unreferenced variables.
+ 20. 2005-01-31  Hanson   Add norm_aa
+ 19. 2004-09-01  Done     Add gui parameter SELECT_PATH_POLY_LOAD. Clicking
+                          this button brings up a file selection dialog.
+                          If an ascii file containing x and y coordinates
+                          for polygon vertices is selected, those vertices
+                          are immediately loaded into the polygon arrays
+                          on the gui. During processing, the polygon is
+                          obtained from the parameter cache, not the file.
+ 18. 2004-03-15  Done     Change the strings for options for the drop down
+                          list parameters OPT_VEL and OPT_ETA to CONSTANT
+                          and PATH. This is what is used in kmig. Add code
+                          to ensure that existing work files will have these
+                          values changed when the work file is loaded.
+ 17. 2003-12-15  Done     Make default value of OPT_STACK=YES. If OPT_TROT
+                          changes to NO, force OPT_STACK=YES.
+ 16. 2003-12-05  Done     Added Opt-Stack. Rename parameters PATH_TROT to be
+                          ROOT_TROT and PATH_TROT_BUTTON to be
+                          ROOT_TROT_BUTTON.
+ 15. 2003-10-01  Done     Change the default value for parameter OPT_AMPLITUDE
+                          to HPHILLIPS.
+ 14. 2003-10-01  Done     Make MAP_APPLY_I the default value for parameter
+                          OPT_MAP_APPLY. Add kmig parameter OPT_SUM_REDUCE to
+                          the ktmig gui. Add kmig amplitude scaling parameters
+                          OPT_AMPLITUDE, OPT_AMP_COSINE, PWR_AMP_SCALE_INP,
+                          MIN_AMP_SCALE_INP, PWR_AMP_SCALE_OUT, and
+                          MIN_AMP_SCALE_OUT.
+ 13. 2003-09-30  Hanson   Use kfun set routines.
+ 12. 2003-06-27  Hanson   Add OPT_VTRC.
+ 11. 2003-06-05  Done     Remove the FCTR_AA parameter at request of users.
+                          Add PRINT_DEBUG parameter and use kfun_module
+                          to control debug print level.
+ 10. 2003-04-22  Done     Add checks on FCTR_VEL and FCTR_ETA arrays for
+                          FNIL. For trace processing, verify that array
+                          lengths are the same for the two arrays. Fix
+                          sensitivity control on FCTR_VEL_ARRAYSET.
+  9. 2003-04-21  Done     Add parameters NUM_CPUS, CPUS_PER_GROUP, and
+                          DIV_TYPE to gui Parallelization Parameters.
+                          Reintroduce parameter FCTR_AA used for anti-aliasing
+                          filter. Introduce parameter array FCTR_ETA, which
+                          forms an arrayset with FCTR_VEL.
+  8. 2003-03-05  Goodger  Move from alpha to beta.
+  6. 2002-07-26  Hanson   Add OPT_MUTE_TURN, OPT_TROT.
+  5. 2002-04-11  Hanson   Adopt expanded module structure.
+  4. 2002-02-19  S Chiu   Add parameters of variable time steps.
+  3. 2002-02-04  S Chiu   Add parameters of DIST_AP_X_INC, DIST_AP_Y_INC,
+                          GRID_AP_X_INC, and GRID_AP_Y_INC. Pass appropriate
+                          parameters of AP_X_INC and AP_Y_INC to KMIG.
+  2. 2001-09-18  S Chiu   Update Global of NDPT, TSTRT and DT.
+  1. 2001-09-14  S Chiu   Initial version.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ General
+ 
+     HDR_X and HDR_Y will normally be 7,8 (or 8,7).
+ 
+     If HDR_X and HDR_Y = 7,8 (or 8,7), then header words 7, 8, 33, 34, 35
+     and 36 on input traces must NOT be integerized (rounded).
+ 
+     If HDR_X and HDR_Y = 17,18 (or 18,17), then header words 17, 18, 11, 12,
+     14 and 15 on input traces must NOT be integerized (rounded).
+ 
+     The CPS grid transform must be set properly in CFE.
+ 
+     Coordinates of the stacking velocity file specified by PATH_VEL must be
+     identical to header words HDR_X and HDR_Y for 3D and to HDR_X for 2D.
+ 
+     All CPUs in a parallel job should have the same speed.
+ 
+ 
+ 2D vs. 3D
+ 
+ If DIMENSION = 3D, then a 3D algorithm is used and both "X" parameters and
+     "Y" parameters are active.  The migration velocity file must be 3D.
+ 
+ If DIMENSION = 2D, then a 2D algorithm is used, all "X" parameters pertain to
+     the inline direction, all "Y" parameters are ignored and the aperture has
+     extent in the inline direction only.  Only one 2D line can be migrated in
+     each job.  The migration velocity file may be 2D or 3D.
+ 
+ If DIMENSION = MULT_2D, then a 2D algorithm is used, all "X" parameters
+     pertain to the inline direction and the aperture has extent in the inline
+     direction only.  HOWEVER the "Y" parameters must be set appropriately for
+     the HDR_Y values in the separate 2D lines.  Several 2D lines can be
+     migrated in one job.  The migration velocity file must be 3D.
+ 
+ PWR_FILT and PHASE_FILT have different default values for 2D and for 3D; be
+ sure to set them properly.
+ 
+ 
+ Input Trace Offset and Sort Order
+ 
+ Input data should always be sorted to common offsets.
+ 
+     For 3D before-stack work:
+     Usually one offset at a time is migrated and ONE_IMAGE is set to YES so
+     that input traces with offset values at a bin edge do not trigger a new
+     image.
+ 
+     For 2D before-stack work:
+     Usually ONE_IMAGE is set to NO and the entire line is migrated at once.
+     In this case input traces occupying a new offset bin will trigger the
+     start of a new image.
+ 
+ 
+ Output Trace Sort Order
+ 
+ Sort order of output traces from fastest to slowest:
+ 
+     If SORT_ORDER = X_IS FAST: Index of FCTR_VEL array, HDR_X, HDR_Y, offset
+     bin as occupied.
+ 
+     If SORT_ORDER = Y_IS FAST: Index of FCTR_VEL array, HDR_Y, HDR_X, offset
+     bin as occupied.
+ 
+ It may be necessary to sort output traces to the desired order.
+ 
+ 
+ Before Stack vs. After Stack Migration
+ 
+ For after stack (zero-offset) migration using KTMIG the offset header word of
+ input traces should be set to zero and you should set ONE_IMAGE = YES,
+ OFF_TOT = 1 and OFF_INIT = 0.0.  For before stack migration, the offset
+ parameters should be set to define the desired offset bins.
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

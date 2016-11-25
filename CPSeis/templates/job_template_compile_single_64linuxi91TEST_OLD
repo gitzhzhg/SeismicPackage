@@ -1,0 +1,13 @@
+set -x
+unalias -a
+echo "#! /bin/tcsh -x" > $RSHCOMPILE
+echo "unalias -a " >> $RSHCOMPILE
+echo "cd /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID" >> $RSHCOMPILE
+echo "ifort6491_f90 -c -O3 -unroll -pthread -no-prec-div -parallel -fPIC -I /home/sps/beta/modules/64linuxi91TEST JJJJJ.f90" >> $RSHCOMPILE
+echo "ifort6491_f90 -i-static JJJJJ.o -o JJJJJ.exe \\" >> $RSHCOMPILE
+echo "-L/home/sps/lib/64linuxi91TEST -lbeta -lpthread -lm -llmrk_stubs -lmpi_stubs -lfft \\" >> $RSHCOMPILE
+echo "-lrt -lpthread -ldl" >> $RSHCOMPILE
+chmod u+x $RSHCOMPILE
+sleep 10
+rsh hoeplc08 $RSHCOMPILE
+sleep 10

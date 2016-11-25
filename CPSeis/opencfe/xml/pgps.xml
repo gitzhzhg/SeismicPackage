@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="pgps" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PGPSPROCESS" title="PGPS Process" rows="26" columns="80">
+    <Label keyword="COMMENT_PREPAREGRIDFILESFORPERMA" alignment="center">Prepare Grid files for Permanent Save</Label>
+    <Label keyword="COMMENT_PGPSFILESELECT" alignment="center">PGPS File Select</Label>
+    <Label keyword="LABEL_OPT_FILE" alignment="left">OPT_FILE=</Label>
+    <Field keyword="OPT_FILE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CHECKFILE" alignment="left">CHECKFILE=</Label>
+    <Field keyword="CHECKFILE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="TEST_BEYOND_SYMLINKS">Test Beyond Symbolic Links</Button>
+    <Button keyword="SELECT_LATEST_PATHNAME">Select PATHNAME</Button>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS  PATHNAMES">
+     <Array keyword="STATUS" type="string" maxLength="8  " columnName="STATUS" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="PATHNAMES" type="string" maxLength="128" columnName="PATHNAMES" editable="yes" sensitive="yes" columnSize="55"/>
+    </ArraySet>
+    <Button keyword="SELECT_PATH_LIST">Select PATH_LIST</Button>
+    <Label keyword="EQLAB_PATH_LIST" alignment="left">=</Label>
+    <Field keyword="PATH_LIST" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PREPAREGRIDFILESFORPERMA" xPos="15" yPos="1" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_PGPSFILESELECT" xPos="23" yPos="3" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_FILE" xPos="10" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FILE" xPos="19" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CHECKFILE" xPos="48" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CHECKFILE" xPos="58" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TEST_BEYOND_SYMLINKS" xPos="10" yPos="8" xSize="26" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_LATEST_PATHNAME" xPos="10" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="10" yPos="11" xSize="66" ySize="11" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST" xPos="2" yPos="24" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_LIST" xPos="18" yPos="24" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_LIST" xPos="19" yPos="24" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_INFO" xPos="19" yPos="25" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_FILE">
+      <Tip>Source of input files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - OPT_FILE<br> Source of input files.</center></b>
+<pre> Default = PATHNAMES
+ Allowed = PATHNAMES, PATH_LIST
+ If OPT_FILE = PATHNAMES, file(s) listed in PATHNAMES array.
+ If OPT_FILE = PATH_LIST, file(s) listed in file indicated by PATH_LIST.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CHECKFILE">
+      <Tip>Check that the file is valid trace file with consistent globals.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - CHECKFILE<br> Check that the file is valid trace file with consistent globals.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ CFE can check the file for consistency and existence, and in the process will
+ load special globals (scalar ones) for subsequent job processes to use.
+ These are so that GVS, some Migrations, etc. will have proper globals set
+ by the input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TEST_BEYOND_SYMLINKS">
+      <Tip>Forces more thorough file STATUS checking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - TEST_BEYOND_SYMLINKS<br> Forces more thorough file STATUS checking.</center></b>
+<pre> Default behavior is to not pursue file STATUS checking beyond the symbolic
+ links themselves.  Pushing this button causes more thorough file STATUS
+ information to be provided.  Refrain from pushing this button during periods
+ of NFS or disk problems.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LATEST_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - SELECT_LATEST_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>File status (if CHECKSTATUS=YES).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - STATUS<br> File status (if CHECKSTATUS=YES).</center></b>
+<pre>  R  -- File found and readable.
+ RE  -- File not found or not readable.
+  W  -- File found and writable.
+  C  -- File not found, but creatable.
+ CE  -- File not found and not creatable.
+ WE  -- File exists and can not be overwritten.  Checks both file and
+        directory permissions.
+ WB  -- Blank filename.
+ NTF -- File not a trc, cmpr, or segy file (only if CHECKFILE == YES).
+ BG  -- File globals disagree with job (only if CHECKFILE == YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES">
+      <Tip>Pathname(s) for the file(s) to be read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PATHNAMES<br> Pathname(s) for the file(s) to be read.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of file(s), including optional node, userid, and dir.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST">
+      <Tip>Choose PATH_LIST with a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - SELECT_PATH_LIST<br> Choose PATH_LIST with a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST">
+      <Tip>ASCII file containing list of file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PATH_LIST<br> ASCII file containing list of file names.</center></b>
+<pre> Default = blank
+ Allowed = char
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_INFO">
+      <Tip>File status for PATH_LIST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PATH_LIST_INFO<br> File status for PATH_LIST.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="PGPSPARAMETERS" title="PGPS Parameters" rows="24" columns="80">
+    <Label keyword="LABEL_PATH_OUTFILES" alignment="left">PATH_OUTFILES=</Label>
+    <Field keyword="PATH_OUTFILES" type="string" maxLength="60" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SORT_ORDER" alignment="left">SORT_ORDER=</Label>
+    <Field keyword="SORT_ORDER" type="string" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X1" alignment="left">X1=</Label>
+    <Field keyword="X1" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y1" alignment="left">Y1=</Label>
+    <Field keyword="Y1" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X2" alignment="left">X2=</Label>
+    <Field keyword="X2" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y2" alignment="left">Y2=</Label>
+    <Field keyword="Y2" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_PATH_OUTFILES" xPos="1" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_OUTFILES" xPos="15" yPos="1" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SORT_ORDER" xPos="1" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SORT_ORDER" xPos="12" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X1" xPos="1" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X1" xPos="4" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y1" xPos="28" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y1" xPos="31" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X2" xPos="1" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X2" xPos="4" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y2" xPos="28" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y2" xPos="31" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PATH_OUTFILES">
+      <Tip>Path name for output trcio files</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PATH_OUTFILES<br> Path name for output trcio files</center></b>
+<pre> Default = SAME
+ Allowed = SAME or Valid path
+ If PATH_OUTFILES=SAME, the output file will be put in the same directory as
+ its corresponding input file.  If a path is given, all output files will
+ be put in the directory indicated by path.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_ORDER">
+      <Tip>The output order of the resulting trcio files</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - SORT_ORDER<br> The output order of the resulting trcio files</center></b>
+<pre> Default = ZXY
+ Allowed = Any combination of Z, X, and Y.
+ Z value is depth, X value is XGRID, and Y value is YGRID.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X1">
+      <Tip>First value to accept along the X-axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - X1<br> First value to accept along the X-axis</center></b>
+<pre> Default = 1
+ Allowed = Integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y1">
+      <Tip>First value to accept along the Y-axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - Y1<br> First value to accept along the Y-axis</center></b>
+<pre> Default = 1
+ Allowed = Integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X2">
+      <Tip>Last value to accept along the Y-axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - X2<br> Last value to accept along the Y-axis</center></b>
+<pre> Default = 2**30
+ Allowed = Integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y2">
+      <Tip>Last value to accept along the Y-axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - Y2<br> Last value to accept along the Y-axis</center></b>
+<pre> Default = 2**30
+ Allowed = Integer</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pgps - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="pgps">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PGPS
+ Category   : io
+ Written    : 2002-06-28   by: Karen Goodger
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Prepare grid files for permanent save.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ PGPS reads grid files containing velocity models and converts them to trcio
+ files.  The resulting output files will have the text "_vmod" appended to
+ the file name, and the output file extension will be ".trc".
+ Multiple _vmod.trc files can be input into TRIN.  TRIN checks the input
+ file names for the string "_vmod.trc" to determine if this is a velocity
+ model permsave job.  If all files names have this string, TRIN will set
+ header word 31 to a 1 for the first trace in every file.  TTROT will use
+ this header word to determine the separation between files, and will write
+ an eof between each vmod file.  TRIN also writes a file called
+ %trin_filenames, which contains the names of the input files.  This file
+ is saved along with the files specified in the TTROT PATH_PS parameter.
+ TTRIN uses the %trin_filenames file to know how to name the vmod files
+ upon restore.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+  It is best if the grid and hgrid files to be saved are in a directory
+  separate from other files.
+ 
+                     To permanent save velocity model files
+  1) Use PGPS to Prepare Grid files for Permanent Save.  The output will be
+     a .trc file and a .modgrid file.
+  2) Use permsave to prepare the list of hgrid and modgrid files.  There
+     should be nothing in the list but hgrid and modgrid files.
+  3) Build a TRIN/TTROT job.  Input to TRIN will be the _vmod files from
+     step 1.  In TTROT, set the TYPE_OUT parameter to PS_VMOD.  Fill in
+     PATH_PS with the list from step 2.
+ 
+                     To restore velocity model files
+  1) Build a job with TTRIN only.  Fill in PATH_VMOD.  The vmod, hgrid, and
+     modgrid files will be written to this directory.  It must be answered.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author         Description
+     ----        ------         -----------
+  6. 2006-09-11  Stoeckley      Repl pc_register_tab_group w HelpSection line.
+  5. 2006-08-24  D. Glover      Added NULLIFY statements for Intel compiler.
+  4. 2006-06-20  Stoeckley      Add pc_register_tab_group for SeisSpace.
+  3. 2005-04-11  Karen Goodger  Set numtr global to make the parameter
+                                cache happy.
+  2. 2002-08-12  Karen Goodger  Add more documentation.
+  1. 2002-06-28  Karen Goodger  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

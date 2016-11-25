@@ -1,0 +1,186 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : install_spws_links
+# Category   : stand-alone
+# Written    : 2004-02-11   by: Tom Stoeckley
+# Revised    : 2004-02-11   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Install links for SPWS programs and scripts for public use.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is a utility to install (or reinstall) links for SPWS program
+# executables and scripts for public use.
+#
+# A link is made in the /apps/geophysics directory for each of the following:
+#   (1) All programs           in $SPWSINSTALLDIR/bin/$ARCHITECTURE.
+#   (2) All scripts            in $SPWSINSTALLDIR/scripts.
+#   (3) All app-defaults files in $SPWSINSTALLDIR/app-defaults.
+#   (4) All help files         in $SPWSINSTALLDIR/app-defaults.
+#
+# Example of file names and locations:
+#
+#   installed program:           $SPWSINSTALLDIR/bin/sparc-sun-solaris/ glotch
+#   link:                       /apps/geophysics/bin/                   glotch
+#
+#   installed app-defaults file: $SPWSINSTALLDIR/app-defaults/ Glotch
+#   link:                       /apps/geophysics/app-defaults/ Glotch
+#
+#   installed help file:         $SPWSINSTALLDIR/app-defaults/ Glotch_help
+#   link:                       /apps/geophysics/app-defaults/ Glotch_help
+#
+# You must type the following in any directory:
+#
+#                       install_spws_links
+#
+# This install_spws_links script must be run on a node for each supported
+# architecture.
+#
+#-------------------------------------------------------------------------------
+#                                WARNING
+#
+# The following directories must contain ONLY the files for which links are
+# desired.  Any other files (such as test files, old versions which are not
+# to be used, tar files, etc.) should be moved to a subdirectory with a name
+# such as obsolete_or_reference.  Otherwise a link in /apps/geophysics will
+# be established for the unwanted file.
+#
+#                   $SPWSINSTALLDIR/bin/$ARCHITECTURE
+#                   $SPWSINSTALLDIR/scripts
+#                   $SPWSINSTALLDIR/app-defaults
+#
+# (Any subdirectories under the above directories are acceptable.)
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#         SPWSINSTALLDIR   normally ~spws/install or /usr/app/vendors/spws
+#         ARCHITECTURE     normally sparc-sun-solaris or ix86-intel-linux
+#         USER             must be spws
+#
+# Note: ~spws/install is simply a link to /usr/app/vendors/spws.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2004-02-11  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: install_spws_links,v 1.1 2004/03/04 13:12:07 wjdone Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSINSTALLDIR == 0 || $SPWSINSTALLDIR == "") then
+     echo environment variable SPWSINSTALLDIR not set.
+     exit
+endif
+
+if($?ARCHITECTURE == 0 || $ARCHITECTURE == "") then
+     echo environment variable ARCHITECTURE not set.
+     exit
+endif
+
+if($?USER == 0 || $USER != "spws") then
+     echo environment variable USER must be spws.
+     exit
+endif
+
+
+##---------------- establish links for program executables -----------------##
+##---------------- establish links for program executables -----------------##
+##---------------- establish links for program executables -----------------##
+
+
+echo ""
+set programs = `\ls $SPWSINSTALLDIR/bin/$ARCHITECTURE`
+
+foreach program ($programs)
+  set install_program = $SPWSINSTALLDIR/bin/$ARCHITECTURE/$program
+  set link_program    = /apps/geophysics/bin/$program
+  if(! -f $install_program) continue
+  if(-e $link_program) \rm $link_program
+  ln -s $install_program $link_program
+  echo "link established for program   $program"
+end
+
+
+##--------- establish links for app-defaults files and help files ----------##
+##--------- establish links for app-defaults files and help files ----------##
+##--------- establish links for app-defaults files and help files ----------##
+
+
+echo ""
+set appfiles = `\ls $SPWSINSTALLDIR/app-defaults`
+
+foreach appfile ($appfiles)
+  set install_appfile = $SPWSINSTALLDIR/app-defaults/$appfile
+  set link_appfile    = /apps/geophysics/app-defaults/$appfile
+  if(! -f $install_appfile) continue
+  if(-e $link_appfile) \rm $link_appfile
+  ln -s $install_appfile $link_appfile
+  echo "link established for appfile   $appfile"
+end
+
+
+##-------------------- establish links for scripts -------------------------##
+##-------------------- establish links for scripts -------------------------##
+##-------------------- establish links for scripts -------------------------##
+
+
+echo ""
+set scripts = `\ls $SPWSINSTALLDIR/scripts`
+
+foreach script ($scripts)
+  set install_script = $SPWSINSTALLDIR/scripts/$script
+  set link_script    = /apps/geophysics/bin/$script
+  if(! -f $install_script) continue
+  if(-e $link_script) \rm $link_script
+  ln -s $install_script $link_script
+  echo "link established for script   $script"
+end
+echo ""
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

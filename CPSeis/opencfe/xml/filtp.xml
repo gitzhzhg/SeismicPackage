@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="filtp" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FILTPPROCESS" title="FILTP Process" rows="24" columns="80">
+    <Label keyword="COMMENT_GENERATEFILTERPANELS" alignment="center">Generate filter panels.</Label>
+    <Label keyword="LABEL_FILTER_TYPE" alignment="left">FILTER_TYPE</Label>
+    <Field keyword="FILTER_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="FREQ_LOW_NONE_ARRAYSET" label="FREQ_LOW_NONE FREQ_LOW_FULL FREQ_HIGH_FULL FREQ_HIGH_NONE PHASE">
+     <Array keyword="FREQ_LOW_NONE" type="float" maxLength="14 " columnName="FREQ_LOW_NONE" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="FREQ_LOW_FULL" type="float" maxLength="14 " columnName="FREQ_LOW_FULL" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="FREQ_HIGH_FULL" type="float" maxLength="15 " columnName="FREQ_HIGH_FULL" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="FREQ_HIGH_NONE" type="float" maxLength="14 " columnName="FREQ_HIGH_NONE" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="PHASE" type="float" maxLength="6  " columnName=" PHASE" editable="yes" sensitive="yes" columnSize="6"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_GENERATEFILTERPANELS" xPos="13" yPos="1" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FILTER_TYPE" xPos="1" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILTER_TYPE" xPos="13" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="FREQ_LOW_NONE_ARRAYSET" xPos="1" yPos="5" xSize="66" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FILTER_TYPE">
+      <Tip>Type or filter to use. BANDPASS, HIGHPASS, LOWPASS, ...</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - FILTER_TYPE<br> Type or filter to use. BANDPASS, HIGHPASS, LOWPASS, ...</center></b>
+<pre> Default = BANDPASS
+ Allowed = character scalar
+ Several filter types are available. They include:
+   NONE, BANDPASS, HIGHPASS, LOWPASS, ALLPASS, and BANDREJECT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Low frequency limit where amp spectrum diminishes to 0.0, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - FREQ_LOW_NONE<br> Low frequency limit where amp spectrum diminishes to 0.0, in Hz.</center></b>
+<pre> Default =  -
+ Allowed = real array</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_FULL">
+      <Tip>Low frequency point where amp spectrum is full pass, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - FREQ_LOW_FULL<br> Low frequency point where amp spectrum is full pass, in Hz.</center></b>
+<pre> Default =  -
+ Allowed = real array</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>High frequency point where amp spectrum is full pass, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - FREQ_HIGH_FULL<br> High frequency point where amp spectrum is full pass, in Hz.</center></b>
+<pre> Default =  -
+ Allowed = real array</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_NONE">
+      <Tip>High frequency limit where amp spectrum diminishes to 0.0, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - FREQ_HIGH_NONE<br> High frequency limit where amp spectrum diminishes to 0.0, in Hz.</center></b>
+<pre> Default =  -
+ Allowed = real array</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHASE">
+      <Tip>Array of filter band phase, in degrees.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - PHASE<br> Array of filter band phase, in degrees.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>filtp - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="filtp">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FILTP
+ Category   : filters
+ Written    : 1989-05-08   by: John Sinton
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Generate filter panels.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ FILTP produces filter panel diagnostics by generating a filtered version of
+ each input trace with each filter band specified.  It then calls BINSORT
+ internally so that the filtered traces are output in functional panels, with
+ each panel being the input dataset filtered by one of the specified filter
+ bands.  Filter panels are output with the filters in the same order as
+ specified by the parameters.  FILTP does all filtering in the frequency
+ domain.
+ 
+ Output Header Words
+ Each output panel is labeled sequentially by HDR_PANEL, the panel number.
+ It is also labeled with the low frequency limit in HDR_SCRATCH_30 and the
+ high frequency limit in HDR_SCRATCH_31 (for help in annotation).
+ 
+ FILTP does not alter the contents of HDR_TOP_MUTE or HDR_BOTTOM_MUTE, even
+ though filter tails get added to the traces.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ FILTP duplicates parameters found in TSVF, which is normally the filter
+ process used for production work.
+ 
+ Because FILTP is a frequency domain process and TSVF is a time domain
+ process, there may be a difference in their operation at very low
+ frequencies.   In the case of very low frequencies, it may be necessary to
+ use an operator in TSVF longer than the default in order to obtain similar
+ results from both processes.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 13. 2006-09-11 Stoeckley  Add call to pc_register_array_names for SeisSpace.
+012. 2006-01-10  B. Menger   Removed Unused Variables.
+ 11. 2002-01-07 Stoeckley  Move trap subroutine to different location in code
+                            to make the intel compiler happy.
+ 10. 2001-04-30 Stoeckley  Change wrapup flag.
+  9. 2000-11-17 Stoeckley  Divide output trace by scale factor to return
+                            the trace to its original amplitude range.
+  8. 2000-06-19 O'Brien    Replaced TSORT with BINSORT
+                           Allow multiple traces on input
+                           Changed to a ONESET process
+                           Reworked array traps
+  7. 2000-04-12 O'Brien    Change filter definitions to new convention
+                           Implemented EzGUI layout definitions
+                           Brought xml tags up to date
+                           Added RCS character ID variable
+  6. 1999-10-26 O'Brien    Full f90 conversion.
+  5. 1998-11-10 Vunderink  Begin using the f90 compiler.
+  4. 1991-12-17 Peterson   Increase filter arrays size from 15 to 24.
+  3. 1990-11-08 Ball       CFT77 change  to CALL TVFBPS (INDX,1)
+  2. 1989-05-31 Baumel     Fix so FTAPER and PHASE work properly.
+  1. 1989-05-08 Sinton     First version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

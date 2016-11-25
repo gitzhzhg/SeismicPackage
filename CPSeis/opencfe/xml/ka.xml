@@ -1,0 +1,1914 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ka" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="INPUTANDOUTPUT" title="Input and Output" rows="30" columns="80">
+    <Label keyword="COMMENT_KOMBOANALYSIS" alignment="center">Kombo Analysis</Label>
+    <Label keyword="LABEL_NUM_CPUS" alignment="left">NUM_CPUS    =</Label>
+    <Field keyword="NUM_CPUS" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INPUTMENU" alignment="left">Input Menu</Label>
+    <Field keyword="MSG_IN" type="string" maxLength="20" editable="no" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_IDENT" alignment="left">HDR_IDENT        =</Label>
+    <Field keyword="HDR_IDENT" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDCONTAININGTRAC" alignment="left">Header word containing trace identification.</Label>
+    <Label keyword="LABEL_HDR_FLATTENING" alignment="left">HDR_FLATTENING   =</Label>
+    <Field keyword="HDR_FLATTENING" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDCONTAININGFLAT" alignment="left">Header word containing flattening time (sec).</Label>
+    <Label keyword="LABEL_TRACE_SAMPLE_UNIT" alignment="left">TRACE_SAMPLE_UNIT=</Label>
+    <Field keyword="TRACE_SAMPLE_UNIT" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WHETHERTRACESAREINTIMEOR" alignment="left">Whether traces are in time or depth.</Label>
+    <Field keyword="MSG01" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG02" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG03" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG04" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG05" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG06" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG07" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Field keyword="MSG08" type="string" maxLength="60" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_MSG_OUT" alignment="left">Output Menu</Label>
+    <Field keyword="MSG_OUT" type="string" maxLength="47" editable="no" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="COMMENT_PASS_THROUGH" alignment="left">PASS_THROUGH   =</Label>
+    <Field keyword="PASS_THROUGH" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTALLORIGINALINPUTVO" alignment="left">Output all original input volumes.</Label>
+    <Label keyword="COMMENT_OUTPUT_BETA" alignment="left">OUTPUT_BETA    =</Label>
+    <Field keyword="OUTPUT_BETA" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTEDITEDBETAATTRIBUT" alignment="left">Output edited BETA attribute volume.</Label>
+    <Field keyword="MSG_O_BETA" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUT_XDIP" alignment="left">OUTPUT_XDIP    =</Label>
+    <Field keyword="OUTPUT_XDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTEDITEDXDIPATTRIBUT" alignment="left">Output edited XDIP attribute volume.</Label>
+    <Field keyword="MSG_O_XDIP" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUT_YDIP" alignment="left">OUTPUT_YDIP    =</Label>
+    <Field keyword="OUTPUT_YDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTEDITEDYDIPATTRIBUT" alignment="left">Output edited YDIP attribute volume.</Label>
+    <Field keyword="MSG_O_YDIP" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUT_WEIGHT" alignment="left">OUTPUT_WEIGHT  =</Label>
+    <Field keyword="OUTPUT_WEIGHT" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTWEIGHTVOLUME" alignment="left">Output weight volume.</Label>
+    <Field keyword="MSG_O_WEIGHT" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUT_GAMMA" alignment="left">OUTPUT_GAMMA   =</Label>
+    <Field keyword="OUTPUT_GAMMA" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTGAMMAVOLUME" alignment="left">Output GAMMA volume.</Label>
+    <Field keyword="MSG_O_GAMMA" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUT_VAV" alignment="left">OUTPUT_VAV     =</Label>
+    <Field keyword="OUTPUT_VAV" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTMODIFIEDAVERAGEVEL" alignment="left">Output modified average velocity volume.</Label>
+    <Field keyword="MSG_O_VAV" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_KOMBOANALYSIS" xPos="28" yPos="1" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_CPUS" xPos="2" yPos="2" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_CPUS" xPos="15" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_INPUTMENU" xPos="2" yPos="3" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_IN" xPos="14" yPos="3" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="4" xSize="78" ySize="14"/>
+     <Constraints component="LABEL_HDR_IDENT" xPos="2" yPos="5" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_IDENT" xPos="20" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDCONTAININGTRAC" xPos="27" yPos="5" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLATTENING" xPos="2" yPos="6" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLATTENING" xPos="20" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDCONTAININGFLAT" xPos="27" yPos="6" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TRACE_SAMPLE_UNIT" xPos="2" yPos="7" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TRACE_SAMPLE_UNIT" xPos="20" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_WHETHERTRACESAREINTIMEOR" xPos="27" yPos="7" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG01" xPos="7" yPos="9" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG02" xPos="7" yPos="10" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG03" xPos="7" yPos="11" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG04" xPos="7" yPos="12" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG05" xPos="7" yPos="13" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG06" xPos="7" yPos="14" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG07" xPos="7" yPos="15" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG08" xPos="7" yPos="16" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MSG_OUT" xPos="2" yPos="19" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSG_OUT" xPos="14" yPos="19" xSize="47" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="20" xSize="78" ySize="10"/>
+     <Constraints component="COMMENT_PASS_THROUGH" xPos="2" yPos="21" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PASS_THROUGH" xPos="18" yPos="21" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTALLORIGINALINPUTVO" xPos="23" yPos="21" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUT_BETA" xPos="2" yPos="23" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OUTPUT_BETA" xPos="18" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTEDITEDBETAATTRIBUT" xPos="23" yPos="23" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_O_BETA" xPos="65" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUT_XDIP" xPos="2" yPos="24" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OUTPUT_XDIP" xPos="18" yPos="24" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTEDITEDXDIPATTRIBUT" xPos="23" yPos="24" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_O_XDIP" xPos="65" yPos="24" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUT_YDIP" xPos="2" yPos="25" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OUTPUT_YDIP" xPos="18" yPos="25" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTEDITEDYDIPATTRIBUT" xPos="23" yPos="25" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_O_YDIP" xPos="65" yPos="25" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUT_WEIGHT" xPos="2" yPos="26" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OUTPUT_WEIGHT" xPos="18" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTWEIGHTVOLUME" xPos="23" yPos="26" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_O_WEIGHT" xPos="65" yPos="26" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUT_GAMMA" xPos="2" yPos="27" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OUTPUT_GAMMA" xPos="18" yPos="27" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTGAMMAVOLUME" xPos="23" yPos="27" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_O_GAMMA" xPos="65" yPos="27" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUT_VAV" xPos="2" yPos="28" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OUTPUT_VAV" xPos="18" yPos="28" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTMODIFIEDAVERAGEVEL" xPos="23" yPos="28" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MSG_O_VAV" xPos="65" yPos="28" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="NUM_CPUS">
+      <Tip>This is a global and you cannot set it.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - NUM_CPUS<br> This is a global and you cannot set it.</center></b>
+<pre> Default = 1
+ Allowed &gt;= 1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_IN">
+      <Tip>Number of input traces for each CMP location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_IN<br> Number of input traces for each CMP location.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_IDENT">
+      <Tip>Header word containing trace identification.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - HDR_IDENT<br> Header word containing trace identification.</center></b>
+<pre> Default = 48
+ Allowed = 1-NWIH   (normally 48-55 or 65-NWIH)
+ 
+ The following identification integers must reside in the specified
+ header word of each trace:
+ 
+  input    81  The residual NMO velocity ratio       (BETA attribute).
+  input    88  The structural dip in the X direction (XDIP attribute).
+  input    89  The structural dip in the Y direction (YDIP attribute).
+  input    82  The RMS amplitude stacked trace for this CMP.
+  input    83  The maximum absolute amplitude stacked trace for this CMP.
+  input    71  The semblance calculated along the residual NMO curve.
+  input    90  The semblance calculated along the structural dip.
+  input    51  The input average velocity.
+  output   91  The weight volume                (calculated by this process).
+  output   84  The GAMMA volume                 (calculated by this process).
+  output   85  The output average velocity         (edited average velocity).
+  output  181  The residual NMO velocity ratio       (edited BETA attribute).
+  output  188  The structural dip in the X direction (edited XDIP attribute).
+  output  189  The structural dip in the Y direction (edited YDIP attribute).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLATTENING">
+      <Tip>Header word containing flattening time (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - HDR_FLATTENING<br> Header word containing flattening time (seconds).</center></b>
+<pre> Default = 0
+ Allowed = 0-NWIH   (normally 0 or 48-55 or 65-NWIH)
+ 
+ Each WEIGHT and ATTRIBUTE trace will be flattened using the flattening
+ time in the specified trace header word.
+ 
+ The traces are flattened before anomaly editing and smoothing.
+ The traces are unflattened after anomaly editing and smoothing.
+ 
+ The traces are flattened by shifting the flattening time to zero.
+ The shifts are performed by shifting the traces by whole sample intervals
+ so that no interpolation between trace samples will be done.
+ 
+ New trace values shifted in from off the end of the trace will be set to NIL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRACE_SAMPLE_UNIT">
+      <Tip>Whether traces are in time or depth.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - TRACE_SAMPLE_UNIT<br> Whether traces are in time or depth.</center></b>
+<pre> Default = DEPTH
+ Allowed = TIME or DEPTH
+ 
+ This parameter is needed only when calculating interval velocities from
+ an average velocity trace.  The algorithm is different depending on whether
+ the trace sample interval corresponds to constant time steps or constant
+ depth steps.
+ 
+ This parameter is used only when applying interval velocity constraints
+ to the BETA attribute.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG01">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG01<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG02">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG02<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG03">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG03<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG04">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG04<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG05">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG05<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG06">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG06<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG07">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG07<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG08">
+      <Tip>Information about required input traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG08<br> Information about required input traces.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MSG_OUT">
+      <Tip>Number of output traces for each CMP location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_OUT<br> Number of output traces for each CMP location.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PASS_THROUGH">
+      <Tip>Whether to output all of the original input volumes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - PASS_THROUGH<br> Whether to output all of the original input volumes.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ If YES, all of the original (unmodified) input traces will be output along
+ with the requested output traces.  This choice is useful if you wish to
+ follow one instance of KA with another in the same job.
+ 
+ If NO, the original input traces will not be output.  Depending on the
+ number of input traces in a gather, and the parameter choices, this can
+ be a significant time savings.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_BETA">
+      <Tip>Whether to output an edited BETA attribute volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OUTPUT_BETA<br> Whether to output an edited BETA attribute volume.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The output BETA attribute volume will be the edited and smoothed version
+ of the input BETA attribute volume.
+ 
+ BETA = (input average velocity / output average velocity)**2 - 1
+ 
+ sqrt(BETA + 1) = input average velocity / output average velocity.
+ 
+ The output edited BETA attribute volume might contain nil values unless
+ REPLACE_NILS_AFTER and REPLACE_NILS_VELCON say to replace nil
+ values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_O_BETA">
+      <Tip>Trace identification found in header word specified by HDR_IDENT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_O_BETA<br> Trace identification found in header word specified by HDR_IDENT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_XDIP">
+      <Tip>Whether to output an edited XDIP attribute volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OUTPUT_XDIP<br> Whether to output an edited XDIP attribute volume.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The output XDIP attribute volume will be the edited and smoothed version
+ of the input XDIP attribute volume.
+ 
+ The output edited XDIP attribute volume might contain nil values unless
+ REPLACE_NILS_AFTER says to replace nil values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_O_XDIP">
+      <Tip>Trace identification found in header word specified by HDR_IDENT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_O_XDIP<br> Trace identification found in header word specified by HDR_IDENT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_YDIP">
+      <Tip>Whether to output an edited YDIP attribute volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OUTPUT_YDIP<br> Whether to output an edited YDIP attribute volume.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The output YDIP attribute volume will be the edited and smoothed version
+ of the input YDIP attribute volume.
+ 
+ The output edited YDIP attribute volume might contain nil values unless
+ REPLACE_NILS_AFTER says to replace nil values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_O_YDIP">
+      <Tip>Trace identification found in header word specified by HDR_IDENT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_O_YDIP<br> Trace identification found in header word specified by HDR_IDENT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_WEIGHT">
+      <Tip>Whether to output a weight volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OUTPUT_WEIGHT<br> Whether to output a weight volume.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The weight volume is calculated based on the following four parameters:
+                USE_RMS_AMPL_WEIGHTING
+                USE_MAX_AMPL_WEIGHTING
+                USE_GATHER_SEMB_WEIGHTING
+                USE_STRUCT_SEMB_WEIGHTING
+ 
+ The weight volume will never contain any nil values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_O_WEIGHT">
+      <Tip>Trace identification found in header word specified by HDR_IDENT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_O_WEIGHT<br> Trace identification found in header word specified by HDR_IDENT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_GAMMA">
+      <Tip>Whether to output a GAMMA volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OUTPUT_GAMMA<br> Whether to output a GAMMA volume.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This volume will be calculated from the edited BETA volume.
+ 
+ GAMMA = sqrt(BETA + 1) = input average velocity / output average velocity.
+ 
+ The output GAMMA volume will never contain nil or zero values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_O_GAMMA">
+      <Tip>Trace identification found in header word specified by HDR_IDENT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_O_GAMMA<br> Trace identification found in header word specified by HDR_IDENT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_VAV">
+      <Tip>Whether to output a modified average velocity volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OUTPUT_VAV<br> Whether to output a modified average velocity volume.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This volume will be calculated from the input average velocity volume
+ and the edited BETA volume.
+ 
+ The output modified average velocity volume will never contain nil or
+ zero values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSG_O_VAV">
+      <Tip>Trace identification found in header word specified by HDR_IDENT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MSG_O_VAV<br> Trace identification found in header word specified by HDR_IDENT.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DDATAVOLUME" title="3D Data Volume" rows="24" columns="80">
+    <Label keyword="COMMENT_THISADESCRIPTIONOFTHEINP" alignment="center">This a description of the input and output 3D data volume.</Label>
+    <Border keyword="BORDER3"/>
+    <Border keyword="BORDER4"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X      =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y      =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDSCONTAININGXAN" alignment="left">Header words containing X and Y coordinates.</Label>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT     =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT     =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FIRSTORANYBINCENTER" alignment="left">First (or any) bin center.</Label>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC      =</Label>
+    <Field keyword="X_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC      =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BININCREMENT" alignment="left">Bin increment.</Label>
+    <Label keyword="LABEL_MAX_X_BINS" alignment="left">MAX_X_BINS =</Label>
+    <Field keyword="MAX_X_BINS" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMAPPROXIMATENUMBER" alignment="left">Maximum approximate number of bins (traces) in X direction.</Label>
+    <Layout>
+     <Constraints component="COMMENT_THISADESCRIPTIONOFTHEINP" xPos="11" yPos="1" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="2" yPos="4" xSize="20" ySize="6"/>
+     <Constraints component="BORDER4" xPos="23" yPos="4" xSize="20" ySize="6"/>
+     <Constraints component="LABEL_HDR_X" xPos="3" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="15" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="24" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="36" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDSCONTAININGXAN" xPos="44" yPos="5" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="3" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="15" yPos="6" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="24" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="36" yPos="6" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FIRSTORANYBINCENTER" xPos="44" yPos="6" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="3" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="15" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="24" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="36" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BININCREMENT" xPos="44" yPos="7" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_X_BINS" xPos="3" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_X_BINS" xPos="15" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMAPPROXIMATENUMBER" xPos="44" yPos="8" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_X">
+      <Tip>Header word containing the X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - HDR_X<br> Header word containing the X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1-NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word containing the Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - HDR_Y<br> Header word containing the Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1-NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>X coordinate of the first (or any) trace in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - X_INIT<br> X coordinate of the first (or any) trace in the X direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the center of any CMP bin measured in the X direction.
+ This value does not have to correspond to the first actual trace in the
+ X direction, since this could in fact vary from line to line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Y coordinate of the first (or any) trace in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - Y_INIT<br> Y coordinate of the first (or any) trace in the Y direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the center of any CMP bin measured in the Y direction.
+ This value does not have to correspond to the first actual trace (or
+ first actual line) in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment of HDR_X between bin centers in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - X_INC<br> Increment of HDR_X between bin centers in the X direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the CMP bin increment (or width) in the X direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment of HDR_Y between bin centers in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - Y_INC<br> Increment of HDR_Y between bin centers in the Y direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the CMP bin increment (or width) in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_X_BINS">
+      <Tip>Maximum number of X bins in any one Y-line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MAX_X_BINS<br> Maximum number of X bins in any one Y-line.</center></b>
+<pre> Default = blank
+ Allowed = integer &gt; 0
+ 
+ This value must be specified.  The maximum number of traces which will
+ be stored on disk at any one time will be slightly greater than MAX_X_BINS
+ times (2*NUM_TR_Y + 1) times the number of input traces used at each CMP.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DANALYSISWINDOW" title="3D Analysis Window" rows="24" columns="80">
+    <Label keyword="COMMENT_THIS3DANALYSISWINDOWISUS" alignment="center">This 3D analysis window is used for anomaly editing and for smoothing.</Label>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN =</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WINDOWLENGTHINSECONDSFOR" alignment="left">Window length in seconds for validation/smoothing.</Label>
+    <Label keyword="LABEL_NT" alignment="left">nt      =</Label>
+    <Field keyword="NT" type="string" maxLength="11" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_SAMPLESINWINDOWFORVALIDA" alignment="left">#Samples in window for validation/smoothing.</Label>
+    <Border keyword="BORDER5"/>
+    <Border keyword="BORDER6"/>
+    <Label keyword="LABEL_NUM_TR_X" alignment="left">NUM_TR_X   =</Label>
+    <Field keyword="NUM_TR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TR_Y" alignment="left">NUM_TR_Y   =</Label>
+    <Field keyword="NUM_TR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRACESEACHSIDEFORVALIDAT" alignment="left">#Traces each side for validation/smoothing.</Label>
+    <Label keyword="LABEL_NX" alignment="left">nx         =</Label>
+    <Field keyword="NX" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NY" alignment="left">ny         =</Label>
+    <Field keyword="NY" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALTRACESFORVALIDATION" alignment="left">Total #traces for validation/smoothing.</Label>
+    <Layout>
+     <Constraints component="COMMENT_THIS3DANALYSISWINDOWISUS" xPos="5" yPos="1" xSize="70" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="2" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="11" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_WINDOWLENGTHINSECONDSFOR" xPos="24" yPos="4" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NT" xPos="2" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NT" xPos="11" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SAMPLESINWINDOWFORVALIDA" xPos="24" yPos="5" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER5" xPos="2" yPos="7" xSize="20" ySize="4"/>
+     <Constraints component="BORDER6" xPos="23" yPos="7" xSize="20" ySize="4"/>
+     <Constraints component="LABEL_NUM_TR_X" xPos="3" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_X" xPos="15" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_Y" xPos="24" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_Y" xPos="36" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRACESEACHSIDEFORVALIDAT" xPos="44" yPos="8" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NX" xPos="3" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NX" xPos="15" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NY" xPos="24" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NY" xPos="36" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALTRACESFORVALIDATION" xPos="44" yPos="9" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_LEN">
+      <Tip>Length in time of the 3D analysis window (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - WIN_LEN<br> Length in time of the 3D analysis window (seconds).</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ 
+ The 3D analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute volume.
+ 
+ The 3D analysis window is specified with the following three parameters:
+                WIN_LEN     (size in the time direction is NT)
+                NUM_TR_X    (size in the  X   direction is NX)
+                NUM_TR_Y    (size in the  Y   direction is NY)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NT">
+      <Tip>Total number sample points (in time) in 3D analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - NT<br> Total number sample points (in time) in 3D analysis window.</center></b>
+<pre>
+ The 3D analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute volume.
+ 
+ NT is calculated from WIN_LEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_X">
+      <Tip>Number of traces on each side in X dir in 3D analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - NUM_TR_X<br> Number of traces on each side in X dir in 3D analysis window.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ This is the number of traces on each side of the center trace in the
+ 3D analysis window.
+ 
+ The 3D analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute volume.
+ 
+ The 3D analysis window is specified with the following three parameters:
+                WIN_LEN     (size in the time direction is NT)
+                NUM_TR_X    (size in the  X   direction is NX)
+                NUM_TR_Y    (size in the  Y   direction is NY)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_Y">
+      <Tip>Number of traces on each side in Y dir in 3D analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - NUM_TR_Y<br> Number of traces on each side in Y dir in 3D analysis window.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ This is the number of traces on each side of the center trace in the
+ 3D analysis window.
+ 
+ The 3D analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute volume.
+ 
+ The 3D analysis window is specified with the following three parameters:
+                WIN_LEN     (size in the time direction is NT)
+                NUM_TR_X    (size in the  X   direction is NX)
+                NUM_TR_Y    (size in the  Y   direction is NY)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NX">
+      <Tip>Total number of traces in X direction in 3D analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - NX<br> Total number of traces in X direction in 3D analysis window.</center></b>
+<pre>
+ The 3D analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute volume.
+ 
+ NX is calculated from NUM_TR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NY">
+      <Tip>Total number of traces in Y direction in 3D analysis window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - NY<br> Total number of traces in Y direction in 3D analysis window.</center></b>
+<pre>
+ The 3D analysis window is used to edit and smooth the selected BETA or
+ XDIP or YDIP attribute volume.
+ 
+ NY is calculated from NUM_TR_Y.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="VELOCITYCONSTRAINTEDITING" title="Velocity Constraint Editing" rows="28" columns="80">
+    <Label keyword="COMMENT_APPLYVELOCITYCONSTRAINTS" alignment="center">Apply velocity constraints to the BETA attribute volume.</Label>
+    <Label keyword="COMMENT_BETAVALUESARESETTONILIFV" alignment="center">BETA values are set to nil if velocity changes fall outside the constraints.</Label>
+    <Label keyword="COMMENT_NILBETAVALUESAREOPTIONAL" alignment="center">Nil BETA values are optionally replaced after applying constraints.</Label>
+    <Label keyword="COMMENT_APPLY_VAV_CONSTRAINTS" alignment="left">APPLY_VAV_CONSTRAINTS  =</Label>
+    <Field keyword="APPLY_VAV_CONSTRAINTS" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYAVERAGEVELOCITYCONS" alignment="left">Apply average velocity constraints.</Label>
+    <Label keyword="COMMENT_APPLY_VINT_CONSTRAINTS" alignment="left">APPLY_VINT_CONSTRAINTS =</Label>
+    <Field keyword="APPLY_VINT_CONSTRAINTS" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYINTERVALVELOCITYCON" alignment="left">Apply interval velocity constraints.</Label>
+    <ArraySet keyword="VAV_TIME_ARRAYSET" label="VAV_TIME VAV_MIN_PERCENT VAV_MAX_PERCENT">
+     <Array keyword="VAV_TIME" type="float" maxLength="9  " columnName="VAV_TIME" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="VAV_MIN_PERCENT" type="float" maxLength="16 " columnName="VAV_MIN_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="VAV_MAX_PERCENT" type="float" maxLength="16 " columnName="VAV_MAX_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <ArraySet keyword="VINT_TIME_ARRAYSET" label="VINT_TIMEVINT_MIN_PERCENTVINT_MAX_PERCENT">
+     <Array keyword="VINT_TIME" type="float" maxLength="9  " columnName="VINT_TIME" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="VINT_MIN_PERCENT" type="float" maxLength="16 " columnName="VINT_MIN_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="VINT_MAX_PERCENT" type="float" maxLength="16 " columnName="VINT_MAX_PERCENT" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <Label keyword="COMMENT_AFTERAPPLYINGVELOCITYCON" alignment="left">After applying velocity constraints:</Label>
+    <Border keyword="BORDER7"/>
+    <Label keyword="LABEL_REPLACE_NILS_VELCON" alignment="left">REPLACE_NILS_VELCON =</Label>
+    <Field keyword="REPLACE_NILS_VELCON" type="comboBox" maxLength="50" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_INTERP_LENGTH_VELCON" alignment="left">MAX_INTERP_LENGTH_VELCON  =</Label>
+    <Field keyword="MAX_INTERP_LENGTH_VELCON" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMLENGTHOFNILATTRIB" alignment="left">Maximum length of nil attribute values to interpolate (seconds).</Label>
+    <Layout>
+     <Constraints component="COMMENT_APPLYVELOCITYCONSTRAINTS" xPos="11" yPos="1" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BETAVALUESARESETTONILIFV" xPos="1" yPos="2" xSize="76" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NILBETAVALUESAREOPTIONAL" xPos="5" yPos="3" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_VAV_CONSTRAINTS" xPos="2" yPos="5" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_VAV_CONSTRAINTS" xPos="26" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYAVERAGEVELOCITYCONS" xPos="31" yPos="5" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_VINT_CONSTRAINTS" xPos="2" yPos="6" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_VINT_CONSTRAINTS" xPos="26" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYINTERVALVELOCITYCON" xPos="31" yPos="6" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VAV_TIME_ARRAYSET" xPos="18" yPos="8" xSize="44" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="VINT_TIME_ARRAYSET" xPos="18" yPos="15" xSize="44" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="COMMENT_AFTERAPPLYINGVELOCITYCON" xPos="1" yPos="22" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER7" xPos="2" yPos="23" xSize="75" ySize="5"/>
+     <Constraints component="LABEL_REPLACE_NILS_VELCON" xPos="4" yPos="24" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE_NILS_VELCON" xPos="25" yPos="24" xSize="50" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MAX_INTERP_LENGTH_VELCON" xPos="4" yPos="26" xSize="27" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_INTERP_LENGTH_VELCON" xPos="31" yPos="26" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMLENGTHOFNILATTRIB" xPos="39" yPos="26" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="APPLY_VAV_CONSTRAINTS">
+      <Tip>Whether to apply average velocity constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_VAV_CONSTRAINTS<br> Whether to apply average velocity constraints.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ The VAV_MIN_PERCENT and VAV_MAX_PERCENT arrays will not be used if this
+ parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_VINT_CONSTRAINTS">
+      <Tip>Whether to apply interval velocity constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_VINT_CONSTRAINTS<br> Whether to apply interval velocity constraints.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ The VINT_MIN_PERCENT and VINT_MAX_PERCENT arrays will not be used if this
+ parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAV_TIME">
+      <Tip>Time on trace for specifying average velocity contraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - VAV_TIME<br> Time on trace for specifying average velocity contraints.</center></b>
+<pre> Default = 0.0
+ Allowed = valid time on trace (seconds)
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ This is the time on the trace where the user wishes to specify the following
+ parameters:
+               VAV_MIN_PERCENT
+               VAV_MAX_PERCENT
+ 
+ The times must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified times, and flat
+ extrapolations will be performed above the first specified time and below
+ the last specified time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAV_MIN_PERCENT">
+      <Tip>Minimum percentage of average velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - VAV_MIN_PERCENT<br> Minimum percentage of average velocity to accept.</center></b>
+<pre> Default = 75.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ This array is not used if APPLY_VAV_CONSTRAINTS is NO.
+ 
+ Average velocities smaller than the specified threshhold will cause the
+ corresponding value in the BETA attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAV_MAX_PERCENT">
+      <Tip>Maximum percentage of average velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - VAV_MAX_PERCENT<br> Maximum percentage of average velocity to accept.</center></b>
+<pre> Default = 125.0
+ Allowed = 100.0 or greater
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ This array is not used if APPLY_VAV_CONSTRAINTS is NO.
+ 
+ Average velocities larger than the specified threshhold will cause the
+ corresponding value in the BETA attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT_TIME">
+      <Tip>Time on trace for specifying interval velocity contraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - VINT_TIME<br> Time on trace for specifying interval velocity contraints.</center></b>
+<pre> Default = 0.0
+ Allowed = valid time on trace (seconds)
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ This is the time on the trace where the user wishes to specify the following
+ parameters:
+               VINT_MIN_PERCENT
+               VINT_MAX_PERCENT
+ 
+ The times must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified times, and flat
+ extrapolations will be performed above the first specified time and below
+ the last specified time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT_MIN_PERCENT">
+      <Tip>Minimum percentage of interval velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - VINT_MIN_PERCENT<br> Minimum percentage of interval velocity to accept.</center></b>
+<pre> Default = 75.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ This array is not used if APPLY_VINT_CONSTRAINTS is NO.
+ 
+ Interval velocities smaller than the specified threshhold will cause the
+ corresponding value in the BETA attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT_MAX_PERCENT">
+      <Tip>Maximum percentage of interval velocity to accept.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - VINT_MAX_PERCENT<br> Maximum percentage of interval velocity to accept.</center></b>
+<pre> Default = 125.0
+ Allowed = 100.0 or greater
+ 
+ This parameter is used to edit the BETA attribute volume.
+ 
+ This array is not used if APPLY_VINT_CONSTRAINTS is NO.
+ 
+ Interval velocities larger than the specified threshhold will cause the
+ corresponding value in the BETA attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLACE_NILS_VELCON">
+      <Tip>Whether and how to replace nil BETA values after constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - REPLACE_NILS_VELCON<br> Whether and how to replace nil BETA values after constraints.</center></b>
+<pre> Default = do not replace nils
+ Allowed = use linear interpolation (to replace nils) (vertical interpolation)
+ Allowed = use scaled interpolation (to replace nils) (vertical interpolation)
+ Allowed = replace nils with zeroes                   (vertical interpolation)
+ Allowed = linear interpolation between weight peaks  (vertical interpolation)
+ Allowed = scaled interpolation between weight peaks  (vertical interpolation)
+ Allowed = do not replace nils
+ 
+ This parameter is used after applying velocity constraints to the BETA
+ attribute volume.
+ 
+ Linear interpolation simply replaces nils with linearly interpolated values.
+ 
+ Scaled interpolation does a linear interpolation of the SQRT(BETA+1)
+ values instead of a linear interpolation of the BETA values directly.
+ SQRT(BETA+1) = GAMMA = old average velocity / new average velocity.
+ 
+ Interpolation between weight peaks uses information from the weight volume,
+ instead of the locations of nil BETA values, to determine where the
+ BETA values will be replaced by interpolated values.  The BETA values
+ are interpolated between local maximum peaks on the weight volume.
+ No interpolation is performed between locations where the BETA value
+ is nil at one or both of the bracketing peaks of the weight volume.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_INTERP_LENGTH_VELCON">
+      <Tip>Maximum length of nil BETA values to interpolate (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MAX_INTERP_LENGTH_VELCON<br> Maximum length of nil BETA values to interpolate (seconds).</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 - trace length
+ 
+ Any nil-filled gaps with a length greater than the specified time length
+ will not be interpolated when using linear or scaled interpolation after
+ smoothing.
+ 
+ If this parameter is &gt;= trace length or zero, nil-filled gaps of all
+ lengths will be interpolated.
+ 
+ This parameter is used only if REPLACE_NILS_VELCON is set to one of the
+ following choices:
+           use linear interpolation
+           use scaled interpolation
+           linear interpolation between weight peaks
+           scaled interpolation between weight peaks</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="THRESHHOLDEDITING" title="Threshhold Editing" rows="24" columns="80">
+    <Label keyword="COMMENT_APPLYTHRESHHOLDSTOTHEBET" alignment="center">Apply threshholds to the BETA or XDIP or YDIP attribute volume.</Label>
+    <Label keyword="COMMENT_ATTRIBUTEVALUESARESETTON" alignment="center">Attribute values are set to nil if threshholds are not met.</Label>
+    <Label keyword="COMMENT_APPLY_RMS_AMPL_THRESH" alignment="left">APPLY_RMS_AMPL_THRESH    =</Label>
+    <Field keyword="APPLY_RMS_AMPL_THRESH" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYRMSAMPLITUDETHRESHH" alignment="left">Apply RMS amplitude threshholds.</Label>
+    <Label keyword="COMMENT_APPLY_MAX_AMPL_THRESH" alignment="left">APPLY_MAX_AMPL_THRESH    =</Label>
+    <Field keyword="APPLY_MAX_AMPL_THRESH" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYMAXIMUMABSOLUTEAMPL" alignment="left">Apply maximum absolute amplitude threshholds.</Label>
+    <Label keyword="COMMENT_APPLY_GATHER_SEMB_THRESH" alignment="left">APPLY_GATHER_SEMB_THRESH =</Label>
+    <Field keyword="APPLY_GATHER_SEMB_THRESH" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYGATHERSEMBLANCETHRE" alignment="left">Apply gather semblance threshholds.</Label>
+    <Label keyword="COMMENT_APPLY_STRUCT_SEMB_THRESH" alignment="left">APPLY_STRUCT_SEMB_THRESH =</Label>
+    <Field keyword="APPLY_STRUCT_SEMB_THRESH" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLYSTRUCTURALSEMBLANCE" alignment="left">Apply structural semblance threshholds.</Label>
+    <ArraySet keyword="THRESH_TIME_ARRAYSET" label="THRESH_TIMERMS_AMPL_THRESHMAX_AMPL_THRESHGATHER_SEMB_THRESHSTRUCT_SEMB_THRESH">
+     <Array keyword="THRESH_TIME" type="float" maxLength="11 " columnName="THRESH_TIME" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="RMS_AMPL_THRESH" type="float" maxLength="15 " columnName="RMS_AMPL_THRESH" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="MAX_AMPL_THRESH" type="float" maxLength="15 " columnName="MAX_AMPL_THRESH" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="GATHER_SEMB_THRESH" type="float" maxLength="18 " columnName="GATHER_SEMB_THRESH" editable="yes" sensitive="yes" columnSize="18"/>
+     <Array keyword="STRUCT_SEMB_THRESH" type="float" maxLength="16 " columnName="STRUCT_SEMB_THRESH" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_APPLYTHRESHHOLDSTOTHEBET" xPos="7" yPos="1" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_ATTRIBUTEVALUESARESETTON" xPos="9" yPos="2" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_RMS_AMPL_THRESH" xPos="2" yPos="4" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_RMS_AMPL_THRESH" xPos="28" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYRMSAMPLITUDETHRESHH" xPos="33" yPos="4" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_MAX_AMPL_THRESH" xPos="2" yPos="5" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_MAX_AMPL_THRESH" xPos="28" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYMAXIMUMABSOLUTEAMPL" xPos="33" yPos="5" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_GATHER_SEMB_THRESH" xPos="2" yPos="6" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_GATHER_SEMB_THRESH" xPos="28" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYGATHERSEMBLANCETHRE" xPos="33" yPos="6" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLY_STRUCT_SEMB_THRESH" xPos="2" yPos="7" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_STRUCT_SEMB_THRESH" xPos="28" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLYSTRUCTURALSEMBLANCE" xPos="33" yPos="7" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="THRESH_TIME_ARRAYSET" xPos="2" yPos="9" xSize="77" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="APPLY_RMS_AMPL_THRESH">
+      <Tip>Whether to apply RMS amplitude threshholds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_RMS_AMPL_THRESH<br> Whether to apply RMS amplitude threshholds.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The RMS_AMPL_THRESH array will not be used if this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_MAX_AMPL_THRESH">
+      <Tip>Whether to apply maximum absolute amplitude threshholds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_MAX_AMPL_THRESH<br> Whether to apply maximum absolute amplitude threshholds.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The MAX_AMPL_THRESH array will not be used if this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_GATHER_SEMB_THRESH">
+      <Tip>Whether to apply gather semblance threshholds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_GATHER_SEMB_THRESH<br> Whether to apply gather semblance threshholds.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The GATHER_SEMB_THRESH array will not be used if this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_STRUCT_SEMB_THRESH">
+      <Tip>Whether to apply structural semblance threshholds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_STRUCT_SEMB_THRESH<br> Whether to apply structural semblance threshholds.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The STRUCT_SEMB_THRESH array will not be used if this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="THRESH_TIME">
+      <Tip>Time on trace for specifying threshholds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - THRESH_TIME<br> Time on trace for specifying threshholds.</center></b>
+<pre> Default = 0.0
+ Allowed = valid time on trace (seconds)
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ This is the time on the trace where the user wishes to specify the following
+ parameters:
+               RMS_AMPL_THRESH
+               MAX_AMPL_THRESH
+               GATHER_SEMB_THRESH
+               STRUCT_SEMB_THRESH
+ 
+ The times must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified times, and flat
+ extrapolations will be performed above the first specified time and below
+ the last specified time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMS_AMPL_THRESH">
+      <Tip>RMS amplitude threshhold.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - RMS_AMPL_THRESH<br> RMS amplitude threshhold.</center></b>
+<pre> Default = 0.8
+ Allowed &gt;= 0.0
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ RMS amplitude values should be those which were calculated from the CMP
+ gather before the traces were stacked.
+ 
+ RMS amplitude values smaller than the specified threshhold will cause the
+ corresponding value in the attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_AMPL_THRESH">
+      <Tip>Maximum absolute amplitude threshhold.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MAX_AMPL_THRESH<br> Maximum absolute amplitude threshhold.</center></b>
+<pre> Default = 1.2
+ Allowed &gt;= 0.0
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Maximum absolute amplitude values should be those which were calculated
+ from the CMP gather before the traces were stacked.
+ 
+ Maximum amplitude values smaller than the specified threshhold will cause
+ the corresponding value in the attribute volume to be set to nil.
+ 
+ Absolute values of the MAX_AMPL_THRESH array values will be used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_SEMB_THRESH">
+      <Tip>Gather semblance threshhold.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - GATHER_SEMB_THRESH<br> Gather semblance threshhold.</center></b>
+<pre> Default = 0.4
+ Allowed &gt;= 0.0
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Gather semblance values should be those which were obtained while the input
+ BETA data volume was being calculated.
+ 
+ Gather semblance values smaller than the specified threshhold will cause
+ the corresponding value in the attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STRUCT_SEMB_THRESH">
+      <Tip>Structure semblance threshhold.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - STRUCT_SEMB_THRESH<br> Structure semblance threshhold.</center></b>
+<pre> Default = 0.4
+ Allowed &gt;= 0.0
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Structural semblance values should be those which were obtained while the
+ input XDIP and YDIP data volumes were being calculated.
+ 
+ Structural semblance values smaller than the specified threshhold will cause
+ the corresponding value in the attribute volume to be set to nil.
+ 
+ Negative or NIL structural semblance values will cause
+ the corresponding value in the attribute volume to be set to nil.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="WEIGHTS" title="Weights" rows="24" columns="80">
+    <Label keyword="COMMENT_THISWEIGHTVOLUMEISUSEDFO" alignment="center">This weight volume is used for anomaly editing and for smoothing.</Label>
+    <Label keyword="COMMENT_USE_RMS_AMPL_WEIGHTING" alignment="left">USE_RMS_AMPL_WEIGHTING    =</Label>
+    <Field keyword="USE_RMS_AMPL_WEIGHTING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USERMSAMPLITUDEFORWEIGHT" alignment="left">Use RMS amplitude for weighting.</Label>
+    <Label keyword="COMMENT_USE_MAX_AMPL_WEIGHTING" alignment="left">USE_MAX_AMPL_WEIGHTING    =</Label>
+    <Field keyword="USE_MAX_AMPL_WEIGHTING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEMAXIMUMABSOLUTEAMPLIT" alignment="left">Use maximum absolute amplitude for weighting.</Label>
+    <Label keyword="COMMENT_USE_GATHER_SEMB_WEIGHTIN" alignment="left">USE_GATHER_SEMB_WEIGHTING =</Label>
+    <Field keyword="USE_GATHER_SEMB_WEIGHTING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEGATHERSEMBLANCEFORWEI" alignment="left">Use gather semblance for weighting.</Label>
+    <Label keyword="COMMENT_USE_STRUCT_SEMB_WEIGHTIN" alignment="left">USE_STRUCT_SEMB_WEIGHTING =</Label>
+    <Field keyword="USE_STRUCT_SEMB_WEIGHTING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USESTRUCTURALSEMBLANCEFO" alignment="left">Use structural semblance for weighting.</Label>
+    <Layout>
+     <Constraints component="COMMENT_THISWEIGHTVOLUMEISUSEDFO" xPos="7" yPos="1" xSize="65" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_RMS_AMPL_WEIGHTING" xPos="2" yPos="3" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_RMS_AMPL_WEIGHTING" xPos="29" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USERMSAMPLITUDEFORWEIGHT" xPos="34" yPos="3" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_MAX_AMPL_WEIGHTING" xPos="2" yPos="4" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_MAX_AMPL_WEIGHTING" xPos="29" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEMAXIMUMABSOLUTEAMPLIT" xPos="34" yPos="4" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_GATHER_SEMB_WEIGHTIN" xPos="2" yPos="5" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_GATHER_SEMB_WEIGHTING" xPos="29" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEGATHERSEMBLANCEFORWEI" xPos="34" yPos="5" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_STRUCT_SEMB_WEIGHTIN" xPos="2" yPos="6" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_STRUCT_SEMB_WEIGHTING" xPos="29" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USESTRUCTURALSEMBLANCEFO" xPos="34" yPos="6" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="USE_RMS_AMPL_WEIGHTING">
+      <Tip>Whether to use RMS amplitude for weighting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_RMS_AMPL_WEIGHTING<br> Whether to use RMS amplitude for weighting.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ This parameter is used to calculate the weight volume which is used
+ to edit and smooth the selected BETA or XDIP or YDIP attribute volume.
+ 
+ If you choose YES, an RMS amplitude trace volume must be input.
+ 
+ Zero, negative, and NIL values in any RMS amplitude trace will be
+ interpreted as zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_MAX_AMPL_WEIGHTING">
+      <Tip>Whether to use maximum absolute amplitude for weighting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_MAX_AMPL_WEIGHTING<br> Whether to use maximum absolute amplitude for weighting.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to calculate the weight volume which is used
+ to edit and smooth the selected BETA or XDIP or YDIP attribute volume.
+ 
+ If you choose YES, a maximum absolute amplitude trace volume must be input.
+ 
+ Zero and NIL values in any maximum absolute amplitude trace will be
+ interpreted as zero.  Negative values will be interpreted as if they
+ are positive.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_GATHER_SEMB_WEIGHTING">
+      <Tip>Whether to use gather semblance for weighting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_GATHER_SEMB_WEIGHTING<br> Whether to use gather semblance for weighting.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to calculate the weight volume which is used
+ to edit and smooth the selected BETA or XDIP or YDIP attribute volume.
+ 
+ If you choose YES, a gather semblance trace volume must be input.
+ 
+ Zero, negative, and NIL values in any gather semblance trace will be
+ interpreted as zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_STRUCT_SEMB_WEIGHTING">
+      <Tip>Whether to use structural semblance for weighting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_STRUCT_SEMB_WEIGHTING<br> Whether to use structural semblance for weighting.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ This parameter is used to calculate the weight volume which is used
+ to edit and smooth the selected BETA or XDIP or YDIP attribute volume.
+ 
+ If you choose YES, a structural semblance trace volume must be input.
+ 
+ Zero, negative, and NIL values in any structural semblance trace will be
+ interpreted as zero.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="ANOMALYEDITING" title="Anomaly Editing" rows="24" columns="80">
+    <Label keyword="COMMENT_APPLYANOMALYEDITINGTOTHE" alignment="center">Apply anomaly editing to the BETA or XDIP or YDIP attribute volume.</Label>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">Attribute values are set to nil if they are anomalous.</Label>
+    <Label keyword="COMMENT_REMOVE_BAD_VALUES" alignment="left">REMOVE_BAD_VALUES     =</Label>
+    <Field keyword="REMOVE_BAD_VALUES" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_REMOVEANOMALOUSVALUESBAS" alignment="left">Remove anomalous values based on standard deviation.</Label>
+    <Label keyword="COMMENT_USE_WEIGHTED_EDIT" alignment="left">USE_WEIGHTED_EDIT     =</Label>
+    <Field keyword="USE_WEIGHTED_EDIT" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEWEIGHTVOLUMEFORSTANDA" alignment="left">Use weight volume for standard deviation calculation.</Label>
+    <Label keyword="LABEL_EDITING_PERCENT_VALID" alignment="left">EDITING_PERCENT_VALID =</Label>
+    <Field keyword="EDITING_PERCENT_VALID" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOF3DANALYSISWINDO" alignment="left">Percent of 3D analysis window required to contain valid picks.</Label>
+    <ArraySet keyword="STDEV_TIME_ARRAYSET" label="STDEV_TIMESTDEV">
+     <Array keyword="STDEV_TIME" type="float" maxLength="10 " columnName="STDEV_TIME" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="STDEV" type="float" maxLength="5  " columnName="STDEV" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_APPLYANOMALYEDITINGTOTHE" xPos="6" yPos="1" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="11" yPos="2" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_REMOVE_BAD_VALUES" xPos="2" yPos="4" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="REMOVE_BAD_VALUES" xPos="25" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_REMOVEANOMALOUSVALUESBAS" xPos="32" yPos="4" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_WEIGHTED_EDIT" xPos="2" yPos="5" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_WEIGHTED_EDIT" xPos="25" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEWEIGHTVOLUMEFORSTANDA" xPos="32" yPos="5" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_EDITING_PERCENT_VALID" xPos="2" yPos="6" xSize="23" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EDITING_PERCENT_VALID" xPos="25" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOF3DANALYSISWINDO" xPos="32" yPos="6" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="STDEV_TIME_ARRAYSET" xPos="14" yPos="8" xSize="18" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="REMOVE_BAD_VALUES">
+      <Tip>Whether to remove anomalous values based on standard deviation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - REMOVE_BAD_VALUES<br> Whether to remove anomalous values based on standard deviation.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The USE_WEIGHTED_EDIT parameter and the STDEV array will not be used if
+ this parameter is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_WEIGHTED_EDIT">
+      <Tip>Whether to use weight volume for standard deviation calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_WEIGHTED_EDIT<br> Whether to use weight volume for standard deviation calculation.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Constant weights will be used if this parameter is NO.
+ 
+ The weight volume is calculated based on the following four parameters:
+                USE_RMS_AMPL_WEIGHTING
+                USE_MAX_AMPL_WEIGHTING
+                USE_GATHER_SEMB_WEIGHTING
+                USE_STRUCT_SEMB_WEIGHTING</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EDITING_PERCENT_VALID">
+      <Tip>Percent of window required to contain valid picks for editing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - EDITING_PERCENT_VALID<br> Percent of window required to contain valid picks for editing.</center></b>
+<pre> Default = 60.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The 3D analysis window is specified with the following three parameters:
+                WIN_LEN     (size in the time direction is NT)
+                NUM_TR_X    (size in the  X   direction is NX)
+                NUM_TR_Y    (size in the  Y   direction is NY)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STDEV_TIME">
+      <Tip>Time on trace for specifying standard deviation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - STDEV_TIME<br> Time on trace for specifying standard deviation.</center></b>
+<pre> Default = 0.0
+ Allowed = valid time on trace (seconds)
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ This is the time on the trace where the user wishes to specify STDEV.
+ 
+ The times must be specified in ascending order.
+ 
+ Interpolations will be performed between the specified times, and flat
+ extrapolations will be performed above the first specified time and below
+ the last specified time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STDEV">
+      <Tip>Maximum number of standard deviations to allow.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - STDEV<br> Maximum number of standard deviations to allow.</center></b>
+<pre> Default = 3.0
+ Allowed = 0.0 or greater
+ 
+ This parameter is used to edit the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ Each value in the attribute volume is compared with the mean value
+ calculated from a 3D analysis window centered at that value.  A value
+ will be set to nil if it differs from the mean value by more than
+ the specified number of standard deviations.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SMOOTHING" title="Smoothing" rows="31" columns="80">
+    <Label keyword="COMMENT_SMOOTHTHEBETAORXDIPORYDI" alignment="center">Smooth the BETA or XDIP or YDIP attribute volume after editing is finished.</Label>
+    <Label keyword="COMMENT_THEEDITINGWILLHAVESETSOM" alignment="center">The editing will have set some attribute values to nil.</Label>
+    <Label keyword="COMMENT_NILATTRIBUTEVALUESAREOPT" alignment="center">Nil attribute values are optionally replaced before or after smoothing.</Label>
+    <Label keyword="COMMENT_BEFORESMOOTHING" alignment="left">Before smoothing:</Label>
+    <Border keyword="BORDER8"/>
+    <Label keyword="LABEL_REPLACE_NILS_BEFORE" alignment="left">REPLACE_NILS_BEFORE =</Label>
+    <Field keyword="REPLACE_NILS_BEFORE" type="comboBox" maxLength="50" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_INTERP_LENGTH_BEFORE" alignment="left">MAX_INTERP_LENGTH_BEFORE =</Label>
+    <Field keyword="MAX_INTERP_LENGTH_BEFORE" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="left">Maximum length of nil attribute values to interpolate (seconds).</Label>
+    <Label keyword="COMMENT_INTERP_WEIGHTS_BEFORE" alignment="left">INTERP_WEIGHTS_BEFORE    =</Label>
+    <Field keyword="INTERP_WEIGHTS_BEFORE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_INTERPOLATEWEIGHTSWHEREA" alignment="left">Interpolate weights where attribute values were nil.</Label>
+    <Label keyword="COMMENT_SMOOTHING" alignment="left">Smoothing:</Label>
+    <Border keyword="BORDER9"/>
+    <Label keyword="COMMENT_APPLY_SMOOTHING" alignment="left">APPLY_SMOOTHING         =</Label>
+    <Field keyword="APPLY_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_SMOOTHTHEEDITEDATTRIBUTE" alignment="left">Smooth the edited attribute volume.</Label>
+    <Label keyword="COMMENT_USE_WEIGHTED_SMOOTHING" alignment="left">USE_WEIGHTED_SMOOTHING  =</Label>
+    <Field keyword="USE_WEIGHTED_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEWEIGHTVOLUMEFORSMOOTH" alignment="left">Use weight volume for smoothing.</Label>
+    <Label keyword="COMMENT_USE_DISTANCE_SMOOTHING" alignment="left">USE_DISTANCE_SMOOTHING  =</Label>
+    <Field keyword="USE_DISTANCE_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USEINVERSEDISTANCEFORSMO" alignment="left">Use inverse distance for smoothing.</Label>
+    <Label keyword="COMMENT_USE_TAPERED_SMOOTHING" alignment="left">USE_TAPERED_SMOOTHING   =</Label>
+    <Field keyword="USE_TAPERED_SMOOTHING" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="COMMENT_USETAPEREDEDGESFORSMOOTH" alignment="left">Use tapered edges for smoothing.</Label>
+    <Label keyword="LABEL_CENTER_WEIGHT_PERCENT" alignment="left">CENTER_WEIGHT_PERCENT   =</Label>
+    <Field keyword="CENTER_WEIGHT_PERCENT" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOFCENTERWEIGHTFOR" alignment="left">Percent of center weight for inverse distance smoothing.</Label>
+    <Label keyword="LABEL_TAPERED_WEIGHT_PERCENT" alignment="left">TAPERED_WEIGHT_PERCENT  =</Label>
+    <Field keyword="TAPERED_WEIGHT_PERCENT" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERCENTOFSMOOTHINGDISTAN" alignment="left">Percent of smoothing distance to taper.</Label>
+    <Label keyword="LABEL_SMOOTHING_PERCENT_VALID" alignment="left">SMOOTHING_PERCENT_VALID =</Label>
+    <Field keyword="SMOOTHING_PERCENT_VALID" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_3" alignment="left">Percent of 3D analysis window required to contain valid picks.</Label>
+    <Label keyword="COMMENT_AFTERSMOOTHING" alignment="left">After smoothing:</Label>
+    <Border keyword="BORDER10"/>
+    <Label keyword="LABEL_REPLACE_NILS_AFTER" alignment="left">REPLACE_NILS_AFTER =</Label>
+    <Field keyword="REPLACE_NILS_AFTER" type="comboBox" maxLength="50" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_INTERP_LENGTH_AFTER" alignment="left">MAX_INTERP_LENGTH_AFTER  =</Label>
+    <Field keyword="MAX_INTERP_LENGTH_AFTER" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_4" alignment="left">Maximum length of nil attribute values to interpolate (seconds).</Label>
+    <Label keyword="COMMENT_INTERP_WEIGHTS_AFTER" alignment="left">INTERP_WEIGHTS_AFTER     =</Label>
+    <Field keyword="INTERP_WEIGHTS_AFTER" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_5" alignment="left">Interpolate weights where attribute values were nil.</Label>
+    <Layout>
+     <Constraints component="COMMENT_SMOOTHTHEBETAORXDIPORYDI" xPos="2" yPos="1" xSize="75" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_THEEDITINGWILLHAVESETSOM" xPos="12" yPos="2" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NILATTRIBUTEVALUESAREOPT" xPos="4" yPos="3" xSize="71" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BEFORESMOOTHING" xPos="1" yPos="5" xSize="17" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER8" xPos="2" yPos="6" xSize="75" ySize="6"/>
+     <Constraints component="LABEL_REPLACE_NILS_BEFORE" xPos="4" yPos="7" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE_NILS_BEFORE" xPos="25" yPos="7" xSize="50" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MAX_INTERP_LENGTH_BEFORE" xPos="4" yPos="9" xSize="26" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_INTERP_LENGTH_BEFORE" xPos="30" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="38" yPos="9" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_INTERP_WEIGHTS_BEFORE" xPos="4" yPos="10" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="INTERP_WEIGHTS_BEFORE" xPos="30" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INTERPOLATEWEIGHTSWHEREA" xPos="38" yPos="10" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_SMOOTHING" xPos="1" yPos="13" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER9" xPos="2" yPos="14" xSize="75" ySize="9"/>
+     <Constraints component="COMMENT_APPLY_SMOOTHING" xPos="4" yPos="15" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="APPLY_SMOOTHING" xPos="29" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SMOOTHTHEEDITEDATTRIBUTE" xPos="36" yPos="15" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_WEIGHTED_SMOOTHING" xPos="4" yPos="16" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_WEIGHTED_SMOOTHING" xPos="29" yPos="16" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEWEIGHTVOLUMEFORSMOOTH" xPos="36" yPos="16" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_DISTANCE_SMOOTHING" xPos="4" yPos="17" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_DISTANCE_SMOOTHING" xPos="29" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEINVERSEDISTANCEFORSMO" xPos="36" yPos="17" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_USE_TAPERED_SMOOTHING" xPos="4" yPos="18" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="USE_TAPERED_SMOOTHING" xPos="29" yPos="18" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USETAPEREDEDGESFORSMOOTH" xPos="36" yPos="18" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CENTER_WEIGHT_PERCENT" xPos="4" yPos="19" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CENTER_WEIGHT_PERCENT" xPos="29" yPos="19" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOFCENTERWEIGHTFOR" xPos="36" yPos="19" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TAPERED_WEIGHT_PERCENT" xPos="4" yPos="20" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPERED_WEIGHT_PERCENT" xPos="29" yPos="20" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERCENTOFSMOOTHINGDISTAN" xPos="36" yPos="20" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMOOTHING_PERCENT_VALID" xPos="4" yPos="21" xSize="25" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMOOTHING_PERCENT_VALID" xPos="29" yPos="21" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_3" xPos="36" yPos="21" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_AFTERSMOOTHING" xPos="1" yPos="24" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER10" xPos="2" yPos="25" xSize="75" ySize="6"/>
+     <Constraints component="LABEL_REPLACE_NILS_AFTER" xPos="4" yPos="26" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE_NILS_AFTER" xPos="24" yPos="26" xSize="50" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MAX_INTERP_LENGTH_AFTER" xPos="4" yPos="28" xSize="26" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_INTERP_LENGTH_AFTER" xPos="30" yPos="28" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_4" xPos="38" yPos="28" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_INTERP_WEIGHTS_AFTER" xPos="4" yPos="29" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="INTERP_WEIGHTS_AFTER" xPos="30" yPos="29" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_5" xPos="38" yPos="29" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="REPLACE_NILS_BEFORE">
+      <Tip>Whether and how to replace nil attribute values before smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - REPLACE_NILS_BEFORE<br> Whether and how to replace nil attribute values before smoothing.</center></b>
+<pre> Default = do not replace nils
+ Allowed = use linear interpolation (to replace nils) (vertical interpolation)
+ Allowed = use scaled interpolation (to replace nils) (vertical interpolation)
+ Allowed = replace nils with zeroes                   (vertical interpolation)
+ Allowed = linear interpolation between weight peaks  (vertical interpolation)
+ Allowed = scaled interpolation between weight peaks  (vertical interpolation)
+ Allowed = do not replace nils
+ 
+ This parameter is used before smoothing the selected BETA or XDIP or
+ YDIP attribute volume.
+ 
+ Linear interpolation simply replaces nils with linearly interpolated values.
+ 
+ Scaled interpolation is used only when editing the BETA attribute.
+ Scaled interpolation is replaced by linear interpolation when editing
+ the XDIP or YDIP attribute.
+ 
+ Scaled interpolation does a linear interpolation of the SQRT(BETA+1)
+ values instead of a linear interpolation of the BETA values directly.
+ SQRT(BETA+1) = GAMMA = old average velocity / new average velocity.
+ 
+ Interpolation between weight peaks uses information from the weight volume,
+ instead of the locations of nil attribute values, to determine where the
+ attribute values will be replaced by interpolated values.  The attribute
+ values are interpolated between local maximum peaks on the weight volume.
+ No interpolation is performed between locations where the attribute value
+ is nil at one or both of the bracketing peaks of the weight volume.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_INTERP_LENGTH_BEFORE">
+      <Tip>Maximum length of nil attribute values to interpolate (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MAX_INTERP_LENGTH_BEFORE<br> Maximum length of nil attribute values to interpolate (seconds).</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 - trace length
+ 
+ Any nil-filled gaps with a length greater than the specified time length
+ will not be interpolated when using linear or scaled interpolation before
+ smoothing.
+ 
+ If this parameter is &gt;= trace length or zero, nil-filled gaps of all
+ lengths will be interpolated.
+ 
+ This parameter is used only if REPLACE_NILS_BEFORE is set to one of the
+ following choices:
+           use linear interpolation
+           use scaled interpolation
+           linear interpolation between weight peaks
+           scaled interpolation between weight peaks</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERP_WEIGHTS_BEFORE">
+      <Tip>Interpolate weights where attribute values are interpolated.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - INTERP_WEIGHTS_BEFORE<br>Interpolate weights where attribute values are interpolated.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ If this parameter is YES, the weights will be replaced by linearly
+ interpolated values in the regions where the attribute values were
+ nil before interpolation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="APPLY_SMOOTHING">
+      <Tip>Whether to smooth the BETA or XDIP or YDIP attribute volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY_SMOOTHING<br> Whether to smooth the BETA or XDIP or YDIP attribute volume.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ The attribute volume will be smoothed over the 3D analysis window.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_WEIGHTED_SMOOTHING">
+      <Tip>Whether to use the weight volume for smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_WEIGHTED_SMOOTHING<br> Whether to use the weight volume for smoothing.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The weight volume is calculated based on the following four parameters:
+                USE_RMS_AMPL_WEIGHTING
+                USE_MAX_AMPL_WEIGHTING
+                USE_GATHER_SEMB_WEIGHTING
+                USE_STRUCT_SEMB_WEIGHTING</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_DISTANCE_SMOOTHING">
+      <Tip>Whether to use inverse distance for smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_DISTANCE_SMOOTHING<br> Whether to use inverse distance for smoothing.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ NO causes a stronger smoothing by weighting all traces the same, regardless
+ of their distances from the middle trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_TAPERED_SMOOTHING">
+      <Tip>Whether to use a taper at the edge of the smoothing area.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USE_TAPERED_SMOOTHING<br> Whether to use a taper at the edge of the smoothing area.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ NO causes a stronger smoothing by weighting all traces the same, regardless
+ of their distances from the middle trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CENTER_WEIGHT_PERCENT">
+      <Tip>Percent of center weight to use for inverse distance smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - CENTER_WEIGHT_PERCENT<br> Percent of center weight to use for inverse distance smoothing.</center></b>
+<pre> Default = 20.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to set the weight of the center trace when inverse
+ distance weights are used for smoothing.  If this parameter were not used,
+ the center trace would always get 100% of the weight because the inverse
+ distance would be infinite.
+ 
+ A smaller percent weights the center trace less, causing a stronger smoothing.
+ A larger percent weights the center trace more, causing a weaker smoothing.
+ 
+ This parameter is not used if USE_DISTANCE_SMOOTHING is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPERED_WEIGHT_PERCENT">
+      <Tip>Percent of the distance to taper for tapered smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - TAPERED_WEIGHT_PERCENT<br> Percent of the distance to taper for tapered smoothing.</center></b>
+<pre> Default = 20.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to set the size of the tapered area at the edge of
+ the smoothing area.  for example, if this parameter is set to 20, the
+ outer 20% of the smoothing distance will be tapered (lower weights grading
+ to zero) and the inner 80% will have constant weights.
+ 
+ A smaller percent produces a narrower taper, causing a stronger smoothing.
+ A larger percent produces a wider taper, causing a weaker smoothing.
+ 
+ This parameter is not used if USE_TAPERED_SMOOTHING is NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMOOTHING_PERCENT_VALID">
+      <Tip>Percent of window required to contain valid picks for smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - SMOOTHING_PERCENT_VALID<br> Percent of window required to contain valid picks for smoothing.</center></b>
+<pre> Default = 60.0
+ Allowed = 0.0 to 100.0
+ 
+ This parameter is used to smooth the selected BETA or XDIP or YDIP attribute
+ volume.
+ 
+ The 3D analysis window is specified with the following three parameters:
+                WIN_LEN     (size in the time direction is NT)
+                NUM_TR_X    (size in the  X   direction is NX)
+                NUM_TR_Y    (size in the  Y   direction is NY)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLACE_NILS_AFTER">
+      <Tip>Whether and how to replace nil attribute values after smoothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - REPLACE_NILS_AFTER<br> Whether and how to replace nil attribute values after smoothing.</center></b>
+<pre> Default = do not replace nils
+ Allowed = use linear interpolation (to replace nils) (vertical interpolation)
+ Allowed = use scaled interpolation (to replace nils) (vertical interpolation)
+ Allowed = replace nils with zeroes                   (vertical interpolation)
+ Allowed = linear interpolation between weight peaks  (vertical interpolation)
+ Allowed = scaled interpolation between weight peaks  (vertical interpolation)
+ Allowed = do not replace nils
+ 
+ This parameter is used after smoothing the selected BETA or XDIP or
+ YDIP attribute volume.
+ 
+ Linear interpolation simply replaces nils with linearly interpolated values.
+ 
+ Scaled interpolation is used only when editing the BETA attribute.
+ Scaled interpolation is replaced by linear interpolation when editing
+ the XDIP or YDIP attribute.
+ 
+ Scaled interpolation does a linear interpolation of the SQRT(BETA+1)
+ values instead of a linear interpolation of the BETA values directly.
+ SQRT(BETA+1) = GAMMA = old average velocity / new average velocity.
+ 
+ Interpolation between weight peaks uses information from the weight volume,
+ instead of the locations of nil attribute values, to determine where the
+ attribute values will be replaced by interpolated values.  The attribute
+ values are interpolated between local maximum peaks on the weight volume.
+ No interpolation is performed between locations where the attribute value
+ is nil at one or both of the bracketing peaks of the weight volume.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_INTERP_LENGTH_AFTER">
+      <Tip>Maximum length of nil attribute values to interpolate (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - MAX_INTERP_LENGTH_AFTER<br> Maximum length of nil attribute values to interpolate (seconds).</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 - trace length
+ 
+ Any nil-filled gaps with a length greater than the specified time length
+ will not be interpolated when using linear or scaled interpolation after
+ smoothing.
+ 
+ If this parameter is &gt;= trace length or zero, nil-filled gaps of all
+ lengths will be interpolated.
+ 
+ This parameter is used only if REPLACE_NILS_AFTER is set to one of the
+ following choices:
+           use linear interpolation
+           use scaled interpolation
+           linear interpolation between weight peaks
+           scaled interpolation between weight peaks</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERP_WEIGHTS_AFTER">
+      <Tip>Interpolate weights where attribute values are interpolated.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - INTERP_WEIGHTS_AFTER<br>Interpolate weights where attribute values are interpolated.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ If this parameter is YES, the weights will be replaced by linearly
+ interpolated values in the regions where the attribute values were
+ nil before interpolation.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ka - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ka">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : ka                               (Kombo Analysis)
+ Category   : migrations
+ Written    : 2003-06-19   by: Tom Stoeckley
+ Revised    : 2007-01-03   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Analyze and edit a combo of input data volumes for tomography.
+ Portability: No known limitations, but see note below.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process prepares data for tomography by analyzing and editing a
+ combination of 3D data input volumes which are in trace format.
+ 
+ Possible input and output traces at each CMP are the following:
+ 
+   input   81  The residual NMO velocity ratio       (BETA attribute).
+   input   88  The structural dip in the X direction (XDIP attribute).
+   input   89  The structural dip in the Y direction (YDIP attribute).
+   input   82  The RMS amplitude stacked trace for this CMP.
+   input   83  The maximum absolute amplitude stacked trace for this CMP.
+   input   71  The semblance calculated along the residual NMO curve.
+   input   90  The semblance calculated along the structural dip.
+   input   51  The input average velocity.
+   output  91  The weight volume                (calculated by this process).
+   output  84  The GAMMA volume                 (calculated by this process).
+   output  85  The output average velocity         (edited average velocity).
+   output 181  The residual NMO velocity ratio       (edited BETA attribute).
+   output 188  The structural dip in the X direction (edited XDIP attribute).
+   output 189  The structural dip in the Y direction (edited YDIP attribute).
+ 
+    Header word HDR_IDENT identifies the type of information each trace
+    contains.  These header word values are listed above.
+ 
+    In this documentation the BETA or XDIP or YDIP trace (or the data volume
+    in which this trace resides) is called the ATTRIBUTE trace or the
+    ATTRIBUTE volume.
+ 
+    The output ATTRIBUTE trace might contain nil values unless
+    the nil values are replaced before or after smoothing.
+ 
+    The output weight volume might contain nil or zero values.
+ 
+    The output average velocity volume will never contain nil values or
+    values &lt;= zero.
+ 
+    Not all input traces are required; only those which are needed to
+    prepare the requested output traces are needed.  The GUI lists the
+    required input traces dynamically depending on the current state
+    of the process parameters.
+ 
+ This process performs the following steps in the indicated order:
+ 
+    (1) Calculates the weight volume to use for editing and smoothing.
+    (2) Applies amplitude and semblance threshholds to the ATTRIBUTE volume.
+    (3) Optionally flattens the weight and ATTRIBUTE volumes.
+    (4) Removes anomalous values from the ATTRIBUTE volume.
+    (5) Optionally replaces nil values in the ATTRIBUTE volume.
+    (6) Smooths the ATTRIBUTE volume.
+    (7) Optionally replaces nil values in the ATTRIBUTE volume.
+    (8) Unflattens the weight and ATTRIBUTE volumes if they had been flattened.
+  Also performs the following steps on BETA and VAV (if both are input):
+    (9) Edits the input average velocities using the edited BETA volume.
+   (10) Applies velocity constraints to the edited BETA volume.
+   (11) Optionally replaces nil values in the new edited BETA volume.
+   (12) Edits input average velocities again using the new edited BETA volume.
+   (13) Always replaces nil values in the new edited average velocity volume.
+ 
+ Notes regarding the above steps:
+ 
+    Weights:     The weight volume (optionally used for removing anomalous
+      (1)        values and for smoothing) is calculated from the following
+                 input traces:
+                      RMS amplitude stacked trace.
+                      maximum absolute amplitude stacked trace.
+                      semblance calculated along the residual NMO curve.
+                      semblance calculated along the structural dip.
+ 
+    Threshholds: Values in the ATTRIBUTE trace are set to nil where
+      (2)        the values in the following input traces are smaller
+                 than the specified threshholds:
+                      RMS amplitude stacked trace.
+                      maximum absolute amplitude stacked trace.
+                      semblance calculated along the residual NMO curve.
+                      semblance calculated along the structural dip.
+ 
+    Flattening:  New regions after shifting (at top and/or bottom of trace)
+      (3) (8)    are set to NIL.
+ 
+    Anomalies:   Values in the ATTRIBUTE trace are set to nil where they
+      (4)        differ from the mean in the surrounding 3D data window by
+                 more than the specified standard deviations.
+ 
+    Smoothing:   Values in the ATTRIBUTE trace are reset to the mean of all
+      (6)        non-nil values in the surrounding 3D data window.
+ 
+    Constraints: Values in the edited BETA trace are set to nil where the
+      (10)       ratios between the input and edited average or interval
+                 velocities are outside of the specified constraints.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Normal trace flow:
+ 
+    (1) Run ABRA to get the following 3D data volumes:
+ 
+           81  The residual NMO velocity ratio (BETA attribute).
+           82  The RMS amplitude stacked trace for this CMP.
+           83  The maximum absolute amplitude stacked trace for this CMP.
+           71  The semblance calculated along the residual NMO curve.
+ 
+    (2) Run SDIP3D or EDA3D to get the following 3D data volumes:
+ 
+           88  The structural dip in the X direction (XDIP attribute).
+           89  The structural dip in the Y direction (YDIP attribute).
+           90  The semblance calculated along the structural dip.
+ 
+    (3) Also prepare the following migration velocity 3D data volume:
+ 
+           51  The input average velocity.
+ 
+    (4) Optionally run MASKER to mask unwanted portions of the above data
+        volumes, and choose the flattening option, for input into ka.
+        You can mask the top, bottom, or internal portions of the traces by
+        running MASKER one or more times to set the masked regions to nil.
+ 
+    (5) Optionally run KASTATS to gather statistics on the following 3D
+        data volumes for help in setting threshholds in KA:
+ 
+           82  The RMS amplitude stacked trace for this CMP.
+           83  The maximum absolute amplitude stacked trace for this CMP.
+           71  The semblance calculated along the residual NMO curve.
+           90  The semblance calculated along the structural dip.
+ 
+    (6) Run KA which takes any of the above input data volumes and
+        produces the following output data volumes:
+ 
+           91  The weight volume                (calculated by this process).
+           85  The output average velocity         (edited average velocity).
+          181  The residual NMO velocity ratio       (edited BETA attribute).
+          188  The structural dip in the X direction (edited XDIP attribute).
+          189  The structural dip in the Y direction (edited YDIP attribute).
+ 
+    (7) Optionally run MASKER again one or more times to mask unwanted
+        portions of the above data volumes which were output from KA.
+ 
+    (8) Run SLICER to shrink the 3D data volumes to 2D horizon slices,
+        with each horizon slice represented by a single sample point on
+        the traces.  The following new data volume (an additional trace)
+        will be created:
+ 
+            1  The time or depth of the horizon (last trace in gather).
+ 
+    (9) Run DABRA to further process the following 2D horizon slices:
+ 
+           91  The weight volume                     (calculated by KA).
+           85  The output average velocity               (edited by KA).
+          181  The residual NMO velocity ratio       (edited BETA attribute).
+          188  The structural dip in the X direction (edited XDIP attribute).
+          189  The structural dip in the Y direction (edited YDIP attribute).
+            1  The time or depth of the horizon (last trace in gather).
+ 
+   (10) Use the output from DABRA to run tomography.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 13. 2007-01-03  Stoeckley  Replace pc_register_tab_group w HelpSection line.
+ 12. 2006-06-20  Stoeckley  Add calls to pc_register_tab_group for SeisSpace.
+ 11. 2006-03-16 Bill Menger Made Parallel
+ 10. 2006-01-10 Bill Menger Removed Unused Variables.
+  9. 2005-10-10  Goodger    Change arguments tri and hdi in the pre-process
+                            routine from intent out to intent inout to
+                            satisfy to absoft f90 compiler.
+  8. 2005-01-10  Stoeckley  Add USE_TAPERED_SMOOTHING &amp; TAPERED_WEIGHT_PERCENT.
+  7. 2004-01-23  Stoeckley  Fix memory access bug when weights are not used.
+  6. 2003-10-20  Stoeckley  Change the way INTERP_WEIGHTS works; add
+                             REPLACE_NILS_VELCON and MAX_INTERP_LENGTH_VELCON.
+  5. 2003-10-02  Stoeckley  Add nullify calls before the memman_nullify calls
+                             to satisfy Portland Group compiler.
+  4. 2003-09-29  Stoeckley  Fix GAMMA = sqrt(BETA+1) which was upside down;
+                             fix bug with MAX_INTERP_LENGTH parameters; use
+                             abrakadabra to return identification string.
+  3. 2003-08-22  Stoeckley  Fix bug introduced in revision 2 for setting dead
+                             input traces to nil; remove requirement that VAV
+                             must always be input when BETA is edited; add
+                             parameter TRACE_SAMPLE_UNIT.
+  2. 2003-08-20  Stoeckley  Set dead input traces to nil; remove normalization
+                             of weights; change defaults for threshhold
+                             parameters; fix calculation of standard deviation.
+  1. 2003-06-19  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

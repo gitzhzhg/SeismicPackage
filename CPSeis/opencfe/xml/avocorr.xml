@@ -1,0 +1,407 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="avocorr" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="AVOCORRPROCESS" title="AVOCORR Process" rows="24" columns="80">
+    <Label keyword="COMMENT_AVOCORRAVOCORRELATIONMAT" alignment="center">AVOCORR - AVO Correlation Matching</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_SELECTTHETYPEOFCORRELATI" alignment="right">Select the type of correlation matching</Label>
+    <Label keyword="LABEL_CORRTYP" alignment="left">CORRTYP=</Label>
+    <Field keyword="CORRTYP" type="comboBox" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PRESERVEORIGINALVARIANCE" alignment="right">Preserve original variances of A and B?</Label>
+    <Label keyword="COMMENT_LPRESRV" alignment="left">LPRESRV=</Label>
+    <Field keyword="LPRESRV" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_REALPARTOFCORRELATIONCOE" alignment="right">Real part of correlation coef</Label>
+    <Label keyword="LABEL_COEFR" alignment="left">COEFR=</Label>
+    <Field keyword="COEFR" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_IMAGINARYPARTOFCORRELATI" alignment="right">Imaginary part of correlation coef</Label>
+    <Label keyword="LABEL_COEFI" alignment="left">COEFI=</Label>
+    <Field keyword="COEFI" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NMOAPPLIEDTOINPUTTRACES" alignment="right">NMO applied to input traces?</Label>
+    <Label keyword="COMMENT_LNMO" alignment="left">LNMO=</Label>
+    <Field keyword="LNMO" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AVOCORRAVOCORRELATIONMAT" xPos="23" yPos="0" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="0" yPos="1" xSize="74" ySize="7"/>
+     <Constraints component="COMMENT_SELECTTHETYPEOFCORRELATI" xPos="0" yPos="2" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CORRTYP" xPos="41" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CORRTYP" xPos="49" yPos="2" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_PRESERVEORIGINALVARIANCE" xPos="0" yPos="3" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LPRESRV" xPos="41" yPos="3" xSize="8" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LPRESRV" xPos="49" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_REALPARTOFCORRELATIONCOE" xPos="10" yPos="4" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COEFR" xPos="43" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COEFR" xPos="49" yPos="4" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_IMAGINARYPARTOFCORRELATI" xPos="5" yPos="5" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COEFI" xPos="43" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COEFI" xPos="49" yPos="5" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NMOAPPLIEDTOINPUTTRACES" xPos="11" yPos="6" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LNMO" xPos="44" yPos="6" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LNMO" xPos="49" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="CORRTYP">
+      <Tip>--&gt;Select the type of correlation matching wanted</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - CORRTYP<br> --&gt;Select the type of correlation matching wanted</center></b>
+<pre> Default = --&gt; Matching on A
+ Allowed = --&gt; Matching on A
+ Allowed = --&gt; Matching on B
+ Allowed = --&gt; Delta-A
+ Allowed = --&gt; Delta-B
+ --&gt; Matching on A -- Correlation Matching on A
+ --&gt; Matching on B -- Correlation Matching on B
+ --&gt; Delta-A -- Correlation Matching on Delta-A
+ --&gt; Delta-B -- Correlation Matching on Delta-B</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LPRESRV">
+      <Tip>--&gt;Choose whether to preserve original variances of A and B</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - LPRESRV<br> --&gt;Choose whether to preserve original variances of A and B</center></b>
+<pre> Default = --&gt; YES
+ Allowed = --&gt; YES
+ Allowed = --&gt; NO
+ --&gt; If 'Yes', then the original variances of A and B will be preserved.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COEFR">
+      <Tip>--&gt;Enter the real part of the desired correlation coefficient</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - COEFR<br> --&gt;Enter the real part of the desired correlation coefficient</center></b>
+<pre> Default = --&gt; -0.5
+ Allowed = --&gt; Real
+ --&gt; The real part of the desired correlation coefficient</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COEFI">
+      <Tip>--&gt;Enter the imaginary part of the desired correlation coefficient</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - COEFI<br> --&gt;Enter the imaginary part of the desired correlation coefficient</center></b>
+<pre> Default = --&gt; 0.0
+ Allowed = --&gt; Real
+ --&gt; The imaginary part of the desired correlation coefficient</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LNMO">
+      <Tip>--&gt;Enter YES if the Input prestack traces are NMO'd</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - LNMO<br> --&gt;Enter YES if the Input prestack traces are NMO'd</center></b>
+<pre> Default = --&gt; YES
+ Allowed = --&gt; YES
+ Allowed = --&gt; NO
+ --&gt; If 'Yes', the program will assume that the traces are NMO'd</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avocorr - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="avocorr">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : AVOCORR
+ Category   : velocity_analysis
+ Written    : 2004-01-29   by: Michael Ried
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Perform AVO Correlation Matching
+ Portability: No known limitations. --&gt; Change if needed.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This tool forms a linear combination of `A' and `B' such that the
+ correlation coefficient between the sum and one of the original two inputs
+ is a user specified value. This method of correlation is consistent with the
+ correction of physical overburden losses.
+ 
+ The angle-dependent component of overburden loss may be described by a
+ function O(x), where x=sin2 q and where O(0)=1. The AVO model for seismic
+ data S(x) is (A+Bx)O(x). Under this model, The apparent slope Bap = B +
+ AO'(0), where B is the true slope, and O'(0) is the leakage term from A
+ into B. This leakage term is generally unknown. However, if we do know from
+ prior information that the correlation between A and B should be some
+ number, then we can determine O'(0) so as to force the correlation between
+ A and Bap to be this number. This effectively removes the effect of
+ angle-dependent overburden loss.
+ 
+ Another use of this tool is to compute DA and DB, which are the horizontal
+ and vertical deviations of the data away their best estimate given the other
+ variable.  They are defined as follows:
+ 
+ DA = A - r (sa / sb) B ;
+ 
+ DB = B - r* (sb / sa) A ,
+ 
+ where sa and sb are the standard deviations of A and B, respectively and r
+ is their correlation coefficient.
+ 
+ Inputs and Outputs:
+ 
+ Minimum input to this tool is a Standard Suite, consisting of the traces
+ shown on the following page. Optional input to this tool are prestack data,
+ passed through AVEL and the Standard Suite tool. This data may or may not be
+ moved out, and must follow the standard suite traces in each ensemble. A
+ velocity trace (trc_type 51) must appear between the standard suite and the
+ prestack data. The prestack data is assumed to be x-t data, unless the
+ ang_value trace header is present. In this case, it is assumed to be constant
+ angle data, whose angle is contained in that header.
+ 
+   Trace                   Header trc_type
+ 
+ Real AVO "A" trace              43
+ 
+ Real AVO "B" trace              44
+ 
+ Imag AVO "A" trace              17
+ 
+ Imag AVO "B" trace              18
+ 
+ Standard deviation "A"          45
+ 
+ Standard deviation "B"          47
+ 
+ Real correlation                48
+ 
+ Imag correlation                41
+ 
+ 
+ The output from this tool another Standard Suite whose component traces
+ have been normalized. If prestack data was appended to the suite, it will
+ be transformed in such a way as to produce the same intercept and gradient
+ traces as the transformed traces passed in the suite.
+ 
+ Parameters:
+ 
+ Type of matching desired:
+ 
+ You may specify one of the following options:
+ 
+ D A - The complex `A' trace will be replaced by the horizontal deviation of
+ `A' from the best estimate of `A' given `B'. The new correlation coefficient
+ will be set to zero.
+ 
+ D B - The complex `A' trace will be replaced by the horizontal deviation of
+ `A' from the best estimate of `A' given `B'. The new correlation coefficient
+ will be set to zero.
+ 
+ Correlation Matching on A - The complex `A' trace will be replaced by
+ A+kB, where k is chosen to make the correlation coefficient between
+ the new `A' trace and `B' be the value specified below.
+ 
+ Correlation Matching on B - The complex `B' trace will be replaced by
+ B + kA, where k is chosen to make the correlation coefficient between
+ `A' and the new `B' trace be the value specified below. This technique
+ effectively reverses the physical effects of offset-dependent attenuation
+ described above, since k will estimate -O'(0).
+ 
+ Real part of desired correlation coefficient:
+ 
+ You may enter the real part of the desired correlation coefficient
+ between the new `A' and `B' traces here. If either DA or DB correlation
+ matching was specified, the program will internally set the desired
+ correlation coefficient to zero.
+ 
+ Do you wish a nonzero imaginary part?
+ 
+ Under most normal situations, you will want the imaginary part of the
+ desired correlation coefficient to be zero. If the incoming data had
+ quadrature components between `A' and `B,' they will be removed.
+ However, it is possible to reintroduce a controlled amount of quadrature
+ components into the data. One reason to do this might be to simulate the
+ effects of an overall velocity error and test the robustness of downstream
+ processing under these conditions.
+ 
+ Imag part of desired correlation coefficient:
+ 
+ This field appears only if you answered the previous question affirmatively.
+ It allows to specify an imaginary part of the desired correlation
+ coefficient. Note that the magnitude of any correlation coefficient must
+ be less than unity.
+ 
+ Preserve the original variances of A and B?
+ 
+ If `No,' then only the operations, A &lt;-- A + kB or B &lt;-- B + kA will be
+ performed. These operations can change the standard deviations of the
+ new seismic data in dramatic ways. A `Yes' to this question will subsequently
+ scale the new `A' or `B' so as the retain their original standard deviations
+ (variances).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+  Minimum input to this tool is a Standard Suite of AVO attributes, which may
+  be generated with either AVOSTS (Standard Suite)or AVOANS (Alternate Norm
+  Suite).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author        Description
+     ----        ------        -----------
+  3. 2006-06-20  B. Menger     Removed Unused Variables.
+  2. 2005-01-03  Michael Ried  Updated the documentation to the program
+  1. 2004-01-29  Michael Ried  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

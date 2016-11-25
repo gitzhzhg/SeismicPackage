@@ -1,0 +1,84 @@
+#! /bin/csh -f
+
+# add_new_platform
+#
+# $Id: add_new_platform,v 1.2 2004/03/04 14:07:43 wjdone Exp $
+#
+# run this script to create a new platform in all of the ~spws directories.
+#
+# simply type this:
+#                     add_new_platform xxxx
+# to create a new platform-dependent subdirectory xxxx everywhere one is
+# required, plus the necessary makefile links.
+#
+# the environment variable SPWSDIR is used to point to the ~spws directory.
+
+#-------------------------------------------------------------------------------
+
+if($1 == "") then
+     echo ''
+     echo '-----------------------------------------------------------------'
+     echo ' Run this script to create a new platform in all of the ~spws'
+     echo ' directories.'
+     echo ''
+     echo ' Simply type this:'
+     echo ''
+     echo '                     add_new_platform xxxx'
+     echo ''
+     echo ' to create a new platform-dependent subdirectory xxxx everywhere'
+     echo ' one is required, plus the necessary makefile links.'
+     echo '-----------------------------------------------------------------'
+     echo ''
+     exit
+endif
+set ARCH=$1
+echo "Running $0 $ARCH..."
+#-------------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+#-------------------------------------------------------------------------------
+
+set name = $SPWSDIR/lib
+set name1 = $SPWSDIR/spws/lib
+ mkdir -p ${name}/${ARCH}
+ mkdir -p ${name1}/${ARCH}
+
+set name = $SPWSDIR/making
+if(! -d $name/$1 || ! -f $name/$1/makefile) then
+  echo adding $name/$1
+  cd $name; mkdir $1; cd $1; if(-f makefile) \rm makefile; ln -s ../makefile
+endif
+
+
+foreach name ($SPWSDIR/oop/*)
+  if($name:t == obsolete_or_reference) continue
+  if(-f $name) continue
+  if(-d $name/$1 && -f $name/$1/makefile) continue
+  echo adding $name/$1
+  cd $name; mkdir $1; cd $1; if(-f makefile) \rm makefile; ln -s ../makefile
+end
+
+
+foreach name ($SPWSDIR/util/*)
+  if($name:t == obsolete_or_reference) continue
+  if(-f $name) continue
+  if(-d $name/$1 && -f $name/$1/makefile) continue
+  echo adding $name/$1
+  cd $name; mkdir $1; cd $1; if(-f makefile) \rm makefile; ln -s ../makefile
+end
+
+
+foreach name ($SPWSDIR/programs/*)
+  if($name:t == obsolete_or_reference) continue
+  if(-f $name) continue
+  if(-d $name/$1 && -f $name/$1/makefile) continue
+  echo adding $name/$1
+  cd $name; mkdir $1; cd $1; if(-f makefile) \rm makefile; ln -s ../makefile
+end
+
+#-------------------------------------------------------------------------------
+

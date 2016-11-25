@@ -1,0 +1,866 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="trinsort" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TRINSORTPROCESS" title="TRINSORT Process" rows="40" columns="80">
+    <Label keyword="COMMENT_READTRACESFROMTRACEFILES" alignment="center">Read traces from trace files in desired order</Label>
+    <Label keyword="LABEL_OPT_FILE" alignment="left">OPT_FILE=</Label>
+    <Field keyword="OPT_FILE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CHECKFILE" alignment="left">CHECKFILE=</Label>
+    <Field keyword="CHECKFILE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="TEST_BEYOND_SYMLINKS">Test Beyond Symbolic Links</Button>
+    <Button keyword="SELECT_LATEST_PATHNAME">Select PATHNAME</Button>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS  PATHNAMES">
+     <Array keyword="STATUS" type="string" maxLength="8  " columnName="STATUS" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="PATHNAMES" type="string" maxLength="128" columnName="PATHNAMES" editable="yes" sensitive="yes" columnSize="55"/>
+    </ArraySet>
+    <Button keyword="SELECT_PATH_LIST">Select PATH_LIST</Button>
+    <Label keyword="EQLAB_PATH_LIST" alignment="left">=</Label>
+    <Field keyword="PATH_LIST" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_TABLEPATH">Select TABLEPATH</Button>
+    <Label keyword="EQLAB_TABLEPATH" alignment="left">=</Label>
+    <Field keyword="TABLEPATH" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="TABLEPATH_INFO" type="string" maxLength="61" editable="no" sensitive="yes"/>
+    <Field keyword="INFO" type="string" maxLength="61" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HOW_READ_TRACES" alignment="left">HOW_READ_TRACES =</Label>
+    <Field keyword="HOW_READ_TRACES" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MERGE" alignment="left">MERGE=</Label>
+    <Field keyword="MERGE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HISTORY" alignment="left">HISTORY=</Label>
+    <Field keyword="HISTORY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SORT" alignment="left">OPT_SORT=</Label>
+    <Field keyword="OPT_SORT" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PRI" alignment="left">HDR_PRI =</Label>
+    <Field keyword="HDR_PRI" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_INIT" alignment="left">PRI_INIT =</Label>
+    <Field keyword="PRI_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_INC" alignment="left">PRI_INC =</Label>
+    <Field keyword="PRI_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEC" alignment="left">HDR_SEC =</Label>
+    <Field keyword="HDR_SEC" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEC_INIT" alignment="left">SEC_INIT =</Label>
+    <Field keyword="SEC_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEC_INC" alignment="left">SEC_INC =</Label>
+    <Field keyword="SEC_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TERT" alignment="left">HDR_TERT=</Label>
+    <Field keyword="HDR_TERT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERT_INIT" alignment="left">TERT_INIT=</Label>
+    <Field keyword="TERT_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERT_INC" alignment="left">TERT_INC=</Label>
+    <Field keyword="TERT_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRACESELECTIONCRITERIA" alignment="left">Trace Selection Criteria:</Label>
+    <Label keyword="LABEL_HDR_A" alignment="left">HDR_A=</Label>
+    <Field keyword="HDR_A" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_A_MIN" alignment="left">A_MIN=</Label>
+    <Field keyword="A_MIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_A_WID" alignment="left">A_WID=</Label>
+    <Field keyword="A_WID" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_A_INC" alignment="left">A_INC=</Label>
+    <Field keyword="A_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_A_MAX" alignment="left">A_MAX=</Label>
+    <Field keyword="A_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_B" alignment="left">HDR_B=</Label>
+    <Field keyword="HDR_B" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_B_MIN" alignment="left">B_MIN=</Label>
+    <Field keyword="B_MIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_B_WID" alignment="left">B_WID=</Label>
+    <Field keyword="B_WID" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_B_INC" alignment="left">B_INC=</Label>
+    <Field keyword="B_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_B_MAX" alignment="left">B_MAX=</Label>
+    <Field keyword="B_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_C" alignment="left">HDR_C=</Label>
+    <Field keyword="HDR_C" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_C_MIN" alignment="left">C_MIN=</Label>
+    <Field keyword="C_MIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_C_WID" alignment="left">C_WID=</Label>
+    <Field keyword="C_WID" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_C_INC" alignment="left">C_INC=</Label>
+    <Field keyword="C_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_C_MAX" alignment="left">C_MAX=</Label>
+    <Field keyword="C_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_READTRACESFROMTRACEFILES" xPos="18" yPos="0" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_FILE" xPos="10" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FILE" xPos="19" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CHECKFILE" xPos="48" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CHECKFILE" xPos="58" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TEST_BEYOND_SYMLINKS" xPos="10" yPos="5" xSize="26" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_LATEST_PATHNAME" xPos="10" yPos="7" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="10" yPos="8" xSize="66" ySize="11" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST" xPos="2" yPos="21" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_LIST" xPos="18" yPos="21" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_LIST" xPos="19" yPos="21" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_INFO" xPos="19" yPos="22" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_TABLEPATH" xPos="1" yPos="25" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_TABLEPATH" xPos="17" yPos="25" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TABLEPATH" xPos="18" yPos="25" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TABLEPATH_INFO" xPos="18" yPos="26" xSize="61" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO" xPos="18" yPos="27" xSize="61" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HOW_READ_TRACES" xPos="1" yPos="29" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HOW_READ_TRACES" xPos="18" yPos="29" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MERGE" xPos="40" yPos="29" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MERGE" xPos="46" yPos="29" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HISTORY" xPos="55" yPos="29" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HISTORY" xPos="63" yPos="29" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SORT" xPos="5" yPos="31" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SORT" xPos="14" yPos="31" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_PRI" xPos="5" yPos="32" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PRI" xPos="14" yPos="32" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_INIT" xPos="23" yPos="32" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_INIT" xPos="33" yPos="32" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_INC" xPos="47" yPos="32" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_INC" xPos="56" yPos="32" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEC" xPos="5" yPos="33" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEC" xPos="14" yPos="33" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEC_INIT" xPos="23" yPos="33" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEC_INIT" xPos="33" yPos="33" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEC_INC" xPos="47" yPos="33" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEC_INC" xPos="56" yPos="33" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TERT" xPos="5" yPos="34" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TERT" xPos="14" yPos="34" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERT_INIT" xPos="23" yPos="34" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERT_INIT" xPos="33" yPos="34" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERT_INC" xPos="47" yPos="34" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERT_INC" xPos="56" yPos="34" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRACESELECTIONCRITERIA" xPos="1" yPos="36" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_A" xPos="2" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_A" xPos="8" yPos="37" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_A_MIN" xPos="14" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="A_MIN" xPos="20" yPos="37" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_A_WID" xPos="33" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="A_WID" xPos="39" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_A_INC" xPos="48" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="A_INC" xPos="54" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_A_MAX" xPos="63" yPos="37" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="A_MAX" xPos="69" yPos="37" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_B" xPos="2" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_B" xPos="8" yPos="38" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_B_MIN" xPos="14" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="B_MIN" xPos="20" yPos="38" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_B_WID" xPos="33" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="B_WID" xPos="39" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_B_INC" xPos="48" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="B_INC" xPos="54" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_B_MAX" xPos="63" yPos="38" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="B_MAX" xPos="69" yPos="38" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_C" xPos="2" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_C" xPos="8" yPos="39" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_C_MIN" xPos="14" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="C_MIN" xPos="20" yPos="39" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_C_WID" xPos="33" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="C_WID" xPos="39" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_C_INC" xPos="48" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="C_INC" xPos="54" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_C_MAX" xPos="63" yPos="39" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="C_MAX" xPos="69" yPos="39" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_FILE">
+      <Tip>Source of input files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - OPT_FILE<br> Source of input files.</center></b>
+<pre> Default = PATHNAMES
+ Allowed = PATHNAMES, PATH_LIST
+ If OPT_FILE = PATHNAMES, file(s) listed in PATHNAMES array.
+ If OPT_FILE = PATH_LIST, file(s) listed in file indicated by PATH_LIST.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CHECKFILE">
+      <Tip>Check that the file is valid trace file with consistent globals.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - CHECKFILE<br> Check that the file is valid trace file with consistent globals.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ CFE can check the file for consistency and existence, and in the process will
+ load special globals (scalar ones) for subsequent job processes to use.
+ These are so that GVS, some Migrations, etc. will have proper globals set
+ by the input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TEST_BEYOND_SYMLINKS">
+      <Tip>Forces more thorough file STATUS checking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - TEST_BEYOND_SYMLINKS<br> Forces more thorough file STATUS checking.</center></b>
+<pre> Default behavior is to not pursue file STATUS checking beyond the symbolic
+ links themselves.  Pushing this button causes more thorough file STATUS
+ information to be provided.  Refrain from pushing this button during periods
+ of NFS or disk problems.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LATEST_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - SELECT_LATEST_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>File status (if CHECKSTATUS=YES).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - STATUS<br> File status (if CHECKSTATUS=YES).</center></b>
+<pre>  R  -- File found and readable.
+ RE  -- File not found or not readable.
+  W  -- File found and writable.
+  C  -- File not found, but creatable.
+ CE  -- File not found and not creatable.
+ WE  -- File exists and can not be overwritten.  Checks both file and
+        directory permissions.
+ WB  -- Blank filename.
+ NTF -- File not a trc, cmpr, or segy file (only if CHECKFILE == YES).
+ BG  -- File globals disagree with job (only if CHECKFILE == YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES">
+      <Tip>Pathname(s) for the file(s) to be read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PATHNAMES<br> Pathname(s) for the file(s) to be read.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of file(s), including optional node, userid, and dir.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST">
+      <Tip>Choose PATH_LIST with a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - SELECT_PATH_LIST<br> Choose PATH_LIST with a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST">
+      <Tip>ASCII file containing list of file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PATH_LIST<br> ASCII file containing list of file names.</center></b>
+<pre> Default = blank
+ Allowed = char
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_INFO">
+      <Tip>File status for PATH_LIST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PATH_LIST_INFO<br> File status for PATH_LIST.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_TABLEPATH">
+      <Tip>Choose TABLEPATH using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - SELECT_TABLEPATH<br> Choose TABLEPATH using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TABLEPATH">
+      <Tip>Name of trace file table to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - TABLEPATH<br> Name of trace file table to use.</center></b>
+<pre> Default = NONE
+ Allowed = char or NONE
+ 
+ This trace file table must match the specified trace files.
+ 
+ Any specified file extension will be changed to ".table".
+ 
+ TABLEPATH must NOT be specified if HOW_READ_TRACES is set to SEQUENTIAL.
+ TABLEPATH must be specified if HOW_READ_TRACES is set to OLD_SORT or NEW_SORT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TABLEPATH_INFO">
+      <Tip>Status of TABLEPATH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - TABLEPATH_INFO<br> Status of TABLEPATH.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="INFO">
+      <Tip>Information regarding contents of TABLEPATH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - INFO<br> Information regarding contents of TABLEPATH.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HOW_READ_TRACES">
+      <Tip>Whether to read traces sequentially or in a chosen order.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HOW_READ_TRACES<br> Whether to read traces sequentially or in a chosen order.</center></b>
+<pre> Default = SEQUENTIAL
+ Allowed = SEQUENTIAL (read traces sequentially and do not use table)
+ Allowed = OLD_SORT   (read traces in old order specified on table)
+ Allowed = NEW_SORT   (read traces in new order specified by parameters here)
+ 
+ HOW_READ_TRACES must be set to SEQUENTIAL if TABLEPATH is NOT specified.
+ HOW_READ_TRACES must be set to OLD_SORT or NEW_SORT if TABLEPATH is specified.
+ 
+ For OLD_SORT, if the trace file table has not been sorted into a new trace
+ file table, the trace order will be the original trace order when the
+ trace file table was created.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MERGE">
+      <Tip>Whether to merge traces with those from previous processes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - MERGE<br> Whether to merge traces with those from previous processes.</center></b>
+<pre> Default = NO
+ Allowed = NO     (Do not merge traces.)
+ Allowed = APPEND (Append traces after those from previous processes.)
+ 
+ The first process in a loop cannot be a TRINSORT with MERGE = APPEND.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HISTORY">
+      <Tip>Whether to read histories from the files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HISTORY<br> Whether to read histories from the files.</center></b>
+<pre> Default = YES
+ Allowed = YES    (Do read histories.)
+ Allowed = NO     (Do not read histories.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SORT">
+      <Tip>Option for selecting common sorts or a custom sort.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - OPT_SORT<br> Option for selecting common sorts or a custom sort.</center></b>
+<pre> Default = CUSTOM
+ Allowed = COMMON_MIDPOINT ( 8, 7, 6)
+ Allowed = COMMON_SOURCE   ( 9,10, 1)
+ Allowed = COMMON_RECEIVER (10, 9, 1)
+ Allowed = COMMON_OFFSET   ( 6, 8, 7)
+ Allowed = CUSTOM</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PRI">
+      <Tip>Header word designating primary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HDR_PRI<br> Header word designating primary sort bins.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ 
+ HDR_PRI is the least rapidly changing sort header for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_INIT">
+      <Tip>Value for the center of ANY primary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PRI_INIT<br> Value for the center of ANY primary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_INC">
+      <Tip>Increment for primary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PRI_INC<br> Increment for primary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ PRI_INC is the increment between, and the width of, primary sort bins.
+ If PRI_INC &lt; 0, traces will be output in descending order of HDR_PRI.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEC">
+      <Tip>Header word designating secondary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HDR_SEC<br> Header word designating secondary sort bins.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH
+ 
+ HDR_SEC has intermediate rapidity of change for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEC_INIT">
+      <Tip>Value for the center of ANY secondary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - SEC_INIT<br> Value for the center of ANY secondary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEC_INC">
+      <Tip>Increment for secondary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - SEC_INC<br> Increment for secondary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ SEC_INC is the increment between, and the width of, secondary sort bins.
+ If SEC_INC &lt; 0, traces will be output in descending order of HDR_SEC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TERT">
+      <Tip>Header word designating tertiary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HDR_TERT<br> Header word designating tertiary sort bins.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH
+ 
+ HDR_TERT is the most rapidly changing sort header for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERT_INIT">
+      <Tip>Value for the center of ANY tertiary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - TERT_INIT<br> Value for the center of ANY tertiary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERT_INC">
+      <Tip>Increment for tertiary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - TERT_INC<br> Increment for tertiary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ TERT_INC is the increment between, and the width of, tertiary sort bins.
+ If TERT_INC &lt; 0, traces will be output in descending order of HDR_TERT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_A">
+      <Tip>Header word for selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HDR_A<br> Header word for selecting traces.</center></b>
+<pre> Default = 0
+ Allowed = 2 - NWIH (or 0 to disable selections).
+ 
+ This header word need not match HDR_PRI or HDR_SEC or HDR_TERT.
+ 
+ Any header word (except header word 1) can be used for trace selections,
+ but if HOW_READ_TRACES is not SEQUENTIAL and the header word is on the
+ TABLEPATH file, the trace selections will be faster because the selection
+ criterion for that header word will be applied BEFORE attempting to read
+ the trace from the file.
+ 
+ The order of HDR_A and HDR_B and HDR_C is unimportant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="A_MIN">
+      <Tip>Value for the center of the MINIMUM bin to select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - A_MIN<br> Value for the center of the MINIMUM bin to select.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Traces in bins with bin center smaller than A_MIN will be skipped.
+ 
+ This value is irrelevant if HDR_A is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="A_WID">
+      <Tip>Bin width for header word HDR_A.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - A_WID<br> Bin width for header word HDR_A.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ 
+ This width need not bear any relationship to the bin widths (or increments)
+ used for sorting.
+ 
+ This value is irrelevant if HDR_A is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="A_INC">
+      <Tip>Increment for header word HDR_A.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - A_INC<br> Increment for header word HDR_A.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= A_WID
+ 
+ This is the increment from the center of one selected bin to the center
+ of the next selected bin.  If it is equal to A_WID, the selected
+ bins will butt up to each other with no gap.
+ 
+ This increment need not be a multiple of A_WID.
+ 
+ This increment need not bear any relationship to the bin widths (or
+ increments) used for sorting.
+ 
+ This value is irrelevant if HDR_A is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="A_MAX">
+      <Tip>Value for the center of the MAXIMUM bin to select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - A_MAX<br> Value for the center of the MAXIMUM bin to select.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ Allowed = real &gt;= A_MIN
+ 
+ This should be equal to A_MIN plus a multiple of A_INC, and will be
+ adjusted slightly if necessary to make this true.
+ 
+ Traces in bins with bin center larger than A_MAX will be skipped.
+ 
+ This value is irrelevant if HDR_A is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_B">
+      <Tip>Header word for selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HDR_B<br> Header word for selecting traces.</center></b>
+<pre> Default = 0
+ Allowed = 2 - NWIH (or 0 to disable selections).
+ 
+ This header word need not match HDR_PRI or HDR_SEC or HDR_TERT.
+ 
+ Any header word (except header word 1) can be used for trace selections,
+ but if HOW_READ_TRACES is not SEQUENTIAL and the header word is on the
+ TABLEPATH file, the trace selections will be faster because the selection
+ criterion for that header word will be applied BEFORE attempting to read
+ the trace from the file.
+ 
+ The order of HDR_A and HDR_B and HDR_C is unimportant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="B_MIN">
+      <Tip>Value for the center of the MINIMUM bin to select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - B_MIN<br> Value for the center of the MINIMUM bin to select.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Traces in bins with bin center smaller than B_MIN will be skipped.
+ 
+ This value is irrelevant if HDR_B is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="B_WID">
+      <Tip>Bin width for header word HDR_B.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - B_WID<br> Bin width for header word HDR_B.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ 
+ This width need not bear any relationship to the bin widths (or increments)
+ used for sorting.
+ 
+ This value is irrelevant if HDR_B is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="B_INC">
+      <Tip>Increment for header word HDR_B.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - B_INC<br> Increment for header word HDR_B.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= B_WID
+ 
+ This is the increment from the center of one selected bin to the center
+ of the next selected bin.  If it is equal to B_WID, the selected
+ bins will butt up to each other with no gap.
+ 
+ This increment need not be a multiple of B_WID.
+ 
+ This increment need not bear any relationship to the bin widths (or
+ increments) used for sorting.
+ 
+ This value is irrelevant if HDR_B is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="B_MAX">
+      <Tip>Value for the center of the MAXIMUM bin to select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - B_MAX<br> Value for the center of the MAXIMUM bin to select.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ Allowed = real &gt;= B_MIN
+ 
+ This should be equal to B_MIN plus a multiple of B_INC, and will be
+ adjusted slightly if necessary to make this true.
+ 
+ Traces in bins with bin center larger than B_MAX will be skipped.
+ 
+ This value is irrelevant if HDR_B is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_C">
+      <Tip>Header word for selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HDR_C<br> Header word for selecting traces.</center></b>
+<pre> Default = 0
+ Allowed = 2 - NWIH (or 0 to disable selections).
+ 
+ This header word need not match HDR_PRI or HDR_SEC or HDR_TERT.
+ 
+ Any header word (except header word 1) can be used for trace selections,
+ but if HOW_READ_TRACES is not SEQUENTIAL and the header word is on the
+ TABLEPATH file, the trace selections will be faster because the selection
+ criterion for that header word will be applied BEFORE attempting to read
+ the trace from the file.
+ 
+ The order of HDR_A and HDR_B and HDR_C is unimportant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C_MIN">
+      <Tip>Value for the center of the MINIMUM bin to select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - C_MIN<br> Value for the center of the MINIMUM bin to select.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Traces in bins with bin center smaller than C_MIN will be skipped.
+ 
+ This value is irrelevant if HDR_C is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C_WID">
+      <Tip>Bin width for header word HDR_C.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - C_WID<br> Bin width for header word HDR_C.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ 
+ This width need not bear any relationship to the bin widths (or increments)
+ used for sorting.
+ 
+ This value is irrelevant if HDR_C is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C_INC">
+      <Tip>Increment for header word HDR_C.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - C_INC<br> Increment for header word HDR_C.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= C_WID
+ 
+ This is the increment from the center of one selected bin to the center
+ of the next selected bin.  If it is equal to C_WID, the selected
+ bins will butt up to each other with no gap.
+ 
+ This increment need not be a multiple of C_WID.
+ 
+ This increment need not bear any relationship to the bin widths (or
+ increments) used for sorting.
+ 
+ This value is irrelevant if HDR_C is 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C_MAX">
+      <Tip>Value for the center of the MAXIMUM bin to select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - C_MAX<br> Value for the center of the MAXIMUM bin to select.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ Allowed = real &gt;= C_MIN
+ 
+ This should be equal to C_MIN plus a multiple of C_INC, and will be
+ adjusted slightly if necessary to make this true.
+ 
+ Traces in bins with bin center larger than C_MAX will be skipped.
+ 
+ This value is irrelevant if HDR_C is 0.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trinsort - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="trinsort">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TRINSORT                 (TRIN with trace sort)
+ Category   : io
+ Written    : 2001-12-28   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Read trace files in desired sorted order using trace file table.
+ Portability: No known limitations, but see note regarding pgf90 bug below.
+ Parallel   : No.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process reads a trace file from disk in the order specified by
+ a table of the traces on the trace file.
+ 
+ This process should be used instead of TRIN if you want to read the traces
+ in an order different from the actual order of the traces on the file.
+ This action may eliminate the need to sort the data using TSORT.
+ 
+ You must have previously saved a trace file table using the TABLESAVE
+ process at the time you saved the trace file itself using the TROT process.
+ The trace file saved by TROT and read by this process must be a TRCIO file.
+ 
+ Any of the header words which were saved on the table can be used to choose
+ the order in which the trace data is to be read by this process.
+ 
+-------------------------------------------------------------------------------
+                         TRIO OF PROCESSES
+ 
+ This process is one of a trio of processes designed to allow reading trace
+ files randomly in order to reduce the need to sort data using TSORT:
+ 
+ TABLESAVE:  Saves a trace file table to disk.  This process should
+             immediately precede or follow TROT in the job.  TROT will
+             save the trace file as usual.
+ 
+ TABLESORT:  Reads, sorts, and saves a trace file table in a different
+             order (setup-only process).  This is optional, since TRINSORT
+             (below) can also sort (but not output) the table.
+ 
+ TRINSORT:   Reads a trace file in desired sort order using the trace file
+             table.  This process should be used instead of TRIN to read
+             the trace file.  TRINSORT can read traces in the order
+             specified on the table, or in a user-specified order.
+ 
+ If you wish to create a trace file table for an existing TROT file, you
+ can read the traces using TRIN followed by TABLESAVE.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+010. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+  9. 2005-10-24  Stoeckley  Enhance to allow more than one trace file input;
+                             add history option.
+  8. 2004-03-17  Stoeckley  Change to not test for selected trace a second
+                             time (after reading the trace) using a header
+                             word which was used for selecting the trace the
+                             first time (before reading the trace).
+  7. 2003-12-09  Stoeckley  Change to double precision from real.
+  6. 2002-08-01  Stoeckley  Change the trace selection algorithm to call the
+                             MTH module.
+  5. 2002-07-11  Stoeckley  Change the trace selection algorithm so that the
+                             trace selection increment does not have to be
+                             a multiple of the bin width.
+  4. 2002-04-08  Stoeckley  Add ability to select traces by pattern.
+  3. 2002-02-25  Stoeckley  Add MERGE parameter with options APPEND and NO.
+  2. 2002-02-06  Stoeckley  Add capability to select traces while reading.
+  1. 2002-02-04  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

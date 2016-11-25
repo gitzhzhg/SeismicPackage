@@ -1,0 +1,38 @@
+#! /bin/csh -f
+
+# checkout_rcs_files_everywhere
+#
+# $Id: checkout_rcs_files_everywhere,v 1.1 2004/05/25 22:01:40 spws Exp spws $
+#
+# Run this script to check out the RCS files in all of the ~spws directories.
+#
+# Simply type this:
+#
+#                    checkout_rcs_files_everywhere  tag
+#
+# where  <tag>  specifies the tag to be used.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+#
+# The environment variables SPWSDIR and SPWSMAKEDIR must be set.
+
+#-------------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo SPWSMAKEDIR not set
+     exit
+endif
+
+set tag = $1
+
+$SPWSMAKEDIR/private_rcs_everywhere checkout_rcs_files $tag
+
+#-------------------------------------------------------------------------------
+

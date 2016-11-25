@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="adns" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="ADNSPROCESS" title="ADNS Process" rows="24" columns="80">
+    <Label keyword="COMMENT_ADDNOISE" alignment="center">Add Noise.</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FRACT" alignment="left">FRACT=</Label>
+    <Field keyword="FRACT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TYPE_NOISE" alignment="left">TYPE_NOISE=</Label>
+    <Field keyword="TYPE_NOISE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEED" alignment="left">SEED=</Label>
+    <Field keyword="SEED" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_ADDNOISE" xPos="15" yPos="1" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="2" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="13" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FRACT" xPos="26" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FRACT" xPos="34" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="2" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="13" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="26" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="34" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TYPE_NOISE" xPos="2" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_NOISE" xPos="13" yPos="7" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SEED" xPos="26" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEED" xPos="34" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="2" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="13" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Method of determining noise amplitude.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - MODE<br> Method of determining noise amplitude.</center></b>
+<pre> Default = MULTI
+ Allowed = MULTI   Set noise level for each gather of traces based on RMS
+                   amplitude of that gather.
+ Allowed = SINGLE  Set noise level for each trace individually, based on
+                   the RMS amplitude of that trace.
+ Allowed = ABS     Add a user-specified ABSOLUTE noise level to all traces
+                   independently of values originally in the traces.</pre></html>]]></Text>
+     </Help>
+     <Help component="FRACT">
+      <Tip>Scale parameter of added noise.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - FRACT<br> Scale parameter of added noise.</center></b>
+<pre> Default = 0.5
+ Allowed = real &gt; 0.0
+ 
+ If mode = SINGLE or MULTI, this is the noise standard deviation as a
+ fraction of the RMS amplitude of input trace (or input gather).
+ If mode = ABS, then FRACT is EXACTLY the standard deviation of the added
+ noise.</pre></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Start of time window for calculating RMS amplitude, in seconds.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - TIM_BEG<br> Start of time window for calculating RMS amplitude, in seconds.</center></b>
+<pre> Default = TSTRT
+ Allowed = TIM_END &gt; real &gt;= TSTRT
+ 
+ The RMS amplitude of input traces is determined within the window defined by
+ TIM_BEG and TIM_END when MODE=SINGLE or MODE=MULTI (ignored when MODE=ABS).
+ 
+ Generated noise is always added to the ENTIRE trace.</pre></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>End of time window for calculating RMS amplitude, in seconds.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - TIM_END<br> End of time window for calculating RMS amplitude, in seconds.</center></b>
+<pre> Default = End-of-trace.
+ Allowed = End-of-trace &gt;= real &gt; TIM_BEG
+ 
+ The RMS amplitude of input traces is determined within the window defined by
+ TIM_BEG and TIM_END when mode=SINGLE or mode=MULTI (ignored when mode=ABS).
+ 
+ Generated noise is always added to the ENTIRE trace.</pre></html>]]></Text>
+     </Help>
+     <Help component="TYPE_NOISE">
+      <Tip>Type of noise added to trace.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - TYPE_NOISE<br> Type of noise added to trace.</center></b>
+<pre> Default = GAUSS
+ Allowed = GAUSS, Gaussian (removable by least-squares methods)
+ Allowed = DEXP,  Double-Exponential (requires more robust methods to remove
+ noise, e.g., L1 techniques)</pre></html>]]></Text>
+     </Help>
+     <Help component="SEED">
+      <Tip>Seed for initializing the random number generator.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - SEED<br> Seed for initializing the random number generator.</center></b>
+<pre> Default = 0, equivalent to not explicitly setting the seed.
+ Allowed = any integer</pre></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html>
+<b><center>adns - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ If HDR_FLAG = 0, then noise is added to all traces. Otherwise, only traces
+ with a flag set in header word HDR_FLAG are changed.
+ 
+ If MODE = MULTI, then flagged traces do double duty, as only the flagged
+ traces are used in determining RMS signal amplitudes; then, once a noise
+ level has been determined for the gather, only the flagged traces are
+ modified by adding noise to them.</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>adns - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="adns">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : ADNS   (Add Noise)
+ Category   : synthetics
+ Written    : 1986-08-13   by: Bob Baumel
+ Revised    : 2002-04-03   by: Bob Baumel
+ Maturity   : production   2002-04-15
+ Purpose    : Adds white noise to traces.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Adds white noise to traces.  This is often useful with synthetic data,
+ either to test the effect of noise on processes, or to mask numerical
+ artifacts in synthetics.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ When MODE=SINGLE, the noise level added to each trace is determined
+ individually from the sample amplitudes in that trace. When MODE=MULTI, the
+ noise level is determined from the RMS amplitude of the whole current gather
+ of traces; then, this noise level is added to every trace in the gather.
+ When MODE=ABS, an absolute noise level is added, independent from the
+ amplitudes of the traces.
+ 
+ TIM_BEG and TIM_END specify the portion of the input traces used for
+ determining input RMS trace amplitudes when MODE=SINGLE and MODE=MULTI.
+ Once a noise level has been determined, added noise is applied to the
+ ENTIRE trace.  TIM_BEG and TIM_END have no effect when MODE=ABS.
+ 
+ The noise added by ADNS is all-band white noise, containing all frequencies
+ from zero to Nyquist. Thus, you may wish to follow ADNS by a band-pass
+ filter. Please note, however, that this will generally reduce the RMS noise
+ level, which may then be a SMALLER fraction of the RMS signal level than
+ indicated by your setting of FRAC (assuming that the original signal was
+ already bandlimited before addition of noise).
+ 
+ Setting TYPE_NOISE = DEXP yields double-exponentially distributed noise.
+ This is a distinctly non-Gaussian noise which puts more events on the
+ "tails" of the distribution than a Gaussian of the same standard deviation
+ (Technically, it's a "leptokurtic" distribution). Generating synthetics
+ with this type of noise can provide a more rigorous test of a process's
+ robustness than simple Gaussian noise.
+ 
+ If HDR_FLAG is non-zero, random noise is added to only the flagged traces.
+ Also, when MODE=MULTI, the flagged traces do double duty: Only flagged traces
+ are used in determining the RMS amplitude of the gather; then, noise is added
+ only to the flagged traces.
+ 
+ ADNS is fully re-enterable with respect to all parameters except SEED. If
+ ADNS occurs more than once in a job, no attempt is made to ensure that each
+ ADNS generates the correct sequence of random numbers according to its SEED
+ value. Therefore, if you want fully reproducible pseudo-random noise
+ controlled by SEED, use only one ADNS in the job. If reproducibility of the
+ noise doesn't matter, feel free to put more than one ADNS in the job.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author    Description
+     ----        ------    -----------
+ 19. 2002-04-15  Baumel    Improve GUI robustness for TIM_BEG and TIM_END.
+ 18. 2001-08-02  Baumel    Add GUI check for gathered input when MODE = MULTI.
+ 17. 2001-05-14  Selzler   Changed wrapup logic to use skip_wrapup
+ 16. 2000-07-07  Selzler   Fixed problems found by CPS Fortran Code Review.
+ 15. 2000-04-17  Selzler   Fixed bug in update and used new random mth routine
+ 14. 2000-03-28  Selzler   Correct more bugs in GUI interaction
+ 13. 2000-03-14  Selzler   Correct bugs in GUI interaction
+ 12. 2000-02-02  Selzler   Added support for GUI and general cleanup
+ 11. 1999-11-19  Selzler   Added RCS "Id" strings to tag executeable
+ 10. 1999-09-13  Selzler   Updated skip_wrapup and print_lun usage
+  9. 1999-08-27  Selzler   Conversion to f90.
+  8. 1999-04-29  Baumel    Add parameter seed.
+  7. 1997-12-23  Goodger   Add parameter HF#.  Convert to fortran90
+                           free form.
+  6. 1995-09-26  Baumel    Add option for double-exponential noise (new
+                           type_noise parameter) to provide better test of
+                           robustness of processes in handling noise.
+  5. 1994-02-09  Baumel    Calculate noise level from RMS amplitude
+                           instead of LAV (no more call to TRSCAN); add
+                           mode, tim_beg, tim_end parameters.
+  4. 1988-10-20  Baumel    NWIH conversion.
+  3. 1988-06-23  Baumel    Add CPSPRT calls, use TRSCAN for finding LAV,
+                           add option for fract<0.
+  2. 1988-06-03  Baumel    New Convention for mute header word.
+  1. 1986-08-13  Baumel    Original version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

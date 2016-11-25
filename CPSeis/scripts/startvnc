@@ -1,0 +1,41 @@
+#!/bin/sh
+# start up vnc server with my preferences
+if [ -z $1 ] ; then
+        PRG=$(basename $0)
+	echo "What geometry do you want?"
+	echo "ex: $PRG full   ==> 3200x1200"
+	echo "    $PRG half   ==> 1590X1170"
+	echo "    $PRG laptop ==> 1680x1050"
+	echo "    $PRG home   ==> 1280x1024"
+	echo "    $PRG nnnxmmm==> nnnxmmm"
+	exit 1
+else
+	if [ "$1" == "full" ] ; then
+		GEOM=3200x1200
+	elif [ "$1" == "half" ] ; then
+		GEOM=1590x1170
+	elif [ "$1" == "laptop" ] ; then
+		GEOM=1680x1050
+	elif [ "$1" == "home" ] ; then
+		GEOM=1280x1024
+	elif [ "$1" == "peles" ] ; then
+		GEOM=1650x950
+	else
+		GEOM=$1
+	fi
+fi
+shift
+if [ ! -z $1 ] ; then
+        DESCRIPTION="$*"
+else
+        DESCRIPTION=""
+fi
+echo "Geometry for screen will be: $GEOM"
+vncserver -depth 24 -geometry $GEOM -AlwaysShared 2> .tmplog$$
+LOGFILE=$(cat .tmplog$$ | grep "Log file is" | awk '{print $4}')
+SCREEN=$(cat $LOGFILE | grep "Listening for VNC" | awk '{print $NF}')
+export SCREEN=$(($SCREEN-5900))
+echo "Screen = $SCREEN Host = $HOSTNAME"
+rm -f .tmplog$$
+echo "$HOSTNAME:$SCREEN:$GEOM $DESCRIPTION" >~/.vnc/$HOSTNAME:$SCREEN:$GEOM.running
+cat ~/.vnc/$HOSTNAME:$SCREEN:$GEOM.running

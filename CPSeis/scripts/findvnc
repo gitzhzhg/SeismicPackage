@@ -1,0 +1,7 @@
+#!/bin/bash
+# find all vnc instances you own and report to you.
+for pid in $(ls ~/.vnc/*.pid ) ; do
+        run="$(basename $pid .pid):*.running"
+        cat ~/.vnc/$run
+        #ls -l ~/.vnc/$run | awk 'BEGIN{FS="/"}{print $NF}' | sed 's/\.running//g'
+done

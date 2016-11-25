@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dwtf" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DWTFPROCESS" title="DWTF Process" rows="31" columns="75">
+    <Label keyword="COMMENT_DISCRETEWAVELETTRANSFORM" alignment="center">Discrete Wavelet Transform Filter Process</Label>
+    <Label keyword="COMMENT_REMOVENOISETRAINSBYWAVEL" alignment="center">Remove noise trains by wavelet transform despiking.</Label>
+    <ArraySet keyword="BANDS_ARRAYSET" label="BANDS    THRESH   CLIP">
+     <Array keyword="BANDS" type="int" maxLength="9  " columnName="BANDS" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="THRESH" type="float" maxLength="9  " columnName="THRESH" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="CLIP" type="float" maxLength="9  " columnName="CLIP" editable="yes" sensitive="yes" columnSize="9"/>
+    </ArraySet>
+    <Label keyword="LABEL_NBANDS" alignment="left">Max Bands</Label>
+    <Field keyword="NBANDS" type="int" maxLength="5" editable="no" sensitive="no"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_TYPE_WAVELET" alignment="left">TYPE_WAVELET=</Label>
+    <Field keyword="TYPE_WAVELET" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_COEF" alignment="left">NUM_COEF=</Label>
+    <Field keyword="NUM_COEF" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_WIN" alignment="left">OPT_WIN=</Label>
+    <Field keyword="OPT_WIN" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_GATHER" alignment="left">OPT_GATHER=</Label>
+    <Field keyword="OPT_GATHER" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_VEL_WIN" alignment="left">VEL_WIN=</Label>
+    <Field keyword="VEL_WIN" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_WIN" alignment="left">HDR_WIN=</Label>
+    <Field keyword="HDR_WIN" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DISCRETEWAVELETTRANSFORM" xPos="19" yPos="1" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_REMOVENOISETRAINSBYWAVEL" xPos="14" yPos="2" xSize="51" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BANDS_ARRAYSET" xPos="14" yPos="4" xSize="30" ySize="6" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NBANDS" xPos="14" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NBANDS" xPos="25" yPos="11" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="4" yPos="13" xSize="48" ySize="3"/>
+     <Constraints component="LABEL_TYPE_WAVELET" xPos="7" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_WAVELET" xPos="20" yPos="14" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_COEF" xPos="32" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_COEF" xPos="41" yPos="14" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_WIN" xPos="4" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_WIN" xPos="12" yPos="18" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_GATHER" xPos="27" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_GATHER" xPos="38" yPos="18" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER2" xPos="4" yPos="20" xSize="48" ySize="9"/>
+     <Constraints component="LABEL_VEL_WIN" xPos="7" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_WIN" xPos="15" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_WIN" xPos="7" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_WIN" xPos="15" yPos="23" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="7" yPos="25" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="15" yPos="25" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="7" yPos="27" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="15" yPos="27" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="BANDS">
+      <Tip>Linked array of band numbers to identify bands for despiking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - BANDS<br> Linked array of band numbers to identify bands for despiking.</center></b>
+<pre> Default = 3
+ Allowed = int =&lt; J-1 (linked array)
+ J-1 bands are output, where 2**J is the smallest whole number power of 2
+ exceeding the number of samples in an input trace.  Only bands listed in the
+ BANDS array will be despiked.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="THRESH">
+      <Tip>Multiple of median absolute value of band to trigger despiking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - THRESH<br> Multiple of median absolute value of band to trigger despiking.</center></b>
+<pre> Default = 3.0
+ Allowed = real &gt;= 0.0 (linked array)
+ Data samples of a band in wavelet space are selected for despiking if their
+ absolute amplitude equals or exceeds THRESH times the median absolute value
+ of the samples in the functional gather.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CLIP">
+      <Tip>Reduce despiked samples to CLIP times median value of band.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - CLIP<br> Reduce despiked samples to CLIP times median value of band.</center></b>
+<pre> Default = 0.5
+ Allowed = real =&gt; 0.0 (linked array)
+ The absolute amplitude of despiked samples is CLIP times the median absolute
+ value of samples in the functional gather.  (Despiking maintains sample
+ polarity.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NBANDS">
+      <Tip>Maximum number of bands for the current trace length (NDPT).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - NBANDS<br> Maximum number of bands for the current trace length (NDPT).</center></b>
+<pre> Default = -
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TYPE_WAVELET">
+      <Tip>Type of wavelet to use in the wavelet transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - TYPE_WAVELET<br> Type of wavelet to use in the wavelet transform.</center></b>
+<pre> Default = COIF
+ Allowed = ASYM   (Use Least Asymmetric wavelet transform.)
+ Allowed = BEYL   (Use Beylkin wavelet transform.)
+ Allowed = COIF   (Use Coiflet wavelet transform.)
+ Allowed = DAUB   (Use Daubechies wavelet transform.)
+ Allowed = HAAR   (Use Haar wavelet transform.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_COEF">
+      <Tip>Number of coefficients to use in the wavelet transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - NUM_COEF<br> Number of coefficients to use in the wavelet transform.</center></b>
+<pre> Default = 20
+ Allowed = 4, 12, 20      (If TYPE_WAVELET =  DAUB.)
+ Allowed = 8, 12, 20      (If TYPE_WAVELET =  ASYM.)
+ Allowed = 6, 12, 24, 30  (If TYPE_WAVELET =  COIF.)
+ Allowed = 18             (If TYPE_WAVELET =  BEYL.)
+ Allowed = 2              (If TYPE_WAVELET =  HAAR.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_WIN">
+      <Tip>Whether to define window top by velocity or header word value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - OPT_WIN<br> Whether to define window top by velocity or header word value.</center></b>
+<pre> Default = VEL
+ Allowed = HDR   (Define start of time window by header word values.)
+ Allowed = VEL   (Define start of time window by velocity.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_GATHER">
+      <Tip>Whether to use a local or group threshhold for despiking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - OPT_GATHER<br> Whether to use a local or group threshhold for despiking.</center></b>
+<pre> Default = NO
+ Allowed = YES   (Traces are a gather; use a common subband Median Abs Value.)
+ Allowed = NO   (Use individual trace subband Median Abs Value.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_WIN">
+      <Tip>Velocity to define window start times, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - VEL_WIN<br> Velocity to define window start times, in seconds.</center></b>
+<pre> Default = 1500
+ Allowed = real &gt; 0.0
+ Window start time = offset/VEL_WIN + TIM_ADD.  Active only if OPT_WIN = VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_WIN">
+      <Tip>Header word carrying window start times, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - HDR_WIN<br> Header word carrying window start times, in seconds.</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH
+ Active only if OPT_WIN = HDR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Additional time for window start time, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - TIM_ADD<br> Additional time for window start time, in seconds.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ If OPT_WIN = HDR, then window start time = Value(HDR_WIN) + TIM_ADD.
+ If OPT_WIN = VEL, then window start time = offset/VEL_WIN + TIM_ADD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of time window for filtering, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - WIN_LEN<br> Length of time window for filtering, in seconds.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ The wavelet filter is applied only within the specified time window.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dwtf - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dwtf">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DWTF   (Discrete Wavelet Transform Filter)
+ Category   : filters
+ Written    : 1999-12-14   by: Phil Anno
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Remove noise trains by wavelet transform despiking.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ DWTF attenuates noise trains in trace gathers (typically air waves or
+ Rayleigh waves in shot profiles) by transforming each trace to the
+ wavelet domain and clipping samples whose absolute amplitude equals or
+ exceeds a threshold.
+ 
+     1.  All traces in an input functional gather are transformed to the
+     wavelet domain using the wavelet type specified.
+ 
+     2.  The traces in the functional gather are scanned and the median
+     absolute amplitude of the gather is calculated.  (This is done in the
+     wavelet domain.)
+ 
+     3.  A time window on each trace is defined, using the header word method
+     or the velocity method.
+ 
+     4.  Within the selected wavelet bands, samples are selected for despiking
+     if their absolute amplitude equals or exceeds a user-specified factor
+     (THRESH) times the median absolute value of the samples in the gather
+     if OPT_GATHER = YES, or in the trace if OPT_GATHER = NO.
+ 
+     5.  The absolute amplitude of despiked samples is reduced to a user
+     specified factor (CLIP) times the median absolute value of samples in the
+     gather.  (Despiking maintains sample polarity.)
+ 
+     6.  After despiking in the wavelet domain, the data is inverse
+     transformed and replaces the original data.
+ 
+ The wavelet domain is used, rather than the Fourier domain, since the wavelet
+ transform can satisfactorily access much smaller time windows than can
+ the Fourier transform.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Users will generally want to use the diagnostic process DWTP first, with a
+ small amount of data, to determine which bands are good candidates for
+ despiking.  Test DWTF jobs may be required to optimize the parameters.
+ 
+ 
+ Subband indexing convention for users.
+    (but not for lower level, internal routines, which
+     conform to typical pyramid algorithm conventions.)
+ 
+     Index of the coarse reference (new 2001-02-15)      subband = 0
+     Index of the coarsest wavelet                       subband = 1
+           v
+           |
+           v
+     Index of finest wavelet                             subband = (Max Bands)
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date      Author       Description
+     ----      ------       -----------
+10. 2006-09-11 Stoeckley    Add call to pc_register_array_names for SeisSpace.
+ 9. 2006-01-10 B. Menger    Removed Unused Variables.
+ 8. 2004-02-05 Anno         Improved logic for filtering near mute indices.
+ 7. 2002-06-10 Anno         Implemented opt_gather option (bug report 720),
+                            and corrected win_len problem (bug report 732).
+ 6. 2001-06-11 Anno         Moved dwt GUI and pyramid algorithm to
+                            WVLETCOEFFS_MODULE.  PRODUCTION.
+                            Added capacity to filter reference subband.
+ 5. 2001-01-24 Anno         Corrected gui parameter checking.
+ 4. 2001-01-22 Anno         Corrected transform wraparound artifact.
+ 3. 2001-01-18 Anno         Corrected parameter checking for THRESH parameter.
+ 2. 2001-01-12 Anno         Conversion to new CPS.
+ 1. 1999-12-14 Anno         Initial version.
+ 
+------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,3064 @@
+C***************************** COPYRIGHT NOTICE ********************************
+C<license>
+C-------------------------------------------------------------------------------
+C Copyright (c) 2007 ConocoPhillips Company
+C
+C Permission is hereby granted, free of charge, to any person obtaining a copy
+C of this software and associated documentation files (the "Software"), to deal
+C in the Software without restriction, including without limitation the rights
+C to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+C copies of the Software, and to permit persons to whom the Software is
+C furnished to do so, subject to the following conditions:
+C
+C The above copyright notice and this permission notice shall be included in all
+C copies or substantial portions of the Software.
+C
+C THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+C IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+C FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+C AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+C LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+C OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+C SOFTWARE.
+C-------------------------------------------------------------------------------
+C</license>
+C*                                                                             *
+C*                 CONFIDENTIAL AND PROPRIETARY INFORMATION                    *
+C*                              OF CONOCO INC.                                 *
+C*                      PROTECTED BY THE COPYRIGHT LAW                         *
+C*                          AS AN UNPUBLISHED WORK                             *
+C*                                                                             *
+C***************************** COPYRIGHT NOTICE ********************************
+C        1         2         3         4         5         6         7
+C23456789012345678901234567890123456789012345678901234567890123456789012
+C\USER DOC
+C-----------------------------------------------------------------------
+C                         CRAY PROCESSING SYSTEM
+C                 EXPLORATION RESEARCH & SERVICES DIVISION
+C                              CONOCO, INC.
+C
+C                        C P S   P R I M I T I V E
+C
+C  Primitive name:  RAYTRACE
+C        Author:  D W Hanson
+C  Last revised:  02/03/89
+C
+C  Purpose:  Determine what cell lies on other side of cell wall segment.
+C-----------------------------------------------------------------------
+C                           CALLING SEQUENCE
+C
+C      CALL RAYTRACE(RAYRAD
+C     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,XCEN,ZCEN,PRAY
+C     3,MCELL,NCELL,ICTYP,VCELL,GCELL
+C     4,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+C     5,ASPLN,BSPLN,CSPLN,DSPLN,ISOP,ICOP
+C     6,IPRINT,LPRINT,*)
+C
+C      CALL RAYSTRT(RAYRAD,IRCODE,ISI,ISO,XI,ZI
+C     1,XO,ZO,XCEN,ZCEN,TRAY,VI,VO
+C     2,DVDX,DVDZ,PRAY,NXCELL,XCELL,ZCELL,IDCELL
+C     3,BSPLN,CSPLN,DSPLN,IPRINT,LPRINT,*)
+C
+C          CALL RAYCIRC(RAYRAD,IRCODE,ISI,ISO,XRAY(ILEG-1),ZRAY(ILEG-1)
+C     1,XRAY(ILEG),ZRAY(ILEG),TSEG,VI,VO,XCEN,ZCEN,DVDX,DVDZ,RV
+C     1,NXCELL(ICI),XCELL(IXC1),ZCELL(IXC1),IDCELL(IXC1)
+C     1,BSPLN(IXC1),CSPLN(IXC1),DSPLN(IXC1),IPRINT,LPRINT,*998)
+C
+C      CALL RAYXOFT(IMODFIL,MEMORY
+C     1,SHOT,BASE,BASEINC,NHMOD,NBND
+C     2,MEMB,IBTYP,NXBND,IXBND,XBND,ZBND,IDBND
+C     3,MEMV,NXVEL,IXVEL,XVEL,VEL,*)
+C
+C      CALL RAYSFIB(XO,ZO,ZSEG,XI,ZI,RSLOPE
+C     1,PRAY,XC1,XC2,ZC1,ZC2,B,C,D,DISTMIN,ITERMAX,IPRINT,LPRINT,*)
+C
+C ARGUMENTS
+C Name    Type*  Valid  Description         *Type: I=IN, O=OUT, B=BOTH
+C ----    ----   -----  -----------
+C  RAYRAD  I     REAL    MAXIMUM DISTANCE BEWTEEN RAY AND SEGMENT
+C NBND     I     INT>0   # OF BOUNDARIES IN MODEL
+C IRCODE O     INT     RAY STATUS FLAG
+C                        0  = RAY EXITS THROUGH MODEL BOUNDARY
+C                        -1 = RAY ENDS AT CRITICAL RELFECTION
+C                        -3 = UNABLE TO FIND RAY EXIT POINT
+C MLEG     I     INT>=0  MAXIMUM NUMBER OF LEGS IN RAY
+C NLEG     O     INT>=0  # OF LEGS IN RAY
+C XRAY     B  REAL ARRAY X COORDINATES OF RAYLEGS
+C                        XRAY(1),ZRAY(1) = INITIAL LOCATION OR RAY
+C                        NEEDS MLEG ELEMENTS
+C ZRAY     B  REAL ARRAY Z COORDINATES OF RAYLEGS
+C                        NEEDS MLEG ELEMENTS
+C TRAY     O  REAL ARRAY TRAVEL TIME OF RAYLEG
+C                        NEEDS MLEG ELEMENTS
+C PRAY   B  REAL ARRAY RAY VECTOR  NEEDS 2*MLEG 
+C MCELL    I     INT     TOTAL NUMBER OF POINTS IN ARRAYS XCELL, ZCELL, ...
+C NCELL    I     INT     # OF CELLS FOUND IN MODEL (SHOULD BE NBND-1)
+C ICTYP I  INT ARRAY  TYPE OF VELOCITY GRADIENT WITHIN CELL
+C                         1 - V(X,Z) = VCELL + (Z - XCELL(1)) * GCELL
+C                         0 - V(X,Z) = VCELL
+C                        -1 - V(X,Z) = VCELL + (X - ZCELL(1)) * GCELL
+C                        NEEDS NCELL ELEMENTS
+C VCELL    I  REAL ARRAY VELOCITY VALUES WITHIN CELL
+C                        NEEDS NCELL ELEMENTS
+C GCELL  I  REAL ARRAY VELOCITY GRADIENT WITHIN CELL
+C                        NEEDS NCELL ELEMENTS
+C IXCELL   I  INT ARRAY  POINTERS TO ARRAYS XCELL,ZCELL ETC
+C                        CELL ICELL BEGINS AT THE IXCELL(ICELL)+1 
+C                        ELEMENT OF XCELL,...
+C                        NEEDS NCELL ELEMENTS
+C NXCELL   I  INT ARRAY  NUMBER OF ELEMENTS IN EACH CELL
+C                        CELL ICELL HAS NXCELL(ICELL) POINTS IN IT
+C                        NEEDS NCELL ELEMENTS
+C XCELL    I REAL ARRAY  CELL WALL X COORDINATES
+C                        NEEDS MCELL ELEMENTS
+C ZCELL    I REAL ARRAY  CELL WALL Z COORDINATES
+C                        NEEDS MCELL ELEMENTS
+C IDCELL  I REAL ARRAY  DISCONTINUITY FLAG FOR CELL WALL POINTS
+C                        IDCELL < 0 MEANS POINT IS A DISCONTINUITY 
+C                        IN CELL WALL SLOPE
+C                        NEEDS MCELL ELEMENTS
+C                        NEEDS MCELL ELEMENTS
+C                        NEEDS MCELL ELEMENTS
+C ISOP   I  INT ARRAY  SEGMENT # ON OTHER SIDE OF CELL BOUNDARY
+C                        NEEDS MCELL ELEMENTS
+C ICOP   I  INT ARRAY  CELL # ON OTHER SIDE OF CELL BOUNDARY
+C                        NEEDS MCELL ELEMENTS
+C BSPLN    I REAL ARRAY  SPLINE COEFFICIENTS FOR CELL.
+C                        NEEDS MCELL ELEMENTS
+C CSPLN    I REAL ARRAY  SPLINE COEFFICIENTS FOR CELL.
+C                        NEEDS MCELL ELEMENTS
+C DSPLN    I REAL ARRAY  SPLINE COEFFICIENTS FOR CELL.
+C                        NEEDS MCELL ELEMENTS
+C XI      I    REAL     X COORDINATE OF RAY AS IT ENTERS CELL
+C ZI      I    REAL     Z COORDINATE OF RAY AS IT ENTERS CELL
+C XO     O    REAL     X COORDINATE OF RAY AS IT EXITS CELL
+C ZO     O    REAL     Z COORDINATE OF RAY AS IT EXITS CELL
+C XCEN  O    REAL     X COORDINATE FOR CENTER OF CIRCULAR RAYS
+C ZCEN  O    REAL     Z COORDINATE FOR CENTER OF CIRCULAR RAYS
+C                        HERE IT IS ALWAYS XI,ZI
+C TRAY     O    REAL     TIME LENGTH OF RAY LEG
+C RRAY     O    REAL     DISTANCE RAY TRAVELS
+C VI      I    REAL     VELOCITY AT POINT RAY ENTERS CELL
+C VO     O    REAL     VELOCITY AT POINT RAY EXITS CELL
+C IPRINT   I    INT      DIAGNOSTIC PRINT FLAG IF IPRINT=5
+C                        INFO IS WRITTEN TO FORTRAN UNIT LPRINT
+C LPRINT   I    INT      FORTRAN UNIT NUMBER TO WRITE DIAGNOSTIC INFO TO
+C *ERR     I             ERROR RETURN
+C-----------------------------------------------------------------------
+C                                 NOTES
+C
+C 1. RAYTRACE is part of a package of primitve subroutines used for 
+C    raytracing through a 2-D model.  It traces a ray through a model.
+C    
+C    It traces rays through a model using two subroutines to traces
+C    rays across individual cells within the model.  Each cell has
+C    either a constant velocity or a linear gradient in the x or z direction.
+C
+C    RAYSTRT TRACES A STRAIGHT RAY THROUGH A CELL
+C    RAYCIRC TRACES A CIRCULAR RAY THROUGH A CELL
+C
+C  Rays will be straight if the velocity is conastant or the ray vector
+C  is parrellel to the velocity gradient
+C
+C  The following aplies to either RAYSTRT or RAYCIRC
+C
+C  THERE ARE THREE POSSIBLE EQUATIONS FOR A RAY THAT ENTERS THE CELL AT
+C  XI,ZI WITH THE RAY VECTOR P = (PRAY(1),PRAY(2)) 
+C  PRAY(1) = COS(ANGLE FROM X AXIS TO RAY)
+C  PRAY(2) = SIN(ANGLE FROM X AXIS TO RAY)
+C
+C  IF THE RAY IS VERTICAL AND THE VELOCITY IS CONSTANT OR THE RAY IS
+C  VERTICAL AND THE CELL HAS A VERTICAL VELOCITY GRADIENT
+C
+C  XRAY = XI
+C
+C  IF THE RAY IS NONVERTICAL AND THE VELOCITY IS CONSTANT WITHIN THE 
+C  CELL OR THE RAY IS HORIZONTAL AND THE CELL HAS A HORIZONTAL VELOCITY
+C  GRADIENT
+C
+C  ZRAY(XRAY) = ZI + (XRAY - XI) * RSLOPE
+C
+C  WHERE
+C
+C  RSLOPE = PRAY(2) / PRAY(1)
+C
+C  IF THE VELOCITY CHANGES LINEARLY WITHIN THE CELL THE RAY WILL
+C  A CIRCLE WHOSE EQUATION IS
+C
+C  (XRAY - X1) ** 2 + (ZRAY - Z1) ** = R1 ** 2
+C
+C  WHERE
+C
+C  V(X,Z) = VI + (X - XI) * DVDX + (Z - ZI) * DVDZ)
+C
+C  WHERE BOTH DVDX AND DVDZ CANNOT BE NONZERO AT THE SAME TIME
+C
+C  DVDZ .NE. 0                       DVDX .NE. 0
+C
+C  X1 = XI + COS1 / (P1 * DVD)   X1 = XI - V1 / DVD
+C
+C  Z1 = ZI - V1 / DVD            Z1 = ZI + COS1 / (P1 * DVD)
+C
+C  P1 = PRAY(2)                      P1 = PRAY(1)
+C
+C  V1 = V(ZI)                      V1 = V(XI)
+C
+C  R1 = 1 / (P1 * DVD) ** 2
+C
+C  COS1 = SQRTFN(1 - (P1 * V1) ** 2)
+C
+C  THE EQUATION FOR THE CELL WALL SEGEMNTS WHOSE END POINTS ARE 
+C  AT XSEG1,ZSEG1 AND XSEG2,ZSEG2 IS
+C
+C  ZSEG(XSEG) = DSPLN*DX**3 + CSPLN*DX**2 + BSPLN*DX + ZSEG1
+C  WHERE DX = XSEG - XSEG1
+C
+C  UNLESS THE SEGEMENT IS VERTICAL, THEN THE EQUATION OF THE SEGMENT IS
+C
+C  XSEG = XSEG1   FOR ALL ZSEG
+C
+C  WE WANT TO FIND THE OPOSITE POINT ON THE CELL BOUNDARY WHERE
+C
+C  XRAY,ZRAY = XSEG,ZSEG
+C
+C  IF THE VELOCITY IS CONSTANT WITHIN THIS CELL OR IF THE RAY IS VERTICAL
+C  OR HORIZONTAL THE RAY IS A STRAIGHT LINE WHOSE EQUATION IS
+C
+C  ZRAY = ZRAIN + (XRAY - XI) * RSLOPE (NON VERTICAL RAY)
+C
+C  OR
+C
+C  XRAY = XI  FOR ALL ZRAY (VERTICAL RAY)
+C
+C  THE EQUATION OF A STRAIGHT LINE CONNECTING THE ENDPOINTS OF THIS 
+C  SEGMENT IS
+C
+C  ZSEG(XSEG) = ZSEG1 + (XSEG - XSEG1) * SEGSLOPE  (NON VERTICAL SEGMENT)
+C
+C  WHERE 
+C
+C  SEGSLOPE = (ZSEG2 - ZSEG1) / (XSEG2 - XSEG1)
+C
+C  OR 
+C
+C  XSEG = XSEG1   FOR ALL ZSEG  (VERTICAL SEGMENT)
+C
+C  WE FIRST FIND THE INTERSECTION OF THE 2 LINES THEN IF THIS INTERSECTION
+C  FALLS BETWEEN THE SEGMENT ENDPOINTS WE USE IT AS A STARTING POINT
+C  TO ITERATIVELY DETERMINE THE INTERSECTION OF THE RAY AND THE SPLINE
+C  FIT TO THE SEGMENT
+C
+C  NOTE CIRCULAR RAYS AND A STRAIGHT LINE MAY HAVE 0 1 OR 2 INTERSECTION
+C  POINTS.  IF WE HAVE 2 AND BOTH FALL BETWEEN THE SEGMENT ENDPOINTS
+C  WE HAVE TO DETERMINE WHICH WOULD BE REACHED FIRST BY THE RAY.
+C
+C 1. RAYXOFT is part of a package of primitve subroutines used for 
+C    trayracing through a 2-D model.  It computes X,Z coordinates
+C    for a ray for selected travel times.
+C    
+C 1. RAYSTRT is part of a package of primitve subroutines used for 
+C    raytracing through a 2-D model.  It traces a straight ray through
+C    a cell.  See RAYTRACE documentaion for description of how rays are
+C    traced across a cell.
+C
+C 1. RAYCIRC is part of a package of primitve subroutines used for 
+C    raytracing through a 2-D model.  It traces a circular ray through
+C    a cell.  See RAYTRACE documentaion for description of how rays are
+C    traced across a cell.
+C    
+C
+C-----------------------------------------------------------------------
+C                           REVISION HISTORY
+C
+C Date      Author       Description
+C ----      ------       -----------
+C 02/03/89  D W HANSON   ORIGINAL VERSION
+C-----------------------------------------------------------------------
+C   SUBROUTINE, FUNCTION, ENTRY AND COMMON BLOCK NAMES IN THIS MODULE
+C
+C   SUBROUTINE NAMES IN THIS MODULE
+C
+C  RAYTRACE   RAYSTRT   RAYCIRC   RAYXOFT   RAYSFIB
+C
+C-----------------------------------------------------------------------
+C                  EXTERNALS REFERENCED BY THIS MODULE
+C
+C-----------------------------------------------------------------------
+C                         MEMORY REQUIREMENTS
+C
+C  STORAGE       - NONE
+C  HEAP(dynamic) - NONE
+C-----------------------------------------------------------------------
+C\END DOC
+      SUBROUTINE RAYTRACE(RAYRAD,ISIN,ICIN
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP
+     1,MREFL,NREFL,IREFL,KREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND,IDBND
+     1,BSBND,CSBND,DSBND,JPRINT,LPRINT,*)
+CDIR$ FASTMD
+
+      DIMENSION XRAY(MLEG),ZRAY(MLEG),TRAY(MLEG),PRAY(2,MLEG)
+
+      DIMENSION ICTYP(NCELL),VCELL(NCELL),GCELL(NCELL)
+     1,IXCELL(NCELL),NXCELL(NCELL),XCELL(MCELL),ZCELL(MCELL)
+     1,IDCELL(MCELL),ISOP(MCELL),ICOP(MCELL)
+     1,BSPLN(MCELL),CSPLN(MCELL),DSPLN(MCELL)
+
+      DIMENSION IREFL(MREFL),IXBND(MBND),NXBND(MBND),XBND(MBND)
+     1,ZBND(MBND),IDBND(MBND),BSBND(MBND),CSBND(MBND),DSBND(MBND)
+
+      DIMENSION RV(2)
+
+C ACOS TABLE
+      PARAMETER (MACOS=2001)
+      COMMON /RAYAC/ NACOS0,NACOS,DACOS
+     1,ACOSFN(MACOS),DACOSFN(MACOS),COSFN(MACOS)
+
+C SQUARE ROOT TABLE
+C      PARAMETER (NBIT=14),(NDIM=2**(NBIT-1))
+C      COMMON /SQTTABR/ ISQTAB(0:0),NBSHFT,IROUND,MB2T15,MINDEX,
+C     *       EMPTY1(NDIM-5),EVEN(NDIM+1),EMPTY2(NDIM-1),ODD(NDIM+1)
+C      SQRTFN(U) = SHIFTR(ISQTAB(SHIFTR((U.AND.MINDEX)+IROUND,NBSHFT))
+C     *                   +             (U.AND.MB2T15)  ,1)
+      SQRTFN(U) = SQRT(U)
+
+      DATA NACOS/MACOS/
+
+      DATA ICALL/0/,CSMAX/.99999999/,ANGMIN/.05/,ADIR/1./
+
+      DISTMIN = RAYRAD / 10
+
+      IF (ICALL .EQ. 0) THEN
+        CALL RAYACOS(NACOS0,NACOS,DACOS,ACOSFN,DACOSFN,COSFN)
+        CALL CELLANG(ADIR,NXCELL,XCELL,ZCELL,IDCELL)
+        IF(IPRINT.EQ.1)WRITE(LPRINT,'('' ADIR='',F10.4)')ADIR
+      ENDIF
+      ICALL = ICALL + 1
+      IPRINT = JPRINT
+C      IF (ICALL.EQ.400)IPRINT=5
+      PI = 2. * ASIN(1.)
+      RD = 180. / PI
+      IF(IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'(/,'' RAYTRACE ICALL='',I5,'' NC='',I5,'' C='',I3
+     1,'' S='',I3,'' A='',F8.3,'' X='',F9.1,'' Z='',F9.1)')
+     1ICALL,NCELL,ICIN,ISIN
+     1,SIGN(1.,PRAY(1,1))*ACOS(PRAY(1,1))*RD,XRAY(1),ZRAY(1)
+      ICI = MAX(1,ICIN)
+      ISI = MAX(0,ISIN)
+      IRCODE = 0
+      TRAY(1) = 0
+      IF (ICI .LT. 1 .OR. ICI .GT. NCELL) THEN
+        PRINT*,' ERROR IN RAYTRACE STARTING CELL NUMBER = ',ICI
+        PRINT*,' THIS MUST BE BETWEEN 1 AND',NCELL
+        IRCODE = -3
+        NLEG = 1
+        RETURN 1
+      ENDIF
+      KREFL = 1
+      ILEG = 1
+      ICO = ICI
+      ISO = ISI
+      DO 1 JLEG = 2 , MLEG
+        ILEG = ILEG + 1
+        PRAY(1,ILEG) = PRAY(1,ILEG-1)
+        PRAY(2,ILEG) = PRAY(2,ILEG-1)
+        PRAY(1,ILEG) = SIGN(1.,PRAY(1,ILEG)) * MIN(1.,ABS(PRAY(1,ILEG)))
+        PRAY(2,ILEG) = SIGN(1.,PRAY(2,ILEG))*SQRTFN(1.-PRAY(1,ILEG)**2)
+      IF (IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'('' A RAYTRACE ILEG='',I5
+     1,'' IC='',I5,'' IS='',I5,'' ICTYP='',I5
+     1,'' X='',F10.2,'' Z='',F10.2,'' P='',2(1X,G9.3))')
+     1ILEG,ICI,ISI,ICTYP(ICI),XRAY(ILEG-1),ZRAY(ILEG-1)
+     1,PRAY(1,ILEG),PRAY(2,ILEG)
+        IF (ABS(PRAY(1,ILEG)) .LT. .00001 
+     1.OR. ABS(PRAY(2,ILEG)) .GT. .99999) THEN
+          PRAY(1,ILEG) = 0
+          PRAY(2,ILEG) = SIGN(1.,PRAY(2,ILEG))
+        ELSEIF (ABS(PRAY(2,ILEG)) .LT. .00001 
+     1.OR. ABS(PRAY(1,ILEG)) .GT. .99999) THEN
+          PRAY(1,ILEG) = SIGN(1.,PRAY(1,ILEG))
+          PRAY(2,ILEG) = 0
+        ENDIF
+        ICI = ICO
+        ISI = ISO
+        IXC0 = IXCELL(ICI) + ISI
+        IXC1 = IXCELL(ICI) + 1
+        IXC2 = IXC1 + 1
+        IF (ABS(ICTYP(ICI)) .EQ. 3) THEN
+          DVDX = 0
+          DVDZ = GCELL(ICI)
+          IRV1 = 1
+          IRV2 = 2
+          RVSIN = PRAY(1,ILEG)
+        ELSEIF (ABS(ICTYP(ICI)) .EQ. 2) THEN
+          DVDX = GCELL(ICI)
+          DVDZ = 0
+          IRV1 = 2
+          IRV2 = 1
+          RVSIN = PRAY(2,ILEG)
+        ELSE
+          DVDX = 0
+          DVDZ = 0
+          RVSIN = PRAY(2,ILEG)
+        ENDIF
+        IF (NREFL .LT. 0) DVDX = 0
+        VI = VCELL(ICI)
+     1+ (XRAY(ILEG-1) - XCELL(IXCELL(ICI)+1)) * DVDX 
+     1+ (ZRAY(ILEG-1) - ZCELL(IXCELL(ICI)+1)) * DVDZ 
+      IF (IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'('' RAYTRACE ILEG='',I5
+     1,'' IC='',I5,'' IS='',I5,'' ICTYP='',I5
+     1,'' X='',F10.2,'' Z='',F10.2,'' P='',2(1X,G9.3))')
+     1ILEG,ICI,ISI,ICTYP(ICI),XRAY(ILEG-1),ZRAY(ILEG-1)
+     1,PRAY(1,ILEG),PRAY(2,ILEG)
+        ILEG1 = ILEG
+C  IF A RAY EXACTLY HITS A NODE POINT SHIFT IT A BIT
+        IF (ISI .GT. 0 .AND. JLEG .EQ. 2) THEN
+          XRTEMP = XRAY(1)
+          ZRTEMP = ZRAY(1)
+          DXC = SIGN(1.,XCELL(IXC0+1)-XCELL(IXC0)) 
+     1* MIN(1.,ABS(XCELL(IXC0+1)-XCELL(IXC0)))
+          IF (ABS(DXC) .GT. 1E-5) THEN
+            DX = XRAY(1) - XCELL(IXC0)
+            DX1 = XRAY(1) - XCELL(IXC0+1)
+            IF (ABS(DX) .LT. ABS(DXC)) XRAY(1) = XCELL(IXC0) + DXC
+            IF (ABS(DX1) .LT. ABS(DXC)) XRAY(1) = XCELL(IXC0+1) - DXC
+            ZRAY(1) = ZCELL(IXC0) + 
+     1((DSPLN(IXC0)*DX+CSPLN(IXC0))*DX+BSPLN(IXC0))*DX
+          ENDIF    ! IF (ABS(DXC) .GT. 1E-5) THEN
+        ENDIF    ! IF (ISI .GT. 0 .AND. JLEG .EQ. 2) THEN
+        IF (ABS(ICTYP(ICI)) .EQ. 1 .OR. RVSIN .EQ. 0 
+     1.OR. NREFL .LT. 0) THEN
+      IF (IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'('' B RAYTRACE ILEG='',I5
+     1,'' IC='',I5,'' IS='',I5,'' ICTYP='',I5
+     1,'' X='',F10.2,'' Z='',F10.2,'' P='',2(1X,G9.3))')
+     1ILEG,ICI,ISI,ICTYP(ICI),XRAY(ILEG-1),ZRAY(ILEG-1)
+     1,PRAY(1,ILEG),PRAY(2,ILEG)
+          CALL RAYSTRT(RAYRAD,IRCODE,ISI,ISO,XRAY(ILEG-1),ZRAY(ILEG-1)
+     1,XRAY(ILEG),ZRAY(ILEG),TSEG,VI,VO,DVDX,DVDZ,PRAY(1,ILEG)
+     1,NXCELL(ICI),XCELL(IXC1),ZCELL(IXC1),IDCELL(IXC1)
+     1,BSPLN(IXC1),CSPLN(IXC1),DSPLN(IXC1),IPRINT,LPRINT,*998)
+        ELSE    ! IF (ABS(ICTYP(ICI)) .EQ. 1 .OR. RVSIN .EQ. 0 
+          CALL RAYCIRC(RAYRAD,IRCODE,ISI,ISO,XRAY(ILEG-1),ZRAY(ILEG-1)
+     1,XRAY(ILEG),ZRAY(ILEG),TSEG,VI,VO,XCEN,ZCEN,DVDX,DVDZ
+     1,PRAY(1,ILEG),NXCELL(ICI),XCELL(IXC1),ZCELL(IXC1),IDCELL(IXC1)
+     1,BSPLN(IXC1),CSPLN(IXC1),DSPLN(IXC1),IPRINT,LPRINT,*998)
+C  FILL IN POINTS IF THIS RAY BENDS SIGNIFICANTLY
+          X1 = XRAY(ILEG-1) - XCEN
+          X2 = XRAY(ILEG) - XCEN
+          Z1 = ZRAY(ILEG-1) - ZCEN
+          Z2 = ZRAY(ILEG) - ZCEN
+          R1 = SQRTFN(X1**2 + Z1**2)
+          R2 = SQRTFN(X2**2 + Z2**2)
+C      PRINT*,' ILEG=',ILEG,' R1=',R1,' R2=',R2
+C      PRINT*,' X1=',X1,' X2=',X2,' Z1=',Z1,' Z2=',Z2
+C      PRINT*,' XCEN=',XCEN,' ZCEN=',ZCEN
+C      IF (R1 .EQ. 0. .OR. R2. EQ. 0. .OR. ABS(R1-R2) .GT. .1) GOTO 25
+      IF (R1 .EQ. 0. .OR. R2. EQ. 0.) GOTO 25
+          CS0 = (X1*X2 + Z1*Z2) / (R1*R2)
+          SN0 = (X1*Z2 - Z1*X2) / (R1*R2)
+          ANG0 = SIGN(1.,SN0) * ACOS(SIGN(1.,CS0)*MIN(1.,ABS(CS0)))
+C      PRINT*,' ANG0=',ANG0*RD,' ANGMIN=',ANGMIN*RD
+          IF (ABS(ANG0) .GT. ANGMIN) THEN
+            CS1 = X1 / R1
+            SN1 = Z1 / R1
+            ANG1 = SIGN(1.,Z1) * ACOS(SIGN(1.,CS1)*MIN(CSMAX,ABS(CS1)))
+            NANG = 20
+            DANG = SIGN(1.,ANG0) * MAX(ANGMIN,ABS(ANG0) / NANG)
+            NANG = MAX(1,MIN(INT(ABS(ANG0/DANG)),MLEG-ILEG))
+            DELT = TSEG / NANG
+            T1 = TRAY(ILEG-1)
+            T2 = TRAY(ILEG-1) + TSEG
+            X2 = XRAY(ILEG)
+            Z2 = ZRAY(ILEG)
+            RV1 = PRAY(1,ILEG)
+            RV2 = PRAY(2,ILEG)
+            DO 24 IANG = 1 , NANG
+              ANG = ANG1 + IANG * DANG
+              XRAY(ILEG) = XCEN + R1 * COS(ANG)
+              ZRAY(ILEG) = ZCEN + R1 * SIN(ANG)
+              VANG = VI 
+     1 + (XRAY(ILEG) - XRAY(ILEG1-1)) * DVDX 
+     1 + (ZRAY(ILEG) - ZRAY(ILEG1-1)) * DVDZ 
+              PRAY(IRV1,ILEG) = PRAY(IRV1,ILEG1-1) * VANG / VI
+              PRAY(IRV1,ILEG) = SIGN(1.,PRAY(IRV1,ILEG))
+     1* MIN(1.,ABS(PRAY(IRV1,ILEG)))
+              PRAY(IRV2,ILEG) = - SQRTFN(1. - PRAY(IRV1,ILEG)**2)
+     1* SIGN(1.,(XRAY(ILEG)-XCEN)*(ZRAY(ILEG)-ZCEN)*PRAY(IRV1,ILEG))
+        PRAY(1,ILEG) = SIGN(1.,PRAY(1,ILEG)) * MIN(1.,ABS(PRAY(1,ILEG)))
+        PRAY(2,ILEG) = SIGN(1.,PRAY(2,ILEG)) 
+     1* SQRTFN(1. - PRAY(1,ILEG)**2)
+              TRAY(ILEG) = T1 + TSEG * ABS((ANG - ANG1) / ANG0)
+      IF(IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'('' IL='',I3,'' A='',F8.3
+     1,'' T='',F7.3,'' X='',F10.2,'' Z='',F10.2,'' P='',2(1X,F8.3))')
+     1ILEG,ANG*RD,TRAY(ILEG),XRAY(ILEG),ZRAY(ILEG),PRAY(1,ILEG)
+     1,PRAY(2,ILEG)
+              ILEG = ILEG + 1
+   24       CONTINUE
+            TSEG = T2 - TRAY(ILEG-1)
+            XRAY(ILEG) = X2
+            ZRAY(ILEG) = Z2
+            PRAY(1,ILEG) = RV1
+            PRAY(2,ILEG) = RV2
+          ENDIF    ! IF (ANG0 .GT. ANGMIN) THEN
+   25     CONTINUE
+        ENDIF    ! IF (ABS(ICTYP(ICI)) .EQ. 1 .OR. RVSIN .EQ. 0 
+  998 CONTINUE
+        IF (ISI .GT. 0 .AND. JLEG .EQ. 2) THEN
+          XRAY(1) = XRTEMP
+          ZRAY(1) = ZRTEMP
+        ENDIF
+        IXC0 = IXCELL(ICI) + ISO
+C  IF A RAY EXACTLY HITS A NODE POINT SHIFT IT A BIT
+        DXC = SIGN(1.,XCELL(IXC0+1)-XCELL(IXC0)) 
+     1* MIN(1.,ABS(XCELL(IXC0+1)-XCELL(IXC0)))
+        IF (ABS(DXC) .GT. 1E-5) THEN
+          DX = XRAY(ILEG) - XCELL(IXC0)
+          DX1 = XRAY(ILEG) - XCELL(IXC0+1)
+          IF (ABS(DX) .LT. ABS(DXC)) XRAY(ILEG) = XCELL(IXC0) + DXC
+          IF (ABS(DX1) .LT. ABS(DXC)) XRAY(ILEG) = XCELL(IXC0+1) - DXC
+          ZRAY(ILEG) = ZCELL(IXC0) + 
+     1((DSPLN(IXC0)*DX+CSPLN(IXC0))*DX+BSPLN(IXC0))*DX
+        ENDIF
+        ISO0 = ISO
+        ICO = ICOP(IXC0)
+        ISO = ISOP(IXC0)
+        NLEG = ILEG
+        TRAY(ILEG) = TRAY(ILEG-1)  + TSEG
+        PRAY(1,ILEG) = SIGN(1.,PRAY(1,ILEG)) * MIN(1.,ABS(PRAY(1,ILEG)))
+        PRAY(2,ILEG) = SIGN(1.,PRAY(2,ILEG)) 
+     1* SQRTFN(1. - PRAY(1,ILEG)**2)
+      IL1 = ILEG1-1
+      IL2 = ILEG
+      IF(IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'(/,'' RAYTRACE ICALL='',I5
+     1,'' ILEG='',I3,'' ILEG1='',I5,'' KREFL='',I3
+     1,/,''   CELL SEG TYP  ANG   TRAY         XRAY      ZRAY  PRAY''
+     1,1000(/,4(1X,I3),1X,F10.5,1X,F7.4,2(1X,F9.1),2(1X,F10.6)))')
+     1ICALL,ILEG,ILEG1,KREFL
+     1,IL1,ICI,ISI,ICTYP(ICI),SIGN(1.,PRAY(2,IL1))*ACOS(PRAY(1,IL1))*RD
+     1,TRAY(IL1),XRAY(IL1),ZRAY(IL1),PRAY(1,IL1),PRAY(2,IL1)
+     1,(IL,ICO,ISO,ICTYP(ICO),SIGN(1.,PRAY(2,IL))*ACOS(PRAY(1,IL))*RD
+     1,TRAY(IL),XRAY(IL),ZRAY(IL),PRAY(1,IL),PRAY(2,IL),IL=ILEG1,ILEG)
+C  CHECK FOR REFLECTIONS
+        IF (KREFL .LE. NREFL) THEN
+          IXB0 = IXBND(IREFL(KREFL)) + 1
+          DO 26 KLEG = ILEG1 ,ILEG
+            XR1 = XRAY(KLEG)
+            ZR1 = ZRAY(KLEG)
+            XR2 = XRAY(KLEG) + PRAY(1,KLEG) * RAYRAD
+            ZR2 = ZRAY(KLEG) + PRAY(2,KLEG) * RAYRAD
+            RIN = MAX(DISTMIN,
+     1SQRTFN((XRAY(KLEG-1)-XRAY(KLEG))**2+(ZRAY(KLEG-1)-ZRAY(KLEG))**2))
+            TIN = TRAY(KLEG) - TRAY(KLEG-1)
+            IF (ABS(ICTYP(ICI)) .EQ. 1 .OR. RVSIN .EQ. 0 
+     1.OR. NREFL .LT. 0) THEN
+              KL1 = KLEG
+            ELSE
+              KL1 = KLEG - 1
+            ENDIF
+          CALL RAYSREFL(RAYRAD,XRAY(KLEG-1),ZRAY(KLEG-1),XR2,ZR2
+     1,PRAY(1,KL1),PRAY(1,KLEG),RIN,TIN,ISB,XREF,ZREF,RV,TOUT
+     1,NXBND(IREFL(KREFL)),XBND(IXB0),ZBND(IXB0),IDBND(IXB0)
+     1,BSBND(IXB0),CSBND(IXB0),DSBND(IXB0),IPRINT,LPRINT,*999)
+            IF (ISB .NE. 0) THEN
+              KREFL = KREFL + 1
+              ILEG = KLEG
+              XRAY(ILEG) = XREF
+              ZRAY(ILEG) = ZREF
+              PRAY(1,ILEG) = RV(1)
+              PRAY(2,ILEG) = RV(2)
+              TRAY(ILEG) = TRAY(ILEG-1) + TOUT
+              ICO = ICI
+              ISO = ISO0
+              IF (SQRTFN((XR1-XRAY(ILEG))**2+(ZR1-ZRAY(ILEG))**2)
+     1.GT. DISTMIN) ISO = 0
+              IF (SQRTFN((XRAY(ILEG)-XRAY(ILEG-1))**2+
+     1(ZRAY(ILEG)-ZRAY(ILEG-1))**2) .LE. DISTMIN) THEN
+                PRAY(1,ILEG-1) = PRAY(1,ILEG)
+                PRAY(2,ILEG-1) = PRAY(2,ILEG)
+                ILEG = ILEG - 1
+              ENDIF
+              NLEG = ILEG
+              GOTO 1
+            ENDIF    ! IF (ISB .NE. 0) THEN
+   26     CONTINUE
+        ENDIF    ! IF (KREFL .LE. NREFL) THEN
+        IF (IRCODE .EQ. -3) GOTO 2
+C
+C  THIS LEG OF THE RAY CAME OUT IN SEGMENT ISO OF CELL ICI
+C  THE OTHER SIDE OF THIS SEGMENT IS SEGMENT ISEGSX(IXC0)
+C  OF CELL ICOP(IXC0)
+C  IF ICOP(IXC0) <= 0 THIS SEGMENT IS ON THE
+C  MODEL BOUNDARY AND WE ARE DONE SHOOTING
+C
+        IF (ICO .LE. 0) THEN
+          IRCODE = ABS(ICO)
+          GOTO 2
+        ENDIF
+C
+C  COMPUTE THE RAY VECTOR COORDINATES ON THE OTHER SIDE OF THIS CELL SEGMENT
+C  IF THIS IS A VERTICAL CELL SEGMENT THE NORMAL IS PARALLEL TO THE X AXIS
+C  THE SIGN IS GIVEN BY THE DIRECTION OF THE CELL WALL
+C
+      IF (XCELL(IXC0) .EQ. XCELL(IXC0+1)) THEN
+C        XNORM = SIGN(1.,ZCELL(IXC0+1)-ZCELL(IXC0)) CELLPLOT
+C        XNORM = -SIGN(1.,ZCELL(IXC0+1)-ZCELL(IXC0)) RAYPLOT
+        XNORM = SIGN(1.,ADIR*(ZCELL(IXC0+1)-ZCELL(IXC0)))
+        ZNORM = 0
+      ELSE
+C
+C  DZDX IS THE TANGENT OF THE ANGLE BETWEEN THE SURFACE AND THE X AXIS
+C  THE NORMAL TO THE SURFACE IN CELL ICOP(IXC0) IS
+C  GIVEN BY THE VECTOR (XNORM,ZNORM) NOTE THAT THIS IS THE NORMAL
+C  VECTOR IN THE CELL THE RAY IS ENTERING
+C  THE SIGN OF THE VECTOR COMPONENTS IS DETERMINED BY THE DIRECTION OF
+C  THE CELL WALL
+C
+          DX = XRAY(ILEG) - XCELL(IXC0)
+          DZDX = (3*DSPLN(IXC0)*DX+2*CSPLN(IXC0))*DX+BSPLN(IXC0)
+C          ZNORM = SIGN(1.,XCELL(IXC0)-XCELL(IXC0+1))/SQRTFN(1.+DZDX**2)
+C          ZNORM = SIGN(1.,XCELL(IXC0+1)-XCELL(IXC0)) 
+C     1/ SQRTFN(1. + DZDX**2)
+          ZNORM = SIGN(1.,ADIR*(XCELL(IXC0)-XCELL(IXC0+1)))
+     1/SQRTFN(1.+DZDX**2)
+          XNORM = - ZNORM * DZDX
+        ENDIF 
+C  THE ANGLE BETWEEN THE INCIDENT RAY AND THE CELL NORMAL CAN BE
+C  OBTAINED FROM THE DOT PRODUCT OF THE TWO VECTORS
+C
+C  COS(ANGINC) = XNORM * PRAY(1) + ZNORM * PRAY(2)
+C
+          CSINC = XNORM * PRAY(1,ILEG) + ZNORM * PRAY(2,ILEG)
+          CSINC = SIGN(1.,CSINC) * MIN(1.,ABS(CSINC))
+C          ANGINC = ACOS(CSINC)
+          IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CSINC/DACOS)))
+          ANGINC = ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (CSINC - COSFN(IACOS))
+          SNINC = SIN(ANGINC)
+C  SNELL LAW GIVES US THE ANGLE BETWEEN THE REFRACTED RAY AND THE NORMAL
+C
+C  SIN(ANGREF) = SIN(ANGINC) * VREF / VINC
+C
+        VINC = VO
+        IF (ABS(ICTYP(ICO)) .EQ. 3) THEN
+          DVDX = 0
+          DVDZ = GCELL(ICO)
+        ELSEIF (ABS(ICTYP(ICO)) .EQ. 2) THEN
+          DVDX = GCELL(ICO)
+          DVDZ = 0
+        ELSE
+          DVDX = 0
+          DVDZ = 0
+        ENDIF
+        VREF = VCELL(ICO) 
+     1+ (XRAY(ILEG) - XCELL(IXCELL(ICO)+1)) * DVDX
+     1+ (ZRAY(ILEG) - ZCELL(IXCELL(ICO)+1)) * DVDZ
+        SNREF = SNINC * VREF / VINC
+C
+C  IF THE ANGLE IS PAST THE CRITICAL ANGLE THERE IS NO TRANSMISSION
+C
+        IF (ABS(SNREF) .GT. 1 .AND. IPRINT.EQ.5 .AND. NREFL .GE. 0)
+     1WRITE(LPRINT,*)' PAST CRITICAL ANGLE SNINC=',SNINC,' SNREF=',SNREF
+     1,' VINC=',VINC,' VREF=',VREF
+        IF (ABS(SNREF) .GT. 1 .AND. NREFL .GE. 0) THEN
+          IRCODE = -1
+          GOTO 2
+        ELSEIF (NREFL .GE. 0) THEN
+          ANGREF = ASIN(SNREF)
+          CSREF = COS(ANGREF)
+        ENDIF
+C
+C  THE DOT PRODUCT OF THE REFRACTED WAVE AND THE NORMAL IS
+C
+C  COS(ANGREF) = XNORM * REFVECX + ZNORM * REFVECZ
+C
+C  THE ANGLE BETWEEN THE INCIDENT AND REFRACTED WAVES CAN BE OBTAINED 
+C  FROM THEIR DOT PRODUCT
+C
+C  COS(ANGINC - ANGREF) = REFVECX * PRAY(1) + REFVECZ * PRAY(2)
+C
+C  SOLVIG THE ABOVE TWO EQUATIONS GIVES REFVECX AND REFVECZ
+C
+        IF (NREFL .LT. 0) THEN
+          PRAY(1,ILEG) = PRAY(1,ILEG-1)
+          PRAY(2,ILEG) = PRAY(2,ILEG-1)
+        ELSEIF (PRAY(1,ILEG) .NE. XNORM 
+     1.OR. PRAY(2,ILEG) .NE. ZNORM) THEN
+          COEF = ZNORM * PRAY(1,ILEG) - XNORM * PRAY(2,ILEG)
+          IF (COEF .EQ. 0) COEF = 1E-6
+          CSDIF = COS(ANGREF - ANGINC)
+          PR1 = PRAY(1,ILEG)
+          PR2 = PRAY(2,ILEG)
+          PRAY(1,ILEG) = (ZNORM * CSDIF - PR2 * CSREF) / COEF
+          PRAY(2,ILEG) = (PR1 * CSREF - XNORM * CSDIF) / COEF
+        ENDIF
+        IF (IRCODE .LT. 0) GOTO 2
+    1 CONTINUE
+    2 CONTINUE
+      IF(IPRINT.EQ.5.OR.IPRINT.EQ.1)
+     1WRITE(LPRINT,'(/,'' RAYTRACE ICALL='',I5
+     1,'' NLEG='',I5,'' IRCODE='',I5
+     1/,'' ICI='',I3,'' ISI='',I4,'' ICTI='',I3
+     1,'' ICO='',I3,'' ISO='',I4,'' ICTO='',I3
+     1,/,''   LEG ANG   TRAY         XRAY      ZRAY''
+     1,/,100(/,1X,I3,1X,F8.3,1X,F7.4,2(1X,F10.2)))')
+     1ICALL,NLEG,IRCODE,ICI,ISI,ICTYP(ICI),ICO,ISO,ICTYP(ICO)
+     1,(JLEG,SIGN(1.,PRAY(2,JLEG))*ACOS(SIGN(1.,PRAY(1,JLEG))
+     1*MIN(1.,ABS(PRAY(1,JLEG))))*RD,TRAY(JLEG)
+     1,XRAY(JLEG),ZRAY(JLEG),JLEG=2,MIN(100,NLEG))
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+      SUBROUTINE RAYSTRT(RAYRAD,IRCODE,ISI,ISO,XI,ZI
+     1,XO,ZO,TRAY,VI,VO,DVDX,DVDZ,PRAY
+     1,NXCELL,XCELL,ZCELL,IDCELL,BSPLN,CSPLN,DSPLN,IPRINT,LPRINT,*)
+CDIR$ FASTMD
+      DIMENSION PRAY(2),XCELL(NXCELL),ZCELL(NXCELL)
+     1,IDCELL(NXCELL),BSPLN(NXCELL),CSPLN(NXCELL),DSPLN(NXCELL)
+      DIMENSION ANG(1000),IXANG(1000)
+      DATA ICALL/0/,CSMAX/.99999999/,RMIN1/1E-10/,RMIN2/1E-3/,NITER/5/
+C ACOS TABLE
+      PARAMETER (MACOS=2001)
+      COMMON /RAYAC/ NACOS0,NACOS,DACOS
+     1,ACOSFN(MACOS),DACOSFN(MACOS),COSFN(MACOS)
+
+C SQUARE ROOT TABLE
+C      PARAMETER (NBIT=14),(NDIM=2**(NBIT-1))
+C      COMMON /SQTTABR/ ISQTAB(0:0),NBSHFT,IROUND,MB2T15,MINDEX,
+C     *       EMPTY1(NDIM-5),EVEN(NDIM+1),EMPTY2(NDIM-1),ODD(NDIM+1)
+C      SQRTFN(U) = SHIFTR(ISQTAB(SHIFTR((U.AND.MINDEX)+IROUND,NBSHFT))
+C     *                   +             (U.AND.MB2T15)  ,1)
+      SQRTFN(U) = SQRT(U)
+
+      ICALL = ICALL + 1
+      DISTMIN = RAYRAD / 10.
+      PI = 2. * ASIN(1.)
+      RD = 180. / PI
+C  DETERMINE THE INPUT ANGLE ANGIN BETWEEN THE POSITIVE X AXIS AND THE VECTOR 
+C      ANGIN = PI + (ACOS(SIGN(1.,PRAY(1))*MIN(CSMAX,ABS(PRAY(1))))
+C     1 - PI) * SIGN(1.,PRAY(2))
+      IACOS = MAX(1,MIN(NACOS,NACOS0+INT(PRAY(1)/DACOS)))
+      ANGIN = PI + SIGN(1.,PRAY(2)) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (PRAY(1) - COSFN(IACOS)) - PI)
+C      ANGIN = PI + (ACOS(PRAY(1)) - PI) * SIGN(1.,PRAY(2))
+C      RX0 = COS(ANGIN)
+C      RZ0 = SIN(ANGIN)
+      RX0 = PRAY(1)
+      RZ0 = PRAY(2)
+C  DETERMINE THE ANGLE BETWEEN THE INPUT RAY 
+C  AND THE VECTOR TO EACH CELL LOCATION
+C  THIS SHOULD BE BETWEEN -PI AND PI
+C      WRITE(LPRINT,'('' RAYSTRT ICALL='',I5,'' NXCELL='',I5
+C     1,'' ANGIN='',F8.3,/,'' IX  A X  Z  R'')')ICALL,NXCELL,ANGIN*RD
+C      PRINT*,' IACOS=',IACOS,' ANGIN=',ANGIN,' PRAY=',PRAY(1),PRAY(2)
+C      PRINT*,' RX0=',RX0,' RZ0=',RZ0
+      DO 1 IXC = 1 , NXCELL
+        RX = XCELL(IXC) - XI
+        RZ = ZCELL(IXC) - ZI
+        RXZ = MAX(SQRTFN(RX**2+RZ**2),RMIN1)
+C        RXZ = MAX(SQRT(RX**2+RZ**2),RMIN1)
+C      PRINT*,' IXC=',IXC,' RX=',RX,' RZ=',RZ,' RXZ=',RXZ
+        CS = (RX0 * RX + RZ0 * RZ) / RXZ ! COS OF THE ANGLE
+        SN = (RX0 * RZ - RZ0 * RX) ! SIN OF THE ANGLE
+C      PRINT*,' CS=',CS,' SN=',SN
+C      IF(ABS(CS).GT.1)STOP
+C        ANG(IXC) = SIGN(1.,SN) * ACOS(SIGN(1.,CS) * MIN(CSMAX,ABS(CS)))
+        IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS/DACOS)))
+C      PRINT*,' IACOS-',IACOS
+        ANG(IXC) = SIGN(1.,SN) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (CS - COSFN(IACOS)))
+C      WRITE(LPRINT,'(1X,I5,1X,F8.3,3(1X,F10.2))')
+C     1IXC,ANG(IXC)*RD,XCELL(IXC),ZCELL(IXC),RXZ
+    1 CONTINUE
+C      STOP
+C  DETERMINE WHICH CELL SEGMENTS INCLUDE THIS RAY
+C      WRITE(LPRINT,*)' INLUDED SEGMENTS IXC NANG  ANGL ANGR'
+      NANG = 0
+      DO 2 IXC = 1 , NXCELL - 1
+        IF (ANG(IXC)*ANG(IXC+1) .GT. 0
+     1.OR. ABS(ANG(IXC)-ANG(IXC+1)) .GE. PI 
+     1.OR. ABS(ANG(IXC)-ANG(IXC+1)) .LT. 1E-10
+     1.OR. IXC .EQ. ISI .OR. IDCELL(IXC) .LT. -1) GOTO 21
+        NANG = NANG + 1
+        IXANG(NANG) = IXC
+C      WRITE(LPRINT,'(2(1X,I3),3(1X,F8.3))')
+C     1IXC,NANG,ANG(IXC)*RD,ANG(IXC+1)*RD
+   21 CONTINUE
+    2 CONTINUE
+      IF (IPRINT.EQ.1.AND.NANG .EQ. 0) 
+     1WRITE(LPRINT,*)' RAYSTRT ICALL=',ICALL,' NANG=',NANG
+      IF (NANG .EQ. 0) GOTO 999
+C      WRITE(LPRINT,*)' NANG=',NANG,' IANG IXC ISO XO ZO RO'
+      IXC = IXANG(1)
+      DANG = - ANG(IXC) / (ANG(IXC+1)-ANG(IXC))
+      XO = XCELL(IXC) + (XCELL(IXC+1) - XCELL(IXC)) * DANG
+      ZO = ZCELL(IXC) + (ZCELL(IXC+1) - ZCELL(IXC)) * DANG
+      RO = SQRTFN((XO-XI)**2+(ZO-ZI)**2)
+      ISO = IXC
+C      WRITE(LPRINT,'(3(1X,I3),3(1X,F10.2))')
+C     1IANG,IXC,ISO,XO,ZO,RO
+      DO 3 IANG = 2 , NANG
+        IXC = IXANG(IANG)
+        DANG = - ANG(IXC) / (ANG(IXC+1)-ANG(IXC))
+        XO0 = XCELL(IXC) + (XCELL(IXC+1) - XCELL(IXC)) * DANG
+        ZO0 = ZCELL(IXC) + (ZCELL(IXC+1) - ZCELL(IXC)) * DANG
+        RO0 = SQRTFN((XO0-XI)**2+(ZO0-ZI)**2)
+        IF (RO0 .LT. RO) THEN
+          RO = RO0
+          XO = XO0
+          ZO = ZO0
+          ISO = IXC
+        ENDIF
+C      WRITE(LPRINT,'(3(1X,I3),3(1X,F10.2))')
+C     1IANG,IXC,ISO,XO,ZO,RO
+    3 CONTINUE
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)' ISO=',ISO,' XO=',XO
+     1,' ZO=',ZO,' RO=',RO
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)' X12=',XCELL(ISO),XCELL(ISO+1)
+     1,' DX=',XCELL(ISO)-XCELL(ISO+1),' RMIN2=',RMIN2
+C  IF THE RAY IS VERTICAL XO = XI AND ZO IS DETERMINED FROM XO
+      IF (ABS(PRAY(1)) .EQ. 0) THEN
+        XO = XI
+        DX = XO - XCELL(ISO)
+        DZ = ((DSPLN(ISO)*DX+CSPLN(ISO))*DX+BSPLN(ISO))*DX
+        ZO = ZCELL(ISO) + DZ
+C  IF THE SEGMENT IS VERTICAL XO AND ZO ARE CORRECT
+      ELSEIF (ABS(XCELL(ISO)-XCELL(ISO+1)) .LT. RMIN2) THEN
+        TN = PRAY(2) / PRAY(1)
+        XO = XCELL(ISO)
+        ZO = ZI + (XO - XI) * TN
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)' ISO=',ISO,' TN=',TN,' XO=',XO
+     1,' ZO=',ZO,' PRAY1=',PRAY(1),' PRAY2=',PRAY(2)
+     1,' XI=',XI
+      ELSE
+        TN = PRAY(2) / PRAY(1)
+        IF (ANG(ISO) .LT. ANG(ISO+1)) THEN
+          X1 = XCELL(ISO)
+          Z1 = ZCELL(ISO)
+          A1 = ANG(ISO)
+          X2 = XCELL(ISO+1)
+          Z2 = ZCELL(ISO+1)
+          A2 = ANG(ISO+1)
+        ELSE
+          X1 = XCELL(ISO+1)
+          Z1 = ZCELL(ISO+1)
+          A1 = ANG(ISO+1)
+          X2 = XCELL(ISO)
+          Z2 = ZCELL(ISO)
+          A2 = ANG(ISO)
+        ENDIF
+        SP3 = DSPLN(ISO)
+        SP2 = CSPLN(ISO)
+        SP1 = BSPLN(ISO)
+        SP0 = ZCELL(ISO)
+        ITER1 = 0
+        ITER2 = 0
+C  USE A BISECTION SEARCH TO FIND WHERE THE RAY CROSSES THE SEGMENT
+C      WRITE(LPRINT,*)' ITER A1  A2  ANG X1  X2  XO ZO ERRZ'
+        DO 4 ITER = 1 , NITER
+          ITER1 = ITER
+          XO = (X1 + X2) / 2
+          DX = XO - XCELL(ISO)
+          ZO = ((SP3*DX+SP2)*DX+SP1)*DX+SP0
+          ZRAY = ZI + (XO - XI) * TN
+          RX = XO - XI
+          RZ = ZO - ZI
+          RXZ = MAX(SQRTFN(RX**2+RZ**2),RMIN1)
+          CS = (RX0 * RX + RZ0 * RZ) / RXZ  ! COS OF THE ANGLE
+          SN = (RX0 * RZ - RZ0 * RX) ! SIN OF THE ANGLE
+C          ANGOUT = SIGN(1.,SN) * ACOS(SIGN(1.,CS) * MIN(CSMAX,ABS(CS)))
+          IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS/DACOS)))
+          ANGOUT = SIGN(1.,SN) * (ACOSFN(IACOS)
+     1+ DACOSFN(IACOS) * (CS - COSFN(IACOS)))
+          IF (ANGOUT .LT. 0) THEN
+            X1 = XO
+            Z1 = ZO
+            A1 = ANGOUT
+          ELSE
+            X2 = XO
+            Z2 = ZO
+            A2 = ANGOUT
+          ENDIF     
+          ERRZ = ABS(ZRAY - ZO)
+C      WRITE(LPRINT,'(1X,I5,3(1X,F8.3),5(1X,F8.2))')
+C     1ITER,A1*RD,A2*RD,ANGOUT*RD,X1,X2,XO,ZO,ERRZ
+          IF(ERRZ .LT. DISTMIN) GOTO 5
+    4   CONTINUE    ! DO 4 ITER = 1 , NITER
+    5   CONTINUE
+        ERRZ = ABS(ZRAY - ZO)
+        IF (ERRZ .LT. DISTMIN) GOTO 7
+C  USE NEWTONS METHOD TO FIND GET MORE ACCURATE
+        FP3 = 3 * SP3
+        FP2 = 2 * SP2
+        FP1 = SP1 - TN
+        FP0 = SP0 - ZI - (XCELL(ISO) - XI) * TN
+        XCMIN = MIN(XCELL(ISO),XCELL(ISO+1))
+        XCMAX = MAX(XCELL(ISO),XCELL(ISO+1))
+C      WRITE(LPRINT,*)' ITER XO XO1 ZO ZO1 ZRAY ERRZ'
+        DO 6 ITER = 1 , NITER
+          ITER2 = ITER
+          DX = XO - XCELL(ISO)
+          F = ((SP3*DX+SP2)*DX+FP1)*DX+FP0
+          DF = (FP3*DX+FP2)*DX+FP1
+          IF (DF .EQ. 0) GOTO 7
+          XO1 = MAX(XCMIN,MIN(XCMAX,XO - F / DF))
+          DX = XO1 - XCELL(ISO)
+          ZO1 = ((SP3*DX+SP2)*DX+SP1)*DX+SP0
+          ZRAY = ZI + (XO1 - XI) * TN
+          ERRZ1 = ABS(ZRAY - ZO1)
+C      WRITE(LPRINT,'(1X,I3,5(1X,F7.1),1X,F7.3,2(1X,G12.6))')
+C     1ITER,XO,XO1,ZO,ZO1,ZRAY,ERRZ1,F,DF
+          IF (ERRZ1 .GT. ERRZ) GOTO 7
+          XO = XO1
+          ZO = ZO1
+          ERRZ = ERRZ1
+          IF (ERRZ .LT. DISTMIN) GOTO 7
+    6   CONTINUE    ! DO 6 ITER = 1 , NITER
+    7   CONTINUE
+      ENDIF    !    IF (ABS(PRAY(1)) .EQ. 0) THEN
+      IRCODE = 0
+      VO = VI 
+     1 + (XO - XI) * DVDX + (ZO - ZI) * DVDZ
+      IF ((DVDX .EQ. 0 .AND. DVDZ .EQ. 0) .OR. VI .EQ. VO) THEN
+        TRAY = SQRTFN((XO-XI)**2+(ZO-ZI)**2) / VI
+      ELSEIF (DVDX .NE. 0) THEN
+        TRAY = ABS(ALOG(VO / VI) / DVDX)
+      ELSE
+        TRAY = ABS(ALOG(VO / VI) / DVDZ)
+      ENDIF
+      RX = XO - XI
+      RZ = ZO - ZI
+      RXZ = MAX(SQRTFN(RX**2+RZ**2),RMIN1)
+      CS = RX / RXZ
+      IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS/DACOS)))
+      ANGOUT = PI + SIGN(1.,RZ) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (CS - COSFN(IACOS)) - PI)
+      ZRAY = ZI + (XO - XI) * TN
+      RZ = ZRAY - ZI
+      RXZ = MAX(SQRTFN(RX**2+RZ**2),RMIN1)
+      CS = RX / RXZ
+      IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS/DACOS)))
+      ANGRAY = PI + SIGN(1.,RZ) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (CS - COSFN(IACOS)) - PI)
+C      WRITE(LPRINT,'(/,'' RAYSTRT ICALL='',I5
+      IF(IPRINT.EQ.1.OR.TRAY.LT.0)
+     1WRITE(LPRINT,'(/,'' RAYSTRT ICALL='',I5
+     1,'' ISI='',I3,'' ISO='',I3,'' I1='',I3,'' I2='',I3
+     1,'' ERRZ='',F10.5,'' DISTMIN='',F10.4,/,''        IN        OUT''
+     1,''        RAY    CELLIN1    CELLIN2   CELLOUT1   CELLOUT2''
+     1,/,2H X,7(1X,F10.2),/,2H Z,7(1X,F10.2),/,2H A,5(1X,F10.3))')
+     1ICALL,ISI,ISO,ITER1,ITER2,ERRZ,DISTMIN
+     1,XI,XO,XO,XCELL(ISI),XCELL(ISI+1)
+     1,XCELL(ISO),XCELL(ISO+1)
+     1,ZI,ZO,ZRAY,ZCELL(ISI),ZCELL(ISI+1)
+     1,ZCELL(ISO),ZCELL(ISO+1)
+     1,ANGIN*RD,ANGOUT*RD,ANGRAY*RD,ANG(ISO)*RD,ANG(ISO+1)*RD
+      RETURN
+  999 CONTINUE
+      IRCODE = -3
+      RETURN 1
+      END
+      SUBROUTINE RAYCIRC(RAYRAD,IRCODE,ISI,ISO,XI,ZI,XO,ZO,TRAY,VI,VO
+     1,XCEN,ZCEN,DVDX,DVDZ,PRAY,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,IPRINT,LPRINT,*)
+CDIR$ FASTMD
+      DIMENSION RV(2),PRAY(2),XCELL(NXCELL),ZCELL(NXCELL)
+     1,IDCELL(NXCELL),BSPLN(NXCELL),CSPLN(NXCELL),DSPLN(NXCELL)
+      DATA ICALL/0/,CSMAX/.99999999/,RMIN/1E-3/,NITER/5/
+      DIMENSION ANG(1000),RC(1000)
+     1,AR1A(1000),XR1A(1000),ZR1A(1000)
+     1,AR2A(1000),XR2A(1000),ZR2A(1000),NRA(1000)
+C ACOS TABLE
+      PARAMETER (MACOS=2001)
+      COMMON /RAYAC/ NACOS0,NACOS,DACOS
+     1,ACOSFN(MACOS),DACOSFN(MACOS),COSFN(MACOS)
+
+C SQUARE ROOT TABLE
+C      PARAMETER (NBIT=14),(NDIM=2**(NBIT-1))
+C      COMMON /SQTTABR/ ISQTAB(0:0),NBSHFT,IROUND,MB2T15,MINDEX,
+C     *       EMPTY1(NDIM-5),EVEN(NDIM+1),EMPTY2(NDIM-1),ODD(NDIM+1)
+C      SQRTFN(U) = SHIFTR(ISQTAB(SHIFTR((U.AND.MINDEX)+IROUND,NBSHFT))
+C     *                   +             (U.AND.MB2T15)  ,1)
+      SQRTFN(U) = SQRT(U)
+
+      ICALL = ICALL + 1
+      ERRZMIN = RAYRAD / 10.
+      PI = 2. * ASIN(1.)
+      RD = 180. / PI
+C  DETERMINE THE INPUT ANGLE ANGIN BETWEEN THE POSITIVE X AXIS AND THE VECTOR 
+C  SET THE CIRCLE CENTER FOR EITHER A VERTICAL OR HORIZONTAL GRADIENT
+C  IF THIS IS A CELL WITH A HORIZONTAL VELOCITY GRADIENT
+      IF (DVDX .NE. 0) THEN
+        DVD = DVDX
+        IRV1 = 2
+        IRV2 = 1
+        CS0 = PRAY(1)
+        P0 = PRAY(2) / VI
+        XCEN = XI - VI / DVDX
+        ZCEN = ZI + CS0 / (P0 * DVDX)
+C  IF THIS IS A CELL WITH A VERTICAL VELOCITY GRADIENT
+      ELSEIF (DVDZ .NE. 0) THEN
+        DVD = DVDZ
+        IRV1 = 1
+        IRV2 = 2
+        P0 = PRAY(1) / VI
+        CS0 = SIGN(1.,PRAY(2)) * SQRTFN(1 - PRAY(1) ** 2)
+        XCEN = XI + CS0 / (P0 * DVDZ)
+        ZCEN = ZI - VI / DVDZ
+      ENDIF
+C  DETERMINE THE ANGLE BETWEEN THE INPUT RAY 
+C  AND THE VECTOR TO EACH CELL LOCATION
+C  THIS SHOULD BE BETWEEN -PI AND PI
+      R0SQ = (XI-XCEN)**2+(ZI-ZCEN)**2
+      R0 = SQRTFN(R0SQ)
+      RXCEN = (XI - XCEN) / R0
+      RZCEN = (ZI - ZCEN) / R0
+      CS = RXCEN * PRAY(1) + RZCEN * PRAY(2)
+      SN = RXCEN * PRAY(2) - RZCEN * PRAY(1)
+C      ANGIN = SIGN(1.,PRAY(2)) * ACOS(PRAY(1))
+C      ANGCEN = SIGN(1.,RZCEN) * ACOS(RXCEN)
+      IACOS = MAX(1,MIN(NACOS,NACOS0+INT(PRAY(1)/DACOS)))
+      ANGIN = SIGN(1.,PRAY(2)) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (PRAY(1) - COSFN(IACOS)))
+      IACOS = MAX(1,MIN(NACOS,NACOS0+INT(RXCEN/DACOS)))
+C      ANGCEN = ACOSFN(IACOS) * SIGN(1.,RZCEN) 
+      ANGCEN = SIGN(1.,RZCEN) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (RXCEN - COSFN(IACOS)))
+      SANG = SIGN(1.,SN)
+C  DETERMINE WHICH CELL SEGMENTS INCLUDE THIS RAY
+      IS1 = MAX(ISI,1)
+      IS2 = IS1 + 1
+      IF(IPRINT.EQ.1)
+     1WRITE(LPRINT,'(//,'' RAYCIRC ICALL='',I5,'' ISI='',I3,'' SA='',I2
+     1,'' AIN='',F8.3,'' VI='',F7.0,'' VX='',F7.5,'' VZ='',F7.5
+     1,/,'' XC1='',F10.2,'' XC2='',F10.2
+     1,'' ZC1='',F10.2,'' ZC2='',F10.2
+     1,/,'' XI='',F10.2,'' ZI='',F10.2,'' XCEN='',F10.2
+     1,'' ZCEN='',F10.2,/,'' R0='',F10.2,'' P='',2(1X,F9.4))')
+     1ICALL,ISI,INT(SANG),ANGIN*RD,VI,DVDX,DVDZ
+     1,XCELL(IS1),XCELL(IS2),ZCELL(IS1),ZCELL(IS2)
+     1,XI,ZI,XCEN,ZCEN,R0,PRAY(1),PRAY(2)
+C     WRITE(LPRINT,*)' IXC ANG  XC  ZC'
+      DO 1 IXC = 1 , NXCELL
+        RX1 = XCELL(IXC) - XCEN
+        RZ1 = ZCELL(IXC) - ZCEN
+        R1 = SQRTFN(RX1**2+RZ1**2)
+        CS1 = (RXCEN * RX1 + RZCEN * RZ1) / R1
+        SN1 = (RXCEN * RZ1 - RZCEN * RX1)
+        RC(IXC) = R1
+C       ANG(IXC) = SIGN(1.,SN1) * ACOS(SIGN(1.,CS1)*MIN(CSMAX,ABS(CS1)))
+        IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS1/DACOS)))
+        ANG(IXC) = SIGN(1.,SN1) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (CS1 - COSFN(IACOS)))
+C      WRITE(LPRINT,'(1X,I3,1X,F15.8,2(1X,F10.2))')
+C     1IXC,ANG(IXC)*RD,XCELL(IXC),ZCELL(IXC)
+    1 CONTINUE
+C      WRITE(LPRINT,*)' NANG IS AOUT      AR1      AR2        '
+C     1,'XO       ZO'
+      NANG = 0
+      ANGOUT = 0
+      XO = 0
+      ZO = 0
+      RXCEN  = RXCEN / R0
+      RZCEN  = RZCEN / R0
+      DO 2 IXC = 1 , NXCELL - 1
+C  FIND THE TWO ROOTS OR A CIRCLE CROSSING A LINE
+        IF (IDCELL(IXC) .LT. -1) GOTO 2
+        IF (XCELL(IXC) .EQ. XCELL(IXC+1)) THEN
+          IF (R0 .GE. ABS(XCELL(IXC)-XCEN)) THEN
+            XR1 = XCELL(IXC)
+            XR2 = XCELL(IXC)
+            ZR1 = ZCEN + SQRTFN(R0SQ - (XR1-XCEN)**2)
+            ZR2 = ZCEN - SQRTFN(R0SQ - (XR1-XCEN)**2)
+            NR = 2
+          ELSE
+            XR1 = 0
+            XR2 = 0
+            ZR1 = 0
+            ZR2 = 0
+            NR = 0
+          ENDIF
+        ELSE    ! IF (XCELL(IXC) .EQ. XCELL(IXC+1)) THEN
+          DZDX = (ZCELL(IXC+1) - ZCELL(IXC)) 
+     1/ (XCELL(IXC+1) - XCELL(IXC))
+          D1 = ZCELL(IXC) - ZCEN + (XCEN - XCELL(IXC)) * DZDX
+          A = 1. + DZDX ** 2
+          B = 2. * D1 * DZDX
+          C = D1 ** 2 - R0SQ
+          D2 = B**2 - 4. * A * C
+          IF (D2 .LT. 0) THEN
+            NR = 0
+            XR1 = 0
+            XR2 = 0
+            ZR1 = 0
+            ZR2 = 0
+          ELSE
+            XR1 = XCEN + (-B + SQRTFN(D2)) / (2 * A)
+            XR2 = XCEN + (-B - SQRTFN(D2)) / (2 * A)
+            ZR1 = ZCELL(IXC) + DZDX * (XR1 - XCELL(IXC))
+            ZR2 = ZCELL(IXC) + DZDX * (XR2 - XCELL(IXC))
+            NR = 2
+          ENDIF
+        ENDIF    ! IF (XCELL(IXC) .EQ. XCELL(IXC+1)) THEN
+      NRA(IXC) = NR
+      IF(IXC.EQ.1.AND.IPRINT.EQ.1)
+     1WRITE(LPRINT,'('' IXC  NR  XC  ZC  XR1  XR2  ZR1  ZR2'')')
+      IF(IPRINT.EQ.1)WRITE(LPRINT,'(2(1X,I3),1X,G10.4,6(1X,F9.1))')
+     1IXC,NR,D2,XCELL(IXC),ZCELL(IXC),XR1,XR2,ZR1,ZR2
+        IF (NR .NE. 0) THEN
+          RX1 = XR1 - XCEN
+          RZ1 = ZR1 - ZCEN
+          CS1 = RXCEN * RX1 + RZCEN * RZ1
+          SN1 = RXCEN * RZ1 - RZCEN * RX1
+C          AR1 = SIGN(1.,SN1) * ACOS(SIGN(1.,CS1)*MIN(CSMAX,ABS(CS1)))
+          IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS1/DACOS)))
+          AR1 = SIGN(1.,SN1) * (ACOSFN(IACOS) 
+     1+ DACOSFN(IACOS) * (CS1 - COSFN(IACOS)))
+          RX2 = XR2 - XCEN
+          RZ2 = ZR2 - ZCEN
+          CS2 = RXCEN * RX2 + RZCEN * RZ2
+          SN2 = RXCEN * RZ2 - RZCEN * RX2
+C          AR2 = SIGN(1.,SN2) * ACOS(SIGN(1.,CS2)*MIN(CSMAX,ABS(CS2)))
+          IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS2/DACOS)))
+          AR2 = SIGN(1.,SN2) * (ACOSFN(IACOS)
+     1+ DACOSFN(IACOS) * (CS2 - COSFN(IACOS)))
+          RR1 = SQRTFN((XCEN-XR1)**2+(ZCEN-ZR1)**2)
+          RR2 = SQRTFN((XCEN-XR2)**2+(ZCEN-ZR2)**2)
+C      WRITE(LPRINT,*)' IXC,CS1,CS2,AR1,AR2,XR1,XR2,ZR1,ZR2,RR1,RR2'
+C      WRITE(LPRINT,'(1X,I3,2(1X,F9.6),2(1X,F15.8),6(1X,F10.0))')
+C     1,IXC,CS1,CS2,AR1*RD,AR2*RD,XR1,XR2,ZR1,ZR2,RR1,RR2
+          IF (SIGN(1.,AR2*SANG) .GT. 0 .AND. (SIGN(1.,AR1*SANG) .LT. 0
+     1 .OR. ABS(AR2) .LT. ABS(AR1))) THEN
+            AR0 = AR1
+            XR0 = XR1
+            ZR0 = ZR1
+            AR1 = AR2
+            XR1 = XR2
+            ZR1 = ZR2
+            AR2 = AR0
+            XR2 = XR0
+            ZR2 = ZR0
+          ENDIF
+          DIS1 = SQRTFN((XR1-XI)**2+(ZR1-ZI)**2)
+          DIS2 = SQRTFN((XR2-XI)**2+(ZR2-ZI)**2)
+          IF (IXC .EQ. ISI .AND. DIS2 .GT. DIS1) THEN
+            AR0 = AR1
+            XR0 = XR1
+            ZR0 = ZR1
+            AR1 = AR2
+            XR1 = XR2
+            ZR1 = ZR2
+            AR2 = AR0
+            XR2 = XR0
+            ZR2 = ZR0
+          ENDIF
+        ELSE    ! IF (NR .NE. 0) THEN
+          AR1 = 0
+          AR2 = 0
+          XR1 = 0
+          XR2 = 0
+          ZR1 = 0
+          ZR2 = 0
+        ENDIF    ! IF (NR .NE. 0) THEN
+        AR1A(IXC) = AR1
+        XR1A(IXC) = XR1
+        ZR1A(IXC) = ZR1
+        AR2A(IXC) = AR2
+        XR2A(IXC) = XR2
+        ZR2A(IXC) = ZR2
+        NRA(IXC) = NR
+        IF(NR .NE. 0 .AND. SANG * AR1 .GE. 0.
+     1.AND. (NANG .EQ. 0 .OR. ABS(AR1) .LT. ABS(AOUT))
+     1.AND. XR1 .GE. MIN(XCELL(IXC),XCELL(IXC+1))-ERRZMIN
+     1.AND. XR1 .LE. MAX(XCELL(IXC),XCELL(IXC+1))+ERRZMIN
+     1.AND. ZR1 .GE. MIN(ZCELL(IXC),ZCELL(IXC+1))-ERRZMIN
+     1.AND. ZR1 .LE. MAX(ZCELL(IXC),ZCELL(IXC+1))+ERRZMIN) THEN
+C     1.AND. AR1 .GE. MIN(ANG(IXC),ANG(IXC+1)) 
+C     1.AND. AR1 .LE. MAX(ANG(IXC),ANG(IXC+1))
+          NANG = NANG + 1
+          AOUT = AR1
+          XO = XR1
+          ZO = ZR1
+          ISO = IXC
+C      WRITE(LPRINT,*)
+C     1' NANG,ISO,AOUT*RD,ANG(IXC)*RD,ANG(IXC+1)*RD,XO,ZO'
+C      WRITE(LPRINT,'(2(1X,I3),3(1X,F8.3),2(1X,F10.2))')
+C     1NANG,ISO,AOUT*RD,ANG(IXC)*RD,ANG(IXC+1)*RD,XO,ZO
+C      WRITE(LPRINT,'('' NA='',I3,'' IS='',I3
+C     1,'' A='',F15.8,'' X='',F10.2,'' Z='',F10.2
+C     1,'' XZC='',4(1X,F10.2))')
+C     1,NANG,IXC,AOUT*RD,XO,ZO
+C     1,XCELL(IXC),XCELL(IXC+1),ZCELL(IXC),ZCELL(IXC+1)
+        ENDIF
+    2 CONTINUE
+      IF (NANG .EQ. 0) THEN
+      RXCEN  = RXCEN * R0
+      RZCEN  = RZCEN * R0
+      DO 1001 IXC = 1 , NXCELL
+        IF (IDCELL(IXC) .LT. -1) GOTO 1001
+        RX1 = XCELL(IXC) - XCEN
+        RZ1 = ZCELL(IXC) - ZCEN
+        R1 = SQRTFN(RX1**2+RZ1**2)
+        CS1 = (RXCEN * RX1 + RZCEN * RZ1) / R1
+        SN1 = (RXCEN * RZ1 - RZCEN * RX1)
+        RC(IXC) = R1
+       ANG(IXC) = SIGN(1.,SN1) * ACOS(SIGN(1.,CS1)*MIN(CSMAX,ABS(CS1)))
+C        IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS1/DACOS)))
+C        ANG(IXC) = SIGN(1.,SN1) * (ACOSFN(IACOS) 
+C     1+ DACOSFN(IACOS) * (CS1 - COSFN(IACOS)))
+C      WRITE(LPRINT,'(1X,I3,1X,F15.8,2(1X,F10.2))')
+C     1IXC,ANG(IXC)*RD,XCELL(IXC),ZCELL(IXC)
+ 1001 CONTINUE
+C      WRITE(LPRINT,*)' NANG IS AOUT      AR1      AR2        '
+C     1,'XO       ZO'
+      NANG = 0
+      ANGOUT = 0
+      XO = 0
+      ZO = 0
+      RXCEN  = RXCEN / R0
+      RZCEN  = RZCEN / R0
+      DO 1002 IXC = 1 , NXCELL - 1
+C  FIND THE TWO ROOTS OR A CIRCLE CROSSING A LINE
+        IF (XCELL(IXC) .EQ. XCELL(IXC+1)) THEN
+          IF (R0 .GE. ABS(XCELL(IXC)-XCEN)) THEN
+            XR1 = XCELL(IXC)
+            XR2 = XCELL(IXC)
+            ZR1 = ZCEN + SQRTFN(R0SQ - (XR1-XCEN)**2)
+            ZR2 = ZCEN - SQRTFN(R0SQ - (XR1-XCEN)**2)
+            NR = 2
+          ELSE
+            XR1 = 0
+            XR2 = 0
+            ZR1 = 0
+            ZR2 = 0
+            NR = 0
+          ENDIF
+        ELSE    ! IF (XCELL(IXC) .EQ. XCELL(IXC+1)) THEN
+          DZDX = (ZCELL(IXC+1) - ZCELL(IXC)) 
+     1/ (XCELL(IXC+1) - XCELL(IXC))
+          D1 = ZCELL(IXC) - ZCEN + (XCEN - XCELL(IXC)) * DZDX
+          A = 1. + DZDX ** 2
+          B = 2. * D1 * DZDX
+          C = D1 ** 2 - R0SQ
+          D2 = B**2 - 4. * A * C
+          IF (D2 .LT. 0) THEN
+            NR = 0
+            XR1 = 0
+            XR2 = 0
+            ZR1 = 0
+            ZR2 = 0
+          ELSE
+            XR1 = XCEN + (-B + SQRTFN(D2)) / (2 * A)
+            XR2 = XCEN + (-B - SQRTFN(D2)) / (2 * A)
+            ZR1 = ZCELL(IXC) + DZDX * (XR1 - XCELL(IXC))
+            ZR2 = ZCELL(IXC) + DZDX * (XR2 - XCELL(IXC))
+            NR = 2
+          ENDIF
+        ENDIF    ! IF (XCELL(IXC) .EQ. XCELL(IXC+1)) THEN
+      NRA(IXC) = NR
+      IF(IXC.EQ.1.AND.IPRINT.EQ.1)
+     1WRITE(LPRINT,'('' IXC  NR  XC  ZC  XR1  XR2  ZR1  ZR2'')')
+      IF(IPRINT.EQ.1)WRITE(LPRINT,'(2(1X,I3),1X,G10.4,6(1X,F9.1))')
+     1IXC,NR,D2,XCELL(IXC),ZCELL(IXC),XR1,XR2,ZR1,ZR2
+        IF (NR .NE. 0) THEN
+          RX1 = XR1 - XCEN
+          RZ1 = ZR1 - ZCEN
+          CS1 = RXCEN * RX1 + RZCEN * RZ1
+          SN1 = RXCEN * RZ1 - RZCEN * RX1
+          AR1 = SIGN(1.,SN1) * ACOS(SIGN(1.,CS1)*MIN(CSMAX,ABS(CS1)))
+C          IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS1/DACOS)))
+C          AR1 = SIGN(1.,SN1) * (ACOSFN(IACOS) 
+C     1+ DACOSFN(IACOS) * (CS1 - COSFN(IACOS)))
+          RX2 = XR2 - XCEN
+          RZ2 = ZR2 - ZCEN
+          CS2 = RXCEN * RX2 + RZCEN * RZ2
+          SN2 = RXCEN * RZ2 - RZCEN * RX2
+          AR2 = SIGN(1.,SN2) * ACOS(SIGN(1.,CS2)*MIN(CSMAX,ABS(CS2)))
+C          IACOS = MAX(1,MIN(NACOS,NACOS0+INT(CS2/DACOS)))
+C          AR2 = SIGN(1.,SN2) * (ACOSFN(IACOS)
+C     1+ DACOSFN(IACOS) * (CS2 - COSFN(IACOS)))
+          RR1 = SQRTFN((XCEN-XR1)**2+(ZCEN-ZR1)**2)
+          RR2 = SQRTFN((XCEN-XR2)**2+(ZCEN-ZR2)**2)
+C      WRITE(LPRINT,*)' IXC,CS1,CS2,AR1,AR2,XR1,XR2,ZR1,ZR2,RR1,RR2'
+C      WRITE(LPRINT,'(1X,I3,2(1X,F9.6),2(1X,F15.8),6(1X,F10.0))')
+C     1,IXC,CS1,CS2,AR1*RD,AR2*RD,XR1,XR2,ZR1,ZR2,RR1,RR2
+          IF (SIGN(1.,AR2*SANG) .GT. 0 .AND. (SIGN(1.,AR1*SANG) .LT. 0
+     1 .OR. ABS(AR2) .LT. ABS(AR1))) THEN
+            AR0 = AR1
+            XR0 = XR1
+            ZR0 = ZR1
+            AR1 = AR2
+            XR1 = XR2
+            ZR1 = ZR2
+            AR2 = AR0
+            XR2 = XR0
+            ZR2 = ZR0
+          ENDIF
+          DIS1 = SQRTFN((XR1-XI)**2+(ZR1-ZI)**2)
+          DIS2 = SQRTFN((XR2-XI)**2+(ZR2-ZI)**2)
+          IF (IXC .EQ. ISI .AND. DIS2 .GT. DIS1) THEN
+            AR0 = AR1
+            XR0 = XR1
+            ZR0 = ZR1
+            AR1 = AR2
+            XR1 = XR2
+            ZR1 = ZR2
+            AR2 = AR0
+            XR2 = XR0
+            ZR2 = ZR0
+          ENDIF
+        ELSE    ! IF (NR .NE. 0) THEN
+          AR1 = 0
+          AR2 = 0
+          XR1 = 0
+          XR2 = 0
+          ZR1 = 0
+          ZR2 = 0
+        ENDIF    ! IF (NR .NE. 0) THEN
+        AR1A(IXC) = AR1
+        XR1A(IXC) = XR1
+        ZR1A(IXC) = ZR1
+        AR2A(IXC) = AR2
+        XR2A(IXC) = XR2
+        ZR2A(IXC) = ZR2
+        NRA(IXC) = NR
+        IF(NR .NE. 0 .AND. SANG * AR1 .GE. 0.
+     1.AND. (NANG .EQ. 0 .OR. ABS(AR1) .LT. ABS(AOUT))
+     1.AND. XR1 .GE. MIN(XCELL(IXC),XCELL(IXC+1))-ERRZMIN
+     1.AND. XR1 .LE. MAX(XCELL(IXC),XCELL(IXC+1))+ERRZMIN
+     1.AND. ZR1 .GE. MIN(ZCELL(IXC),ZCELL(IXC+1))-ERRZMIN
+     1.AND. ZR1 .LE. MAX(ZCELL(IXC),ZCELL(IXC+1))+ERRZMIN) THEN
+C     1.AND. AR1 .GE. MIN(ANG(IXC),ANG(IXC+1)) 
+C     1.AND. AR1 .LE. MAX(ANG(IXC),ANG(IXC+1))
+          NANG = NANG + 1
+          AOUT = AR1
+          XO = XR1
+          ZO = ZR1
+          ISO = IXC
+C      WRITE(LPRINT,*)
+C     1' NANG,ISO,AOUT*RD,ANG(IXC)*RD,ANG(IXC+1)*RD,XO,ZO'
+C      WRITE(LPRINT,'(2(1X,I3),3(1X,F8.3),2(1X,F10.2))')
+C     1NANG,ISO,AOUT*RD,ANG(IXC)*RD,ANG(IXC+1)*RD,XO,ZO
+C      WRITE(LPRINT,'('' NA='',I3,'' IS='',I3
+C     1,'' A='',F15.8,'' X='',F10.2,'' Z='',F10.2
+C     1,'' XZC='',4(1X,F10.2))')
+C     1,NANG,IXC,AOUT*RD,XO,ZO
+C     1,XCELL(IXC),XCELL(IXC+1),ZCELL(IXC),ZCELL(IXC+1)
+        ENDIF
+ 1002 CONTINUE
+      ENDIF
+      IF (NANG .EQ. 0) THEN
+        WRITE(LPRINT,*)' RAYCIRC ICALL=',ICALL,' NANG=',NANG
+        WRITE(LPRINT,*)' ANGIN ANGOUT       '
+     1,'XCEN     XI      XO     ZCEN    ZI       ZO'
+        WRITE(LPRINT,'(100(/,9X,2(1X,F5.0),6(1X,F8.0)))')
+     1ANGIN*RD,ANGOUT*RD,XCEN,XI,XO,ZCEN,ZI,ZO
+        WRITE(LPRINT,*)' R0=',R0,' SANG=',SANG
+      WRITE(LPRINT,'(/,'' IXC  ACELL A1  R XCELL   X1    ZCELL   Z1''
+     1,100(/,I3,2(1X,G9.3),5(1X,F9.0)))')
+     1(IXC,ANG(IXC)*RD,AR1A(IXC)*RD
+     1,SQRTFN((XCEN-XR1A(IXC))**2+(ZCEN+ZR1A(IXC))**2)
+     1,XCELL(IXC),XR1A(IXC),ZCELL(IXC),ZR1A(IXC),IXC=1,MIN(NXCELL,100))
+C        WRITE(LPRINT,'(100(/,I3,1X,I2,2(1X,G10.4),5(1X,F9.0)))')
+C     1(IXC,NRA(IXC),ANG(IXC)*RD,AR1A(IXC)*RD
+C     1,SQRTFN((XCEN-XR1A(IXC))**2+(ZCEN+ZR1A(IXC))**2)
+C     1,XCELL(IXC),XR1A(IXC),ZCELL(IXC),ZR1A(IXC),IXC=1,NXCELL)
+        WRITE(LPRINT,*)' IX A A1 A2 XC X1 X2 ZC Z1 Z2'
+      WRITE(LPRINT,'(100(/,I3,3(1X,G9.3),2(1X,F8.0,2(1X,F10.0))))')
+     1(IXC,ANG(IXC)*RD,AR1A(IXC)*RD,AR2A(IXC)*RD
+     1,XCELL(IXC),XR1A(IXC),XR2A(IXC),ZCELL(IXC),ZR1A(IXC),ZR2A(IXC)
+     1,IXC=1,NXCELL)
+        DO 9977 IXC = 1 , NXCELL - 1
+        XR1=XR1A(IXC)
+        ZR1=ZR1A(IXC)
+        AR1=AR1A(IXC)
+        NR=NRA(IXC)
+        IF(NR .NE. 0 .AND. SANG * AR1 .GE. 0.
+     1.AND. (NANG .EQ. 0 .OR. ABS(AR1) .LT. ABS(AOUT))
+     1.AND. AR1 .GE. MIN(ANG(IXC),ANG(IXC+1)) 
+     1.AND. AR1 .LE. MAX(ANG(IXC),ANG(IXC+1))
+     1.AND. XR1 .GE. MIN(XCELL(IXC),XCELL(IXC+1))-ERRZMIN
+     1.AND. XR1  .LE. MAX(XCELL(IXC),XCELL(IXC+1))+ERRZMIN
+     1.AND. ZR1  .GE. MIN(ZCELL(IXC),ZCELL(IXC+1))-ERRZMIN
+     1.AND. ZR1  .LE. MAX(ZCELL(IXC),ZCELL(IXC+1))+ERRZMIN) THEN
+          WRITE(LPRINT,'('' I '',I3
+     1,'' XR'',F9.0,'' X1'',F9.0,'' X2'',F9.0
+     1,'' ZR'',F9.0,'' Z1'',F9.0,'' Z2'',F9.0)')
+     1IXC,XR1A(IXC),XCELL(IXC),XCELL(IXC+1)
+     1,ZR1A(IXC),ZCELL(IXC),ZCELL(IXC+1)
+          WRITE(LPRINT,*)' AR=',AR1A(IXC)*RD,' AC1=',ANG(IXC)*RD
+     1,' AC2=',ANG(IXC+1)*RD
+     1,' NR=',NRA(IXC)
+          ENDIF
+ 9977   CONTINUE
+      CALL RAYSTRT(RAYRAD,IRCODE,ISI,ISO,XI,ZI
+     1,XO,ZO,TRAY,VI,VO,DVDX,DVDZ,PRAY,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,IPRINT,LPRINT,*999)
+        GOTO 8
+      ENDIF
+C  IF THE SEGMENT IS VERTICAL XO AND ZO ARE CORRECT
+      IF (ABS(XCELL(ISO)-XCELL(ISO+1)) .LT. RMIN) THEN
+        XO = XCELL(ISO)
+        ZO = ZCEN + SIGN(1.,ZO-ZCEN) * SQRTFN(R0SQ-(XO-XCEN)**2)
+      ELSE
+C  USE NEWTONS METHOD TO GET MORE ACCURATE
+        VO = VI 
+     1 + (XO - XI) * DVDX + (ZO - ZI) * DVDZ
+        RV(IRV1) = PRAY(IRV1) * VO / VI
+        RV(IRV1) = SIGN(1.,RV(IRV1))*MIN(1.,ABS(RV(IRV1)))
+        RV(IRV2) = - SQRTFN(1 - RV(IRV1) ** 2)
+     1* SIGN(1.,(XO-XCEN)*(ZO-ZCEN)*RV(IRV1))
+        XI0 = XO - 1000. * RV(1)
+        ZI0 = ZO - 1000. * RV(2)
+C      WRITE(LPRINT,*)' XZI0=',XI0,ZI0,' XZOU=',XO,ZO
+C     1,' P=',PRAY(1),PRAY(2)
+        IF (ABS(PRAY(1)) .EQ. 0. .OR. XO .EQ. XI0) GOTO 7
+        TN = (ZO - ZI0) / (XO - XI0)
+        SP3 = DSPLN(ISO)
+        SP2 = CSPLN(ISO)
+        SP1 = BSPLN(ISO)
+        SP0 = ZCELL(ISO)
+        FP3 = 3 * SP3
+        FP2 = 2 * SP2
+        FP1 = SP1 - TN
+        FP0 = SP0 - ZI0 - (XCELL(ISO) - XI0) * TN
+        ITER2 = 0
+        XCMIN = MIN(XCELL(ISO),XCELL(ISO+1))
+        XCMAX = MAX(XCELL(ISO),XCELL(ISO+1))
+C      WRITE(LPRINT,*)' ITER XO XO1 ZO ZO1 ZRAY ERRZ'
+        ZSIGN = SIGN(1.,ZO-ZCEN)
+        DO 6 ITER = 1 , NITER
+          ITER2 = ITER
+          DX = XO - XCELL(ISO)
+          F = ((SP3*DX+SP2)*DX+FP1)*DX+FP0
+          DF = (FP3*DX+FP2)*DX+FP1
+          IF (DF .EQ. 0) GOTO 7
+          XO1 = MAX(XCMIN,MIN(XCMAX,XO - F / DF))
+          DX = XO1 - XCELL(ISO)
+          ZO1 = ((SP3*DX+SP2)*DX+SP1)*DX+SP0
+          ZRAY = ZCEN + ZSIGN * SQRTFN(ABS(R0SQ - (XO1 - XCEN)**2))
+          ERRZ1 = ABS(ZRAY - ZO1)
+C      WRITE(LPRINT,'(1X,I3,5(1X,F7.1),1X,F7.3,2(1X,G12.6))')
+C     1ITER,XO,XO1,ZO,ZO1,ZRAY,ERRZ1,F,DF
+          IF (ERRZ1 .GT. ERRZ) GOTO 7
+          XO = XO1
+          ZO = ZO1
+          ERRZ = ERRZ1
+          IF (ERRZ .LT. ERRZMIN) GOTO 7
+    6   CONTINUE    ! DO 6 ITER = 1 , NITER
+    7   CONTINUE
+      ENDIF    !    IF (ABS(PRAY(1)) .EQ. 0) THEN
+    8 CONTINUE
+      IRCODE = 0
+      ZSIGN = SIGN(1.,ZO-ZCEN)
+      ZRAY = ZCEN + ZSIGN * SQRTFN(ABS(R0SQ - (XO - XCEN)**2))
+      RRAY = SQRTFN((XCEN-XRAY)**2+(ZCEN-ZRAY)**2)
+      RO = SQRTFN((XCEN-XO)**2+(ZCEN-ZO)**2)
+      VO = VI 
+     1 + (XO - XI) * DVDX + (ZO - ZI) * DVDZ
+      SN1 = PRAY(IRV1)
+      CS1 = PRAY(IRV2)
+      PRAY(IRV1) = PRAY(IRV1) * VO / VI
+      PRAY(IRV1) = SIGN(1.,PRAY(IRV1))*MIN(1.,ABS(PRAY(IRV1)))
+      PRAY(IRV2) = - SQRTFN(1 - PRAY(IRV1) ** 2)
+     1* SIGN(1.,(XO-XCEN)*(ZO-ZCEN)*PRAY(IRV1))
+      SN2 = PRAY(IRV1)
+      CS2 = PRAY(IRV2)
+      IF (SN1 .EQ. 0 .OR. SN2 .EQ. 0
+     1.OR. CS1 .EQ. -1 .OR. CS2 .EQ. -1) THEN
+        TRAY = ALOG(VO / VI) / DVD
+      ELSEIF (((1+CS1) * SN2) / ((1+CS2) * SN1) .LT. 0) THEN
+        TRAY = ALOG(MAX(1E-5,VO / VI)) / DVD
+      ELSE
+        TRAY = ALOG(((1+CS1) * SN2) / ((1+CS2) * SN1)) / DVD
+      ENDIF
+      TRAY = MAX(0.,TRAY)
+      II1 = ISI
+      II2 = II1 + 1
+      IO1 = ISO
+      IO2 = IO1 + 1
+      IF(IPRINT.EQ.1)WRITE(LPRINT,'(/,'' RAYCIRC ICALL='',I5
+     1,'' ISI='',I3,'' ISO='',I3,'' I1='',I3,'' I2='',I3
+     1,'' EZ='',F10.5,'' EZMIN='',F8.4,/,'' VI='',F10.2
+     1,'' VO='',F10.2,'' TRAY='',F8.4,'' PI='',2(1X,F9.5)
+     1,'' PO='',2(1X,F9.5),/,''        IN        OUT''
+     1,''        RAY    CELLIN1    CELLIN2   CELLOUT1   CELLOUT2''
+     1,/,2H R,7(1X,F10.2),/,2H X,7(1X,F10.2),/,2H Z,7(1X,F10.2),/,2H A
+     1,7(1X,F10.3))')ICALL,II1,IO1,ITER1,ITER2,ERRZ,ERRZMIN,VI
+     1,VO,TRAY,SN1,CS1,SN2,CS2,R0,RO,RRAY,RC(II1),RC(II2),RC(IO1)
+     1,RC(IO2),XI,XO,XO,XCELL(II1),XCELL(II2),XCELL(IO1),XCELL(IO2)
+     1,ZI,ZO,ZRAY,ZCELL(II1),ZCELL(II2),ZCELL(IO1),ZCELL(IO2)
+     1,AIN*RD,AOUT*RD,ANG(II1)*RD,ANG(II2+1)*RD,ANG(IO1)*RD,ANG(IO2)*RD
+C      IF(IRCODE.NE.-999)STOP
+      RETURN
+  999 CONTINUE
+      IRCODE = -3
+      RETURN 1
+      END
+      SUBROUTINE RAYACOS(NACOS0,NACOS,DACOS,ACOSFN,DACOSFN,COSFN)
+      DIMENSION ACOSFN(NACOS),DACOSFN(NACOS),COSFN(NACOS)
+C      COMMON /RAYAC/ NACOS0,NACOS,DACOS,ACOSFN(1)
+      DACOS = 2. / (NACOS - 1)
+      NACOS0 = NINT(1. / DACOS) + 1
+C      WRITE(45,*)' NACOS=',NACOS,' NACOS0=',NACOS0,' DACOS=',DACOS
+      DO 1 IACOS = 1 , NACOS
+        COSFN(IACOS) = MIN(1.,-1. + (IACOS - 1) * DACOS)
+        ACOSFN(IACOS) = ACOS(COSFN(IACOS))
+    1 CONTINUE
+      DO 2 IACOS = 1 , NACOS - 1
+        DACOSFN(IACOS) = (ACOSFN(IACOS+1) - ACOSFN(IACOS)) / DACOS
+    2 CONTINUE
+      DACOSFN(NACOS) = 0
+C      RD = 90. / ASIN(1.)
+C      DO I = 1 , NACOS
+C        WRITE(45,'(1X,I5,1X,F15.8,1X,F15.12,1X,F15.10)')
+C     1I,ACOSFN(I)*RD,COSFN(I),DACOSFN(I)
+C      ENDDO
+      RETURN
+      END
+
+      SUBROUTINE RAYXOFT(NFILL,XFILL,ZFILL,TFILL
+     1,NLEG,XRAY,ZRAY,TRAY,PRAY,IPRINT,LPRINT,*)
+      DIMENSION XFILL(NFILL),ZFILL(NFILL),TFILL(NFILL)
+     1,XRAY(NLEG),ZRAY(NLEG),TRAY(NLEG),PRAY(2,NLEG)
+
+C SQUARE ROOT TABLE
+C      PARAMETER (NBIT=14),(NDIM=2**(NBIT-1))
+C      COMMON /SQTTABR/ ISQTAB(0:0),NBSHFT,IROUND,MB2T15,MINDEX,
+C     *       EMPTY1(NDIM-5),EVEN(NDIM+1),EMPTY2(NDIM-1),ODD(NDIM+1)
+C      SQRTFN(U) = SHIFTR(ISQTAB(SHIFTR((U.AND.MINDEX)+IROUND,NBSHFT))
+C     *                   +             (U.AND.MB2T15)  ,1)
+      SQRTFN(U) = SQRT(U)
+
+      DATA ICALL/0/
+      ICALL = ICALL + 1
+      IF (TFILL(1) .EQ. 0) THEN
+        XFILL(1) = XRAY(1)
+        ZFILL(1) = ZRAY(1)
+        IFILL1 = 2
+      ELSE
+        IFILL1 = 1
+      ENDIF
+      IF (IFILL1 .GT. NFILL) RETURN
+      DO 1001 ILEG = 1 , NLEG - 1
+        IF (TRAY(ILEG+1) .LT. TFILL(IFILL1)) GOTO 1001
+        IFILL2 = IFILL1
+        DO 1002 IFILL = IFILL1 , NFILL
+          IFILL2 = IFILL
+          IF (TFILL(IFILL2) .GE. TRAY(ILEG+1)) GOTO 1003
+ 1002   CONTINUE
+ 1003   CONTINUE
+C  NOW FILL IN POINTS BEFORE THIS
+C  IF THIS IS A STRAIGHT RAY SEGMENT
+        TLEG = TRAY(ILEG+1) - TRAY(ILEG)
+        IF (TLEG .NE. 0) THEN
+          XGRAD = (XRAY(ILEG+1) - XRAY(ILEG)) / TLEG
+          ZGRAD = (ZRAY(ILEG+1) - ZRAY(ILEG)) / TLEG
+        ELSE
+          XGRAD = 0
+          ZGRAD = 0
+        ENDIF
+        DO 1004 IFILL = IFILL1 , IFILL2
+          DELT = TFILL(IFILL) - TRAY(ILEG)
+          XFILL(IFILL) = XRAY(ILEG) + DELT * XGRAD
+          ZFILL(IFILL) = ZRAY(ILEG) + DELT * ZGRAD
+ 1004   CONTINUE
+        IFILL1 = IFILL2 + 1
+        IF (IFILL1 .GT. NFILL) GOTO 1005
+ 1001 CONTINUE
+ 1005 CONTINUE
+      RETURN
+  999 RETURN 1
+      END 
+      SUBROUTINE RAYSNEW(X0,Z0,XR1,XR2,ZR1,ZR2,XB1,XB2,ZB1,ZB2,ZR0
+     1,XMIN,XMAX,RSLOPE,DISTMIN
+     1,BSPLN,CSPLN,DSPLN,IPRINT,LPRINT,*)
+C  USE NEWTONS METHOD TO FIND WHERE SEGMENT AND RAY CROSS
+      ADIFF(X1,X2) = ABS(X1-X2)
+      NITER = 10
+      DO 1 ITER = 1 , NITER
+        DX = X0 - XB1
+        ZSEG = ((DSPLN*DX+CSPLN)*DX+BSPLN)*DX+ZB1
+        Z0 = ZR0 + X0 * RSLOPE
+        IF (ADIFF(Z0,ZSEG) .LE. DISTMIN) GOTO 2
+        SSLOPE = (3*DSPLN*DX+2*CSPLN)*DX+BSPLN
+        X0 = (ZR0 - (ZSEG - X0 * SSLOPE)) / (SSLOPE - RSLOPE)
+        X0 = MIN(XMAX,MAX(XMIN,X0))
+    1 CONTINUE
+      IF (ADIFF(Z0,ZSEG) .GT. DISTMIN) 
+     1CALL RAYSFIB(X0,Z0,ZSEG,XR1,XR2,ZR1,ZR2,RSLOPE
+     1,XB1,XB2,ZB1,ZB2,BSPLN,CSPLN,DSPLN,DISTMIN,NITER
+     1,IPRINT,LPRINT,*999)
+    2 CONTINUE
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+      SUBROUTINE RAYSFIB(XO,ZO,ZSEG,XR1,XR2,ZR1,ZR2,RSLOPE
+     1,XC1,XC2,ZC1,ZC2,B,C,D,DISTMIN,NITER,IPRINT,LPRINT,*)
+C  THIS LOOKS FOR THE INTERSECTION OF A STRAIGHT RAY WITH
+C  A LINE SEGMENT DESCRIBED BY A CUBIC SPLINE FIT USING A FIBBONACCI SEARCH
+      ADIFF(X1,X2) = ABS(X1-X2)
+      X0 = XO
+      Z0 = ZO
+      DX = XO - XC1
+      ZSEG0 = ((D * DX + C) * DX + B) * DX + ZC1
+      ZO = ZR1 + (XO - XR1) * RSLOPE
+      IF (XR2 .GT. XR1) THEN
+        XL = XR1
+        XR = MAX(XC1,XC2)
+      ELSE
+        XL = MIN(XC1,XC2)
+        XR = XR2
+      ENDIF
+      ISIGN0 = INT(SIGN(1.,ZSEG0-ZO))
+      DX0 = SIGN(1.,RSLOPE*(ZSEG0-ZO)) * (XR - XL) / 100
+      DO 1 IX = 1 , 100
+        XRAY = XO + IX * DX0
+        XRAY = MAX(XRAY,XL)
+        XRAY = MIN(XRAY,XR)
+        DX = XRAY - XC1
+        ZSEG = ((D * DX + C) * DX + B) * DX + ZC1
+        ZRAY = ZR1 + (XRAY - XR1) * RSLOPE
+        ISIGN1 = INT(SIGN(1.,ZSEG-ZRAY))
+        IF (ISIGN1 .NE. ISIGN0) THEN
+          IXMIN = IX
+          GOTO 2
+        ENDIF
+        ISIGN0 = ISIGN1
+    1 CONTINUE
+    2 CONTINUE
+      XL = MAX(XL,XO + (IXMIN - 1) * DX0)
+      XR = MIN(XR,XL + DX0)
+      ZL = ZR1 + (XL - XR1) * RSLOPE
+      ZR = ZR1 + (XR - XR1) * RSLOPE
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)' ISIGN0=',ISIGN0,' ISIGN1=',ISIGN1
+     1,' IXMIN=',IXMIN
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)
+     1' XL=',XL,' XR=',XR,' ZL=',ZL,' ZR=',ZR
+      IF (ZR .GT. ZL) THEN
+        XMIN = XL
+        XMAX = XR
+        ZMIN = ZL
+        ZMAX = ZR
+      ELSE
+        XMIN = XR
+        XMAX = XL
+        ZMIN = ZR
+        ZMAX = ZL
+      ENDIF
+      IF (ZMIN .LT. MIN(ZC1,ZC2) - 100) THEN
+        ZMIN = MIN(ZC1,ZC2) - 100
+        XMIN = XR1 + (ZMIN - ZR1) / RSLOPE
+      ENDIF
+      IF (ZMAX .LT. MAX(ZC1,ZC2) + 100) THEN
+        ZMAX = MAX(ZC1,ZC2) + 100
+        XMAX = XR1 + (ZMAX - ZR1) / RSLOPE
+      ENDIF
+      DX = XMIN - XC1
+      ZSEGMIN = ((D * DX + C) * DX + B) * DX + ZC1
+      DX = XMAX - XC1
+      ZSEGMAX = ((D * DX + C) * DX + B) * DX + ZC1
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)
+     1' RAYSFIB XMIN=',XMIN,' XMAX=',XMAX,' ZMIN=',ZMIN,' ZMAX=',ZMAX
+     1,' DISTMIN=',DISTMIN
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)' XR1=',XR1,' ZR1=',ZR1
+     1,' RSLOPE=',RSLOPE
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)
+     1' XO=',XO,' ZO=',ZO,' ZSEG0=',ZSEG0
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)
+     1' ZSEGMIN=',ZSEGMIN,' ZSEGMAX=',ZSEGMAX
+      NPASS = 2
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)
+     1'ITER  DIFF  ZSEG  ZO  XO ZMIN  ZMAX  XMIN  XMAX'
+      ZPREV = ZO - 1000.
+      DO 1000 ITER = 1 , NITER * NPASS
+        XO = (XMAX + XMIN) / 2.
+        DX = XO - XC1
+        ZSEG = ((D * DX + C) * DX + B) * DX + ZC1
+        ZO = ZR1 + (XO - XR1) * RSLOPE
+        IF (ADIFF(ZSEG,ZO) .LT. DISTMIN 
+     1.OR. ADIFF(ZO,ZPREV) .LT. DISTMIN) GOTO 1001
+        ZPREV = ZO
+        IF (ZSEG .GT. ZO) THEN
+          XMIN = XO
+          ZMIN = ZO
+        ELSE
+          XMAX = XO
+          ZMAX = ZO
+        ENDIF      
+C      IF(IPRINT.EQ.1.AND.ITER.GT.NITER*0)
+C     1WRITE(LPRINT,'(1X,I5,8(1X,F10.2))')
+C     1ITER,ADIFF(ZSEG,ZO),ZSEG,ZO,XO,ZMIN,ZMAX,XMIN,XMAX
+ 1000 CONTINUE
+ 1001 CONTINUE
+      IF(IPRINT.EQ.1)WRITE(LPRINT,*)' XO=',XO
+     1,' Z0=',Z0,'ZSEG0=',ZSEG0,' ZO=',ZO,' ZSEG=',ZSEG
+     1,' A0=',ADIFF(Z0,ZSEG0),' A1=',ADIFF(ZO,ZSEG)
+      IF (ADIFF(Z0,ZSEG0) .LT. ADIFF(ZO,ZSEG)) THEN
+        XO = X0
+        ZO = Z0
+      ENDIF
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+
+      SUBROUTINE RAYSREFL(RAYRAD,XR1,ZR1,XR2,ZR2,RVP,RVI,RI,TI
+     1,ISO,XO,ZO,RVO,TO,NXBND,XBND,ZBND,IDBND,BSPLN,CSPLN,DSPLN
+     1,IPRINT,LPRINT,*)
+CDIR$ FASTMD
+      DIMENSION XR(2),ZR(2),RVP(2),RVI(2),RVO(2),XBND(NXBND)
+     1,ZBND(NXBND),IDBND(NXBND),BSPLN(NXBND),CSPLN(NXBND),DSPLN(NXBND)
+
+C SQUARE ROOT TABLE
+C      PARAMETER (NBIT=14),(NDIM=2**(NBIT-1))
+C      COMMON /SQTTABR/ ISQTAB(0:0),NBSHFT,IROUND,MB2T15,MINDEX,
+C     *       EMPTY1(NDIM-5),EVEN(NDIM+1),EMPTY2(NDIM-1),ODD(NDIM+1)
+C      SQRTFN(U) = SHIFTR(ISQTAB(SHIFTR((U.AND.MINDEX)+IROUND,NBSHFT))
+C     *                   +             (U.AND.MB2T15)  ,1)
+      SQRTFN(U) = SQRT(U)
+
+      DATA ICALL/0/,DXBND/1E-2/
+      DISTMIN = RAYRAD / 10
+      ICALL = ICALL + 1
+C  IF THIS IS A BND WITH A CONSTANT VELOCITY THEN
+C  CYCLE OVER THE SEGMENTS IN THE REFLECTOR
+C  JUMP TO THE BOTTOM IF WE FIND A SEGMENT THAT INTERSECTS THE RAY
+      IF (XR1 .NE. XR2) THEN
+        RSLOPE = (ZR2 - ZR1) / (XR2 - XR1)
+        ZR0 = ZR1 - XR1 * RSLOPE
+      ENDIF
+      ISO = 0
+      RO = 0
+C      IF (ICALL .EQ. 2)WRITE(LPRINT,'('' RAYSREFL IC='',I5
+C     1,'' XR='',2(1X,F8.2),'' ZR='',2(1X,F8.2))')ICALL,XR1,XR2,ZR1,ZR2
+      DO 1 ISEG = 1 , NXBND - 1
+        IF (IDBND(ISEG) .LT. -1) GOTO 1
+        XB1 = XBND(ISEG)
+        XB2 = XBND(ISEG+1)
+        ZB1 = ZBND(ISEG)
+        ZB2 = ZBND(ISEG+1)
+        IF (SQRTFN((XB2-XB1)**2+(ZB2-ZB1)**2) .LE. DXBND) GOTO 1
+C      IF (ICALL .EQ. 2)WRITE(LPRINT,'('' IS='',I5,'' XB='',2(1X,F8.2)
+C     1,'' ZB='',2(1X,F8.2))')ISEG,XB1,XB2,ZB1,ZB2
+C  IF THIS IS A VERTICAL RAY THE EQUATION OF THE RAY IS X0 = XR1
+C  FOR A VERTICAL RAY
+        IF (XR1 .EQ. XR2) THEN
+          X0 = XR1
+          DX = X0 - XB1
+          Z0 = ((DSPLN(ISEG)*DX+CSPLN(ISEG))*DX+BSPLN(ISEG))*DX+ZB1
+          R0 = SQRTFN((X0 - XR1)**2 + (Z0 - ZR1)**2)
+          IF ((XB1-X0)*(XB2-X0)+(ZB1-Z0)*(ZB2-Z0) .GE. 0 
+     1.OR. R0 .GT. RI) GOTO 1
+C  FOR A VERTICAL LINE SEGMENT
+        ELSEIF (XB1 .EQ. XB2) THEN    ! IF (XR1 .EQ. XR2) THEN
+          X0 = XB1
+          Z0 = ZR1 + (X0 - XR1) * RSLOPE
+          R0 = SQRTFN((X0 - XR1)**2 + (Z0 - ZR1)**2)
+C      IF (ICALL .EQ. 2)WRITE(LPRINT,'('' X0='',F12.2,'' Z0='',F12.2
+C     1,'' RSLOPE='',F12.6)')X0,Z0,RSLOPE
+          IF ((XB1-X0)*(XB2-X0)+(ZB1-Z0)*(ZB2-Z0) .GE. 0 
+     1.OR. R0 .GT. RI) GOTO 1
+C  FOR NONVERTICAL RAY AND LINE SEGEMENT
+        ELSE    ! IF (XR1 .EQ. XR2) THEN
+          SSLOPE = (ZB2 - ZB1) / (XB2 - XB1)    ! SLOPE OF THE LINE SEGMENT
+          IF (SSLOPE .EQ. RSLOPE) GOTO 1
+          X0 = (ZR0 - (ZB1 - XB1 * SSLOPE)) / (SSLOPE - RSLOPE)
+          Z0 = ZR0 + X0 * RSLOPE
+          R0 = SQRTFN((XR1-X0)**2+(ZR1-Z0)**2)
+          IF ((XB1-X0)*(XB2-X0)+(ZB1-Z0)*(ZB2-Z0) .GE. 0 
+     1.OR. R0 .GT. RI) GOTO 1
+          XBRMIN = MAX(MIN(XB1,XB2),MIN(XR1,XR2)) - DISTMIN
+          XBRMAX = MIN(MAX(XB1,XB2),MAX(XR1,XR2)) + DISTMIN
+      CALL RAYSNEW(X0,Z0,XR1,XR2,ZR1,ZR2,XB1,XB2,ZB1,ZB2,ZR0
+     1,XBRMIN,XBRMAX,RSLOPE,DISTMIN,BSPLN(ISEG),CSPLN(ISEG),DSPLN(ISEG)
+     1,IPRINT,LPRINT,*999)
+        ENDIF    ! IF (XR1 .EQ. XR2) THEN
+C  THE RAY INTERSECTS THIS SEGMENT AT X0,Z0
+C  CHECK THE DISTANCE FROM THE INPUT LOCATION
+        R0 = SQRTFN((XR1-X0)**2+(ZR1-Z0)**2)
+        IF (ISO .EQ. 0 .OR. R0 .LT. RO) THEN
+          RO = R0
+          XO = X0
+          ZO = Z0
+          ISO = ISEG
+      IF(ICALL.EQ.2)WRITE(LPRINT,'('' ISO='',I5,'' XZ='',3(1X,F10.2))')
+     1ISO,XO,ZO,RO
+        ENDIF
+    1 CONTINUE
+      IF (ISO .NE. 0) THEN
+C  THE RAY REFLECTS FROM SEGMENT ISO AT XO,ZO
+C  IF THIS IS A VERTICAL BOUNDARY
+        RRAT = RO / RI
+        RV1 = RVP(1) + (RVI(1) - RVP(1)) * RRAT
+        RV2 = RVP(2) + (RVI(2) - RVP(2)) * RRAT
+        IF (XBND(ISO) .EQ. XBND(ISO+1)) THEN
+          RVO(1) = - RV1
+          RVO(2) = RV2
+        ELSE    ! IF (XBND(ISO) .EQ. XBND(ISO+1)) THEN
+          DX = XO - XBND(ISO)
+          DZDX = (3*DSPLN(ISO)*DX+2*CSPLN(ISO))*DX+BSPLN(ISO)
+          GAMMA = SQRTFN(1 + DZDX ** 2)
+          SIGNNORM = SIGN(1.,XBND(ISO+1)-XBND(ISO))
+          XNORM = - SIGNNORM * DZDX / GAMMA
+          ZNORM = SIGNNORM / GAMMA
+          A = RV1 * ZNORM - RV2 * XNORM
+          B = - RV1 * XNORM - RV2 * ZNORM
+          RVO(1) = XNORM * B + ZNORM * A
+          RVO(2) = ZNORM * B - XNORM * A
+        ENDIF    ! IF (XBND(ISO) .EQ. XBND(ISO+1)) THEN
+        TO = TI * MIN(RRAT,1.)
+      ENDIF    ! IF (ISO .NE. 0) THEN
+      IS1 = MAX(ISO,1)
+      IF((IPRINT.EQ.5.OR.IPRINT.EQ.1).AND.ISO.NE.0)
+     1WRITE(LPRINT,'(/,'' RAYSREFL ICALL='',I5,'' RRAD='',F10.4
+     1,'' ISO='',I5
+     1,/,'' TI='',F8.4,'' TO='',F8.3,'' RI='',F10.2,'' RO='',F10.2
+     1,/,'' X12='',F10.2,1X,F10.2,'' XO='',F10.2
+     1,'' Z12='',F10.2,1X,F10.2,'' ZO='',F10.2
+     1,/,'' RVP='',2(1X,F8.4),'' RVI='',2(1X,F8.4),'' RVO='',2(1X,F8.4)
+     1,'' XN='',F8.4,'' ZN='',F8.4
+     1,/,'' XB1='',F10.2,'' XB2='',F10.2,'' ZB1='',F10.2,'' ZB2='',F10.2
+     1)')ICALL,RAYRAD,ISO,TI,TO,RI,RO,XR1,XR2,XO,ZR1,ZR2,ZO
+     1,RV1,RV2,RVI(1),RVI(2),RVO(1),RVO(2),XNORM,ZNORM
+     1,XBND(IS1),XBND(IS1+1),ZBND(IS1),ZBND(IS1+1)
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+      SUBROUTINE RAYWHERE(X0,Z0,IS0,IC0,XS0,ZS0,RS0
+     1,NCELL,IXCELL,NXCELL,XCELL,ZCELL,*)
+      DIMENSION IXCELL(*),NXCELL(*),XCELL(*),ZCELL(*)
+      IX0 = 0
+      DO 1 ICELL = 1 , NCELL
+        IXC0 = IXCELL(ICELL) + 1
+      JCELL=ICELL
+      CALL INPOLY(X0,Z0,NXCELL(ICELL),XCELL(IXC0),ZCELL(IXC0),INS,*998)
+        IF (INS .EQ. 1) THEN
+          IC0 = ICELL
+          CALL RAYWHSEG(X0,Z0,IS0,XS0,ZS0,RS0
+     1,NXCELL(ICELL),XCELL(IXC0),ZCELL(IXC0),*999)
+          RETURN
+        ENDIF
+    1 CONTINUE
+C      PRINT*,' ERROR IN RAYWHERE - XZ=',X0,Z0,' NCELL=',NCELL
+      RETURN 1
+  998 CONTINUE
+C      PRINT*,' ERROR IN RAYWHERE - INPOLY XZ=',X0,Z0
+C      PRINT'('' NCELL='',I3,'' JCELL='',I3,'' NXC='',I3,'' IXC='',I3
+C     1,/,''  IXC  X  Z'',100(/1X,I5,2(1X,F10.2)))',
+C     1NCELL,JCELL,NXCELL(JCELL),IXCELL(JCELL),(IXC,XCELL(IXC),ZCELL(IXC)
+C     1,IXC=IXCELL(JCELL)+1,IXCELL(JCELL)+MIN(100,NXCELL(JCELL)))
+      RETURN 1
+  999 CONTINUE
+C      PRINT*,' ERROR IN RAYWHERE - RAYWHSEG XZ=',X0,Z0
+C      PRINT'('' NCELL='',I3,'' JCELL='',I3,'' NXC='',I3,'' IXC='',I3
+C     1,/,''  IXC  X  Z'',100(/1X,I5,2(1X,F10.2)))',
+C     1NCELL,JCELL,NXCELL(JCELL),IXCELL(JCELL),(IXC,XCELL(IXC),ZCELL(IXC)
+C     1,IXC=IXCELL(JCELL)+1,IXCELL(JCELL)+MIN(100,NXCELL(JCELL)))
+      RETURN 1
+      END
+      SUBROUTINE RAYWHSEG(X0,Z0,IS0,XS0,ZS0,RS0,NXCELL,XCELL,ZCELL,*)
+      DIMENSION XCELL(*),ZCELL(*)
+      DATA ICALL/0/,RMIN/1E-3/
+      ICALL = ICALL + 1
+C      WRITE(6,'('' RAYWHSEG ICALL='',I5,'' NX='',I5
+C     1,'' X='',F10.2,'' Z='',F10.2)')ICALL,NXCELL,X0,Z0
+      IS0 = 0
+      DO 1 IXC = 1 , NXCELL - 1
+        DX = XCELL(IXC+1) - XCELL(IXC)
+        DZ = ZCELL(IXC+1) - ZCELL(IXC)
+        DX2 = DX * DX
+        DZ2 = DZ * DZ
+        DR2 = MAX(1E-6,DX2 + DZ2)
+        XR = 
+     1(X0 * DX2 + XCELL(IXC) * DZ2 - DZ * DX * (ZCELL(IXC) - Z0)) / DR2
+        ZR = 
+     1(Z0 * DZ2 + ZCELL(IXC) * DX2 - DZ * DX * (XCELL(IXC) - X0)) / DR2
+        RS02 = (XR - X0)**2 + (ZR - Z0)**2        
+      IF ((XR .LT. MIN(XCELL(IXC),XCELL(IXC+1))-RMIN
+     1.OR. XR .GT. MAX(XCELL(IXC),XCELL(IXC+1))+RMIN
+     1.OR. ZR .LT. MIN(ZCELL(IXC),ZCELL(IXC+1))-RMIN
+     1.OR. ZR .GT. MAX(ZCELL(IXC),ZCELL(IXC+1))+RMIN)
+     1.OR. (IS0 .NE. 0 .AND. RS02 .GT. RS02MIN)) GOTO 1
+        IS0 = IXC
+        IF (RS02 .GT. RMIN) IS0 = - IXC
+        RS02MIN = RS02
+        XS0 = XR
+        ZS0 = ZR
+    1 CONTINUE
+      RS0 = SQRT(RS02)
+C      WRITE(6,'('' IS0='',I5,'' R='',F10.2
+C     1,'' X='',2(1X,F10.2),'' Z='',2(1X,F10.2))')
+C     1IS0,RS0,XCELL(IXC),XCELL(IXC+1),ZCELL(IXC),ZCELL(IXC+1)
+      IF (RS0 .GT. RMIN) ISEG = -ISEG
+      RETURN
+  999 CONTINUE
+      PRINT*,' ERROR IN RAYWHSEG'
+      RETURN 1
+      END
+
+      SUBROUTINE RAYBTOS(X,NX)
+      COMMON /SHOTA/ SHOT,BASE,BASEINC,NHMOD,XMODMINS,XMODMAXS
+      DIMENSION X(*)
+      IF (NHMOD .NE. 7 .OR. NX .LE. 0) RETURN
+      DO 1 IX = 1 , NX
+        X(IX) = (X(IX) - BASE) / BASEINC + SHOT
+    1 CONTINUE
+      RETURN
+      END
+      SUBROUTINE RAYSTOB(X,NX)
+      COMMON /SHOTA/ SHOT,BASE,BASEINC,NHMOD,XMODMINS,XMODMAXS
+      DIMENSION X(*)
+      IF (NHMOD .NE. 7 .OR. NX .LE. 0) RETURN
+      DO 1 IX = 1 , NX
+        X(IX) = (X(IX) - SHOT) * BASEINC + BASE
+    1 CONTINUE
+      RETURN
+      END
+      SUBROUTINE RAYSHOOT(ANG,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*)
+      DIMENSION XRAY(MLEG),ZRAY(MLEG),TRAY(MLEG),PRAY(2,MLEG)
+
+      CHARACTER MODTYPE*1
+
+      XRAY(1) = XSHOT
+      ZRAY(1) = ZSHOT
+      TRAY(1) = 0.
+      PRAY(1,1) = COS(ANG)
+      PRAY(2,1) = SIN(ANG)
+      NLEG = 1
+      IF (MODTYPE .EQ. 'L') THEN
+        CALL RAYTRACE(RAYRAD,ISI,ICI
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP
+     1,MREFL,NREFL,IREFL,KREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND,IDBND
+     1,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      ELSE
+        CALL RAYFDIFF(IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,RAYRAD
+     1,VGRD,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MREFL,NREFL,IREFL,KREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND,IDBND
+     1,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      ENDIF    ! IF (MODTYPE .EQ. 'L') THEN
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+
+C  THIS IDENTIFIES THE ANGLE AT WHICH DX/DA CHANGES SIGN 
+      SUBROUTINE RAYREV(ANG1,ANG2,ANGA,ANGB,X1,X2,XA,XB,IXD1,IXD2,DANG
+     1,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP
+     1,MREFL,NREFL,IREFL,KREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND
+     1,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*)
+
+      DIMENSION XRAY(MLEG),ZRAY(MLEG),TRAY(MLEG),PRAY(2,MLEG)
+
+      DIMENSION ICTYP(NCELL),VCELL(NCELL),GCELL(NCELL)
+     1,IXCELL(NCELL),NXCELL(NCELL)
+     2,XCELL(MCELL),ZCELL(MCELL),IDCELL(MCELL)
+     3,ISOP(MCELL),ICOP(MCELL)
+     4,BSPLN(MCELL),CSPLN(MCELL),DSPLN(MCELL),RV(2)
+
+      DIMENSION IREFL(MREFL),IXBND(MBND),NXBND(MBND)
+     1,XBND(MBND),ZBND(MBND),IDBND(MBND)
+     2,BSBND(MBND),CSBND(MBND),DSBND(MBND)
+
+      REAL VGRD(MZGRD,*)
+      DATA ICALL/0/
+      ICALL = ICALL + 1
+      ANGA = ANG1
+      ANGB = ANG2
+      XA = X1
+      XB = X2
+      IXDIRA = IXD1
+      IXDIRB = IXD2
+      ITERMAX = 20
+      DO 1 ITER = 1 , ITERMAX
+        IF (ABS(ANGB - ANGA) .LE. DANG) GOTO 2
+        ANG0 = (ANGA + ANGB) / 2
+        ANG0 = ANG0 - DANG / 10.
+      CALL RAYSHOOT(ANG0,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+        IF (IRCODE .NE. 1) GOTO 2
+        X0A = XRAY(NLEG)
+        ANG0 = ANG0 + DANG / 10.
+      CALL RAYSHOOT(ANG0,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+        IF (IRCODE .NE. 1) GOTO 2
+        X0 = XRAY(NLEG)
+        IXDIR0 = SIGN(1.,X0 - X0A)
+        IF (IXDIR0 .EQ. IXD1) THEN
+          ANGA = ANG0
+          XA = X0
+        ELSE
+          ANGB = ANG0
+          XB = X0
+        ENDIF         
+    1 CONTINUE    ! DO 1 ITER = 1 , ITERMAX
+C  COME TO HERE IF WE FIND A PAIR SUFFICIENTLY CLOSE TOGETHER OR IF WE
+C  RUN OUT OF ITERATIONS
+    2 CONTINUE
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+
+      SUBROUTINE RAYOFF(NOFF,XSRC,ZSRC,OIN,OFF,ANG,X1,X2,T1,T2,IRC
+     1,ANGNORM,ANGINC,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*)
+      DIMENSION ZSRC(1),X1(1),X2(1),T1(1),T2(1),ANG(1),OFF(1),OIN(1)
+     1,IRC(1)
+      CHARACTER MODTYPE*1
+      DATA ICALL/0/
+      ICALL = ICALL + 1
+      RD = 90. / ASIN(1.)
+      DANG = ANGINC * 1E-2
+      NPASS = 1000
+      ANGMIN = - 2 * ASIN(1.)
+      ANGMAX = 0
+      DISTMIN = RAYRAD / 5
+      IF(IPRINT.EQ.22)WRITE(LPRINT,'('' RAYOFF ICALL='',I3
+     1,'' NO='',I3,'' X='',F8.0,'' AN='',F9.3,'' A='',F9.3)')
+     1ICALL,NOFF,XSRC,ANGNORM*RD,ANG(1)*RD
+      DO 1 IO = 1 , NOFF
+        IERR = 1
+        IF (MODTYPE .EQ. 'L')
+     1CALL RAYWHERE(XSRC,ZSRC(IO),ISEG,ICELL,XS0,ZS0,RS0
+     1,NCELL,IXCELL,NXCELL,XCELL,ZCELL,*3)
+C  COME TO HERE TO TRY ANOTHER ANGLE
+        JPASS = 0
+        IPASS = 0
+        ANGA = ANG(IO)
+C      WRITE(LPRINT,'('' IO='',I3,'' O='',F10.2,'' Z='',F10.2
+C     1,'' IS='',I5,'' IC='',I5)')IO,OIN(IO),ZSRC(IO),ISEG,ICELL
+    2   CONTINUE
+        IPASS = IPASS + 1
+C  DETERMINE O AND DO / DA AT THIS ANGLE
+        IERR = 2
+        CALL RAYDODA(DANG,ANGNORM,ANGA,DODA,OFFA
+     1,X1(IO),T1(IO),X2(IO),T2(I0),XSRC,ZSRC(IO),ISEG,ICELL,RAYRAD
+     1,IRC(IO),MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*3)
+C      WRITE(LPRINT,'('' A ANGA='',F9.4,'' OFFA='',F10.2)')
+C     1ANGA*RD,OFFA
+        IF (IPASS .EQ. 0 .AND. IRC(IO) .NE. 0) THEN
+          ANGA = 0
+          GOTO 2
+        ELSEIF (IRC(IO) .NE. 0) THEN
+          GOTO 1
+        ENDIF
+        IERR = 3
+        IF (IPASS .GT. NPASS .OR. ANGNORM - ANGA .LT. ANGMIN 
+     1.OR. ANGNORM + ANGA .GT. ANGMAX) GOTO 3
+        IF (JPASS .LE. 0
+     1.OR. (OFFA .LT. OIN(IO) .AND. OFFB .LT. OIN(IO))
+     1.OR. (OFFA .GT. OIN(IO) .AND. OFFB .GT. OIN(IO))) THEN
+          DODAB = DODAA
+          ANGB = ANGA
+          OFFB = OFFA
+          ANGA = ANGA + ANGINC * SIGN(1.,(OFFA-OIN(IO))*DODAA)
+          JPASS = 1
+          GOTO 2
+        ENDIF
+        IF (OFFA .GT. OFFB) THEN
+          AA = OFFA
+          OFFA = OFFB
+          OFFB = AA
+          AA = ANGA
+          ANGA = ANGB
+          ANGB = AA
+        ENDIF    ! IF (OFFA .GT. OFFB) THEN
+        IERR = 4
+        ITERMAX = 10              
+        IF (ABS(OFFA-OIN(IO)) .LT. DISTMIN 
+     1 .OR. ABS(OFFB-OIN(IO)) .LT. DISTMIN) ITERMAX = 1
+C  ITERATIVELY SPLIT ANGLES IANGOFF AND IANGOFF+1 UNTIL WE FIND
+C  AN ANGLE WHOSE SPECULAR REFLECTION SEARATION EQUALS THIS OFFSET
+C  THE RAY END POINTS ARE X1 AND X2
+        DO 4 ITER = 1 , ITERMAX
+          ANGFACT = (OIN(IO) - OFFA) / (OFFB - OFFA)
+C  WE SHOOT A SPECULAR REFLECTION PAIR OF RAYS AT ANGLES ANG1 AND ANG2
+          ANG(IO) = ANGA + (ANGB - ANGA) * ANGFACT
+          CALL RAYDODA(DANG,ANGNORM,ANG(IO),DODA,OFF(IO)
+     1,X1(IO),T1(IO),X2(IO),T2(I0),XSRC,ZSRC(IO),ISEG,ICELL,RAYRAD
+     1,IRC(IO),MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*3)
+          IF (ABS(OFF(IO)-OIN(IO)) .LT. DISTMIN) IERR = 0
+          IF (ABS(OFF(IO)-OIN(IO)) .LT. DISTMIN) GOTO 1
+          IF (OFF(IO) .GT. OIN(IO)) THEN
+            OFFB = OFF(IO)
+            ANGB = ANG(IO)
+          ELSE    ! IF (OFF(IO) .GT. OIN(IO)) THEN
+            OFFA = OFF(IO)
+            ANGA = ANG(IO)
+          ENDIF    ! IF (OFF(IO) .GT. OIN(IO)) THEN
+    4   CONTINUE    ! DO 4 ITER = 1 , ITERMAX
+    3   CONTINUE
+        IF(IPRINT.EQ.22) 
+     1WRITE(LPRINT,'('' ERROR RETURN FROM RAYDODA IERR='',I1
+     1,'' ICALL='',I5,'' IO='',I5,'' IP='',I5)')IERR,ICALL,IO,IPASS
+    1 CONTINUE    ! DO 1 IO = 1 , NOFF
+      IF(IPRINT.EQ.22)WRITE(LPRINT,'('' IOFF IRC ANG O1 O2 X1 X2 T1 T2''
+     1,100(/,2(1X,I5),1X,F9.3,4(1X,F10.2),2(1X,F6.3)))')
+     1(IO,IRC(IO),ANG(IO)*RD,OIN(IO),OFF(IO)
+     1,X1(IO),X2(IO),T1(IO),T2(IO),IO=1,MIN(100,NOFF))
+      RETURN
+  999 CONTINUE
+      IF(IPRINT.EQ.22)WRITE(LPRINT,*)' ERROR IN RAYOFF IERR=',IERR
+      RETURN 1
+      END
+      SUBROUTINE RAYDODA(DANG,ANGNORM,ANG,DODA,OFF,X1,T1,X2,T2
+     1,XSRC,ZSRC,ISEG,ICELL,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*)
+      DIMENSION XRAY(1),ZRAY(1),TRAY(1)
+      DATA ICALL/0/
+      ICALL = ICALL + 1
+      RD = 90. / ASIN(1.)
+      ANG1 = ANGNORM + ANG
+      ANG2 = ANGNORM - ANG
+      IF(IPRINT.EQ.21)
+     1WRITE(LPRINT,'('' RAYDODA ICALL='',I5,'' AN='',F9.4,'' A1='',F9.4
+     1,'' A2='',F9.4,'' DA='',F9.6,'' X='',F10.2,'' Z='',F10.2
+     1,'' IS='',I3,'' IC='',I3)')
+     1ICALL,ANGNORM*RD,ANG1*RD,ANG2*RD,DANG*RD,XSRC,ZSRC,ISEG,ICELL
+      CALL RAYSHOOT(ANG1,XSRC,ZSRC,ISEG,ICELL,RAYRAD
+     1,IRC1,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+C      WRITE(LPRINT,'('' 1 IR='',I3,'' NL='',I5
+C     1,'' X='',F10.2,'' Z='',F10.2,'' T='',F8.3)')
+C     1IRC1,NLEG,XRAY(NLEG),ZRAY(NLEG),TRAY(NLEG)
+      X1 = XRAY(NLEG)
+      T1 = TRAY(NLEG)
+      CALL RAYSHOOT(ANG2,XSRC,ZSRC,ISEG,ICELL,RAYRAD
+     1,IRC2,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      X2 = XRAY(NLEG)
+      T2 = TRAY(NLEG)
+C      WRITE(LPRINT,'('' 2 IR='',I3,'' NL='',I5
+C     1,'' X='',F10.2,'' Z='',F10.2,'' T='',F8.3)')
+C     1IRC2,NLEG,XRAY(NLEG),ZRAY(NLEG),TRAY(NLEG)
+      ANG1 = ANG1 + DANG
+      ANG2 = ANG2 - DANG
+      CALL RAYSHOOT(ANG1,XSRC,ZSRC,ISEG,ICELL,RAYRAD
+     1,IRC1A,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      X1A = XRAY(NLEG)
+      CALL RAYSHOOT(ANG2,XSRC,ZSRC,ISEG,ICELL,RAYRAD
+     1,IRC2A,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      X2A = XRAY(NLEG)
+      IRCODE = 0
+      IF (IRC1 .NE. 1 .OR. IRC2 .NE. 1 
+     1.OR. IRC1A .NE. 1 .OR. IRC2A .NE. 1) IRCODE = -3
+      OFF = ABS(X2 - X1)
+      OFFA = ABS(X2A - X1A)
+      DODA = (OFF - OFFA) / DANG
+      ANG1 = ANG1 - DANG
+      ANG2 = ANG2 + DANG
+      IF(IPRINT.EQ.21)WRITE(LPRINT,'('' IRC='',I2
+     1,'' A12='',2(1X,F9.4),'' O='',F10.2
+     1,'' DO='',G10.4,'' X='',2(1X,F10.2))')
+     1IRCODE,ANG1*RD,ANG2*RD,OFF,DODA,X1,X2
+      RETURN
+  999 CONTINUE
+      IRCODE = -3
+      RETURN
+      END
+
+      SUBROUTINE RAYFDIFF(IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,RAYRAD
+     1,VGRD,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC
+     1,RAYSTEP,MREFL,NREFL,IREFL,KREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND
+     1,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*)
+
+      INTEGER NLEG,MZGRD,NXGRD,NZGRD,IRCODE
+      REAL XGRDMIN,ZGRDMIN,XGRDINC,ZGRDINC,RAYSTEP
+      REAL TRAY(MLEG),XRAY(MLEG),ZRAY(MLEG),PRAY(2,MLEG)
+      REAL VGRD(MZGRD,NXGRD)
+
+      INTEGER IREFL(MREFL),IXBND(MBND),NXBND(MBND)
+      REAL XBND(MBND),ZBND(MBND),IDBND(MBND)
+      REAL BSBND(MBND),CSBND(MBND),DSBND(MBND)
+
+      REAL RVI(2),RVO(2)
+
+
+C SQUARE ROOT TABLE
+C      PARAMETER (NBIT=14),(NDIM=2**(NBIT-1))
+C      COMMON /SQTTABR/ ISQTAB(0:0),NBSHFT,IROUND,MB2T15,MINDEX,
+C     *       EMPTY1(NDIM-5),EVEN(NDIM+1),EMPTY2(NDIM-1),ODD(NDIM+1)
+C      SQRTFN(U) = SHIFTR(ISQTAB(SHIFTR((U.AND.MINDEX)+IROUND,NBSHFT))
+C     *                   +             (U.AND.MB2T15)  ,1)
+      SQRTFN(U) = SQRT(U)
+
+      DISTMIN = 1E-10
+
+      DATA ICALL/0/
+CDIR$ FASTMD
+      ICALL = ICALL + 1
+      RD = 90. / ASIN(1.)
+C  CYCLE OVER RAY STEPS
+C  BREAK THE LOOP OVER RAY STEPS INTO NLEG1 CYCLES OF NLEG1 LENGTH
+C  THE LAST OUTER CYCLE HAS NLEG2B STEPS
+      XGRDMAX = XGRDMIN + (NXGRD - 1) * XGRDINC
+      ZGRDMAX = ZGRDMIN + (NZGRD - 1) * ZGRDINC
+      XGRD0 = (XGRDMAX - XGRDMIN) / 1
+      KREFL = 1
+      NLEG1 = MIN(50,MLEG)
+      ILEG = 1
+      RAYSTEPX = RAYSTEP / XGRDINC
+      RAYSTEPZ = RAYSTEP / ZGRDINC
+      DXDZ = XGRDINC / ZGRDINC
+C      DISTMIN = XGRDINC / 1E6
+      TRAY(ILEG) = 0
+      IF (IPRINT .EQ. 5. AND. ICALL .EQ. 1) THEN
+        WRITE(LPRINT,'(/,'' CZZZ RAYFDIFF MZGRD='',I5
+     1,/,'' NXGRD='',I5,'' XGRDMIN='',F10.2,'' XGRDINC='',F10.2
+     1,/,'' NZGRD='',I5,'' ZGRDMIN='',F10.2,'' ZGRDINC='',F10.2
+     1,/,'' IZGRD   ZGRD'',11(1X,F5.0))')
+     1MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC
+     1,((IXGRD-1)*XGRDINC+XGRDMIN,IXGRD=1,NXGRD,NXGRD/10)
+      DO 8827 IZGRD = 1 , NZGRD , 50
+        WRITE(LPRINT,'(1X,I5,1X,F6.0,11(1X,F5.0))')
+     1IZGRD,(IZGRD-1)*ZGRDINC+ZGRDMIN
+     1,(VGRD(IZGRD,IXGRD),IXGRD=1,NXGRD,NXGRD/10)
+ 8827 CONTINUE
+      WRITE(LPRINT,*)' CZZZ'
+      WRITE(LPRINT,*)' '
+      ENDIF
+      IX1 = INT((XRAY(ILEG) - XGRDMIN) / XGRDINC)
+      IZ1 = INT((ZRAY(ILEG) - ZGRDMIN) / ZGRDINC)
+      IX2 = MIN(NXGRD,MAX(1,IX1+1))
+      IZ2 = MIN(NZGRD,MAX(1,IZ1+1))
+      IX1 = MIN(NXGRD,MAX(1,IX1))
+      IZ1 = MIN(NZGRD,MAX(1,IZ1))
+      X1 = (IX1 - 1) * XGRDINC + XGRDMIN
+      Z1 = (IZ1 - 1) * ZGRDINC + ZGRDMIN
+      XF = (XRAY(ILEG) - X1) / XGRDINC
+      ZF = (ZRAY(ILEG) - Z1) / ZGRDINC
+          IDV1 = (1 - SIGN(1.,XF-ZF*DXDZ)) / 2
+          IDV2 = (1 + SIGN(1.,XF-ZF*DXDZ)) / 2
+          DVDX = IDV1 * (VGRD(IZ2,IX2) - VGRD(IZ2,IX1))
+     1         + IDV2 * (VGRD(IZ1,IX2) - VGRD(IZ1,IX1))
+          DVDZ = IDV1 * (VGRD(IZ2,IX1) - VGRD(IZ1,IX1))
+     1         + IDV2 * (VGRD(IZ2,IX2) - VGRD(IZ1,IX2))
+
+          V0 = VGRD(IZ1,IX1) + XF * DVDX + ZF * DVDZ
+      ANG = SIGN(1.,PRAY(2,1)) * ACOS(PRAY(1,1)) * 90 / ASIN(1.)
+C      IF(IPRINT.EQ.5)THEN
+      IF (IPRINT.EQ.5) THEN
+      WRITE(LPRINT,'(/,'' RAYFDIFF ICALL='',I5,'' MLEG='',I5
+     1,'' IDV='',2(1X,I3),'' RAYSTEP='',F10.2,'' V0='',F10.2
+     1,'' V1='',F10.2,'' DVDX='',F10.4,'' DVDZ='',F10.4/
+     1,'' XS='',F8.2,'' ZS='',F8.2,'' ANG='',F6.1
+     1,'' PRAY='',2(1X,F8.4)
+     1,/,'' IX='',I5,'' NX='',I5,'' XMIN='',F10.2,'' XINC='',F10.4
+     1,/,'' IZ='',I5,'' NZ='',I5,'' ZMIN='',F10.2,'' ZINC='',F10.4)')
+     1ICALL,MLEG,IDV1,IDV2,RAYSTEP,V0,VGRD(IZ1,IX1),DVDX,DVDZ
+     1,XSHOT,ZSHOT,ANG,PRAY(1,1),PRAY(2,1)
+     1,IX1,NXGRD,XGRDMIN,XGRDINC
+     1,IZ1,NZGRD,ZGRDMIN,ZGRDINC
+      WRITE(LPRINT,'('' XZ1='',2(1X,F8.2),'' XZF='',2(1X,F8.4))')
+     1X1,Z1,XF,ZF
+      WRITE(LPRINT,'('' NBND='',I5)')NBND
+      WRITE(LPRINT,'('' NREFL='',I5,'' IR='',20(1X,I2))')
+     1NREFL,(IREFL(II),II=1,MIN(20,NREFL))
+      ENDIF
+      PRAY(1,1) = PRAY(1,1) / V0
+      PRAY(2,1) = PRAY(2,1) / V0
+      IF(IPRINT.EQ.5)
+     1WRITE(LPRINT,'('' RAYFDIFF ICALL='',I5,'' ILEG IX IZ V A T X Z''
+     1/,3(1X,I5),2(1X,F7.1),1X,F8.4,2(1X,F8.2))')
+     1ICALL,ILEG,IX1,IZ1,V0
+     1,RD * SIGN(1.,PRAY(2,ILEG)) 
+     1* ACOS(SIGN(1.,PRAY(1,ILEG)) * MIN(ABS(V0*PRAY(1,ILEG)),.99999))
+     1,TRAY(ILEG),XRAY(ILEG),ZRAY(ILEG)
+    1 CONTINUE
+        NLEG2 = NLEG1
+        IF (ILEG + NLEG2 .GT. MLEG) NLEG2 = MLEG - ILEG
+        ILEG0 = ILEG
+        DO 2 ILEG2 = 1 , NLEG2
+          ILEG = ILEG + 1
+C  STEP OUT THE RAY LOCATION
+          XRAY(ILEG) = XRAY(ILEG-1) + RAYSTEP * PRAY(1,ILEG-1)
+          ZRAY(ILEG) = ZRAY(ILEG-1) + RAYSTEP * PRAY(2,ILEG-1)
+          IX1 = INT((XRAY(ILEG) - XGRDMIN) / XGRDINC)
+          IZ1 = INT((ZRAY(ILEG) - ZGRDMIN) / ZGRDINC)
+          IX2 = MIN(NXGRD,MAX(1,IX1+1))
+          IZ2 = MIN(NZGRD,MAX(1,IZ1+1))
+          IX1 = MIN(NXGRD,MAX(1,IX1))
+          IZ1 = MIN(NZGRD,MAX(1,IZ1))
+          X1 = (IX1 - 1) * XGRDINC + XGRDMIN
+          Z1 = (IZ1 - 1) * ZGRDINC + ZGRDMIN
+          XF = (XRAY(ILEG) - X1) / XGRDINC
+          ZF = (ZRAY(ILEG) - Z1) / ZGRDINC
+          IDV1 = (1 - SIGN(1.,XF-ZF*DXDZ)) / 2
+          IDV2 = (1 + SIGN(1.,XF-ZF*DXDZ)) / 2
+          DVDX = IDV1 * (VGRD(IZ2,IX2) - VGRD(IZ2,IX1))
+     1         + IDV2 * (VGRD(IZ1,IX2) - VGRD(IZ1,IX1))
+          DVDZ = IDV1 * (VGRD(IZ2,IX1) - VGRD(IZ1,IX1))
+     1         + IDV2 * (VGRD(IZ2,IX2) - VGRD(IZ1,IX2))
+
+          V0 = VGRD(IZ1,IX1) + XF * DVDX + ZF * DVDZ
+C      IF(V0.EQ.0)THEN
+C      PRINT*,' ILEG=',ILEG,' V0=',V0,' IX1=',IX1,' IZ1=',IZ1
+C      STOP
+C      ENDIF
+          V02 = V0 ** 2
+          V03 = V02 * V0
+          PRAY(1,ILEG) = PRAY(1,ILEG-1) - RAYSTEPX * DVDX / V03
+          PRAY(2,ILEG) = PRAY(2,ILEG-1) - RAYSTEPZ * DVDZ / V03
+
+          TRAY(ILEG) = TRAY(ILEG-1) + RAYSTEP / V02
+          PRAY(1,ILEG-1) = PRAY(1,ILEG-1) * V0
+          PRAY(2,ILEG-1) = PRAY(2,ILEG-1) * V0
+      IF(IPRINT.EQ.5)WRITE(LPRINT,'('' A''
+     1,3(1X,I4),1X,F6.0,1X,F6.3,2(1X,F6.0),2(1X,F10.6))')
+     1ILEG,IX1,IZ1,V0,TRAY(ILEG),XRAY(ILEG),ZRAY(ILEG)
+     1,V0*PRAY(1,ILEG),V0*PRAY(2,ILEG)
+    2   CONTINUE
+      IF(IPRINT.EQ.5)WRITE(LPRINT,'('' B''
+     1,3(1X,I5),1X,F7.1,1X,F8.4,2(1X,F8.2),2(1X,F8.4))')
+     1ILEG,IX1,IZ1,V0,TRAY(ILEG),XRAY(ILEG),ZRAY(ILEG)
+     1,V0*PRAY(1,ILEG),V0*PRAY(2,ILEG)
+C  CHECK THE RAY ENDPOINTS TO SEE IF THE RAY WAS REFLECTED
+        IF (KREFL .LE. NREFL) THEN
+          IXB0 = IXBND(IREFL(KREFL)) + 1
+          TI = TRAY(ILEG) - TRAY(ILEG0)
+          RI = MAX(DISTMIN,
+     1SQRTFN((XRAY(ILEG)-XRAY(ILEG0))**2+(ZRAY(ILEG)-ZRAY(ILEG0))**2))
+          RVI(1) = (XRAY(ILEG) - XRAY(ILEG0)) / RI
+          RVI(2) = (ZRAY(ILEG) - ZRAY(ILEG0)) / RI
+      CALL RAYSREFL(RAYRAD,XRAY(ILEG0),ZRAY(ILEG0),XRAY(ILEG),ZRAY(ILEG)
+     1,RVI,RVI,RI,TI,ISB1,XO,ZO,RVO,TO
+     1,NXBND(IREFL(KREFL)),XBND(IXB0),ZBND(IXB0),IDBND(IXB0)
+     1,BSBND(IXB0),CSBND(IXB0),DSBND(IXB0),IPRINT,LPRINT,*999)
+          IF (ISB1 .NE. 0) THEN
+            ILEG = ILEG0
+            DO 3 ILEG2 = 1 , NLEG2
+              JLEG = ILEG
+              ILEG = ILEG + 1
+              TI = TRAY(ILEG) - TRAY(JLEG)
+              RI = MAX(DISTMIN,
+     1SQRTFN((XRAY(ILEG)-XRAY(JLEG))**2+(ZRAY(ILEG)-ZRAY(JLEG))**2))
+              RVI(1) = (XRAY(ILEG) - XRAY(JLEG)) / RI
+              RVI(2) = (ZRAY(ILEG) - ZRAY(JLEG)) / RI
+      CALL RAYSREFL(RAYRAD,XRAY(JLEG),ZRAY(JLEG),XRAY(ILEG),ZRAY(ILEG)
+     1,RVI,RVI,RI,TI,ISB2,XO,ZO,RVO,TO
+     1,NXBND(IREFL(KREFL)),XBND(IXB0),ZBND(IXB0),IDBND(IXB0)
+     1,BSBND(IXB0),CSBND(IXB0),DSBND(IXB0),IPRINT,LPRINT,*999)
+              IF (ISB2 .NE. 0) THEN
+                KREFL = KREFL + 1
+          IX1 = INT((XRAY(ILEG) - XGRDMIN) / XGRDINC)
+          IZ1 = INT((ZRAY(ILEG) - ZGRDMIN) / ZGRDINC)
+          IX2 = MIN(NXGRD,MAX(1,IX1+1))
+          IZ2 = MIN(NZGRD,MAX(1,IZ1+1))
+          IX1 = MIN(NXGRD,MAX(1,IX1))
+          IZ1 = MIN(NZGRD,MAX(1,IZ1))
+          X1 = (IX1 - 1) * XGRDINC + XGRDMIN
+          Z1 = (IZ1 - 1) * ZGRDINC + ZGRDMIN
+          XF = (XRAY(ILEG) - X1) / XGRDINC
+          ZF = (ZRAY(ILEG) - Z1) / ZGRDINC
+          IDV1 = (1 - SIGN(1.,XF-ZF*DXDZ)) / 2
+          IDV2 = (1 + SIGN(1.,XF-ZF*DXDZ)) / 2
+          DVDX = IDV1 * (VGRD(IZ2,IX2) - VGRD(IZ2,IX1))
+     1         + IDV2 * (VGRD(IZ1,IX2) - VGRD(IZ1,IX1))
+          DVDZ = IDV1 * (VGRD(IZ2,IX1) - VGRD(IZ1,IX1))
+     1         + IDV2 * (VGRD(IZ2,IX2) - VGRD(IZ1,IX2))
+
+          V0 = VGRD(IZ1,IX1) + XF * DVDX + ZF * DVDZ
+                PRAY(1,ILEG) = RVO(1) / V0
+                PRAY(2,ILEG) = RVO(2) / V0
+                TRAY(ILEG) = TRAY(JLEG) + TO
+C      IF(IPRINT.EQ.5)WRITE(LPRINT,'('' C''
+      IF(IPRINT.EQ.5)WRITE(LPRINT,'('' C''
+     1,3(1X,I5),1X,F8.4,4(1X,F8.0),2(1X,F8.5))')
+     1ISB1,ILEG0,ILEG,TRAY(ILEG)
+     1,XRAY(ILEG0),XRAY(ILEG),ZRAY(ILEG0),ZRAY(ILEG),RVI(1),RVI(2)
+                GOTO 4
+              ENDIF    ! IF (ISB2 .NE. 0) THEN
+    3       CONTINUE    ! DO 3 ILEG2 = 1 , NLEG2
+          ENDIF    ! IF (ISB1 .NE. 0) THEN
+        ENDIF    ! IF (KREFL .LE. NREFL) THEN
+    4   CONTINUE
+C  CHECK THE RAY ENDPOINTS TO SEE IF IT HAS LEFT THE MODEL
+        IF (XRAY(ILEG) .LE. XGRDMIN-XGRD0 
+     1 .OR. XRAY(ILEG) .GE. XGRDMAX+XGRD0
+     1 .OR. ZRAY(ILEG) .LE. ZGRDMIN 
+     1 .OR. ZRAY(ILEG) .GE. ZGRDMAX) GOTO 5
+      IF (ILEG .LT. MLEG) GOTO 1
+    5 CONTINUE
+      ILEG1 = ILEG
+      DO 6 ILEG = ILEG0 + 1 , ILEG1
+        NLEG = ILEG
+        IF (XRAY(ILEG) .LE. XGRDMIN-XGRD0
+     1 .OR. XRAY(ILEG) .GE. XGRDMAX+XGRD0
+     1 .OR. ZRAY(ILEG) .LE. ZGRDMIN 
+     1 .OR. ZRAY(ILEG) .GE. ZGRDMAX) GOTO 7
+    6 CONTINUE
+      IRCODE = 0
+      GOTO 9
+    7 CONTINUE
+      TI = TRAY(NLEG) - TRAY(NLEG-1)
+      RI = 
+     1SQRTFN((XRAY(NLEG)-XRAY(NLEG-1))**2+(ZRAY(NLEG)-ZRAY(NLEG-1))**2)
+      DXI = XRAY(NLEG) - XRAY(NLEG-1)
+      DZI = ZRAY(NLEG) - ZRAY(NLEG-1)
+      IF (ZRAY(NLEG) .LE. ZGRDMIN) THEN
+        IRCODE = 1
+        ZRAY(NLEG) = ZGRDMIN
+        XRAY(NLEG) = XRAY(NLEG-1) 
+     1+ (ZRAY(NLEG) - ZRAY(NLEG-1)) * DXI / DZI
+      ELSEIF (XRAY(NLEG) .LE. XGRDMIN-XGRD0) THEN
+        IRCODE = 2
+        XRAY(NLEG) = XGRDMIN - XGRD0
+        ZRAY(NLEG) = ZRAY(NLEG-1) 
+     1+ (XRAY(NLEG) - XRAY(NLEG-1)) * DZI / DXI
+      ELSEIF (ZRAY(NLEG) .GE. ZGRDMAX) THEN
+        IRCODE = 3
+        ZRAY(NLEG) = ZGRDMAX
+        XRAY(NLEG) = XRAY(NLEG-1) 
+     1+ (ZRAY(NLEG) - ZRAY(NLEG-1)) * DXI / DZI
+      ELSEIF (XRAY(NLEG) .GE. XGRDMAX+XGRD0) THEN
+        IRCODE = 4
+        XRAY(NLEG) = XGRDMAX + XGRD0
+        ZRAY(NLEG) = ZRAY(NLEG-1) 
+     1+ (XRAY(NLEG) - XRAY(NLEG-1)) * DZI / DXI
+      ELSE
+      PRINT*,' ERROR IN RAYFDIFF NLEG=',NLEG
+     1,' X=',XRAY(NLEG-1),XRAY(NLEG),' Z=',ZRAY(NLEG-1),ZRAY(NLEG)
+     1,' XG=',XGRDMIN,XGRDMAX,' ZG=',ZGRDMIN,ZGRDMAX
+      GOTO 999
+      ENDIF
+      RO = 
+     1SQRTFN((XRAY(NLEG)-XRAY(NLEG-1))**2+(ZRAY(NLEG)-ZRAY(NLEG-1))**2)
+      TRAY(NLEG) = TRAY(NLEG-1) + TI * RO / RI
+      PRAY(1,NLEG) = PRAY(1,NLEG-1)
+      PRAY(2,NLEG) = PRAY(2,NLEG-1)
+    9 CONTINUE
+      RETURN
+  999 CONTINUE
+      PRINT*,' ERROR IN RAYFDIFF'
+      RETURN 1
+      END
+
+      SUBROUTINE RAYFINDX(ANG0,ANG1,ANG2,X0,X1,X2,XSHOT,ZSHOT
+     1,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*,*)
+
+      DIMENSION XRAY(MLEG),ZRAY(MLEG),TRAY(MLEG),PRAY(2,MLEG)
+
+      DIMENSION ICTYP(NCELL),VCELL(NCELL),GCELL(NCELL)
+     1,IXCELL(NCELL),NXCELL(NCELL)
+     2,XCELL(MCELL),ZCELL(MCELL),IDCELL(MCELL)
+     3,ISOP(MCELL),ICOP(MCELL)
+     4,BSPLN(MCELL),CSPLN(MCELL),DSPLN(MCELL),RV(2)
+
+      DIMENSION IREFL(MREFL),IXBND(MBND),NXBND(MBND)
+     1,XBND(MBND),ZBND(MBND),IDBND(MBND)
+     2,BSBND(MBND),CSBND(MBND),DSBND(MBND)
+
+      REAL VGRD(MZGRD,*)
+
+      DATA ICALL/0/,NITER/11/
+      SAVE RD
+      ICALL = ICALL + 1
+      IF (ICALL .EQ. 1) RD = 90. / ASIN(1.)
+      IF (X1 .LT. X2) THEN
+        ANGA = ANG1
+        ANGB = ANG2
+        XA = X1
+        XB = X2
+      ELSE
+        ANGA = ANG2
+        ANGB = ANG1
+        XA = X2
+        XB = X1
+      ENDIF
+      ITERMAX = NITER
+      IF (X1 .EQ. X2) ITERMAX = 1
+      ILOOP = 0
+    1 CONTINUE
+      IF(IPRINT.EQ.80)WRITE(LPRINT,*)' ILOOP=',ILOOP,' XA=',XA,' XB=',XB
+      IF(IPRINT.EQ.80)
+     1WRITE(LPRINT,'('' A'',1X,I5,2(1X,I3),4(1X,F7.0),3(X,F10.5))')
+     1ICALL,ITER,IRCODE,X0,XRAY(NLEG),XA,XB,ANG0*RD,ANGA*RD,ANGB*RD
+      DO 2 ITER = 1 , ITERMAX
+        ANGFACT = 0
+        IF (XA .NE. XB) ANGFACT = (X0 - XA) / (XB - XA)
+        ANG0 = ANGA + (ANGB - ANGA) * ANGFACT
+      CALL RAYSHOOT(ANG0,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+        IF (XRAY(NLEG) .LT. XA .OR. XRAY(NLEG) .GT. XB
+     1 .OR. IRCODE .NE. 1) GOTO 21
+        IF (ABS(XRAY(NLEG)-X0) .LE. RAYRAD / 10) GOTO 6
+        IF (XRAY(NLEG) .LT. X0) THEN
+          XA = XRAY(NLEG)
+          ANGA = ANG0
+        ELSE
+          XB = XRAY(NLEG)
+          ANGB = ANG0
+        ENDIF
+      IF(IPRINT.EQ.80.AND.ITER.EQ.1)WRITE(LPRINT,*)
+     1' ITER ANGA ANGB ANG0 XA  XB  X0'
+      IF(IPRINT.EQ.80)WRITE(LPRINT,'(1X,I5,3(1X,F12.7),3(1X,F10.2))')
+     1ITER,ANGA*RD,ANGB*RD,ANG0*RD,XA,XB,XRAY(NLEG)
+    2 CONTINUE    ! DO 2 ITER = 1 , ITERMAX
+   21 CONTINUE
+      IF(IPRINT.EQ.80)
+     1WRITE(LPRINT,'('' B'',1X,I5,2(1X,I3),4(1X,F7.0),3(X,F10.5))')
+     1ICALL,ITER,IRCODE,X0,XRAY(NLEG),XA,XB,ANG0*RD,ANGA*RD,ANGB*RD
+      IF (ABS(XRAY(NLEG)-X0) .LE. 1.*RAYRAD) GOTO 6
+      IF (ILOOP .NE. 0) GOTO 5
+C  COME TO HERE IF WE FIND A PAIR SUFFICIENTLY CLOSE TOGETHER OR IF WE
+C  RUN OUT OF ITERATIONS
+      IF (ILOOP .EQ. 0) THEN
+        DELANG = (ANGB - ANGA) / NITER
+      IF(IPRINT.EQ.80)THEN
+      WRITE(LPRINT,'('' A RAYFINDX ICALL='',I4,'' RAYRAD='',F10.4
+     1,'' XS='',F12.2,'' X0='',F12.2,'' XR='',F12.2)')
+     1ICALL,RAYRAD,XSHOT,X0,XRAY(NLEG)
+      WRITE(LPRINT,*)' ILOOP =',ILOOP,' XA=',XA,' XB=',XB
+     1,' ANGA=',ANGA*RD,' ANGB=',ANGB*RD,' ANG0=',ANG0*RD
+     1,' DELANG=',DELANG*RD,' NITER=',NITER
+      WRITE(LPRINT,*)' X1=',X1,' X2=',X2,' A1=',ANG1*RD,' A2=',ANG2*RD
+      WRITE(LPRINT,*)' ITER IRCODE ANGA ANGB XA XB'
+      ENDIF
+        ILOOP = 1
+        XE = XA
+        XF = XB
+        ANGE = ANGA
+        ANGF = ANGB
+        ANGB = ANGA
+        XB = XA
+        ANGC = ANGB
+        IF (ABS(XA-X0) .LT. ABS(XB-X0)) THEN
+          XD = XA
+          ANGD = ANGA
+        ELSE
+          XD = XB
+          ANGD = ANGB
+        ENDIF
+        DO 3 ITER = 1 , NITER
+          XA = XB
+          ANGA = ANGB
+          ANGB = ANGC + (ITER - 1) * DELANG
+      CALL RAYSHOOT(ANGB,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+          XB = XRAY(NLEG)
+          IF (X0 .GE. MIN(XA,XB) .AND. X0 .LE. MAX(XA,XB)
+     1 .AND. (ABS(XA-X0) .LT. ABS(XD-X0)
+     1   .OR. ABS(XB-X0) .LT. ABS(XD-X0)) .AND. IRCODE .EQ. 1) THEN
+            ID = ITER
+            IF (XA .LT. XB) THEN
+              XE = XA
+              XF = XB
+              ANGE = ANGA
+              ANGF = ANGB
+            ELSE
+              XF = XA
+              XE = XB
+              ANGF = ANGA
+              ANGE = ANGB
+            ENDIF
+            IF (ABS(XA-X0) .LT. ABS(XB-X0)) THEN
+              XD = XA
+              ANGD = ANGA
+            ELSE
+              XD = XB
+              ANGD = ANGB
+            ENDIF
+      IF(IPRINT.EQ.80)WRITE(LPRINT,'(2(1X,I3),3(1X,F12.7),3(1X,F10.2))')
+     1ITER,IRCODE,ANGA*RD,ANGB*RD,ANGD*RD,XA,XB,XD
+          ENDIF    ! IF (X0 .GE. MIN(XA,XB) .AND. X0 .LE. MAX(XA,XB)
+C          IF (XB .LT. XA .OR. IRCODE .NE. 1) GOTO 5
+C          IF (X0 .GE. XA .AND. X0 .LE. XB) GOTO 1
+    3   CONTINUE    ! DO 3 ITER = 1 , NITER
+        IF (ABS(XD-X0) .LE. 1.*RAYRAD) THEN
+          ANG0 = ANGD
+      CALL RAYSHOOT(ANG0,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+          GOTO 6
+        ENDIF    ! IF (ABS(XD-X0) .LE. 1.*RAYRAD) THEN
+        XA = XE
+        XB = XF
+        ANGA = ANGE
+        ANGB = ANGF
+        GOTO 1
+      ELSEIF (ILOOP .EQ. 1) THEN
+      IF(IPRINT.EQ.80)THEN
+      WRITE(LPRINT,'('' B RAYFINDX XS='',F12.2
+     1,'' X0='',F12.2,'' XR='',F12.2)')XSHOT,X0,XRAY(NLEG)
+      WRITE(LPRINT,*)' ILOOP =',ILOOP,' XA=',XA,' XB=',XB
+     1,' ANGA=',ANGA*RD,' ANGB=',ANGB*RD,' ANG0=',ANG0*RD
+      WRITE(LPRINT,*)' X1=',X1,' X2=',X2,' A1=',ANG1*RD,' A2=',ANG2*RD
+      ENDIF
+        ILOOP = 2
+        DELANG = (ANGB - ANGA) / NITER
+        ANGA = ANGB
+        XA = XB
+        DO 4 ITER = 1 , NITER
+          XB = XA
+          ANGB = ANGA
+          ANGA = ANGB - DELANG
+      CALL RAYSHOOT(ANGA,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+          XA = XRAY(NLEG)
+          IF (XB .LT. XA .OR. IRCODE .NE. 1) GOTO 5
+          IF (X0 .GE. XA .AND. X0 .LE. XB) GOTO 1
+    4   CONTINUE    ! DO 4 ITER = 1 , NITER
+      ENDIF    ! IF (ILOOP .EQ. 0) THEN
+    5 CONTINUE
+C      IF(ICALL.EQ.1)WRITE(LPRINT,*)
+C     1' ICALL ITER IRCODE X0    XRAY   XA   XB ANG0 ANGA  ANGB'
+C      WRITE(LPRINT,'('' C'',1X,I5,3(1X,I3),4(1X,F7.0),3(X,F10.5))')
+C     1ICALL,ILOOP,ITER,IRCODE,X0,XRAY(NLEG),XA,XB,ANG0*RD,ANGA*RD,ANGB*RD
+      IF(IPRINT.EQ.80)THEN
+      WRITE(LPRINT,'('' C RAYFINDX XS='',F12.2
+     1,'' X0='',F12.2,'' XR='',F12.2)')XSHOT,X0,XRAY(NLEG)
+      WRITE(LPRINT,*)' ILOOP =',ILOOP,' XA=',XA,' XB=',XB
+     1,' ANGA=',ANGA*RD,' ANGB=',ANGB*RD,' ANG0=',ANG0*RD
+      WRITE(LPRINT,*)' X1=',X1,' X2=',X2,' A1=',ANG1*RD,' A2=',ANG2*RD
+      ENDIF
+      RETURN 2
+    6 CONTINUE
+      CALL RAYSHOOT(ANG0,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      IF(IPRINT.EQ.80)
+     1WRITE(LPRINT,'('' D'',1X,I5,3(1X,I3),4(1X,F7.0),3(X,F10.5))')
+     1ICALL,ILOOP,ITER,IRCODE,X0,XRAY(NLEG),XA,XB
+     1,ANG0*RD,ANGA*RD,ANGB*RD
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+C  THIS IDENTIFIES THE ANGLE AT WHICH DX/DA CHANGES SIGN 
+      SUBROUTINE RAYSHOT(XSHOT,ZSHOT,NOFF,OFFMIN,OFFINC,MEV,NEV,XEV,TEV
+     1,PEVS,PEVR,LOADEV,MLEGEV,ILEGEV,NLEGEV,XRAYEV,ZRAYEV,TRAYEV
+     1,RAYRAD,ANGMIN,ANGINC,NANG,MFAN,XFAN,TFAN,AFAN,DFAN
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL
+     1,IDCELL,BSPLN,CSPLN,DSPLN,ISOP,ICOP
+     1,MREFL,NREFL,IREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND,IDBND
+     1,BSBND,CSBND,DSBND,JPRINT,LPRINT,*)
+CDIR$ FASTMD
+
+      DIMENSION XEV(1),TEV(1),PEVS(1),PEVR(1)
+     1,ILEGEV(1),NLEGEV(1),XRAYEV(1),ZRAYEV(1),TRAYEV(1)
+
+      DIMENSION XRAY(1),ZRAY(1),TRAY(1),PRAY(2,1)
+
+      DIMENSION XFAN(1),TFAN(1),AFAN(1),DFAN(1)
+
+      DIMENSION ICTYP(1),VCELL(1),GCELL(1),IXCELL(1),NXCELL(1)
+     1,XCELL(1),ZCELL(1),IDCELL(1),BSPLN(1),CSPLN(1),DSPLN(1)
+     1,ISOP(1),ICOP(1),RV(2)
+
+      DIMENSION IREFL(1),IXBND(1),NXBND(1),XBND(1),ZBND(1),IDBND(1)
+     1,BSBND(1),CSBND(1),DSBND(1)
+
+      REAL VGRD(MZGRD,1)
+
+      CHARACTER MODTYPE*1
+
+      DATA ICALL/0/
+
+      RD = 90. / ASIN(1.)
+      ICALL = ICALL + 1
+
+      IPRINT = JPRINT
+C      IPRINT = 81
+C  DETERMINE WHAT SEGMENT THIS POINT IS IN
+      IF (MODTYPE .EQ. 'L')
+     1CALL RAYWHERE(XSHOT,ZSHOT,ISI,ICI,XS1,ZS1,RS1
+     1,NCELL,IXCELL,NXCELL,XCELL,ZCELL,*999)
+      ISI = MAX(ISI,0)
+C  SHOOT THE INITIAL RAY
+C  ANG IS MEASURED FROM THE POSITIVE X AXIS TOWARDS THE POSITIVE Z AXIS
+      RD = 90. / ASIN(1.)
+      ANGMAX = (NANG - 1) * ANGINC + ANGMIN
+      DANG  = ANGINC / 100
+      XTRC1 = XSHOT + OFFMIN
+      XTRC2 = XSHOT + OFFMIN + (NOFF - 1) * OFFINC
+      XTRCMIN = MIN(XTRC1,XTRC2)
+      XTRCMAX = MAX(XTRC1,XTRC2)
+      XTRCINC = ABS(OFFINC)
+      IF (IPRINT.EQ.81) THEN
+        WRITE(LPRINT,'('' RAYSHOT ICALL='',I5
+     1,'' X='',F10.2,'' MBND='',I5,'' NBND='',I5,'' MEV='',I5
+     1,/,'' AMIN='',F6.2,'' AMAX='',F6.2,'' AINC ='',F6.3
+     1,/,'' RAYRAD='',F6.3,'' NO='',I5,'' OMIN='',F8.2,'' OINC='',F6.2
+     1,'' MTYPE='',A1)')
+     1ICALL,XSHOT,MBND,NBND,MEV,ANGMIN*RD,ANGMAX*RD,ANGINC*RD
+     1,RAYRAD,NOFF,OFFMIN,OFFINC,MODTYPE
+      WRITE(LPRINT,*)' XTRC1=',XTRC1,' XTRC2=',XTRC2
+      WRITE(LPRINT,*)' XTRCMIN=',XTRCMIN,' XTRCMAX=',XTRCMAX
+     1,' XTRCINC=',XTRCINC
+      ENDIF
+C  COME TO HERE FOR THE NEXT ANGLE
+C      WRITE(LPRINT,'('' IBND  IOFF ITER ANG  X0  XR  O0  OR'')')
+      ILEGEV0 = 0
+      NEV = 0
+      IF (NEV .GE. MEV) GOTO 2005
+      DO 2000 IBND = 1 , NBND
+        NREFL = 1
+        IREFL(1) = IBND
+        CALL RAYFAN(NANG,ANGMIN,ANGINC,MFAN,NFAN,XFAN,TFAN,AFAN,DFAN
+     1,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      IF (IPRINT.EQ.81)
+     1WRITE(LPRINT,'('' IBND='',I5,'' NFAN='',I5
+     1,/,''  IFAN  AFAN  TFAN  XFAN  DXDA''
+     1,/,1000(/,1X,I5,1X,F8.4,1X,F8.4,1X,F10.2,1X,F10.2))')
+     1IBND,NFAN,(I,AFAN(I)*RD,TFAN(I),XFAN(I),DFAN(I)
+     1,I=1,MIN(1000,NFAN))
+C        IF (NFAN .NE. -999) GOTO 2000
+        DO 2001 IFAN = 2 , NFAN
+          IXD2 = SIGN(1.,DFAN(IFAN-1))
+          ANG2 = AFAN(IFAN-1)
+          X2 = XFAN(IFAN-1)
+          IXD1 = SIGN(1.,DFAN(IFAN))
+          ANG1 = AFAN(IFAN)
+          X1 = XFAN(IFAN)
+C IF THERE HAS BEEN A REVERSAL OF THE RAYS WITHIN THIS INTERVAL SEARCH FOR IT
+          IREVERSE = 0
+C          IF (IXD1 .NE. IXD2) THEN
+C      CALL RAYREV(ANG1,ANG2,ANGA,ANGB,X1,X2,XA,XB,IXD1,IXD2,DANG
+C     1,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+C     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+C     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+C     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+C     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP
+C     1,MREFL,NREFL,IREFL,KREFL,MBND,NBND,IXBND,NXBND,XBND,ZBND
+C     1,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+C            X1 = XB
+C            ANG1 = ANGB
+C            IREVERSE = 1
+C          ENDIF
+          IXTRC1 = MAX(1,0+INT((MIN(X1,X2)-XTRCMIN)/XTRCINC))
+          IXTRC2 = MIN(NOFF,2+INT((MAX(X1,X2)-XTRCMIN)/XTRCINC))
+ 3001     CONTINUE
+          IF ((IXTRC1 - 1) * XTRCINC + XTRCMIN .LT. MIN(X1,X2)) THEN
+            IXTRC1 = IXTRC1 + 1
+            GOTO 3001
+          ENDIF
+ 3002     CONTINUE
+          IF ((IXTRC2 - 1) * XTRCINC + XTRCMIN .GT. MAX(X1,X2)) THEN
+            IXTRC2 = IXTRC2 - 1
+            GOTO 3002
+          ENDIF
+          IF (IXTRC2 .LT. IXTRC1) GOTO 2001
+      IF(IPRINT.EQ.81)
+     1WRITE(LPRINT,'('' IA='',I3,'' ID='',2(1X,I2),'' IX='',2(1X,I4)
+     1,'' A1='',F8.3,'' A2='',F8.3,'' X1='',F8.0,'' X2='',F8.0)')
+     1IFAN,IXD1,IXD2,IXTRC1,IXTRC2,ANG1*RD,ANG2*RD,X1,X2
+          DO 2003 IXTRC = IXTRC1 , IXTRC2
+            IF (NEV .GE. MEV) GOTO 2005
+            X0 = XTRCMIN + (IXTRC - 1) * XTRCINC
+            IF (X0 .LT. MIN(X1,X2) .OR. X0 .GT. MAX(X1,X2)) GOTO 2003
+C  ITERATIVELY SPLIT ANGLES ANG1 AND ANG2 UNTIL WE FIND
+C  AN ANGLE WHICH HITS THIS OFFSET WITHIN A DISTANCE OF RAYRAD
+C  THE RAY END POINTS ARE X1 AND X2
+      CALL RAYFINDX(ANG0,ANG1,ANG2,X0,X1,X2,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT
+     1,*999,*2200)
+      NLEG0 = NLEG
+      IF (ABS(XRAY(NLEG) - X0) .LE. RAYRAD) GOTO 2201
+ 2200 CONTINUE
+      XF = (X0 - XFAN(IFAN-1)) / (XFAN(IFAN) - XFAN(IFAN-1))
+      ANG0 = AFAN(IFAN-1) + XF * (AFAN(IFAN) - AFAN(IFAN-1))
+C      ANG0 = AFAN(IFAN)
+      IF(IPRINT.EQ.81)WRITE(LPRINT,'('' IXTRC='',I5,'' A='',F9.3
+     1,'' X0='',F10.2,'' T0='',F8.4)')IXTRC,ANG0*RD,X0
+     1,TFAN(IFAN-1) + (TFAN(IFAN) - TFAN(IFAN-1)) * XF
+      CALL RAYSHOOT(ANG0,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+      TRAY(2) = TFAN(IFAN-1) + (TFAN(IFAN) - TFAN(IFAN-1)) * XF
+      XRAY(2) = X0
+      PRAY(1,2) = PRAY(1,NLEG-1)
+      PRAY(2,2) = PRAY(2,NLEG-1)
+      NLEG = 2
+      NLEG0 = -NLEG
+ 2201 CONTINUE
+C      WRITE(LPRINT,'(2(1X,I5),1X,F8.3,4(1X,F8.2))')
+C     1IBND,IXTRC,ANG0*RD,X0,XRAY(NLEG),X0-XSHOT,X0-XRAY(NLEG)
+      DO 3003 IEV = 1 , NEV
+        IF (ABS(XEV(IEV) - XRAY(NLEG)) .LT. ABS(OFFINC)/2.1
+     1   .AND. ABS(TEV(IEV) - TRAY(NLEG)) .LT. .05) THEN
+          IF (TEV(IEV) .GT. TRAY(NLEG)) THEN
+            XEV(NEV) = XRAY(NLEG)
+            TEV(NEV) = TRAY(NLEG)
+            PEVS(NEV) = SIGN(1.,PRAY(1,1))*MIN(1.,ABS(PRAY(1,1)))
+            PEVR(NEV) = SIGN(1.,PRAY(1,NLEG))*MIN(1.,ABS(PRAY(1,NLEG)))
+          ENDIF
+          GOTO 2003
+        ENDIF
+ 3003 CONTINUE
+C      JPRINT=25
+C      IF(IPRINT.EQ.81)
+C     1WRITE(LPRINT,'('' RAYSHOT IX='',I3,'' A='',F8.3,'' X0='',F8.0
+C     1,'' XR='',F8.0,'' O0='',F8.4,'' OR='',F8.4)')
+C     1IXTRC,ANG0*RD,X0,XRAY(NLEG),X0-XSHOT,X0-XRAY(NLEG)
+      IF(IPRINT.EQ.81.AND.NEV.EQ.0)
+     1WRITE(LPRINT,'('' NEV  IXTRC  IFAN  NLEG  ANG0    ANG1    ANG2 ''
+     1,''   T0  X0       XRAY    X1    X2'')')
+      IF(IPRINT.EQ.81)
+     1WRITE(LPRINT,'(4(1X,I5),3(1X,F8.2),1X,F7.4,4(1X,F8.2))')
+     1NEV,IXTRC,IFAN,NLEG0,ANG0*RD,ANG1*RD,ANG2*RD,TRAY(NLEG)
+     1,X0,XRAY(NLEG),X1,X2
+          NEV = NEV + 1
+          XEV(NEV) = XRAY(NLEG)
+          TEV(NEV) = TRAY(NLEG)
+          PEVS(NEV) = SIGN(1.,PRAY(1,1)) * MIN(1.,ABS(PRAY(1,1)))
+          PEVR(NEV) = SIGN(1.,PRAY(1,NLEG)) * MIN(1.,ABS(PRAY(1,NLEG)))
+          IISKIP = 1
+          IF (NLEG .GT. 100) IISKIP=10
+          IF (NLEG .GT. 1000) IISKIP=25
+          IF (NLEG .GT. 2000) IISKIP=50
+C      IF (IPRINT.EQ.81)
+C     1WRITE(LPRINT,'(/,'' NEV='',I5,'' NLEG='',I5,'' IRCODE='',I5
+C     1,/,'' I  T  X  Z  V''
+C     1,(200(/,1X,I5,F8.4,3(1X,F10.2),2(1X,I5)))')NEV,NLEG,IRCODE
+C     1,(II,TRAY(II),XRAY(II),ZRAY(II),VGRD
+C     1(MIN(NZGRD,MAX(1,NINT((ZRAY(II)-ZGRDMIN)/ZGRDINC)))
+C     1,MIN(NXGRD,MAX(1,NINT((XRAY(II)-XGRDMIN)/XGRDINC))))
+C     1,MIN(NZGRD,MAX(1,NINT((ZRAY(II)-ZGRDMIN)/ZGRDINC)))
+C     1,MIN(NXGRD,MAX(1,NINT((XRAY(II)-XGRDMIN)/XGRDINC)))
+C     1,II=1,MIN(IISKIP*99,NLEG-1),IISKIP)
+C     1,NLEG,TRAY(NLEG),XRAY(NLEG),ZRAY(NLEG),VGRD
+C     1(MIN(NZGRD,MAX(1,NINT((ZRAY(NLEG)-ZGRDMIN)/ZGRDINC)))
+C     1,MIN(NXGRD,MAX(1,NINT((XRAY(NLEG)-XGRDMIN)/XGRDINC))))
+C     1,MIN(NZGRD,MAX(1,NINT((ZRAY(NLEG)-ZGRDMIN)/ZGRDINC)))
+C     1,MIN(NXGRD,MAX(1,NINT((XRAY(NLEG)-XGRDMIN)/XGRDINC)))
+         IF (LOADEV .EQ. 1 .AND. ILEGEV0 + NLEG .LT. MLEGEV) THEN
+           ILEGEV(NEV) = ILEGEV0
+           IL0 = ILEGEV(NEV) 
+           DO 2004 ILEG = 1 , NLEG-1 , IISKIP
+             IL0 = IL0 + 1
+             XRAYEV(IL0) = XRAY(ILEG)
+             ZRAYEV(IL0) = ZRAY(ILEG)
+             TRAYEV(IL0) = TRAY(ILEG)
+ 2004      CONTINUE
+           IL0 = IL0 + 1
+           XRAYEV(IL0) = XRAY(NLEG)
+           ZRAYEV(IL0) = ZRAY(NLEG)
+           TRAYEV(IL0) = TRAY(NLEG)
+           NLEGEV(NEV) = IL0 - ILEGEV(NEV)
+           ILEGEV0 = IL0
+         ENDIF    ! IF (LOADEV .EQ. 1 .AND. ILEGEV0 + NLEG .LT. MLEGEV) THEN
+C         IF(IPRINT.EQ.81)THEN
+C           IF(IFAN.EQ.2)WRITE(89,*)' IFAN ANG  N  IRC  T  X  Z  '
+C           WRITE(89,'(1X,I5,1X,F8.2,2(1X,I5),1X,F8.3,2(1X,F12.1))')
+C     1IFAN,ANG*RD,NLEG,IRCODE
+C     1,TRAY(NLEG),XRAY(NLEG),ZRAY(NLEG)
+C       WRITE(90,'(/,'' IFAN='',I5,'' ANG='',F6.3,'' NLEG='',I5
+C     1,'' IRCOD='',I5,/,
+C     1'' IL  IC  IS  IT      TR        XR        ZR        XC      ZC''
+C     1,100(/,1(1X,I3),1X,F6.3,4(1X,F10.2)))')
+C     1IFAN,ANG*RD,NLEG,IRCODE,(IL,TRAY(IL),XRAY(IL),ZRAY(IL)
+C     1,IL=1,MIN(100,NLEG))
+C         ENDIF
+         IF (NEV .EQ. MEV) GOTO 2005
+ 2003     CONTINUE    ! DO 2003 IXTRC = IXTRC1 , IXTRC2
+ 2001   CONTINUE     ! DO 2001 IFAN = 2 , NFAN
+ 2000 CONTINUE
+ 2005 CONTINUE
+      IF(IPRINT.EQ.81)WRITE(LPRINT,'('' RAYSHOT ICALL='',I5
+     1,'' NEV='',I5,1000(/,1X,I5,1X,F10.2,1X,F8.3,2(1X,F8.3)))')
+     1ICALL,NEV,(IEV,XEV(IEV),TEV(IEV)
+     1,ACOS(PEVS(IEV))*RD,ACOS(PEVR(IEV))*RD,IEV=1,MIN(1000,NEV))
+      RETURN
+  999 CONTINUE
+      WRITE(LPRINT,*)' ERROR IN RAYSHOT'
+      WRITE(LPRINT,*)' '
+      WRITE(LPRINT,*)' NCELL=',NCELL
+      DO 77 ICELL=1,NCELL
+      WRITE(LPRINT,*)' ICELL=',ICELL
+     1,' IXCELL=',IXCELL(ICELL),' NXCELL=',NXCELL(ICELL)
+      DO 87 IXC = 1 , NXCELL(ICELL)
+      IXC0 = IXCELL(ICELL) + IXC
+      WRITE(LPRINT,'(2(1X,I5),2(1X,F10.2))')
+     1IXC,IDCELL(IXC0),XCELL(IXC0),ZCELL(IXC0)
+   87 CONTINUE
+   77 CONTINUE
+      WRITE(LPRINT,*)' '
+      RETURN 1
+      END
+      SUBROUTINE RAYFAN(NANG,ANGMIN,ANGINC,MFAN,NFAN,XFAN,TFAN,AFAN,DFAN
+     1,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*)
+      DIMENSION XFAN(1),TFAN(1),AFAN(1),DFAN(1),XRAY(1),TRAY(1)
+      DATA ICALL/0/
+      ICALL = ICALL + 1
+      NFAN = 0
+      DANG = ANGINC / 100.
+      RD = 90. / ASIN(1.)
+      IF (IPRINT.EQ.82)WRITE(LPRINT,'('' RAYFAN NANG='',I5
+     1,'' ANGMIN='',F8.3,'' ANGINC='',F8.3,'' DANG='',F8.5)')
+     1NANG,ANGMIN*RD,ANGINC*RD,DANG*RD
+      DO 1 IANG = 1 , NANG
+        ANG = (IANG - 1) * ANGINC + ANGMIN - DANG
+      CALL RAYSHOOT(ANG,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+        IF (IRCODE .NE. 1 .OR. KREFL .LE. NREFL) GOTO 1
+        X1 = XRAY(NLEG)
+        ANG = ANG + DANG
+      CALL RAYSHOOT(ANG,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+        IF (IRCODE .NE. 1 .OR. KREFL .LE. NREFL) GOTO 1
+        NFAN = NFAN + 1
+        XFAN(NFAN) = XRAY(NLEG)
+        TFAN(NFAN) = TRAY(NLEG)
+        AFAN(NFAN) = ANG
+        DFAN(NFAN) = XFAN(NFAN) - X1
+        IF (NFAN .GE. MFAN) RETURN
+        IF (NFAN .GT. 1 
+     1.AND. SIGN(1.,DFAN(NFAN)) .NE. SIGN(1.,DFAN(NFAN-1))) THEN
+          NFAN = NFAN - 1
+          ANG0 = AFAN(NFAN)
+          DO 2 JFAN = 1 , 5
+            ANG = ANG0 + JFAN * ANGINC / 5 - DANG
+      CALL RAYSHOOT(ANG,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+            IF (IRCODE .NE. 1 .OR. KREFL .LE. NREFL) GOTO 2
+            X1 = XRAY(NLEG)
+            ANG = ANG + DANG
+      CALL RAYSHOOT(ANG,XSHOT,ZSHOT,ISI,ICI,RAYRAD
+     1,IRCODE,MLEG,NLEG,XRAY,ZRAY,TRAY,PRAY,MODTYPE,VGRD
+     1,MZGRD,NXGRD,XGRDMIN,XGRDINC,NZGRD,ZGRDMIN,ZGRDINC,RAYSTEP
+     1,MCELL,NCELL,ICTYP,VCELL,GCELL,IXCELL,NXCELL,XCELL,ZCELL,IDCELL
+     1,BSPLN,CSPLN,DSPLN,ISOP,ICOP,MREFL,NREFL,IREFL,KREFL,MBND,NBND
+     1,IXBND,NXBND,XBND,ZBND,IDBND,BSBND,CSBND,DSBND,IPRINT,LPRINT,*999)
+            IF (IRCODE .NE. 1 .OR. KREFL .LE. NREFL) GOTO 2
+            NFAN = NFAN + 1
+            XFAN(NFAN) = XRAY(NLEG)
+            TFAN(NFAN) = TRAY(NLEG)
+            AFAN(NFAN) = ANG
+            DFAN(NFAN) = XFAN(NFAN) - X1
+            IF (NFAN .GE. MFAN) RETURN
+    2     CONTINUE
+        ENDIF    ! IF (NFAN .GT. 1 
+
+      IF (IPRINT.EQ.82 .AND. NFAN .EQ. 1)
+     1WRITE(LPRINT,'('' IA  IF  NL A T X D'')')
+      IF (IPRINT.EQ.82)
+     1WRITE(LPRINT,'(3(1X,I5),1X,F8.3,1X,F8.4,2(1X,F10.4))')
+     1IANG,NFAN,NLEG,ANG*RD,TFAN(NFAN),XFAN(NFAN),DFAN(NFAN)
+    1 CONTINUE
+      RETURN
+  999 CONTINUE
+      RETURN 1
+      END
+      SUBROUTINE RAYPARAB(X1,X2,X3,Y1,Y2,Y3,A,B,C)
+      A = 0
+      B = 0
+      C = 0
+      IF (X1 .NE. X2 .AND. X2 . NE. X3 .AND. X3 .NE. X1) THEN
+        B = ((Y3-Y1)/(X3**2-X1**2)-(Y2-Y1)/(X2**2-X1**2))
+     1*(X2+X1)*(X3+X1)/(X2-X3)
+        A = ((Y3-Y1)/(X3-X1)-(Y2-Y1)/(X2-X1))/(X3-X2)
+        C = Y1-A*X1**2-B*X1
+      ENDIF
+      RETURN
+      END

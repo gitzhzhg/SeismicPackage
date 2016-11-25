@@ -1,0 +1,686 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="decon" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DECONPROCESS" title="DECON Process" rows="31" columns="80">
+    <Label keyword="COMMENT_TIMEDOMAINPREDICTIVEDECO" alignment="center">Time domain predictive deconvolution</Label>
+    <Label keyword="LABEL_OPT_DECON_TYPE" alignment="left">OPT_DECON_TYPE=</Label>
+    <Field keyword="OPT_DECON_TYPE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SAILE" alignment="left">SAILE=</Label>
+    <Field keyword="SAILE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_TR_MODE" alignment="left">OPT_TR_MODE=</Label>
+    <Field keyword="OPT_TR_MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME" alignment="left">PATHNAME=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_OP" alignment="left">LEN_OP=</Label>
+    <Field keyword="LEN_OP" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GAP" alignment="left">GAP=</Label>
+    <Field keyword="GAP" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD=</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TR_INIT" alignment="left">TR_INIT=</Label>
+    <Field keyword="TR_INIT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TR_INC" alignment="left">TR_INC=</Label>
+    <Field keyword="TR_INC" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TR_LAST" alignment="left">TR_LAST=</Label>
+    <Field keyword="TR_LAST" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_INL" alignment="left">HDR_INL=</Label>
+    <Field keyword="HDR_INL" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CRL" alignment="left">HDR_CRL=</Label>
+    <Field keyword="HDR_CRL" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TAU_P_VEL" alignment="left">TAU_P_VEL=</Label>
+    <Field keyword="TAU_P_VEL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_WIN" alignment="left">OPT_WIN=</Label>
+    <Field keyword="OPT_WIN" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ZERO_CROSS" alignment="left">ZERO_CROSS=</Label>
+    <Field keyword="ZERO_CROSS" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_ZCROSS" alignment="left">HDR_ZCROSS=</Label>
+    <Field keyword="HDR_ZCROSS" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="OFF_ARRAYSET" label="OFF         WIN_TIM_BEG WIN_TIM_END">
+     <Array keyword="OFF" type="float" maxLength="12 " columnName="OFF" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="12 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="12 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <ArraySet keyword="INLINES_ARRAYSET" label="INLINES     CROSSLINES  TIM_REF_BEG TIM_REF_END">
+     <Array keyword="INLINES" type="float" maxLength="12 " columnName="INLINES" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="CROSSLINES" type="float" maxLength="12 " columnName="CROSSLINES" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="TIM_REF_BEG" type="float" maxLength="12 " columnName="TIM_REF_BEG" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="TIM_REF_END" type="float" maxLength="12 " columnName="TIM_REF_END" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <ArraySet keyword="OFFSET_ARRAYSET" label="OFFSET      TIM_ADD      WIN_LEN">
+     <Array keyword="OFFSET" type="float" maxLength="12 " columnName="OFFSET" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="TIM_ADD" type="float" maxLength="13 " columnName="TIM_ADD" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="WIN_LEN" type="float" maxLength="11 " columnName="WIN_LEN" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_TIMEDOMAINPREDICTIVEDECO" xPos="12" yPos="1" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_DECON_TYPE" xPos="1" yPos="3" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DECON_TYPE" xPos="16" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SAILE" xPos="29" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAILE" xPos="35" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_TR_MODE" xPos="42" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TR_MODE" xPos="54" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATHNAME" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="10" yPos="5" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_LEN_OP" xPos="1" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OP" xPos="9" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GAP" xPos="23" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GAP" xPos="31" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="45" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="56" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TR_INIT" xPos="1" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_INIT" xPos="9" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TR_INC" xPos="23" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_INC" xPos="31" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TR_LAST" xPos="45" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_LAST" xPos="56" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_INL" xPos="1" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_INL" xPos="9" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CRL" xPos="23" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CRL" xPos="31" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TAU_P_VEL" xPos="45" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAU_P_VEL" xPos="56" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="1" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="9" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_WIN" xPos="23" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_WIN" xPos="31" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ZERO_CROSS" xPos="45" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ZERO_CROSS" xPos="56" yPos="13" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_ZCROSS" xPos="1" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_ZCROSS" xPos="12" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_ARRAYSET" xPos="1" yPos="17" xSize="39" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="INLINES_ARRAYSET" xPos="1" yPos="22" xSize="51" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="OFFSET_ARRAYSET" xPos="1" yPos="27" xSize="39" ySize="4" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_DECON_TYPE">
+      <Tip>Option of type of decon operator to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - OPT_DECON_TYPE<br> Option of type of decon operator to use.</center></b>
+<pre> Default = DECON
+ Allowed = DECON      (traditional statistical decon)
+ Allowed = ZERO_PHASE (whiten amplitude spectrum only, preserve phase
+ spectrum)
+ Allowed = NONE       (use no decon operator - if only SAILE is desired)
+ Normally the DECON option is chosen.  ZERO_PHASE is used when it is desired
+ to whiten the amplitude spectrum while maintaining the phase spectrum
+ unchanged.  The NONE option is available if the SAILE operation is desired
+ without decon.
+ 
+ For ZERO_PHASE, a spiking decon operator of length 2*LEN_OP is first derived.
+ This is then converted (by FFT and inverse FFT) to a zero-phase operator of
+ the same length (lag times from -LEN_OP to +LEN_OP) and with the same
+ amplitude spectrum.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAILE">
+      <Tip>Option whether to perform SAILE (integrate trace).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - SAILE<br> Option whether to perform SAILE (integrate trace).</center></b>
+<pre> Default = NO
+ Allowed = YES  (Perform SAILE after the operation chosen in OPT_DECON_TYPE.)
+ Allowed = NO   (Do not perform SAILE.)
+ 
+ The SAILE operation is performed after the decon operation chosen in
+ OPT_DECON_TYPE.  If SAILE is desired, OPT_TR_MODE must be either SINGLE or
+ MULT.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_TR_MODE">
+      <Tip>Option whether to use single trace, multiple trace or all trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - OPT_TR_MODE<br> Option whether to use single trace, multiple trace or all trace.</center></b>
+<pre> Default = SINGLE
+ Allowed = SINGLE  (Build one operator for each input trace.)
+ Allowed = MULT    (Build one operator for each input trace gather.)
+ Allowed = ALL     (Build a single operator for all input traces.)
+ The SINGLE option performs traditional single-trace decon.  The MULT option
+ designs a single operator from the autocorrelations of all traces in a gather
+ and applies that operator to all traces in the gather ("gather-consistent"
+ decon).  The ALL option designs a single operator from the autocorrelations
+ of all the input traces and writes that operator to a file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Filename for TROT file containing operator when OPT_TR_MODE = ALL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - PATHNAME<br> Filename for TROT file containing operator when OPT_TR_MODE = ALL.</center></b>
+<pre> Default = blank
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OP">
+      <Tip>Length of decon operator, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - LEN_OP<br> Length of decon operator, in seconds.</center></b>
+<pre> Default = 0.200
+ Allowed = real&gt;0.0
+ LEN_OP is the entire length of the decon operator, in seconds, including any
+ gap.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAP">
+      <Tip>Prediction distance for operator, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - GAP<br> Prediction distance for operator, in seconds.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;=0.0
+ GAP = 0.0 produces "spiking decon", GAP &gt; 0.0 produces "gap decon."
+ (Actually, a GAP of one sample means spiking decon and a GAP of more than one
+ sample means gap decon.)
+ 
+ GAP must be 0.0 for OPT_DECON_TYPE = ZERO_PHASE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - DIAG_LOAD<br> Diagonal load, in percent.</center></b>
+<pre> Default = 2.0
+ Allowed = real&gt;=0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_INIT">
+      <Tip>First trace in gather to use in calculating decon operator.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TR_INIT<br> First trace in gather to use in calculating decon operator.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ Sequential number of first trace in gather to use in calculating decon
+ operator when OPT_TR_MODE is MULT or ALL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_INC">
+      <Tip>Increment for trace in gather to use in calculating decon operator.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TR_INC<br> Increment for trace in gather to use in calculating decon operator.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ Increment for sequential number of trace in gather to use in calculating
+ decon operator when OPT_TR_MODE is MULT or ALL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_LAST">
+      <Tip>Last trace in gather to use in calculating decon operator .</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TR_LAST<br> Last trace in gather to use in calculating decon operator .</center></b>
+<pre> Default = number of traces in gather
+ Allowed = int&gt;=TR_INIT
+ Sequential number of last trace in gather to use in calculating decon
+ operator when OPT_TR_MODE is MULT or ALL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_INL">
+      <Tip>Header word for inline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - HDR_INL<br> Header word for inline coordinate.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ Header word for inline coordinate to use in specifying grid and offset
+ varying windows.
+ 
+ HDR_INL must be non-zero for window variation in the inline direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CRL">
+      <Tip>Header word for crossline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - HDR_CRL<br> Header word for crossline coordinate.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ Header word for crossline coordinate to use in specifying grid and offset
+ varying windows.
+ 
+ HDR_CRL must be non-zero for window variation in the crossline direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAU_P_VEL">
+      <Tip>Reference velocity for gap decon in Tau-P domain.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TAU_P_VEL<br> Reference velocity for gap decon in Tau-P domain.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;=0.0
+ See Advice for Users for details.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word designating offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - HDR_OFF<br> Header word designating offset.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_WIN">
+      <Tip>Option of method to use for specifying autocorrelation window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - OPT_WIN<br> Option of method to use for specifying autocorrelation window.</center></b>
+<pre> Default = OFF_GRID
+ Allowed = OFF_GRID (Window varies with offset and grid.)
+ Allowed = MUTE     (Window defined by time measured from mute.)
+ Option OFF_GRID specifies the autocorrelation window by a linked array of
+ offset, window top and window bottom values.  In addition these values may
+ be varied over grid coordinates if desired.  (If HDR_INL = 0 and HDR_CRL = 0
+ then no grid variation occurs.)
+ 
+ Option MUTE specifies the autocorrelation window by a linked array of offset,
+ time from mute to window top and length of window.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ZERO_CROSS">
+      <Tip>Use zero_crossing to determine the GAP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - ZERO_CROSS<br> Use zero_crossing to determine the GAP.</center></b>
+<pre> Default = 0
+ Allowed = 0 - 2
+ If ZERO_CROSS = 0, use user-defined GAP.
+ If ZERO_CROSS = 1, use first zero crossing as GAP.
+ If ZERO_CROSS = 2, use second zero crossing as GAP.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_ZCROSS">
+      <Tip>Header word for GAP determined from the zero crossing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - HDR_ZCROSS<br> Header word for GAP determined from the zero crossing.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ Header word to store the GAP determined from zero crossing of the
+ autocorrelation.
+ 
+ If HDR_ZCROSS = 0, the GAP parameter is not stored in the header.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF">
+      <Tip>Array of offsets for specifying offset varying window times.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - OFF<br> Array of offsets for specifying offset varying window times.</center></b>
+<pre> Default =  -
+ Allowed = real (array)
+ OFF is an array of offsets for specifying offset varying windows.  It is
+ linked with WIN_TIM_BEG and WIN_TIM_END.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times, in seconds .</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - WIN_TIM_BEG<br> Array of window top times, in seconds .</center></b>
+<pre> Default = TSTRT
+ Allowed = real&gt;=TSTRT (array)
+ WIN_TIM_BEG is an array of window top times for specifying offset varying
+ windows.  It is linked with OFF and WIN_TIM_END.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - WIN_TIM_END<br> Array of window bottom times, in seconds.</center></b>
+<pre> Default =  -
+ Allowed = real (array)
+ WIN_TIM_END is an array of window bottom times for specifying offset varying
+ windows.  It is linked with OFF and WIN_TIM_BEG.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INLINES">
+      <Tip>Array of inline coordinate values for spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - INLINES<br> Array of inline coordinate values for spatially varying windows.</center></b>
+<pre> Default = 0
+ Allowed = real (array)
+ Array of inline coordinate values for specifying spatially varying windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CROSSLINES">
+      <Tip>Array of crossline coordinate values for spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - CROSSLINES<br> Array of crossline coordinate values for spatially varying windows.</center></b>
+<pre> Default = 0
+ Allowed = real (array)
+ Array of crossline coordinate values for specifying spatially varying windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_REF_BEG">
+      <Tip>Array of top window reference times for spatially varying windows .</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TIM_REF_BEG<br> Array of top window reference times for spatially varying windows .</center></b>
+<pre> Default = 0
+ Allowed = real (array)
+ Actual spatially varying window top times are the sum of the times specified
+ by OFF and WIN_TIM_BEG and the spatially varying reference time TIM_REF_BEG.
+ 
+ Local spatially varying reference time is interpolated between entries of
+ TIM_REF_BEG.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_REF_END">
+      <Tip>Window bottom reference times for spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TIM_REF_END<br> Window bottom reference times for spatially varying windows.</center></b>
+<pre> Default = 0
+ Allowed = real (array)
+ Actual spatially varying window bottom times are the sum of the times
+ specified by OFF and WIN_TIM_END and the spatially varying reference time
+ TIM_REF_END.
+ 
+ Local spatially varying reference time is interpolated between entries of
+ TIM_REF_END.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFFSET">
+      <Tip>Array of offsets for specifying window times based on mute time.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - OFFSET<br> Array of offsets for specifying window times based on mute time.</center></b>
+<pre> Default =  -
+ Allowed = real (array)
+ OFFSET is an array of offsets for specifying window times based on mute time.
+ It is linked with TIM_ADD and WIN_TIM_END.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Time at top of window = mute time + TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - TIM_ADD<br> Time at top of window = mute time + TIM_ADD.</center></b>
+<pre> Default =  -
+ Allowed = real (array)
+ TIM_ADD is an array of times linked with OFFSET and WIN_LEN such that
+ time at top of window = mute time + TIM_ADD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - WIN_LEN<br> Time at bottom of window = time at top of window + WIN_LEN.</center></b>
+<pre> Default =  -
+ Allowed = real (array)
+ WIN_LEN is an array of times linked with OFFSET and TIM_ADD such that
+ time at bottom of window = time at top of window + WIN_LEN.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>decon - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="decon">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DECON    (DECONvolution)
+ Category   : filters
+ Written    : 1986-07-03   by: Bob Baumel
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Time domain predictive (statistical) deconvolution.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ DECON performs traditional minimum phase predictive (statistical)
+ deconvolution, either "spiking" decon (prediction length is one sample) or
+ "gap" decon (prediction length is greater than one sample).
+ 
+ DECON first calculates the autocorrelation within the trace design window,
+ calculates the decon operator from the autocorrelation and then
+ performs the deconvolution by convolving the operator with the trace.
+ 
+ &lt;left&gt;DECON parameters fall into four categories&lt;/left&gt;
+ DECON TYPE: traditional decon, "normalizing" decon (flattens amplitude
+ spectrum only) and/or "saile" (trace integration).
+ 
+ OPERATOR BUILD MODE:  one operator for each input trace, one for each input
+ gather or one for all input traces.
+ 
+ OPERATOR DESIGN PARAMETERS: operator length, gap and diagonal load.
+ 
+ DESIGN WINDOW PARAMETERS: parameters for specifying beginning and ending
+ times for a possibly offset varying trace window (this trace window is used
+ for calculating autocorrelations for the operator design).
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+&lt;left&gt;Single- and Multiple-Trace Deconvolution&lt;/left&gt;
+ For single-trace decon, select OPT_TR_MODE = SINGLE. For multiple-trace or
+ gather-consistent decon, select OPT_TR_MODE = MULT.  In this mode input
+ traces must be gathered.  Autocorrelation is calculated on traces within the
+ gather defined by the TR_INIT, TR_INC and TR_LAST parameters.
+ Autocorrelations are averaged to achieve an improved estimate and a single
+ operator is calculated and applied to all traces in the gather.
+ 
+&lt;left&gt;All-Trace Option&lt;/left&gt;
+ When OPT_TR_MODE = ALL, a single operator is calculated from the autocor-
+ relations of all input traces and written to a file where it can be read by
+ TRIN, FILTR or DSIG.  For consistency with FILTR and DSIG, TMIN of this
+ TRCIO file contains the time of the first sample in this trace (ZERO if
+ OPT_DECON_TYPE = DECON or -LEN_OP if OPT_DECON_TYPE = ZERO_PHASE ).
+ 
+&lt;left&gt;Improved Efficiency Trace Selection for Autocorrelatio&lt;/left&gt;
+ When OPT_TR_MODE = MULT or OPT_TR_MODE = ALL, autocorrelation is calculated
+ only on traces within the input gather defined by the TR_INIT, TR_INC and
+ TR_LAST parameters.  If TR_INC is set &gt; 1, run-time and cost is lowered and
+ typically the operator calculated is not significantly different than if all
+ the traces had been used.
+ 
+&lt;left&gt;Window Options&lt;/left&gt;
+ Of the window options, the MUTE option is simpler to set up than the
+ more complicated OFF_GRID method and may give adequate results.
+ 
+&lt;left&gt;Tau-P Deconvolution&lt;/left&gt;
+ For GAPPED decon in the TAU_P domain, the user-specified GAP is multiplied by
+ the quantity    SQRT ( 1. - (V*P)**2 )    where V is the reference velocity
+ (TAU_P_VEL), and P is the slowness or ray parameter of the trace.  The
+ P-values are taken from header word HDR_OFF (the same word as would normally
+ hold the offset) and are assumed to be in MICROseconds per meter or foot
+ (same conventions as in process SLST).  TAU_P_VEL should be in standard
+ velocity units (meters or feet per second).  This option is used only when
+ OPT_DECON_TYPE = DECON, OPT_TR_MODE = SINGLE, GAP&gt;0, and TAU_P_VEL&gt;0.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+      Date       Author     Description
+      ----       ------     -----------
+  47. 2006-09-11 Stoeckley  Add call to pc_register_array_names for SeisSpace.
+046. 2006-01-10  B. Menger   Removed Unused Variables.
+  45. 2005-01-17 Chiu       Added option to use zero crossing of the
+                            autocorrelation for determining the GAP parameter
+  44. 2002-05-06 Vunderink  Added parallel control parameters
+  43. 2001-10-18 Selzler    Temporarily back out parallel support
+  42. 2001-07-31 Vunderink  Added parallel control parameters
+  41. 2000-12-11 Selzler    Changed wrapup logic to use skip_wrapup
+  40. 2000-10-03 Selzler    Corrected bug, linked array length initialization.
+                            Changed default for OP_LEN per user request.
+  39. 2000-05-09 Selzler    Change offsets to double precision
+  38. 2000-03-27 Selzler    Verify DT before using it
+  37. 2000-03-10 Selzler    Modified functionality per user feedback
+  36. 2000-03-01 Selzler    Corrected documentation for header 3 and 4
+  35. 2000-02-25 Selzler    Corrected bug when writing operator to file
+  34. 2000-02-10 Selzler    Corrected bug in wrapup logic
+  33. 2000-02-09 Selzler    synchronized source with CIB's latest newdoc.
+  32. 2000-02-07 Selzler    improved gui support
+  31. 2000-02-02 Selzler    Added support for GUI and general cleanup
+  30. 2000-01-14 Selzler    Corrected two bugs
+  29. 2000-01-12 Selzler    Corrected FFT scale factor
+  28. 2000-01-07 Selzler    Corrected 'MULT' constant bug and
+                            changed OPLEN to LEN_OP and
+                            changed FILENAME to PATHNAME per request.
+  27. 1999-11-19 Selzler    Corrected naming and date usage.
+  26. 1999-10-27 Selzler    Added RCS "Id" strings to tag executeable
+  25  1999-08-10 Selzler    Conversion to fortran 90 compiler.
+  24  1998-11-10 Vunderink  Begin using the f90 compiler.
+  23  1998-06-29 Vunderink  Added OPT, OFFSET, ADDTIM, WINLEN parameters
+  22  1997-11-10 Vunderink  Added spatial window
+  21  1995-09-05 Vunderink  Double LEN_OP when FILTYP=NORM.
+  20  1992-04-06 Troutt     Add tail mute logic. Don't use input values
+                            greater than tail mute index for operator
+                            design (input values above head mute index
+                            were already excluded). Call MUTEHW on input
+                            to assure that tail mute is set.
+  19  1990-12-05 Baumel     Add STRIDE option in multi-trace decon.
+  18  1990-09-27 Ball       Doc. chg only. LTR parameter default.
+  17  1990-02-28 Peterson   Allow traces with dead window to pass thru
+                            without DECON (S/M=S or M). As per JOHN REED.
+  16  1989-08-31 Baumel     Fix GAPPED decon bug (introduced 1989/04/07).
+  15  1989-07-17 Baumel     Fix bug of incorrect wrapup messages.
+  14  1989-04-07 Baumel     Add NORMALIZE/SAILE &amp; PTAU_VEL options.
+  13  1989-01-19 Howard     New DTRIN &amp; DTROT Mod.
+  12  1988-09-26 Howard     NWIH and NWPT conversion.
+  11  1988-07-26 Baumel     Use new DCODE/NCODE tables.
+  10  1988-06-03 Baumel     New convention for mute header word.
+   9  1988-04-22 Baumel     Add CPSPRT calls.
+   8  1987-10-04 Baumel     Remove "apply" mode &amp; match disk file
+                            convention to FILTR process.
+   7  1987-06-09 Baumel     Add S/M = B and S/M = A options (now
+                            internally callable, MEMPRT removed).
+   6  1987-03-31 Hanson     Add NCODE call for history records.
+   5  1987-01-15 Baumel     Add IPRT parameter (print switch).
+   4  1986-10-24 Baumel     Add multi-channel capability (S/M param).
+   3  1986-08-18 Baumel     Call to MEMPRT added.
+   2  1986-07-18 Baumel     Allow Offset-dependent Time Window.
+   1  1986-07-03 Baumel     Original working version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

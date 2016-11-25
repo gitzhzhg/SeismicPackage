@@ -1,0 +1,737 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ffava" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FFAVAPROCESS" title="FFAVA Process" rows="24" columns="80">
+    <Label keyword="COMMENT_FFAVAFLUIDFACTORAVAFINDS" alignment="center">FFAVA (Fluid Factor AVA). Finds F(t) = B(t) - W(t)*A(t)</Label>
+    <Label keyword="COMMENT_WHEREAAVAINTERCEPTBAVAGR" alignment="center">where A = AVA Intercept, B = AVA Gradient, W = Weight function.</Label>
+    <Label keyword="COMMENT_THISPROCESSMUSTBEPRECEDE" alignment="center">This process must be PRECEDED by AVAGRAD with OPT_OUTPUT = A_AND_B.</Label>
+    <Label keyword="LABEL_OPT_WF" alignment="left">OPT_WF=</Label>
+    <Field keyword="OPT_WF" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_FF" alignment="left">OPT_FF=</Label>
+    <Field keyword="OPT_FF" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_IN" alignment="left">HDR_IN=</Label>
+    <Field keyword="HDR_IN" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_USEDONLYWHENOPT_WFCALC" alignment="center">Used only when OPT_WF = CALC:</Label>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_WF_OUT" alignment="left">OPT_WF_OUT=</Label>
+    <Field keyword="OPT_WF_OUT" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_USEDWHENOPT_WFCALCOROPT_" alignment="center">Used when OPT_WF = CALC or OPT_WF = TRIAL:</Label>
+    <Label keyword="LABEL_WF_INIT" alignment="left">WF_INIT=</Label>
+    <Field keyword="WF_INIT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WF_INC" alignment="left">WF_INC=</Label>
+    <Field keyword="WF_INC" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WF_TOT" alignment="left">WF_TOT=</Label>
+    <Field keyword="WF_TOT" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_WF" alignment="left">HDR_WF=</Label>
+    <Field keyword="HDR_WF" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FORANOMALYCLASSIFIEROPT_" alignment="center">For Anomaly Classifier (OPT_FF = 4):</Label>
+    <Label keyword="LABEL_THRESH_FF" alignment="left">THRESH_FF=</Label>
+    <Field keyword="THRESH_FF" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CLASS2_MIN" alignment="left">CLASS2_MIN=</Label>
+    <Field keyword="CLASS2_MIN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CLASS2_MAX" alignment="left">CLASS2_MAX=</Label>
+    <Field keyword="CLASS2_MAX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WEIGHTFUNCTIONFOROPT_WFU" alignment="center">Weight function for OPT_WF = USER:</Label>
+    <ArraySet keyword="TIMES_ARRAYSET" label="TIMES   WEIGHTS">
+     <Array keyword="TIMES" type="float" maxLength="8  " columnName="TIMES" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="WEIGHTS" type="float" maxLength="8  " columnName="WEIGHTS" editable="yes" sensitive="yes" columnSize="8"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_FFAVAFLUIDFACTORAVAFINDS" xPos="10" yPos="0" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_WHEREAAVAINTERCEPTBAVAGR" xPos="6" yPos="1" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_THISPROCESSMUSTBEPRECEDE" xPos="4" yPos="2" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_WF" xPos="4" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_WF" xPos="14" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_FF" xPos="28" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FF" xPos="39" yPos="4" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_IN" xPos="53" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_IN" xPos="63" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_USEDONLYWHENOPT_WFCALC" xPos="23" yPos="6" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="4" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="14" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="28" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="39" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="53" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="64" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_WF_OUT" xPos="28" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_WF_OUT" xPos="39" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_USEDWHENOPT_WFCALCOROPT_" xPos="17" yPos="10" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WF_INIT" xPos="4" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WF_INIT" xPos="14" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WF_INC" xPos="28" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WF_INC" xPos="39" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WF_TOT" xPos="53" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WF_TOT" xPos="64" yPos="11" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_WF" xPos="28" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_WF" xPos="39" yPos="12" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FORANOMALYCLASSIFIEROPT_" xPos="19" yPos="14" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_THRESH_FF" xPos="4" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="THRESH_FF" xPos="14" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CLASS2_MIN" xPos="28" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CLASS2_MIN" xPos="39" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CLASS2_MAX" xPos="53" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CLASS2_MAX" xPos="64" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_WEIGHTFUNCTIONFOROPT_WFU" xPos="20" yPos="17" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TIMES_ARRAYSET" xPos="28" yPos="18" xSize="19" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_WF">
+      <Tip>Whether to calculate weights, use user specified or trial weights.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - OPT_WF<br> Whether to calculate weights, use user specified or trial weights.</center></b>
+<pre> Default = CALC
+ Allowed = CALC   (Calculate weight function automatically).
+ Allowed = TRIAL  (Output trial weight function panels).
+ Allowed = USER   (Use a user specified weight function).
+ 
+ When OPT_WF = CALC, FFAVA calculates the weight function W(t) for you. Here,
+ W(t) is determined as a slowly-varying function of time (depth). A separate
+ weight function is calculated and applied to each input section as defined
+ by jumps in header word HDR_IN.
+ 
+ When OPT_WF = TRIAL, FFAVA produces fluid factor panels for a set of trial
+ W-values, allowing you to pick a W(t) function manually. This is analogous
+ to velocity analysis by generating constant-velocity panels using the GVS
+ process. At any depth, the optimal W-value is that which produces the
+ quietest background with clearly visible (AVA) anomalous events.
+ 
+ When OPT_WF = USER, you input a user-specified W(t) function, which may have
+ been determined by examining panels generated by FFAVA using OPT_WF = TRIAL.
+ For OPT_WF = USER, the W(t) function is specified using the TIMES and WEIGHTS
+ arrays.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_FF">
+      <Tip>Type of fluid factor calculation to perform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - OPT_FF<br> Type of fluid factor calculation to perform.</center></b>
+<pre> Default = 1
+ Allowed = 1   Standard, (B - W*A).
+ Allowed = 2   Hilterman product (rotated NI*PR).
+ Allowed = 3   Rotated A*B product.
+ Allowed = 4   FFAVA Anomaly Classifier.
+ The default (OPT_FF = 1) produces our "standard" fluid factor, analogous
+ to the fluid factors of Smith &amp; Gidlow et al; this is a linear combination
+ of A and B (Intercept and Gradient).
+ 
+ The "Hilterman product" is the product of Normal-Incidence Reflectivity (NI)
+ and Poisson Reflectivity (PR) after rotating axes so the background fluid
+ trend runs along the NI axis.  [Note: NI = A  ;  PR = A + B]
+ 
+ The "rotated A*B product" is a similar product after rotating axes, but in
+ the original (A,B) plane instead of the (NI,PR) plane.
+ 
+ The "Anomaly Classifier" is intended to produce plots indicating whether AVA
+ anomalies are Rutherford and Williams Class 1, 2 or 3, or Castagna Class 4.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_IN">
+      <Tip>Header word to use for identifying input sections.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - HDR_IN<br> Header word to use for identifying input sections.</center></b>
+<pre> Default = 8
+ Allowed = 0 - NWIH
+ The values in header word HDR_IN should be integers, identifying
+ successive input sections.
+ 
+ HDR_IN has its greatest effect when OPT_WF = CALC, in which case FFAVA
+ calculates and applies a separate weight function for every section.
+ 
+ If you want to be tricky (when OPT_WF = CALC), you could set HDR_IN to
+ calculate weight functions for various selected trace groupings, instead
+ of standard seismic lines. For example, if HDR_IN = 1, FFAVA will derive
+ and apply a separate weight function for every trace.
+ 
+ HDR_IN is also used for renumbering header words 3 and 4 when OPT_WF = CALC
+ or USER. However, when OPT_WF = TRIAL, numbering of header words 3 and 4 is
+ determined by the panel sorting routine, so HDR_IN has no effect.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of time window, in seconds, for weight function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - WIN_LEN<br> Length of time window, in seconds, for weight function calculation.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ Length of time window, in seconds, for automatic weight function calculation.
+ 
+ Weight factors are estimated for each input [A(t),B(t)] trace pair by
+ finding W to minimize the median absolute value of [B(t) - W*A(t)] in time
+ windows of length WIN_LEN. (The estimated weight functions are then averaged
+ over the whole section.)  The windowed medians are handled the same as in
+ process MVXP.  Choose WIN_LEN big enough so it contains MOSTLY background
+ "fluid" events rather than events with anomalous AVA character.
+ 
+ Active only when OPT_WF = CALC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Beginning time, in seconds, for weight function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - TIM_BEG<br> Beginning time, in seconds, for weight function calculation.</center></b>
+<pre> Default = TSTRT
+ Allowed = real
+ Beginning time, in seconds, for automatic weight function calculation.
+ 
+ Active only when OPT_WF = CALC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Ending time, in seconds, for weight function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - TIM_END<br> Ending time, in seconds, for weight function calculation.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TIM_BEG
+ Ending time, in seconds, for automatic weight function calculation.
+ 
+ Active only when OPT_WF = CALC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_WF_OUT">
+      <Tip>Option for outputting weight function traces when OPT_WF = CALC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - OPT_WF_OUT<br> Option for outputting weight function traces when OPT_WF = CALC.</center></b>
+<pre> Default = NONE
+ Allowed = NONE  (Output NO weight functions in output section).
+ Allowed = FIRST (Output weight function as FIRST trace of output section).
+ Allowed = ONLY  (Output ONLY the weight functions -- no seismic data!).
+ 
+ The default is to not output any of the weight functions calculated by
+ FFAVA when OPT_WF = CALC.
+ 
+ Choosing OPT_WF_OPT = FIRST may be useful for QC, so you can look at the
+ weight functions that FFAVA generates.
+ 
+ Choosing OPT_WF_OUT = ONLY may POSSIBLY produce a useful attribute. In
+ this case, it would be best to compute FINE-GRAINED weight functions by
+ choosing WIN_LEN very small (just a few samples), and by manipulating
+ HDR_IN so that each input "section" contains only a few traces.
+ 
+ Active only when OPT_WF = CALC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WF_INIT">
+      <Tip>First trial weight function value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - WF_INIT<br> First trial weight function value.</center></b>
+<pre> Default = -1.5
+ Allowed = real
+ First Weight value to try when OPT_WF = CALC or TRIAL.
+ 
+ The default of WF_INIT = -1.5 is appropriate if FFAVA is immediately
+ preceded by MVXP.  If not, you might try WF_INIT = -3.
+ 
+ When OPT_WF = CALC, WF_INIT, WF_INC and WF_TOT define an internal search
+ range for minimizing windowed medians of [B(t)-W*A(t)].
+ 
+ When OPT_WF = TRIAL, WF_INIT, WF_INC and WF_TOT set trial Weight values for
+ output panels.
+ 
+ Active only if OPT_WF = CALC or TRIAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WF_INC">
+      <Tip>Increment between trial weight function values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - WF_INC<br> Increment between trial weight function values.</center></b>
+<pre> Default = 0.1
+ Allowed = real
+ Trial Weight value increment when OPT_WF = CALC or TRIAL.
+ 
+ The default of WF_INC = 0.1 is appropriate if FFAVA is immediately preceded
+ by MVXP.  If not, you might try WF_INC = 0.2.
+ 
+ When OPT_WF = CALC, WF_INIT, WF_INC and WF_TOT define an internal search
+ range for minimizing windowed medians of [B(t)-W*A(t)].
+ 
+ When OPT_WF = TRIAL, WF_INIT, WF_INC and WF_TOT set trial Weight values for
+ output panels.
+ 
+ Active only if OPT_WF = CALC or TRIAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WF_TOT">
+      <Tip>Total number of trial weight function values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - WF_TOT<br> Total number of trial weight function values.</center></b>
+<pre> Default = 16
+ Allowed = int &gt; 0
+ Number of trial Weight values when OPT_WF = CALC or TRIAL.
+ 
+ When OPT_WF = CALC, WF_INIT, WF_INC and WF_TOT define an internal search
+ range for minimizing windowed medians of [B(t)-W*A(t)].
+ 
+ When OPT_WF = TRIAL, WF_INIT, WF_INC and WF_TOT set trial Weight values for
+ output panels.
+ 
+ Active only if OPT_WF = CALC or TRIAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_WF">
+      <Tip>Header word to carry weight function value if OPT_WF = TRIAL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - HDR_WF<br> Header word to carry weight function value if OPT_WF = TRIAL.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH
+ 
+ Active only if OPT_WF = TRIAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="THRESH_FF">
+      <Tip>Classifier threshold.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - THRESH_FF<br> Classifier threshold.</center></b>
+<pre> Default = 5.0
+ Allowed = real &gt;= 0.0
+ The absolute value of (B-W*A) must exceed this threshold in order to
+ classify an event as anomalous. For events considered non-anomalous (i.e.,
+ within this distance of the fluid trend), the anomaly classifier trace will
+ have a value of -0.5 or +0.5 (with sign matching the ordinary OPT_FF=1 FFAVA
+ trace), or 0.0 in case the original (A,B) point is very close to the origin.
+ 
+ Active only if OPT_FF = 4.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CLASS2_MIN">
+      <Tip>Class II minimum for classifier.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - CLASS2_MIN<br> Class II minimum for classifier.</center></b>
+<pre> Default = -6.0
+ Allowed = real &lt; 0.0
+ Minimum value of Intercept (A) to classify an event as Class II [This is for
+ events with negative B-W*A; i.e., top-of-reservoir reflection. For events
+ with positive B-W*A, the corresponding zones are obtained by reflection
+ through the origin of the (A,B) plane].
+ 
+ Active only if OPT_FF = 4.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CLASS2_MAX">
+      <Tip>Class II maximum for classifier.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - CLASS2_MAX<br> Class II maximum for classifier.</center></b>
+<pre> Default = 4.0
+ Allowed = real &gt; 0.0
+ Maximum value of Intercept (A) to classify an event as Class II [This is for
+ events with negative B-W*A; i.e., top-of-reservoir reflection. For events
+ with positive B-W*A, the corresponding zones are obtained by reflection
+ through the origin of the (A,B) plane].
+ 
+ Active only if OPT_FF = 4.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIMES">
+      <Tip>Trace times, in seconds, for user specified weight functions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - TIMES<br> Trace times, in seconds, for user specified weight functions.</center></b>
+<pre> Default = -
+ Allowed = real linked array
+ Entries must be in increasing order.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WEIGHTS">
+      <Tip>Weight values for user specified weight functions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - WEIGHTS<br> Weight values for user specified weight functions.</center></b>
+<pre> Default = -
+ Allowed = real linked array</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ffava - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ffava">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FFAVA    (Fluid Factor AVA method)
+ Category   : stacks
+ Written    : 1994-03-09   by: Bob Baumel &amp; Javaid Durrani
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Generate "fluid factor" AVA trace displays
+ Portability: No known limitations.
+ Parallel   : No
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ FFAVA produces "fluid factor" traces F(t), intended to highlight anomalous
+ AVA behavior of hydrocarbon-related reflections as compared with background
+ reflections from water-saturated rocks.  We define F(t) as the difference
+ between the ACTUAL AVA gradient B(t) and a PREDICTED gradient based on
+ background "fluid" trend; i.e.:
+ 
+                  F(t)   =   B(t)  -  W(t)*A(t),
+ 
+ where A(t) is zero-offset trace value and W(t) is estimated slope of the
+ background fluid trend.   (This is the default fluid factor type - others are
+ also available.)
+ 
+ This assumes that background "fluid" events follow linear trends in the (A,B)
+ plane (i.e., B = W*A), as described by Foster et al (1993).  Note:
+ W = -cot(phi)  where "phi" is the "fluid angle" defined by Foster et al.
+ 
+ We make W(t) a (slowly-varying) function of time because we expect the
+ background fluid trend to be depth-dependent (where W becomes increasingly
+ negative at greater depths).  Foster et al (1993) did not consider depth
+ dependence of their fluid trends.  Our depth dependent W(t) is similar in
+ concept to the "geogain" function of Gidlow &amp; Smith (1992).
+ 
+ 
+ Weighting Function Options
+ 
+ FFAVA can derive weighting functions W(t) automatically from the seismic data
+ (OPT_WF = CALC), or you can input a W(t) function manually (OPT_WF = USER),
+ or you can generate constant weight function panels to pick your W(t)
+ functions manually (OPT_WF = TRIAL).  If OPT_WF = TRIAL, output traces are
+ sorted internally into constant weight factor panel order.
+ 
+ When OPT_WF = CALC, FFAVA derives a single weight-factor function W(t) for
+ each input "section," where each "section" is identified by a constant value
+ of header word HDR_IN.  If you wish, you may fool FFAVA into deriving new
+ weighting functions for any desired groups of traces, by setting HDR_IN
+ appropriately.  When OPT_WF = USER, you input only one W(t) function, which
+ is used for all traces read into the job.
+ 
+ 
+ Automatic Weighting Function Calculation
+ 
+ Derivation of W(t) when OPT_WF = CALC is a two-step process:  First, a W(t)
+ function is derived for each input [A(t),B(t)] pair by finding W-values to
+ minimize the median absolute value of [B(t)-W*A(t)] within time windows of
+ height WIN_LEN. (These windowed medians are handled as in process MVXP. The
+ window length WIN_LEN should be big enough to contain mostly background
+ "fluid" events instead of being dominated by events with anomalous AVA.) Once
+ W(t) functions have been derived for each trace pair, they are averaged over
+ an entire section as defined by HDR_IN.
+ 
+ 
+ Trial Weighting Function Parameters
+ 
+ The role of WF_INIT, WF_INC and WF_TOT depend on your value of OPT_WF:
+ When OPT_WF = CALC, these define a search range used by FFAVA internally as
+ it looks for W-values to minimize the windowed medians; thus, they must cover
+ the range of possible W-values, and must cover it densely enough to locate
+ the minimum with reasonable accuracy.
+ 
+ When OPT_WF = TRIAL, these parameters simply specify the trial W-values for
+ your output panels.  The WF_INIT, WF_INC and WF_TOT parameters are not used
+ when OPT_WF = USER.
+ 
+ The default values (WF_INIT=-1.5, WF_INC=0.1, WF_TOT=16) are only appropriate
+ when FFAVA has been immediately preceded by MVXP.  In this case, derived
+ W-values are typically on the order of -1.0 to -0.5.  If MVXP has NOT been
+ applied just before FFAVA, try setting WF_INIT=-3.0, WF_INC=0.2; in this
+ case, typical W-values are around -2.5 to -2.0.
+ 
+ 
+ Fluid Factor Options
+ 
+ The OPT_FF parameter provides four options for the type of "fluid factor"
+ output:
+ 
+      OPT_FF = 1:   F = (B - W*A).
+      OPT_FF = 2:   F = (B - W*A) * [(2+W)*A + (1+W)*B] / [1 + (1+W)**2].
+      OPT_FF = 3:   F = (B - W*A) * (A + W*B) / (1 + W**2).
+      OPT_FF = 4:   Anomaly Classifier (See below).
+ 
+ The default (OPT_FF = 1) is our "standard" fluid factor, analogous to the
+ fluid factors of Smith &amp; Gidlow et al; this is a linear combination of A and
+ B.
+ 
+ OPT_FF = 2 and 3 are PRODUCT measures, based on an idea of Fred
+ Hilterman: to generalize the familiar A*B product (effective only for shallow
+ gas [Class III] anomalies) to a product measure that works better for Class
+ II and Class I anomalies.  Hilterman uses the "fluid trend" idea by rotating
+ his coordinate axes until they are parallel and perpendicular to the fluid
+ trend; then he multiplies coordinate components.  Instead of the (A,B) plane,
+ Hilterman works in the (NI,PR) plane where
+ 
+       NI = "Normal-Incidence Reflectivity" = A.
+       PR = "Poisson Reflectivity"          = A + B.
+ 
+ This results in the slightly complicated formula shown above for OPT_FF=2
+ when expressed in terms of A and B.  OPT_FF=3 is a simpler formula obtained
+ by applying Hilterman's rotation idea directly in the (A,B) plane.  In all
+ cases, the "fluid trend" is B = W*A.
+ 
+ 
+ Anomaly Classifier Option
+ 
+ The Anomaly Classifier option (OPT_FF=4) is intended to determine whether
+ events are "anomalous," and if so, which Rutherford &amp; Williams class (I, II,
+ III or IV) the anomaly belongs in.  The classification is based on input
+ (A,B) values, but output trace samples are restricted to a few discrete
+ values, intended to be plotted with a linear color bar.
+ 
+ Specifically, output traces contain only 11 possible values: -4, -3, -2, -1,
+ -0.5, 0, +0.5, +1, +2, +3, +4.  Absolute values of 1 - 4 are intended to
+ indicate anomalies of Class I, II, III and IV respectively.  The algebraic
+ sign of the result always matches that of the ordinary (OPT_FF=1) FFAVA
+ trace.  Absolute value 0.5 indicates non-anomalous events, meaning that the
+ magnitude of the ordinary FFAVA trace is less than THRESH_FF.  A result of 0
+ means that the (A,B) point is very close to the origin (absolute value of A
+ and B both less than 0.001) - usually missing data zones.
+ 
+ In the Anomaly Classifier (OPT_FF=4), if an event is classified as anomalous
+ (meaning that the ordinary OPT_FF=1 trace has magnitude greater than
+ THRESH_FF), it is further classified as Class I, II, III or IV according to
+ the value of "A" (zero offset reflectivity) and the sign of "B."
+ 
+ Events with negative FFAVA response (top-of-reservoir reflection) are
+ classified as follows:
+ 
+     Class I   if B &lt; 0.0 and A &gt; CLASS2_MAX
+ 
+     Class II  if B &lt; 0.0 and  CLASS2_MIN &lt; A &lt; CLASS2_MAX
+ 
+     Class III if B &lt; 0.0 and  A &lt; CLASS2_MIN,
+ 
+     Class IV  if B &gt; 0.0 and  A &lt; CLASS2_MIN,
+ 
+ Events with positive FFAVA response (bottom-of-reservoir reflection), are
+ classified with the same regions reflected through the origin of the (A,B)
+ plane.
+ 
+ 
+ References
+ 
+ Gidlow, P.M., Smith, G.C., and Vail, P.J., 1992, Hydrocarbon detection
+   using fluid factor traces: a case history; in Robinson, J.H., ed.,
+   How Useful is Amplitude-Versus-Offset Analysis?, Technical Program
+   and Abstracts, Joint SEG/EAEG Summer Research Workshop, Aug 9-14,
+   Big Sky, Montana
+ 
+ Smith, G.C. and Gidlow, P.M., 1987, Weighted stacking for rock
+   property estimation and detection of gas; Geophysical Prospecting,
+   35, 993-1014.
+ 
+ Foster, D.J., Smith, S.W., Dey-Sarkar, S., and Swan, H.W., 1993,
+   A Closer Look at Hydrocarbon Indicators; presented at 63rd Annual
+   SEG Meeting (paper SL2.2), Sept 26-30, Washington, DC.
+ 
+ Castagna, J.P and Smith, S.W., 1994, Comparison of AVO Indicators: A
+   modeling study; GEOPHYSICS, 59, 1849-1855.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ FFAVA must be PRECEDED by process AVAGRAD with OPT_OUTPUT = A_AND_B.  Thus,
+ the input to FFAVA must consist of 2-trace gathers where the first trace of
+ each  gather is the zero-offset extrapolated trace and the second trace of
+ the gather is the AVA gradient.
+ 
+ FFAVA should be preceded by MVXP with no debrighten (after AVAGRAD and before
+ FFAVA).  Although not absolutely necessary, this better standardizes the
+ amplitudes of the input data, allowing various parameters to be set in a more
+ data-independent manner, especially if using the FFAVA Anomaly Classifier
+ (OPT_FF = 4).
+ 
+ 
+ Run Time
+ 
+ Run time of FFAVA when OPT_WF = CALC should be similar to running the MVXP
+ process WF_TOT times on your stacked data.  When OPT_WF = USER or TRIAL,
+ execution time is much faster.
+ 
+ 
+ Trace Output
+ 
+ FFAVA outputs traces one at a time when OPT_WF = USER or CALC. When
+ OPT_WF = TRIAL, it outputs traces one at a time sorted into WF-value panels.
+ 
+ 
+ Plotting Anomaly Classifier Output
+ 
+ When plotting results of the Anomaly Classifier (OPT_FF=4) using a linear
+ color bar in a program such as COLR, all vertical and horizontal color
+ grading must be turned OFF.  Similarly, after outputting these traces from
+ FFAVA with OPT_FF=4, don't do ANYTHING to them that could alter the trace
+ values before plotting.  As one example, do not apply a static shift, because
+ shifting by a non-integer number of samples will interpolate the trace values!
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date      Author       Description
+     ----      ------       -----------
+ 16.  2006-09-11 Stoeckley  Add call to pc_register_array_names for SeisSpace.
+ 15.  2001-11-05 Baumel     Add statement to compile in new absoft compiler.
+ 14.  2001-06-18 Baumel     Finished alpha testing; various bug fixes.
+                            PRODUCTION.
+ 13.  2001-01-25 Selzler    Conversion to new CPS, ready to alpha test.
+ 12.  1999-01-25 Vunderink  Begin using the f90 compiler.
+ 11.  1996-09-19 Baumel     Moved to conlib.
+ 10.  1996-03-11 Baumel     Change defaults for WTRY1, DWTRY (assume MVXP
+                            precedes FFAVA). Documentation additions.
+  9.  1996-02-23 Baumel     Add FFAVA Anomaly Classifier (FFTYPE=4).
+  8.  1995-10-03 Baumel     Major rewrite: New algorithm for computing
+                            weight factors based on minimizing medians;
+                            many parameter changes.
+  7.  1994-12-09 Baumel     Another minor bug fix.
+  6.  1994-10-31 Baumel     Couple of minor bug fixes.
+  5.  1994-07-07 Baumel     New options for fluid factor type (currently
+                            available through WFCALC parameter).
+  4.  1994-06-24 Baumel     Allow manual entry of weight-factors; also
+                            new sign convention for weight-factors.
+  3.  1994-03-29 Baumel     More robust weight-factor calculation.
+  2.  1994-03-24 Baumel     Fluid Factor = new linear comb. of A &amp; B.
+  1.  1994-03-09 Baumel     Original working version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

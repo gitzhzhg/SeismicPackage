@@ -1,0 +1,65 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                             run_java_programs
+#-------------------------------------------------------------------------------
+# Run all java programs in the current directory.
+#
+# The java programs are all java files which contain the following exact phrase:
+#
+#                        "public static void main"
+#
+# A list of the java source files must be passed as the first argument.
+
+# The java command must be passed as the second argument.
+#
+# The relevant class files must have been created before this script is run.
+#
+# This script will work correctly only if the package name is in the first line
+# of the source file.
+#
+# The user will be prompted to press enter to continue before running each java program.
+# This action is disabled if the word AUTO is passed as a third argument.
+#-------------------------------------------------------------------------------
+
+
+set JAVA_FILES = "$1"
+set JAVA       = "$2"
+set AUTO       = "$3"
+
+if(`echo $JAVA_FILES` == "") then
+   exit 0
+endif
+
+foreach file ($JAVA_FILES)
+
+   grep 'public static void main' $file > /dev/null || continue
+
+   set packline = `head -1 $file`
+   set phrase   = $packline[2]
+   set package  = `expr $phrase : '\(.*\).'`
+   set name     = $file:r:t
+
+   echo ""
+   echo ""
+   echo ""
+   echo "---> ready to run java $package.$name"
+   if ($AUTO != AUTO) then
+     echo "---> press enter to continue"
+     set xxx = $<
+   endif
+
+   $JAVA $package.$name $AUTO
+
+   echo ""
+   echo "---> finished running java $package.$name"
+   if ($AUTO != AUTO) then
+     echo "---> press enter to continue"
+     set xxx = $<
+   endif
+
+end
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+

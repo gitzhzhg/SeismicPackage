@@ -1,0 +1,195 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : install_spws_program
+# Category   : stand-alone
+# Written    : 2004-02-11   by: Tom Stoeckley
+# Revised    : 2004-05-21   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script to install an SPWS program for public use.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is a utility to install an SPWS program for public use.
+#
+# The following steps are performed:
+#   (1) The program executable is copied to the $SPWSINSTALLDIR directory.
+#   (2) The associated app-defaults file (if it exists) is also copied. 
+#   (3) The associated help file (if it exists) is also copied. 
+#   (4) A link is made in the $SPWSINSTALLDIR directory for the program.
+#   (5) A link is made in the $SPWSINSTALLDIR directory for app-defaults file.
+#   (6) A link is made in the $SPWSINSTALLDIR directory for the help file.
+#   (7) A link is made in the /apps/geophysics directory for the program.
+#   (8) A link is made in the /apps/geophysics directory for app-defaults file.
+#   (9) A link is made in the /apps/geophysics directory for the help file.
+#
+# Example of file names and locations:
+#
+#   PROGRAM EXECUTABLE:
+#   source:      /home/spws/programs/glotch/linuxab80_debug/glotch
+#   installed:   /usr/app/vendors/spws/bin/ix86-intel-linux/glotch.21May2004 (1)
+#   link to (1): /usr/app/vendors/spws/bin/ix86-intel-linux/glotch           (2)
+#   link to (2):                       /apps/geophysics/bin/glotch
+#
+#   APP-DEFAULTS FILE:
+#   source:                  /home/spws/app-defaults/ Glotch
+#   or source:               /home/spws/app-defaults/ Glotch.app
+#   installed:    /usr/app/vendors/spws/app-defaults/ Glotch.21May2004  (1)
+#   link to (1):  /usr/app/vendors/spws/app-defaults/ Glotch            (2)
+#   link to (2):       /apps/geophysics/app-defaults/ Glotch
+#
+#   HELP FILE:
+#   source:                  /home/spws/app-defaults/ Glotch_help
+#   installed:    /usr/app/vendors/spws/app-defaults/ Glotch_help.21May2004 (1)
+#   link to (1):  /usr/app/vendors/spws/app-defaults/ Glotch_help           (2)
+#   link to (2):       /apps/geophysics/app-defaults/ Glotch_help
+#
+# This script is normally called from the target "install" in a makefile,
+# but also can be called directly for any desired executable.
+#
+# You must type the following:
+#
+#                     install_spws_program <program>
+#
+# where <program> is the name of the architecture-dependent program executable.
+#
+# The full path must be specified if <program> is not in the local directory.
+#
+# This install_spws_program must be run on a node for each supported
+# architecture.
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#         SPWSDIR          normally ~spws
+#         SPWSINSTALLDIR   normally ~spws/install or /usr/app/vendors/spws
+#         ARCHITECTURE     normally sparc-sun-solaris or ix86-intel-linux
+#         USER             must be spws
+#
+# Note: ~spws/install is simply a link to /usr/app/vendors/spws.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  2. 2004-05-21  Stoeckley  Change installed name to include date to keep from
+#                             overwriting the previous version, add a link to
+#                             the new version; move most of the code to the
+#                             new script private_install.
+#  1. 2004-02-11  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: install_spws_program,v 1.2 2004/05/21 19:29:58 spws Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo environment variable SPWSDIR not set.
+     exit
+endif
+
+if($?SPWSINSTALLDIR == 0 || $SPWSINSTALLDIR == "") then
+     echo environment variable SPWSINSTALLDIR not set.
+     exit
+endif
+
+if($?ARCHITECTURE == 0 || $ARCHITECTURE == "") then
+     echo environment variable ARCHITECTURE not set.
+     exit
+endif
+
+
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+
+
+set source_program = $1
+set program        = $1:t
+
+if($program == "") then
+  echo "missing program name"
+  exit 1
+endif
+
+set first_letter = `expr $program : '\(.\).*'`
+set last_letters = `expr $program : '.\(.*\)'`
+set first_upper  = `echo $first_letter | tr '[a-z]' '[A-Z]'`
+set suffix       = _help
+set suffix2      = .app
+set appfile      = $first_upper$last_letters
+set appfile2     = $appfile$suffix2
+set helpfile     = $appfile$suffix
+
+set source_appfile  = $SPWSDIR/app-defaults/$appfile
+set source_appfile2 = $SPWSDIR/app-defaults/$appfile2
+set source_helpfile = $SPWSDIR/app-defaults/$helpfile
+
+set install_program  = $SPWSINSTALLDIR/bin/$ARCHITECTURE/$program
+set install_appfile  = $SPWSINSTALLDIR/app-defaults/$appfile
+set install_helpfile = $SPWSINSTALLDIR/app-defaults/$helpfile
+
+set link_program  = /apps/geophysics/bin/$program
+set link_appfile  = /apps/geophysics/app-defaults/$appfile
+set link_helpfile = /apps/geophysics/app-defaults/$helpfile
+
+
+##----------------------------- do the work --------------------------------##
+##----------------------------- do the work --------------------------------##
+##----------------------------- do the work --------------------------------##
+
+
+$SPWSMAKEDIR/private_install   \
+                 $source_program $install_program $link_program
+
+$SPWSMAKEDIR/private_install   \
+                 $source_appfile $install_appfile $link_appfile
+
+$SPWSMAKEDIR/private_install   \
+                 $source_appfile2 $install_appfile $link_appfile
+
+$SPWSMAKEDIR/private_install   \
+                 $source_helpfile $install_helpfile $link_helpfile
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="setpoly" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SETPOLYPROCESS" title="SETPOLY Process" rows="25" columns="80">
+    <Label keyword="COMMENT_SETPOLYSETHEADERWORDFORT" alignment="center">SETPOLY - Set Header Word For Traces Inside A Polygon</Label>
+    <Label keyword="COMMENT_TRACEPOSITION" alignment="center">Trace position:</Label>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X         =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y         =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDTOSET" alignment="center">Header word to set:</Label>
+    <Label keyword="LABEL_HDR_SET" alignment="left">HDR_SET       =</Label>
+    <Field keyword="HDR_SET" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_VALUESTOSETINTOHDR_SET" alignment="center">Values to set into HDR_SET</Label>
+    <Label keyword="LABEL_POLY_VAL_IN" alignment="left">POLY_VAL_IN  =</Label>
+    <Field keyword="POLY_VAL_IN" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_POLY_VAL_OUT" alignment="left">POLY_VAL_OUT =</Label>
+    <Field keyword="POLY_VAL_OUT" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_POLY_VAL_OUT_FLAG" alignment="left">POLY_VAL_OUT_FLAG =</Label>
+    <Field keyword="POLY_VAL_OUT_FLAG" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_THEPOLYGON" alignment="center">The Polygon:</Label>
+    <Label keyword="LABEL_OPT_POLY" alignment="left">OPT_POLY =</Label>
+    <Field keyword="OPT_POLY" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_POLY">Select PATHNAME_POLY</Button>
+    <Label keyword="EQLAB_PATHNAME_POLY" alignment="left">=</Label>
+    <Field keyword="PATHNAME_POLY" type="string" maxLength="81" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OR" alignment="center">-- or --</Label>
+    <ArraySet keyword="POLY_X_ARRAYSET" label="POLY_X    POLY_Y">
+     <Array keyword="POLY_X" type="float" maxLength="10 " columnName="POLY_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="POLY_Y" type="float" maxLength="10 " columnName="POLY_Y" editable="yes" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_SETPOLYSETHEADERWORDFORT" xPos="12" yPos="1" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_TRACEPOSITION" xPos="2" yPos="3" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="5" yPos="4" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="21" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="30" yPos="4" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="46" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDTOSET" xPos="2" yPos="6" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SET" xPos="30" yPos="6" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SET" xPos="46" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_VALUESTOSETINTOHDR_SET" xPos="2" yPos="8" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_POLY_VAL_IN" xPos="5" yPos="9" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="POLY_VAL_IN" xPos="20" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_POLY_VAL_OUT" xPos="5" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="POLY_VAL_OUT" xPos="20" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_POLY_VAL_OUT_FLAG" xPos="38" yPos="10" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="POLY_VAL_OUT_FLAG" xPos="58" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_THEPOLYGON" xPos="2" yPos="12" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_POLY" xPos="2" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_POLY" xPos="12" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATHNAME_POLY" xPos="2" yPos="16" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_POLY" xPos="23" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_POLY" xPos="24" yPos="16" xSize="81" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OR" xPos="3" yPos="18" xSize="8" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="POLY_X_ARRAYSET" xPos="2" yPos="19" xSize="23" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_X">
+      <Tip>Header word containing x coordinate values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - HDR_X<br> Header word containing x coordinate values.</center></b>
+<pre> Default = 7
+ Allowed = 1-NWIH
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word containing y coordinate values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - HDR_Y<br> Header word containing y coordinate values.</center></b>
+<pre> Default = 8
+ Allowed = 1-NWIH
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SET">
+      <Tip>Header word set to POLY_VAL_IN if a trace is inside the polygon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - HDR_SET<br> Header word set to POLY_VAL_IN if a trace is inside the polygon.</center></b>
+<pre> Default = 48
+ Allowed = 1-NWIH
+ SETPOLY sets header word HDR_SET = POLY_VAL_IN for traces whose X, Y
+ locations, as defined by header words HDR_X and HDR_Y respectively, are
+ INSIDE the polygon.  (Traces whose X,Y locations lie on a vertex or on a line
+ joining two adjacent vertices are also considered INSIDE the polygon.)
+ 
+ For traces OUTSIDE the polygon:
+ 
+     If POLY_VAL_OUT_FLAG = NO, then header word HDR_SET is not changed from
+     its input value.
+ 
+     If POLY_VAL_OUT_FLAG = YES, then header word HDR_SET is set to
+     POLY_VAL_OUT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POLY_VAL_IN">
+      <Tip>Value placed in HDR_SET for traces inside polygon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - POLY_VAL_IN<br> Value placed in HDR_SET for traces inside polygon.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ SETPOLY sets header word HDR_SET = POLY_VAL_IN for traces whose X, Y
+ locations, as defined by header words HDR_X and HDR_Y respectively, are
+ INSIDE the polygon.  (Traces whose X,Y locations lie on a vertex or on a line
+ joining two adjacent vertices are also considered INSIDE the polygon.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POLY_VAL_OUT">
+      <Tip>Value placed in HDR_SET for traces outside polygon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - POLY_VAL_OUT<br> Value placed in HDR_SET for traces outside polygon.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ For traces OUTSIDE the polygon:
+ 
+     If POLY_VAL_OUT_FLAG = NO, then header word HDR_SET is not changed from
+     its input value.
+ 
+     If POLY_VAL_OUT_FLAG = YES, then header word HDR_SET is set to
+     POLY_VAL_OUT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POLY_VAL_OUT_FLAG">
+      <Tip>Whether to set HDR_SET for traces outside the polygon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - POLY_VAL_OUT_FLAG<br> Whether to set HDR_SET for traces outside the polygon.</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ HDR_SET will be set to POLY_VAL_OUT if a trace is outside the polygon, only
+ if POLY_VAL_OUT_FLAG = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_POLY">
+      <Tip>Whether to use polygon arrays or polygon file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - OPT_POLY<br> Whether to use polygon arrays or polygon file.</center></b>
+<pre> Default = ARRAY_POLY
+ Allowed = ARRAY_POLY
+ Allowed = PATHNAME_POLY
+ 
+ If OPT_POLY = ARRAY_POLY, then define polygons by arrays on GUI (POLY_X,
+ and POLY_Y).
+ 
+ If OPT_POLY = PATHNAME_POLY, then define polygons by polygon file whose
+ pathname is entered in PATHNAME_POLY.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_POLY">
+      <Tip>polygon path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - SELECT_PATHNAME_POLY<br> polygon path name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_POLY">
+      <Tip>Name of the text file defining polygon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - PATHNAME_POLY<br> Name of the text file defining polygon.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ You can put the coordinate pairs of vertices in a two column space delimited
+ text file where the first column contains the HDR_X value and the second
+ column the HDR_Y value.  Each row in the text file is a coordinate pair.
+ Vertex coordinate values must be entered sequentially in clockwise
+ order.  The pathname of this text file must be entered in the PATHNAME_POLY
+ parameter.
+ 
+ Up to 200 data entry lines are allowed in the file; text after the second
+ space on the line is ignored.  Only the first 80 characters of each line are
+ used.  Comment lines beginning with "#" are ignored if they are placed AFTER
+ the data lines.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POLY_X">
+      <Tip>Array of polygon vertex x coordinate values, linked with POLY_Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - POLY_X<br> Array of polygon vertex x coordinate values, linked with POLY_Y.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ Vertex coordinate values must be entered sequentially in clockwise order.
+ POLY_X is limited to 200 entries.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POLY_Y">
+      <Tip>Array of polygon vertex y coordinate values, linked with POLY_X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - POLY_Y<br> Array of polygon vertex y coordinate values, linked with POLY_X.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ Vertex coordinate values must be entered sequentially in clockwise order.
+ POLY_Y is limited to 200 entries.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>setpoly - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="setpoly">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SETPOLY    (Set a header word if a trace is inside a polygon)
+ Category   : headers
+ Written    : 1999-07-21   by: Douglas Hanson
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Set a header word if a trace is inside a polygon.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ SETPOLY sets header word HDR_SET to the value of POLY_VAL_IN for traces whose
+ X, Y locations, as defined by header words HDR_X and HDR_Y respectively, are
+ INSIDE the polygon.  (Traces whose X,Y locations lie on a vertex or on a line
+ joining two adjacent vertices are also considered to be INSIDE the polygon.)
+ 
+ For traces OUTSIDE the polygon:
+ 
+     If POLY_VAL_OUT_FLAG = NO, then header word HDR_SET is not changed from
+     its input value.
+ 
+     If POLY_VAL_OUT_FLAG = YES, then header word HDR_SET is set to
+     POLY_VAL_OUT.
+ 
+ 
+ Defining the Polygon
+ 
+ The polygon can be defined in two ways.
+ 
+     1. The vertices of the polygon can be defined by coordinate pairs as
+     specified in the GUI arrays POLY_X, POLY_Y.  Vertex coordinate values
+     must be entered sequentially in clockwise order.
+ 
+     2. Or you can put the coordinate pairs in a two column space delimited
+     text file where the first column contains the HDR_X value and the second
+     column the HDR_Y value.  Each row in the text file is a coordinate pair.
+     Vertex coordinate values must be entered sequentially in clockwise
+     order.  The pathname of this text file must be entered in the
+     PATHNAME_POLY parameter.
+ 
+     Up to 200 data entry lines are allowed in the file; text after the second
+     space on the line is ignored.  Only the first 80 characters of each line
+     are used.  Comment lines beginning with "#" are ignored if they are
+     placed AFTER the data lines.
+ 
+ If OPT_POLY = ARRAY_POLY, then define polygons by the GUI arrays (POLY_X,
+ and POLY_Y).
+ 
+ If OPT_POLY = PATHNAME_POLY, then define polygons by the polygon file whose
+ pathname is entered in PATHNAME_POLY.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ All entries in POLY_X and the first column of the text file must pertain to
+ the coordinate designated by HDR_X (typically header word 7).  All entries in
+ POLY_Y and the second column of the text file must pertain to the coordinate
+ designated by HDR_Y (typically header word 8).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author          Description
+     ----        ------          -----------
+ 12. 2006-12-04  D. Glover       Added NULLIFY statements for Intel compiler
+ 11. 2006-06-06  Stoeckley       Add pc_register_array_names for SeisSpace.
+ 10. 2006-01-10  B. Menger       Removed Unused Variables.
+  9. 2002-02-21  CI Burch        Documentation change only
+  8. 2002-02-18  Douglas Hanson  Use cio for read.
+  7. 2002-02-14  Douglas Hanson  Use dp inside_poly
+  6. 2002-01-07  Douglas Hanson  Add opt_poly.
+  5. 2001-11-26  Douglas Hanson  Set pathname_poly sensitive.
+  4. 2001-11-15  Douglas Hanson  Increase gui filename length.
+  3. 2001-08-01  Douglas Hanson  Fix poly_x access error.
+  2. 2001-05-16  Brad Kruse      Converted from old system.
+  1. 1999-07-21  Douglas Hanson  Original version
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

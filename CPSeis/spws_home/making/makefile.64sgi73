@@ -1,0 +1,42 @@
+##------------------------------- 64sgi73 --------------------------------##
+##------------------------------- 64sgi73 --------------------------------##
+##------------------------------- 64sgi73 --------------------------------##
+
+permitted_architectures = sgi64
+permitted_hosts         = hotce20
+
+FC         = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_AB90EP  = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_O1      = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_FLOATIO = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_INTERPOLATE = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_KMIG    = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_PPIO    = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2 
+FC_UNDER   = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+FC_LINK    = f90       -64 -Wl,-multigot -O2
+
+CC         = cc  -c -O -64 -Wl,-multigot -O2 -DSGI64 
+CC_IBSMA   = cc  -c -O -64 -Wl,-multigot -O2 -DSGI64 -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+CC_LINK    = cc        -64 -Wl,-multigot
+
+CXX        = CC  -c -O -64 -Wl,-multigot -O2 -DSGI64 -woff 1021
+CXX_IBSMA  = CC  -c -O -64 -Wl,-multigot -O2 -DSGI64 -woff 1021 \
+                                         -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+CXX_LINK   = CC        -64 -Wl,-multigot
+CXX_DEPEND = g++3 -MM                         -DSGI64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = ld -shared
+
+MODEXT     = .mod
+MODFLAG    = -I
+
+FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+GUI_LIBS   = -L/usr/Motif-2.1/lib64 -lXm -lXpm -L/usr/lib64 -lXt -lX11
+MATH_LIBS  = -lm -lpthread
+
+INCDIRS += /usr/Motif-2.1/include $(JAVA_HOME)/include \
+                                  $(JAVA_HOME)/include/linux

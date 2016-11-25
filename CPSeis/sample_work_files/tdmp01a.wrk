@@ -1,0 +1,184 @@
+<CPS_v1 type="WORKFILE"/>
+
+<PROCESS name="PROJECT_DATA">
+ <GLOBALS>
+  GRID    = (0, 0, 25, 0, 0, 25)
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  PROJECT = NONE,   ACCOUNT = "",     USER_NAME = dhanson,
+  ROUTING_NAME = "",                  ADDRESS = "",     PHONE   = "",
+  USER_LEVEL = REGULAR,               SURVEY_UNITS = FEET,
+  TR_UNITS_TYP = TIME,                TR_UNITS = " SECONDS",
+  MODE = "3D Mode", ORIGIN_EAST = 0,  ORIGIN_NORTH = 0, X_GRID_DIST = 25,
+  Y_GRID_DIST = 25, ANGLE   = 0,      HANDEDNESS = RIGHT,
+  DX11    = 25,     DX12    = 0,      DX21    = 0,      DX22    = 25,
+  DN11    = 0.04,   DN12    = 0,      DN21    = 0,      DN22    = 0.04,
+  SURVEY_EAST = (), SURVEY_NORTH = (),                  GRID_X  = (),
+  GRID_Y  = (),     X_RESIDUAL = (),  Y_RESIDUAL = ()
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="JOB_DATA">
+ <GLOBALS>
+  GRID    = (0, 0, 25, 0, 0, 25),     TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 1001,   NWIH    = 64,     NUM_CPUS = 1
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  JOBNAME = tdmp01a,                  JOB_COMMENT = "",
+  SUB_PROJECT = NONE,                 QUEUE   = A,      MAIL_OPT = NO,
+  HISTORY_OPT = MODEL,                PDN_USERID = dhanson,
+  MACHINE = Linux,  RERUN   = NO,     PATHNAME_TRCIO = ~dhanson/cpsdata/,
+  PATHNAME_DIR = /homes/3DGeo/dhanson/,                 NUM_CPUS = 1,
+  NUM_NODES = 1,    PRIORITY = 0,     TSTAMP_INC = 1000,
+  STD_LIBS = BETALIB,
+  REC_KEEPING = "NO    Job Summary File",
+  PCPS_REPORT_OPT = "Do not include worker printout",
+  TRSCAN_OPT = BASIC,                 CALLING_PROGRAM = CPS,
+  DEBUG_LEVEL = "NO DEBUG",           RLOCATION = LOCAL,
+  TRACE_LENGTH = 4, TSTRT   = 0,      DT      = 0.004,  NDPT    = 1001,
+  NWIH    = 64,     CUSTOM_EXEC_B = "",
+  CUSTOM_EXEC_A = "",                 CUSTOM_LAM = NO,
+  CUSTOM_MODULES = (),                CUSTOM_COMPILE = (),
+  CUSTOM_LINK = (), CUSTOM_NODES = (),
+  PROCESS_LIST = (PROJECT_DATA, JOB_DATA, SPIKE, HEADSUM, TDMP)
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="SPIKE">
+ <GLOBALS>
+  GRID    = (0, 0, 25, 0, 0, 25),     TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 1001,   NWIH    = 64,     NUM_CPUS = 1,     GATHERED = NO,
+  NUMTR   = 1
+ </GLOBALS>
+ <CONTROLS>
+  NEED_LABEL = YES, NSCRATCH = 0,     NSTORE  = 16004,
+  PARALLEL_SAFE = YES,                PCPS_SEND_MODE = PCPS_BOSS_EXECS,
+  PCPS_GENERATOR_MODE = PCPS_TRACE_GEN
+ </CONTROLS>
+ <PARAMETERS>
+  AMP_REF_ARRAYSET = (AMP_REF, DEP_REF, X_DIP_REF, Y_DIP_REF),
+  DN1_REF_ARRAYSET = (DN1_REF, VP1_REF, VS1_REF, DN2_REF, VP2_REF,
+   VS2_REF),
+  AMP_DIF_ARRAYSET = (AMP_DIF, DEP_DIF, X_LOC_DIF, Y_LOC_DIF),
+  DN1_DIF_ARRAYSET = (DN1_DIF, VP1_DIF, VS1_DIF, DN2_DIF, VP2_DIF,
+   VS2_DIF),
+  AMP_PIK_ARRAYSET = (AMP_PIK, DEP_PIK, X_LOC_PIK, Y_LOC_PIK),
+  NUM_CPUS = 1,     BROADCAST_TRACES = YES,
+  SYNGRID_AZIMUTH = --------------------------------------------,
+  SYNGRID_PARAMETERS = -----------------------------------------,
+  OPT_XY_ORDER = X_Y,                 OPT_OFFSET_SIGN = NONE,
+  GATHER_TYPE = OFFSET,               OPT_INPUT = INTERNAL,
+  NUM_DUPLICATE = 1,                  GROUP_SIZE = 1,   AZIMUTH = 0,
+  SYNGRID_HDR = ------------------------------------------------,
+  HDR_X   = 7,      HDR_Y   = 8,
+  SYNGRID_X = --------------------------------------------------,
+  GAT_X_TOT = 3,    GAT_X_INIT = 0,   GAT_X_LAST = 2,   GAT_X_INC = 1,
+  SYNGRID_Y = --------------------------------------------------,
+  GAT_Y_TOT = 1,    GAT_Y_INIT = 0,   GAT_Y_LAST = 0,   GAT_Y_INC = 1,
+  SYNGRID_X_OFF = ----------------------------------------------,
+  OFF_X_TOT = 1,    OFF_X_INIT = 0,   OFF_X_LAST = 0,   OFF_X_INC = 25,
+  SYNGRID_Y_OFF = ----------------------------------------------,
+  OFF_Y_TOT = 1,    OFF_Y_INIT = 0,   OFF_Y_LAST = 0,   OFF_Y_INC = 25,
+  SYNREF_ZOEPPRITZ = -------------------------------------------,
+  OPT_ZOEPPRITZ = YES,                TIM_TYPE = NORMAL,
+  TIM_INTERP = 4,
+  SYNREF_GHOST = -----------------------------------------------,
+  OPT_GHOST_NON = YES,                OPT_GHOST_GAT = NO,
+  OPT_GHOST_TIG = NO,                 DEP_GHOST = 0,    RC_GHOST = -1,
+  SYNREF_DECAY = -----------------------------------------------,
+  OPT_DECAY = NO,   PWR_DECAY = 0,    COS_DECAY = 0,
+  SYNREF_NOISE = -----------------------------------------------,
+  OPT_NOISE = NO,   NOISE_TYPE = DIFF,                  AMP_NOISE = 0.1,
+  SYNREF_DIRECT = ----------------------------------------------,
+  OPT_DIRECT = NO,  AMP_DIRECT = 0,   PWR_DIRECT = 0,
+  SYNREF_SPIKES = ----------------------------------------------,
+  OPT_SPIKE = NO,   AMP_SPIKE = 1,    SPIKE_TOT = 1,    SPIKE_MIN = 0.4,
+  SPIKE_MAX = 0.4,  SPIKE_INC = 0.4,
+  SYNREF_REF = -------------------------------------------------,
+  OPT_REF = YES,
+  AMP_REF = (1, 1, 1, 1, 1, 1, 1),
+  DEP_REF = (500, 1000, 1500, 2000, 2500, 3000, 3500),
+  X_DIP_REF = (30, 25, 20, 15, 10, 5, 0),
+  Y_DIP_REF = (0, 0, 0, 0, 0, 0, 0),
+  DN1_REF = (1, 1, 1, 1, 1, 1, 1),
+  VP1_REF = (2000, 2000, 2000, 2000, 2000, 2000, 2000),
+  VS1_REF = (1000, 1000, 1000, 1000, 1000, 1000, 1000),
+  DN2_REF = (1, 1, 1, 1, 1, 1, 1),
+  VP2_REF = (2100, 2100, 2100, 2100, 2100, 2100, 2100),
+  VS2_REF = (1000, 1000, 1000, 1000, 1000, 1000, 1000),
+  SYNREF_DIF = -------------------------------------------------,
+  OPT_DIF = NO,     PATH_DIF = NONE,  AMP_DIF = (),     DEP_DIF = (),
+  X_LOC_DIF = (),   Y_LOC_DIF = (),   DN1_DIF = (),     VP1_DIF = (),
+  VS1_DIF = (),     DN2_DIF = (),     VP2_DIF = (),     VS2_DIF = (),
+  SYNREF_PIK = -------------------------------------------------,
+  OPT_PIK = NO,     PATH_PIK = NONE,  AMP_PIK = (),     DEP_PIK = (),
+  X_LOC_PIK = (),   Y_LOC_PIK = (),   X_OFF_PIK = (),   Y_OFF_PIK = (),
+  SYNREF_REFLECTIVITY = ----------------------------------------,
+  OPT_COMPUTE_REF = NO,               PATH_REF_INP = NONE,
+  PATH_REF_OUT = NONE,
+  SYNVOFZ_RAY = ------------------------------------------------,
+  OPT_VOFZ = YES,   RAY_TOT = 1001,
+  SYNVOFZ_RAY_DIST = -------------------------------------------,
+  RAY_DIST_TOT = 121,                 RAY_DIST_MIN = 0,
+  RAY_DIST_MAX = 12000,               RAY_DIST_INC = 100,
+  SYNVOFZ_RAY_DEP = --------------------------------------------,
+  RAY_DEP_TOT = 101,                  RAY_DEP_MIN = 0,
+  RAY_DEP_MAX = 10000,                RAY_DEP_INC = 100,
+  SYNVOFZ_VEL = ------------------------------------------------,
+  OPT_VEL = PATH,   PATH_VEL = NONE,  DEPTH_VEL = 0,    CONST_VEL = 2000,
+  GRAD_VEL = 0,     V_GAT_TIG = 1,
+  WAVELET_PARAMETERS = -----------------------------------------,
+  WAVELET_TYPE = GAUSSIAN2,           WAVELET_SHIFT = 0,
+  WAVELET_LENGTH = 0.08,              WAVELET_INC = 0.001,
+  WAVELET_FFT = -2048,                WAVELET_NUM = 81,
+  WAVELET_FILTER = ---------------------------------------------,
+  WAVELET_FREQ_LOW_NONE = 5,          WAVELET_FREQ_LOW_FULL = 8,
+  WAVELET_FREQ_HIGH_FULL = 50,        WAVELET_FREQ_HIGH_NONE = 60,
+  WAVELET_PHASE = 0,                  WAVELET_FILTER_LEVEL = WAVELET,
+  WAVELET_FREQ_POWER = 0,             WAVELET_FREQ_RICKER = -32.5,
+  DATUMGRID_DATUM = --------------------------------------------,
+  OPT_DATUM = NO,
+  DATUMGRID_GAT_DATUM = ----------------------------------------,
+  OPT_GAT_DATUM = CONSTANT,           CONST_GAT_DATUM = 0,
+  PATH_GAT_DATUM = NONE,
+  DATUMGRID_TIG_DATUM = ----------------------------------------,
+  OPT_TIG_DATUM = CONSTANT,           CONST_TIG_DATUM = 0,
+  PATH_TIG_DATUM = NONE
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="HEADSUM">
+ <GLOBALS>
+  GRID    = (0, 0, 25, 0, 0, 25),     TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 1001,   NWIH    = 64,     NUM_CPUS = 1,     GATHERED = NO,
+  NUMTR   = 1
+ </GLOBALS>
+ <CONTROLS>
+  NTAPES  = 0,      NEED_REQUEST = NO,                  NEED_LABEL = NO,
+  TWOSETS = NO,     NSCRATCH = 0,     NSTORE  = 768,    IFTD    = NO,
+  NDISK   = 0,      SETUP_ONLY = NO
+ </CONTROLS>
+ <PARAMETERS>
+  HDR_FLAG = 0,     HIST_LAV = YES
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="TDMP">
+ <GLOBALS>
+  GRID    = (0, 0, 25, 0, 0, 25),     TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 1001,   NWIH    = 64,     NUM_CPUS = 1,     GATHERED = NO,
+  NUMTR   = 1
+ </GLOBALS>
+ <PARAMETERS>
+  HDR_FLAG = 0,     SKIP_INIT = 0,    NUM_DO  = 1,      NUM_SKIP = 0,
+  TOT_DO  = 10,     NUM_SAM = 0,      OPT_HDR = BRIEF,  ROUND   = YES,
+  HEADERS = (6, 4, 5, 4, 4, 5, 5, "", 4, 4, "", "", "", "", "", "", "", "",
+   "", "", "", "", "", "", 8, "", "", "", "", "", "", "", 5, "", 5)
+ </PARAMETERS>
+</PROCESS>

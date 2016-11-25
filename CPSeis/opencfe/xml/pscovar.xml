@@ -1,0 +1,723 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="pscovar" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PSCOVARPROCESS" title="PSCOVAR Process" rows="24" columns="80">
+    <Label keyword="COMMENT_PSCOVARCOMPUTECOVARIANCE" alignment="center">PSCOVAR - Compute Covariances for PSLINV and Generate AVA Synthetics</Label>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_COLUMNS" alignment="left">NUM_COLUMNS=</Label>
+    <Field keyword="NUM_COLUMNS" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FIRSTLINE" alignment="left">FIRSTLINE=</Label>
+    <Field keyword="FIRSTLINE" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NILSTRING" alignment="left">NILSTRING=</Label>
+    <Field keyword="NILSTRING" type="string" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_COLUMN" alignment="left">TIME_COLUMN=</Label>
+    <Field keyword="TIME_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DENSITY_COLUMN" alignment="left">DENSITY_COLUMN=</Label>
+    <Field keyword="DENSITY_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWAVE_COLUMN" alignment="left">PWAVE_COLUMN=</Label>
+    <Field keyword="PWAVE_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SWAVE_COLUMN" alignment="left">SWAVE_COLUMN=</Label>
+    <Field keyword="SWAVE_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_UNITS" alignment="left">TIME_UNITS=</Label>
+    <Field keyword="TIME_UNITS" type="comboBox" maxLength="14" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWAVE_TYPE" alignment="left">PWAVE_TYPE=</Label>
+    <Field keyword="PWAVE_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SWAVE_TYPE" alignment="left">SWAVE_TYPE=</Label>
+    <Field keyword="SWAVE_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WAVELET_TYPE" alignment="left">WAVELET_TYPE=</Label>
+    <Field keyword="WAVELET_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PEAK_FREQ" alignment="left">PEAK_FREQ=</Label>
+    <Field keyword="PEAK_FREQ" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FREQ_LOW_NONE" alignment="center">FREQ_LOW_NONE</Label>
+    <Label keyword="COMMENT_FREQ_LOW_FULL" alignment="center">FREQ_LOW_FULL</Label>
+    <Label keyword="COMMENT_FREQ_HIGH_FULL" alignment="center">FREQ_HIGH_FULL</Label>
+    <Label keyword="COMMENT_FREQ_HIGH_NONE" alignment="center">FREQ_HIGH_NONE</Label>
+    <Field keyword="FREQ_LOW_NONE" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Field keyword="FREQ_LOW_FULL" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Field keyword="FREQ_HIGH_FULL" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Field keyword="FREQ_HIGH_NONE" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COV_WIN_TOP" alignment="left">COV_WIN_TOP=</Label>
+    <Field keyword="COV_WIN_TOP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COV_WIN_BOT" alignment="left">COV_WIN_BOT=</Label>
+    <Field keyword="COV_WIN_BOT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANGLE_FIRST" alignment="left">ANGLE_FIRST=</Label>
+    <Field keyword="ANGLE_FIRST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANGLE_INC" alignment="left">ANGLE_INC=</Label>
+    <Field keyword="ANGLE_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_ANGLES" alignment="left">NUM_ANGLES=</Label>
+    <Field keyword="NUM_ANGLES" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VSVP_OUT" alignment="left">OPT_VSVP_OUT=</Label>
+    <Field keyword="OPT_VSVP_OUT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_SMTH_VSVP" alignment="left">LEN_SMTH_VSVP=</Label>
+    <Field keyword="LEN_SMTH_VSVP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR" alignment="left">NUMTR=</Label>
+    <Field keyword="NUMTR" type="string" maxLength="7" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PSCOVARCOMPUTECOVARIANCE" xPos="5" yPos="1" xSize="68" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME" xPos="1" yPos="3" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="16" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="17" yPos="3" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="17" yPos="4" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_COLUMNS" xPos="1" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_COLUMNS" xPos="13" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FIRSTLINE" xPos="27" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FIRSTLINE" xPos="37" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NILSTRING" xPos="52" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NILSTRING" xPos="62" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_COLUMN" xPos="1" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_COLUMN" xPos="13" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DENSITY_COLUMN" xPos="20" yPos="8" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DENSITY_COLUMN" xPos="35" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PWAVE_COLUMN" xPos="42" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWAVE_COLUMN" xPos="55" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SWAVE_COLUMN" xPos="62" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SWAVE_COLUMN" xPos="75" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_UNITS" xPos="1" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_UNITS" xPos="12" yPos="9" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PWAVE_TYPE" xPos="33" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWAVE_TYPE" xPos="44" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SWAVE_TYPE" xPos="57" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SWAVE_TYPE" xPos="68" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WAVELET_TYPE" xPos="1" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WAVELET_TYPE" xPos="14" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PEAK_FREQ" xPos="29" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PEAK_FREQ" xPos="39" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FREQ_LOW_NONE" xPos="0" yPos="12" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_FREQ_LOW_FULL" xPos="15" yPos="12" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_FREQ_HIGH_FULL" xPos="30" yPos="12" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_FREQ_HIGH_NONE" xPos="46" yPos="12" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="FREQ_LOW_NONE" xPos="1" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_FULL" xPos="17" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_FULL" xPos="32" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_NONE" xPos="48" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COV_WIN_TOP" xPos="1" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COV_WIN_TOP" xPos="13" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COV_WIN_BOT" xPos="28" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COV_WIN_BOT" xPos="40" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANGLE_FIRST" xPos="1" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANGLE_FIRST" xPos="13" yPos="17" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANGLE_INC" xPos="30" yPos="17" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANGLE_INC" xPos="40" yPos="17" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_ANGLES" xPos="56" yPos="17" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ANGLES" xPos="67" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_VSVP_OUT" xPos="1" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VSVP_OUT" xPos="14" yPos="18" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_SMTH_VSVP" xPos="26" yPos="18" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_SMTH_VSVP" xPos="40" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUMTR" xPos="59" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR" xPos="67" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - SELECT_PATHNAME<br>Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Name of input file containing well log data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PATHNAME<br>Name of input file containing well log data.</center></b>
+<pre> Default = NONE
+ Allowed = valid file name.
+ 
+ This must be an ASCII file containing four or more columns of numbers.
+ The number of columns on the file must be NUM_COLUMNS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PATHNAME_INFO<br>Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NUM_COLUMNS">
+      <Tip>Number of columns in the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - NUM_COLUMNS<br>Number of columns in the file.</center></b>
+<pre> Default = 4
+ Allowed = integer &gt;= 4.
+ 
+ NUM_COLUMNS is the total number of columns in your file, which must be
+ specified to allow reading the file correctly. Your file must have at least
+ four columns, containing  Traveltime, Density, P-wave velocity or slowness,
+ and S-wave velocity or slowness. It may have additional columns (e.g., other
+ well logs), but these will be ignored by PSCOVAR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FIRSTLINE">
+      <Tip>Row on file to start reading.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - FIRSTLINE<br>Row on file to start reading.</center></b>
+<pre> Default = 1
+ Allowed = integer &gt;= 1
+ 
+ This parameter allows skipping header information, as may be present in an
+ LAS or similar format file, and you may also set FIRSTLINE to start reading
+ deeper in order to ignore bad values at the top of your logs.
+ 
+ Note: PSCOVAR reads from line FIRSTLINE to the end of the file. If there are
+ bad values at the bottom of your logs that you want PSCOVAR to ignore, remove
+ them by editing your file before running PSCOVAR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NILSTRING">
+      <Tip>Symbol for nil value on file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - NILSTRING<br>Symbol for nil value on file.</center></b>
+<pre> Default = -999.2500
+ Allowed = any character string containing no blank characters.
+ 
+ WARNING: This is a CHARACTER STRING, not a number, so it must match the nil
+ string in your file EXACTLY (e.g., -999.2500 isn't the same as -999.25).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_COLUMN">
+      <Tip>Column number containing (two-way) Traveltime values in file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - TIME_COLUMN<br>Column number containing (two-way) Traveltime values in file.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NUM_COLUMNS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DENSITY_COLUMN">
+      <Tip>Column number containing Density values in file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - DENSITY_COLUMN<br>Column number containing Density values in file.</center></b>
+<pre> Default = 2
+ Allowed = 1 - NUM_COLUMNS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWAVE_COLUMN">
+      <Tip>Column number in file containing P-Wave slowness or velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PWAVE_COLUMN<br>Column number in file containing P-Wave slowness or velocity.</center></b>
+<pre> Default = 3
+ Allowed = 1 - NUM_COLUMNS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SWAVE_COLUMN">
+      <Tip>Column number in file containing S-Wave slowness or velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - SWAVE_COLUMN<br>Column number in file containing S-Wave slowness or velocity.</center></b>
+<pre> Default = 4
+ Allowed = 1 - NUM_COLUMNS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_UNITS">
+      <Tip>Units of times in TIME_COLUMN on file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - TIME_UNITS<br>Units of times in TIME_COLUMN on file.</center></b>
+<pre> Default = MILLISECONDS
+ Allowed = MILLISECONDS or SECONDS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWAVE_TYPE">
+      <Tip>Whether P-Wave values in file are Slowness or Velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PWAVE_TYPE<br>Whether P-Wave values in file are Slowness or Velocity.</center></b>
+<pre> Default = SLOWNESS
+ Allowed = SLOWNESS or VELOCITY
+ 
+ P-Wave and S-Wave values may be either velocities in meters or feet per
+ second, or slownesses in MICROseconds per meter or foot. It is acceptable
+ for P-Wave values to be slowness while S-Wave values are velocity (or vice
+ versa) as long as both are in meters or both in feet.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SWAVE_TYPE">
+      <Tip>Whether S-Wave values in file are Slowness or Velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - SWAVE_TYPE<br>Whether S-Wave values in file are Slowness or Velocity.</center></b>
+<pre> Default = SLOWNESS
+ Allowed = SLOWNESS or VELOCITY
+ 
+ P-Wave and S-Wave values may be either velocities in meters or feet per
+ second, or slownesses in MICROseconds per meter or foot. It is acceptable
+ for P-Wave values to be slowness while S-Wave values are velocity (or vice
+ versa) as long as both are in meters or both in feet.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WAVELET_TYPE">
+      <Tip>Whether to include a Bandpass or Ricker or No wavelet.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - WAVELET_TYPE<br>Whether to include a Bandpass or Ricker or No wavelet.</center></b>
+<pre> Default = BANDPASS
+ Allowed = BANDPASS, RICKER or NONE
+ 
+ Your selected wavelet will be applied to reflectivities before computing
+ covariances and will also appear in the output synthetic traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PEAK_FREQ">
+      <Tip>Peak frequency of wavelet if WAVELET_TYPE = RICKER.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PEAK_FREQ<br>Peak frequency of wavelet if WAVELET_TYPE = RICKER.</center></b>
+<pre> Default = 45.0
+ Allowed = real &gt; 0.0
+ 
+ Used only if WAVELET_TYPE = RICKER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Frequency where low frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - FREQ_LOW_NONE<br>Frequency where low frequency taper passes nothing.</center></b>
+<pre> Default = 0.0
+ Allowed = Nyquist &gt;= real &gt;= 0.0
+ 
+ Used only if WAVELET_TYPE = BANDPASS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_FULL">
+      <Tip>Frequency where low frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - FREQ_LOW_FULL<br>Frequency where low frequency taper passes full amplitude.</center></b>
+<pre> Default = 0.0
+ Allowed = Nyquist &gt;= real &gt;= FREQ_LOW_NONE
+ 
+ Used only if WAVELET_TYPE = BANDPASS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>Frequency where high frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - FREQ_HIGH_FULL<br>Frequency where high frequency taper passes full amplitude.</center></b>
+<pre> Default = Nyquist
+ Allowed = Nyquist &gt;= real &gt;= FREQ_LOW_FULL
+ 
+ Used only if WAVELET_TYPE = BANDPASS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_NONE">
+      <Tip>Frequency where high frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - FREQ_HIGH_NONE<br>Frequency where high frequency taper passes nothing.</center></b>
+<pre> Default = Nyquist
+ Allowed = Nyquist &gt;= real &gt;= FREQ_HIGH_FULL
+ 
+ Used only if WAVELET_TYPE = BANDPASS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COV_WIN_TOP">
+      <Tip>Top of Time Window (in seconds) for computing Covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - COV_WIN_TOP<br>Top of Time Window (in seconds) for computing Covariance.</center></b>
+<pre> Default = start_trace
+ Allowed = real between start_trace and end_trace
+ 
+ The window defined by COV_WIN_TOP and COV_WIN_BOT is used for calculating
+ covariance but has no effect on the output synthetic traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COV_WIN_BOT">
+      <Tip>Bottom of Time Window (in seconds) for computing Covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - COV_WIN_BOT<br>Bottom of Time Window (in seconds) for computing Covariance.</center></b>
+<pre> Default = end_trace
+ Allowed = real between COV_WIN_TOP and end_trace
+ 
+ The window defined by COV_WIN_TOP and COV_WIN_BOT is used for calculating
+ covariance but has no effect on the output synthetic traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANGLE_FIRST">
+      <Tip>Angle (in degrees) for first synthetic trace to generate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - ANGLE_FIRST<br>Angle (in degrees) for first synthetic trace to generate.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANGLE_INC">
+      <Tip>Angle increment (in degrees) for generated synthetic traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - ANGLE_INC<br>Angle increment (in degrees) for generated synthetic traces.</center></b>
+<pre> Default = 5.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ANGLES">
+      <Tip>Number of angles for generating synthetic traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - NUM_ANGLES<br>Number of angles for generating synthetic traces.</center></b>
+<pre> Default = 13
+ Allowed = integer &gt;= 3
+ 
+ Output gather will contain either NUM_ANGLES traces (if OPT_VSVP_OUT = NO)
+ or NUM_ANGLES + 1 traces (if OPT_VSVP_OUT = YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VSVP_OUT">
+      <Tip>Whether to output a trace containing smoothed Vs/Vp ratio.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - OPT_VSVP_OUT<br>Whether to output a trace containing smoothed Vs/Vp ratio.</center></b>
+<pre> Default = YES
+ Allowed = YES or NO
+ 
+ If OPT_VSVP_OUT = YES, the Vs/Vp trace will be the last trace of the output
+ gather and will have a value of 999.0 in header word 6.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_SMTH_VSVP">
+      <Tip>Running average smoothing length (in seconds) for Vs/Vp trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - LEN_SMTH_VSVP<br>Running average smoothing length (in seconds) for Vs/Vp trace.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt;= 0.0
+ 
+ A running average smoother is applied to your output Vs/Vp trace when
+ OPT_VSVP_OUT = YES, to help you pick a slowly varying Vs/Vp function for use
+ in PSLINV. This parameter has no effect on output synthetic traces, which are
+ computed using the original (unsmoothed) Vs/Vp. It also has no effect on the
+ Covariance calculation, which doesn't make use of the Vs/Vp ratio at all.
+ 
+ You may set LEN_SMTH_VSVP = 0.0 if you want the original (unsmoothed) Vs/Vp
+ to be output.
+ 
+ Active only when OPT_VSVP_OUT = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR">
+      <Tip>Number of traces in the output gather, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - NUMTR<br>Number of traces in the output gather, shown for reference.</center></b>
+<pre>
+ NUMTR will be either NUM_ANGLES (if OPT_VSVP_OUT = NO) or NUM_ANGLES + 1
+ (if OPT_VSVP_OUT = YES).</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pscovar - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="pscovar">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PSCOVAR          (PSLINV Covariance Analysis)
+ Category   : inversion
+ Written    : 2004-06-24   by: Bob Baumel
+ Revised    : 2007-01-03   by: D. Glover
+ Maturity   : production
+ Purpose    : Well log Covariances for PSLINV and AVA Synthetics
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ PSCOVAR computes well log covariances to be used for constraining inversions
+ in process PSLINV. Input to this process consists of an ASCII file, which may
+ be in LAS or other columnar ASCII format, containing well logs (or even a
+ sparse synthetic model) including Density and P-wave &amp; S-wave velocities or
+ slownesses. Covariances computed by PSCOVAR are displayed in the report file.
+ In addition, PSCOVAR outputs synthetic traces (in the angle domain) which may
+ be used for testing, and optionally also outputs a Vs/Vp trace which may be
+ used for picking a depth-dependent Vs/Vp function to use in PSLINV.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ PSCOVAR is a loop-starting process, as it supplies traces to the job after
+ reading an ASCII file containing well log data. Thus, PSCOVAR will normally
+ be the first active process of a CPS job following JOB_DATA. In JOB_DATA
+ parameters, be sure that the seismic trace length is long enough to cover
+ the range of traveltimes represented by your log data, and that the seismic
+ sample interval (DT) is fine enough for seismic data
+ 
+ The ASCII file input to PSCOVAR must include at least four columns of
+ numbers, containing the quantities:
+    Traveltime (two-way) in seconds or milliseconds,
+    Density,
+    P-wave slowness or velocity,
+    S-wave slowness or velocity.
+ These columns may appear in any order, and the file may include additional
+ columns (e.g., other well logs) which PSCOVAR will ignore.
+ 
+ The FIRSTLINE parameter lets you start reading at any desired line in the
+ file, so you can ignore header information (as present in LAS or similar
+ format files) and you can also ignore bad values at the top of your logs.
+ PSCOVAR reads from line FIRSTLINE to the end of the file. If there are bad
+ values at the bottom of your logs that you want PSCOVAR to ignore, you
+ should remove them by editing your file prior to running PSCOVAR.
+ 
+ Setting the NILSTRING parameter can be tricky, as it needs to match the nil
+ values in your file exactly as ASCII strings, not just numerically. For
+ example, -999.25 and -999.2500 are not the same string. Regardless of your
+ NILSTRING setting, PSCOVAR assumes that traveltimes are always non-negative,
+ while Densities, P-wave and S-wave values are always positive; therefore,
+ any values in these columns that fail to satisfy these conditions are
+ interpreted as nils.
+ 
+ A traveltime column must be present so PSCOVAR can place log values at the
+ correct seismic trace times. Traveltimes need not be sampled uniformly (e.g.,
+ the logs might still be sampled uniformly in depth), and may be sampled more
+ finely than the seismic time samples. When reading your file, PSCOVAR
+ resamples logs to the seismic sample rate by binning log values into the
+ intervals between successive seismic trace samples and averaging all values
+ that fall into the same bin. (We place bins BETWEEN the seismic time samples,
+ instead of centering them on the seismic time samples, so we can calculate
+ reflectivities more accurately AT the seismic time samples.)
+ 
+ P-wave and S-wave values in the file may be either velocities or slownesses
+ but must be in CONSISTENT UNITS. If both are velocities (or both slownesses),
+ they should be in the SAME units. If one is a velocity and the other a
+ slowness, their units must match (e.g., velocity in meters per second and
+ slowness in microseconds per meter). Actually, even if the P-wave and S-wave
+ units AREN'T consistent, you'll still get the right covariances, but your
+ output synthetic traces and Vs/Vp trace will be wrong.
+ 
+ The Vs/Vp trace is calculated using only the depth levels where the P-wave
+ and S-wave logs are both present (although the Density log need not also be
+ present). The Vp and Vs logs, after resampling and decimation to just these
+ levels, are linearly interpolated/extrapolated to fill the trace; then, the
+ Vs/Vp ratio is calculated.
+ 
+ Reflectivities (for both the covariance calculation and synthetic traces)
+ are calculated only in intervals where all three of the logs (Density, P-wave
+ and S-wave) are present. More precisely, reflectivities are calculated only
+ where there are pairs of adjacent levels (after binning as explained above)
+ where all three of these logs are present at both levels.
+ 
+ (Warning: If the log sampling is so coarse that pairs of adjacent seismic
+ bins are never both populated, PSCOVAR will not calculate any reflections.)
+ 
+ If you wish to build the ASCII file for a synthetic model with coarsely
+ spaced interfaces that produce sharp reflections, then build each interface
+ by entering a PAIR of rows separated by one seismic sample interval (DT) to
+ produce the rock property contrasts at that interface. In particular, place
+ these rows 0.5*DT above and 0.5*DT below the time where you want the
+ reflection to appear. For example, if you wish to place reflections at
+ 1.500 and 1.700 seconds, and the sample interval in your job is 0.002 s,
+ enter rows describing rock properties at traveltimes 1.499, 1.501, 1.699 and
+ 1.701 seconds.
+ 
+ Covariances computed by PSCOVAR appear in the report file and include the
+ following five numbers which may be used to constrain inversions in PSLINV:
+    CC_RVS_RVP   = Correlation coefficient between RVS and RVP.
+    CC_RDEN_RVP  = Correlation coefficient between RDEN and RVP.
+    CC_RDEN_RVS  = Correlation coefficient between RDEN and RVS.
+    SDR_RVS_RVP  = Ratio of Std Dev of RVS to Std Dev of RVP.
+    SDR_RDEN_RVP = Ratio of Std Dev of RDEN to Std Dev of RVP.
+ These numbers represent correlations between  P, S and Density REFLECTIVITIES
+ (RVP, RVS and RDEN) which depend on the depth distribution of P-wave, S-wave
+ and Density values. They cannot be computed simply by examining crossplots of
+ the original P-wave, S-wave and Density logs.
+ 
+ Although the correlations computed by PSCOVAR cannot be derived from
+ crossplots of original rock properties, it is nevertheless very useful to
+ examine such crossplots. For example, they may reveal that you've been given
+ a MANUFACTURED log! Sometimes, even though all three logs (P-wave, S-wave and
+ Density) were recorded, one of them (typically the S-wave log) has been
+ replaced with a synthetic log (e.g., calculated from P-wave and other logs)
+ which may behave better for some analyses. However, to compute meaningful
+ correlations for use in PSLINV, you should use genuine recorded logs!
+ 
+ PSCOVAR allows specifying a Bandpass or Ricker wavelet which will be applied
+ to reflectivities before computing their covariances and will also appear in
+ the output synthetic traces. The covariances will be most valid for use in
+ PSLINV if they've been computed using a wavelet with the same frequency
+ content as the seismic data you intend to invert with PSLINV. The wavelets
+ applied by PSCOVAR are always zero phase. But, theoretically, covariances of
+ reflectivities convolved with a wavelet depend only on the amplitude spectrum
+ of the wavelet, so there isn't any advantage to allowing wavelets with more
+ general phase spectrum.
+ 
+ The COV_WIN_TOP and COV_WIN_BOT parameters let you specify a time window for
+ computing the covariances (These parameters have no effect on the output
+ synthetic traces). Remember that PSCOVAR computes reflectivities only in the
+ time range where all three of the logs: Density, P-wave and S-wave are
+ present in your input file. So, even if you accept the defaults for
+ COV_WIN_TOP and COV_WIN_BOT (to use entire trace), the computed covariance
+ will depend only on that range, although it may include effects of wavelet
+ sidelobes above and below that interval if you've applied a wavelet with long
+ tails. You might use COV_WIN_TOP and COV_WIN_BOT to suppress that sidelobe
+ effect or to compute covariances from only a subset of the interval where
+ Density, P-wave and S-wave logs are present.
+ 
+ The output Synthetic traces are computed using Aki &amp; Richards approximation
+ (the same approximation used for inversion in PSLINV). They are output in the
+ angle domain, with header word 6 containing angle in degrees. All angle
+ traces include the same wavelet; thus, these traces do not include wavelet
+ stretch. (Real data processed to the angle domain would normally include
+ wavelet stretch, which can be removed using process WSF.)
+ 
+ If OPT_VSVP_OUT = YES, the final trace of the output gather will contain the
+ Vs/Vp ratio. You may view this trace in Cbyt and use it for picking a depth
+ dependent Vs/Vp ratio for use in PSLINV. The Vs/Vp trace has the value 999.0
+ in header word 6. (This big number in header word 6 ensures that if you do
+ an inversion test by running the output gather into PSLINV, and you haven't
+ removed the Vs/Vp trace, PSLINV will ignore this Vs/Vp trace.)
+ 
+ The LEN_SMTH_VSVP parameter applies a running average smoother to the output
+ Vs/Vp trace, but has no effect on the covariance calculation, and also has
+ no effect on the synthetic angle traces, which are computed using a detailed
+ Vs/Vp sampled at the seismic sample rate.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+  6. 2007-01-03  D. Glover  Added NULLIFY statements for Intel compiler.
+  5. 2006-04-20  Baumel     Add check to ignore log values with nonphysical
+                            Vs/Vp ratios when calculating reflectivities.
+  4. 2006-04-11  Baumel     Several small changes to match synthetics produced
+                            by HSYN, which can now accept input from the same
+                            kind of log files that PSCOVAR reads: To position
+                            reflectors more accurately, bin log values into
+                            intervals BETWEEN consecutive seismic time samples
+                            (previously, they were rounded to NEAREST seismic
+                            time sample). Compute reflection amplitudes only
+                            for pairs of adjacent bins where all three logs
+                            (Density, Vp and Vs) are present at both levels.
+  3. 2006-01-10  B. Menger  Removed Unused Variables.
+  2. 2005-01-17  Baumel     Compute Vs/Vp at all time levels where P-wave and
+                            S-wave logs are both present, even if Density
+                            isn't present.
+  1. 2004-06-24  Baumel     Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

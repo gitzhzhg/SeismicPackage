@@ -1,0 +1,12 @@
+set -x
+unalias -a
+echo "#! /bin/tcsh -x" > $RSHCOMPILE
+echo "unalias -a " >> $RSHCOMPILE
+echo "cd /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID" >> $RSHCOMPILE
+echo "pgf3260_f90 -c -g -I /home/sps/beta/spsmodules/32linuxp60_debug JJJJJ.f90" >> $RSHCOMPILE
+echo "pgf3260_f90 JJJJJ.o -o JJJJJ.exe \\" >> $RSHCOMPILE
+echo "-L/home/sps/lib/32linuxp60_debug -lbeta -lfwcdbeta -lblzwbeta -ljosbeta -lpthread -lm -llmrk_stubs -lmpi_stubs -lfft \\" >> $RSHCOMPILE
+echo "-lrt -lpthread -ldl" >> $RSHCOMPILE
+chmod u+x $RSHCOMPILE
+sleep 10
+rsh hoeplc07 $RSHCOMPILE

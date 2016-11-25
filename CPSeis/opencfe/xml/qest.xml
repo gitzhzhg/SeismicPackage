@@ -1,0 +1,523 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="qest" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="QESTPROCESS" title="QEST Process" rows="24" columns="80">
+    <Label keyword="COMMENT_ESTIMATEQTATTENUATIONFUN" alignment="center">Estimate Q(t) attenuation function from surface seismic data</Label>
+    <Label keyword="COMMENT_PARAMETERSFORQTESTIMATIO" alignment="center">Parameters for Q(t) estimation</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_IN" alignment="left">HDR_IN=</Label>
+    <Field keyword="HDR_IN" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MDTFMT" alignment="left">MDTFMT=</Label>
+    <Field keyword="MDTFMT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_INC" alignment="left">WIN_INC=</Label>
+    <Field keyword="WIN_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_LAST" alignment="left">TIM_LAST=</Label>
+    <Field keyword="TIM_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_TAPER" alignment="left">LEN_TAPER=</Label>
+    <Field keyword="LEN_TAPER" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG=</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END=</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PARAMETERSFOROPTIONALBYT" alignment="center">Parameters for optional bytefile of amplitude spectra</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_PATHNAME_BYT" alignment="left">PATHNAME_BYT=</Label>
+    <Field keyword="PATHNAME_BYT" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_SCALE" alignment="left">FREQ_SCALE=</Label>
+    <Field keyword="FREQ_SCALE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX=</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TIM_OUT" alignment="left">HDR_TIM_OUT=</Label>
+    <Field keyword="HDR_TIM_OUT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FREQ_OUT" alignment="left">HDR_FREQ_OUT=</Label>
+    <Field keyword="HDR_FREQ_OUT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_ESTIMATEQTATTENUATIONFUN" xPos="7" yPos="1" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_PARAMETERSFORQTESTIMATIO" xPos="22" yPos="3" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="4" xSize="76" ySize="7"/>
+     <Constraints component="LABEL_HDR_IN" xPos="3" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_IN" xPos="13" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MDTFMT" xPos="29" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MDTFMT" xPos="38" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="3" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="13" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_INC" xPos="29" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_INC" xPos="38" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_LAST" xPos="54" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_LAST" xPos="63" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_TAPER" xPos="3" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_TAPER" xPos="13" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_BEG" xPos="29" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="38" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="54" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="63" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PARAMETERSFOROPTIONALBYT" xPos="11" yPos="12" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="13" xSize="77" ySize="7"/>
+     <Constraints component="LABEL_PATHNAME_BYT" xPos="3" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_BYT" xPos="16" yPos="14" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_SCALE" xPos="3" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_SCALE" xPos="16" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="33" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="46" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TIM_OUT" xPos="3" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TIM_OUT" xPos="16" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FREQ_OUT" xPos="33" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FREQ_OUT" xPos="46" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_IN">
+      <Tip>Header word designating input trace subsets for Q estimation.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - HDR_IN<br> Header word designating input trace subsets for Q estimation.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_IN &gt; 0, then each subset of input traces, with a common value of
+ header word HDR_IN, will have a Q function estimated by QEST. In this case,
+ input traces should be sorted with HDR_IN as a primary sort header word.
+ 
+ Specify HDR_IN = 0 to estimate just one Q function from the entire dataset.</pre></html>]]></Text>
+     </Help>
+     <Help component="MDTFMT">
+      <Tip>Measure Delay Time (for attenuation calculation) From Mute Time?</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - MDTFMT<br> Measure Delay Time (for attenuation calculation) From Mute Time?</center></b>
+<pre> Default = YES
+ Allowed = YES (Measure delay time for attenuation calculation from mute time.)
+ Allowed = NO  (Measure delay time for attenuation calculation from zero time.)
+ When MDTFMT = YES, the time windows used by QEST begin at the head mute time.
+ When MDTFMT = NO, the time windows used by QEST begin at the top of the trace.
+ 
+ You must use matching settings of MDTFMT in the QEST and IQ processes.
+ 
+ MDTFMT = YES is appropriate for deep water marine data since Q for sea water
+ can, as a practical matter, be taken as infinite.</pre></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length, in seconds, of the time windows.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - WIN_LEN<br> Length, in seconds, of the time windows.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></html>]]></Text>
+     </Help>
+     <Help component="WIN_INC">
+      <Tip>Time increment for window locations, in seconds.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - WIN_INC<br> Time increment for window locations, in seconds.</center></b>
+<pre>  Default = 1.0
+  Allowed = real &gt;= DT</pre></html>]]></Text>
+     </Help>
+     <Help component="TIM_LAST">
+      <Tip>Last time to use, in seconds, for the time windows.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - TIM_LAST<br> Last time to use, in seconds, for the time windows.</center></b>
+<pre> Default = end_of_trace
+ Allowed = end_of_trace &gt;= real &gt; TSTRT
+ Leaving this field blank is equivalent to selecting end_of_trace.</pre></html>]]></Text>
+     </Help>
+     <Help component="LEN_TAPER">
+      <Tip>Length of cosine taper, in seconds, for the time windows.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - LEN_TAPER<br> Length of cosine taper, in seconds, for the time windows.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt;= 0.0
+ Cosine taper is centered on nominal window edges (but if taper would run
+ off beginning or end of the trace, taper is moved inward until it lies
+ entirely on the trace).</pre></html>]]></Text>
+     </Help>
+     <Help component="FREQ_BEG">
+      <Tip>Lowest frequency to use in spectral ratio method, in Hz.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - FREQ_BEG<br> Lowest frequency to use in spectral ratio method, in Hz.</center></b>
+<pre> Default = 20.0
+ Allowed = Nyquist &gt; real &gt;= 0.0</pre></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>Highest frequency to use in spectral ratio method, in Hz.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - FREQ_END<br> Highest frequency to use in spectral ratio method, in Hz.</center></b>
+<pre> Default = 60.0
+ Allowed = Nyquist &gt;= real &gt; FREQ_BEG</pre></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_BYT">
+      <Tip>Pathname for bytefile containing spectra for each time window.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - PATHNAME_BYT<br> Pathname for bytefile containing spectra for each time window.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ If a pathname is entered in the parameter PATHNAME_BYT, then QEST writes the
+ amplitude spectrum of each time window (averaged over the traces) to a
+ bytefile.  The average amplitude spectrum of each time window is written to
+ a separate trace.
+ 
+ If HDR_IN &gt; 0, then each input subset defined by a HDR_IN value causes a
+ separate set of amplitude spectra to be written to the bytefile. Sets of
+ spectra traces associated with each input subset are written to the bytefile
+ in the same order as the subsets are encountered by the QEST process (i.e.,
+ time windows vary more rapidly than HDR_IN values in the bytefile).
+ 
+ In the spectrum traces, header word HDR_TIM_OUT carries the time at the
+ window center associated with that spectrum (measured from either mute time
+ or zero time according to MDTFMT parameter) and header word HDR_FREQ_OUT
+ carries the average frequency of the spectrum.
+ 
+ If PATHNAME_BYT = NONE, then no bytefile is written.</pre></html>]]></Text>
+     </Help>
+     <Help component="FREQ_SCALE">
+      <Tip>Frequency interval, in Hz, for each "second" in bytefile traces.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - FREQ_SCALE<br> Frequency interval, in Hz, for each "second" in bytefile traces.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt; 0.0
+ This is the frequency interval, in Hz, denoted by each "second" in the
+ bytefile traces. The TSTRT value in the bytefile is always 0.0 since the
+ spectra start at zero frequency.</pre></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency, in Hz, for bytefile traces.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - FREQ_MAX<br> Maximum frequency, in Hz, for bytefile traces.</center></b>
+<pre> Default = Nyquist
+ Allowed = Nyquist &gt;= real &gt;= FREQ_END
+ The value of FREQ_MAX determines the length of traces in the bytefile. This
+ should be &gt;= FREQ_END so that the bytefile displays at least as much of the
+ spectrum as is actually used for Q estimation.</pre></html>]]></Text>
+     </Help>
+     <Help component="HDR_TIM_OUT">
+      <Tip>Header word whose values are window center times.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - HDR_TIM_OUT<br> Header word whose values are window center times.</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH
+ The center of the time window corresponding to each spectrum trace is stored
+ in header word HDR_TIM_OUT of the bytefile traces. Center times are measured
+ from either mute time or zero time according to the MDTFMT parameter.</pre></html>]]></Text>
+     </Help>
+     <Help component="HDR_FREQ_OUT">
+      <Tip>Header word whose values are average frequency of the spectrum.</Tip>
+      <Text><![CDATA[<html>
+<b><center>qest - HDR_FREQ_OUT<br> Header word whose values are average frequency of the spectrum.</center></b>
+<pre> Default = 49
+ Allowed = 1 - NWIH
+ The average frequency of the spectrum will be entered in header word
+ HDR_FREQ_OUT, where the average frequency is defined as the mean frequency
+ weighted by the amplitude spectrum.</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>qest - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="qest">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : QEST    (Estimates Q(t) from surface seismic data.)
+ Category   : filters
+ Written    : 1997-09-29   by: Greg Lazear
+ Revised    : 2001-01-31   by: Tom Stoeckley
+ Maturity   : production   2001-04-30
+ Purpose    : Estimates Q(t) attenuation function from surface seismic data.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ QEST estimates a Q(t) attenuation function from surface seismic data using
+ the spectral ratio method.  It writes the computed Q(t) function to the .rpt
+ file and may optionally also output windowed amplitude spectra in a bytefile.
+ QEST does not alter the input traces.
+ 
+ 
+ Detailed QEST Operation
+ 
+  1. QEST divides each input trace into time windows of length WIN_LEN with
+     an increment of WIN_INC between adjacent windows. The windows start
+     from the top of trace or the head mute time, depending on the MDTFMT
+     parameter, and end at TIM_LAST. (These windows are similar to the time
+     windows in XP or MVXP except that QEST uses only fully populated windows
+     for its calculation.)
+ 
+  2. A Fourier transform of each time window is computed.  Only the
+     amplitude spectra are used; phase spectra are discarded.
+ 
+  3. For each time window, and each frequency from FREQ_BEG to FREQ_END,
+     the amplitude spectra of all input traces are averaged.
+ 
+  4. The trace averaged amplitudes vs. frequency are then used to
+     compute the spectral ratios:
+ 
+                   ln ( A(f,t(i)) / A(f,t(i-1)) ),
+ 
+     where f is an individual frequency; and t(i-1) and t(i) are the centers
+     of adjacent time windows.
+ 
+  5. A linear least squares fit of spectral ratio vs. frequency is then
+     used to compute the average interval Q between the centers of adjacent
+     time windows.
+ 
+  6. The shallowest interval Q found by the process is extrapolated to
+     the surface (or to mute time if MDTMFT = YES).  The deeper interval Q
+     values are then used to derive an average Q(t) function suitable for
+     use in the IQ process.  Note: QEST actually prints both the interval and
+     average Q values in the .rpt file, but only the AVERAGE Q function
+     (Qav) should be used in IQ.
+ 
+ 
+ Input Subsets
+ 
+ If HDR_IN &gt; 0, each subset of input traces with a common value of header
+ word HDR_IN will have a Q function estimated by QEST. In this case, input
+ traces should be sorted with HDR_IN as a primary sort header word. You may
+ set HDR_IN = 0 to estimate just one Q function from the whole dataset.
+ 
+ 
+ Amplitude Spectra Bytefile
+ 
+ If a pathname is entered in the parameter PATHNAME_BYT, then QEST writes the
+ amplitude spectrum of each time window (averaged over the traces) to a
+ bytefile.  The average amplitude spectrum of each time window is written to
+ a separate trace.
+ 
+ If HDR_IN &gt; 0, then each input subset defined by a HDR_IN value causes a
+ separate set of amplitude spectra to be written to the bytefile. Sets of
+ spectra traces associated with each input subset are written to the bytefile
+ in the same order as the subsets are encountered by the QEST process (i.e.,
+ time windows vary more rapidly than HDR_IN values in the bytefile).
+ 
+ In the spectrum traces, header word HDR_TIM_OUT carries the time at the
+ window center associated with that spectrum (measured from either mute time
+ or zero time according to MDTFMT parameter) and header word HDR_FREQ_OUT
+ carries the average frequency of the spectrum.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ In general, it appears that approximately one second long time windows work
+ well.  It is crucial to determine the optimal spectral bandwidth; i.e., the
+ widest bandwidth which is relatively uncontaminated by noise, and where the
+ spectral ratios display a linear decay with frequency.  Inclusion of noise
+ contaminated frequencies will adversely affect the resulting Q estimation.
+ 
+ The amplitude spectra bytefile of the input data should be examined to
+ determine what time and frequency ranges are likely to be relatively
+ noise-free so that sensible parameter values for QEST can be chosen.
+ 
+ 
+ Goodness of Fit
+ 
+ The spectral ratio method assumes that the underlying reflectivity sequence
+ has an amplitude spectrum with a uniform average for all the time windows.
+ Since there is no assurance that this will be true for any particular
+ dataset, estimating Q from surface seismic data is likely to be unreliable.
+ 
+ For this reason a goodness-of-fit measure for the least-squares linear fit,
+ namely, a Correlation Coefficient (CorCoef) is included in the .rpt file.
+ It may be necessary to gain experience using this process with different
+ datasets to determine acceptable values for this correlation coefficient.
+ For perfect fit, the correlation coefficient would be -1.0 because spectral
+ ratios should be decreasing functions of frequency. Correlation coefficients
+ refer to the estimated INTERVAL Q (Qint) values, which are then integrated
+ to determine the average Q (Qav) values.
+ 
+ 
+ Using IQ
+ 
+ Attenuation can be corrected using the IQ process, entering the appropriate
+ average Q information as estimated by QEST.  The bandwidth used in IQ should
+ probably be wider than that used for QEST because IQ is a filter and will
+ remove frequencies outside the specified bandwidth.
+ 
+ After applying Q correction via IQ, verify by generating another Amplitude
+ Spectra Bytefile using QEST that the correction was successful in equalizing
+ the amplitude spectra for all time windows.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date      Author        Description
+     ----      ------        -----------
+ 7. 2001-04-30 Stoeckley     Replace BYTE with PERMTFILE (which uses TRCIO).
+ 6. 2000-12-07 Bob Baumel    Change wrapped_up flag to skip_wrapup.
+ 5. 2000-11-29 Bob Baumel    Bug fix - Don't set header HDR_IN in bytefile if
+                             HDR_IN = 0; also cosmetic/documentation changes.
+ 4. 2000-06-29 Bob Baumel    Conversion to new system (combines former QEST
+                             and MWSPCT).
+ 3. 1999-08-17 Baumel/Stacy  Begin using the spectral ratio method.
+ 2. 1999-02-22 Goodger       Begin using the fortran90 compiler.
+ 1. 1997-09-29 Lazear        Created original version.
+ 
+ Revision history of previous MWSPCT process, now part of QEST:
+ 
+ 4. 1999-02-03 CIB           Added average frequency calculation
+ 3. 1999-01-26 Vunderink     Documentation change only.
+ 2. 1999-01-25 Vunderink     Installed in newlib.
+ 1. 1999-01-11 Vunderink     Original version.
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

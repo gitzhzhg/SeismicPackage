@@ -1,0 +1,65 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##--------------------------- linuxab80_debug ------------------------------##
+##--------------------------- linuxab80_debug ------------------------------##
+##--------------------------- linuxab80_debug ------------------------------##
+
+
+permitted_architectures = ix86-intel-linux
+permitted_hosts         = unrestricted
+
+JAVA_HOME  = /apps/geophysics/jdk1.6.0_04
+JAVA_DIR_ROOT = $(JAVA_HOME)/jre/lib
+
+FC         = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+FC_O1      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+FC_FLOATIO = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+FC_INTERPOLATE = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+FC_KMIG    = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+FC_PPIO    = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                                -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_UNDER   = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                                -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_LINK    = ab80_f90 -eR
+
+CC         = gcc -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                   -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = gcc -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                   -D_LARGEFILE_SOURCE \
+                                                   -D_FILE_OFFSET_BITS=64
+CC_LINK    = gcc -D_REENTRANT
+
+CXX        = g++ -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                    -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = g++ -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                   -D_LARGEFILE_SOURCE \
+                                                   -D_FILE_OFFSET_BITS=64
+CXX_LINK   = g++
+CXX_DEPEND = g++ -MM              -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared
+
+MODEXT     = .mod
+MODFLAG    = -p
+
+FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+             -lU77 -lfio -lf90math -lf77math -lV77
+GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+             -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+MATH_LIBS  = -lm -lpthread -lc
+
+JAVA_LIBS = -L$(JAVA_DIR_ROOT)/i386 -L$(JAVA_DIR_ROOT)/i386/client \
+            -ljava -ljvm -lverify
+
+##### if -lc is present in MATH_LIBS, and if the main program is a c program
+##### linked using fortran, then a fortran open statement returns status 0
+##### even if an error occurs.
+
+#### if -lc is absent in FOR_LIBS and MATH_LIBS, then libCFE.so has unsatisfied
+#### externals stat, istat, and fstat.
+
+INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)/include/linux \
+           /usr/applinux/vendors/openmotif/2.1/include

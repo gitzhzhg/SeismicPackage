@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="lmrkhrz" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="LMRKHRZPROCESS" title="LMRKHRZ Process" rows="32" columns="80">
+    <Label keyword="COMMENT_LMRKHRZSIMPLEAUTOPICKING" alignment="center">LMRKHRZ -- Simple Autopicking or</Label>
+    <Label keyword="COMMENT_COMMUNICATIONBETWEENCPSH" alignment="center">Communication between CPS headers and SeisWorks 3D horizons</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="26" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEISWORKS_PROJECT" alignment="left">SEISWORKS_PROJECT=</Label>
+    <Field keyword="SEISWORKS_PROJECT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1" title=" Threshold / Autopick Modes"/>
+    <Label keyword="LABEL_LOCAL_LAV_WIN_LEN" alignment="left">LOCAL_LAV_WIN_LEN=</Label>
+    <Field keyword="LOCAL_LAV_WIN_LEN" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INLINE_DIVISOR" alignment="left">INLINE_DIVISOR=</Label>
+    <Field keyword="INLINE_DIVISOR" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2" title=" Transfer Modes"/>
+    <Label keyword="LABEL_HORIZON_NAME" alignment="left">HORIZON_NAME  =</Label>
+    <Field keyword="HORIZON_NAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TRANS" alignment="left">HDR_TRANS     =</Label>
+    <Field keyword="HDR_TRANS" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FACTOR" alignment="left">HDR_FACTOR    =</Label>
+    <Field keyword="HDR_FACTOR" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_TYPE" alignment="left">INFO_TYPE     =</Label>
+    <Field keyword="INFO_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_APPLIESTOCMPGATHERCASEON" alignment="center">(applies to CMP gather case only)</Label>
+    <Border keyword="BORDER3" title=" Environment Variables"/>
+    <Label keyword="LABEL_LM_LICENSE_FILE" alignment="left">LM_LICENSE_FILE  =</Label>
+    <Field keyword="LM_LICENSE_FILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OWHOME" alignment="left">OWHOME           =</Label>
+    <Field keyword="OWHOME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OW_PMPATH" alignment="left">OW_PMPATH        =</Label>
+    <Field keyword="OW_PMPATH" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OW_DDF" alignment="left">OW_DDF           =</Label>
+    <Field keyword="OW_DDF" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_LMRKHRZSIMPLEAUTOPICKING" xPos="3" yPos="1" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_COMMUNICATIONBETWEENCPSH" xPos="3" yPos="2" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="3" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="8" yPos="5" xSize="26" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SEISWORKS_PROJECT" xPos="41" yPos="5" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEISWORKS_PROJECT" xPos="59" yPos="5" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="8" xSize="77" ySize="6"/>
+     <Constraints component="LABEL_LOCAL_LAV_WIN_LEN" xPos="3" yPos="10" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LOCAL_LAV_WIN_LEN" xPos="21" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INLINE_DIVISOR" xPos="3" yPos="12" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INLINE_DIVISOR" xPos="21" yPos="12" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="16" xSize="77" ySize="7"/>
+     <Constraints component="LABEL_HORIZON_NAME" xPos="3" yPos="18" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HORIZON_NAME" xPos="18" yPos="18" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TRANS" xPos="3" yPos="19" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TRANS" xPos="18" yPos="19" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FACTOR" xPos="3" yPos="20" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FACTOR" xPos="18" yPos="20" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_TYPE" xPos="3" yPos="21" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_TYPE" xPos="18" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_APPLIESTOCMPGATHERCASEON" xPos="29" yPos="21" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="25" xSize="77" ySize="7"/>
+     <Constraints component="LABEL_LM_LICENSE_FILE" xPos="3" yPos="27" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LM_LICENSE_FILE" xPos="21" yPos="27" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OWHOME" xPos="3" yPos="28" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OWHOME" xPos="21" yPos="28" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OW_PMPATH" xPos="3" yPos="29" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OW_PMPATH" xPos="21" yPos="29" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OW_DDF" xPos="3" yPos="30" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OW_DDF" xPos="21" yPos="30" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Mode of operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - MODE<br> Mode of operation.</center></b>
+<pre> Default = THRESHOLD_TEST
+ Allowed = THRESHOLD_TEST, AUTOPICK_STYLE1, HDR_TO_HRZ, HRZ_TO_HDR
+ THRESHOLD_TEST mode provides a means of helping you estimate what "local lav"
+ and mute shift parameters you may want to use later on for autopicking or
+ stacking waterbottom reflections.  It outputs a suite of horizons on every
+ inline that's evenly divisible by 10.  Output is temporally coarse also (it's
+ nearest-sample based).
+ 
+ AUTOPICK_STYLE1 mode picks every line, and uses spline interpolation to
+ attempt to provide a very high quality "snapped" pick.
+ 
+ HDR_TO_HRZ and HRZ_TO_HDR are just data transfer modes that do not even
+ use the trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEISWORKS_PROJECT">
+      <Tip>The name of the SeisWorks (3D) Project</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - SEISWORKS_PROJECT<br> The name of the SeisWorks (3D) Project</center></b>
+<pre> Default =
+ Allowed =
+ Must pre-exist and be NFS mounted.  LMRKHRZ won't create it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LOCAL_LAV_WIN_LEN">
+      <Tip>Window length in seconds for local lav determination.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - LOCAL_LAV_WIN_LEN<br> Window length in seconds for local lav determination.</center></b>
+<pre> Default = 1.0
+ Allowed = sensible
+ Window is hung from the mute, and the "local LAV" is measured.  The LAV
+ value for the full trace is ignored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INLINE_DIVISOR">
+      <Tip>Output can be sparse in THRESHOLD_TEST mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - INLINE_DIVISOR<br> Output can be sparse in THRESHOLD_TEST mode.</center></b>
+<pre> Default = 20
+ Allowed = 1 to 1000
+ Speeds runtime in THRESHOLD_TEST mode.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HORIZON_NAME">
+      <Tip>Name of pre-existing horizon for "data transfer modes".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - HORIZON_NAME<br> Name of pre-existing horizon for "data transfer modes".</center></b>
+<pre> Default = abc_scratch01
+ Allowed =
+ Names like 'abc_scratch01' are recommended for person having initials 'abc'.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TRANS">
+      <Tip>Header word value to transfer.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - HDR_TRANS<br> Header word value to transfer.</center></b>
+<pre> Default = 48
+ Allowed =
+ Pertains to HDR_TO_HRZ and HRZ_TO_HDR modes only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FACTOR">
+      <Tip>Multiply header word by this value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - HDR_FACTOR<br> Multiply header word by this value.</center></b>
+<pre> Default = .001
+ Allowed =
+ Pertains to HDR_TO_HRZ and HRZ_TO_HDR modes only.  Useful for unit conversion,
+ e.g. when Landmark time horizon is in milliseconds, whereas CPS always works
+ in seconds.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_TYPE">
+      <Tip>Type of data to write out (if CMP-gathered data, HDR_TO_HRZ mode).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - INFO_TYPE<br> Type of data to write out (if CMP-gathered data, HDR_TO_HRZ mode).</center></b>
+<pre> Default = MAXIMUM
+ Allowed = MINIMUM, MAXIMUM, AVERAGE
+ In HDR_TO_HRZ mode, the type of data to write out (if data is CMP-gathered).
+ If the data is gathered but not CMP-gathered, the job will abort.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LM_LICENSE_FILE">
+      <Tip>Defines the OpenWorks license file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - LM_LICENSE_FILE<br> Defines the OpenWorks license file.</center></b>
+<pre> Default = Site-specific value stored in cps_config.dat.
+ Allowed =
+ Necessary for devkit operation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OWHOME">
+      <Tip>Defines the OpenWorks "home path".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - OWHOME<br> Defines the OpenWorks "home path".</center></b>
+<pre> Default = Site-specific.
+ Allowed =
+ Necessary for devkit operation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OW_PMPATH">
+      <Tip>Defines the OpenWorks project management path".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - OW_PMPATH<br> Defines the OpenWorks project management path".</center></b>
+<pre> Default = Site-specific.
+ Allowed =
+ Necessary for devkit operation.  Generally is $OWHOME/conf.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OW_DDF">
+      <Tip>Defines the 'dir.dat' file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - OW_DDF<br> Defines the 'dir.dat' file.</center></b>
+<pre> Default = Site-specific.
+ Allowed =
+ Necessary for devkit operation.  Normally this points to the dir.dat file for
+ the "district".  It is commonly $OWHOME/conf/dir.dat.  BUT note that this may
+ NOT be the same dir.dat file used to load seismic data.  Some sites
+ intentionally maintain 2 dir.dat files per project, each designed to be used
+ in the proper circumstance.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkhrz - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="lmrkhrz">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : LMRKHRZ
+ Category   : io
+ Written    : 2001-07-16   by: SMCook
+ Revised    : 2006-06-12   by: B. Menger
+ Maturity   : production
+ Purpose    : Autopicking and horizon communication between SeisWorks and CPS.
+ Portability: Solaris only for actual execution.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ LMRKHRZ can be used in the following ways:
+  1. As a water bottom event picker (in either "rough" or "final" modes).
+  2. As a means of transferring values from a SeisWorks 3D horizon to a CPS
+     header word, or vice versa.
+ 
+ Other potential applications include
+  1. Using an interpretated horizon to set a troublesome mute pick.
+  2. Importing interpreter picks for depth processing, window design, etc.
+  3. LAV maps to investigate acquisition footprint or locate noise spikes.
+  4. Attribute maps, mute maps, SLAB maps, statics maps, fold maps, etc.
+  5. General-purpose header QC (e.g. when HEADSUM fails to reveal a pattern).
+  6. Defining an areally complex "trace flag region" (a region to be included,
+     excluded, or somehow treated differently).
+  7. etc.
+ 
+ Using THRESHOLD_TEST mode results in a suite of horizons that store the
+ sample times where various pre-defined amplitude thresholds are met.  The
+ thresholds used are relative to the "local LAV", not the header LAV.  This
+ suite of horizon picks can then be used in SeisWorks 3D
+  1. to determine settings for subsequent operations;
+  2. as a seed for Landmark's ZAP, should an interpreter be so inclined; or
+  3. etc.
+ 
+ AUTOPICK_STYLE1 mode outputs a complete horizon (few gaps) wherein the peak
+ or trough has been carefully temporally interpolated so as to make it suitable
+ for final interpretation use in many cases (assuming the waterbottom is
+ well-behaved).  These picks are also of the quality needed for making good
+ azimuth- or dip-field "shade maps", which are useful for detecting faults and
+ very subtle stratigraphic details.  This mode requires that the user set a
+ good %-of-local-LAV threshold as a jump-off point for refining the pick.
+ 
+ For GATHERED, CMP-sorted data in HDR_TO_HRZ mode, the user must choose to
+ write out the minimum, maximum, or average HDR_TRANS value.
+ 
+ A SeisWorks 3D horizon can be thought of as a rectangular map containing one
+ single-precision floating point value for each CMP bin.  Accordingly, it can
+ store any type of data that's readily represented as single-precision floating
+ point, such as time, depth, amplitude, or whatever attribute or statistic you
+ care to put into it (noting that rare cases exist such as with coordinate data
+ where a loss of meaningful precision could occur).  To transfer data in this
+ manner, choose HDR_TO_HRZ or HRZ_TO_HDR mode.
+ 
+ One of Landmark's strengths is high-resolution graphics.  Although there are
+ alternate means of accomplishing many of the tasks mentioned above, they may
+ in some cases be cumbersome or incomplete, and may not offer the graphics
+ or hardcopy quality of Landmark software.  A high-resolution image potentially
+ translates into the ability to explore a large amount of information in a
+ clear, rapid fashion.
+ 
+ Landmark's RAVE software (crossplots, etc.) uses horizon files, and could
+ be of occasional use in CPS-related QC or attribute analysis.
+ 
+ SeisWorks also has basic map manipulation capabilities that could be of use.
+ If an attribute for some reason needs areal smoothing, for example, it could
+ be exported, smoothed in SeisWorks, then imported back in.  To find errors in
+ geometry, one could export a coordinate, subtract a smoothed map version of
+ the coordinate from the unsmoothed version (to reduce dynamic range), then
+ visually locate spurious values/regions.
+ 
+ As with the other CPS Landmark processes LMRKIN and LMRKOUT, midpoint
+ annotation header words 7 &amp; 8 exclusively define where the data maps to in
+ SeisWorks 3D.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ LMRKHRZ assumes a certain level of SeisWorks proficiency on your part.  It
+ may, depending on the option you choose, assume one or more of the following:
+ 
+  1. You have access to a SeisWorks 3D project;
+ 
+  2. You know how to create/manipulate horizons in SeisWorks 3D;
+ 
+  3. You know the values of certain environment variables for your project.
+ 
+  4. Header words 8 and 7 contain inline and crossline numbers.
+ 
+ 
+ In THRESHOLD_TEST and autopicking mode(s), horizon output names are hardwired.
+ 
+ For the other modes, these 3 rules apply:
+ 
+  1. You must not accidentally overwrite someone else's horizon.  It is
+     important not to blindly use LMRKHRZ -- you should open and view the
+     project and be aware of what is occurring when you write out a horizon.
+ 
+  2. You should refrain from cluttering up a project with numerous "once-used"
+     horizons.  It is perhaps best to prepend your output horizon name with
+     your initials, and re-use horizons you've generated that you don't need
+     any more.  This is both a matter of courtesy and efficiency.  User 'abc',
+     for example, could indefinitely maintain a series of horizons
+ 
+                                abc_scratch01
+                                abc_scratch02
+                                abc_scratch03
+                                  ...etc...
+ 
+     without consuming much disk space or irritating the other users of the
+     project.  In fact, to encourage this behavior, HDR_TO_HRZ and HRZ_TO_HDR
+     modes force you to pre-create the horizon in SeisWorks BEFORE running
+     your CPS job.  You can easily re-use these old scratch horizons, though,
+     because LMRKHRZ nullifies the entire output horizon first (to avoid
+     getting output that is an unintended "hybrid" of different programs or
+     job runs.)
+ 
+     If you need to retain the output permanently, rename it within SeisWorks
+     or copy it to a new horizon within SeisWorks.
+ 
+  3. You must follow rules 1 and 2.
+ 
+ 
+ Please note that, for HDR_TO_HRZ and HRZ_TO_HDR modes, traces are passed
+ along even though only the headers are being used.  Consequently, using
+ LMRKHRZ may not be the most efficient way to accomplish certain tasks.
+ 
+ All fields are case-sensitive.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+  8. 2006-06-12  B. Menger  Removed Unused Variables.
+  7. 2003-11-19  SMCook     Added THRESHOLD_TEST and AUTOPICK_STYLE1 modes to
+                             aid in phase determination and fast and efficient
+                             interpretation in deepwater marine environments.
+  6. 2003-06-16  SMCook     Moved putenv statements so they run before traps.
+                            Removed seisworks_project_trap.
+  5. 2003-02-12  SMCook     Added LM_LICENSE_FILE to guidef section.
+  4. 2003-01-15  SMCook     Added logic for LM_LICENSE_FILE.  Overrides and
+                             eliminates need for it in the job builder.
+  3. 2002-02-25  SMCook     Changed trap logic in a number of places to
+                             address intermittent GUI crashes.
+  2. 2001-07-19  SMCook     Now using HDRs 7 &amp; 8 instead of 37 &amp; 38.
+  1. 2001-07-16  SMCook     Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

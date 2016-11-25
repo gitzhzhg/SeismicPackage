@@ -1,0 +1,63 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##---------------------------- linuxab80RHEL39 -------------------------------##
+##---------------------------- linuxab80RHEL39 -------------------------------##
+##---------------------------- linuxab80RHEL39 -------------------------------##
+
+
+permitted_architectures = ix86-intel-linux
+permitted_hosts         = hoeplc03 hoeplc04
+
+ABSOFT     = /usr/local/compilers/absoft/ProFortran80
+JAVA_HOME  = /apps/geophysics/jdk1.6.0_04
+
+FC         = ab80_f90 -c -en -O2 -YDEALLOC=MINE
+FC_AB90EP  = ab80_f90 -c -en -O2 -YDEALLOC=MINE
+FC_O1      = ab80_f90 -c -en -O1 -YDEALLOC=MINE
+FC_FLOATIO = ab80_f90 -c -en -O2 -YDEALLOC=MINE
+FC_INTERPOLATE = ab80_f90 -c -en -O2 -YDEALLOC=MINE
+FC_KMIG    = ab80_f90 -c -en -O2 -YDEALLOC=MINE
+FC_PPIO    = ab80_f90 -c -en -O2 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+ppio_includes = -I$(SPSDIR)/lam-6.5.6.rhel36/include
+
+FC_UNDER   = ab80_f90 -c -en -O2 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_LINK    = ab80_f90
+
+CC         = gcc -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                               -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                               -D_LARGEFILE_SOURCE \
+                                               -D_FILE_OFFSET_BITS=64
+CC_LINK    = gcc
+
+CXX        = g++ -c     -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = g++ -c     -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                               -D_LARGEFILE_SOURCE \
+                                               -D_FILE_OFFSET_BITS=64
+CXX_LINK   = g++
+CXX_DEPEND = g++ -MM          -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared 
+
+MODEXT     = .mod
+MODFLAG    = -p
+
+FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+             -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+
+GUI_LIBS   = -L/usr/X11R6/lib -lXm -dy -lXp -lXext -lXt -lX11 \
+             /usr/lib/gcc-lib/i386-redhat-linux/3.2.3/libstdc++.a
+
+#GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+
+MATH_LIBS  = -lm -lpthread
+
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386 -L$(JAVA_HOME)/jre/lib/i386/client \
+            -ljava -ljvm -lverify
+
+INCDIRS += /usr/X11R6/include
+#INCDIRS += /usr/applinux/vendors/openmotif/2.1/include

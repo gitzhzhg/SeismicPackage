@@ -1,0 +1,66 @@
+#! /bin/csh -f
+##------------------------- fetch_package_name ---------------------------##
+##------------------------- fetch_package_name ---------------------------##
+##------------------------- fetch_package_name ---------------------------##
+
+# This script returns the package name (containing slashes) for a package
+# within the CPSEIS_WRAPPERS directory tree.  The CPSEIS_WRAPPERS environment
+# variable must be set.  The returned package name is determined from the path
+# of the current directory, and is everything after the $CPSEIS_WRAPPERS/src
+# directory.
+
+# This script has been written for use from a makefile.  Normally, any one
+# of the following three commands in the makefile would accomplish this purpose:
+#
+#   PACKAGE_SLASH := $(subst $(CPSEIS_WRAPPERS)/src/,,$(shell pwd))
+#   PACKAGE_SLASH := $(subst $(CPSEIS_WRAPPERS)/src/,,$(CURDIR))
+#   PACKAGE_SLASH := $(subst $(CPSEIS_WRAPPERS)/src/,,$(PWD))
+#
+# However, the above equations sometimes give wrong answers when links are
+# involved.  For example, if CPSEIS_WRAPPERS is /apps/fusiongeo/cpseis/wrappers,
+# and /apps/fusiongeo/cpseis is linked to /apps/cpseis when make is executed
+# in the /apps/fusiongeo/cpseis/wrappers/src/org/cpseis/util directory:
+#
+#   shell pwd returns /apps/cpseis/wrappers/src/org/cpseis/util
+#   CURDIR    returns /apps/cpseis/wrappers/src/org/cpseis/util
+#   PWD       returns /apps/fusiongeo/cpseis/wrappers/src/org/cpseis/util
+#
+#   shell pwd causes PACKAGE_SLASH to be /apps/cpseis/wrappers/src/org/cpseis/util
+#   CURDIR    causes PACKAGE_SLASH to be /apps/cpseis/wrappers/src/org/cpseis/util
+#   PWD       causes PACKAGE_SLASH to be org/cpseis/wrappers (correct)
+#
+# And to make things even more complicated, when executing make from a higher
+# level directory (using subdirectories.make), PWD returns that higher level
+# directory,  For example, running make from /apps/fusiongeo/cpseis/wrappers
+# causes PWD to return /apps/fusiongeo/cpseis/wrappers when make enters the
+# /apps/fusiongeo/cpseis/wrappers/src/org/cpseis/util directory.
+#
+# One solution to these problems is to explicitly specify the package name
+# in the makefiles in each directory to be made.  Another solution is not to
+# use links.  A third solution (in this case) is to specify CPSEIS_WRAPPERS to
+# be the non-linked path /apps/cpseis/wrappers, and to use shell pwd or CURDIR.
+# The fourth solution is to use this script.
+
+##-------------------------- start of script -------------------------------##
+##-------------------------- start of script -------------------------------##
+##-------------------------- start of script -------------------------------##
+
+set curdir = `pwd`
+set package = $curdir:t
+
+while (1)
+
+  cd ..
+  set curdir = `pwd`
+  if ($curdir:t == src) break
+  if ($curdir:t == "/") break
+  if ($curdir:t == "") break
+  set package = $curdir:t/$package
+
+end
+
+echo $package
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##

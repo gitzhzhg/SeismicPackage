@@ -1,0 +1,223 @@
+#!/bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : nightly_post_mortum
+# Category   : stand-alone
+# Written    : 2003-06-06   by: Tom Stoeckley
+# Revised    : 2003-06-06   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Run a post mortum on nightly_make results.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is run by nightly_make in a platform-specific directory each
+# time gmake is started or finished on a platform.  This script need not be
+# run by a user.
+# 
+# This script should be called with the argument pre before calling gmake.
+# This script should be called without any arguments after calling gmake.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2003-06-06  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+#---------------------------------------------------------------------------
+# RCS Id : $Id: nightly_post_mortum,v 1.1 2004/03/04 13:49:43 wjdone Exp $
+#---------------------------------------------------------------------------
+
+
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+
+
+set platform  = $cwd:t
+set making    = $SPWSDIR/making
+set statshort = logfile.status
+set statfile  = $making/$platform/logfile.status
+set logfile   = $making/$platform/logfile.today
+set platnodes = `cat $SPWSMAKEDIR/nightly_nodes_and_platforms`
+set border    = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+
+
+##------------------- add ident to beginning of log file --------------------##
+##------------------- add ident to beginning of log file --------------------##
+##------------------- add ident to beginning of log file --------------------##
+
+
+if($1 == pre) then
+     echo " "                                    >> $logfile
+     echo " "                                    >> $logfile
+     echo "$border$border"                       >> $logfile
+     echo "  $HOST  $platform  STARTING  `date`" >> $logfile
+     echo "$border$border"                       >> $logfile
+     echo " "                                    >> $logfile
+     echo " "                                    >> $logfile
+     exit
+endif
+
+
+##-------------------- check for errors in log file -------------------------##
+##-------------------- check for errors in log file -------------------------##
+##-------------------- check for errors in log file -------------------------##
+
+
+echo " "
+echo " "
+
+set info_file = "/tmp/info$$.tmp"
+set whoops    = false
+
+grep ':[0-9]*: ' $logfile | grep -i -v warning > $info_file && set whoops = true
+grep '^gmake.*Error'                 $logfile >> $info_file && set whoops = true
+grep '^make.*Error'                  $logfile >> $info_file && set whoops = true
+grep 'line [0-9]*: '                 $logfile >> $info_file && set whoops = true
+grep 'bad directory'                 $logfile >> $info_file && set whoops = true
+grep 'Stop'                          $logfile >> $info_file && set whoops = true
+grep 'Command not found'             $logfile >> $info_file && set whoops = true
+grep 'compilation aborted'           $logfile >> $info_file && set whoops = true
+
+
+##------------------------- update status file ------------------------------##
+##------------------------- update status file ------------------------------##
+##------------------------- update status file ------------------------------##
+
+
+if($whoops == true) then
+     echo "nightly_make ERROR    $platform   (mail messages sent)" > $statfile
+else
+     echo "nightly_make FINISHED $platform"                        > $statfile
+endif
+
+
+##--------------------- add ident to end of log file ----------------------##
+##--------------------- add ident to end of log file ----------------------##
+##--------------------- add ident to end of log file ----------------------##
+
+
+if($whoops == true) then
+     echo " "                                    >> $logfile
+     echo " "                                    >> $logfile
+     echo "$border$border"                       >> $logfile
+     echo "  $HOST  $platform  ERROR     `date`" >> $logfile
+     echo "$border$border"                       >> $logfile
+     echo " "                                    >> $logfile
+     echo " "                                    >> $logfile
+else
+     echo " "                                    >> $logfile
+     echo " "                                    >> $logfile
+     echo "$border$border"                       >> $logfile
+     echo "  $HOST  $platform  FINISHED  `date`" >> $logfile
+     echo "$border$border"                       >> $logfile
+     echo " "                                    >> $logfile
+     echo " "                                    >> $logfile
+endif
+
+
+##-------------------- send mail messages if error found --------------------##
+##-------------------- send mail messages if error found --------------------##
+##-------------------- send mail messages if error found --------------------##
+
+
+if($whoops == true) then
+       set mail_file = "/tmp/file$$.tmp"
+   if($ARCHITECTURE == sgi64) then
+       echo "Subject: Nightly make error on platform $platform" > $mail_file
+   endif
+       echo "See $logfile"              >> $mail_file
+       echo "Or run nightly_view"       >> $mail_file
+       echo ""                          >> $mail_file
+       echo "Offending Files:"          >> $mail_file
+       echo ""                          >> $mail_file
+       cat  $info_file                  >> $mail_file
+   if($ARCHITECTURE == sgi64) then
+       mail                                                 \
+                   Kruger.C.Corn@conocophillips.com         \
+                   Bill.Done@conocophillips.com             \
+#                  Richard.S.Day@conocophillips.com         \
+                   Tom.R.Stoeckley@conocophillips.com       \
+                   < $mail_file
+   else
+       mail -s "Nightly make error on platform $platform"   \
+                   Kruger.C.Corn@conocophillips.com         \
+                   Bill.Done@conocophillips.com             \
+#                  Richard.S.Day@conocophillips.com         \
+                   Tom.R.Stoeckley@conocophillips.com       \
+                   < $mail_file
+   endif
+       \rm -f $mail_file
+       \rm -f $info_file
+endif
+
+
+##------------------ list contents of all status files ---------------------##
+##------------------ list contents of all status files ---------------------##
+##------------------ list contents of all status files ---------------------##
+
+
+set completed = true
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set node     = $platnode:r
+   set platform = $making/$platnode:e
+
+   if(-f $platform/$statshort) then
+     cat $platform/$statshort
+     grep 'started'  $platform/$statshort > /dev/null && set completed = false
+     grep 'will use' $platform/$statshort > /dev/null && set completed = false
+   else
+     echo "$platform/$statshort not found"
+   endif
+end
+
+
+##------------- print message if all platforms are completed ---------------##
+##------------- print message if all platforms are completed ---------------##
+##------------- print message if all platforms are completed ---------------##
+
+
+if($completed == true) echo "--------all platforms completed-------- "
+
+echo " "
+echo " "
+
+
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+

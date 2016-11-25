@@ -1,0 +1,60 @@
+                COMPARE_AND_COPY_PROCEDURES              2004-06-02
+--------------------------------------------------------------------------------
+# To compare local files with those in ~spws and ~sps system directories:
+#
+#                        compare  <code>
+#
+#  <code> = all      prints a line for each file.
+#  <code> = matching prints a line for each matching file only.
+#  <code> = missing  prints a line for each missing file only.
+#  <code> = diff     prints a line for each non-matching file only.
+#  <code> = mgdiff   prints a line for each non-matching file only.
+#  <code> = xdiff    prints a line for each non-matching file only.
+#  <code> = default  prints a line for each non-matching file only (default).
+#  <code> = reverse  prints a line for each non-matching file in reverse order.
+#  <code> = multiple prints a line for each file found more than once.
+#  <code> = help     prints help.
+#
+# The user can then do a diff or mgdiff or xdiff to see the details of files
+# which differ.  This can be done simply by triple-clicking on a listed line
+# and then button-2-clicking in another xterm.
+#
+# If a second command line argument is specified, it should be a directory
+# to which the local files are compared, instead of the system directories.
+#
+# This script can be used in a developer's directory to compare local files
+# with those in ~spws and ~sps.  This script can also be used in an ~spws
+# directory to compare local files with those in ~sps and /usr/app/vendors/spws.
+--------------------------------------------------------------------------------
+# To copy a source file from ~spws to the user's local directory:
+#
+#                copy_from_spws  <filename>  <mode>
+#
+# where <filename> = desired source file (with extension but without path).
+# where <mode>     = always or different or missing (default missing).
+#
+# This script looks in the include and programs and oop and util directories.
+# This script adds user write permission to the copied file.
+#
+# If the system version of the file cannot be found:
+#
+#   If a local version exists, this script does nothing and exits normally.
+#   If there is no local version, this script exits with an error message.
+#
+# If the system version of the file is found:
+#
+#   <mode> = always:  The file is always copied from the system, whether
+#                     or not a local version exists.  If a local version
+#                     exists, it is replaced by the system version.
+#
+#   <mode> = different:  The file is copied from the system only if a
+#                        local version does not exist, or if the system
+#                        version is different from the local version.
+#
+#   <mode> = missing (default):  The file is copied from the system only
+#                                if a local version does not exist.
+#
+#   <mode> = newer:  The file is copied from the system only if a local
+#                    version does not exist, or if the system version
+#                    is newer than the local version.
+--------------------------------------------------------------------------------

@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="telav" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TELAVPROCESS" title="TELAV Process" rows="24" columns="80">
+    <Label keyword="COMMENT_AUTOMATICTRACEEDITINGBAS" alignment="center">Automatic trace editing based on largest absolute value (LAV).</Label>
+    <Label keyword="LABEL_FCTR_KIL" alignment="left">FCTR_KIL=</Label>
+    <Field keyword="FCTR_KIL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NTUME" alignment="left">NTUME=</Label>
+    <Field keyword="NTUME" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_PRINT" alignment="left">OPT_PRINT=</Label>
+    <Field keyword="OPT_PRINT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LAV_TIM_BEG" alignment="left">LAV_TIM_BEG=</Label>
+    <Field keyword="LAV_TIM_BEG" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AUTOMATICTRACEEDITINGBAS" xPos="9" yPos="1" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FCTR_KIL" xPos="13" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FCTR_KIL" xPos="22" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NTUME" xPos="45" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NTUME" xPos="51" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_PRINT" xPos="12" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_PRINT" xPos="22" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LAV_TIM_BEG" xPos="39" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LAV_TIM_BEG" xPos="51" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FCTR_KIL">
+      <Tip>Kill traces whose LAVs exceed FCTR_KIL times median(LAV).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - FCTR_KIL<br> Kill traces whose LAVs exceed FCTR_KIL times median(LAV).</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;1.0
+ 
+ This process kills traces with LAV &gt; FCTR_KIL * MEDIAN(LAV).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NTUME">
+      <Tip>Number of Traces to Use in the Median Estimate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - NTUME<br> Number of Traces to Use in the Median Estimate.</center></b>
+<pre> Default = 10000
+ Allowed = int &gt;3
+ NTUME is the maximum number of traces to store on disk at once and use to
+ estimate the median(LAV) for that block of traces.
+ 
+ For GATHERed data, NTUME is automatically adjusted upward to include the
+ entire gather with the NTUMEth trace. This only happens before the median
+ LAV has been calculated for the first time. After this, NTUME is reset to
+ the value supplied by the user. The result is that TELAV might produce a
+ slightly different answer for the same data that is gathered in different
+ ways.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_PRINT">
+      <Tip>Option whether to print detail on each trace killed.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - OPT_PRINT<br> Option whether to print detail on each trace killed.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If OPT_PRINT = NO then mimimum detail is printed.  If OPT_PRINT = YES then
+ detail on each trace killed is printed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LAV_TIM_BEG">
+      <Tip>Starting time for the restricted-time LAV calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - LAV_TIM_BEG<br> Starting time for the restricted-time LAV calculation.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;=0.0
+ If LAV_TIM_BEG = 0.0 then the value in HDR_LAV is used by TELAV.
+ If LAV_TIM_BEG &gt; 0.0 then a new LAV is calculated for each trace for the
+ time range from HDR_TOP_MUTE + LAV_TIM_BEG to end of trace.
+ 
+ LAV_TIM_BEG is measured in seconds from the mute time.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>telav - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="telav">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TELAV  (Trace Edit by Largest Absolute Value) [Previously ASFM]
+ Category   : Amplitude_mod
+ Written    : 1990-04-12   by: Mike Howard (median version)
+ Revised    : 2006-04-25   by: B. Menger
+ Maturity   : production
+ Purpose    : Automatic trace editing based on trace largest absolute value.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process kills traces with LAV &gt; FCTR_KIL * MEDIAN(LAV).  (LAV stands
+ for Largest Absolute Value.) TELAV stores NTUME input traces on disk,
+ determines their median LAV, then processes the traces stored followed by
+ the rest of the dataset. The median LAV is reported for each NTUME traces
+ that pass through so users can assess whether NTUME was large enough.
+ 
+ Since the median is not sensitive to anomalous LAVs, NTUME can be a smaller
+ fraction of the traces and FCTR_KIL can be a smaller value than would be
+ required if using the average LAV.  TELAV prints information on the
+ median(LAV)s calculated so that you can judge whether NTUME was large
+ enough to yield a stable median LAV.
+ 
+ Normally TELAV uses the LAV values that are ALREADY PRESENT in HDR_LAV.
+ (It is the responsibility of every process that may change a trace's LAV
+ to recalculate it and reset HDR_LAV.)  When LAV_TIM_BEG is non-zero, a
+ new LAV is calculated using the part of each input trace from LAV_TIM_BEG
+ to the end of trace and stored in HDR_SCRATCH_30.  (Note that LAV_TIM_BEG
+ is measured from the mute, in seconds.)
+ 
+ When LAV_TIM_BEG is non-zero, the restricted-time LAV is used both for the
+ median LAV calculation and for determining whether to kill an individual
+ trace.
+ 
+ When TELAV receives GATHERed data, NTUME is automatically adjusted upward
+ to include the entire gather with the NTUMEth trace. This only happens
+ before the median LAV has been calculated for the first time. After this,
+ NTUME is reset to the value supplied by the user. The result is that TELAV
+ might produce a slightly different answer for the same data that is gathered
+ in different ways.
+ 
+ For the final median LAV calculation, TELAV may use less than NTUME traces
+ if fewer than NTUME traces are available.
+ 
+ Historical Note:
+ TELAV was previously known as ASFM.  ASFM was functionally equivalent to
+ TELAV after 1990.  Prior to 1990, ASFM used an arithmetic mean (average)
+ calculation rather than the median currently used.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                       ADVICE FOR USERS
+ 
+ Testing for appropriate values of FCTR_KIL can be conveniently done by
+ running several TELAV processes in the same job, with the FCTR_KIL values
+ DECREASING from the first to the last process.  Number of traces killed for
+ each value of FCTR_KIL are displayed in the .rpt file.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                        REVISION HISTORY
+ 
+      Date        Author    Description
+      ----        -------   -----------
+028. 2006-04-25  B. Menger   Removed Unused Variables.
+ 27.  2001-03-22  Stoeckley Change to collect at least NTUME live traces
+                             before calculating median.  Previously, although
+                             dead traces were ignored when calculating the
+                             median, if the first NTUME traces were all dead,
+                             the median was set to 0.  Also change allocation
+                             of WORK so it need not be reallocated later.
+                             Also replace TRCIO with TEMPTFILE, move sone
+                             redundant code into subroutines for clarity and
+                             easier maintenance, and add additional info to
+                             summary printout for better diagnosis.
+ 26.  2001-02-15  Stoeckley Change wrapup flag.
+ 25.  2000-09-05  O'Brien   Replaced native fortran i/o with trcio_module
+ 24.  2000-04-04  O'Brien   Implemented EzGUI Layout
+ 23.  2000-03-14  O'Brien   Fixed bug in write statement that used wrong
+                             variable for array subscript.
+                             Use lav_module when new LAVs are to be computed.
+                             Push all summary printouts into wrapup routine.
+ 22.  2000-03-09  O'Brien   Added a summary print statement to telav_wrapup.
+ 21.  2000-02-25  O'Brien   Made READ/WRITE error messages more specific.
+                             Cleaned up wrapup routine.
+ 20.  2000-02-23  O'Brien   Updated document and help regarding GATHERed data
+ 19.  2000-02-10  O'Brien   Added pc_put calls for control parameters
+                             NEED_REQUEST and NEED_LABEL.
+                             Allow work() to resize dynamically when a group
+                             of NTR traces pushes ncollected past NTUME
+ 18.  2000-02-08  O'Brien   Put variable threshold into telav_struct
+ 17.  2000-02-03  O'Brien   General Description updated.
+ 16.  2000-01-28  O'Brien   Implemented pc_put_options_field for OPT_PRINT
+ 15.  2000-01-10  O'Brien   Fixed file access inconsistency when telav_create
+                             is imediately followed by tela_delete
+ 14.  1999-12-29  O'Brien   Brought xml tags up to date
+                             Added RCS character ID variable
+ 13.  1999-09-13  O'Brien   Updates for conformance with new pc_module
+ 12.  1999-08-23  O'Brien   Changed header array to double precision
+ 11.  1999-08-16  O'Brien   Changed state variable use per changes in pc_module
+ 10.  1999-08-10  O'Brien   Removed min max args from pc_get calls.
+  9.  1999-08-05  O'Brien   Full f90 conversion.
+  8.  1998-11-24  Goodger   Begin using the fortran90 compiler.
+  7.  1994-10-26  Troutt    Documentaion change only to clarify that DELAY
+                             is input in terms of seconds.
+  6.  1993-10-07  Troutt    Add new parameter DELAY for Nigeria 3D.
+                             This allows for calculation of new LAV's in a
+                             window below the mute and puts them in HW27.
+  5.  1993-09-22  Troutt    Set HW64 for killed traces.
+                             Fix array index for print inside of do 24.
+                             Change HW31 check back to 666 (use NINT).
+                             Add several comments for easier maintenance.
+  4.  1992-06-18  Peterson  Corrections:Specify to not pack the headers and
+                             data in STROTSI. (very large LAVs i.e. 1.9E+38
+                             were being currupted by PACK21 and EXPAND21)
+                             For reentrancy, increase number of variables to
+                             save and restore to 17. Add MEDIAN calculation
+                             for the last WORK buffer full of LAVs.
+                             Use variable ONE=1 in CALL STRINI to be safe
+                             and for reentrancy (STRINI would change the
+                             constant 1 to 0 at the end of the data.
+                             Change IF(HD(31,N).NE.666.) to 666.0 + or -.01
+  3.  1991-10-12  Howard    Add profile and receiver # to printout.
+  2.  1990-05-14  Howard    Fix bug if MAXONDSK&gt;# of traces in job.
+  1.  1990-04-12  Howard    Original Median Version (former versions used mean)
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

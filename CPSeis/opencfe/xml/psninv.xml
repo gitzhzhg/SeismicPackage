@@ -1,0 +1,820 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="psninv" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PSNINVPROCESS" title="psninv Process" rows="38" columns="80">
+    <Label keyword="COMMENT_PRESTACKNONLINEARINVERSI" alignment="center">PreStack Non-Linear Inversion products (PSNINV)</Label>
+    <Label keyword="COMMENT_GENERALPARAMETERS" alignment="center">General Parameters</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_OPT_INPUT" alignment="left">OPT_INPUT=</Label>
+    <Field keyword="OPT_INPUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUTPUT" alignment="left">OPT_OUTPUT=</Label>
+    <Field keyword="OPT_OUTPUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR_IN" alignment="left">NUMTR_IN=</Label>
+    <Field keyword="NUMTR_IN" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR_OUT" alignment="left">NUMTR_OUT=</Label>
+    <Field keyword="NUMTR_OUT" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_ANG_REF" alignment="left">ANG_REF=</Label>
+    <Field keyword="ANG_REF" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NOISEPARAMETERS" alignment="center">Noise Parameters</Label>
+    <Label keyword="COMMENT_HYPERBOLICWINPARAMETERS" alignment="center">Hyperbolic Win Parameters</Label>
+    <Label keyword="COMMENT_FLAGSFORTIMELAPSE" alignment="center">Flags for Time-Lapse</Label>
+    <Border keyword="BORDER2"/>
+    <Border keyword="BORDER3"/>
+    <Border keyword="BORDER4"/>
+    <Label keyword="LABEL_MEDIAN" alignment="left">MEDIAN=</Label>
+    <Field keyword="MEDIAN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T0_MIN" alignment="left">T0_MIN=</Label>
+    <Field keyword="T0_MIN" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FLAG_AVO" alignment="left">FLAG_AVO=</Label>
+    <Field keyword="FLAG_AVO" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T0_MAX" alignment="left">T0_MAX=</Label>
+    <Field keyword="T0_MAX" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FLAG_REGU" alignment="left">FLAG_REGU=</Label>
+    <Field keyword="FLAG_REGU" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FLAG_NOISE" alignment="left">FLAG_NOISE=</Label>
+    <Field keyword="FLAG_NOISE" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_" alignment="center">-</Label>
+    <Label keyword="COMMENT_ITERATIONPARAMETERS" alignment="center">Iteration Parameters</Label>
+    <Border keyword="BORDER5"/>
+    <Label keyword="LABEL_MAX_ITER" alignment="left">MAX_ITER=</Label>
+    <Field keyword="MAX_ITER" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IPM_ITER" alignment="left">IPM_ITER=</Label>
+    <Field keyword="IPM_ITER" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CG_ITER" alignment="left">CG_ITER=</Label>
+    <Field keyword="CG_ITER" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">-</Label>
+    <Label keyword="COMMENT_BOUNDSONINTERCEPTGRADIEN" alignment="center">Bounds on Intercept &amp; Gradient Parameters</Label>
+    <Border keyword="BORDER6"/>
+    <Label keyword="LABEL_INTERCEPT_BOUND" alignment="left">INTERCEPT_BOUND=</Label>
+    <Field keyword="INTERCEPT_BOUND" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GRADIENT_BOUND" alignment="left">GRADIENT_BOUND=</Label>
+    <Field keyword="GRADIENT_BOUND" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SPECIFYTHEPATHFORTHEVELO" alignment="center">Specify the Path for the Velocity file and the name</Label>
+    <Border keyword="BORDER7"/>
+    <Button keyword="SELECT_PATH_VEL">Select PATH_VEL</Button>
+    <Label keyword="EQLAB_PATH_VEL" alignment="left">=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_VEL_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_AVE" alignment="left">OPT_AVE=</Label>
+    <Field keyword="OPT_AVE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_SMOOTH" alignment="left">LEN_SMOOTH=</Label>
+    <Field keyword="LEN_SMOOTH" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SR" alignment="left">OPT_SR=</Label>
+    <Field keyword="OPT_SR" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SPECIFYTHESTARTINGANDOUT" alignment="center">Specify the starting and output wavelet parameters</Label>
+    <Border keyword="BORDER8"/>
+    <Button keyword="SELECT_PATH_WVLT">Select PATH_WVLT</Button>
+    <Label keyword="EQLAB_PATH_WVLT" alignment="left">=</Label>
+    <Field keyword="PATH_WVLT" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_WVLT_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_FIRST" alignment="left">TIM_FIRST=</Label>
+    <Field keyword="TIM_FIRST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_OP" alignment="left">LEN_OP=</Label>
+    <Field keyword="LEN_OP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PRESTACKNONLINEARINVERSI" xPos="11" yPos="0" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_GENERALPARAMETERS" xPos="14" yPos="2" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="3" xSize="53" ySize="5"/>
+     <Constraints component="LABEL_OPT_INPUT" xPos="2" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_INPUT" xPos="12" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OUTPUT" xPos="30" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUTPUT" xPos="41" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUMTR_IN" xPos="2" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_IN" xPos="12" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUMTR_OUT" xPos="30" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_OUT" xPos="41" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG_REF" xPos="30" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG_REF" xPos="41" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NOISEPARAMETERS" xPos="2" yPos="9" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_HYPERBOLICWINPARAMETERS" xPos="22" yPos="9" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_FLAGSFORTIMELAPSE" xPos="50" yPos="9" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="0" yPos="10" xSize="20" ySize="3"/>
+     <Constraints component="BORDER3" xPos="22" yPos="10" xSize="24" ySize="4"/>
+     <Constraints component="BORDER4" xPos="48" yPos="10" xSize="24" ySize="5"/>
+     <Constraints component="LABEL_MEDIAN" xPos="2" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MEDIAN" xPos="9" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T0_MIN" xPos="25" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T0_MIN" xPos="32" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FLAG_AVO" xPos="51" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FLAG_AVO" xPos="61" yPos="11" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T0_MAX" xPos="25" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T0_MAX" xPos="32" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FLAG_REGU" xPos="51" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FLAG_REGU" xPos="61" yPos="12" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FLAG_NOISE" xPos="51" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FLAG_NOISE" xPos="62" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_" xPos="72" yPos="14" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_ITERATIONPARAMETERS" xPos="16" yPos="15" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER5" xPos="0" yPos="16" xSize="66" ySize="3"/>
+     <Constraints component="LABEL_MAX_ITER" xPos="2" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_ITER" xPos="11" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_IPM_ITER" xPos="19" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IPM_ITER" xPos="28" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CG_ITER" xPos="36" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CG_ITER" xPos="44" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="66" yPos="18" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BOUNDSONINTERCEPTGRADIEN" xPos="11" yPos="20" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER6" xPos="0" yPos="21" xSize="68" ySize="3"/>
+     <Constraints component="LABEL_INTERCEPT_BOUND" xPos="2" yPos="22" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INTERCEPT_BOUND" xPos="18" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GRADIENT_BOUND" xPos="27" yPos="22" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GRADIENT_BOUND" xPos="42" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SPECIFYTHEPATHFORTHEVELO" xPos="15" yPos="25" xSize="51" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER7" xPos="1" yPos="26" xSize="78" ySize="5"/>
+     <Constraints component="SELECT_PATH_VEL" xPos="3" yPos="27" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VEL" xPos="18" yPos="27" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="19" yPos="27" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_VEL_INFO" xPos="19" yPos="28" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_AVE" xPos="6" yPos="29" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AVE" xPos="14" yPos="29" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_SMOOTH" xPos="28" yPos="29" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_SMOOTH" xPos="39" yPos="29" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_SR" xPos="59" yPos="29" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SR" xPos="66" yPos="29" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SPECIFYTHESTARTINGANDOUT" xPos="16" yPos="32" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER8" xPos="1" yPos="33" xSize="78" ySize="5"/>
+     <Constraints component="SELECT_PATH_WVLT" xPos="3" yPos="34" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_WVLT" xPos="19" yPos="34" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_WVLT" xPos="20" yPos="34" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_WVLT_INFO" xPos="20" yPos="35" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_FIRST" xPos="4" yPos="36" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_FIRST" xPos="14" yPos="36" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_OP" xPos="32" yPos="36" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OP" xPos="39" yPos="36" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_INPUT">
+      <Tip>Input CMPs in angle or offset or intercept-gradient pairs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - OPT_INPUT<br> Input CMPs in angle or offset or intercept-gradient pairs.</center></b>
+<pre> Default = OFFSET
+ Allowed = OFFSET    (Input consists of ordinary CMP gathers in offset.)
+ 
+ If OPT_INPUT = OFFSET, header word 6 must contain offset.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUTPUT">
+      <Tip>Type of AVA gradient related output product.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - OPT_OUTPUT<br> Type of AVA gradient related output product.</center></b>
+<pre> Default = A_B_SRC
+ Allowed = A_B_SRC  (Intercept, Gradient and Source.)
+ Allowed = DA_DB_SRC (Perturbed Intercept, Perturbed Gradient and Source.)
+ Allowed = S_REFL   (Estimated S-wave reflectivity at normal incidence + Src.)
+ Allowed = P_REFL   (Modeled P-wave reflectivity at angle ANG_REF. + Source)
+ Allowed = VS_VP    (Estimated VS/VP ratio + Source.)
+ Allowed = AB_PROD  (Product of Intercept times Gradient + Source.)
+ Allowed = MODEL    (Predicted data + a,b,source trace.)
+ Allowed = RESID    (Observed(input) data - Predicted Data + a,b,source trace.)
+ 
+ 
+ OPT_OUTPUT = A_B_SRC produces a 3-trace output gather from each input gather.
+ 
+ OPT_OUTPUT = DA_DB_SRC produces a 3-trace output gather from input gather.
+ 
+ OPT_OUTPUT = P_REFL, S_REFL, VS_VP or AB_PROD produces a two output trace
+ from each input gather.
+ 
+ OPT_OUTPUT = MODEL or RESID produces output gathers of the same size as the
+ input gathers plus three more traces for a, b, and source.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_IN">
+      <Tip>Value of NUMTR global upon input, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - NUMTR_IN<br> Value of NUMTR global upon input, shown for reference.</center></b>
+<pre> psninv requires gathered input. NUMTR for your input traces must be at
+ least 2 for all options, and must be exactly 2 when OPT_INPUT = A_B_SRC
+ or DA_DB_SRC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_OUT">
+      <Tip>Value of NUMTR global upon output, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - NUMTR_OUT<br> Value of NUMTR global upon output, shown for reference.</center></b>
+<pre> The value of NUMTR for your output traces depends on OPT_OUTPUT.
+ NUMTR_OUT will be 3 when OPT_OUTPUT = A_B_SRC, DA_DB_SRC.
+ NUMTR_OUT will be 2 when OPT_OUTPUT = P_REFL, S_REFL, VS_VP or AB_PROD.
+ NUMTR_OUT will be the same as NUMTR_IN + 3 when OPT_OUTPUT = MODEL or RESID.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_REF">
+      <Tip>Reference angle to use, in degrees, when OPT_OUTPUT = P_REFL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - ANG_REF<br> Reference angle to use, in degrees, when OPT_OUTPUT = P_REFL.</center></b>
+<pre> Default = 0.0
+ Allowed = 90.0 &gt;= real &gt;= 0.0
+ 
+ Active only when OPT_OUTPUT = P_REFL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MEDIAN">
+      <Tip>Standard Deviation for Median Noise estimate in Percentage</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - MEDIAN<br> Standard Deviation for Median Noise estimate in Percentage</center></b>
+<pre> Default = 1.0
+ Allowed = (0,1)
+ 
+ MEDIAN provides the noise estimate in the data. Typically this is
+ expressed in percentage. Thus MEDIAN=1.0 means that the standard
+ deviation of the data is 100% of the median value in the specified
+ window. The window is defined by T0_MIN and T0_MAX
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="T0_MIN">
+      <Tip>Minimum zero-offset time for the hyperbolic window</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - T0_MIN<br> Minimum zero-offset time for the hyperbolic window</center></b>
+<pre> Default = begining of the trace. But this will make the code
+           code run slower since it will invert all of the data.
+           Also the AVO model will try to fit zeros if no signal is
+           available.
+ Allowed = specify the starting time for the window in seconds</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FLAG_AVO">
+      <Tip>Flag for including the base AVO model in the time lapse inversion</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - FLAG_AVO<br> Flag for including the base AVO model in the time lapse inversion</center></b>
+<pre> Default = 0
+ Allowed = integer 0,1
+ If FLAG_AVO = 1, then the reference or base model for AVO will be read from
+ data file. Note that first two traces of each gather will be the intercept
+ and gradient trace obtained from previous inversion.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="T0_MAX">
+      <Tip>Maximum zero-offset time for the hyperbolic window</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - T0_MAX<br> Maximum zero-offset time for the hyperbolic window</center></b>
+<pre> Default = end of the trace. This will make the code run slower
+           since it will invert all of the data till end of trace
+ Allowed = end the starting time for the window in seconds</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FLAG_REGU">
+      <Tip>Flag for including the previous regularization in time lapse inversion</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - FLAG_REGU<br> Flag for including the previous regularization in time lapse inversion</center></b>
+<pre> Default = 0
+ Allowed = integer 0,1
+ If FLAG_REGU = 1, then the previous regularization will be read from the
+ data file. Note that the regularization parameter from previous inversion
+ is extracted from the header word of the first trace i.e. intercept trace.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="FLAG_NOISE">
+      <Tip>Flag to include the previous noise estimate in the time lapse inversion</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - FLAG_NOISE<br> Flag to include the previous noise estimate in the time lapse inversion</center></b>
+<pre> Default = 0
+ Allowed = integer 0,1
+ If FLAG_NOISE = 1, then the previous noise estimate will be read from the
+ data file. Note that the noise parameter from previous inversion
+ is extracted from the header word of the first trace i.e. intercept trace.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_ITER">
+      <Tip>Maximum number of iterations in the inversion</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - MAX_ITER<br> Maximum number of iterations in the inversion</center></b>
+<pre> Default = 5.0
+ Allowed = &gt; 1
+ 
+ MAX_ITER is the maximum number of iterations allowed in the
+ inversion. Typically the inversion will run upto MAX_ITER if
+ it doesnot converge with the specifed noise level.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="IPM_ITER">
+      <Tip>Maximum number of interior point iterations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - IPM_ITER<br> Maximum number of interior point iterations</center></b>
+<pre> Default = 6.0
+ Allowed = &gt; 1
+ 
+ IPM_ITER is the maximum number of iterations allowed in the
+ interior point optimization procedure. The default is 6
+ and can be increased if the barrier parameter do not
+ decrease sufficiently. In most cases 6-8 iterations is
+ enough at each regularization step.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="CG_ITER">
+      <Tip>Maximum number of CG Iteration for solving system of equation</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - CG_ITER<br> Maximum number of CG Iteration for solving system of equation</center></b>
+<pre> Default = 20
+ Allowed = &gt; 20
+ 
+ CG_ITER is the maximum number of conjugate gradient iterations allowed in the
+ solving the system. This number depends on the size of the system. However
+ allowing number of iterations equal to size will be very expensive. Thus few
+ iterations (&gt; 20) is sufficient to give an approximate solution to the linear
+ system. Note that an approximate solution for system of eq. is all we need to
+ solve the nonlinear inverse problem.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERCEPT_BOUND">
+      <Tip>Bound for the intercept parameter (a)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - INTERCEPT_BOUND<br> Bound for the intercept parameter (a)</center></b>
+<pre> Default = 0.2
+ Allowed = (0,1)
+ 
+ INTERCEPT_BOUND provides the bound for the intercept parameter. For example
+ if the specified bound is 0.2 then -0.2 &lt;= a &lt;= 0.2 is imposed in inversion.
+ Note that |a  + bsin(theta)^2| &lt;= 1. The program will change the bnd if user
+ specifies bound that are greater than unity (&gt;1). The change is proportinal
+ for the intercept and gradient, such that total refelctivity &lt; 1.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRADIENT_BOUND">
+      <Tip>Bound for the gradient parameter (b)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - GRADIENT_BOUND<br> Bound for the gradient parameter (b)</center></b>
+<pre> Default = 0.2
+ Allowed = (0,1)
+ 
+ GRADIENT_BOUND provides the bound for the gradient parameter. For example
+ if the specified bound is 0.2 then -0.2 &lt;= b &lt;= 0.2 is imposed in inversion.
+ Note that |a  + bsin(theta)^2| &lt;= 1. The program will change the bnd if user
+ specifies bound that are greater than unity (&gt;1). The change is proportinal
+ for the intercept and gradient, such that total refelctivity &lt; unity.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VEL">
+      <Tip>Choose PATH_VEL using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - SELECT_PATH_VEL<br> Choose PATH_VEL using a file selection dialog box.</center></b>
+<pre> Active only when OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL">
+      <Tip>Pathname for a stacking or interval velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PATH_VEL<br> Pathname for a stacking or interval velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ A velocity file is needed to carryout the forward modeling that
+ applies the moveout on the data. Note that Stacking velocity
+ (NMO) is used in the forward modeling. However if interval velocity
+ file is provided, the code computes the NMO velocity using
+ interval to NMO velocity relation.
+ 
+ Active only when OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL_INFO">
+      <Tip>Status of PATH_VEL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PATH_VEL_INFO<br> Status of PATH_VEL.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OPT_AVE">
+      <Tip>Whether to average all velocity functions in the file into one.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - OPT_AVE<br> Whether to average all velocity functions in the file into one.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ Whether to average all velocity functions in the file to a single velocity
+ function.
+ 
+ As in process AVAST, the intent of OPT_AVE = NO is to be able to accommodate
+ a SLOWLY varying water depth. It is up to you to put in functions which have
+ a smooth lateral variation. It is NOT recommended that the option be used
+ with raw stacking velocites.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_SMOOTH">
+      <Tip>Length of running average smoothing for interval velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - LEN_SMOOTH<br> Length of running average smoothing for interval velocities.</center></b>
+<pre> Default = 0.2
+ Allowed = real &gt;= 0.0
+ Length, in seconds, of running average smoothing for interval velocity
+ functions.  If LEN_SMOOTH = 0.0, then no smoothing is done.
+ 
+ Normally some smoothing is required to avoid jagged velocity contours when
+ converting from offset to angle.  Typical values of LEN_SMOOTH are from
+ 0.1 s to 0.5 s.
+ 
+ Active only when OPT_SR = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SR">
+      <Tip>Use the inaccurate Straight Ray method to convert offset to angle.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - OPT_SR<br> Use the inaccurate Straight Ray method to convert offset to angle.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ The OPT_SR = YES option is included for historical reasons, or to compare
+ with contractor processed data, as some contractors may still be using such
+ a method for calculating gradients.  If OPT_SR = NO, an improved conversion
+ from offset to angle is used.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_WVLT">
+      <Tip>Choose PATH_WVLT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - SELECT_PATH_WVLT<br> Choose PATH_WVLT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_WVLT">
+      <Tip>Pathname of wavelet file for starting and reference model</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PATH_WVLT<br> Pathname of wavelet file for starting and reference model</center></b>
+<pre> Default = NONE
+ Allowed = char
+ If you specify PATH_WVLT, the wavelet in this file is used in the inversion
+ as the starting and the reference model.
+ 
+ This file may be in TRCIO or SEGY format or any other format readable by the
+ TRCIO primitives in CPS. Only the first trace in your file will be read.
+ 
+ If PATH_WVLT = NONE, then program will generate a random wavelet
+ as the starting wavelet, with the L2 norm of the data. The reference
+ wavelet will have zero norm.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_WVLT_INFO">
+      <Tip>Status of PATH_WVLT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PATH_WVLT_INFO<br> Status of PATH_WVLT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIM_FIRST">
+      <Tip>Actual time for first sample of the wavelet, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - TIM_FIRST<br> Actual time for first sample of the wavelet, in seconds.</center></b>
+<pre> Default = 0.0 (or read from wavelet file)
+ Allowed = real
+ Time of first sample in wavelet is used for proper centering of the
+ wavelet (same as in wavelets used by DSIG, although correctness of the
+ centering time is more critical here than it is in DSIG).
+ 
+ As in the case of DSIG, the front end will attempt to read the TMIN value
+ from your wavelet file (if that file exists already when building the job
+ containing psninv) and will use this as the default for TIM_FIRST; however,
+ you may override this setting manually, if necessary.
+ 
+ If your wavelet is in a SEGY file, the TMIN extracted from the file will
+ always be 0.0 (because SEGY format doesn't support non-zero TMIN), so you'll
+ have to know the correct TIM_FIRST value independently.  If you extracted
+ your wavelet using interactive inversion software you probably determined
+ its TIM_FIRST value quite accurately in the extraction process.  If your
+ estimated wavelet was calculated by C4WE, the TMIN in your wavelet file is
+ only very approximate; in this case, we recommend analyzing it with SPCT to
+ determine a more accurate TIM_FIRST before using this wavelet in psninv.
+ 
+ TIM_FIRST is always active.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OP">
+      <Tip>Length of operator for start, ref and output wavelet, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - LEN_OP<br> Length of operator for start, ref and output wavelet, in seconds.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0
+ LEN_OP should be approximately the same as the wavelet length.
+ 
+ LEN_OP is always active.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>psninv - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="psninv">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PSNINV   (PreStack Nonlinear INVersion for AVA parameters
+                        and source wavelet)
+ Category   : diagnostics
+ Written    : 2003-07-28   by: Partha Routh
+ Revised    : 2006-10-31   by: Partha Routh
+ Maturity   : production
+ Purpose    : Generate various AVA gradient related products &amp; source wavelet.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ PSNINV produces various AVA gradient related output products, including
+ Source wavelet. PSNINV can be used to produce AVA gradient as a final product,
+ but typically it is used to provide input data to FFAVA and PSLINV processes.
+ 
+ 
+      OPT_INPUT = OFFSET, The input to the code is moveout CIP gathers
+      So the data are NON-NMO-corrected CIP gathers with trace offset in
+      header word 6.
+ 
+ 
+ Intercept-Gradient Calculation
+ 
+ 
+ If OPT_INPUT = OFFSET, psninv fits each input CMP gather with src wavelet and
+ reflectivity model given by:
+ 
+               r(x,t0) = A(t0) + B(t0)*(sin(angle)**2),
+ 
+ where x is offset, t0 is the zero-offset travel time, A is the intercept and
+ B is the gradient.  The sine of the reflection angle is approximated by:
+ 
+                   sin(angle) = (x*VI)/(t*(VR**2)),
+ 
+ where VR = stacking (RMS) velocity, VI = interval velocity (related to VR
+ by the Dix equation) and t = reflection time derived from the NMO equation:
+ 
+                  t = sqrt( t0**2 + (x**2)/(VR**2) ).
+ 
+ Normally, an interval velocity derived from the RMS velocity by the Dix
+ equation is a jagged function of time and should be smoothed for use in
+ converting offset to angle.  LEN_SMOOTH is the length of a running average
+ smoothing operator, in seconds, that is applied to the interval velocity.
+ Typical values of LEN_SMOOTH are from 0.1 s to 0.5 s.
+ 
+ 
+ Straight Ray Offset-Angle Conversion
+ 
+ Prior to September 1995, ASTK (the precursor to psninv) used an inaccurate
+ offset-angle conversion based on a straight ray approximation, equivalent to
+ the approximation described earlier with the further simplification that
+ VI = VR; thus, the assumed relation between offset and angle was:
+ 
+                         sin(angle) = x/(t*VR),
+ 
+ which uses only the RMS velocity and makes no use of interval velocity.
+ For reflections at depth, this equation may underestimate reflection angle
+ by around a factor of two.  Setting OPT_SR = YES causes psninv to use this
+ inaccurate method.  This option is provided for historical interest or for
+ comparison with contractor-processed data since some contractors may still
+ compute AVA gradients this way.  Normally, OPT_SR should be set to NO.
+ 
+ 
+ Gradient Related Products Available
+ 
+ If OPT_INPUT = OFFSET, psninv first fits the input CMP as described
+ above and extracts an intercept trace, gradient trace and a source trace.
+ PSNINV then calculates the desired gradient related product based on
+ these intercept and gradient traces
+ (or may optionally produce MODEL or RESID output to indicate the quality of
+ data fitting).
+ 
+     If OPT_OUTPUT = A_B_SRC, the intercept, gradient and src traces are output
+     in three-trace gathers (thus, 3 output traces per input gather). Here, the
+     intercept trace will be the first trace, gradient the second trace
+     in each three-trace output gather.
+ 
+     If OPT_OUTPUT = DA_DB_SRC, the perturbed intercept, grad and src traces
+     are output in three-trace gathers (thus, 3 O/P traces per input gather).
+     The perturbed intercept trace will be the first trace, perturbed gradient
+     the second trace in each three-trace output gather.
+ 
+     If OPT_OUTPUT = P_REFL, a P-wave reflectivity trace at angle ANG_REF
+     is output with source trace.(2 trace per gather.)
+     A(t0) + B(t0)*(sin(ANGREF)**2).
+     When ANGREF = 0, this shows perturbations in log(P-Impedance). For
+     non-zero ANGREF, it represents perturbations in the logarithm of an
+     "Elastic Impedance" (Patrick Connolly, Leading Edge, April 1999).
+ 
+     If OPT_OUTPUT = S_REFL, an estimated S-wave reflectivity trace at normal
+     incidence is output along with source trace.
+     (2 trace per input gather.)  0.5*( A(t0) - B(t0)).
+ 
+     If OPT_OUTPUT = VS_VP, an estimated VS/VP ratio trace plus source trace
+      is output.
+     (Two trace per input gather.)  -0.5*( A(t0) + B(t0)).  Note that this has
+     the opposite polarity of a Poisson's ratio stack.
+ 
+     If OPT_OUTPUT = AB_PROD, the product of the intercept times the gradient
+     traces plus source trace is output.  (2 trace per input gather.)
+     This highlights bright spots with both large amplitudes and large AVA
+     changes (Rutherford &amp; Williams Class 3).
+ 
+     If OPT_OUTPUT = MODEL, psninv outputs predicted data (as many traces
+     per gather as in the input traces). along with three other traces,
+     intercept,  gradient and source trace.
+ 
+     If OPT_PROD = RESID, the observed data minus the predicted data is output
+     along with three other traces, intercept, gradient and source trace.
+ 
+ 
+ Velocity Handling
+ 
+ Manipulation of the velocities needed for converting offset to angle when
+ OPT_INPUT = OFFSET depends on settings of OPT_AVE and OPT_SR and is designed
+ to follow the treatment in process AVAST as closely as possible. As in AVAST,
+ you may input Stacking or RMS velocities (type VTNM or VTRM) or Interval
+ velocities (type VTIN).
+ 
+ If OPT_AVE = YES, velocity functions are combined to arrive at a single
+ interval velocity function: If input velocities are of type VTNM or VTRM,
+ they are first resampled to the trace sample interval, then averaged, then
+ converted to interval velocity using Dix's formula. If they are of type
+ VTIN, they are resampled to the trace sample interval (honoring the constant
+ interval velocity "steps"), then averaged. In either case, the composited
+ interval velocity is then smoothed using the LEN_SMOOTH parameter. This
+ smoothed interval velocity is also converted to RMS velocity, because both
+ interval and RMS velocities are needed in our approximate offset-to-angle
+ conversion formula.
+ 
+ If OPT_AVE = NO, a smoothed interval velocity and corresponding RMS velocity
+ is derived separately at every velocity location and saved in a table. When
+ processing traces, interval and RMS velocities are interpolated separately
+ from the stored table to the current CMP location.
+ 
+ The intent of the OPT_AVE = NO option is to be able to accommodate a SLOWLY
+ varying water depth.  It is up to you to put in functions which have a smooth
+ lateral variation. It is NOT recommended that the option be used with raw
+ stacking velocites.
+ 
+ If OPT_SR = YES, velocity handling is as described above, except that no
+ smoothing is done, and only the RMS velocity is used (You may still input
+ interval velocities, if you wish, even when OPT_SR = YES).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Input Data Preparation
+ 
+ If OPT_INPUT = OFFSET, input data should be non-NMO-corrected CMP gathers,
+ preferably with multiples attenuated.
+ Data should be muted (head and tail) to remove
+ noise or any data that might be misinterpreted by PSNINV.  Use a zero length
+ taper in MUTE to avoid tapers that PSNINV might interpret as AVA gradients.
+ 
+ If OPT_INPUT = OFFSET, header word 6 for each input trace should be set to
+ the center value of the offset range that trace represents.
+ 
+ Output Traces
+ 
+ If output traces from psninv will be inverted using PSLINV, do not apply any
+ amplitude balance between psninv and PSLINV. On the other hand, if output
+ traces will be sent to FFAVA, an MVXP is usually applied between psninv and
+ FFAVA.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         PSNINV REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+  2. 2006-10-31  Routh       Beta version checks.
+  1. 2003-07-01  Routh       First version of PSNINV was developed
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

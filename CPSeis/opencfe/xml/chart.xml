@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="chart" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="CHARTPROCESS" title="CHART Process" rows="24" columns="70">
+    <Label keyword="COMMENT_GENERATEAGROUNDPOSITIONC" alignment="center">Generate a Ground Position Chart or a Stacking Chart from Traces</Label>
+    <Label keyword="LABEL_SPACING" alignment="left">SPACING=</Label>
+    <Field keyword="SPACING" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEVICE" alignment="left">DEVICE=</Label>
+    <Field keyword="DEVICE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PROF_INIT" alignment="left">PROF_INIT=</Label>
+    <Field keyword="PROF_INIT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PROF_LAST" alignment="left">PROF_LAST=</Label>
+    <Field keyword="PROF_LAST" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SURVEY_UNITS" alignment="left">SURVEY_UNITS=</Label>
+    <Field keyword="SURVEY_UNITS" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_LEN" alignment="left">HDR_LEN=</Label>
+    <Field keyword="HDR_LEN" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_" alignment="center">(7 17 47 35)</Label>
+    <Label keyword="LABEL_LEN_INIT" alignment="left">LEN_INIT=</Label>
+    <Field keyword="LEN_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_INC" alignment="left">LEN_INC=</Label>
+    <Field keyword="LEN_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_LAST" alignment="left">LEN_LAST=</Label>
+    <Field keyword="LEN_LAST" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_TOT" alignment="left">LEN_TOT=</Label>
+    <Field keyword="LEN_TOT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_WID" alignment="left">HDR_WID=</Label>
+    <Field keyword="HDR_WID" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">(8 18 0 26 27 38 36)</Label>
+    <Label keyword="LABEL_WID_INIT" alignment="left">WID_INIT=</Label>
+    <Field keyword="WID_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WID_INC" alignment="left">WID_INC=</Label>
+    <Field keyword="WID_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ONLYONEYBINISPLOTTED" alignment="center">(only one Y bin is plotted)</Label>
+    <Layout>
+     <Constraints component="COMMENT_GENERATEAGROUNDPOSITIONC" xPos="1" yPos="1" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SPACING" xPos="15" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SPACING" xPos="25" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DEVICE" xPos="37" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEVICE" xPos="44" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PROF_INIT" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PROF_INIT" xPos="11" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PROF_LAST" xPos="21" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PROF_LAST" xPos="31" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SURVEY_UNITS" xPos="45" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SURVEY_UNITS" xPos="58" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_LEN" xPos="1" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LEN" xPos="11" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_" xPos="19" yPos="7" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_LEN_INIT" xPos="1" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_INIT" xPos="11" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_INC" xPos="19" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_INC" xPos="27" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_LAST" xPos="35" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_LAST" xPos="44" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_TOT" xPos="52" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_TOT" xPos="60" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_WID" xPos="1" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_WID" xPos="11" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="19" yPos="11" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WID_INIT" xPos="1" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WID_INIT" xPos="11" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WID_INC" xPos="19" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WID_INC" xPos="27" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ONLYONEYBINISPLOTTED" xPos="36" yPos="13" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SPACING">
+      <Tip>Whether to use single or double column spacing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - SPACING<br> Whether to use single or double column spacing.</center></b>
+<pre> Default = SINGLE
+ Allowed = SINGLE  (Less wrap-around, harder to read.)
+ Allowed = DOUBLE  (More wrap-around, easier to read.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEVICE">
+      <Tip>Device on which to put the chart (printer or plotter).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - DEVICE<br> Device on which to put the chart (printer or plotter).</center></b>
+<pre> Default = PRINTER
+ Allowed = PRINTER or OPS or CONP
+ Currently only the PRINTER choice is available.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROF_INIT">
+      <Tip>Value of header word 9 for first shot profile to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROF_INIT<br> Value of header word 9 for first shot profile to plot.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROF_LAST">
+      <Tip>Value of header word 9 for last shot profile to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROF_LAST<br> Value of header word 9 for last shot profile to plot.</center></b>
+<pre> Default = 999
+ Allowed = int &gt; SP_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SURVEY_UNITS">
+      <Tip>Units (feet or meters) used in the surveyed coordinate system.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - SURVEY_UNITS<br> Units (feet or meters) used in the surveyed coordinate system.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_LEN">
+      <Tip>Header word labeling plot length coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - HDR_LEN<br> Header word labeling plot length coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+                               COORDS     HDR_LEN     HDR_WID
+                               ------     -------     -------
+     Stacking chart           surveyed      17        18 or 0
+     Stacking chart             grid         7         8 or 0
+     Ground position chart   sequential     47       0,26,27,38
+     Ground position chart      grid        35          36
+ 
+ HDR_WID must be set to 0 for a 2D chart.
+ 
+ For ground position charts, header word 46 is also used when 47 is specified
+ and 33 is used when 35 is specified.  Headers 26,27,38 are source, receiver,
+ and CMP line numbers respectively.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_INIT">
+      <Tip>Initial value for plot length header word to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - LEN_INIT<br> Initial value for plot length header word to plot.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_INC">
+      <Tip>Increment for plot length header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - LEN_INC<br> Increment for plot length header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_LAST">
+      <Tip>Last value of plot length header word to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - LEN_LAST<br> Last value of plot length header word to plot.</center></b>
+<pre> Default = 999.0
+ Allowed = real&gt;=LEN_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_TOT">
+      <Tip>Total number of plot length header word values to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - LEN_TOT<br> Total number of plot length header word values to plot.</center></b>
+<pre> Default = 999
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_WID">
+      <Tip>Header word labeling plot width coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - HDR_WID<br> Header word labeling plot width coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 0 - NWIH
+                               COORDS     HDR_LEN     HDR_WID
+                               ------     -------     -------
+     Stacking chart           surveyed      17        18 or 0
+     Stacking chart             grid         7         8 or 0
+     Ground position chart   sequential     47       0,26,27,38
+     Ground position chart      grid        35          36
+ 
+ HDR_WID must be set to 0 for a 2D chart.
+ 
+ For ground position charts, header word 46 is also used when 47 is specified
+ and 33 is used when 35 is specified.  Headers 26,27,38 are source, receiver,
+ and CMP line numbers respectively.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WID_INIT">
+      <Tip>Only value for plot width header word to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - WID_INIT<br> Only value for plot width header word to plot.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WID_INC">
+      <Tip>Increment for plot width header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - WID_INC<br> Increment for plot width header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;0.0
+ Only one value of HDR_WID is plotted</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>chart - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="chart">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : CHART    (generate ground position or stacking chart)
+ Category   : headers
+ Written    : 1989-12-31   by: Tom Stoeckley
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Generate a ground position or stacking chart from trace headers.
+ Portability: No known limitations, but see portability issues below.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ CHART will produce a GROUND POSITION CHART if HDR_LEN=47 or 35, otherwise it
+ will produce a STACKING CHART.  Normally the header words are set as follows.
+ 
+ 
+                                 COORDS      HDR_LEN    HDR_WID (3-D)
+                                 ------        ---       ---------
+     Stacking chart             surveyed       17           18
+     Stacking chart               grid          7            8
+     Ground position chart     sequential      47         0,26,27,38
+     Ground position chart        grid         35           36
+ 
+ HDR_WID must be set to 0 for a 2D chart.
+ 
+ For ground position charts, header word 46 is also used when 47 is specified
+ and 33 is used when 35 is specified.  Headers 26,27,38 are source, receiver,
+ and CMP line numbers respectively.
+ 
+ Traces that fall outside the range of the specified header word values will
+ not be plotted.  You can use this fact to restrict your chart to a subset of
+ your data.
+ 
+ CHART generates the chart from information in the trace headers.
+ The traces do not have to be in any particular order.
+ 
+ 3D Charts
+ 
+ For 3-D data, you will get a sequential ground position chart for all your
+ lines at once if you specify HDR_LEN=47 and HDR_WID=0.  However, you will
+ normally have to call CHART separately to get a stacking chart, or grid
+ ground position chart, for each HDR_WID value.
+ 
+ 
+ Chart Annotation
+ 
+ The entire shot profile number (header word 9) is printed vertically
+ immediately preceding the first location (source or receiver or CMP) for that
+ shot profile.
+ 
+ Receivers (or CMP's) and sources are plotted using the following symbols.
+ The symbols for the receivers are listed with highest overriding priority
+ first.
+ 
+                       RECEIVER (OR CMP) SYMBOLS
+ 
+     Dead receiver                           x   (X every fifth column)
+     Reverse polarity receiver               +   (if header 25 is negative)
+     Beginning (first) receiver in group     a
+     End (last) receiver in group            e
+     Multiple live receivers                 m   (M every fifth column)
+     One live receiver                       .   (: every fifth column)
+ 
+                           SOURCE SYMBOLS
+ 
+     Source with no receivers at all         S   (For SPACING=DOUBLE,
+     Source with receivers forward           F   plotted to the left
+     Source with receivers reverse           R   if there is a receiver
+     Source with receivers on both sides     B   at the same position)
+ 
+             ADDITIONAL SOURCE SYMBOLS for SPACING=SINGLE
+ 
+     Source and dead receiver                D   (plotted over x or X)
+     Source and reverse polarity receiver    P   (plotted over +)
+     Source and beginning receiver           U   (plotted over a)
+     Source and end receiver                 V   (plotted over e)
+     Source and multiple live receivers      T   (plotted over m or M)
+     Source and one live receiver            L   (plotted over . or :)
+ 
+ Note that reverse polarity receivers are identified with + only if header
+ word 25 is negative.  Since this is a violation of the standard for header
+ word 25 (largest absolute value on the trace), this will normally not be
+ the case.  However, if CHART is called internally from FGD, which has the
+ ability to reverse the polarity of a trace based upon the field geometry
+ description, FGD will set header 25 negative for internal calls to CHART.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 31. 2006-06-20  B. Menger    Removed Unused Variables.
+ 30. 2001-02-13  Stoeckley    Change wrapup flag.
+ 29. 2000-10-19  Stoeckley    Add missing context-sensitive help.
+ 28. 2000-10-06  Stoeckley    Add required missing documentation sections.
+ 27. 2000-08-24  Stoeckley    Change defaults for LEN_LAST and LEN_TOT to
+                               999; add printouts of min/max values.
+ 26. 2000-05-02  Stoeckley    Fix problem which caused aborts on linux and
+                               extremely slow operation on sun: Changed
+                               dimension of obj%h from 8 to 80, which matches
+                               dimension in called subroutines (obj_h).
+                               See portability issues below.
+ 25. 2000-04-28  Stoeckley    Fix error in getting SURVEY_UNITS.
+ 24. 2000-04-10  Stoeckley    Add GUI definition section; remove the MODE
+                               parameter.
+ 23. 2000-02-15  Stoeckley    Improve detection and error reporting of
+                               missing globals.
+ 22. 2000-02-04  Stoeckley    Improved use of wrapup flag to keep from
+                               executing wrapup code from front end.
+ 21. 2000-01-24  Stoeckley    Converted from old system.  Plotting option
+                               not yet implemented.
+ 20. 1998-12-16  K. Goodger   Begin using the fortran90 compiler.
+ 19. 1993-04-21  K. Goodger   Insert leading zeros if necessary to
+                               insure a 5 character job name for conplot.
+ 18. 1993-04-20  K. Goodger   Recompile with static option.
+ 17. 1992-05-07  K. Goodger   Remove documentation on DEV parameter as
+                               this option has not been completed and is
+                               available only through FGD.
+ 16. 1991-10-28  K. Goodger   Get info from common blocks from FGD if
+                               CHART run as separate process and want plot.
+                               Get NQS to pass to CONPLOT for vector file name.
+ 15. 1991-09-23  D Peterson   Comment out CALL JDGH code in IF (JD) THEN
+ 14. 1991-09-23  D Peterson   Clear rest of CBUF character array after
+                               writing to it. UNICOS writes aprox. 277
+                               characters and the rest to 640 is garbage.
+ 13. 1991-04-16  K. Goodger   Change lower case chars to upper if OPS.
+                               Calculate plot length.
+ 12. 1991-02-26  Goodger      Add option to draw vertical lines every
+                               20 CDP's on plotter option.
+ 11. 1991-02-20  Goodger      Add option to output charts to plotter.
+ 10. 1990-08-27  Stoeckley    Change how shotpoints and line numbers are
+                               printed when information is not available
+                               in trace headers.
+  9. 1990-07-10  Stoeckley    Add legend to chart.
+  8. 1990-07-09  Stoeckley    Add beginning and end receiver flag, add
+                               MODE=HEADERS2, modify some of the symbols
+                               to use the extra column when SPACING=DOUBLE,
+                               and eliminate subroutine CHARTA.
+  7. 1990-07-05  Stoeckley    Add English-metric flag, make some print
+                               format changes, add SPACING parameter, and
+                               add End Receiver flag.
+  6. 1990-05-25  Stoeckley    Fix reverse polarity ident when MODE=FGD.
+  5. 1990-05-16  Stoeckley    Add option to generate chart from FGD.
+                               Also add reverse polarity symbol.
+  4. 1990-05-04  Stoeckley    Fix bug in calculation for length of line.
+                               Also improve calculation of shotpoints.
+  3. 1990-04-23  Stoeckley    Add option to generate chart from the JD.
+                               Change plot width from 104 to 80 columns.
+  2. 1990-03-12  Stoeckley    Minor chart format improvements.
+  1. 1989-12-13  Stoeckley    Original version converted from Conseis.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

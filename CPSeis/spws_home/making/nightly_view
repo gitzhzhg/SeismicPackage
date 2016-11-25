@@ -1,0 +1,199 @@
+#!/bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : nightly_view
+# Category   : stand-alone
+# Written    : 2003-06-09   by: tom Stoeckley
+# Revised    : 2003-06-09   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script to view results of nightly makes.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is an ~spws utility to easily view the log files produced by
+# the nightly_make script.  Simply type the following in any directory:
+#
+#                nightly_view
+#
+# This script will also concatenate all log files into a single one in case
+# you might want to do something with it (such as print it) without having
+# to deal with several separate log files.
+#
+#-------------------------------------------------------------------------------
+#                          INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#                SPWSMAKEDIR
+#                SPWSDIR
+#
+# The following file must exist:
+#
+#                $SPWSMAKEDIR/nightly_nodes_and_platforms
+#
+# The following log files should exist:
+#
+#                logfile.status    (in ~spws/making/*)
+#                logfile.today     (in ~spws/making/*)
+#
+# The following log file will be created in the ~spws/making directory
+# (or in the user's home directory if the user is not spws):
+#
+#                logfile.combined
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2003-06-09  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#---------------------------------------------------------------------------
+# RCS Id : $Id: nightly_view,v 1.1 2004/03/04 13:50:47 wjdone Exp $
+#---------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo environment variable SPWSDIR not set.
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo environment variable SPWSMAKEDIR not set.
+     exit
+endif
+
+
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+
+
+if(! -f $SPWSMAKEDIR/nightly_nodes_and_platforms) then
+     echo missing nightly_nodes_and_platforms file.
+     exit
+endif
+
+
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+
+
+set making            = $SPWSDIR/making
+set logfile_status    = logfile.status
+set logfile_today     = logfile.today
+set logfile_combined  = $making/logfile.combined
+set platnodes         = `cat $SPWSMAKEDIR/nightly_nodes_and_platforms`
+
+if($USER != spws) then
+     set logfile_combined  = ~/logfile.combined
+endif
+
+
+##-------------------- remove old combined log file ------------------------##
+##-------------------- remove old combined log file ------------------------##
+##-------------------- remove old combined log file ------------------------##
+
+
+if(-f $logfile_combined) \rm $logfile_combined
+
+
+##------------- add status files to new combined log file -------------------##
+##------------- add status files to new combined log file -------------------##
+##------------- add status files to new combined log file -------------------##
+
+
+echo ""                                               >  $logfile_combined
+echo "combining all log files into $logfile_combined" >> $logfile_combined
+echo ""                                               >> $logfile_combined
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set logfile = $making/$platnode:e/$logfile_status
+
+   if(-f $logfile) then
+        cat $logfile >> $logfile_combined
+   else
+        echo "$logfile not found" >> $logfile_combined
+   endif
+end
+
+echo "" >> $logfile_combined
+
+
+##--------------- add log files to new combined log file -------------------##
+##--------------- add log files to new combined log file -------------------##
+##--------------- add log files to new combined log file -------------------##
+
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set logfile = $making/$platnode:e/$logfile_today
+
+   if(-f $logfile) then
+        cat $logfile >> $logfile_combined
+   else
+        echo " "                  >> $logfile_combined
+        echo "$logfile not found" >> $logfile_combined
+        echo "$logfile not found" >> $logfile_combined
+        echo "$logfile not found" >> $logfile_combined
+        echo "$logfile not found" >> $logfile_combined
+        echo "$logfile not found" >> $logfile_combined
+        echo " "                  >> $logfile_combined
+   endif
+
+end
+
+
+##---------------- show the combined log file to the user ------------------##
+##---------------- show the combined log file to the user ------------------##
+##---------------- show the combined log file to the user ------------------##
+
+
+cat $logfile_combined | more
+
+
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+

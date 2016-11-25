@@ -1,0 +1,118 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                          make_dependencies
+#-------------------------------------------------------------------------------
+# This script creates a file containing makefile dependencies.
+# The created file will be called makefile.depend.
+# This file will contain Fortran-90 and C and C++ dependencies.
+# This file will not contain XML dependencies.
+#
+# Run this script from a makefile (using target depend) as follows:
+#
+#   $(CPSEIS_WRAPPERS)/scripts/make_dependencies  "$(INC_FLAGS)"
+#
+# INC_FLAGS are the include directories preceded by -I prefixes.
+# Accesses include files in the local directory and in java include directories.
+# Environment variables  CPSEIS_WRAPPERS  JAVA_HOME  CLASSPATH  must be set.
+#-------------------------------------------------------------------------------
+#                              INPUT FILES
+#
+# Needs source files (in the local directory):
+#
+#    .f90  .c  .cc  .cpp  .h  .hh
+#
+# Needs executables:
+#
+#    java org.cpseis.util.FortranDependencies
+#    java org.cpseis.util.FixMakefileDepend
+#    fix_dependencies
+#-------------------------------------------------------------------------------
+#                              OUTPUT FILES
+#
+# Creates file (in the local directory):
+#
+#    makefile.depend
+#
+# Creates temporary files which get deleted:
+#
+#    ff_tempfile  (list of Fortran-90 source files)
+#    cc_tempfile  (list of C and C++ source files)
+#    pp_tempfile  (g++ compiler command to get C and C++ dependencies)
+#    dd_tempfile  (original unfixed version of new makefile.depend)
+#-------------------------------------------------------------------------------
+
+##------------------------ get lists of source files ------------------------##
+##------------------------ get lists of source files ------------------------##
+##------------------------ get lists of source files ------------------------##
+
+set INC_FLAGS  = "$1"
+
+echo "--> input arguments to script make_dependencies..."
+echo "    CPSEIS_WRAPPERS = $CPSEIS_WRAPPERS"
+echo "    JAVA_HOME       = $JAVA_HOME"
+echo "    CLASSPATH       = $CLASSPATH"
+echo "    INC_FLAGS       = $INC_FLAGS"
+
+echo "--> getting lists of fortran90 and c and c++ source files..."
+
+\ls *.f90 | sed -e 's/*/ /' -e 's/@/ /' >  ff_tempfile
+\ls *.c   | sed -e 's/*/ /' -e 's/@/ /' >  cc_tempfile
+\ls *.cc  | sed -e 's/*/ /' -e 's/@/ /' >> cc_tempfile
+\ls *.cpp | sed -e 's/*/ /' -e 's/@/ /' >> cc_tempfile
+\ls *.cxx | sed -e 's/*/ /' -e 's/@/ /' >> cc_tempfile
+
+##----------------------- build fortran dependencies ------------------------##
+##----------------------- build fortran dependencies ------------------------##
+##----------------------- build fortran dependencies ------------------------##
+
+echo "--> building fortran90 dependencies..."
+
+echo ""                                                    >  dd_tempfile
+echo "################ makefile.depend ##################" >> dd_tempfile
+echo ""                                                    >> dd_tempfile
+echo "############## fortran dependencies ###############" >> dd_tempfile
+echo ""                                                    >> dd_tempfile
+
+java org.cpseis.util.FortranDependencies  < ff_tempfile >> dd_tempfile
+
+##----------------------- assemble compiler command ------------------------##
+##----------------------- assemble compiler command ------------------------##
+##----------------------- assemble compiler command ------------------------##
+
+echo "--> assembling compiler command for building c and c++ dependencies..."
+
+echo "g++  -MM -c $INC_FLAGS \"                                  >  pp_tempfile
+awk  '{ printf ("%s ",$0) }'                      < cc_tempfile  >> pp_tempfile
+echo ""                                                          >> pp_tempfile
+
+##----------------------- build c and c++ dependencies ---------------------##
+##----------------------- build c and c++ dependencies ---------------------##
+##----------------------- build c and c++ dependencies ---------------------##
+
+echo "--> building c and c++ dependencies..."
+
+echo ""                                                     >> dd_tempfile
+echo "############# c and c++ dependencies ##############"  >> dd_tempfile
+echo ""                                                     >> dd_tempfile
+
+chmod u+x pp_tempfile
+./pp_tempfile | $CPSEIS_WRAPPERS/scripts/fix_dependencies >> dd_tempfile
+
+echo ""                                                     >> dd_tempfile
+echo "################ end dependencies #################"  >> dd_tempfile
+echo ""                                                     >> dd_tempfile
+
+##----------------------- finish up and return ------------------------------##
+##----------------------- finish up and return ------------------------------##
+##----------------------- finish up and return ------------------------------##
+
+java org.cpseis.util.FixMakefileDepend < dd_tempfile > makefile.depend
+
+\rm -f ff_tempfile cc_tempfile pp_tempfile dd_tempfile
+
+echo "--> finished"
+echo "--> your dependencies are now in a local file called makefile.depend"
+
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##

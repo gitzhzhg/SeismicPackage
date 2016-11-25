@@ -1,0 +1,23 @@
+
+     # makefile_for_spws_jars in ~spws/making
+
+     # This makefile can be used by any ~spws directory
+     # which makes ~spws jars.  Any such ~spws directory
+     # need only have a link to this makefile.  For example,
+     # you can type the following in the java source code directory
+     # (under sys) for any jar:
+     #   ln -s  $SPWSMAKEDIR/makefile_for_spws_jars  makefile
+
+
+LINKMODE       = jspws
+#######MATURITY       = production
+MATURITY       = beta
+TARGET_JAR = $(SPWSDIR)/sys/jars/$(SUBTREE).jar
+
+EXCLUDE        = Junk.java \
+                 MyJunk.java
+
+-include ../makefile.special
+
+include $(SPWSMAKEDIR)/makefile.spws.java
+

@@ -1,0 +1,1344 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="cc3d" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="CC3DPROCESS" title="CC3D Process" rows="25" columns="80">
+    <Label keyword="COMMENT_COMPOSITECORRELATION3DST" alignment="center">Composite Correlation 3-D Statics</Label>
+    <Label keyword="LABEL_MAX_STATIC" alignment="left">MAX_STATIC=</Label>
+    <Field keyword="MAX_STATIC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MS" alignment="center">ms</Label>
+    <Label keyword="LABEL_FOLD_MAX" alignment="left">FOLD_MAX=</Label>
+    <Field keyword="FOLD_MAX" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WEIGHT" alignment="left">WEIGHT=</Label>
+    <Field keyword="WEIGHT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_ITER" alignment="left">NUM_ITER  =</Label>
+    <Field keyword="NUM_ITER" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_WID" alignment="left">OFF_WID =</Label>
+    <Field keyword="OFF_WID" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERMS" alignment="left">TERMS =</Label>
+    <Field keyword="TERMS" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWR_CC" alignment="left">PWR_CC    =</Label>
+    <Field keyword="PWR_CC" type="string" maxLength="7" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TAPER" alignment="left">TAPER   =</Label>
+    <Field keyword="TAPER" type="string" maxLength="7" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_UPDATE" alignment="left">UPDATE=</Label>
+    <Field keyword="UPDATE" type="string" maxLength="7" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_SRC">Select PATH_SRC</Button>
+    <Label keyword="EQLAB_PATH_SRC" alignment="left">=</Label>
+    <Field keyword="PATH_SRC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_SRC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_REC">Select PATH_REC</Button>
+    <Label keyword="EQLAB_PATH_REC" alignment="left">=</Label>
+    <Field keyword="PATH_REC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_REC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_CORR_FILES" alignment="left">CORR_FILES=</Label>
+    <Field keyword="CORR_FILES" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NO_DEAD" alignment="left">NO_DEAD=</Label>
+    <Field keyword="NO_DEAD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_PRINT" alignment="left">OPT_PRINT=</Label>
+    <Field keyword="OPT_PRINT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEAD_END" alignment="left">DEAD_END=</Label>
+    <Field keyword="DEAD_END" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_SRC" alignment="left">HDR_SRC=</Label>
+    <Field keyword="HDR_SRC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SX" alignment="left">HDR_SX=</Label>
+    <Field keyword="HDR_SX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_SX_INIT" alignment="left">SX_INIT=</Label>
+    <Field keyword="SX_INIT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SX_INC" alignment="left">SX_INC=</Label>
+    <Field keyword="SX_INC" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SX_LAST" alignment="left">SX_LAST=</Label>
+    <Field keyword="SX_LAST" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SX_TOT" alignment="left">SX_TOT=</Label>
+    <Field keyword="SX_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SY" alignment="left">HDR_SY=</Label>
+    <Field keyword="HDR_SY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_SY_INIT" alignment="left">SY_INIT=</Label>
+    <Field keyword="SY_INIT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SY_INC" alignment="left">SY_INC=</Label>
+    <Field keyword="SY_INC" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SY_LAST" alignment="left">SY_LAST=</Label>
+    <Field keyword="SY_LAST" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SY_TOT" alignment="left">SY_TOT=</Label>
+    <Field keyword="SY_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_REC" alignment="left">HDR_REC=</Label>
+    <Field keyword="HDR_REC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RX" alignment="left">HDR_RX=</Label>
+    <Field keyword="HDR_RX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_RX_INIT" alignment="left">RX_INIT=</Label>
+    <Field keyword="RX_INIT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RX_INC" alignment="left">RX_INC=</Label>
+    <Field keyword="RX_INC" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RX_LAST" alignment="left">RX_LAST=</Label>
+    <Field keyword="RX_LAST" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RX_TOT" alignment="left">RX_TOT=</Label>
+    <Field keyword="RX_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RY" alignment="left">HDR_RY=</Label>
+    <Field keyword="HDR_RY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_RY_INIT" alignment="left">RY_INIT=</Label>
+    <Field keyword="RY_INIT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RY_INC" alignment="left">RY_INC=</Label>
+    <Field keyword="RY_INC" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RY_LAST" alignment="left">RY_LAST=</Label>
+    <Field keyword="RY_LAST" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RY_TOT" alignment="left">RY_TOT=</Label>
+    <Field keyword="RY_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_CMPS" alignment="left">CMPs:</Label>
+    <Label keyword="LABEL_COMP_X" alignment="left">COMP_X=</Label>
+    <Field keyword="COMP_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPX_INIT" alignment="left">CMPX_INIT=</Label>
+    <Field keyword="CMPX_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPX_INC" alignment="left">CMPX_INC=</Label>
+    <Field keyword="CMPX_INC" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPX_LAST" alignment="left">CMPX_LAST=</Label>
+    <Field keyword="CMPX_LAST" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPX_TOT" alignment="left">CMPX_TOT=</Label>
+    <Field keyword="CMPX_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMP_Y" alignment="left">COMP_Y=</Label>
+    <Field keyword="COMP_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPY_INIT" alignment="left">CMPY_INIT=</Label>
+    <Field keyword="CMPY_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPY_INC" alignment="left">CMPY_INC=</Label>
+    <Field keyword="CMPY_INC" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPY_LAST" alignment="left">CMPY_LAST=</Label>
+    <Field keyword="CMPY_LAST" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMPY_TOT" alignment="left">CMPY_TOT=</Label>
+    <Field keyword="CMPY_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NSTORE" alignment="left">NSTORE=</Label>
+    <Field keyword="NSTORE" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NSCRATCH" alignment="left">NSCRATCH=</Label>
+    <Field keyword="NSCRATCH" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_DISK" alignment="left">DISK=</Label>
+    <Field keyword="DISK" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_MEGABYTES" alignment="center">megabytes</Label>
+    <Label keyword="LABEL_NCPUS" alignment="left">NCPUS=</Label>
+    <Field keyword="NCPUS" type="string" maxLength="5" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_COMPOSITECORRELATION3DST" xPos="21" yPos="0" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_STATIC" xPos="10" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_STATIC" xPos="21" yPos="2" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MS" xPos="28" yPos="2" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FOLD_MAX" xPos="34" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_MAX" xPos="43" yPos="2" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WEIGHT" xPos="56" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WEIGHT" xPos="63" yPos="2" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_ITER" xPos="10" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ITER" xPos="21" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_WID" xPos="34" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_WID" xPos="43" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERMS" xPos="56" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERMS" xPos="63" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PWR_CC" xPos="10" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWR_CC" xPos="21" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TAPER" xPos="34" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPER" xPos="43" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_UPDATE" xPos="56" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="UPDATE" xPos="63" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_SRC" xPos="0" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_SRC" xPos="15" yPos="6" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SRC" xPos="16" yPos="6" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SRC_INFO" xPos="16" yPos="7" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_REC" xPos="0" yPos="8" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_REC" xPos="15" yPos="8" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_REC" xPos="16" yPos="8" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_REC_INFO" xPos="16" yPos="9" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CORR_FILES" xPos="10" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CORR_FILES" xPos="21" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NO_DEAD" xPos="30" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NO_DEAD" xPos="38" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_PRINT" xPos="45" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_PRINT" xPos="55" yPos="10" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DEAD_END" xPos="63" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEAD_END" xPos="72" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="0" yPos="12" xSize="79" ySize="11"/>
+     <Constraints component="LABEL_HDR_SRC" xPos="1" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SRC" xPos="9" yPos="13" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SX" xPos="3" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SX" xPos="10" yPos="14" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SX_INIT" xPos="15" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SX_INIT" xPos="23" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SX_INC" xPos="33" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SX_INC" xPos="40" yPos="14" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SX_LAST" xPos="47" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SX_LAST" xPos="55" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SX_TOT" xPos="65" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SX_TOT" xPos="72" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SY" xPos="3" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SY" xPos="10" yPos="15" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SY_INIT" xPos="15" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SY_INIT" xPos="23" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SY_INC" xPos="33" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SY_INC" xPos="40" yPos="15" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SY_LAST" xPos="47" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SY_LAST" xPos="55" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SY_TOT" xPos="65" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SY_TOT" xPos="72" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_REC" xPos="1" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_REC" xPos="9" yPos="16" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_RX" xPos="3" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RX" xPos="10" yPos="17" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RX_INIT" xPos="15" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RX_INIT" xPos="23" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RX_INC" xPos="33" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RX_INC" xPos="40" yPos="17" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RX_LAST" xPos="47" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RX_LAST" xPos="55" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RX_TOT" xPos="65" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RX_TOT" xPos="72" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_RY" xPos="3" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RY" xPos="10" yPos="18" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RY_INIT" xPos="15" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RY_INIT" xPos="23" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RY_INC" xPos="33" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RY_INC" xPos="40" yPos="18" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RY_LAST" xPos="47" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RY_LAST" xPos="55" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RY_TOT" xPos="65" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RY_TOT" xPos="72" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_CMPS" xPos="1" yPos="19" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COMP_X" xPos="3" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMP_X" xPos="10" yPos="20" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPX_INIT" xPos="13" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPX_INIT" xPos="23" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPX_INC" xPos="31" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPX_INC" xPos="40" yPos="20" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPX_LAST" xPos="45" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPX_LAST" xPos="55" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPX_TOT" xPos="63" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPX_TOT" xPos="72" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COMP_Y" xPos="3" yPos="21" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMP_Y" xPos="10" yPos="21" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPY_INIT" xPos="13" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPY_INIT" xPos="23" yPos="21" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPY_INC" xPos="31" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPY_INC" xPos="40" yPos="21" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPY_LAST" xPos="45" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPY_LAST" xPos="55" yPos="21" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMPY_TOT" xPos="63" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMPY_TOT" xPos="72" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NSTORE" xPos="1" yPos="24" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NSTORE" xPos="8" yPos="24" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NSCRATCH" xPos="19" yPos="24" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NSCRATCH" xPos="28" yPos="24" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DISK" xPos="39" yPos="24" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DISK" xPos="44" yPos="24" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MEGABYTES" xPos="55" yPos="24" xSize="9" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NCPUS" xPos="67" yPos="24" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NCPUS" xPos="73" yPos="24" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MAX_STATIC">
+      <Tip>Maximum static to solve for (in milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - MAX_STATIC<br> Maximum static to solve for (in milliseconds).</center></b>
+<pre> Default =  40.0
+ Allowed =  real &gt; 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_MAX">
+      <Tip>Maximum fold in a CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - FOLD_MAX<br> Maximum fold in a CMP.</center></b>
+<pre> Default =  50
+ Allowed =  int &gt; 0.
+ 
+ Used to set up the trace buffer indexing of bins on disk.
+ If the fold of an input CMP exceeds FOLD_MAX the excess traces are dropped.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WEIGHT">
+      <Tip>Weight for static estimate from stacked correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WEIGHT<br> Weight for static estimate from stacked correlations.</center></b>
+<pre> Default =  0.5
+ Allowed = real from 0.0 through 1.0
+ 
+ WEIGHT = 1.0 uses only picks of stacked correlations (like FISH).
+ WEIGHT = 0.0 uses only the average pick of individual correlations (like IMS).
+ WEIGHT = 0.5 uses an average of the two types of picks.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ITER">
+      <Tip>Number of solution iterations (passes).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - NUM_ITER<br> Number of solution iterations (passes).</center></b>
+<pre> Default =  20
+ Allowed =  int &gt;= 1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_WID">
+      <Tip>Offset bin interval (in distance) for estimating residual NMO.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - OFF_WID<br> Offset bin interval (in distance) for estimating residual NMO.</center></b>
+<pre> Default =  1000
+ Allowed =  real &gt; 0.
+ 
+ OFF_WID determines the number of offsets in the least-squares fit of time
+ shifts versus offset squared.  OFF_WID is used only if TERMS = 4.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERMS">
+      <Tip>Method to use in static solution.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - TERMS<br> Method to use in static solution.</center></b>
+<pre> Default =  3
+ Allowed =  1,2,3,4
+ 
+ TERMS = 1 does source and/or receiver solution only.  It uses in the full
+           stack only those traces with same ground position as the partial
+           stack (FISH-style).
+ 
+ TERMS = 2 does source and/or receiver solution only.  It uses in the full
+           stack all the super-CMP traces (original CC3D-style).
+ 
+ TERMS = 3 is the same as TERMS = 2, but also uses CMP term.
+ 
+ TERMS = 4 is the same as TERMS = 2, but also uses CMP term and residual NMO
+           (offset) term.
+ 
+ (TERMS = 1 or 3 are recommended based on very little experience.)
+ (Generally TERMS = 1 is expected to work better than TERMS = 2.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWR_CC">
+      <Tip>Power for weighting the residual static shifts.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PWR_CC<br> Power for weighting the residual static shifts.</center></b>
+<pre> Default =  1.0
+ Allowed =  real &gt;= 0.0
+ 
+ Residual static shifts are weighted by correlation coefficients raised
+ to this power.  This allows picks from poor correlations to be weighted less
+ than picks from good correlations.
+ 
+ This parameter is not in the user interface because it has not been
+ determined whether it is advisable to adjust it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPER">
+      <Tip>Taper for correlation functions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - TAPER<br> Taper for correlation functions.</center></b>
+<pre> Default =  1.0
+ Allowed =  real between 0.0 (no taper) and 1.0 (full taper).
+ 
+ Correlation functions are tapered down by this fraction at the edges.
+ The calculated taper is symmetric and linear.
+ The center of the taper always has value 1.0.
+ The ends of the taper have value (1.0 - TAPER).
+ If TAPER is 0.0, the correlation will not be tapered (all values 1.0).
+ If TAPER is 0.5, the correlation will be tapered down to 0.5 at the ends.
+ If TAPER is 1.0, the correlation will be tapered down to 0.0 at the ends.
+ 
+ This parameter is not in the user interface because it has not been
+ determined whether it is advisable to adjust it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="UPDATE">
+      <Tip>Static values are updated by this fraction after each pass.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - UPDATE<br> Static values are updated by this fraction after each pass.</center></b>
+<pre> Default =  0.8
+ Allowed =  real between 0.0 and 1.0
+ 
+ This parameter is not in the user interface because it has not been
+ determined whether it is advisable to adjust it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_SRC">
+      <Tip>Choose PATH_SRC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SELECT_PATH_SRC<br> Choose PATH_SRC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC">
+      <Tip>Name for the output source static file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PATH_SRC<br> Name for the output source static file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_SRC = NONE, then do not calculate or output source statics.
+ 
+ At least one static file (PATH_SRC or PATH_REC) must be specified.
+ 
+ The extension .cc3d will always be appended.
+ 
+ Files are saved after each iteration, overwriting the previous contents of
+ the file.  The iteration count will be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC_INFO">
+      <Tip>Status of PATH_SRC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PATH_SRC_INFO<br> Status of PATH_SRC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_REC">
+      <Tip>Choose PATH_REC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SELECT_PATH_REC<br> Choose PATH_REC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_REC">
+      <Tip>Name for the output receiver static file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PATH_REC<br> Name for the output receiver static file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_REC = NONE, then do not calculate or output receiver statics.
+ 
+ At least one static file (PATH_SRC or PATH_REC) must be specified.
+ 
+ The extension .cc3d will always be appended.
+ 
+ Files are saved after each iteration, overwriting the previous contents of
+ the file.  The iteration count will be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_REC_INFO">
+      <Tip>Status of PATH_REC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PATH_REC_INFO<br> Status of PATH_REC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="CORR_FILES">
+      <Tip>Type of static correlation files to save.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CORR_FILES<br> Type of static correlation files to save.</center></b>
+<pre> Default = TRC8
+ Allowed = TRC8 (save TRCIO byte files with the extension .trc8)
+ Allowed = NONE (do not save correlation files)
+ 
+ The names of the static correlation files will be the same as PATH_SRC and
+ PATH_REC except for the extension.
+ 
+ Files are saved after each iteration, overwriting the previous contents
+ of the file.
+ 
+ A CBYT option allows the correlation files to be plotted and edited easily.
+ This option automatically updates the statics files based on correlation
+ edits.
+ 
+ CORR_FILES is always forced to NONE for parallel processing (more than 1 CPU).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NO_DEAD">
+      <Tip>Whether to omit dead traces from the output correlation files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - NO_DEAD<br> Whether to omit dead traces from the output correlation files.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ Setting NO_DEAD = YES may be desirable if the correlation files are very
+ large and consist mostly of dead traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_PRINT">
+      <Tip>How much printing to do.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - OPT_PRINT<br> How much printing to do.</center></b>
+<pre> Default =  MIN
+ Allowed =  MIN (do a minimum amount of printing).
+ Allowed =  MAX (print complete table of the calculated static values).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEAD_END">
+      <Tip>Whether to stop before outputting any traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - DEAD_END<br> Whether to stop before outputting any traces.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ 
+ If this parameter is YES, this will be a dead-end process which does not
+ output any traces.
+ 
+ If this parameter is NO, all input traces will be shifted and output, in
+ the same order they were received.
+ 
+ Static files and correlation files will always be written, regardless of the
+ value of DEAD_END.
+ 
+ Stopping before outputting any traces reduces the required temporary disk
+ space by a factor of at least 5, and more commonly by about 10 on average.
+ The disk savings are more significant when trace correlation windows are
+ small.
+ 
+ DEAD_END is always forced to YES for parallel processing (more than 1 CPU).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SRC">
+      <Tip>Header word(s) to use to identify source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HDR_SRC<br> Header word(s) to use to identify source locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (source sequential ground position - header word  46)
+ Allowed = GROUP (original source group number      - header word   9)
+ Allowed = LNSP  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = GRID  (source grid coordinates           - header words 33 and 34)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ GROUP coordinates:
+  The original source group number should generally be used for 2D and 3D
+  surveys if a source occupies the same location more than once.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SX">
+      <Tip>First header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HDR_SX<br> First header word to use for designating source locations.</center></b>
+<pre> Default = 46
+ Allowed = 46  (source sequential ground position - header word  46)
+ Allowed = 9   (original source group number      - header word   9)
+ Allowed = 29  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 33  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SX_INIT">
+      <Tip>Minimum value of HDR_SX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SX_INIT<br> Minimum value of HDR_SX.</center></b>
+<pre> Default =  1.0
+ Allowed = real (in units of header word HDR_SX).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SX_INC">
+      <Tip>Increment between values of HDR_SX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SX_INC<br> Increment between values of HDR_SX.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ Increment between values of HDR_SX for occupied source locations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SX_LAST">
+      <Tip>Maximum value of HDR_SX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SX_LAST<br> Maximum value of HDR_SX.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ If both SX_LAST and SX_TOT are specified, SX_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SX_TOT">
+      <Tip>Total number of HDR_SX values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SX_TOT<br> Total number of HDR_SX values.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0
+ 
+ If both SX_LAST and SX_TOT are specified, SX_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SY">
+      <Tip>Second header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HDR_SY<br> Second header word to use for designating source locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (source sequential ground position - header word  46)
+ Allowed = 0   (original source group number      - header word   9)
+ Allowed = 26  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 34  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SY_INIT">
+      <Tip>Minimum value of header word 34.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SY_INIT<br> Minimum value of header word 34.</center></b>
+<pre> Default =  1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SY_INC">
+      <Tip>Increment between values of header word 34.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SY_INC<br> Increment between values of header word 34.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ Increment between values of header word 34 for occupied source locations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SY_LAST">
+      <Tip>Maximum value of header word 34.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SY_LAST<br> Maximum value of header word 34.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ If both SY_LAST and SY_TOT are specified, SY_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SY_TOT">
+      <Tip>Total number of header word 34 values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - SY_TOT<br> Total number of header word 34 values.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0
+ 
+ If both SY_LAST and SY_TOT are specified, SY_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_REC">
+      <Tip>Header word(s) to use to identify receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HDR_REC<br> Header word(s) to use to identify receiver locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (receiver sequential ground position - header word  47)
+ Allowed = LNSP  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = GRID  (receiver grid coordinates           - header words 35 and 36)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RX">
+      <Tip>First header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HDR_RX<br> First header word to use for designating receiver locations.</center></b>
+<pre> Default = 47
+ Allowed = 47  (receiver sequential ground position - header word  47)
+ Allowed = 28  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 35  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RX_INIT">
+      <Tip>Minimum value of HDR_RX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RX_INIT<br> Minimum value of HDR_RX.</center></b>
+<pre> Default =  1.0
+ Allowed = real (in units of header word HDR_RX).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RX_INC">
+      <Tip>Increment between values of HDR_RX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RX_INC<br> Increment between values of HDR_RX.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ Increment between values of HDR_RX for occupied receiver locations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RX_LAST">
+      <Tip>Maximum value of HDR_RX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RX_LAST<br> Maximum value of HDR_RX.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ If both RX_LAST and RX_TOT are specified, RX_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RX_TOT">
+      <Tip>Total number of HDR_RX values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RX_TOT<br> Total number of HDR_RX values.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0
+ 
+ If both RX_LAST and RX_TOT are specified, RX_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RY">
+      <Tip>Second header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HDR_RY<br> Second header word to use for designating receiver locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (receiver sequential ground position - header word  47)
+ Allowed = 27  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 36  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RY_INIT">
+      <Tip>Minimum value of header word 36.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RY_INIT<br> Minimum value of header word 36.</center></b>
+<pre> Default =  1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RY_INC">
+      <Tip>Increment between values of header word 36.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RY_INC<br> Increment between values of header word 36.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ Increment between values of header word 36 for occupied receiver locations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RY_LAST">
+      <Tip>Maximum value of header word 36.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RY_LAST<br> Maximum value of header word 36.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.0
+ 
+ If both RY_LAST and RY_TOT are specified, RY_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RY_TOT">
+      <Tip>Total number of header word 36 values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RY_TOT<br> Total number of header word 36 values.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0
+ 
+ If both RY_LAST and RY_TOT are specified, RY_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMP_X">
+      <Tip>Number of CMPs to composite in the CMP X grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - COMP_X<br> Number of CMPs to composite in the CMP X grid direction.</center></b>
+<pre> Default = 5
+ Allowed = int &gt; 0
+ 
+ Number of CMPs to composite in the CMP X grid direction to form super-CMP
+ base traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPX_INIT">
+      <Tip>Minimum CMP X grid location (header word 7).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPX_INIT<br> Minimum CMP X grid location (header word 7).</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPX_INC">
+      <Tip>Increment between header word 7 values for CMP locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPX_INC<br> Increment between header word 7 values for CMP locations.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPX_LAST">
+      <Tip>Maximum CMP X grid location (header word 7).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPX_LAST<br> Maximum CMP X grid location (header word 7).</center></b>
+<pre> Default =  1.0
+ Allowed = real
+ 
+ If both CMPX_LAST and CMPX_TOT are specified, CMPX_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPX_TOT">
+      <Tip>Total number of CMP X grid locations (header word 7).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPX_TOT<br> Total number of CMP X grid locations (header word 7).</center></b>
+<pre> Default = 1
+ Allowed = int
+ 
+ If both CMPX_LAST and CMPX_TOT are specified, CMPX_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMP_Y">
+      <Tip>Number of CMPs to composite in the CMP Y grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - COMP_Y<br> Number of CMPs to composite in the CMP Y grid direction.</center></b>
+<pre> Default = 5
+ Allowed = int &gt; 0
+ 
+ Number of CMPs to composite in the CMP Y grid direction to form super-CMP
+ base traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPY_INIT">
+      <Tip>Minimum CMP Y grid location (header word 8).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPY_INIT<br> Minimum CMP Y grid location (header word 8).</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPY_INC">
+      <Tip>Increment between header word 8 values for CMP locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPY_INC<br> Increment between header word 8 values for CMP locations.</center></b>
+<pre> Default =  1.0
+ Allowed = real &gt; 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPY_LAST">
+      <Tip>Maximum CMP Y grid location (header word 8).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPY_LAST<br> Maximum CMP Y grid location (header word 8).</center></b>
+<pre> Default =  1.0
+ Allowed = real
+ 
+ If both CMPY_LAST and CMPY_TOT are specified, CMPY_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMPY_TOT">
+      <Tip>Total number of CMP Y grid locations (header word 8).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CMPY_TOT<br> Total number of CMP Y grid locations (header word 8).</center></b>
+<pre> Default = 1
+ Allowed = int
+ 
+ If both CMPY_LAST and CMPY_TOT are specified, CMPY_TOT takes precedence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NSTORE">
+      <Tip>Number of word of permanent storage to be used.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - NSTORE<br> Number of word of permanent storage to be used.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NSCRATCH">
+      <Tip>Number of word of temporary storage to be used.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - NSCRATCH<br> Number of word of temporary storage to be used.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="DISK">
+      <Tip>Disk space (in megabytes) to be used.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - DISK<br> Disk space (in megabytes) to be used.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NCPUS">
+      <Tip>Number of processors in the job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - NCPUS<br> Number of processors in the job.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="Correlation Window Parameters" rows="24" columns="80">
+    <Label keyword="LABEL_WIN_OPT" alignment="left">WIN_OPT=</Label>
+    <Field keyword="WIN_OPT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_ADD" alignment="left">WIN_TIM_ADD=</Label>
+    <Field keyword="WIN_TIM_ADD" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_LEN" alignment="left">WIN_TIM_LEN=</Label>
+    <Field keyword="WIN_TIM_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="WIN_COOR_X_ARRAYSET" label="WIN_COOR_XWIN_COOR_YWIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="WIN_COOR_X" type="float" maxLength="10 " columnName="WIN_COOR_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_COOR_Y" type="float" maxLength="10 " columnName="WIN_COOR_Y" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_OPT" xPos="5" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_OPT" xPos="13" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_TIM_ADD" xPos="20" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_ADD" xPos="32" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_TIM_LEN" xPos="42" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_LEN" xPos="54" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="15" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="20" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="30" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X_ARRAYSET" xPos="8" yPos="4" xSize="45" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_OPT">
+      <Tip>Method to use for specifying trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_OPT<br> Method to use for specifying trace windows.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE   (window defined by time measure from mute)
+ Allowed = GRID   (window varies laterally, or same window everywhere)
+ 
+ Segments of the input traces used in this process are defined by these
+ windows.
+ 
+ Option GRID specifies the trace windows by linked arrays of window top and
+ window bottom values which may vary lateraly (spatially) over arbitrarily
+ chosen coordinates.
+ 
+ Option MUTE specifies the trace windows by specifying the time from the
+ mute time to the top of the window, and the length of the window.
+ 
+ Some processes might disable the MUTE option if it is not appropriate
+ for that process.  In this case, the GRID option will be the default
+ and only option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_ADD">
+      <Tip>Time at top of window = mute time + WIN_TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_TIM_ADD<br> Time at top of window = mute time + WIN_TIM_ADD.</center></b>
+<pre> Default = 0.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_TIM_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_TIM_LEN<br> Time at bottom of window = time at top of window + WIN_TIM_LEN.</center></b>
+<pre> Default = 1.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) (one window).
+ Allowed = any number of values &gt;= top of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) (one window).
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cc3d - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="cc3d">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : CC3D
+ Category   : statics
+ Written    : 1996-05-25   by: Greg Lazear
+ Revised    : 2006-09-18   by: D. Glover
+ Maturity   : production
+ Purpose    : 3D composite correlation statics.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ CC3D is a surface consistent residual statics process that uses a generalized
+ composite and correlate algorithm to estimate static shifts.  A detailed
+ description of the CC3D algorithm is found in the Algorithm Description for
+ Developers section.  A simplified version follows.
+ 
+       1.  Traces are sorted into super-CMPs, each consisting of COMP_X *
+       COMP_Y actual CMPs.  Loop over steps 2 - 4 for each super-CMP.
+ 
+       2.  Apply previously derived shifts and composite traces to: super-CMP
+       stacks and partial stacks (common source, common receiver, common CMP
+       and common offset), with number of types of partial stacks determined
+       by TERMS.  The common source stacked trace, common receiver stacked
+       trace, etc., constitute statistical expectations of those individual
+       gathers.
+ 
+       3.  Correlate each partial stack against the super-CMP stack (with the
+       partial stack removed) and pick the correlations to obtain an initial
+       IMS-like estimate of the static for that term.
+ 
+       4.  Stack the correlations with other correlations of the same term and
+       sum the IMS-like shifts into an average for each term.
+ 
+       5.  Pick the stacked correlations to get a FISH-like static estimate,
+       combine this estimate with the IMS-like estimate, weighed according
+       to the WEIGHT parameter, and add the statics estimates of this
+       iteration to those of the previous iterations.
+ 
+       6.  Iterate steps 2 - 5 NUM_ITER times.
+ 
+       7.  Print results in the .rpt file, save statics files and optionally
+       write the final stacked correlations to bytefiles.
+ 
+ 
+ Source and Receiver Locations
+ 
+ Source locations are designated by header words HDR_SX and HDR_SY;
+ receiver locations are designated by header words HDR_RX and HDR_RY.
+ These header words define a source grid and a receiver grid which determine
+ the size of the source and receiver statics files.  Traces that fall outside
+ either the source or the receiver grid will be dropped.
+ 
+ The header words SX_INC, SY_INC, RX_INC, and RY_INC specify increments of the
+ source and receiver headers for occupied source and receiver locations.  Each
+ actual source and receiver location found in trace headers will be binned
+ into the nearest location specified by these parameters for purposes of
+ calculating statics.
+ 
+ This index saves memory when the grid is only sparsely occupied by sources or
+ receivers.
+ 
+ 
+ CMP Locations and Super-CMPs
+ 
+ CMP locations are designated by header words 7 and 8 which are the stack-bin
+ grid coordinates.  Traces are dropped if they fall outside of this grid.
+ This grid is extended slightly, if necessary, to make whole super-bins
+ of COMP_X and COMP_Y CMPs.  Traces are dropped if the fold in a super-bin
+ exceeds FOLD_MAX * COMP_X * COMP_Y traces.
+ 
+ The COMP_X and COMP_Y parameters are in "counting" units, meaning a value
+ of seven will composite seven CMPs, independent of their grid increments. Thus
+ CMPs with consecutive header 7 values of (120, 120.5, 121, 121.5, 122) would
+ be composited when COMP_X=5, even though their range in header word 7 units
+ is 2.
+ 
+ 
+ Disk Allocation
+ 
+ This program is an all-trace process, and uses the CMP grid specification and
+ FOLD_MAX to allocate disk space for the traces.  It is important not to make
+ FOLD_MAX unnecessarily large, because this could waste a lot of disk space.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Choice of Coordinates
+ 
+ CMP locations are designated by the CMP grid coordinates (header words 7 and
+ 8).  Users must choose header words to designate source and receiver
+ locations as follows:
+ 
+ Source Coordinate Options     Source Header Words
+ 
+       Shot Profile Number           9
+       Sequential Ground Position   46
+       Shotpoint and Line Number    29 and 26
+       Grid Coordinates             33 and 34
+ 
+ Receiver Coordinate Options   Receiver Header Words
+ 
+       Sequential Ground Position   47
+       Shotpoint and Line Number    28 and 27
+       Grid Coordinates             35 and 36
+ 
+ Source and receiver coordinate choices are independent of each other.
+ 
+ 
+ Coordinate Recommendations
+ 
+ Normally, if sequential ground position header words have been set in the
+ input dataset, the ground position is the best choice for source and receiver
+ coordinates since static and byte files are smaller and static determination
+ may be more acurate.  However, if there is more than one source pop per
+ source location, then shot profile number should be used for the source
+ coordinate.
+ 
+ If sequential ground position header words have not been set in the input
+ dataset and the datset is relatively small then shotpoint or line number
+ coordinates may be the next best choice.  Grid coodinates are another
+ possible choice with these drawbacks:
+ 
+       1.  Grid coordinates may not be densely populated making internal
+       calculations slower, disk use higher and static and byte files larger.
+ 
+       2.  Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Normally, grid coordinates are not a good choice for large datasets
+ because this usually causes the static files to be extremely large and
+ mostly filled with nils.
+ 
+-------------------------------------------------------------------------------
+                        SUMMARY OF PARAMETERS
+ 
+ Correlation window parameters:   Standard laterally varying time window
+                                  parameters in the LATWIN primitive.
+ 
+ File output parameters:          PATH_SRC, PATH_REC,
+ File output parameters:          HDR_SRC, HDR_REC,
+                                  CORR_FILES, NO_DEAD
+ 
+ Printing parameters:             OPT_PRINT
+ 
+ Static solution parameters:      MAX_STATIC, NUM_ITER, WEIGHT, TERMS,
+                                  PWR_CC, TAPER, UPDATE, OFF_WID
+ 
+ Source ground position ranges:   HDR_SX, SX_INIT, SX_INC, SX_LAST, SX_TOT
+                                  HDR_SY, SY_INIT, SY_INC, SY_LAST, SY_TOT
+ 
+ Receiver ground position ranges: HDR_RX, RX_INIT, RX_INC, RX_LAST, RX_TOT
+                                  HDR_RY, RY_INIT, RY_INC, RY_LAST, RY_TOT
+ 
+ CMP parameters:           COMP_X, CMPX_INIT, CMPX_INC, CMPX_LAST, CMPX_TOT
+                           COMP_Y, CMPY_INIT, CMPY_INC, CMPY_LAST, CMPY_TOT
+                           FOLD_MAX
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+035. 2006-09-18  D. Glover  Added NULLIFY statements for Intel compiler.
+ 34. 2005-12-22  Stoeckley  Initialize error flag in cc3d_form_stacks to
+                             allow for empty super-cmp.
+ 33. 2005-10-24  Stoeckley  Extensively redesigned to make parallel code
+                             more efficient.
+ 32. 2005-01-25  Stoeckley  Documentation correction plus make two fields
+                             insensitive when not needed.
+ 31. 2004-12-09  Stoeckley  Add logic for parallelization (parallelization
+                             is not yet efficient).
+ 30. 2004-10-12  Stoeckley  Change to output NUMTR=1 instead of NUMTR=0 when
+                             DEAD_END=YES to make icps happy.
+ 29. 2002-08-29  Stoeckley  Add time column to iterations printout.
+ 28. 2001-10-18  Stoeckley  Add file selection boxes and file status messages.
+ 27. 2001-05-14  Stoeckley  Change default correlation file extension to trc8.
+ 26. 2001-03-21  Stoeckley  Add additional error printouts.
+ 25. 2001-02-20  Stoeckley  Change OPT_PRINT default from MAX to MIN; remove
+                             warning message for temporary file &gt; 2GB; change
+                             error message for blank filename to occur less
+                             often.
+ 24. 2001-02-13  Stoeckley  Change wrapup flag.
+ 23. 2000-10-19  Stoeckley  Add missing context-sensitive help.
+ 22. 2000-10-06  Stoeckley  Add statement to use the ADDEXT module (previously
+                             was implicit in PATHCHECK which as been changed);
+                             add missing required documentation sections.
+ 21. 2000-08-23  Stoeckley  Minor documentation change regarding parameter
+                             keyword names WIN_HDR_X and WIN_HDR_Y.
+ 20. 2000-07-20  Stoeckley  Replace TEMPFILE with TEMPTFILE; change keywords
+                             COMP_INL and COMP_CRL to COMP_X and COMP_Y.
+ 19. 2000-06-21  Stoeckley  Replace TEMPIO with TEMPFILE.
+ 18. 2000-06-16  Stoeckley  Make some keyword changes to match other statics
+                             processes; make small changes to link to
+                             upgraded STATUTIL primitive.
+ 17. 2000-06-05  Stoeckley  Remove the EVERY parameter, and fix TAPER error.
+ 16. 2000-05-26  Stoeckley  Add new options for static file header words
+                             (source and receiver shotpoints and line
+                             numbers); change to not allow MUTE window
+                             option.
+ 15. 2000-05-22  Stoeckley  Change to use the PERMTFILE primitive instead
+                             of the TRCIO primitive and BYTE process; add
+                             DEAD_END parameter and use the STATSHIFT
+                             primitive.
+ 14. 2000-04-25  Stoeckley  Improved CFE screen.
+ 13. 2000-04-04  Stoeckley  Converted from old system.
+ 12. 1998-12-15  Vunderink  Begin using the f90 compiler.
+ 11. 1998-02-05  Vunderink  Fix bug in scratch memory calculation
+ 10. 1997-12-02  Stoeckley  Added TERMS=1 (FISH-style) option.
+                             Also made all subroutines implicit none.
+  9. 1997-09-08  Vunderink  Added IBWIN to common block.
+  8. 1997-08-28  Vunderink  Added spatial correlation window and added
+                             keyword OPT_PRINT.
+  7. 1997-01-10  Stoeckley  Remove obsolete call to CC3D_PICK.
+  6. 1996-12-16  Stoeckley  Major revision (see special notes).
+  5. 1996-10-11  Stoeckley  Fixed two bugs in calculation of offset terms.
+  4. 1996-07-19  Lazear     Modified indexing of stack trace array.
+  3. 1996-07-12  Lazear     Added CMP and Residual NMO terms.
+  2. 1996-06-21  Lazear     Modified grid input parameters.
+  1. 1996-06-18  Lazear     Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

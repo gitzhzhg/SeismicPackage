@@ -1,0 +1,1018 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="pslinv" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PSLINVPROCESS" title="PSLINV Process" rows="24" columns="80">
+    <Label keyword="COMMENT_PSLINVPRESTACKLINEARIZED" alignment="center">PSLINV (PreStack Linearized INVersion)</Label>
+    <Label keyword="COMMENT_GENERALPARAMETERS" alignment="center">General Parameters:</Label>
+    <Label keyword="LABEL_OPT_INPUT" alignment="left">OPT_INPUT=</Label>
+    <Field keyword="OPT_INPUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUTPUT" alignment="left">OPT_OUTPUT=</Label>
+    <Field keyword="OPT_OUTPUT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SD_OUT" alignment="left">OPT_SD_OUT=</Label>
+    <Field keyword="OPT_SD_OUT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR_IN" alignment="left">NUMTR_IN=</Label>
+    <Field keyword="NUMTR_IN" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR_OUT" alignment="left">NUMTR_OUT=</Label>
+    <Field keyword="NUMTR_OUT" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_PARMS" alignment="left">NUM_PARMS=</Label>
+    <Field keyword="NUM_PARMS" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_FOLD_MIN" alignment="left">FOLD_MIN=</Label>
+    <Field keyword="FOLD_MIN" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANG_FAR" alignment="left">ANG_FAR=</Label>
+    <Field keyword="ANG_FAR" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCALE" alignment="left">SCALE=</Label>
+    <Field keyword="SCALE" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_EXP_GARD" alignment="left">EXP_GARD=</Label>
+    <Field keyword="EXP_GARD" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MIN" alignment="left">FREQ_MIN=</Label>
+    <Field keyword="FREQ_MIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD=</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PARAMETERSFORAPRIORIMODE" alignment="center">Parameters for A Priori Model Covariance:</Label>
+    <Label keyword="LABEL_CC_RVS_RVP" alignment="left">CC_RVS_RVP=</Label>
+    <Field keyword="CC_RVS_RVP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CC_RDEN_RVP" alignment="left">CC_RDEN_RVP=</Label>
+    <Field keyword="CC_RDEN_RVP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CC_RDEN_RVS" alignment="left">CC_RDEN_RVS=</Label>
+    <Field keyword="CC_RDEN_RVS" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SDR_RVS_RVP" alignment="left">SDR_RVS_RVP=</Label>
+    <Field keyword="SDR_RVS_RVP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SDR_RDEN_RVP" alignment="left">SDR_RDEN_RVP=</Label>
+    <Field keyword="SDR_RDEN_RVP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COV_DETERM" alignment="left">COV_DETERM=</Label>
+    <Field keyword="COV_DETERM" type="string" maxLength="11" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_PARAMETERSTOSPECIFYBACKG" alignment="center">Parameters to specify Background Vs/Vp:</Label>
+    <Button keyword="SELECT_PATH_VSVP">Select PATH_VSVP</Button>
+    <Label keyword="EQLAB_PATH_VSVP" alignment="left">=</Label>
+    <Field keyword="PATH_VSVP" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_VSVP_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_AVE" alignment="left">OPT_AVE=</Label>
+    <Field keyword="OPT_AVE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_SMOOTH" alignment="left">LEN_SMOOTH=</Label>
+    <Field keyword="LEN_SMOOTH" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TIME_ARRAYSET" label="TIME      VS_VP">
+     <Array keyword="TIME" type="float" maxLength="10 " columnName="TIME" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="VS_VP" type="float" maxLength="10 " columnName="VS_VP" editable="yes" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_PSLINVPRESTACKLINEARIZED" xPos="21" yPos="0" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_GENERALPARAMETERS" xPos="30" yPos="2" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_INPUT" xPos="5" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_INPUT" xPos="15" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OUTPUT" xPos="29" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUTPUT" xPos="40" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SD_OUT" xPos="54" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SD_OUT" xPos="65" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUMTR_IN" xPos="5" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_IN" xPos="15" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUMTR_OUT" xPos="29" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_OUT" xPos="40" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_PARMS" xPos="54" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_PARMS" xPos="64" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOLD_MIN" xPos="5" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_MIN" xPos="15" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG_FAR" xPos="29" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG_FAR" xPos="40" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCALE" xPos="54" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCALE" xPos="64" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_EXP_GARD" xPos="5" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EXP_GARD" xPos="15" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MIN" xPos="29" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MIN" xPos="40" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="54" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="64" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PARAMETERSFORAPRIORIMODE" xPos="19" yPos="8" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CC_RVS_RVP" xPos="3" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CC_RVS_RVP" xPos="15" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CC_RDEN_RVP" xPos="28" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CC_RDEN_RVP" xPos="41" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CC_RDEN_RVS" xPos="54" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CC_RDEN_RVS" xPos="66" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SDR_RVS_RVP" xPos="3" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SDR_RVS_RVP" xPos="15" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SDR_RDEN_RVP" xPos="28" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SDR_RDEN_RVP" xPos="41" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COV_DETERM" xPos="54" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COV_DETERM" xPos="66" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PARAMETERSTOSPECIFYBACKG" xPos="20" yPos="12" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATH_VSVP" xPos="2" yPos="13" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VSVP" xPos="18" yPos="13" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VSVP" xPos="19" yPos="13" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_VSVP_INFO" xPos="19" yPos="14" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_AVE" xPos="5" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AVE" xPos="13" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_SMOOTH" xPos="22" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_SMOOTH" xPos="33" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="50" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="56" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="65" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="71" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_ARRAYSET" xPos="29" yPos="16" xSize="23" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_INPUT">
+      <Tip>Whether input in angle gathers, A_AND_B pairs, or A_B_C triples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - OPT_INPUT<br> Whether input in angle gathers, A_AND_B pairs, or A_B_C triples.</center></b>
+<pre> Default = ANGLE
+ Allowed = ANGLE   (Input is angle gathers.)
+ Allowed = A_AND_B (Input is intercept-gradient pair gathers.)
+ Allowed = A_B_C   (Input is 3-trace A_B_C gathers.)
+ 
+ If OPT_INPUT = ANGLE, header word 6 must contain reflection angle for each
+ trace, in degrees.
+ 
+ If OPT_INPUT = A_AND_B, each 2-trace input gather must contain intercept(A)
+ followed by gradient(B), where A and B are coefficients in the Shuey equation
+ R = A + B*sin^2.
+ 
+ If OPT_INPUT = A_B_C, each 3-trace input gather must contain the A, B and C
+ traces in that order, where A, B and C are coefficients in the extended Shuey
+ equation R = A + B*sin^2 + C*sin^2*tan^2.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUTPUT">
+      <Tip>Output product desired.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - OPT_OUTPUT<br> Output product desired.</center></b>
+<pre> Default = 3
+ Allowed = 2    RP, DSIGMA and RS;                         2-parameter.
+ Allowed = 3    ZP, SIGMA and ZS;               INTEGRATED 2-parameter.
+ Allowed = 4    D(LAMBDA-RHO) and D(MU-RHO);               2-parameter.
+ Allowed = 5    LAMBDA-RHO and MU-RHO;          INTEGRATED 2-parameter.
+ Allowed = 6    A, B and C (RP, GRAD, RVP);                3-parameter.
+ Allowed = 7    RVP, RVS and RDEN;                         3-parameter.
+ Allowed = 8    VP, VS and DEN;                 INTEGRATED 3-parameter.
+ Allowed = 9    RP, RS and RDEN;                           3-parameter.
+ Allowed = 10   ZP, ZS and DEN;                 INTEGRATED 3-parameter.
+ Allowed = 11   RP, DSIGMA and RDEN;                       3-parameter.
+ Allowed = 12   ZP, SIGMA and DEN;              INTEGRATED 3-parameter.
+ Allowed = 13   D(LAMBDA-RHO), D(MU-RHO), RDEN;            3-parameter.
+ Allowed = 14   LAMBDA-RHO, MU-RHO and DEN;     INTEGRATED 3-parameter.
+ 
+ Options 2 to 5 are 2-parameter inversions; options 6 to 14 are 3-parameter
+ inversions. (Note: Even though options 2 and 3 generate three output
+ parameters, they are still TWO-parameter inversions because their three
+ inverted quantities aren't independent; they are provided for convenience
+ because users may wish to view all three of them.)
+ 
+ Options 2, 4, 7, 9, 11 and 13 invert for CONTRASTS of rock properties
+ across interfaces.
+ 
+ Options 3, 5, 8, 10, 12 and 14 are integrated versions of options 2, 4, 7,
+ 9, 11 and 13 respectively. Integrated outputs are intended to represent
+ actual LAYER properties, as opposed to contrasts between layers. These are,
+ however, BAND-LIMITED results, with no information outside the bandwidth of
+ the seismic data. Also, these results have arbitrary scale unless you've
+ set the SCALE parameter just right.
+ 
+ Option 6 outputs the coefficients A, B and C in the 3-parameter Aki and
+ Richards equation  R = A + B*sin^2 + C*sin^2*tan^2. But this is more than
+ a simple curve fit. In fact, option 6 is based on the same rock property
+ model and a priori covariance as options 7 to 14; it inverts for rock
+ property contrasts as in those other options, but then outputs the A, B
+ and C coefficients equivalent to the inverted rock property contrasts.
+ 
+ If OPT_INPUT = A_AND_B, then only the 2-parameter options (2 - 5) are
+ available.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SD_OUT">
+      <Tip>Whether to output standard deviations of inverted quantities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - OPT_SD_OUT<br> Whether to output standard deviations of inverted quantities.</center></b>
+<pre> Default = NO
+ Allowed = YES - Output standard deviation traces.
+ Allowed = NO  - Don't output standard deviation traces.
+ 
+ Setting OPT_SD_OUT = YES doubles the number of output traces by appending
+ traces containing estimated standard deviations of the inverted quantities
+ to each output gather. For example, if OPT_OUTPUT = 2, PSLINV would normally
+ output 3 traces in each gather, containing RP, DSIGMA and RS in that order.
+ If OPT_SD_OUT = YES, then 6 traces are output in each gather, containing:
+ 
+         RP, DSIGMA, RS, SD(RP), SD(DSIGMA), SD(RS)
+ 
+ in that order, where SD(x) denotes standard deviation of quantity x.
+ 
+ Estimated standard deviations are available only when OPT_INPUT = ANGLE
+ and DIAG_LOAD &gt; 0.
+ 
+ For integrated outputs (OPT_OUTPUT = 3, 5, 8, 10, 12 and 14), estimated
+ standard deviations are actually those of the NON-integrated quantities;
+ thus, they are identical to the standard deviations output when
+ OPT_OUTPUT = 2, 4, 7, 9, 11 and 13, respectively.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_IN">
+      <Tip>Value of NUMTR global upon input, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - NUMTR_IN<br> Value of NUMTR global upon input, shown for reference.</center></b>
+<pre> PSLINV requires gathered input. NUMTR for your input traces must be at
+ least 2 for all options; it must be exactly 2 when OPT_INPUT = A_AND_B
+ and must be exactly 3 when OPT_INPUT = A_B_C.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_OUT">
+      <Tip>Value of NUMTR global upon output, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - NUMTR_OUT<br> Value of NUMTR global upon output, shown for reference.</center></b>
+<pre> Number of traces in each output gather, corresponding to the number of
+ output quantities (plus standard deviations of those quantities if
+ OPT_SD_OUT=YES). Depending on your choice of OPT_OUTPUT:
+ NUMTR_OUT will be 2 (or 4 if OPT_SD_OUT=YES) when OPT_OUTPUT = 4 or 5.
+ NUMTR_OUT will be 3 (or 6 if OPT_SD_OUT=YES) for all other OPT_OUTPUT values.
+ 
+ Note that when OPT_OUTPUT = 2 or 3, NUMTR_OUT will be 3, even though these
+ are TWO-parameter inversions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_PARMS">
+      <Tip>Whether 2-parameter or 3-parameter inversion, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - NUM_PARMS<br> Whether 2-parameter or 3-parameter inversion, shown for reference.</center></b>
+<pre> NUM_PARMS will be 2 when OPT_OUTPUT = 2 to 5.
+ NUM_PARMS will be 3 when OPT_OUTPUT = 6 to 14.
+ 
+ Note that when OPT_OUTPUT = 2 or 3, PSLINV does TWO-parameter inversion, so
+ NUM_PARMS = 2, although three (non-independent) quantities are computed and
+ output (NUMTR_OUT = 3 or 6).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_MIN">
+      <Tip>Minimum # of live angle samples at any depth to attempt inversion.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - FOLD_MIN<br> Minimum # of live angle samples at any depth to attempt inversion.</center></b>
+<pre> Default = NUM_PARMS
+ Allowed = int &gt;= NUM_PARMS
+ 
+ At each time/depth level, PSLINV will not attempt inversion unless the input
+ gather contains at least this many live trace samples at that level.
+ 
+ Active only when OPT_INPUT = ANGLE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_FAR">
+      <Tip>Estimated far angle in original data, in degrees.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - ANG_FAR<br> Estimated far angle in original data, in degrees.</center></b>
+<pre> Default = 40.0
+ Allowed = 84.26 &gt; real &gt; 0.0
+ (Note: Upper limit of 84.26 degrees is the angle at which sin^2 = 0.99)
+ 
+ This parameter is relevant only when OPT_INPUT = A_AND_B, as in this case,
+ PSLINV needs an estimate of the angle range that was originally in your data
+ before reduction to intercept and gradient.
+ 
+ In operation, when OPT_INPUT = A_AND_B, the input A and B traces are used
+ with the Shuey equation (R = A + B*sin^2) to generate model traces at angles
+ zero and ANG_FAR. Then, these two traces are used as if OPT_INPUT = ANGLE.
+ 
+ Considering that far angles actually achieved are depth dependent, you
+ may base your ANG_FAR estimate on the depth of greatest interest.
+ 
+ If input A_AND_B pairs were produced by AVAGRAD using the High Order AVA
+ Offset Dependent Tuning Correction (NP_FIT = 3) option in AVAGRAD, it is
+ best to specify a value for ANG_FAR which is considerably less than the far
+ angle actually in your data (e.g., you might set ANG_FAR to only 10 degrees),
+ because that NP_FIT = 3 option in AVAGRAD produces A_AND_B pairs which
+ accurately match only the small-angle AVA behavior of your data.
+ 
+ Active only when OPT_INPUT = A_AND_B.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCALE">
+      <Tip>Scale factor to convert trace amplitudes to reflection coefficients.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - SCALE<br>Scale factor to convert trace amplitudes to reflection coefficients.</center></b>
+<pre> Default = 1.0
+ Allowed = real /= 0.0
+ If you know the scale factor that will convert your input trace amplitudes
+ to true reflectivity, setting this parameter will produce output with a
+ more accurate amplitude scale. Otherwise, the output products will have an
+ arbitrary scale.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EXP_GARD">
+      <Tip>Exponent in Gardner's equation (rho = const * VP**EXP_GARD).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - EXP_GARD<br> Exponent in Gardner's equation (rho = const * VP**EXP_GARD).</center></b>
+<pre> Default = 0.25
+ Allowed = real &gt; 0.0
+ Gardner's equation is used in the TWO-parameter rock property inversions to
+ eliminate a third independent parameter from the equations. This is done by
+ assuming that the materials on both sides of an interface follow the Gardner
+ equation.
+ 
+ Active only when OPT_OUTPUT = 2, 3, 4 or 5.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MIN">
+      <Tip>Low-cut frequency to use for integrated products, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - FREQ_MIN<br> Low-cut frequency to use for integrated products, in Hz.</center></b>
+<pre> Default = 3.0
+ Allowed = real &gt;= 0.0
+ The integration step in options 3, 5, 8, 10, 12 and 14 can introduce spurious
+ low frequency energy outside the bandwidth of the seismic data. The FREQ_MIN
+ parameter allows this noise to be removed after integration.
+ 
+ Active only when OPT_OUTPUT = 3, 5, 8, 10, 12 or 14.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent, for inverse calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - DIAG_LOAD<br> Diagonal load, in percent, for inverse calculations.</center></b>
+<pre> Default = 5.0
+ Allowed = real &gt;= 0.0
+ Given noisy data, the diagonal load factor stabilizes the inversion.
+ If the signal/noise ratio in your data is S/N (expressed in terms of
+ power, not amplitude), the diagonal load should be chosen as:
+ 
+                   DIAG_LOAD  =  100 / (S/N)
+ 
+ which is simply the noise/signal ratio (multiplied by 100 because diagonal
+ load is expressed as a percentage).
+ 
+ Strictly speaking, DIAG_LOAD isn't a DIAGONAL load for 3-parameter inversions
+ when OPT_INPUT = ANGLE, as it multiplies a NON-diagonal (inverse) covariance
+ matrix incorporating your knowledge of correlations between rock properties.
+ But DIAG_LOAD still plays the role of a stabilization factor and should still
+ be selected according to signal/noise ratio based on the formula above.
+ 
+ Active only when OPT_INPUT = ANGLE.  We assume that when OPT_INPUT =
+ A_AND_B or A_B_C, signal/noise has already been accounted for in calculation
+ of intercepts and gradients or A_B_C triples, so it would be redundant to do
+ again in PSLINV.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CC_RVS_RVP">
+      <Tip>Correlation coefficient between RVS and RVP for model covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - CC_RVS_RVP<br> Correlation coefficient between RVS and RVP for model covariance.</center></b>
+<pre> Default = 0.8
+ Allowed = 1.0 &gt; real &gt; -1.0
+ This parameter is used in specifying the a priori model covariance matrix
+ for 3-parameter inversions when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE.
+ 
+ Active only when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE and DIAG_LOAD &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CC_RDEN_RVP">
+      <Tip>Correlation coefficient between RDEN and RVP for model covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - CC_RDEN_RVP<br> Correlation coefficient between RDEN and RVP for model covariance.</center></b>
+<pre> Default = -0.2
+ Allowed = 1.0 &gt; real &gt; -1.0
+ This parameter is used in specifying the a priori model covariance matrix
+ for 3-parameter inversions when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE.
+ 
+ Active only when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE and DIAG_LOAD &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CC_RDEN_RVS">
+      <Tip>Correlation coefficient between RDEN and RVS for model covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - CC_RDEN_RVS<br> Correlation coefficient between RDEN and RVS for model covariance.</center></b>
+<pre> Default = -0.3
+ Allowed = 1.0 &gt; real &gt; -1.0
+ This parameter is used in specifying the a priori model covariance matrix
+ for 3-parameter inversions when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE.
+ 
+ Active only when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE and DIAG_LOAD &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SDR_RVS_RVP">
+      <Tip>Ratio of Std Dev of RVS to Std Dev of RVP for model covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - SDR_RVS_RVP<br> Ratio of Std Dev of RVS to Std Dev of RVP for model covariance.</center></b>
+<pre> Default = 1.8
+ Allowed = real &gt; 0.0
+ Standard deviation ratios are required in specifying the a priori model
+ covariance matrix for 3-parameter inversions when OPT_OUTPUT &gt; 5 and
+ OPT_INPUT = ANGLE.
+ 
+ Active only when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE and DIAG_LOAD &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SDR_RDEN_RVP">
+      <Tip>Ratio of Std Dev of RDEN to Std Dev of RVP for model covariance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - SDR_RDEN_RVP<br> Ratio of Std Dev of RDEN to Std Dev of RVP for model covariance.</center></b>
+<pre> Default = 0.5
+ Allowed = real &gt; 0.0
+ Standard deviation ratios are required in specifying the a priori model
+ covariance matrix for 3-parameter inversions when OPT_OUTPUT &gt; 5 and
+ OPT_INPUT = ANGLE.
+ 
+ Active only when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE and DIAG_LOAD &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COV_DETERM">
+      <Tip>Determinant of model covariance matrix, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - COV_DETERM<br> Determinant of model covariance matrix, shown for reference.</center></b>
+<pre> Determinant of your a priori model covariance matrix must be positive.
+ 
+ Specification of model covariance applies only to 3-parameter inversions
+ when OPT_OUTPUT &gt; 5 and OPT_INPUT = ANGLE and DIAG_LOAD &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VSVP">
+      <Tip>Choose PATH_VSVP using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - SELECT_PATH_VSVP<br> Choose PATH_VSVP using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_VSVP">
+      <Tip>Pathname for a TRCIO trace file containing Vs/Vp ratios.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PATH_VSVP<br> Pathname for a TRCIO trace file containing Vs/Vp ratios.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ You must EITHER specify a trace file containing background Vs/Vp ratios
+ OR manually enter (TIME, VS_VP) pairs to specify a single time-dependent
+ Vs/Vp function. Background Vs/Vp ratios are needed in order to relate
+ reflection amplitudes to rock property contrasts.
+ 
+ If you specify a file, trace values in your file should be in the range
+ 0 &lt; real &lt;= 0.7. Hard zero (and negative) values in the file are
+ interpreted as nil values, so are ignored and replaced with interpolated
+ or extrapolated values.
+ 
+ When specifying a trace file containing background Vs/Vp, parameters
+ HDR_X and HDR_Y let you to specify which header words in this file denote
+ X and Y locations. These X and Y locations must fill a rectangular grid and
+ must be sorted in ascending order, with X increasing most rapidly.
+ 
+ Please note, however, that X and Y locations of the seismic gathers to be
+ inverted need NOT be sorted this way, and need not match the locations of
+ Vs/Vp traces exactly, as the Vs/Vp values will be interpolated/extrapolated
+ to the locations of your data. Also, the seismic sample rate and time range
+ of the Vs/Vp traces need not coincide with those of the data being inverted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VSVP_INFO">
+      <Tip>Status of PATH_VSVP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PATH_VSVP_INFO<br> Status of PATH_VSVP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OPT_AVE">
+      <Tip>Whether to average all Vs/Vp traces in the file into one.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - OPT_AVE<br> Whether to average all Vs/Vp traces in the file into one.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ This allows suppressing the lateral variation in your Vs/Vp trace file by
+ averaging all Vs/Vp traces into a single time-dependent Vs/Vp function and,
+ then, using that function to invert your data. This is analogous to OPT_AVE
+ in processes AVAST and AVAGRAD; however, the default in this process is
+ OPT_AVE = NO, because it is assumed that when you specify PATH_VSVP, you do
+ want a laterally varying background Vs/Vp.
+ 
+ If OPT_AVE = YES, it is actually the SQUARES of the Vs/Vp values in the
+ file which are averaged laterally.
+ 
+ Active only when PATH_VSVP has been specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_SMOOTH">
+      <Tip>Length of running average smoother for Vs/Vp ratios in file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - LEN_SMOOTH<br> Length of running average smoother for Vs/Vp ratios in file.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ Length, in seconds, of (vertical) running average smoother for the Vs/Vp
+ values read from PATH_VSVP file. If LEN_SMOOTH = 0.0, then no smoothing is
+ done. This is analogous to LEN_SMOOTH in processes AVAST and AVAGRAD;
+ however, the default in this process is LEN_SMOOTH = 0.0, because it is
+ assumed that any desired smoothing has already been done in generating the
+ PATH_VSVP file.
+ 
+ If LEN_SMOOTH &gt; 0.0, smoothing is actually applied to the SQUARES of the
+ Vs/Vp values read from the file.
+ 
+ Active only when PATH_VSVP has been specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>CPS header word containing X locations in PATH_VSVP file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - HDR_X<br> CPS header word containing X locations in PATH_VSVP file.</center></b>
+<pre> Default = 37
+ Allowed = 1 - NWIH
+ Make sure this header word is set properly in both your PATH_VSVP file and
+ in the data you are inverting.
+ 
+ Active only when PATH_VSVP is specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>CPS header word containing Y locations in PATH_VSVP file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - HDR_Y<br> CPS header word containing Y locations in PATH_VSVP file.</center></b>
+<pre> Default = 38
+ Allowed = 1 - NWIH
+ Make sure this header word is set properly in both your PATH_VSVP file and
+ in the data you are inverting.
+ 
+ Active only when PATH_VSVP is specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME">
+      <Tip>Trace times, in seconds, for specifying Vs/Vp ratios.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - TIME<br> Trace times, in seconds, for specifying Vs/Vp ratios.</center></b>
+<pre> Default = Single entry at time TSTRT
+ Allowed = Real linked array: Values between TSTRT and end of trace.
+ You must EITHER specify a trace file containing background Vs/Vp ratios
+ OR manually enter (TIME, VS_VP) pairs to specify a single time-dependent
+ Vs/Vp function. Background Vs/Vp ratios are needed in order to relate
+ reflection amplitudes to rock property contrasts.
+ 
+ If you manually enter (TIME, VS_VP) pairs, at least one such pair must be
+ provided. TIME entries must be in increasing order but needn't cover the
+ whole trace, as your VS_VP values will be interpolated/extrapolated to cover
+ the trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VS_VP">
+      <Tip>Background Vs/Vp ratio as slowly varying function of trace time.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - VS_VP<br> Background Vs/Vp ratio as slowly varying function of trace time.</center></b>
+<pre> Default = Single entry with value 0.5
+ Allowed = Linked array: Values in range 0.7 &gt;= real &gt; 0.0
+ You must EITHER specify a trace file containing background Vs/Vp ratios
+ OR manually enter (TIME, VS_VP) pairs to specify a single time-dependent
+ Vs/Vp function. Background Vs/Vp ratios are needed in order to relate
+ reflection amplitudes to rock property contrasts.
+ 
+ If you manually enter (TIME, VS_VP) pairs, at least one such pair must be
+ provided. As it is actually the SQUARE of Vs/Vp which appears in the Aki and
+ Richards approximation, your VS_VP will be squared, then linearly
+ interpolated/extrapolated to cover the whole trace.
+ 
+ The upper limit of VS_VP = 0.7 is nearly SQRT(0.5), which corresponds to
+ Poisson's ratio = 0 or Lame parameter Lambda = 0.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pslinv - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="pslinv">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PSLINV    (PreStack Linearized INVersion)
+ Category   : inversion
+ Written    : 1992-02-21   by: Bob Baumel &amp; Dapeng Wang
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Linearized inversion of prestack angle gathers.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ PSLINV is a linearized inversion of pre-stack angle gathers (or intercept(A)
+ gradient(B) or A_B_C trace gathers) to various 2-parameter and 3-parameter
+ rock property and AVA attributes.
+ 
+ 
+ Inversion Method
+ 
+ PSLINV performs "linearized" inversion in that it's based on the Aki and
+ Richards linearized approximation of the relationship between angle-dependent
+ reflectivity and contrasts in material properties. Nonlinear effects are
+ ignored or treated as known, smoothly varying "background" properties (e.g.,
+ background Vs/Vp ratio is specified as a slowly varying function of travel-
+ time in this implementation).
+ 
+ Propagation velocity is assumed to be handled by previous processing (NMO,
+ migration, etc.). Data is assumed to contain primaries only. Also, PSLINV
+ does not attempt any nonlinear methods to extend the data bandwidth. (The
+ FREQ_MIN parameter allows removing low frequency noise that may have been
+ introduced by the integration step in some options.)
+ 
+ 
+ Output Options
+ 
+ 2 vs. 3 Parameter Inversions
+ 
+ Options 2 - 5 are two-parameter inversions in the sense that they invert
+ for two independent rock properties. Actually, even these "two-parameter"
+ options use the THREE-parameter Aki &amp; Richards approximation, but they
+ assume a "hard" Gardner constraint (specified by the EXP_GARD parameter)
+ to eliminate density and then solve for only two rock properties.
+ 
+ Options 6 - 14 are three-parameter inversions which use the three-parameter
+ Aki &amp; Richards approximation directly to solve for three rock properties.
+ 
+ Options 2 and 3 are classified as TWO-parameter inversions, even though they
+ generate three output parameters, because their three output quantities
+ aren't independent (Any one of the outputs can be calculated from the other
+ two); we provide these three outputs for convenience, as users may wish to
+ view all three of them.
+ 
+ Option 6 outputs the coefficients A, B and C in the expression:
+        Reflectivity  =  A  +  B * sin^2  +  C * sin^2 * tan^2,
+ but this is more than a simple curve fit. In fact, option 6 is based on the
+ same rock property model and a priori covariance as options 7 to 14; it
+ inverts for rock property contrasts as in those other options, but then
+ outputs the A, B and C coefficients equivalent to the inverted rock property
+ contrasts.
+ 
+ When OPT_INPUT = A_AND_B, only the 2-parameter options are available.
+ 
+ Given the improved stabilization now in PSLINV (with DIAG_LOAD and a priori
+ model covariance), it is worthwhile to always run three-parameter rather
+ than two-parameter inversion whenever possible -- although, depending on
+ data quality and angle range of your input data, you may or may not obtain
+ usable results for the 3rd inverted parameter (density). Thus, two-parameter
+ inversion should probably be limited to cases when you have no other choice;
+ i.e., when you have only intercept and gradient data (OPT_INPUT = A_AND_B).
+ 
+ 
+ Interface-Oriented vs. Layer-Oriented Outputs
+ 
+ Options 2, 4, 7, 9, 11 and 13 invert for contrasts of rock properties across
+ interfaces. Here, the inverted quantities are:
+ 
+      "RP"     = P-Reflectivity = 0.5 * d(P-Impedance) / (P-Impedance)
+      "RS"     = S-Reflectivity = 0.5 * d(S-Impedance) / (S-Impedance)
+      "DSIGMA" = d(Poisson's ratio)
+      "RVP"    = 0.5 * d(P-Velocity) / (P-Velocity)
+      "RVS"    = 0.5 * d(S-Velocity) / (S-Velocity)
+      "RDEN"   = 0.5 * d(Density) / (Density)
+      "D(LAMBDA-RHO)" = 0.5 * d(Lambda*Density) / (Lambda*Density)
+      "D(MU-RHO)"     = 0.5 * d(Mu*Density) / (Mu*Density)
+ 
+ where "d" denotes a (vertical) difference in material properties across
+ the interface. Lambda and Mu denote the Lame parameters.
+ 
+ Options 3, 5, 8, 10, 12 and 14 are (band-limited) integrated versions of
+ options 2, 4, 7, 9, 11 and 13 respectively. Here, the output quantities are:
+ 
+      "ZP"    = 0.5 * log(P-Impedance)
+      "ZS"    = 0.5 * log(S-Impedance)
+      "SIGMA" = Poisson's ratio
+      "VP"    = 0.5 * log(P-Velocity)
+      "VS"    = 0.5 * log(S-Velocity)
+      "DEN"   = 0.5 * log(Density)
+      "LAMBDA-RHO" = 0.5 * log(Lambda*Density)
+      "MU-RHO"     = 0.5 * log(Mu*Density)
+ 
+ These integrated outputs are intended to represent LAYER properties, as
+ opposed to contrasts between layers. These are still BAND-LIMITED results,
+ with no information outside the bandwidth of the seismic data.
+ 
+ For any of these interface-oriented or layer-oriented outputs, results will
+ have arbitrary scale unless you set the SCALE parameter just right, to scale
+ your input data to true reflectivity.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ Three kinds of input data may be used by PSLINV:
+ 1. Angle gathers such as produced by partial stacking, e.g., from process
+    AVAST.
+ 2. Intercept-and-gradient (A_AND_B) pairs, usually from process AVAGRAD.
+ 3. Three trace A_B_C gathers.
+ 
+ The preferred sequence is to use angle gathers which have been filtered
+ using the Wavelet Stretch Filtering (WSF) process and then input these
+ gathers to PSLINV using the OPT_INPUT = ANGLE option. Removal of wavelet
+ stretch is necessary in order to have any hope of recovering a third
+ parameter in 3-parameter inversions.
+ 
+ In the past, input data for PSLINV were often pre-processed with AVAGRAD to
+ take advantage of Offset Dependent Tuning Correction (ODTC). If AVAGRAD has
+ been run, the data have been reduced to Intercept-and-gradient pairs which
+ would be input to PSLINV using OPT_INPUT = A_AND_B; and only two-parameter
+ inversion options in PSLINV are available. On the other hand, leaving your
+ data in angle gathers and filtering them with WSF seems to do a better job
+ of removing offset dependent tuning and preserves the option to do a
+ three-parameter inversion in PSLINV.
+ 
+ If your data consists of partial-offset stacks (instead of partial-angle
+ stacks), the only option for using PSLINV is to pre-process the data with
+ AVAGRAD using the OPT_INPUT = OFFSET option in AVAGRAD before running PSLINV.
+ 
+ When OPT_INPUT = A_AND_B, you must also set the ANG_FAR parameter in order
+ to specify the angle range of your input data (which would be evident when
+ OPT_INPUT = ANGLE, but is no longer obvious after the data have been reduced
+ to A_AND_B pairs). In operation, when OPT_INPUT = A_AND_B, the input A and B
+ traces are used with the Shuey equation to generate model traces at angles
+ zero and ANG_FAR; then, these traces are used as if OPT_INPUT = ANGLE.
+ 
+ 
+ Input Data Preparation
+ 
+ If OPT_INPUT = ANGLE, input data will normally be angle gathers produced by
+ AVAST.  The AVAST documentation discusses proper data preparation for that
+ process. Angle gathers produced by AVAST should not have an amplitude balance
+ applied but SHOULD be filtered with WSF to remove wavelet stretch.  Angle
+ gathers should also be MUTED (head and tail) before input to PSLINV to remove
+ any artifacts or filter tails at top and bottom of traces that might be
+ misinterpreted as spurious AVA behavior. This muting is probably done most
+ easily with the data sorted in common angle panels rather than the CMP angle
+ gathers which must actually be input to PSLINV. Use a ZERO LENGTH TAPER in
+ MUTE to avoid introducing tapers that PSLINV would interpret as AVA behavior!
+ 
+ If OPT_INPUT = A_AND_B, input will be intercept-gradient pair trace gathers
+ normally produced by AVAGRAD (the intercept trace must be the first trace in
+ the gather). These intercept-gradient gathers should not be altered before
+ being input to PSLINV.
+ 
+ If OPT_INPUT = A_B_C, input will be three-trace gathers containing the
+ coefficients A, B and C (in that order) that fit the Aki &amp; Richards equation
+ R = A + B*sin^2 + C*sin^2*tan^2. These A_B_C triples may have been produced
+ by the PSNINV (prestack nonlinear inversion) process.
+ 
+ 
+ Choosing Diagonal Load
+ 
+ The diagonal load factor DIAG_LOAD helps to stabilize the inversion in the
+ presence of noise. If you can estimate the signal/noise ratio (S/N) in your
+ data (expressed in terms of power, not amplitude), then a suitable diagonal
+ load may be chosen as:
+ 
+                   DIAG_LOAD  =  100 / (S/N)
+ 
+ which is simply the noise/signal ratio (multiplied by 100 because diagonal
+ load is expressed as a percentage).
+ 
+ The DIAG_LOAD parameter is not available when OPT_INPUT = A_AND_B or A_B_C
+ since, in those cases, signal/noise should have already been accounted for
+ in the process of reducing your data to A_AND_B or A_B_C traces. It would be
+ redundant to do signal/noise analysis again in PSLINV while inverting for
+ rock properties.
+ 
+ Note: Now that PSLINV has capability to specify a general covariance for the
+ a priori model, the term involving the DIAG_LOAD parameter is no longer,
+ strictly speaking, a DIAGONAL load. However, for backward compatibility, we
+ haven't changed the name of this parameter.
+ 
+ 
+ Choosing A Priori Model Covariance
+ 
+ Three parameter inversions can be stablized by using an a priori model
+ covariance specified by the five numbers:
+    CC_RVS_RVP   = Correlation coefficient between RVS and RVP.
+    CC_RDEN_RVP  = Correlation coefficient between RDEN and RVP.
+    CC_RDEN_RVS  = Correlation coefficient between RDEN and RVS.
+    SDR_RVS_RVP  = Ratio of Std Dev of RVS to Std Dev of RVP.
+    SDR_RDEN_RVP = Ratio of Std Dev of RDEN to Std Dev of RVP.
+ The defaults for these parameters are based on averages computed from
+ several wells (These values may be revised in the future!). If you have
+ well logs in your area, you may use process PSCOVAR to derive covariances
+ specific for that region.
+ 
+ 
+ Choosing traveltime dependent Vs/Vp
+ 
+ If you have well logs for your area (including P-wave, S-wave and Density),
+ process PSCOVAR can output a smoothed Vs/Vp trace which you can view in Cbyt
+ to pick a time-dependent Vs/Vp function for use in PSLINV.
+ 
+ 
+ QC of Results
+ 
+ For most output options, standard deviations of the inverted quantities may
+ be output by setting OPT_SD_OUT = YES, in order to estimate quality of the
+ inverted results. Estimation of the standard deviations requires you to set
+ DIAG_LOAD &gt; 0, and is therefore not available when OPT_INPUT = A_AND_B or
+ A_B_C.
+ 
+ 
+ Backward Compatibility Notes
+ 
+ The 2004-06-24 update to PSLINV includes a number of changes that don't
+ preserve backward compatibility. Some points to note:
+ 
+ As the VS_VP parameter has been changed from a scalar to an array, its value
+ won't transfer from old work files built with the previous version. Thus, if
+ the old job included a VS_VP value different from its default of 0.5, it will
+ get reset to its default when reading the old work file, and you'll need to
+ restore it manually in the new job.
+ 
+ Several of the OPT_OUTPUT options have been renumbered. The old linear
+ combination options (previously 4, 5 and 13) have been eliminated, as nobody
+ ever used them. The two-parameter Lame parameter inversions, previously 14
+ and 15, are now options 4 and 5. Options 13 and 14 are now three-parameter
+ Lame parameter inversions.
+ 
+ Three-parameter inversions with DIAG_LOAD &gt; 0 won't give the same results as
+ the previous version unless you set the a priori model covariance to match
+ the covariance assumed implicitly by that older PSLINV, which (for options
+ 7 to 12) was an identity matrix in RP, RP-RS and RDEN. To match that
+ assumption, you must now set the strange-looking values:
+    CC_RVS_RVP     =  0.8164966  (=  SQRT(2/3))
+    CC_RDEN_RVP    = -0.7071068  (= -SQRT(1/2))
+    CC_RDEN_RVS    = -0.5773503  (= -SQRT(1/3))
+    SDRAT_RVS_RVP  =  1.2247449  (=  SQRT(3/2))
+    SDRAT_RDEN_RVP =  0.7071068  (=  SQRT(1/2))
+ Option 6 (A_B_C output) with DIAG_LOAD &gt; 0 would be still harder to match
+ because you'd have to enter covariance values that depend on the Vs/Vp ratio.
+ In the old version, option 6 assumed a covariance (identity matrix in A, B
+ and C) inconsistent with the rock property inversions (options 7 to 12). In
+ the new version, option 6 performs the SAME rock property inversion as
+ options 7 to 14, then outputs the A_B_C values consistent with the inverted
+ rock properties.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 17. 2006-09-11  Stoeckley  Add call to pc_register_array_names for SeisSpace.
+ 16. 2006-04-04  Baumel     Added ability to read spatially-dependent Vs/Vp
+                            from a trace file.
+ 15. 2006-01-10  B. Menger  Removed Unused Variables.
+ 14. 2005-01-17  Baumel     Add a priori model covariance for 3-parameter
+                            inversions. Add OPT_INPUT = A_B_C, time-dependent
+                            VS/VP, and 3-parameter Lame options (new options
+                            13 and 14). Remove option 1 (A_AND_B output) which
+                            duplicated functionality of AVAGRAD. Change action
+                            of option 6 (A_B_C output) to assume same rock
+                            property model as options 7 and above. Remove the
+                            linear combination options (old options 4, 5 and
+                            13). Rename the 2-parameter Lame options (old
+                            options 14 and 15) to 4 and 5.
+ 13. 2002-04-17  Baumel     Add DIAG_LOAD and OPT_SD_OUT parameters; switch
+                            2nd and 3rd parameters in options 2 and 3; change
+                            3rd parameter in options 11 and 12 to Density
+                            instead of P-Velocity.
+ 12. 2001-11-01  Baumel     Add statement to compile in new absoft compiler.
+ 11. 2001-10-04  Baumel     Add LAMBDA-RHO, MU-RHO options.
+ 10. 2001-04-10  Baumel     Documentation change warranted because AVAGRAD
+                            now includes an OPT_INPUT = OFFSET option.
+  9. 2001-02-01  Baumel     Converted to new system (Changes in conversion:
+                            Add OPT_INPUT = A_AND_B, combine previous options
+                            2, 3, 4 and 5 into new options 2 and 3; remove
+                            the RVA option).
+  8. 1999-06-09  Baumel     Remove (RVP,RVS) and (VP,VS) 2-parameter
+                            inversion options (too sensitive to differential
+                            Gardner assumption); also reduce default for FCUT.
+  7. 1999-05-13  Baumel     Bug fix - include RVA in PSLINV_CSET calls.
+  6. 1999-05-11  Baumel     Rename process to PSLINV. Provide band-
+                            limited integration for all 2 and 3-param
+                            inversion options; remove option for setting
+                            a mute pattern within this process; add RVA
+                            parameter; overhaul for F90 (FIX format).
+  5. 1995-12-06  Baumel     Do "SAIL" for ALL params in options 3 &amp; 10.
+  4. 1995-11-14  Baumel     Avoid hard zero trace values (same as ASTK).
+  3. 1995-04-04  Baumel     First version with 13 active options.
+  2. 1995-02-28  Baumel     Interim version while modernizing program.
+  1. 1992-02-21  D Wang     Original version of IMPD process.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

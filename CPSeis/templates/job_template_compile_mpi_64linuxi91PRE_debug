@@ -1,0 +1,9 @@
+echo "mpif90 -c -g -mcmodel=medium -I${CPSEIS_INSTALL_DIR}/src JJJJJ.f90" >> $RSHCOMPILE
+echo "mpif90 *.o -o JJJJJ.exe \\" >> $RSHCOMPILE
+echo "-L${CPSEIS_INSTALL_DIR}/lib/${CPSEIS_ARCH} -lcps -lpthread -lm \\" >> $RSHCOMPILE
+echo "-L${THIRDPARTY_INSTALL_DIR}/lib -lfftw -lrfftw -lmpich -lfmpich " >> $RSHCOMPILE
+chmod u+x $RSHCOMPILE
+echo "Compiling..."
+./$RSHCOMPILE
+echo "Preparing to run..."
+sleep 4

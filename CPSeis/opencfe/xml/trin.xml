@@ -1,0 +1,1059 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="trin" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TRIN" title="TRIN" rows="33" columns="80">
+    <Label keyword="LABEL_ABORT" alignment="left">ABORT=</Label>
+    <Field keyword="ABORT" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HISTORY" alignment="left">HISTORY=</Label>
+    <Field keyword="HISTORY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ORDER_LOCAL" alignment="left">ORDER_LOCAL=</Label>
+    <Field keyword="ORDER_LOCAL" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ORDER_PREV" alignment="left">ORDER_PREV=</Label>
+    <Field keyword="ORDER_PREV" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PARALLEL_MODE" alignment="left">PARALLEL_MODE=</Label>
+    <Field keyword="PARALLEL_MODE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SELECT_ON_HEADER_WORD" alignment="left">Select_on_header_word=</Label>
+    <Field keyword="SELECT_ON_HEADER_WORD" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_START" alignment="left">Start=</Label>
+    <Field keyword="START" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_END" alignment="left">End=</Label>
+    <Field keyword="END" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INCR" alignment="left">Incr=</Label>
+    <Field keyword="INCR" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_PERFORMDOSKIPPATTERNSONS" alignment="center">Perform do-skip patterns on sequences of items.</Label>
+    <Label keyword="LABEL_TR_MAX" alignment="left">TR_MAX=</Label>
+    <Field keyword="TR_MAX" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SKIP_INIT" alignment="left">SKIP_INIT=</Label>
+    <Field keyword="SKIP_INIT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_DO" alignment="left">NUM_DO=</Label>
+    <Field keyword="NUM_DO" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_SKIP" alignment="left">NUM_SKIP=</Label>
+    <Field keyword="NUM_SKIP" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_FILE" alignment="left">OPT_FILE=</Label>
+    <Field keyword="OPT_FILE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CHECKFILE" alignment="left">CHECKFILE=</Label>
+    <Field keyword="CHECKFILE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="TEST_BEYOND_SYMLINKS">Test Beyond Symbolic Links</Button>
+    <Button keyword="SELECT_LATEST_PATHNAME">Select LATEST_PATHNAME</Button>
+    <Label keyword="EQLAB_LATEST_PATHNAME" alignment="left">=</Label>
+    <Field keyword="LATEST_PATHNAME" type="string" maxLength="70" editable="yes" sensitive="yes"/>
+    <Field keyword="LATEST_PATHNAME_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS  PATHNAMES">
+     <Array keyword="STATUS" type="string" maxLength="8  " columnName="STATUS" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="PATHNAMES" type="string" maxLength="128" columnName="PATHNAMES" editable="yes" sensitive="yes" columnSize="55"/>
+    </ArraySet>
+    <Button keyword="SELECT_PATH_LIST">Select PATH_LIST</Button>
+    <Label keyword="EQLAB_PATH_LIST" alignment="left">=</Label>
+    <Field keyword="PATH_LIST" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_ABORT" xPos="10" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ABORT" xPos="16" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HISTORY" xPos="37" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HISTORY" xPos="45" yPos="0" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ORDER_LOCAL" xPos="4" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ORDER_LOCAL" xPos="16" yPos="1" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ORDER_PREV" xPos="32" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ORDER_PREV" xPos="43" yPos="1" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PARALLEL_MODE" xPos="2" yPos="2" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PARALLEL_MODE" xPos="16" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SELECT_ON_HEADER_WORD" xPos="2" yPos="3" xSize="22" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_ON_HEADER_WORD" xPos="24" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_START" xPos="28" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="START" xPos="34" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_END" xPos="42" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="END" xPos="46" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INCR" xPos="54" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INCR" xPos="59" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="0" yPos="4" xSize="48" ySize="5"/>
+     <Constraints component="COMMENT_PERFORMDOSKIPPATTERNSONS" xPos="1" yPos="5" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TR_MAX" xPos="1" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_MAX" xPos="10" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SKIP_INIT" xPos="22" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SKIP_INIT" xPos="34" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_DO" xPos="1" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_DO" xPos="10" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_SKIP" xPos="23" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_SKIP" xPos="34" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_FILE" xPos="10" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FILE" xPos="19" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CHECKFILE" xPos="48" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CHECKFILE" xPos="58" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TEST_BEYOND_SYMLINKS" xPos="10" yPos="13" xSize="26" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_LATEST_PATHNAME" xPos="2" yPos="15" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_LATEST_PATHNAME" xPos="24" yPos="15" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LATEST_PATHNAME" xPos="25" yPos="15" xSize="70" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LATEST_PATHNAME_INFO" xPos="25" yPos="16" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="10" yPos="18" xSize="66" ySize="11" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST" xPos="2" yPos="31" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_LIST" xPos="18" yPos="31" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_LIST" xPos="19" yPos="31" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_INFO" xPos="19" yPos="32" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="ABORT">
+      <Tip>How different the input file must be from the data context before TRIN will abo</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - ABORT<br> How different the input file must be from the data context before TRIN will abo</center></b>
+<pre> Default = NORMAL
+ Allowed = STRICT, NORMAL, LENIENT
+ If ABORT = STRICT, then abort if Sample Rate(DT), Start Time (TIM_BEG),
+ or Ending Time (TIM_END) on any file does not match the job globals. (Start time and end time
+ could be depth values or frequencies instead...)
+ 
+ If ABORT = NORMAL, then abort if a DT mismatch occurs, or if TIM_END on any
+ file is LESS than TIM_END in the job.  If a TIM_BEG mismatch occurs,
+ truncate or extend the top of the trace with zeroes and adjust the head mute
+ index.  If TIM_END on any file is MORE than TIM_END in the job, truncate
+ the bottom of the trace, and adjusts the tail mute index.
+ 
+ If ABORT = LENIENT, then if a DT mismatch occurs, ignore DT on the file.  If
+ a TIM_BEG or TIM_END mismatch occurs, truncate or extend the top or bottom of
+ the trace with zeroes and adjust the mute indices.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HISTORY">
+      <Tip>(For CPS data sets that include history) How to control transfer of processing</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - HISTORY<br> (For CPS data sets that include history) How to control transfer of processing</center></b>
+<pre> Default = YES
+ Allowed = YES   (Read all old histories.)
+ Allowed = NO    (Do not read any history.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ORDER_LOCAL">
+      <Tip>Whether to merge traces with those from other files.      (Use this if you list</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - ORDER_LOCAL<br> Whether to merge traces with those from other files.      (Use this if you list</center></b>
+<pre> Default = APPEND
+ Allowed = APPEND(Append traces after those from other files.)
+ Allowed = MERGE (Merge traces one at a time with those from other files.)
+ 
+ The do-skip pattern is applied after the ORDER_LOCAL; so the do-skip
+ is for the composite of the input files, not for each individual input file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ORDER_PREV">
+      <Tip>Whether to merge traces with those from previous processes. (by adding them to</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - ORDER_PREV<br> Whether to merge traces with those from previous processes. (by adding them to</center></b>
+<pre> Default = NEW
+ Allowed = NEW   (Do not merge traces.)
+ Allowed = APPEND(Append traces after those from previous processes.)
+ Allowed = MERGE (Merge traces one at a time with those from previous
+                  processes.)
+ 
+ The first process in a loop cannot be a TRIN with
+ ORDER_PREV = APPEND or ORDER_PREV = MERGE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PARALLEL_MODE">
+      <Tip>Select which traces are read by each process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PARALLEL_MODE<br> Select which traces are read by each process.</center></b>
+<pre> Default = NONE
+ Allowed = NONE
+ Allowed = BLOCK
+ Allowed = CIRCULAR
+ If you use this, you MUST set the max traces for TRIN to read in the TR_MAX field.
+ If you set some arbitrary number, then each "CPU" in your parallel job will try to read
+ (that number)/(the number of CPU's).  BLOCK mode makes CPU #1 do the
+ first TR_MAX/(Number of CPU's in the job) traces, CPU #2 does the next group, etc.  CIRCULAR
+ makes CPU #1 do trace 1 CPU #2 does trace 2, etc going back to CPU #1 doing
+ trace (Number of CPU's) + 1...    All modes will honor your DO-SKIP patterns. (The DO-SKIP
+ patterns are those created by the fields TR_MAX, SKIP_INIT, NUM_DO, and NUM_SKIP.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_ON_HEADER_WORD">
+      <Tip>Use this to restrict input to traces with certain header word numbers (using CP</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - SELECT_ON_HEADER_WORD<br> Use this to restrict input to traces with certain header word numbers (using CP</center></b>
+<pre> Default = 0
+ Allowed = 0 - (the number of words in trace header)
+ Default of 0 means to ignore the "start, end, incr" and allow all traces
+ to be passed on to the processing sequence.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="START">
+      <Tip>Starting value for the "select on header word" header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - START<br> Starting value for the "select on header word" header word.</center></b>
+<pre> Default = 0.0
+ Allowed =
+ All traces which have the selected header word of this value will be
+ passed through to the processing stream.  All others (except if they
+ are within the "incr, end" values) will be rejected.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="END">
+      <Tip>Ending value for the "select on header word" header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - END<br> Ending value for the "select on header word" header word.</center></b>
+<pre> Default = 0.0
+ Allowed =
+ All traces from "start" to this "end" value with increment of "incr"
+ will be passed to the processing stream.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INCR">
+      <Tip>Increment with which to stride through the values in the selected header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - INCR<br> Increment with which to stride through the values in the selected header word.</center></b>
+<pre> Default = 0.0
+ Allowed =
+ For the "select_on_header_word" option, you will allow traces from the
+ "start" value to the "end" value through using the "incr" value to
+ incrementally stride through traces.  If 0.0, then values are passed that
+ fall anywhere between start and end.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_MAX">
+      <Tip>Maximum number of items to ultimately select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - TR_MAX<br> Maximum number of items to ultimately select.</center></b>
+<pre> Default = 99999999
+ Allowed = int &gt;= 0
+ Selection will stop once tr_max items have been selected with the do_skip
+ pattern. TR_MAX is the maximum number of items SELECTED by do_skip.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SKIP_INIT">
+      <Tip>Number of items to skip over initially before selecting any.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - SKIP_INIT<br> Number of items to skip over initially before selecting any.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DO">
+      <Tip>Number of items to process at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - NUM_DO<br> Number of items to process at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SKIP">
+      <Tip>Number of items to skip at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - NUM_SKIP<br> Number of items to skip at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 0
+ Allowed = int (positive,negative, or 0 unless restricted by the programmer.)
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_FILE">
+      <Tip>Source of input files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - OPT_FILE<br> Source of input files.</center></b>
+<pre> Default = PATHNAMES
+ Allowed = PATHNAMES, PATH_LIST
+ If OPT_FILE = PATHNAMES, file(s) listed in PATHNAMES array.
+ If OPT_FILE = PATH_LIST, file(s) listed in file indicated by PATH_LIST.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CHECKFILE">
+      <Tip>Check that the file is valid trace file with consistent globals.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - CHECKFILE<br> Check that the file is valid trace file with consistent globals.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ CFE can check the file for consistency and existence, and in the process will
+ load special globals (scalar ones) for subsequent job processes to use.
+ These are so that GVS, some Migrations, etc. will have proper globals set
+ by the input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TEST_BEYOND_SYMLINKS">
+      <Tip>Forces more thorough file STATUS checking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - TEST_BEYOND_SYMLINKS<br> Forces more thorough file STATUS checking.</center></b>
+<pre> Default behavior is to not pursue file STATUS checking beyond the symbolic
+ links themselves.  Pushing this button causes more thorough file STATUS
+ information to be provided.  Refrain from pushing this button during periods
+ of NFS or disk problems.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LATEST_PATHNAME">
+      <Tip>Choose LATEST_PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - SELECT_LATEST_PATHNAME<br> Choose LATEST_PATHNAME using a file selection dialog box.</center></b>
+<pre> Pathname of trace file to add to PATHNAMES (the array of trace files).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LATEST_PATHNAME">
+      <Tip>Pathname of trace file to add to PATHNAMES.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - LATEST_PATHNAME<br> Pathname of trace file to add to PATHNAMES.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of trace file to add to PATHNAMES (the array of trace files).
+ If no file suffix is specified an appropriate file suffix will be added.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LATEST_PATHNAME_INFO">
+      <Tip>File status for LATEST_PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - LATEST_PATHNAME_INFO<br> File status for LATEST_PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>File status (if CHECKSTATUS=YES).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - STATUS<br> File status (if CHECKSTATUS=YES).</center></b>
+<pre>  R  -- File found and readable.
+ RE  -- File not found or not readable.
+  W  -- File found and writable.
+  C  -- File not found, but creatable.
+ CE  -- File not found and not creatable.
+ WE  -- File exists and can not be overwritten.  Checks both file and
+        directory permissions.
+ WB  -- Blank filename.
+ NTF -- File not a trc, cmpr, or segy file (only if CHECKFILE == YES).
+ BG  -- File globals disagree with job (only if CHECKFILE == YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES">
+      <Tip>Pathname(s) for the file(s) to be read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PATHNAMES<br> Pathname(s) for the file(s) to be read.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of file(s), including optional node, userid, and dir.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST">
+      <Tip>Choose PATH_LIST with a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - SELECT_PATH_LIST<br> Choose PATH_LIST with a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST">
+      <Tip>ASCII file containing list of file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PATH_LIST<br> ASCII file containing list of file names.</center></b>
+<pre> Default = blank
+ Allowed = char
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_INFO">
+      <Tip>File status for PATH_LIST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PATH_LIST_INFO<br> File status for PATH_LIST.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="MAPSEGYHEADERS" title="Map SEGY Headers" rows="24" columns="80">
+    <Label keyword="COMMENT_" alignment="center">-------------------------------------------------------------------</Label>
+    <Label keyword="LABEL_MOD_SEGY" alignment="left">MOD_SEGY =</Label>
+    <Field keyword="MOD_SEGY" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="SBYTE_ARRAYSET" label="SBYTE BYTES CPS_HDR MTYPE">
+     <Array keyword="SBYTE" type="int" maxLength="6  " columnName="SBYTE" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="BYTES" type="int" maxLength="6  " columnName="BYTES" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="CPS_HDR" type="int" maxLength="8  " columnName="CPS_HDR" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="MTYPE" type="string" maxLength="5  " columnName="MTYPE" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">-------------------------------------------------------------------</Label>
+    <Layout>
+     <Constraints component="COMMENT_" xPos="1" yPos="0" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MOD_SEGY" xPos="21" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MOD_SEGY" xPos="32" yPos="1" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SBYTE_ARRAYSET" xPos="22" yPos="3" xSize="28" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="1" yPos="8" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MOD_SEGY">
+      <Tip>Type of segy mapping.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - MOD_SEGY<br> Type of segy mapping.</center></b>
+<pre> Default = STAN
+ Allowed = STAN      (Standard SEGY to CPS mapping.
+ Allowed = LANDMARK
+ Allowed = GEODEPTH
+ Allowed = JASON
+ Allowed = HAMPSON-RUSSELL-2D
+ Allowed = HAMPSON-RUSSELL-3D
+ Allowed = USER      (User specified mapping)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SBYTE">
+      <Tip>Starting byte of the SEGY header to be moved.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - SBYTE<br> Starting byte of the SEGY header to be moved.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BYTES">
+      <Tip>Number of bytes to be moved to a CPS header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - BYTES<br> Number of bytes to be moved to a CPS header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CPS_HDR">
+      <Tip>CPS header word to receive the SEGY header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - CPS_HDR<br> CPS header word to receive the SEGY header.</center></b>
+<pre> Default = -
+ Allowed = 1 to NWIH (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MTYPE">
+      <Tip>Treat Segy header word as I(integer), or F(floating point).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - MTYPE<br> Treat Segy header word as I(integer), or F(floating point).</center></b>
+<pre> Default = -
+ Allowed = char(8) (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="GROUPSFORKMIG" title="Groups For Kmig" rows="24" columns="80">
+    <Label keyword="LABEL_OPT_GROUP" alignment="left">OPT_GROUP  =</Label>
+    <Field keyword="OPT_GROUP" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_GROUP" alignment="left">HDR_GROUP  =</Label>
+    <Field keyword="HDR_GROUP" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_GROUP" alignment="left">LEN_GROUP  =</Label>
+    <Field keyword="LEN_GROUP" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_OPT_GROUP" xPos="4" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_GROUP" xPos="16" yPos="0" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_GROUP" xPos="32" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_GROUP" xPos="44" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_GROUP" xPos="52" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_GROUP" xPos="64" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_GROUP">
+      <Tip>Define image groups by header word specified in the HDR_GROUP field.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - OPT_GROUP<br> Define image groups by header word specified in the HDR_GROUP field.</center></b>
+<pre> Default = NO
+ Allowed = NO  TRIN will not set header word HDR_GROUP to the file index.
+ Allowed = YES KMIG will     set header word HDR_GROUP to the file index.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_GROUP">
+      <Tip>Header word # (from CPS) to define groups. (see Header Mapping to find the corr</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - HDR_GROUP<br> Header word # (from CPS) to define groups. (see Header Mapping to find the corr</center></b>
+<pre> Default = 52
+ Allowed = 1-64
+ If OPT_GROUP = YES TRIN will set header word specified in the HDR_GROUP field to the file index.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_GROUP">
+      <Tip>Number of files per group.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - LEN_GROUP<br> Number of files per group.</center></b>
+<pre> Default = 1
+ Allowed = any positive integer</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>trin - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="trin">
+   <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TRIN       (TRace INput from disk)
+ Category   : io
+ Written    : 1999-08-26   by: Bill Menger
+ Revised    : 2007-11-29   by: Bill Menger
+ Maturity   : beta
+ Purpose    : Read seismic traces from one or more disk files.
+ Portability: No known limitations.
+ Parallel   : Yes (in SS)
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ [Note that not all the parameters shown here will have been implemented when
+ testing begins for TRIN.  Some may prove to be undesirable or unnecessary.]
+ 
+ 
+ TRIN reads traces from a disk file, either randomly or sequentially. The
+ PATHNAMES is the only input parameter that must be entered; defaults can be
+ used for all other parameters.  TROT is the corresponding process for writing
+ disk files.
+ 
+ File Identification
+ 
+ Use PATHNAMES = [path/subpath/]filename[.ext] (The "[]" are not typed in,
+                                               they indicate optional parts of
+                                               the pathname.)
+ 
+ To check the PATHNAMES and load special globals that were written to the file
+ from its creating job, use the CHECKFILE parameter.  This checks the file
+ from CFE by opening it, reading the header(s), and loading special globals
+ for the subsequent processing steps.
+ 
+   To read native CWP files, (SU file format), you must run the SU program:
+   $segyhdrs &lt;native_file.su
+   $segywrite tape=myfile.segy convert=0 &lt;native_file.su
+   Then run trin with PATHNAMES=myfile.segy
+ 
+ Abort Conditions
+ 
+ ABORT options are: STRICT, NORMAL and LENIENT conditions for aborting if file
+ globals do not match globals in job.  TRIN prints a summary of the globals
+ for each file it reads and also prints warning or error messages if file
+ globals do not match job globals.
+ 
+ History Selection
+ 
+ HISTORY options to control transfer of histories from file are YES or NO.
+ 
+ Input Merging
+ 
+ ORDER_LOCAL and ORDER_PREV
+   ORDER_LOCAL tells TRIN how to sequence traces from within its group of files
+   from the input file list (within this particular instance of TRIN).
+ 
+   ORDER_PREV tells TRIN how to sequence traces that it will bring into the job
+   with respect to the other processes in the job. ORDER_PREV is not restricted
+   unless on the first process, where it must be NEW. Any other process (IPN&gt;3)
+   it can be either MERGE or APPEND.  IF Merge, it will MERGE 1 trace onto the
+   end of the group of traces coming to it.  Ex:
+   2 traces come from previous process.  TRIN-MERGE adds one trace, passing out
+   3 traces:  the first two have been processed by previous modules, the third
+   is being added from this TRIN's input file(s).
+   IF APPEND, it will wait until the processing loop has received all of its
+   traces, then will add all of the traces (one at a time) from its files at
+   the end of the processing stream. Ex:
+   2 traces come from previous process, then a NO_MORE_TRACES flag is sent.
+   Now, this TRIN-APPEND will add 1 trace, and on the return loop, will add a
+   second trace, etc. until all traces are input.
+   You can intersperse APPEND and MERGE and even put processing steps in-
+   between TRINs to do comparison processing.  Ex:
+   TRIN-NEW XP1 TRIN-APPEND XP2.  Your output will be XP1 + XP2 applied to the
+   first set of traces, but only XP2 applied to the second set.
+   *** In MERGE mode where you have two files of different numbers of traces,
+   the traces are MERGEd until one file runs out of traces, then the remaining
+   traces from the other file are APPENDED at the end.  Example:
+   File1 (10 traces), denoted by a-1, a-2, a-3...a-10
+   File2 (5 traces), denoted by  b-1, b-2, b-3, b-4, b-5
+   file3 (3 traces), denoted by  c-1, c-2, c-3
+   Job 1
+   (TRIN1(order_prev=new), TRIN2 (order_prev=MERGE), TRIN3(order_prev=MERGE)
+   Traces will be:
+   a-1,b-1,c-1,a-2,b-2,c-2,a-3,b-3,c-3,a-4,b-4,a-5,b-5,a-6,a-7,a-8,a-9,a-10
+ 
+   Job 2
+   (TRIN1(order_prev=new), TRIN2 (order_prev=APPEND), TRIN3(order_prev=APPEND)
+   Traces will be:
+   a-1,a-2,a-3,a-4,a-5...a-10,b-1,b-2,...b-5,c-1,c-2,c-3
+ 
+   Job 3
+   (TRIN1(order_prev=new), TRIN2 (order_prev=MERGE), TRIN3(order_prev=APPEND)
+   Traces will be:
+   a-1,b-1,a-2,b-2,a-3,b-3,a-4,b-4,a-5,b-5,a-6,a-7,a-8,a-9,a-10,c-1,c-2,c-3
+ 
+ Trace Selection
+ 
+ TR_MAX is the maximum number of traces to read.  Set TR_MAX to 0 to read no
+ traces, set TR_MAX to a very large number to read all traces.
+ 
+ DO_SKIP parameters are SKIP_INIT, NUM_DO and NUM_SKIP.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+                             trace lengths
+ 
+  If you read a file whose traces are shorter than your job's traces, they
+  will be padded with 0.0's
+ 
+  If you read a file whose traces are longer than your job's traces, they
+  will be truncated.
+ 
+                             start time (tstrt)
+ 
+  If you read a file whose tim_beg or tstrt is not = your job's tstrt, then:
+ 
+  If your job tstrt &gt; file tim_beg, you get only those data values that are
+  within the range of your job's tstrt to your job's end-of-trace (which is
+  tstrt + (ndpt-1)/dt).
+ 
+  If your job tstrt &lt; file tim_beg, you will get 0.0's in the first part of
+  your trace, until your samples fall within the values that are recorded on
+  disk.
+ 
+  If you are trying to RESET a tstart, you should read the traces using a tstrt
+  that is == to the file's tstrt, THEN do a SHIFT operation, THEN process the
+  data.  Otherwise you will simply have zero values for all samples that were
+  not recorded on the file.  The file header contains a start and end time for
+  the traces.
+ 
+                             Merging Traces
+ 
+ ORDER_LOCAL and ORDER_PREV
+ 
+                            SEGY Header Words
+ When TRIN reads a SEGY file, it maps SEGY headers to CPS headers using the
+ following mapping.  For byte offsets of the SEGY header words, either see
+ below (where the description of SEGY-&gt;CPS mapping is found, or look in the
+ SEGY documentation, or look in the Seismic Unix documentation from the CWP at
+ Colorado School of mines.  Their naming convention for segy headers is used.
+ 
+ If CPS creates the SEGY file with TROT, conoco job globals are written to
+ unused portions of the binary header, and are detected by TRIN.  The LAV is
+ also saved for each trace, as is the MIDPOINT x,y,elev, etc.  (see midpoint
+ information below.)
+ 
+ ----------- MAPPING CPS &lt;==&gt; SEGY  sort by segy_byte#--(sort by CPS# is below)
+ SEGY BYTES CPS HDR CPS                   SEGY
+ BEG:END    NUMBER  NAME                  NAME
+ -------     --     -----------------     -------
+ 001:004     01     sequence              tracl
+ 005:008     01     sequence              tracr
+ 009:012     03     current_group         fldr
+ 013:016     04     current_channel       tracf
+ 017:020     29     source_shotpoint      ep
+ 021:024     07     midpoint_xgrid        cdp
+ 021:024     37     midpoint_shotpoint    cdp
+ 025:028     38     midpoint_line         cdpt
+ 029:030                                  trid
+ 031:032                                  nvs
+ 033:034     05     fold                  nhs
+ 035:036                                  duse
+ 037:040     06     offset                offset
+ 041:044     16     receiver_elev         gelev
+ 045:048     13     source_elev           selev
+ 049:052     20     source_depth          sdepth
+ 053:056                                  gdel
+ 057:060                                  sdel
+ 061:064                                  swdep
+ 065:068                                  gwdep
+ 069:070                                  scalel
+ 071:072                                  scalco
+ 073:076     11     source_xloc           sx
+ 077:080     12     source_yloc           sy
+ 081:084     14     receiver_xloc         gx
+ 085:088     15     receiver_yloc         gy
+ 089:090                                  counit
+ 091:092                                  wevel
+ 093:094                                  swevel
+ 095:096     44     source_uptime         sut
+ 097:098     45     receiver_uptime       gut
+ 099:100     39     pre                   sstat
+ 101:102     40     post                  gstat
+ 103:104     43     cum_resid_static      tstat
+ 105:106                                  laga
+ 107:108                                  lagb
+ 109:110                                  delrt
+ 111:112     02     top_mute              muts
+ 113:114     64     bottom_mute           mute
+ 115:116                                  ns
+ 117:118                                  dt
+ 119:120                                  gain
+ 121:122                                  igc
+ 123:124                                  igi
+ 125:126                                  corr
+ 127:128                                  sfs
+ 129:130                                  sfe
+ 131:132                                  slen
+ 133:134                                  styp
+ 135:136                                  stas
+ 137:138                                  stae
+ 139:140                                  tatyp
+ 141:142                                  afilf
+ 143:144                                  afils
+ 145:146                                  nofilf
+ 147:148                                  nofils
+ 149:150                                  lcf
+ 151:152                                  hcf
+ 153:154                                  lcs
+ 155:156                                  hcs
+ 157:158                                  year
+ 159:160                                  day
+ 161:162                                  hour
+ 163:164                                  minute
+ 165:166                                  sec
+ 167:168                                  timbas
+ 169:170     30     scratch_30            trwf
+ 171:172                                  grnors
+ 173:174                                  grnofr
+ 175:176                                  grnlof
+ 177:178                                  gaps
+ 179:180                                  otrav
+ 237:240     08     midpoint_ygrid        unused1
+ 
+ 
+        Documentation on User Defined Header Mapping can be found in
+                         Primitive MAPSEGY
+ 
+ ----------- MAPPING CPS &lt;==&gt; SEGY sort by CPS hdr#-------------
+ SEGY BYTES CPS HDR CPS                   SEGY
+ BEG:END    NUMBER  NAME                  NAME
+ -------     --     -----------------     -------
+ 001:004     01     sequence              tracl
+ 005:008     01     sequence              tracr
+ 111:112     02     top_mute              muts
+ 009:012     03     current_group         fldr
+ 013:016     04     current_channel       tracf
+ 033:034     05     fold                  nhs
+ 037:040     06     offset                offset
+ 021:024     07     midpoint_xgrid        cdp
+ 237:240     08     midpoint_ygrid        unused1
+ 073:076     11     source_xloc           sx
+ 077:080     12     source_yloc           sy
+ 045:048     13     source_elev           selev
+ 081:084     14     receiver_xloc         gx
+ 085:088     15     receiver_yloc         gy
+ 041:044     16     receiver_elev         gelev
+ 193:200     17     midpoint_xloc         mp_xloc
+ 201:208     18     midpoint_yloc         mp_yloc
+ 209:216     19     midpoint_elev         mp_elev
+ 049:052     20     source_depth          sdepth
+ 189:192     25     lav                   lav (dbl-precision)
+ 233:236     25     lav                   lav (dbl-precision)
+ 017:020     29     source_shotpoint      ep
+ 169:170     30     scratch_30            trwf
+ 021:024     37     midpoint_shotpoint    cdp
+ 025:028     38     midpoint_line         cdpt
+ 099:100     39     pre                   sstat
+ 101:102     40     post                  gstat
+ 103:104     43     cum_resid_static      tstat
+ 095:096     44     source_uptime         sut
+ 097:098     45     receiver_uptime       gut
+ 117:118                                  dt
+ 029:030                                  trid
+ 035:036                                  duse
+ 115:116                                  ns
+ 061:064                                  swdep
+ 065:068                                  gwdep
+ 113:114     64     bottom_mute           mute
+ 
+ Not all CPS header words have a corresponding SEGY header.  If you create a
+ file with TROT in SEGY format, and read that file with TRIN, you will lose
+ some header words.  Also, SEGY header words are integer, so you may lose
+ precision making the round trip.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author        Description
+     ----       ------        -----------
+ 84. 2007-11-29 Bill Menger   Modified print statement on resetting maxtrc.
+ 83. 2007-11-20 Stoeckley     Remove INCR from the row "START END INCR" to
+                               eliminate scrollbars from the SeisSpace menu.
+ 82. 2007-11-08 Stoeckley     Changed two options from APP to APPEND before
+                               calling pc_put so the parameter cache would
+                               not complain when it encounters the older
+                               spelling APP.
+ 81. 2007-07-17 Bill Menger   Modified the GUI (with Tom's help.)
+ 80. 2007-07-10 Bill Menger   Added parallel modes and SeisSpace parameters,
+                              fixed bug in SS that disallowed parallel or
+                              multiple jobs running simultaneously.
+ 79. 2006-08-29 Stoeckley     Add tab groups to HelpSection.
+ 78. 2006-08-24 D. Glover     Added NULLIFY statements for Intel compiler.
+ 77. 2006-07-13 Bill Menger   Modified the order_prev method so that a file
+                              will merge with others then if it has more traces
+                              it will continue to supply traces as if it were
+                              in the append mode after the other trace
+                              supplying processes are finished.
+ 76. 2006-05-16 SMCook        Moved 'use trcio_module' statement to the
+                               beginning of the 'use list' to force the
+                               compiler to honor new optional argument
+                               lbo_version in trcio_open function.
+ 75. 2006-01-10 B. Menger     Removed unused variables.
+ 74. 2005-07-11 Bill Menger   Added code to allow merge to keep reading traces
+                              until all files are empty, instead of stopping
+                              when the first file is at EOF
+ 73. 2004-12-16 Bill Menger   Modified NTR output so that a TRIN will not set
+                              NTR to NO_MORE_TRACES when it is out of data
+                              IF any previous process has passed traces to it.
+                              This allows TRIN to run dry before a previous
+                              trace-generating process.
+ 72. 2004-12-15 Hanson        Add len_group.
+ 71. 2004-09-21 Hanson        Add opt_group, hdr_group.
+ 70. 2004-08-23 Bill Menger   Merged parm screens, added error msg on bad trc.
+ 69. 2004-04-06 SMCook        Changed case statement to include LBO when
+                               handling jobglobals.
+ 68. 2004-02-05 Menger        Remove (line 1625) the call to set lav.  Trcio
+                              handles this, and puts negative numbers in it
+                              when data is corrupted, so we don't want to
+                              override that feature.
+                              Added code to return on pc_error instead of
+                              ignoring errors.
+ 67. 2004-01-21 Menger        Change tr-max setting to reset in the odd case
+                              where a do-skip pattern causes the expected file
+                              size needed to exceed 2^31.  This happens when a
+                              person uses TRMAX=999999999 and SKIP=999.  When
+                              multiplied, they give the "size" of file that
+                              must be traversed in order to hit that TR-MAX.
+                              If that size &gt; 2^31 then maxthru turned out to
+                              be &lt; 0 because of integer rollover and I didn't
+                              set the tr-max because maxthru was "smaller" than
+                              the file size.
+ 66. 2003-10-31 Menger        Force order_prev=NEW if ipn &lt;= 3.
+ 65. 2003-10-29 Goodger       Fix problem creating %trin_filenames file which
+                              is used in velocity_model permsaves.  The
+                              write was moved from the "number of files"
+                              loop in revision 63 to a history card loop
+                              which was too large, and thus wrote junk to
+                              %trin_filenames file.
+ 64. 2003-10-03 Bill Menger   Added code to abort if EOF prematurely hit.
+ 63. 2003-07-29 SMCook        Fixed array violation at point where potentially
+                              long filenames were written to history (replaced
+                              logic where trin was building its own cards with
+                              logic that uses the cardset primitive).
+ 62. 2003-01-23 Ed Schmauch   Improved error message for initial skip too big.
+ 61. 2002-10-25 Goodger       Add use getlun_module.
+ 60. 2002-08-26 K. Goodger    Write input file names to the history file.
+ 59. 2002-07-30 K. Goodger    Flag scratch header 31 to indicate the first
+                              trace in a file if velocity model files are
+                              being read.
+                              TTROT will use this for the
+                              PS_VMOD option, to know when to write an EOF
+                              when multiple files are saved.
+                              Output a file called %trin_filenames.  This
+                              file will be saved along with processing
+                              records by TTROT if a velocity model permsave.
+ 58. 2002-05-28 Ed Schmauch   Added multifile, keeping downward compatibility.
+ 57. 2002-04-09 Ed Schmauch   No direct calls to cmprio_module, only indirct
+                              access through trcio_module.
+ 56. 2002-02-04 Ed Schmauch   Removed old multifile options.
+ 55. 2001-11-08 Stoeckley     Add file selection dialog and status line for
+                               PATHNAME.
+ 54. 2001-11-06 Ed Schmauch   Removed unnecessary use segy_module.  Updated
+                              documentation to reflect changes in segy headers.
+ 53. 2001-10-18 Bill Menger   Fix number of files that are open on CFE by
+                              saving the checkfile status as a logical.
+ 52. 2001-08-27 K. Goodger    Replace call to trcio_read_history with
+                              trcio_read_history_cards.
+ 51. 2001-06-05 Ed Schmauch   Added nint to first_sample calculation
+                              in trin_read_trace.
+ 50. 2001-04-30 K. Goodger    Move segy header mapping to primitive
+                              mapsegy.
+ 49. 2001-03-15 Bill Menger   Fixed bug in the "APP" mode.
+ 48. 2001-02-28 Bill Menger   Removed unused object elements.
+ 47. 2001-02-21 Bill Menger   Added trace compression.
+ 46. 2001-01-11 Bill Menger   Added dumpheader call on file open, added hist-
+                              ory calls.
+ 45. 2000-12-13 Bill Menger   Removed pc_info diagnostic calls.
+ 44. 2000-12-12 Bill Menger   Added skip_wrapup flag, remove wrapped_up flag.
+ 43. 2000-11-13 Bill Menger   Added KLUDGE file naming support for cluster
+                              system's method of 2gig limit.
+ 42. 2000-11-09 R.S.Day       Added optional SEGY custom header mapping
+ 41. 2000-10-24 Bill Menger   *Added secondary sort option on pri-sec multiple
+                               file option.
+ 40. 2000-10-04 Bill Menger   *changed documentation only.
+ 39. 2000-10-03 Bill Menger   Added mode=multiple option,fixed do-skip.
+ 38. 2000-09-28 Bill Menger   Modified FE with checkfile option.
+ 37. 2000-09-26 Bill Menger   Added jobglobals to file open portion, modified
+                              SEGY documentation.
+ 36. 2000-09-05 Bill Menger   Added put-control to update function, removed
+                              from the trap for obj%merge.
+ 35. 2000-08-24 Bill Menger   Added ability to modify tr_max based on file
+                              size.
+ 34. 2000-08-17 Bill Menger   Added history capability.
+ 33. 2000-07-18 Bill Menger   Removed requirement for extension to file name.
+ 32. 2000-07-07 Bill Menger   Added "QTROT format" file support.
+ 31. 2000-06-27 Stoeckley     Added test for keyword present before getting
+                              globals NUMTR and GATHERED to circumvent a
+                              problem with a new capability in PC.
+ 30. 2000-05-24 Bill Menger   Fixed print statement to give correct number of
+                              traces upon hitting EOF.
+ 29. 2000-05-08 Bill Menger   Fixed update function, modified print* statement
+ 28. 2000-05-04 Bill Menger   Added dooskip code and string_compress_blanks.
+ 27. 2000-04-19 Bill Menger   Added gui code.
+ 26. 2000-02-24 Bill Menger   Fixed pc-update_state so message stops printing.
+ 25. 2000-02-21 Bill Menger   Tried to get set sensitive flags to work right.
+ 24. 2000-02-18 Bill Menger   Fixed bug in size of wtype combo box variable.
+ 23. 2000-02-17 Bill Menger   Modified EOF message, Added documentation,
+                              changed variable names, disabled some fields.
+ 22. 2000-02-14 Bill Menger   Modified inactive fields, etc.
+ 21. 2000-02-04 Bill Menger   Added gathered flag.
+ 20. 2000-02-03 Bill Menger   Added segy documentation
+ 19. 2000-02-03 Bill Menger   Modified traps to use kw arg, removed pathname
+                              pieces from front end and parm list and help.
+ 18. 2000-01-27 Bill Menger   Modified to allow tstart /= 0.0,fixed a bug in
+                              numtr for non-merge jobs, and added some doc.
+                              Added sequential trace count.
+ 17. 2000-01-21 Bill Menger   Added num_opt_ftype,num_opt_wtype,num_opt_force.
+                              and associated parameters for FE.
+ 16. 2000-01-21 Bill Menger   Modified need_request for APP mode.
+ 15. 2000-01-18 Bill Menger   Changed the need_request argument.
+ 14. 2000-01-12 Bill Menger   Added pathname primitive calls.
+ 13. 2000-01-11 Bill Menger   Added code for front-end display to work right.
+ 12. 2000-01-07 Bill Menger   Removed internal calls to trin_delete!!!
+                              Upgraded header reading facility for tfils.
+ 11. 2000-01-04 Bill Menger   Modified create/update to allow FE calls.
+ 10. 1999-12-30 Bill Menger   Changed to comply with new documentation.
+  9. 1999-12-08 Bill Menger   Modified delete function,added ident.
+  8. 1999-12-08 Bill Menger   set obj%wrapped_up=true on wrapup.
+  7. 1999-12-01 Bill Menger   set obj%numtr = 0 on initialization.
+  6. 1999-10-18 Bill Menger   replaced all pc_info calls to not include calls
+                              to the "trim" function (it dies on solaris.) &amp;
+                              added obj%numtr = obj%numtr + 1 before pc_put.
+  5. 1999-10-14 Bill Menger   fixed wrapup bug.
+  4. 1999-10-07 Bill Menger   Finished off functionality.
+  3. 1999-10-01 Bill Menger   Modified to use trcio.
+  2. 1999-08-26 Bill Menger   Converted from old system.
+  1. 1999-08-01 Bill Menger   Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

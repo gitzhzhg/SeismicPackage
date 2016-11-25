@@ -1,0 +1,102 @@
+#! /bin/csh -f
+
+# checkin_rcs_files
+#
+# $Id: checkin_rcs_files,v 1.1 2004/05/25 22:03:20 spws Exp spws $
+#
+# Run this script to check in the RCS files in the specified ~spws directory.
+#
+# Simply type this:
+#
+#               checkin_rcs_files  <directory>  <option>
+#
+# where  <directory> (required) is the desired RCS directory (full path).
+# where  <option>    (optional) specifies which files should be listed.
+#
+#     option   files listed
+#     ------   ------------
+#       -1     those for which action is taken.
+#       -2     those for which action is taken.
+#       -3     all files.
+#
+# Option -2 is used for any other option (or unspecified option).
+#
+# This script makes sure that all checked-in RCS files in <directory> are
+# up to date.  The following actions are performed:
+#
+#  (1) If a file has never been checked in, it is checked in, and then checked
+#      out as read-only.
+#
+#  (2) If a file is different from the checked-in file, it is checked in,
+#      and then checked out as read-only.
+#
+#  (3) If a file is not checked out, it is checked out as read-only.
+#
+#  (4) If a file is the same as the checked-in file, nothing is done if the
+#      file is read-only.  If it is read-write, it is changed to read-only.
+
+#-------------------------------------------------------------------------------
+
+set directory = $1
+set option    = $2
+
+if($directory == "") then
+     echo RCS directory argument not set
+     exit
+endif
+
+#-------------------------------------------------------------------------------
+
+    cd $directory/..
+
+    echo ""
+    echo "directory $directory"
+    echo ""
+
+    foreach name ($directory/*,v)
+        set name2 = `echo $name | tr ',' '.'`
+        set name3 = $name2:r
+        set name4 = $name3:t
+        if (! -f $name4) then
+            echo "   checked out of RCS:                         $name4"
+            co -u $name4 >& /dev/null
+        endif
+        if (-w $name4) then
+            echo "   changed to read-only:                       $name4"
+            chmod u-w $name4
+        endif
+        set junkname = junktemp.$name4
+        if (-e $junkname) then
+            \rm $junkname
+        endif
+        \mv     $name4 $junkname
+        co   -l $name4           >& /dev/null
+        diff -h $name4 $junkname >& /dev/null
+#       cmp  -s $name4 $junkname >& /dev/null
+        set stat2 = $status
+        \mv     $junkname $name4
+        if ($stat2 != 0) then
+            echo "   updated version checked in to RCS:          $name4"
+            ci -u -m'updated' $name4 >& /dev/null
+        else if ($option == -3) then
+            echo "   matching:                                   $name4"
+        endif
+    end
+
+    foreach name ($directory/../*)
+        if (! -f $name) then
+            continue
+        endif
+        set name2 = $name:t
+        set name3 = $directory/$name2,v
+        if ($name2:r == makefile) then
+            continue
+        endif
+        if (! -f $name3) then
+            echo "   new file checked in to RCS:                 $name2"
+            ci -d -u -m'new' $name2
+        endif
+    end
+
+#-------------------------------------------------------------------------------
+

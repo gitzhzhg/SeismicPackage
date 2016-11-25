@@ -1,0 +1,1192 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="sisc" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SISCPROCESS" title="SISC Process" rows="25" columns="80">
+    <Label keyword="COMMENT_INPUTANDOUTPUTTRACESPECI" alignment="center">Input and Output Trace Specifications</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEAD_END" alignment="left">DEAD_END=</Label>
+    <Field keyword="DEAD_END" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INPUTANDOUTPUTSTATICFILE" alignment="center">Input and Output Static File Specifications</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="COMMENT_SOURCEFILE" alignment="left">Source file:</Label>
+    <Label keyword="LABEL_HDR_SRC" alignment="left">HDR_SRC=</Label>
+    <Field keyword="HDR_SRC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SX" alignment="left">HDR_SX=</Label>
+    <Field keyword="HDR_SX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SY" alignment="left">HDR_SY=</Label>
+    <Field keyword="HDR_SY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_RECEIVERFILE" alignment="left">Receiver file:</Label>
+    <Label keyword="LABEL_HDR_REC" alignment="left">HDR_REC=</Label>
+    <Field keyword="HDR_REC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RX" alignment="left">HDR_RX=</Label>
+    <Field keyword="HDR_RX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RY" alignment="left">HDR_RY=</Label>
+    <Field keyword="HDR_RY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_SRC">Select PATH_SRC</Button>
+    <Label keyword="EQLAB_PATH_SRC" alignment="left">=</Label>
+    <Field keyword="PATH_SRC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_SRC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_REC">Select PATH_REC</Button>
+    <Label keyword="EQLAB_PATH_REC" alignment="left">=</Label>
+    <Field keyword="PATH_REC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_REC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_CORR_FILES" alignment="left">CORR_FILES=</Label>
+    <Field keyword="CORR_FILES" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_CORR" alignment="left">LEN_CORR=</Label>
+    <Field keyword="LEN_CORR" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MS" alignment="center">ms</Label>
+    <Label keyword="LABEL_NO_DEAD" alignment="left">NO_DEAD=</Label>
+    <Field keyword="NO_DEAD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_STATICCALCULATIONPARAMET" alignment="center">Static Calculation Parameters</Label>
+    <Border keyword="BORDER3"/>
+    <Label keyword="LABEL_MAX_STATIC" alignment="left">MAX_STATIC =</Label>
+    <Field keyword="MAX_STATIC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">ms</Label>
+    <Label keyword="LABEL_ICC_MIN" alignment="left">ICC_MIN=</Label>
+    <Field keyword="ICC_MIN" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_COMP" alignment="left">NUM_COMP   =</Label>
+    <Field keyword="NUM_COMP" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCC_MIN" alignment="left">SCC_MIN=</Label>
+    <Field keyword="SCC_MIN" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="left">Source file:</Label>
+    <Label keyword="LABEL_RA_SRC" alignment="left">RA_SRC=</Label>
+    <Field keyword="RA_SRC" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CORR_SRC" alignment="left">HDR_CORR_SRC=</Label>
+    <Field keyword="HDR_CORR_SRC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_CORR_SRC" alignment="left">BIN_CORR_SRC=</Label>
+    <Field keyword="BIN_CORR_SRC" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_3" alignment="left">Receiver file:</Label>
+    <Label keyword="LABEL_RA_REC" alignment="left">RA_REC=</Label>
+    <Field keyword="RA_REC" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CORR_REC" alignment="left">HDR_CORR_REC=</Label>
+    <Field keyword="HDR_CORR_REC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_CORR_REC" alignment="left">BIN_CORR_REC=</Label>
+    <Field keyword="BIN_CORR_REC" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_INPUTANDOUTPUTTRACESPECI" xPos="18" yPos="1" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="2" xSize="76" ySize="3"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="21" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="30" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEAD_END" xPos="40" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEAD_END" xPos="49" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INPUTANDOUTPUTSTATICFILE" xPos="15" yPos="6" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="7" xSize="76" ySize="9"/>
+     <Constraints component="COMMENT_SOURCEFILE" xPos="3" yPos="8" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SRC" xPos="19" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SRC" xPos="27" yPos="8" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SX" xPos="38" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SX" xPos="45" yPos="8" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SY" xPos="49" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SY" xPos="56" yPos="8" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_RECEIVERFILE" xPos="3" yPos="9" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_REC" xPos="19" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_REC" xPos="27" yPos="9" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_RX" xPos="38" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RX" xPos="45" yPos="9" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_RY" xPos="49" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RY" xPos="56" yPos="9" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_SRC" xPos="3" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_SRC" xPos="18" yPos="10" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SRC" xPos="19" yPos="10" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SRC_INFO" xPos="19" yPos="11" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_REC" xPos="3" yPos="12" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_REC" xPos="18" yPos="12" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_REC" xPos="19" yPos="12" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_REC_INFO" xPos="19" yPos="13" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CORR_FILES" xPos="19" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CORR_FILES" xPos="30" yPos="14" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_CORR" xPos="38" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_CORR" xPos="47" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MS" xPos="55" yPos="14" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NO_DEAD" xPos="60" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NO_DEAD" xPos="68" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_STATICCALCULATIONPARAMET" xPos="21" yPos="17" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="18" xSize="76" ySize="7"/>
+     <Constraints component="LABEL_MAX_STATIC" xPos="16" yPos="19" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_STATIC" xPos="28" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="35" yPos="19" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ICC_MIN" xPos="43" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ICC_MIN" xPos="51" yPos="19" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_COMP" xPos="16" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_COMP" xPos="28" yPos="20" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCC_MIN" xPos="43" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCC_MIN" xPos="51" yPos="20" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="3" yPos="22" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RA_SRC" xPos="19" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RA_SRC" xPos="26" yPos="22" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CORR_SRC" xPos="34" yPos="22" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CORR_SRC" xPos="47" yPos="22" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_BIN_CORR_SRC" xPos="55" yPos="22" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_CORR_SRC" xPos="68" yPos="22" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_3" xPos="3" yPos="23" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RA_REC" xPos="19" yPos="23" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RA_REC" xPos="26" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CORR_REC" xPos="34" yPos="23" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CORR_REC" xPos="47" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_BIN_CORR_REC" xPos="55" yPos="23" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_CORR_REC" xPos="68" yPos="23" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are used for the statics solution.
+ Otherwise, only traces with a flag set in header word HDR_FLAG are used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEAD_END">
+      <Tip>Whether to stop before outputting any traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - DEAD_END<br> Whether to stop before outputting any traces.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ 
+ If this parameter is YES, this will be a dead-end process which does not
+ output any traces, but the job uses fewer resources and runs faster.
+ 
+ If this parameter is NO, all input traces will have the newly-derived
+ static shift applied and will be output, in the same order they were
+ received.
+ 
+ Static files and correlation files will always be written, regardless of the
+ value of DEAD_END.
+ 
+ Stopping before outputting any traces reduces the required temporary disk
+ space by a factor of at least 5, and more commonly by about 10 on average.
+ The disk savings are more significant when trace correlation windows are
+ small.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SRC">
+      <Tip>Header word(s) to use to identify source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_SRC<br> Header word(s) to use to identify source locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (source sequential ground position - header word  46)
+ Allowed = GROUP (original source group number      - header word   9)
+ Allowed = LNSP  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = GRID  (source grid coordinates           - header words 33 and 34)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ GROUP coordinates:
+  The original source group number should generally be used for 2D and 3D
+  surveys if a source occupies the same location more than once.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Grid coordinates are not allowed for the SISC process.
+ 
+ Sequential ground position coordinates should not be used for the SISC
+ process for 3D surveys because there is no way to identify separate lines,
+ which must be integrated independently.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SX">
+      <Tip>First header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_SX<br> First header word to use for designating source locations.</center></b>
+<pre> Default = 46
+ Allowed = 46  (source sequential ground position - header word  46)
+ Allowed = 9   (original source group number      - header word   9)
+ Allowed = 29  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 33  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SY">
+      <Tip>Second header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_SY<br> Second header word to use for designating source locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (source sequential ground position - header word  46)
+ Allowed = 0   (original source group number      - header word   9)
+ Allowed = 26  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 34  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_REC">
+      <Tip>Header word(s) to use to identify receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_REC<br> Header word(s) to use to identify receiver locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (receiver sequential ground position - header word  47)
+ Allowed = LNSP  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = GRID  (receiver grid coordinates           - header words 35 and 36)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Grid coordinates are not allowed for the SISC process.
+ 
+ Sequential ground position coordinates should not be used for the SISC
+ process for 3D surveys because there is no way to identify separate lines,
+ which must be integrated independently.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RX">
+      <Tip>First header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_RX<br> First header word to use for designating receiver locations.</center></b>
+<pre> Default = 47
+ Allowed = 47  (receiver sequential ground position - header word  47)
+ Allowed = 28  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 35  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RY">
+      <Tip>Second header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_RY<br> Second header word to use for designating receiver locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (receiver sequential ground position - header word  47)
+ Allowed = 27  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 36  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_SRC">
+      <Tip>Choose PATH_SRC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - SELECT_PATH_SRC<br> Choose PATH_SRC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC">
+      <Tip>Pathname for the file which will contain source statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PATH_SRC<br> Pathname for the file which will contain source statics.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_SRC = NONE, then no source statics will be calculated.
+ PATH_SRC and PATH_REC cannot both be set to NONE.
+ Static files will will have an extension named after the static process.
+ 
+ For the SISC process, a static increment file with the extension .inc is
+ also saved.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.  The iteration count will
+ be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC_INFO">
+      <Tip>Status of PATH_SRC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PATH_SRC_INFO<br> Status of PATH_SRC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_REC">
+      <Tip>Choose PATH_REC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - SELECT_PATH_REC<br> Choose PATH_REC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_REC">
+      <Tip>Pathname for the file which will contain receiver statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PATH_REC<br> Pathname for the file which will contain receiver statics.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_REC = NONE, then no receiver statics will be calculated.
+ PATH_SRC and PATH_REC cannot both be set to NONE.
+ Static files will will have an extension named after the static process.
+ 
+ For the SISC process, a static increment file with the extension .inc is
+ also saved.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.  The iteration count will
+ be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_REC_INFO">
+      <Tip>Status of PATH_REC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PATH_REC_INFO<br> Status of PATH_REC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="CORR_FILES">
+      <Tip>Type of static correlation files to save.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - CORR_FILES<br> Type of static correlation files to save.</center></b>
+<pre> Default = TRC8
+ Allowed = TRC8 (save TRCIO byte files with the extension .trc8)
+ Allowed = NONE (do not save correlation files)
+ 
+ The names of the static correlation files will be the same as PATH_SRC and
+ PATH_REC except for the extension.
+ 
+ Choice NONE is not allowed for the FISH and SISC processes.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.
+ 
+ A CBYT option allows the correlation files to be plotted and edited easily.
+ This option automatically updates the statics files based on correlation
+ edits.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_CORR">
+      <Tip>Length of each side of the correlation function (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - LEN_CORR<br> Length of each side of the correlation function (milliseconds).</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt;= MAX_STATIC.
+ 
+ The plotted correlations will be twice this length (since both sides are
+ plotted.)
+ 
+ This value, plus the number of iterations, determines the length of the
+ correlation traces output to byte files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NO_DEAD">
+      <Tip>Whether to omit dead traces from the output correlation files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - NO_DEAD<br> Whether to omit dead traces from the output correlation files.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ Setting NO_DEAD = YES may be desirable if the correlation files are very
+ large and consist mostly of dead traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_STATIC">
+      <Tip>Maximum static shift (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - MAX_STATIC<br> Maximum static shift (milliseconds).</center></b>
+<pre> Default = 40.0
+ Allowed = real &gt; 0.0
+ 
+ This is the maximum static increment that is solved for.  The final
+ integrated static, particularly when using long running averages, will
+ probably exceed this value for some ground positions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ICC_MIN">
+      <Tip>Minimum individual correlation coefficient to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - ICC_MIN<br> Minimum individual correlation coefficient to use.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 &lt;= real &lt; 1.0
+ 
+ If the correlation coefficient for an individual correlation is less than
+ ICC_MIN, then that correlation will not be added to the stacked correlation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_COMP">
+      <Tip>Max number of ground positions to composite prior to correlating.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - NUM_COMP<br> Max number of ground positions to composite prior to correlating.</center></b>
+<pre> Default = 5
+ Allowed = int &gt;= 1
+ 
+ Partial composite over ground positions prior to correlation reduces the
+ effects of random and linear noise.  Some partial composite prior to
+ correlation is beneficial even on good data.
+ 
+ For example: For a source file solution, several traces with the same
+ source ground position will be composited over several receiver ground
+ positions (or over several CMPs or offsets depending on the choice for
+ HDR_CORR_SRC), and then correlated with the next source ground position
+ which is composited over the same receiver ground positions.  This helps
+ attenuate energy that is not flat with offset, such as linear interference
+ or multiples, and may also help the solution when random noise is a problem.
+ 
+ NOTE: The maximum ground position range to be composited is NUM_COMP times
+ the ground position increment which is occupied by traces.  Normally,
+ NUM_COMP is the number of traces composited, but can be larger or smaller
+ with irregular data acquisition (e.g. duplicate shots or skips).
+ 
+ WARNING: This NUM_COMP parameter differs slightly from the corresponding
+ parameter in the old Cray Processing System.  In the old system, this
+ parameter specified a ground position range rather than the number of
+ occupied ground positions.  Therefore, to get a certain level of compositing
+ in the old system required adjusting this parameter based on the occupied
+ ground position increment.  For example, if the ground position increment
+ was 4, this parameter would have to be set to 20 to get a 5-fold composite.
+ Now, NUM_COMP can be set to 5 to get a 5-fold composite regardless of the
+ ground position increment.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCC_MIN">
+      <Tip>Minimum stacked correlation coefficient to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - SCC_MIN<br> Minimum stacked correlation coefficient to use.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 &lt;= real &lt; 1.0
+ 
+ If the correlation coefficient for a stacked correlation is less than
+ SCC_MIN, then the static value will be set to nil.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RA_SRC">
+      <Tip>Length of running average to remove from source static file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - RA_SRC<br> Length of running average to remove from source static file.</center></b>
+<pre> Default = 21
+ Allowed = int &gt;= 5
+ 
+ Length of running average, in ground position units in the source
+ acquisition line direction, to remove from the source static file.
+ 
+ It is recommended that RA_SRC be set to the source ground position range
+ corresponding to half of the maximum offset.  This should be the number
+ of total ground positions, not the number of occupied ground positions,
+ corresponding to the desired running average distance.
+ 
+ For example, if the separation between adjacent source ground positions
+ along a source acquisition line is 100 meters, and the maximum offset is
+ 4000 meters, RA_SRC should normally be set to 0.5 * 4000 / 100 = 20.
+ This is true whether or not every ground position is occupied by a source.
+ 
+ If RA_SRC == 20:
+  (1) If every ground position is occupied, the running average will
+       contain 21 points.
+  (2) If only every other ground position is occupied, the running average
+       will contain 11 points.
+  (3) The actual number of points in a running average will always be odd
+       for the sake of symmetry.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CORR_SRC">
+      <Tip>Header word to define source static correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_CORR_SRC<br> Header word to define source static correlations.</center></b>
+<pre> Default = REC
+ Allowed = REC   (correlate traces with common receiver)
+ Allowed = CMP   (correlate traces with common midpoint)
+ Allowed = SOFF  (correlate traces with common signed offset)
+ Allowed = AOFF  (correlate traces with common absolute offset)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_CORR_SRC">
+      <Tip>Range to bin source correlation headers prior to correlating.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - BIN_CORR_SRC<br> Range to bin source correlation headers prior to correlating.</center></b>
+<pre> Default = 1
+ Allowed = int &gt;= 1
+ 
+ Setting BIN_CORR_SRC &gt; 1 bins the correlation header words.  This can
+ facilitate a solution when the correlation header words for adjacent
+ source ground positions do not match.  An example would be when adjacent
+ sources have alternate receiver ground positions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RA_REC">
+      <Tip>Length of running average to remove from receiver static file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - RA_REC<br> Length of running average to remove from receiver static file.</center></b>
+<pre> Default = 21
+ Allowed = int &gt;= 5
+ 
+ Length of running average, in ground position units in the receiver
+ acquisition line direction, to remove from the receiver static file.
+ 
+ It is recommended that RA_REC be set to the receiver ground position range
+ corresponding to half of the maximum offset.  This should be the number
+ of total ground positions, not the number of occupied ground positions,
+ corresponding to the desired running average distance.
+ 
+ For example, if the separation between adjacent receiver ground positions
+ along a receiver acquisition line is 100 meters, and the maximum offset is
+ 4000 meters, RA_REC should normally be set to 0.5 * 4000 / 100 = 20.
+ This is true whether or not every ground position is occupied by a receiver.
+ 
+ If RA_REC == 20:
+  (1) If every ground position is occupied, the running average will
+       contain 21 points.
+  (2) If only every other ground position is occupied, the running average
+       will contain 11 points.
+  (3) The actual number of points in a running average will always be odd
+       for the sake of symmetry.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CORR_REC">
+      <Tip>Header word to define receiver static correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HDR_CORR_REC<br> Header word to define receiver static correlations.</center></b>
+<pre> Default = SRC
+ Allowed = SRC   (correlate traces with common source)
+ Allowed = CMP   (correlate traces with common midpoint)
+ Allowed = SOFF  (correlate traces with common signed offset)
+ Allowed = AOFF  (correlate traces with common absolute offset)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_CORR_REC">
+      <Tip>Range to bin receiver correlation headers prior to correlating.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - BIN_CORR_REC<br> Range to bin receiver correlation headers prior to correlating.</center></b>
+<pre> Default = 1
+ Allowed = int &gt;= 1
+ 
+ Setting BIN_CORR_REC &gt; 1 bins the correlation header words.  This can
+ facilitate a solution when the correlation header words for adjacent
+ receiver ground positions do not match.  An example would be when adjacent
+ receivers have alternate source ground positions.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="Correlation Window Specifications" rows="24" columns="80">
+    <Label keyword="LABEL_WIN_OPT" alignment="left">WIN_OPT=</Label>
+    <Field keyword="WIN_OPT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_ADD" alignment="left">WIN_TIM_ADD=</Label>
+    <Field keyword="WIN_TIM_ADD" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_LEN" alignment="left">WIN_TIM_LEN=</Label>
+    <Field keyword="WIN_TIM_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="WIN_COOR_X_ARRAYSET" label="WIN_COOR_XWIN_COOR_YWIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="WIN_COOR_X" type="float" maxLength="10 " columnName="WIN_COOR_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_COOR_Y" type="float" maxLength="10 " columnName="WIN_COOR_Y" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_OPT" xPos="5" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_OPT" xPos="13" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_TIM_ADD" xPos="20" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_ADD" xPos="32" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_TIM_LEN" xPos="42" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_LEN" xPos="54" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="15" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="20" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="30" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X_ARRAYSET" xPos="8" yPos="4" xSize="45" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_OPT">
+      <Tip>Method to use for specifying trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_OPT<br> Method to use for specifying trace windows.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE   (window defined by time measure from mute)
+ Allowed = GRID   (window varies laterally, or same window everywhere)
+ 
+ Segments of the input traces used in this process are defined by these
+ windows.
+ 
+ Option GRID specifies the trace windows by linked arrays of window top and
+ window bottom values which may vary lateraly (spatially) over arbitrarily
+ chosen coordinates.
+ 
+ Option MUTE specifies the trace windows by specifying the time from the
+ mute time to the top of the window, and the length of the window.
+ 
+ Some processes might disable the MUTE option if it is not appropriate
+ for that process.  In this case, the GRID option will be the default
+ and only option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_ADD">
+      <Tip>Time at top of window = mute time + WIN_TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_TIM_ADD<br> Time at top of window = mute time + WIN_TIM_ADD.</center></b>
+<pre> Default = 0.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_TIM_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_TIM_LEN<br> Time at bottom of window = time at top of window + WIN_TIM_LEN.</center></b>
+<pre> Default = 1.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) (one window).
+ Allowed = any number of values &gt;= top of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) (one window).
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sisc - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="sisc">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SISC      (Static Increments by Stacked Correlations)
+ Category   : statics
+ Written    : 1989-03-28   by: Tom Stoeckley
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : 2D (and perhaps 3D) surface consistent residual statics process.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+  Purpose:       This is a residual static program designed to
+                 derive surface consistent static files from
+                 2D (and possibly 3D) reflection data.
+ 
+  Method:        Unlike most residual statics processes, SISC is not
+                 a base-trace oriented statics process.  This process
+                 derives static increments by correlating from one
+                 ground position to the next, then integrates the
+                 resulting static file.  This is in contrast to the
+                 more usual approach of correlating to a base (or pilot)
+                 trace centered at the same CDP location.
+ 
+  Advantages:    Large statics or static discontinuities may be more
+                 successfully detected by this approach.  This
+                 approach may also help when the base traces are
+                 badly damaged by the static.
+ 
+  Limitations:   This process is inherently a 2D process and therefore
+                 has historically been applied only to 2D data.  However,
+                 this process can be used on 3D data because it operates
+                 on each 2D line in the 3D dataset separately.  Because
+                 of the nature of this type of static solution, it has
+                 not been determined whether generalization to 3D is
+                 advisable.
+ 
+  Editing:       This process outputs stacked correlation files in
+                 addition to the statics files.  The correlation files
+                 can be viewed in CBYT in order to help edit the statics
+                 files.  The statics files can also be edited in ISEP
+                 or MSEPITA.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ SISC Operation Summary:
+ 
+   1. Correlate each trace in a shot profile with the trace, having the same
+      receiver, in the next shot profile.  Changes in timing here cannot be
+      due to receiver statics (since the receivers are the same) but must be
+      due to the difference in the source static between the two sources.
+ 
+   2. Composite the correlations between individual traces in the two shot
+      profiles and pick the time shift from the composited correlation.
+      This is the static increment (difference in the source statics) between
+      these two sources.
+ 
+   3. Repeat steps 1 and 2 for all shot profiles to find the source static
+      increment for all the source locations.
+ 
+   4. Starting at the beginning of the line, integrate (form the running sum
+      of) the source static increments to generate the actual static for each
+      source location.
+ 
+   5. Remove a user specified running average from the source static sequence.
+      This amounts to a low-cut spatial frequency filter to remove the
+      undesirable long wavelength components produced by integrating noise
+      fluctuations.  (The running average length is usually approximately half
+      the maximum offset.)
+ 
+   6. Repeat steps 1 - 5 exchanging the word "source" (or "shot") with
+      "receiver" to find the receiver static for all the receiver locations.
+ 
+ 
+ SISC can partially composite traces prior to the correlation step:
+ 
+ For a source static solution, several adjacent traces with the same source
+ will be composited over a range of receiver ground positions, and then
+ correlated with traces from the next source which were composited over an
+ identical range of receiver ground positions.  The correlations are then
+ composited and picked to form the static increment as previously described.
+ (Compositing for the receiver static solution proceeds similarly.)
+ 
+ This compositing step helps attenuate energy that is not flat with offset,
+ such as linear interference and multiples, and may also help the solution
+ when random noise is a problem.  Five CMPs is a typical number to composite
+ and is helpful even on good data.
+ 
+ 
+ Determining Profiles to be Correlated:
+ 
+ SISC will always correlate to the next available ground position,
+ automatically jumping over unoccupied ground positions, or ground positions
+ to which correlations cannot be made.  If correlations are contaminated
+ because of overlapping source or receiver arrays, the user can avoid
+ correlating traces that were mixed during acquisition by simply deleting
+ or flagging traces (with the SELECT process) for every other ground position
+ before running SISC.
+ 
+ 
+ Running Average Removal:
+ 
+ SISC grades through skips and nils in the integrated static file prior to
+ calculating the running average.  For group files, the running average is
+ calculated from group numbers.  The graded ends method is used for
+ calculating the running average at the ends of the line.
+ 
+ When editing stacked correlations in CBYT, ISEP must be used to integrate the
+ static increment file and remove a running average.
+ 
+ 
+ Editing Stacked Correlations:
+ 
+ A CBYT option allows the bytefile containing stacked correlations to be
+ plotted and edited easily.  This option automatically updates the static
+ increment file based on correlation edits.
+ 
+ The static increment file can be integrated and a running average removed
+ with the ISEP or MSEPITA utility to form the actual static file that can
+ be applied with the SHFT process.  ISEP or MSEPITA can easily be used to
+ test the effect of different running averge lengths.
+ 
+ 
+ Reference:
+ 
+ Disher, D. A. and Naquin, P. J., 1970, Statistical Automatic Statics Analysis:
+ Geophysics, v. 35, p. 574 - 585.
+ 
+ 
+ 3D Work:
+ 
+ SISC can be used on 2D or 3D data, although on 3D data it must operate on
+ each line separately.  The process CS3D is designed specifically for 3D work
+ and has an algorithm similar to SISC.
+ 
+ 
+ Binning Correlation Ground Positions:
+ 
+ Setting BIN_CORR_SRC and/or BIN_CORR_REC greater than one bins the
+ correlation header words.  This can facilitate a solution when the
+ correlation header words for adjacent ground positions do not match.
+ An example would be when adjacent sources have alternate receiver ground
+ positions.
+ 
+ 
+ Using SISC Before NMO is Applied:
+ 
+ SISC can be run before velocity analysis or before NMO is applied to the data
+ if the HDR_CORR parameters are set to one of the offset options - signed
+ offset (SOFF) or absolute offset (AOFF).  In this case, NUM_COMP should be
+ kept small, typically less than 5.
+ 
+ 
+ Advantages of SISC
+ 
+   1. SISC is excellent at solving for large and abrupt statics.
+ 
+   2. Because SISC composites correlations before picking (and optionally
+      composites before correlating) it works better on noisy data than
+      industry standard automatic statics processes.
+ 
+   3. SISC allows stacked correlations to be displayed and edited.  This
+      is essential for virtually all data.
+ 
+   4. The SISC static solution contains usable components at longer
+      wavelengths than most other residual statics processes.
+ 
+ 
+ Disadvantages of SISC
+ 
+   1. Choosing the running average and removing it is an extra step.
+      Structure can contaminate the solution if too large a running average
+      is used.
+ 
+   2. Editing the correlations is often not obvious.
+ 
+   3. SISC statics are not as precise as FISH or IMS.  SISC is always
+      followed by other statics processes.
+ 
+   4. SISC is of limited value on very poor data.
+ 
+-------------------------------------------------------------------------------
+                     OPTIONS NO LONGER AVAILABLE
+ 
+ The FORREV option in the old CPS system allowed SISC to display separately,
+ in the correlation file, correlations for receivers forward of the source
+ and reverse of the source, for diagnostic purposes (for split-spread
+ acquisition only).  This option has not been implemented in the upgraded
+ CPS system, but can be mimicked by simply deleting or flagging traces
+ (with the SELECT process) for one side of the spread before running SISC.
+ This procedure also has the advantage that a static file will be derived
+ from just one side of the spread, a capability that the old FORREV option
+ did not have.
+ 
+ The LEAP option in the old CPS system allowed SISC to display separately,
+ in the correlation file, correlations leapfrogging over ground position,
+ for diagnostic purposes.  This option has not been implemented in the
+ upgraded CPS system, but can be mimicked by simply deleting or flagging
+ traces (with the SELECT process) for every other ground position before
+ running SISC.  This procedure also has the advantage that a static file
+ will be derived from every other ground position, a capability that the
+ old LEAP option did not have.
+ 
+ The NINC options in the old CPS system allowed SISC to generate a static
+ file in which correlations leapfrog over ground positions, similar to the
+ LEAP option described above.  This option was useful to avoid correlating
+ traces which were mixed during acquisiton due to overlapping source or
+ receiver arrays.  The resulting static file, however, was not very useful
+ because it could not be correctly integrated because of the overlapping
+ static increments.  Such a file also was often faulty because of decoupling
+ between the even and odd ground positions.  This option has not been
+ implemented in the upgraded CPS system, but can be safely mimicked in the
+ same manner as the LEAP option.
+ 
+ The NBIN options in the old CPS system provided two capabilities for SISC.
+ One of these was to composite ground positions prior to solving the statics.
+ This option could be dangerous because of the smearing of static increments
+ which often are very different from one ground position to the next.  This
+ option has not been implemented in the upgraded CPS system, but can be
+ mimicked by simply compositing ground positions before running SISC.  This
+ procedure also has the advantage that the user has greater control over how
+ the compositing is done.
+ 
+ The other capability provided by the NBIN options in the old CPS system
+ was to allow binning the correlation header words.  This can facilitate a
+ solution when the correlation header words for adjacent ground positions
+ do not match.  An example would be when adjacent sources have alternate
+ receiver ground positions.  This capability is retained in the upgraded
+ CPS system with the keywords BIN_CORR_SRC and BIN_CORR_REC.
+ 
+ The RA_SRC and RA_REC parameters for the running average length allowed
+ a value of 0 in the old CPS system, which then defaulted to half of the
+ maximum offset.  Because of the increased number of header word options
+ for static file description, and the more accurate way the offsets are
+ saved in the upgraded CPS system, it is no longer possible to correlate
+ the offset lengths with the static header words, and therefore the optional
+ value of 0 is no longer available.  The user must supply a reasonable
+ value for the running average in units of the ground position header
+ word in the direction of the source or receiver acquisition line.  The
+ recommended value remains half of the maximum offset.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 37. 2006-12-04  D. Glover  Added NULLIFY statements for Intel compiler.
+ 36. 2001-10-18  Stoeckley  Add file selection boxes and file status messages.
+ 35. 2001-05-14  Stoeckley  Change wrapup flag.
+ 34. 2000-10-20  Stoeckley  Documentation change only to clarify the definition
+                             of the NUM_COMP parameter.
+ 33. 2000-08-08  Stoeckley  Minor documentation change regarding header words
+                             7, 8, WIN_HDR_X, and WIN_HDR_Y.
+ 32. 2000-07-20  Stoeckley  Removed one line of code which tested the ERROR
+                             variable before it was defined.
+ 31. 2000-06-23  Stoeckley  Converted from old system.
+ 30. 1998-12-15  Vunderink  Begin using the f90 compiler.
+ 29. 1997-09-02  Vunderink  Fixed bug in SISC_READ whenever NHD=2.
+ 28. 1997-08-13  Vunderink  Fixed bug in spatial window which was causing
+                             the traces to be windowed on output
+ 27. 1997-08-11  Vunderink  Added spatial correlation window
+ 26. 1997-03-12  Vunderink  Fixed bug caused by SISC1 common not being
+                             updated in SISC_WRITE whenever PRNT was added.
+ 25. 1997-03-05  Vunderink  Added PRNT keyword.
+ 24. 1996-09-26  Vunderink  Added RLSTAPE and removed SORTDIR keywords.
+ 23. 1995-11-02  Vunderink  The program will now determine the number of
+                             bits required to store the sequential trace
+                             number.  If the number of bits is less than
+                             21, then packed word for each trace is still
+                             split into 3 equal part of 21 bits each.
+                             Otherwise, the required number of bits are
+                             allocated to store the trace number and the
+                             remaining bits are split into 2 equal parts.
+ 22. 1995-09-26  Vunderink  Add SORTDIR, STOP, and BYTSAV keywords
+ 21. 1994-05-25  Troutt     Save lun1 for now (common later) so that file
+                             can be successfully removed from $SORTDIR
+ 20. 1994-05-20  Troutt     Add SORTDIR logic (partial).  Have not yet
+                             put SORTDIR in the DCODE list - it is hard-
+                             wired to YES for the YK Survey.
+ 19. 1994-02-11  Troutt     Add error check for HPALLOC call.
+ 18. 1993-07-21  Troutt     "Unfix" minor problem in SISCINT that didn't
+                             preserve last nil (see last update).  I had
+                             made the "fix" in order to resolve differences
+                             between SISC and ISEP.  It turns out that ISEP
+                             was in error, but ISEP has now been fixed.
+ 17. 1993-06-18  Troutt     Fix minor problem in SISCINT that didn't pre-
+                             serve last nil.  Also saved NRUN in SISCF1 so
+                             SISCF3 could print it out.  Added 2 new DCODE
+                             parameters, #RUN1 and #RUN2 to be used for
+                             FILE1 and FILE2.  The old #RUN parameter was
+                             deactivated (if an old job comes in w- #RUN,
+                             it is used to set #RUN1 and #RUN2).  The old
+                             parameter ORDER was also deactivated.  It was
+                             never really supported - ORDER=NO was always
+                             used!  A new comment card was added to the
+                             static file showing the actual #points used
+                             in the running average calculation.
+ 16. 1993-03-23  Troutt     Add PATH parameter to allow stacked correla-
+                             tions to be put into BYTE file(s).
+ 15. 1992-10-30  Troutt     Change running average removal for group
+                             files (hw 9) by removing "fancy" logic that
+                             related groups to source ground positions.
+                             This change was made in SISCFAC.
+ 14. 1992-02-25  Troutt     Add logic for tail mute HW64 by updating
+                             primitive FISIUTIL (routine FISISHFT).
+ 13. 1991-03-22  Troutt     Save INC in SISCP1 so SISCP2 can use it.
+ 12. 1991-01-07  Stoeckley  Change running average to correspond to
+                             documentation.  Previously was number of
+                             points rather than number of ground positions.
+ 11. 1990-10-23  Peterson   Include error and abort arguments on calls to
+                             HPALLOC and HPDEALLC.
+ 10. 1990-07-23  Stoeckley  Fix failed static bug introduced in revis #8.
+  9. 1990-07-18  Stoeckley  Fix shotpoint bug introduced in revision #8.
+  8. 1990-06-19  Stoeckley  Replace some routines by calls to FISIUTIL
+                             routines.
+  7. 1989-06-06  Stoeckley  Fix bug in static file application when FORREV
+                             is set to yes.
+  6. 1989-06-02  Stoeckley  Change SISCSORT to better version.
+  5. 1989-05-26  Stoeckley  Add if-check in SISCSORT to prohibit operand
+                             range error which sometimes occurs when not
+                             compiled with DEBUG option.
+  4. 1989-05-25  Stoeckley  Add check for dead traces.
+  3. 1989-05-15  Stoeckley  Change use of parameter HF#.
+  2. 1989-05-08  Stoeckley  Change MXSH and MXPK from seconds to millisecs.
+  1. 1989-03-28  Stoeckley  Original Version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

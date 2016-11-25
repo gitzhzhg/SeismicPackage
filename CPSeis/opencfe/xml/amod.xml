@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="amod" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN01" title="SCREEN01" rows="1" columns="1" minCellWidth="8" minCellHeight="12">
+    <Border keyword="BORDER1" title=" Anisotropic velocity definition"/>
+    <Label keyword="LABEL_OPT_ANISO" alignment="left">OPT_ANISO=</Label>
+    <Field keyword="OPT_ANISO" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TITLE_MOD_ARRAYSET" label="TITLE_MOD OPT_MOD CONST_MOD DEPTH_MOD GRAD_MOD  PATH_MOD">
+     <Array keyword="TITLE_MOD" type="string" maxLength="10 " columnName="TITLE_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="OPT_MOD" type="string" maxLength="8  " columnName="OPT_MOD" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="CONST_MOD" type="float" maxLength="10 " columnName="CONST_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="DEPTH_MOD" type="float" maxLength="10 " columnName="DEPTH_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="GRAD_MOD" type="float" maxLength="10 " columnName="GRAD_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="PATH_MOD" type="string" maxLength="128" columnName="PATH_MOD" editable="yes" sensitive="yes" columnSize="30"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="BORDER1" xPos="0" yPos="0" xSize="79" ySize="10"/>
+     <Constraints component="LABEL_OPT_ANISO" xPos="1" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_ANISO" xPos="11" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TITLE_MOD_ARRAYSET" xPos="1" yPos="3" xSize="81" ySize="6" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_ANISO">
+      <Tip>Velocity model file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - OPT_ANISO<br> Velocity model file name.</center></b>
+<pre> Default = ISOTROPIC
+ Allowed = ISOTROPIC    Isotropic time and depth migration.
+ Allowed = ANISOTROPIC  Vertical anisotropic time and depth migration.
+ Allowed = TILTED_BED   Tilted bed anisotropic depth migration.
+ Allowed = ISOELASTIC   Vp, Vs, Denisty for E2D
+ Allowed = ANIELASTIC   Vp, Vs, Denisty, epsilon, delta for E2D</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TITLE_MOD">
+      <Tip>Title of model coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - TITLE_MOD<br> Title of model coefficient.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MOD">
+      <Tip>How each model coefficient is defined.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - OPT_MOD<br> How each model coefficient is defined.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_MOD">
+      <Tip>Constant value for model coeffieicnt at depth DEPTH_MOD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - CONST_MOD<br> Constant value for model coeffieicnt at depth DEPTH_MOD.</center></b>
+<pre> Default = 2000.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEPTH_MOD">
+      <Tip>Depth from which graident is measured.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - DEPTH_MOD<br> Depth from which graident is measured.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRAD_MOD">
+      <Tip>Gradient for mdoel coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - GRAD_MOD<br> Gradient for mdoel coefficient.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MOD">
+      <Tip>Name of model coefficient file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>amod - PATH_MOD<br> Name of model coefficient file.</center></b>
+<pre> Default = NONE
+ Allowed = character
+ The X_SIN coefficient is the sine of the anisotropic coefficient dip angle
+ projected into the x,z plane.
+ The Y_SIN coefficient is the sine of the anisotropic coefficient dip angle
+ projected into the y,z plane.
+ For a horizontal geometry x_sin = y_sin = 0.
+ For a 30 degree dip from the horizontal in the x direction, x_sin = .5
+ For a 45 degree dip from the horizontal in the x direction, x_sin = .7071
+ The true dip of the anisotropic coefficient from the z axis is:
+ asin ( sqrt ( 1. - x_sin**2 - y_sin**2 ) )
+ If any PATH_MOD entry is other than NONE or CONST_MOD IS not equal to 0.
+ AMOD assumes an anisotropic model.
+ Then PATH_MOD(1) is the vZ values and the group velocity is
+ 1/v(a)**2 = cos(a)**2/vz**2 + sin(a)**2/vx**2 * (1 + 2*ETA*cos(a)**2 )
+ If TYPE_TABLE_CALC = TIME, PATH_MOD(1) is assumed to be the stacking velocity.
+ Otherwise, PATH_MOD(1) is assumed to be the vertical interval velocity.
+ If PATH_MOD(2) is NONE the steep dip anisotropic coefficient is CONST_MOD</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+  </CommandArea>
+  <Help component="amod">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R I M I T I V E
+ 
+ Name       : amod
+ Category   : migrations
+ Written    : 2004-03-12   by: Douglas Hanson
+ Revised    : 2006-04-25   by: B. Menger
+ Maturity   : production
+ Purpose    : Anisotropic model description.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ Kirchhoff imaging velocity routines.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author         Description
+     ----        ------         -----------
+011. 2006-04-25  B. Menger      Removed Unused Variables.
+ 10. 2005-03-24  Douglas Hanson Add amod_stop.
+  9. 2005-01-31  R.S.Day        Added iso and ani elastic options. Added the
+                                amod_path_by_name, amod_path_n methods.
+  8. 2004-09-14  R.S.Day        Promoted to beta.
+  7  2004-04-22  R.S.Day        delete blank in gui for alignment
+  6  2004-04-07  Douglas Hanson Set OPT_VEL default to PATH.
+  5  2004-04-05  Douglas Hanson Add amod_put_process.
+  4  2004-03-24  Douglas Hanson Add title.
+  3  2004-03-22  Douglas Hanson Fix sensitivity.
+  2  2004-03-18  Douglas Hanson Add c_opt_aniso.
+  1  2004-03-12  Douglas Hanson Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

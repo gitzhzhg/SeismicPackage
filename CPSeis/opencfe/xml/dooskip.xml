@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dooskip" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN01" title="SCREEN01" rows="1" columns="1" minCellWidth="8" minCellHeight="12">
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_PERFORMDOSKIPPATTERNSONS" alignment="center">Perform do-skip patterns on sequences of items.</Label>
+    <Label keyword="LABEL_TR_MAX" alignment="left">TR_MAX=</Label>
+    <Field keyword="TR_MAX" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SKIP_INIT" alignment="left">SKIP_INIT=</Label>
+    <Field keyword="SKIP_INIT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_DO" alignment="left">NUM_DO=</Label>
+    <Field keyword="NUM_DO" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_SKIP" alignment="left">NUM_SKIP=</Label>
+    <Field keyword="NUM_SKIP" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="BORDER1" xPos="0" yPos="0" xSize="48" ySize="5"/>
+     <Constraints component="COMMENT_PERFORMDOSKIPPATTERNSONS" xPos="1" yPos="1" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TR_MAX" xPos="1" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_MAX" xPos="10" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SKIP_INIT" xPos="22" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SKIP_INIT" xPos="34" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_DO" xPos="1" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_DO" xPos="10" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_SKIP" xPos="23" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_SKIP" xPos="34" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TR_MAX">
+      <Tip>Maximum number of items to ultimately select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dooskip - TR_MAX<br> Maximum number of items to ultimately select.</center></b>
+<pre> Default = 99999999
+ Allowed = int &gt;= 0
+ Selection will stop once tr_max items have been selected with the do_skip
+ pattern. TR_MAX is the maximum number of items SELECTED by do_skip.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SKIP_INIT">
+      <Tip>Number of items to skip over initially before selecting any.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dooskip - SKIP_INIT<br> Number of items to skip over initially before selecting any.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DO">
+      <Tip>Number of items to process at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dooskip - NUM_DO<br> Number of items to process at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SKIP">
+      <Tip>Number of items to skip at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dooskip - NUM_SKIP<br> Number of items to skip at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 0
+ Allowed = int (positive,negative, or 0 unless restricted by the programmer.)
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+  </CommandArea>
+  <Help component="dooskip">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R I M I T I V E
+ 
+ Name       : dooskip  (DO a few, SKIP a few... pattern primitive.)
+ Category   : miscellaneous
+ Written    : 2000-05-04   by: Bill Menger
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Provide do_skip parameters for processes.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+  This primitive attempts to assist the programmer by handling the do-skip
+  parameters for him/her.
+  Parameters:    Range
+  skip_init      &gt;=0
+  num_do         &gt;=1
+  num_skip       any integer [Note: can be restricted to &gt;= 0. see below]
+  tr_max         &gt;=0
+ 
+  [Programming example (TRIN) found in programming_doc]
+ 
+  Modes:
+   SEQUENTIAL: (see advice_doc)
+         Positive skipping (num_skip &gt;= 0 )
+         [NOTE: if using gui, you can restrict num_skip to &gt;= 0 by calling
+                the dooskip_neg_skip_ok(obj,.false.) function.]
+   DIRECTED:   (see advice_doc)
+         Positive skipping (num_skip &gt;= 0 )
+         Negative skipping with overall forward movement:
+           (num_skip &lt; 0 AND abs(num_skip) &lt;  num_do )
+         Negative skipping with overall reverse movement:
+           (num_skip &lt; 0 AND abs(num_skip) &gt;  num_do )
+         In Place skipping (num_skip &lt; 0 AND abs(num_skip) == num_do )
+ 
+ [programmers note: if not used inside a "process" that calls the update
+  and trap routines, you call the "put" and "get" routines to access values
+  instead of using the parameter cache.]
+ [programmers note: create/initialize are called by all routines but DELETE &amp;
+  the traps.  You can start off by calling a "put" routine which will call
+  create and initialize for you.]
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+  9. 2006-06-20  B. Menger    Removed Unused Variables.
+  8. 2001-03-22  Bill Menger  Took out some fields.
+  7. 2000-10-30  Bill Menger  Fixed dooskip the function.
+  6. 2000-10-23  Bill Menger  Added reset function.
+  5. 2000-10-04  Bill Menger  Modified gui_def, added tips.
+  4. 2000-08-24  Bill Menger  Added dooskip_calc_trmax function
+  3. 2000-08-22  Bill Menger  Added dooskip-thru-item function, fixed doc.
+  2. 2000-05-08  Bill Menger  Added pc_update_error() call to update routine.
+                              Changed pc_warning msg to pc_error.
+  1. 2000-05-04  Bill Menger  Initial version.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
++------------------------------------------------+
+|dooskip can be used in one of two general modes:|
++------------------------------------------------+
+ +----------------+
+ |Sequential mode:|
+ +----------------+
+    Usage:  After initialization and setting of parameters, call dooskip from
+            within a do-loop where the loop counter is sequential.  Typically
+            dooskip is called with no optional arguments in this case, since
+            loop control is directed by the caller, not dooskip.
+    Example:
+            type(dooskip_struct),pointer :: DS
+            integer                      :: status,i
+            if(dooskip_initialize(DS) /= dooskip_ok)stop 'doskip: init err'
+            status = dooskip_put_tr_max   (DS,4)
+            status = dooskip_put_skip_init(DS,2)
+            status = dooskip_put_num_do   (DS,1)
+            status = dooskip_put_num_skip (DS,1)
+            !(should start at item 3, do 1, skip 1, ... up to 4 items.)
+            if using the update and traps, you should call this to disallow
+            negative values of num_skip:
+              call dooskip_neg_skipping_ok(.false.)
+            do i = 1, 10
+               if(dooskip(DS)) print*' I''m Doing Item ',i
+            end do
+     Result:
+            I'm Doing Item 3
+            I'm Doing Item 5
+            I'm Doing Item 7
+            I'm Doing Item 9
+ 
+            ** DO-REPEAT in sequential mode: (WILL NOT WORK)
+              (Use directed mode for this.)
+ 
+            ** DO-REVERSE in sequential mode:
+              (Use directed mode for this.)
+ 
+            ** DO-RUNNING_AVG in sequential mode:
+              (Use directed mode for this.)
+ 
+ +----------------+
+ |Directed mode:  |
+ +----------------+
+    Usage:  After initialization and setting of parameters, call dooskip from
+            within a do_while loop where the loop counter is directed by
+            dooskip.  This would be useful in a trace-reading program that
+            would prefer to seek to the next appropriate trace and not
+            attempt to read traces that would never be selected in the first
+            place.
+    Example:
+            type(dooskip_struct),pointer :: DS
+            integer                      :: status,this_item,next_item
+            if(dooskip_initialize(DS) /= dooskip_ok)stop 'doskip: init err'
+            status = dooskip_put_tr_max   (DS,4)
+            status = dooskip_put_skip_init(DS,2)
+            status = dooskip_put_num_do   (DS,1)
+            status = dooskip_put_num_skip (DS,1)
+            !(should start at item 3, do 1, skip 1, ... up to 4 items.)
+            this_item = dooskip_next_item(DS)
+            do while (.not. dooskip_hit_tr_max(DS))
+              if(dooskip(DS,this_item,next_item) ) &amp;
+                print*,' I''m Doing Item ',this_item,&amp;
+                       ' Next item will be ',next_item
+              this_item = next_item
+            end do !while
+ 
+     Result:
+            I'm Doing Item 3 Next item will be 5
+            I'm Doing Item 5 Next item will be 7
+            I'm Doing Item 7 Next item will be 9
+            I'm Doing Item 9 Next item will be 11
+ 
+     Notes: Directed mode allows you to "know" the upcoming item that will
+            not be skipped, and thus your "loop" can be more efficient if
+            you are reading from a random-access disk file or memory buffer,
+            since you only execute the "loop" when it is going to do work.
+            (Example: use a seek function to "seek" ahead to the next
+             record you will "do".)
+ 
+            DO-REPEAT in directed mode:
+            Example:
+              Skip_init=10, num_do=3, num_skip=-3 would start on record
+              11, and do 11 12 13, 11 12 13, 11 12 13, 11 12 13.... until
+              tr_max was hit.
+ 
+            DO-REVERSE in directed mode:
+            Example:
+              skip_init=79,999  Num_do=1 Num_skip=-2 tr_max = 80000
+ 
+              this_item = dooskip_next_item(DS)
+              do while (.not. dooskip_hit_tr_max(DS))
+                if(dooskip(DS,this_item,next_item) ) print*,this_item
+                this_item = next_item
+              end do !while
+ 
+              This would start on record 80,000 and do the following:
+              80000 79999 79998 79997 ... 3 2 1
+ 
+             DO-RUNNING-AVG in directed mode:
+             Let's say you want to composite 3 records into one record, then
+             move up one record and composite the next three, etc.
+             You want: 123   234  345  456 ...
+             You do: skip_init=0,tr_max = 10000, num_do=3, num_skip=-2
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

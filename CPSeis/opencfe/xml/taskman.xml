@@ -1,0 +1,669 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="taskman" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TASKMANINPUTFILE" title="TaskMan Input File" rows="24" columns="80">
+    <Label keyword="COMMENT_TASKMANAGERPARAMETERFILE" alignment="center">Task Manager parameter file for control of project tasks</Label>
+    <Button keyword="SELECT_PATH_PRJ">SELECT PATH_PRJ</Button>
+    <Label keyword="EQLAB_PATH_PRJ" alignment="left">=</Label>
+    <Field keyword="PATH_PRJ" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Button keyword="READ_IT">READ_IT</Button>
+    <Button keyword="WRITE_IT">WRITE_IT</Button>
+    <Label keyword="LABEL_EXEC_MODE" alignment="left">EXEC_MODE=</Label>
+    <Field keyword="EXEC_MODE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_TASKMANAGERPARAMETERFILE" xPos="5" yPos="1" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATH_PRJ" xPos="1" yPos="3" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_PRJ" xPos="17" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_PRJ" xPos="18" yPos="3" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="READ_IT" xPos="6" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="WRITE_IT" xPos="21" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_EXEC_MODE" xPos="6" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EXEC_MODE" xPos="16" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_PATH_PRJ">
+      <Tip>Name of project file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SELECT_PATH_PRJ<br> Name of project file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Name of the project file which has information relevant to
+ all jobs in a project. Parameters in the project file are displayed
+ on the TaskMan Parameters tab.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_PRJ">
+      <Tip>Name of project file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PATH_PRJ<br> Name of project file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Name of the project file which has information relevant to
+ all jobs in a project. Parameters in the project file are displayed
+ on the TaskMan Parameters tab.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="READ_IT">
+      <Tip>Press button to read the PATH_PRJ file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - READ_IT<br> Press button to read the PATH_PRJ file.</center></b>
+<pre> When the READ_IT button is pressed TASKMAN
+ will read the PATH_PRJ file and update the display.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WRITE_IT">
+      <Tip>Press button to write the PATH_PRJ file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - WRITE_IT<br> Press button to write the PATH_PRJ file.</center></b>
+<pre> When the WRITE_IT button is pressed TASKMAN
+ will write the PATH_PRJ file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EXEC_MODE">
+      <Tip>Choose how taskman behaves in the main program.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - EXEC_MODE<br> Choose how taskman behaves in the main program.</center></b>
+<pre> Default = SETUP
+ Allowed = SETUP
+ Allowed = EXECUTE
+ SETUP makes taskman a setup only process.
+ EXECUTE makes taskman be called at setup and at
+ trace execution time.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TASKMANPARAMETERS" title="TaskMan Parameters" rows="24" columns="80">
+    <Button keyword="SELECT_LSTFILE">SELECT LSTFILE</Button>
+    <Label keyword="EQLAB_LSTFILE" alignment="left">=</Label>
+    <Field keyword="LSTFILE" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NINFO" alignment="left">NINFO=</Label>
+    <Field keyword="NINFO" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NSHOTS" alignment="left">NSHOTS=</Label>
+    <Field keyword="NSHOTS" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_JOBFILE" alignment="left">JOBFILE=</Label>
+    <Field keyword="JOBFILE" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STKFILE" alignment="left">STKFILE=</Label>
+    <Field keyword="STKFILE" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TSKFILE" alignment="left">TSKFILE=</Label>
+    <Field keyword="TSKFILE" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TSKTYPE" alignment="left">TSKTYPE=</Label>
+    <Field keyword="TSKTYPE" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TASK_TOT" alignment="left">TASK_TOT=</Label>
+    <Field keyword="TASK_TOT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TASK_ISKP" alignment="left">TASK_ISKP=</Label>
+    <Field keyword="TASK_ISKP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TASK_NDO" alignment="left">TASK_NDO=</Label>
+    <Field keyword="TASK_NDO" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TASK_SKP" alignment="left">TASK_SKP=</Label>
+    <Field keyword="TASK_SKP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Button keyword="WRITE_TSKFILE">WRITE_TSKFILE</Button>
+    <Label keyword="LABEL_RESTART" alignment="left">RESTART=</Label>
+    <Field keyword="RESTART" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_JOB_HALT" alignment="left">JOB_HALT=</Label>
+    <Field keyword="JOB_HALT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_JOB_START" alignment="left">JOB_START=</Label>
+    <Field keyword="JOB_START" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRJ_CPUS" alignment="left">PRJ_CPUS=</Label>
+    <Field keyword="PRJ_CPUS" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_JOB_CPUS" alignment="left">JOB_CPUS=</Label>
+    <Field keyword="JOB_CPUS" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_EDIT" alignment="left">EDIT=</Label>
+    <Field keyword="EDIT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="SELECT_LSTFILE" xPos="1" yPos="1" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_LSTFILE" xPos="16" yPos="1" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LSTFILE" xPos="17" yPos="1" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NINFO" xPos="1" yPos="2" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NINFO" xPos="7" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NSHOTS" xPos="17" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NSHOTS" xPos="24" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_JOBFILE" xPos="1" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="JOBFILE" xPos="9" yPos="4" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_STKFILE" xPos="1" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STKFILE" xPos="9" yPos="5" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TSKFILE" xPos="1" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TSKFILE" xPos="9" yPos="7" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TSKTYPE" xPos="1" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TSKTYPE" xPos="9" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TASK_TOT" xPos="1" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK_TOT" xPos="10" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TASK_ISKP" xPos="19" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK_ISKP" xPos="29" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TASK_NDO" xPos="38" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK_NDO" xPos="47" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TASK_SKP" xPos="56" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK_SKP" xPos="65" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WRITE_TSKFILE" xPos="1" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RESTART" xPos="19" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RESTART" xPos="27" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_JOB_HALT" xPos="1" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="JOB_HALT" xPos="10" yPos="12" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_JOB_START" xPos="17" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="JOB_START" xPos="27" yPos="12" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PRJ_CPUS" xPos="1" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRJ_CPUS" xPos="10" yPos="13" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_JOB_CPUS" xPos="17" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="JOB_CPUS" xPos="26" yPos="13" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_EDIT" xPos="1" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EDIT" xPos="6" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_LSTFILE">
+      <Tip>Name of an FXINFO list file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SELECT_LSTFILE<br> Name of an FXINFO list file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ The FXINFO list file contains an array of FXINFO file
+ names. Same format used by FXPROJECT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LSTFILE">
+      <Tip>Name of an FXINFO list file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - LSTFILE<br> Name of an FXINFO list file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ The FXINFO list file contains an array of FXINFO file
+ names. Same format used by FXPROJECT. The shots described in the
+ fxinfo files become the tasks when TSKTYPE=SHOT_LST</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NINFO">
+      <Tip>Number of FXINFO files pointed to by LSTFILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - NINFO<br> Number of FXINFO files pointed to by LSTFILE.</center></b>
+<pre> Default = 0
+ Allowed = &gt; 1
+ Number of FXINFO files pointed to by LSTFILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NSHOTS">
+      <Tip>Number of shots described by the fxinfo files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - NSHOTS<br> Number of shots described by the fxinfo files.</center></b>
+<pre> Default = 0
+ Allowed = &gt; 1
+ Number of shots described by the fxinfo files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="JOBFILE">
+      <Tip>Full path name of a CPS job script.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - JOBFILE<br> Full path name of a CPS job script.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Name of a cps job file. When TSKTYPE=SHOT_LST or SHOT_SKP, this script
+ will be executed to perform the shot tasks. The script must include the
+ FXSHOT process set up for internal IO. When TSKTYPE=JOB, the JOBFILE
+ is a template to generate the names of other CPS jobs that will
+ be run. It is assumed the MWB has generated job names with the
+ skip pattern specified in the project file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STKFILE">
+      <Tip>Future Use-Full path name of file for stacking images.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - STKFILE<br> Future Use-Full path name of file for stacking images.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Full path name file to be used for stacking images.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSKFILE">
+      <Tip>Name of task list file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - TSKFILE<br> Name of task list file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Name of the task list file which has information
+ about the tasks that are to be performed by cps jobs. The
+ TSKFILE is written when the WRITE_TSKFILE button is pressed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSKTYPE">
+      <Tip>Type of tasks to generate and process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - TSKTYPE<br> Type of tasks to generate and process.</center></b>
+<pre> Default = SHOT_SKP
+ Allowed = JOB  Tasks will be interpreted as CPS jobs.
+ Allowed = SHOT_SKP Tasks are interpreted as a skip pattern of shot indices
+ Allowed = SHOT_LST Tasks are taken as shots numbers from the lstfile.
+ The skip pattern is honored for all options, but may be clipped in
+ the case of SHOT_LST due to data limitations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK_TOT">
+      <Tip>Upper limit on the number of tasks to execute and monitor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - TASK_TOT<br> Upper limit on the number of tasks to execute and monitor.</center></b>
+<pre> Default = 1
+ Allowed = &gt; 1
+ Upper limit on the number of tasks to execute and monitor.
+ Used for task generation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK_ISKP">
+      <Tip>Initial skip in the task pattern.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - TASK_ISKP<br> Initial skip in the task pattern.</center></b>
+<pre> Default = 0
+ Allowed = &gt; -1
+ Set up a task index pattern with this initial skip.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK_NDO">
+      <Tip>Group size in the task skip pattern.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - TASK_NDO<br> Group size in the task skip pattern.</center></b>
+<pre> Default = 1
+ Allowed = &gt; 0
+ Set up a task index pattern with group size=ndo.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK_SKP">
+      <Tip>Skips between groups in the task pattern.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - TASK_SKP<br> Skips between groups in the task pattern.</center></b>
+<pre> Default = 0
+ Allowed = &gt; -1
+ Set up a task index pattern with this skip between groups of ndo.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WRITE_TSKFILE">
+      <Tip>Press button to write or rewrite TSKFILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - WRITE_TSKFILE<br> Press button to write or rewrite TSKFILE.</center></b>
+<pre> When the WRITE_TSKFILE button is pressed TASKMAN
+ will write TSKFILE. If RESTART=YES the entire task file will
+ be rewritten. When RESTART=NO, only the non-task portion of
+ the task file will be updated. This allows one to preserve the
+ status of the tasks when a project is partially complete.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RESTART">
+      <Tip>Controls how much of TSKFILE is written.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - RESTART<br> Controls how much of TSKFILE is written.</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES
+ Set to YES to completely write or rewrite the task list file.
+ Set to NO to preserve the status of existing tasks in a project
+ that is already in progress. CAUTION - you can loose your completed
+ work if you overwrite the task list when RESTART=YES. Typically
+ the task file is written 1 time with restart = YES. There after
+ one would normally rewrite it with restart=NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="JOB_HALT">
+      <Tip>Whether to halt at the end of the current task or not.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - JOB_HALT<br> Whether to halt at the end of the current task or not.</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES
+  If YES then a job will halt at the end of the current task.
+  If NO  then a job will continue its normal processing.
+  This parameter is saved in the TSKFILE and will not be updated
+  until TSKFILE is written. To preserve task status for an ongoing
+  project, set restart=NO when updating job_halt in the TSKFILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="JOB_START">
+      <Tip>Controls auto-submission of jobs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - JOB_START<br> Controls auto-submission of jobs.</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES
+  If YES then a new job will be started when a job ends and there is
+  still work to be done. If NO then no jobs will be started when
+  an old job ends. The serv_host variable needs to be set if
+  job_start=YES. The serv_host name is will be used in an rsh command
+  to start the next batch job.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRJ_CPUS">
+      <Tip>Maximum number of CPUS that your project can use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PRJ_CPUS<br> Maximum number of CPUS that your project can use.</center></b>
+<pre> Default = 1
+ Allowed = &gt; 0
+ Maximum number of cpus allowed for the project.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="JOB_CPUS">
+      <Tip>Largest number of CPUS that 1 job will use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - JOB_CPUS<br> Largest number of CPUS that 1 job will use.</center></b>
+<pre> Default = 1
+ Allowed = &gt; 0
+ Largest number of CPUS that 1 job will use.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EDIT">
+      <Tip>Make fields sensitive or not.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - EDIT<br> Make fields sensitive or not.</center></b>
+<pre> Default = NO
+ Allowed = YES
+ Allowed = NO
+ Allow or disallow editing of the task manager parameters</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TASKMANGRAPHICSQC" title="TaskMan Graphics QC" rows="24" columns="80">
+    <Button keyword="PLOT_SRC_XY">PLOT_SRC_XY</Button>
+    <Label keyword="LABEL_PLOT_FILE1" alignment="left">PLOT_FILE1=</Label>
+    <Field keyword="PLOT_FILE1" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Button keyword="PLOT_TASKS">PLOT_TASKS</Button>
+    <Label keyword="LABEL_PLOT_FILE2" alignment="left">PLOT_FILE2=</Label>
+    <Field keyword="PLOT_FILE2" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="PLOT_SRC_XY" xPos="1" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PLOT_FILE1" xPos="1" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLOT_FILE1" xPos="12" yPos="2" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PLOT_TASKS" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PLOT_FILE2" xPos="1" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLOT_FILE2" xPos="12" yPos="5" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PLOT_SRC_XY">
+      <Tip>Press button to plot the source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PLOT_SRC_XY<br> Press button to plot the source locations.</center></b>
+<pre> The fxinfo file will be read and the source X-Y locations will
+ be plotted in a gnuplot display</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT_FILE1">
+      <Tip>Temp file to hold data for gnuplot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PLOT_FILE1<br> Temp file to hold data for gnuplot.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Temp file to hold data for gnuplot.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT_TASKS">
+      <Tip>Press button to plot the task statuses in TSKFILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PLOT_TASKS<br> Press button to plot the task statuses in TSKFILE.</center></b>
+<pre> The tskfile file will be read and the task status will
+ be plotted in a gnuplot display</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT_FILE2">
+      <Tip>Temp file to hold data for gnuplot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PLOT_FILE2<br> Temp file to hold data for gnuplot.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Temp file to hold data for gnuplot.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TASKMANSERVER" title="TaskMan Server" rows="24" columns="80">
+    <Label keyword="COMMENT_TASKMANAGERPARAMETERSCON" alignment="center">Task Manager parameters controlling optional server mode</Label>
+    <Label keyword="LABEL_SERV_USE" alignment="left">SERV_USE=</Label>
+    <Field keyword="SERV_USE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SERV_HOST" alignment="left">SERV_HOST=</Label>
+    <Field keyword="SERV_HOST" type="string" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SERV_PORT" alignment="left">SERV_PORT=</Label>
+    <Field keyword="SERV_PORT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Button keyword="SERV_START">SERV_START</Button>
+    <Button keyword="SERV_STOP">SERV_STOP</Button>
+    <Layout>
+     <Constraints component="COMMENT_TASKMANAGERPARAMETERSCON" xPos="5" yPos="1" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SERV_USE" xPos="1" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SERV_USE" xPos="10" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SERV_HOST" xPos="17" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SERV_HOST" xPos="27" yPos="3" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SERV_PORT" xPos="42" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SERV_PORT" xPos="52" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SERV_START" xPos="6" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SERV_STOP" xPos="24" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SERV_USE">
+      <Tip>Skips between groups in the task pattern.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SERV_USE<br> Skips between groups in the task pattern.</center></b>
+<pre> Default = NO
+ Allowed = YES
+ Allowed = NO
+ Use server or server less mode.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SERV_HOST">
+      <Tip>Host running server when SERV_USE=YES.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SERV_HOST<br> Host running server when SERV_USE=YES.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ Host running server when SERV_USE=YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SERV_PORT">
+      <Tip>Port number to use when SERV_USE=YES.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SERV_PORT<br> Port number to use when SERV_USE=YES.</center></b>
+<pre> Default = 2077
+ Allowed = &gt; 1024
+ Port number to use when SERV_USE=YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SERV_START">
+      <Tip>Press button to start the project server.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SERV_START<br> Press button to start the project server.</center></b>
+<pre> When the SERV_START button is pressed TASKMAN
+ will start a server on host SERV_HOST that uses port number
+ SERV_PORT. TASKMAN will only allow one instance of a server
+ for a particular port, host and path_prj setting.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SERV_STOP">
+      <Tip>Press button to stop the project server.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - SERV_STOP<br> Press button to stop the project server.</center></b>
+<pre> When the SERV_STOP button is pressed TASKMAN
+ will stop the server that is running on host SERV_HOST
+ that uses port number SERV_PORT.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>taskman - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="taskman">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TASKMAN
+ Category   : miscellaneous
+ Written    : 2002-07-11   by: dayrs
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Help control the execution of tasks in CPS
+ Portability: No limitations
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ TASKMAN or Task Manager is used to control task work. The
+ task manager is used to help monitor and control the work done on a
+ list of tasks that are associated with a project.
+ 
+ TASKMAN takes parameters from a project file and maintains project
+ status in a task list file. Only 1 instance of TASKMAN should occur in a job
+ and it should be included after JOB_DATA.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ --&gt; Insert advice to the user.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+012. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+ 11. 2005-08-18  R.S.Day    Delete unued variables.
+ 10. 2004-09-28  R.S.Day    Added taskman_wr_prjdata, taskman_get_jth_info,
+                            taskman_wr_tskfile.
+  9. 2004-09-14  R.S.Day    Promoted to beta. Added taskman_info_names_c.
+  8. 2004-08-12  RSDay      Eliminate taskman_rd_info. Use fxcard fxdata.
+  7. 2004-02-05  RSDay      More checks on serv_host and job_start parameters
+                            Fix wrapup behavior when a signal has occured
+  6. 2004-01-23  RSDay      Made change for fxpar_create compatability
+  5. 2003-10-16  RSDay      Get rid of hard wired paths
+  4. 2002-09-23  RSDay      Changes for taskman server mode support.
+                            Changes forced by fxinfo and fxdata changes.
+  3. 2002-08-15  RSDay      Added gnuplot plotting capability.
+                            taskman_plot_data calls gpi functions.
+                            Streamlined taskman_get_task
+  2. 2002-08-09  RSDay      Added JOB_HALT and JOB_START parameters to GUI.
+                            Change in arguments to taskman_prjfile_rd,
+                            taskman_prjfile_wr and taskman_cl_init. Now
+                            using fxinfo_read to get info from an fxinfo file.
+  1. 2002-07-11  RSDay      Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

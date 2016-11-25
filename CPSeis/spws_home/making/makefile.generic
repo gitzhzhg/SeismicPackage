@@ -1,0 +1,60 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##-------------------------- GENERIC -------------------------------##
+##-------------------------- GENERIC -------------------------------##
+##-------------------------- GENERIC -------------------------------##
+
+permitted_architectures =  MACHINE_ARCHITECTURE
+permitted_hosts          = HOSTNAME
+
+FC         = mpif90 -c -g 
+FC_AB90EP  = mpif90 -c -g 
+FC_O1      = mpif90 -c -g 
+FC_FLOATIO = mpif90 -c -g 
+FC_INTERPOLATE  = mpif90 -c -g 
+FC_KMIG    = mpif90 -c -g 
+FC_PPIO    = mpif90 -c -g 
+FC_UNDER   = mpif90 -c -g 
+FC_LINK    = mpif90 -g
+
+### mpicc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+CC         = mpicc -c -g  -Wall -mcmodel=medium -DLINUX -DLINUXI -D_REENTRANT \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+CC_LINK    = mpicc
+
+CXX        = g++ -c -g  -Wall -mcmodel=medium -DLINUX -DLINUXI \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+CXX_LINK   = mpif90  -g
+CXX_DEPEND = g++ -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared -g
+
+MODEXT     = .mod
+MODFLAG    = -I
+FOR_LIBS   = /usr/lib64/libstdc++.so.5 \
+             /usr/lib/gcc-lib/x86_64-redhat-linux/3.3.4/libstdc++.a
+
+#             /usr/lib/gcc-lib/x86_64-redhat-linux/3.2.3/libstdc++.a \
+
+GUI_LIBS    = /usr/X11R6/lib64/libXm.a \
+              /usr/X11R6/lib64/libXmu.a \
+              /usr/X11R6/lib64/libXp.a \
+              /usr/X11R6/lib64/libXext.a \
+              /usr/X11R6/lib64/libXt.a \
+              /usr/X11R6/lib64/libSM.a \
+              /usr/X11R6/lib64/libICE.a \
+              /usr/X11R6/lib64/libX11.a
+
+#MATH_LIBS  = /usr/lib64/libm.a \
+#             /usr/lib64/libpthread.a \
+#             /usr/lib64/libc.a
+MATH_LIBS = /usr/lib64/libm.a -lpthread -lc
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/amd64 -L$(JAVA_HOME)/jre/lib/amd64/server \
+            -ljava -ljvm -lverify
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)/include/linux /usr/include /usr/X11R6/include

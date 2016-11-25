@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="vtrim" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="VTRIMPROCESS" title="VTRIM Process" rows="20" columns="80">
+    <Label keyword="COMMENT_VELOCITYTRIM" alignment="center">Velocity TRIM</Label>
+    <Label keyword="COMMENT_OPTIMIZENMOONNMOCORRECTE" alignment="center">Optimize NMO on NMO-corrected CMP gathers.</Label>
+    <Label keyword="LABEL_TIM_SMOOTH" alignment="left">TIM_SMOOTH=</Label>
+    <Field keyword="TIM_SMOOTH" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SECONDS" alignment="center">seconds</Label>
+    <Label keyword="LABEL_RMO_INIT" alignment="left">RMO_INIT=</Label>
+    <Field keyword="RMO_INIT" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">seconds</Label>
+    <Label keyword="LABEL_RMO_INC" alignment="left">RMO_INC =</Label>
+    <Field keyword="RMO_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="center">seconds</Label>
+    <Label keyword="COMMENT_EFFECTIVEOFFSETUSEDFOR" alignment="center">Effective offset used for</Label>
+    <Label keyword="LABEL_RMO_LAST" alignment="left">RMO_LAST=</Label>
+    <Field keyword="RMO_LAST" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_3" alignment="center">seconds</Label>
+    <Label keyword="COMMENT_DISPLAYONLYPARAMETERS" alignment="center">display-only parameters:</Label>
+    <Label keyword="LABEL_OFF_BIG" alignment="left">OFF_BIG=</Label>
+    <Field keyword="OFF_BIG" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_RMO_TOT" alignment="left">RMO_TOT =</Label>
+    <Field keyword="RMO_TOT" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <ArraySet keyword="TIMES_ARRAYSET" label="TIMES    RMO_MIN  RMO_MAX   OFF_MAX   ADJUSTED_RMO_MIN  ADJUSTED_RMO_MAX">
+     <Array keyword="TIMES" type="float" maxLength="9  " columnName="TIMES" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="RMO_MIN" type="float" maxLength="9  " columnName="RMO_MIN" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="RMO_MAX" type="float" maxLength="10 " columnName="RMO_MAX" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="OFF_MAX" type="float" maxLength="10 " columnName="OFF_MAX" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="ADJUSTED_RMO_MIN" type="string" maxLength="18 " columnName="ADJUSTED_RMO_MIN" editable="no" sensitive="yes" columnSize="18"/>
+     <Array keyword="ADJUSTED_RMO_MAX" type="string" maxLength="16 " columnName="ADJUSTED_RMO_MAX" editable="no" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_VELOCITYTRIM" xPos="32" yPos="1" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OPTIMIZENMOONNMOCORRECTE" xPos="18" yPos="2" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_SMOOTH" xPos="1" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_SMOOTH" xPos="12" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SECONDS" xPos="22" yPos="4" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RMO_INIT" xPos="49" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_INIT" xPos="58" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="68" yPos="4" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RMO_INC" xPos="49" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_INC" xPos="58" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="68" yPos="5" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_EFFECTIVEOFFSETUSEDFOR" xPos="1" yPos="6" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RMO_LAST" xPos="49" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_LAST" xPos="58" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_3" xPos="68" yPos="6" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_DISPLAYONLYPARAMETERS" xPos="1" yPos="7" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OFF_BIG" xPos="27" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_BIG" xPos="35" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RMO_TOT" xPos="49" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_TOT" xPos="58" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIMES_ARRAYSET" xPos="3" yPos="9" xSize="75" ySize="9" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TIM_SMOOTH">
+      <Tip>Length of time running average smoothing for residual moveout.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - TIM_SMOOTH<br> Length of time running average smoothing for residual moveout.</center></b>
+<pre> Default = 0.3
+ Allowed = real &gt; 0.0
+ 
+ Length of the temporal running average smoothing, in seconds, for residual
+ moveout adjustments.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_INIT">
+      <Tip>Minimum adjusted value of residual moveout to test for (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RMO_INIT<br> Minimum adjusted value of residual moveout to test for (seconds).</center></b>
+<pre>
+ This is the smallest (most negative) value in the ADJUSTED_RMO_MIN array.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_INC">
+      <Tip>Increment between values of residual moveout to test for (secs).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RMO_INC<br> Increment between values of residual moveout to test for (secs).</center></b>
+<pre> Default =  0.012
+ Allowed = real &gt; 0.0
+ 
+ RMO_INC is the increment in residual moveout values to test.  This increment
+ refers to the residual moveout at the offset given by OFF_BIG, which is the
+ biggest offset specified in the OFF_MAX array.
+ 
+ All moveouts between RMO_INIT and RMO_LAST in increments of RMO_INC
+ will be tested.  These moveouts are effective at the offset given by
+ OFF_BIG.  A total of RMO_TOT moveouts will be tested.
+ 
+ After all moveout tests are made, the residual NMO corrections actually
+ made to the traces will be determined from the maximum semblance determined
+ within the range of moveouts constrained by the RMO_MIN and RMO_MAX arrays.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_LAST">
+      <Tip>Maximum adjusted value of residual moveout to test for (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RMO_LAST<br> Maximum adjusted value of residual moveout to test for (seconds).</center></b>
+<pre>
+ This is the largest (most positive) value in the ADJUSTED_RMO_MAX array.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_BIG">
+      <Tip>Biggest offset specified in the OFF_MAX array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - OFF_BIG<br> Biggest offset specified in the OFF_MAX array.</center></b>
+<pre>
+ This biggest offset is used to calculate the adjusted lower and upper
+ moveout constraints displayed in the arrays.  These adjusted constraints
+ are extended from the specified constraints by the ratio (OFF_BIG/OFF_MAX)
+ squared.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_TOT">
+      <Tip>Total number of residual moveout values to test for.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RMO_TOT<br> Total number of residual moveout values to test for.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIMES">
+      <Tip>Array of zero offset times for specifying moveout constraints.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - TIMES<br> Array of zero offset times for specifying moveout constraints.</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)
+ 
+ These zero offset times should be specified in seconds.
+ There should normally be at least two constraints per second.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_MIN">
+      <Tip>Array of lower moveout constraints (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RMO_MIN<br> Array of lower moveout constraints (seconds).</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)
+ 
+ RMO_MIN is the smallest (most negative) residual moveout correction allowed,
+ in seconds, for the specified zero-offset time and the corresponding
+ maximum offset specified for that time.
+ 
+ RMO_MIN should be determined from over-corrected (concave up) events.
+ RMO_MIN should normally be a negative number.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_MAX">
+      <Tip>Array of upper moveout constraints (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RMO_MAX<br> Array of upper moveout constraints (seconds).</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)
+ 
+ RMO_MAX is the largest (most positive) residual moveout correction allowed,
+ in seconds, for the specified zero-offset time and the corresponding
+ maximum offset specified for that time.
+ 
+ RMO_MAX should be determined from under-corrected (concave down) events.
+ RMO_MAX should normally be a positive number.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MAX">
+      <Tip>Array of maximum unmuted offsets at specified zero offset times.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - OFF_MAX<br> Array of maximum unmuted offsets at specified zero offset times.</center></b>
+<pre> Default =  -
+ Allowed = real (linked array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ADJUSTED_RMO_MIN">
+      <Tip>Array of adjusted lower moveout constraints (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - ADJUSTED_RMO_MIN<br> Array of adjusted lower moveout constraints (seconds).</center></b>
+<pre>
+ ADJUSTED_RMO_MIN is the smallest (most negative) residual moveout correction
+ allowed, in seconds, for the specified zero-offset time, adjusted from the
+ corresponding RMO_MIN value to the very biggest offset found in the OFF_MAX
+ array, and then adjusted slightly to be a multiple of RMO_INC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ADJUSTED_RMO_MAX">
+      <Tip>Array of adjusted upper moveout constraints (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - ADJUSTED_RMO_MAX<br> Array of adjusted upper moveout constraints (seconds).</center></b>
+<pre>
+ ADJUSTED_RMO_MAX is the largest (most positive) residual moveout correction
+ allowed, in seconds, for the specified zero-offset time, adjusted from the
+ corresponding RMO_MAX value to the very biggest offset found in the OFF_MAX
+ array, and then adjusted slightly to be a multiple of RMO_INC.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>vtrim - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="vtrim">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : VTRIM
+ Category   : velocity_analysis
+ Written    : 1991-04-23   by: Bill Harlan
+ Revised    : 2006-06-12   by: B. Menger
+ Maturity   : production
+ Purpose    : Optimize NMO on NMO-corrected CMP gathers.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ VTRIM performs a residual moveout adjustment to optimize the moveout of the
+ input CMPs to achieve the flattest possible events within a specified
+ constraint.  The CMPs with correction applied will be output from VTRIM.
+ Input CMPs must be NMO corrected.  VTRIM neither inputs nor outputs a
+ velocity file.
+ 
+ (Automatic velocity picking of CMPs that have not been NMO corrected is
+ provided by the VPICK process.)
+ 
+ (The VTRIM process was formerly part of the old Cray VPICK process.)
+ 
+-------------------------------------------------------------------------------
+                     CONSTRAINTS ON MOVEOUT ADJUSTMENT
+ 
+ The allowed range of residual moveout correction is specified by a linked
+ array of RMO_MIN, RMO_MAX, TIMES and OFF_MAX values where:
+ 
+       TIMES is the array of zero-offset times in seconds.
+ 
+       OFF_MAX is the array of maximum offset values.
+ 
+       RMO_MIN is the array of the smallest (negative) residual moveout
+       correction allowed, in seconds, for the specified zero-offset time
+       at the specified far offset.
+ 
+       RMO_MAX is the array of the largest (positive) residual moveout
+       correction allowed, in seconds, for the specified zero-offset time
+       at the specified far offset.
+ 
+ At least two constraints per second should be made.  VTRIM converts
+ constraints to squared slowness for interpolation.
+ 
+-------------------------------------------------------------------------------
+          SMOOTHING OF OUTPUT RESIDUAL MOVEOUT CORRECTION
+ 
+ TIM_SMOOTH is the length of a temporal running average smoothing operator
+ applied to the estimated residual moveouts.
+ 
+-------------------------------------------------------------------------------
+                             RESTRICTIONS
+ 
+ Moveout adjustment will not be performed on a CMP for the following reasons:
+  (1) the CMP gather contains fewer than eight live traces.
+  (2) the nearest live trace offset is more than half the farthest live
+       trace offset.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Typical use of VTRIM is as a final "trim" of NMO after the last velocity
+ analysis of the processing sequence.
+ 
+ RMO_MIN and RMO_MAX are interpreted as residual moveouts (in seconds)
+ after the NMO correction has been made with a user-specified velocity
+ file.  Residual moveouts are measured as the zero-offset time of a
+ reflection minus its corrected time at offset OFF_MAX.
+ 
+ To choose values for RMO_MIN and RMO_MAX:
+ 
+  (1) Apply normal moveout corrections to a midpoint gather, then plot.
+ 
+  (2) For a particular zero-offset time, specify the largest unmuted
+      offset OFF_MAX.
+ 
+  (3) Set RMO_MIN to the smallest (most negative) residual moveout.
+      This will normally be a negative number corresponding to an
+      over-corrected reflection.
+ 
+  (4) Set RMO_MAX to the largest (most positive) residual moveout.
+      This will normally be a positive number corresponding to an
+      under-corrected reflection.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+040. 2006-06-12  B. Menger   Removed Unused Variables.
+ 39. 2001-04-04  Stoeckley  Changed the RMO_INC default from 0.3 (which was
+                             a mistake) to 0.012; replaced MINLOC and MAXLOC
+                             calls with old-fashioned do loop code to get
+                             around an apparent problem with these intrinsic
+                             functions.
+ 38. 2001-02-09  Stoeckley  Completely rewrote the code from scratch, using
+                             a number of existing primitives.  The new code
+                             corrects a number of problems, contains only
+                             a small fraction as much code, and runs several
+                             times faster.  Some of the problems in the
+                             previous code included incorrect treatment of
+                             negative times, mute adjustment problems, and
+                             inadequate number of iterations (the new
+                             code does not use multiple iterations).
+                            If there are problems with this new code, I can
+                             try to improve the old code.
+ 37. 2000-12-15  Coleman    Corrected some spelling and grammer in messages.
+ 36. 2000-12-14  Coleman    Changed some the subroutines from PRIVATE to
+                             PUBLIC so that they can be called by VPICK.
+ 35. 2000-12-12  Coleman    Convert to new system from a subset of VPICK.
+ 34. 1996-06-20  Vunderink  Added SAVE FILENO to VTRIMFNEW subroutine.
+ 33. 1995-04-03  Harlan     Allow more than 1999 picks per function.
+ 32. 1994-10-17  Harlan     Shorten dcode card to 80 characters. Fortran!
+ 31. 1994-10-07  Harlan     Yet another typo in internal NMC dcode card.
+ 30. 1994-10-06  Harlan     Fix problem interpolating input file headers.
+ 29. 1994-08-29  Harlan     Update documentation.
+ 28. 1994-07-18  Harlan     Fix another NCODE typo calling NMC.
+ 27. 1994-07-15  Harlan     Fix NCODE problem calling NMC internally.
+ 26. 1994-07-15  Harlan     Bad input interpolation default, header 7&amp;8.
+ 25. 1994-07-15  Harlan     Add more scratch memory.
+ 24. 1994-06-29  Harlan     Fix bottom mute.
+ 23. 1994-05-06  Harlan     Allow OUTFILE="NONE"
+ 22. 1994-04-27  Harlan     Change name to VPICK; add header word NHYVEL
+         for 3D; call NMC internally for input velocity interpolation;
+         get header words from VELFILE.
+ .....................................................................
+ Lower revisions refer to earlier name VPIK
+ 21. 1994-03-04  Harlan     Double resolution of semblances, slower by 2.
+ 20. 1994-02-23  Harlan     Avoid SQRT of negative number in VTRIMRMT3.
+ 19. 1993-05-04  Harlan     Make variable IMIN static in VTRIMPARM.
+ 18. 1993-04-29  Harlan     Initialization in VTRIMSPCK for new compiler.
+ 17. 1993-02-12  Harlan     Fix VTRIMCOMP for bottom zero padding.
+ 16. 1992-09-03  Harlan     Allow initial velocities outside constraints
+ 15. 1992-07-31  Harlan     Add "FLAT" option for VFILE.
+ 14. 1992-03-24  Harlan     I-O negative moveouts as negative velocities
+ 13. 1992-02-14  Harlan     Ignore dead traces when averaging headers.
+ 12. 1992-02-03  Harlan     Increase resolution of internal semblances.
+ 11. 1992-01-24  Harlan     Reduce significant digits in veloc. file.
+ 10. 1992-01-24  Harlan     Changes to documentation only.
+ 9.  1991-12-30  Harlan     If can't pick, apply moveout anyway.
+ 8.  1991-12-20  Harlan     Output of VTRIM uses smoothed velocities.
+ 7.  1991-11-26  Harlan     Minor changes in comments to *.cpr file.
+ 6.  1991-10-31  Harlan     Check for dead gathers. Insure N &lt; NTRMAX.
+ 5.  1991-10-02  Harlan     ASCII semblance plots to *.cpr file.
+ 4.  1991-08-01  Harlan     Add smoothing of picks over midpoint.
+ 3.  1991-06-20  Harlan     Adjust to UNICOS changes in CLOSFIL.
+ 2.  1991-06-05  Harlan     Add new constraint options.
+ 1.  1991-04-23  Harlan     Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

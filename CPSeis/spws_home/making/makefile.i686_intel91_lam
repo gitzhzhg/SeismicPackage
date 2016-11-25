@@ -1,0 +1,52 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##--------------------------- i686_intel91_lam --------------------------------##
+##--------------------------- i686_intel91_lam --------------------------------##
+##--------------------------- i686_intel91_lam --------------------------------##
+
+permitted_architectures = i686
+permitted_hosts         = juju
+permitted_hosts        += nissan
+permitted_hosts        += braveheart
+
+FC         = ifort -c -g -fPIC -heap-arrays 10000
+FC_LINK    = ifort -nofor_main -i-static
+
+#CC         = gcc  -c -g -Wall -m32 -DLINUX -DLINUXI -DLINUXI91 -DBETALIB -D_REENTRANT -D_FILE_OFFSET_BITS=64
+CC         = icc  -c -g -TV -Wall -DLINUX -DLINUXI -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DBETALIB -DLINUXI91
+#CC_LINK    = gcc -m32
+CC_LINK    = icc -i-static
+
+CXX        = icpc -c -g -TV -Wall -m32 -DLINUX -DLINUXI -DLINUXI91 -DBETALIB -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = icpc  -O2 -c -g -Wall -m32 -DLINUX -DLINUXI -D_REENTRANT \
+#                                               -D_LARGEFILE_SOURCE \
+#                                               -D_FILE_OFFSET_BITS=64
+CXX_LINK   = ifort -nofor_main -i-static
+CXX_DEPEND = icpc -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = icpc -shared
+
+MODEXT     = .mod
+MODFLAG    = -I
+FOR_LIBS   = /usr/lib/libstdc++.so.5 \
+             -L/usr/lib/gcc-lib/i386-redhat-linux/3.2.3/ -lstdc++
+#	     $(CPSEIS_INSTALL_DIR)/intel_i686/libimf.a
+#libstdc++.a \
+
+GUI_LIBS    = /usr/X11R6/lib/libXm.a
+GUI_LIBS   += /usr/X11R6/lib/libXmu.a
+GUI_LIBS   += /usr/X11R6/lib/libXp.a
+GUI_LIBS   += /usr/X11R6/lib/libXext.a
+GUI_LIBS   += /usr/X11R6/lib/libXt.a
+GUI_LIBS   += /usr/X11R6/lib/libX11.a
+GUI_LIBS   += /usr/X11R6/lib/libSM.a
+GUI_LIBS   += /usr/X11R6/lib/libICE.a
+#-L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+MATH_LIBS  = -lm -lpthread
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)/include/linux /usr/include /usr/X11R6/include

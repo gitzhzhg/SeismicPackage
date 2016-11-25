@@ -1,0 +1,10 @@
+#!/bin/bash
+# find where a module's routines are used in other cpseis programs.
+if [ -z $1 ] ; then
+	echo "provide a module name"
+	exit 1
+fi
+MOD=$1
+grep -ni ${MOD}_[a-z] *.f90 | more
+grep -ni ${MOD}_[a-z] *.f90 | awk 'BEGIN{FS=":"}{print $1,$3}' | awk '{print $1,$3}' | sort -u | grep -v "${MOD}\.f90" | grep -v superwrap
+

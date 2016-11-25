@@ -1,0 +1,268 @@
+!!!
+!!!                           Program Template
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!!  7. 2002-10-23  Stoeckley  Minor documentation and ident string changes.
+!!!  6. 2001-10-22  Stoeckley  Add advice concerning the RCS ident string;
+!!!                             add code check-in instructions.
+!!!  5. 2001-06-07  Goodger    Remove public from rcs ident string.  The
+!!!                            public attribute is not allowed in a program
+!!!                            unit.
+!!!  4. 2001-05-24  Goodger    Add rcs ident string.
+!!!  3. 2000-10-06  Stoeckley  Add CPS_v1 documentation tag.
+!!!  2. 1999-12-13  Stoeckley  Bring up to standards of other templates.
+!!!  1. 1999-05-31  ???        Initial version.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         GENERAL INFORMATION
+!!!
+!!! This template for main programs constitutes part of the standards
+!!! for writing programs for the Conoco Processing System.  This
+!!! template, including the instructions and comments within this template,
+!!! is to be used for creating programs or converting them from
+!!! the old processing system.
+!!!
+!!! All of the instructions, comments, and sample code in this template are
+!!! commented out with three exclamation points to allow new code to be
+!!! inserted and tested without having to delete this information first.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         SUPPORTING DOCUMENTS
+!!!
+!!! (1) Documentation accessed by the CPSDOC program.
+!!! (2) Templates for processes and primitives            (in ~sps/templates).
+!!! (3) Coding Standards for Mixing Programming Languages (in ~sps/templates).
+!!! (4) Detailed Fortran Coding Standards                 (in ~sps/templates).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       INITIAL STEPS TO PERFORM
+!!!
+!!! (1) Copy this template to a new file with the name "xxxx.f90" where
+!!!     "xxxx" is the name of your program.
+!!!
+!!! (2) Make the following replacements in this template wherever they occur:
+!!!     Replace  xxxx or XXXX  with the program name.
+!!!     Replace   2001-01-01   with the current check-in date (year-month-day).
+!!!     Replace      NNNN      with your name.
+!!!
+!!! (3) Insert your code (including documentation) into this template at
+!!!     locations where instructions are found.  Make sure all inserted code
+!!!     conforms to the appropriate standards.
+!!!
+!!! (4) Delete all instructions, comments, and sample code (lines beginning
+!!!     with !!!) in this file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       CODE CHECK-IN INSTRUCTIONS
+!!!
+!!! (1) Test the code thoroughly until you believe that it is ready
+!!!     for BETA TESTING if it is to be placed into betalib, or ALPHA
+!!!     TESTING if it is to be placed into alphalib.
+!!!
+!!! (2) Make sure the code compiles and works on all available compilers.
+!!!
+!!! (3) Set the Revised field (in the brief doc) to current check-in date
+!!!     and author.
+!!!
+!!! (4) Make sure a new entry has been added to the revision history, and
+!!!     set this entry to the current check-in date.
+!!!
+!!! (5) Check the code using the checkc script.
+!!!
+!!! (6) Check in the new code before 3:00 p.m.
+!!!
+!!! (7) If this code is to be included by a user as a custom compile in
+!!!     a CPS job, you should make sure that the RCS ident string includes
+!!!     the file name, revision date, author, and maturity (custom) to
+!!!     insure that the correct information is displayed in the report file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                  INSTRUCTIONS FOR OTHER LANGUAGES
+!!!
+!!! This template is specifically designed for Fortran-90 main programs.
+!!! With appropriate modifications, the documentation portion of this template
+!!! is also to be used for programs written in other languages.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                  INSTRUCTIONS FOR MULTIPLE FILES
+!!!
+!!! When a program consists of more than one file, the header file template
+!!! and auxiliary file templates can be used for the additional files.  Any
+!!! potentially general-purpose code in the program should be made into
+!!! primitives to facilitate reusability.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!
+!!!
+!<CPS_v1 type="PROGRAM"/>
+!!------------------------------ xxxx.f90 --------------------------------!!
+!!------------------------------ xxxx.f90 --------------------------------!!
+!!------------------------------ xxxx.f90 --------------------------------!!
+
+
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                       C P S   P R O G R A M 
+!
+! Name       : XXXX
+! Category   : stand-alone
+! Written    : 2001-01-01   by: NNNN
+! Revised    : 2001-01-01   by: NNNN
+! Maturity   : beta
+! Purpose    : --> description for single-line context-sensitive help.
+! Portability: No known limitations.
+!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                          GENERAL DESCRIPTION
+!
+!  --> Description of this particular algorithm, how it differs from other
+!  --> algorithms for the general problem and when you may want to use it.
+!  --> Include information on whether the process is appropriate for 2D
+!  --> and/or 3D work.
+!
+!-------------------------------------------------------------------------------
+!</descript_doc>
+
+
+!<advice_doc>
+!-------------------------------------------------------------------------------
+!                          ADVICE FOR USERS
+!
+!!!  --> Enter here more lengthy or more detailed advice than is appropriate
+!!!  --> for the multi-line help for individual parameters.  This section can
+!!!  --> be omitted if all necessary advice is presented elsewhere.
+!
+!-------------------------------------------------------------------------------
+!</advice_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                             REVISION HISTORY
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. 2001-01-01  NNNN       Initial version.
+!
+!!!  --> Copy the old revision history to this location if it exists,
+!!!  --> and renumber as necessary.
+!!!
+!!!  --> The revision history should be listed in descending order, with
+!!!  --> the most recent revision at the top.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<portability_doc>
+!-------------------------------------------------------------------------------
+!                         PORTABILITY LIMITATIONS
+!
+! No known limitations.
+! This process requires 8-byte (64-bit) word sizes.
+! This process packs and unpacks values in 8-byte words.
+! This process contains the following platform-dependent code...
+!
+!!!      --> This section must be present if the Portability statement
+!!!      --> in the brief_doc above indicates that there are some
+!!!      --> portability limitations.
+!!!      --> Omit or modify the inappropriate lines above.
+!!!      --> Also you can add appropriate new information here.
+!!!      --> Omit this section if it is not needed.
+!
+!-------------------------------------------------------------------------------
+!</portability_doc>
+
+
+!<compile_doc>
+!-------------------------------------------------------------------------------
+!                     SPECIAL COMPILING REQUIREMENTS
+!
+! No special requirements.
+!
+!!!  --> Description of any special compiler or linking requirements
+!!!  --> or restrictions.
+!!!  --> Omit this section if it is not needed.
+!
+!-------------------------------------------------------------------------------
+!</compile_doc>
+
+
+!<algorithm_doc>
+!-------------------------------------------------------------------------------
+!                  ALGORITHM DESCRIPTION FOR DEVELOPERS
+!
+!!!  --> Description of this particular algorithm, related theory and
+!!!  --> relevant references.
+!
+!-------------------------------------------------------------------------------
+!</algorithm_doc>
+
+
+!<programming_doc>
+!-------------------------------------------------------------------------------
+!                           PROGRAMMING NOTES
+!
+!!!  --> Enter here more lengthy or more detailed information which may be
+!!!  --> required.  Or add new sections as appropriate.
+!!!  --> This section can be omitted if all necessary information is presented
+!!!  --> in other sections.
+!
+!-------------------------------------------------------------------------------
+!</programming_doc>
+
+
+
+!!--------------------------- private module -------------------------------!!
+!!--------------------------- private module -------------------------------!!
+!!--------------------------- private module -------------------------------!!
+
+
+!!! If this program uses its own (private) modules, they can be placed in
+!!! sections like this one.  Fortran-90 requires that any modules used by
+!!! the main program and residing in the same file must PRECEDE the main
+!!! program in the file.  Otherwise the compiler will complain that it
+!!! cannot find the module!
+
+
+!!-------------------------- start of program ------------------------------!!
+!!-------------------------- start of program ------------------------------!!
+!!-------------------------- start of program ------------------------------!!
+
+
+      program xxxx
+!!!   use abcdef_module   ! for each module to be used.
+      implicit none
+
+      character(len=100),save :: XXXX_IDENT = &
+'$Id: program_template,v 1.7 2002/10/23 21:16:32 Stoeckley custom sps $'
+
+
+      end program xxxx
+
+
+!!-------------------------------- end -----------------------------------!!
+!!-------------------------------- end -----------------------------------!!
+!!-------------------------------- end -----------------------------------!!
+
+
+
+

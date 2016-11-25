@@ -1,0 +1,267 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name   : copy_from_spws
+# Written: 2004-05-11   by: Tom Stoeckley
+# Revised: 2004-05-11   by: Tom Stoeckley
+# Purpose: Copy a source file from ~sps to the local directory.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                            DOCUMENTATION
+#
+# To copy a source file from ~spws to the local directory, simply run this
+# script as follows:
+#                                          opt
+#                                   i       i
+#                copy_from_spws  filename  mode
+#
+# where filename = desired source file (with extension but without path).
+# where mode     = always or different or missing (default missing).
+#
+# This script looks in the include and programs and oop and util directories.
+#
+# If the system version of the file cannot be found:
+#
+#   If a local version exists, this script does nothing and exits normally.
+#   If there is no local version, this script exits with an error message.
+#
+# If the system version of the file is found:
+#
+#   The MODE argument determines whether it is copied to the local directory.
+#
+# This script adds user write permission to the copied file.
+#-------------------------------------------------------------------------------
+#                    DETAILS FOR THE MODE ARGUMENT
+#
+# Details for mode = always:
+#
+#     The file is always copied from the system, whether or not a local
+#     version exists.  If a local version exists, it is replaced by the
+#     system version.
+#
+# Details for mode = different:
+#
+#     The file is copied from the system only if a local version does not
+#     exist, or if the system version is different from the local version.
+#     If the two versions are the same, no copying is performed.
+#
+# Details for mode = missing (or unspecified mode):
+#
+#     The file is copied from the system only if a local version does not
+#     exist.  To force it to copy, you must either delete the local version
+#     or use mode = always.
+#
+# Details for mode = newer:
+#
+#     The file is copied from the system only if a local version does not
+#     exist, or if the system version is newer than the local version.
+#     If the system version is older, no copying is performed.
+#
+#-------------------------------------------------------------------------------
+#                         INPUT REQUIRMENTS
+#
+# The following environment variable must exist:
+#
+#                SPWSDIR
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+# 1.  2004-05-11  Stoeckley  Initial Version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: copy_from_spws,v 1.4 2003/10/08 11:53:03 Stoeckley prod sps $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo environment variable SPWSDIR not set
+     exit 1
+endif
+
+
+##------------------------- get all arguments ------------------------------##
+##------------------------- get all arguments ------------------------------##
+##------------------------- get all arguments ------------------------------##
+
+
+set filename = $1
+set mode     = $2
+
+if($filename == "") then
+     echo ' '
+     echo 'not enough arguments.'
+     echo 'first argument == FILENAME (with extension but without path).'
+     echo 'second argument (optional) == MODE (always or different or missing).'
+     echo ' '
+     exit 1
+endif
+
+if($mode == "") then
+     set mode = missing
+endif
+
+if($mode != always && $mode != different && $mode != newer && \
+   $mode != missing) then
+     echo ' '
+     echo 'second optional argument MODE is invalid.'
+     echo 'MODE must be always or different or newer or missing.'
+     echo 'MODE == missing is the default.'
+     echo ' '
+     exit 1
+endif
+
+
+##---------------------- return if file already exists -------------------##
+##---------------------- return if file already exists -------------------##
+##---------------------- return if file already exists -------------------##
+
+
+if(-f $filename && $mode == missing) then
+     echo local file $filename already exists
+     exit 0
+endif
+
+
+##----------------- get location of system version of file -----------------##
+##----------------- get location of system version of file -----------------##
+##----------------- get location of system version of file -----------------##
+
+
+if($filename:e == h) then
+     set location1 = 'incl*'
+     set location2 = 'incl*'
+     set location3 = 'incl*'
+else if($filename:e == hh) then
+     set location1 = 'incl*/*'
+     set location2 = 'incl*/*'
+     set location3 = 'incl*/*'
+else if($filename:e == c) then
+     set location1 = 'oop*/*'
+     set location2 = 'util*/*'
+     set location3 = 'prog*/*'
+else if($filename:e == cc) then
+     set location1 = 'oop*/*'
+     set location2 = 'util*/*'
+     set location3 = 'prog*/*'
+else if($filename:e == f90) then
+     set location1 = 'oop*/*'
+     set location2 = 'util*/*'
+     set location3 = 'prog*/*'
+else
+     echo FILENAME should have extension .f90 or .c or .h or .cc or .hh
+     exit 1
+endif
+
+
+##------------------ get system version of file --------------------------##
+##------------------ get system version of file --------------------------##
+##------------------ get system version of file --------------------------##
+
+
+          echo looking for the system version of $filename
+          ls $SPWSDIR/$location1/$filename >& /dev/null
+          if($status == 0) then
+               set pathname = $SPWSDIR/$location1/$filename
+               goto success
+          endif
+          ls $SPWSDIR/$location2/$filename >& /dev/null
+          if($status == 0) then
+               set pathname = $SPWSDIR/$location2/$filename
+               goto success
+          endif
+          ls $SPWSDIR/$location3/$filename >& /dev/null
+          if($status == 0) then
+               set pathname = $SPWSDIR/$location3/$filename
+               goto success
+          endif
+
+
+##---------------------- system version missing ---------------------------##
+##---------------------- system version missing ---------------------------##
+##---------------------- system version missing ---------------------------##
+
+
+if(-f $filename) then
+     echo system version of $filename missing but local version exists
+     exit 0
+endif
+
+echo system and local versions of $filename both missing
+exit 1
+
+
+##----------------------- system version(s) found --------------------------##
+##----------------------- system version(s) found --------------------------##
+##----------------------- system version(s) found --------------------------##
+
+
+success:
+
+foreach name ($pathname)
+
+if($mode == different) then
+   set changed = false
+   diff $filename $name >& /dev/null || set changed = true
+   if($changed == false) then
+      echo system version of $filename same as local version
+      continue
+   endif
+endif
+
+if($mode == newer) then
+   set list = `ls -t $filename $name`
+   if($list[1] == $filename) then
+      echo system version of $filename older than local version
+      continue
+   endif
+endif
+
+echo "fetching  $filename  from  $name:h"
+\cp -f $name .
+chmod u+w $filename
+
+end
+
+exit 0
+
+
+##------------------------------ end --------------------------------------##
+##------------------------------ end --------------------------------------##
+##------------------------------ end --------------------------------------##
+

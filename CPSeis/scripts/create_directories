@@ -1,0 +1,70 @@
+#!/bin/bash
+# create directories for a build
+temp=$(pwd)
+trap "cd ${temp} ; exit 1" 1 2 3 6 9 11 12 15
+if [ -z $1 ] ; then
+	echo "$0:ERROR->usage: $0 PLATFORM"
+	exit 1
+else
+	PLATFORM=$1
+fi
+
+if [ ! -d $CPSEIS_INSTALL_DIR/platforms/$PLATFORM/bin ] ; then
+	mkdir -p $CPSEIS_INSTALL_DIR/platforms/$PLATFORM/bin
+fi
+if [ ! -d $CPSEIS_INSTALL_DIR/platforms/$PLATFORM/lib ] ; then
+	mkdir -p $CPSEIS_INSTALL_DIR/platforms/$PLATFORM/lib
+fi
+if [ ! -d $CPSEIS_INSTALL_DIR/platforms/$PLATFORM/xml ] ; then
+	mkdir -p $CPSEIS_INSTALL_DIR/platforms/$PLATFORM/xml
+fi
+cd $CPSEIS_INSTALL_DIR/platforms/$PLATFORM
+if [ ! -f "Makefile" ] ; then
+	ln -s $CPSEIS_INSTALL_DIR/etc/Makefile .
+fi
+if [ ! -d $CPSEIS_INSTALL_DIR/opencfe/src/com/conoco/shared/$PLATFORM ] ; then
+	mkdir -p $CPSEIS_INSTALL_DIR/opencfe/src/com/conoco/shared/$PLATFORM 
+fi
+if [ ! -d $CPSEIS_INSTALL_DIR/opencfe/src/jni/$PLATFORM ] ; then
+	mkdir -p $CPSEIS_INSTALL_DIR/opencfe/src/jni/$PLATFORM 
+fi
+
+cd $CPSEIS_INSTALL_DIR/spws_home/making
+chmod 755 add_new_platform
+chmod 755 replace_makefile_links
+if [ ! -f "makefile.${PLATFORM}" ] ; then
+	sed <makefile.generic "s/GENERIC/${PLATFORM}/g;s/HOSTNAME/${HOSTNAME}/g;s/MACHINE_ARCHITECTURE/$(uname -m)/g" >makefile.$PLATFORM
+fi
+./add_new_platform $PLATFORM
+./replace_makefile_links
+
+cd ${temp}
+#--------- JAVA DIRECTORY FOR JAVA BUILDS -----------
+[ -z $THIRDPARTY_DIR ] && exit 1
+JDIR=$(ls -d $THIRDPARTY_DIR/jdk1.6*)
+if [ -h $THIRDPARTY_DIR/jdk ] ; then
+	echo "link already established to jdk"
+else
+	ln -s $JDIR $THIRDPARTY_DIR/jdk
+fi
+mkdir -p $THIRDPARTY_DIR/jdk/platforms
+ln -s $JDIR $JDIR/platforms/$CPSEIS_ARCH
+ls -ld $THIRDPARTY_DIR/jdk/platforms/$CPSEIS_ARCH
+# ---------- CPSDATA DIRECTORY DEFAULTS ------------
+HD=$(echo ~ | awk -F/ '{print $2}')
+WAI=$(whoami)
+HOME=/$HD/$WAI
+HN=$(basename $HOSTNAME .localdomain)
+CPS_DIR=$HOME/actual_cpsdata/
+TMP_DIR=$HOME/actual_cpstemp/
+mkdir -p $CPS_DIR
+mkdir -p $TMP_DIR
+cat $CPSEIS_INSTALL_DIR/etc/CPSDATA_NODES.DAT |
+	sed "s/LOCALHOST/${HN}/g;s:CPSDATA_DISK:/${HD}:g;\
+	s:CPSDATA_DIR:${CPS_DIR}:g" >$CPSEIS_INSTALL_DIR/etc/cpsdata_nodes.dat
+cat $CPSEIS_INSTALL_DIR/etc/CPSTEMP_NODES.DAT |
+	sed "s/LOCALHOST/${HN}/g;s:CPSDATA_DISK:/${HD}:g;\
+	s:CPSTEMP_DIR:${TMP_DIR}:g" >$CPSEIS_INSTALL_DIR/etc/cpstemp_nodes.dat
+mv $CPSEIS_INSTALL_DIR/etc/$CPSEIS_ARCH/cps_config.dat $CPSEIS_INSTALL_DIR/etc/$CPSEIS_ARCH/cps_config.dat.$$
+unset CPSEIS_ENVIRONMENT 
+. ~/.bashrc

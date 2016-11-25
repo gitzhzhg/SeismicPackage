@@ -1,0 +1,20 @@
+#!/bin/sh
+# if you have a compiler only hosted from one machine, put that information here.
+# and do an rsh or ssh to that machine to run the compile script
+if [ -z $1 ] ; then
+	echo "No compile script entered as first argument."
+	exit 1
+else
+	COMPILE_SCRIPT=$1
+fi
+if [ ! -z $2 ] ; then
+	COMPILE_NODE=$2
+else
+	COMPILE_NODE=$(head -n 1 ${CPSEIS_INSTALL_DIR}/etc/compiler_nodes.dat)
+fi
+if [ "$COMPILE_NODE" != "$HOSTNAME" ] ; then
+	time ssh $COMPILE_NODE $COMPILE_SCRIPT
+else
+	time $COMPILE_SCRIPT
+fi
+exit 0

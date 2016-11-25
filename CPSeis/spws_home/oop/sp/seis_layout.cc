@@ -1,0 +1,66 @@
+/*<license>
+ -------------------------------------------------------------------------------
+  Copyright (c) 2007 ConocoPhillips Company
+ 
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+ 
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+ 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+ -------------------------------------------------------------------------------
+ </license>*/
+#include "sp/seis_plot.hh"
+#include "sp/seis_layout.hh"
+#include "sp/seis_control.hh"
+#include <Xm/Form.h>
+
+
+SeisLayout::SeisLayout( const Widget  p,
+                        const char    *name,
+                        const int     ptype) :
+              SeisPlot()
+{
+  _form= XtVaCreateManagedWidget("primsw", xmFormWidgetClass, p, NULL);
+  constructor(_form,name,ptype,True);
+
+  _cntl= new SeisControl(_form, "cntl",this);
+  XtVaSetValues( _cntl->W(), XmNleftAttachment, XmATTACH_FORM,
+                             XmNrightAttachment, XmATTACH_FORM,
+                             XmNbottomAttachment, XmATTACH_FORM, NULL);
+
+  XtVaSetValues( SeisPlot::W(), XmNleftAttachment,   XmATTACH_FORM,
+                                XmNrightAttachment,  XmATTACH_FORM,
+                                XmNtopAttachment,    XmATTACH_FORM,
+                                XmNbottomAttachment, XmATTACH_WIDGET,
+                                XmNbottomWidget, _cntl->W(), NULL);
+
+}
+
+SeisLayout::~SeisLayout()
+{
+ delete _cntl;
+}
+
+SeisPlot& SeisLayout::operator=(SeisPlot& sp)
+{
+ SeisPlot::operator=(sp);
+ return *this;
+}
+
+Widget SeisLayout::W()
+{
+  return _form;
+}
+ 

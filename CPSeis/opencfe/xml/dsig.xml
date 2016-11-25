@@ -1,0 +1,598 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dsig" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DSIGPROCESS" title="DSIG Process" rows="24" columns="80">
+    <Label keyword="COMMENT_DETERMINISTICALLYREMOVEO" alignment="center">Deterministically remove (or apply) source signature.</Label>
+    <Label keyword="LABEL_OPT_LOC" alignment="left">OPT_LOC=</Label>
+    <Field keyword="OPT_LOC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TR_SIG_BEG" alignment="left">TR_SIG_BEG=</Label>
+    <Field keyword="TR_SIG_BEG" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TR_SIG_END" alignment="left">TR_SIG_END=</Label>
+    <Field keyword="TR_SIG_END" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_SIG_BEG" alignment="left">TIM_SIG_BEG=</Label>
+    <Field keyword="TIM_SIG_BEG" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_SIG_END" alignment="left">TIM_SIG_END=</Label>
+    <Field keyword="TIM_SIG_END" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_FIRST" alignment="left">TIM_FIRST=</Label>
+    <Field keyword="TIM_FIRST" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUT" alignment="left">OPT_OUT=</Label>
+    <Field keyword="OPT_OUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INVERT" alignment="left">INVERT=</Label>
+    <Field keyword="INVERT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PHASE_ONLY" alignment="left">PHASE_ONLY=</Label>
+    <Field keyword="PHASE_ONLY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD=</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_OPT_BANDPASS" alignment="left">OPT_BANDPASS=</Label>
+    <Field keyword="OPT_BANDPASS" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_LOW_NONE" alignment="left">FREQ_LOW_NONE=</Label>
+    <Field keyword="FREQ_LOW_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_LOW_FULL" alignment="left">FREQ_LOW_FULL=</Label>
+    <Field keyword="FREQ_LOW_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_HIGH_FULL" alignment="left">FREQ_HIGH_FULL=</Label>
+    <Field keyword="FREQ_HIGH_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_HIGH_NONE" alignment="left">FREQ_HIGH_NONE=</Label>
+    <Field keyword="FREQ_HIGH_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PHASE" alignment="left">PHASE=</Label>
+    <Field keyword="PHASE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMMENT" alignment="left">COMMENT=</Label>
+    <Field keyword="COMMENT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DETERMINISTICALLYREMOVEO" xPos="9" yPos="1" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_LOC" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_LOC" xPos="9" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="23" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="33" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME" xPos="1" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="16" yPos="5" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="17" yPos="5" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="17" yPos="6" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TR_SIG_BEG" xPos="2" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_SIG_BEG" xPos="13" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TR_SIG_END" xPos="27" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_SIG_END" xPos="38" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_SIG_BEG" xPos="1" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_SIG_BEG" xPos="13" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_SIG_END" xPos="26" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_SIG_END" xPos="38" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_FIRST" xPos="51" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_FIRST" xPos="61" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_OUT" xPos="5" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUT" xPos="13" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INVERT" xPos="23" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INVERT" xPos="30" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PHASE_ONLY" xPos="35" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PHASE_ONLY" xPos="46" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="51" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="61" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="13" xSize="60" ySize="7"/>
+     <Constraints component="LABEL_OPT_BANDPASS" xPos="2" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_BANDPASS" xPos="15" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FREQ_LOW_NONE" xPos="3" yPos="16" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_NONE" xPos="17" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_LOW_FULL" xPos="33" yPos="16" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_FULL" xPos="47" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_HIGH_FULL" xPos="2" yPos="17" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_FULL" xPos="17" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_HIGH_NONE" xPos="32" yPos="17" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_NONE" xPos="47" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PHASE" xPos="11" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PHASE" xPos="17" yPos="18" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COMMENT" xPos="1" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT" xPos="10" yPos="21" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_LOC">
+      <Tip>Option for location of signature.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - OPT_LOC<br> Option for location of signature.</center></b>
+<pre> Default = FIRST
+ Allowed = FIRST (Signatures are only in first gather of input traces.)
+ Allowed = EVERY (Signatures are in every gather of input traces.)
+ Allowed = FILE  (Signature is in a TROT file.)
+ Allowed = NONE  (No signature at all -- just do bandpass filter.)
+ 
+ If OPT_LOC = EVERY, the input traces must arrive in gathers.
+ If OPT_LOC = FIRST, input traces must be gathered if TR_SIG_END &gt; 1 but
+    DON'T need to be gathered if TR_SIG_BEG = TR_SIG_END = 1, meaning that
+    you have just one signature, located in your very first input trace.
+ If OPT_LOC = FILE, input traces may be gathered or ungathered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 or 2 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are filtered.  Otherwise, only traces with
+ a flag set in header word HDR_FLAG are filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+<pre> Active only when OPT_LOC = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Pathname of trace file containing the signature if OPT_LOC=FILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PATHNAME<br> Pathname of trace file containing the signature if OPT_LOC=FILE.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER
+ DSIG reads only one trace from this file, and uses it as the signature to
+ remove or apply to traces (If your file contains more than one trace, all
+ but the first are ignored). Any file format readable by TRIN is also
+ readable by DSIG. The DT global in this file must match DT in the current
+ job. The TMIN value in the file is used for setting an initial default for
+ TIM_FIRST, although you may override that TIM_FIRST value when setting
+ parameters for DSIG.
+ 
+ Active only when OPT_LOC = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TR_SIG_BEG">
+      <Tip>Sequential number of first trace in gather recording a signature.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - TR_SIG_BEG<br> Sequential number of first trace in gather recording a signature.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ This parameter is used only when OPT_LOC=FIRST or OPT_LOC=EVERY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_SIG_END">
+      <Tip>Sequential number of last trace in gather recording a signature.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - TR_SIG_END<br> Sequential number of last trace in gather recording a signature.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;=TR_SIG_BEG
+ This parameter is used only when OPT_LOC=FIRST or OPT_LOC=EVERY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_SIG_BEG">
+      <Tip>Time in trace for start of signature, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - TIM_SIG_BEG<br> Time in trace for start of signature, in seconds.</center></b>
+<pre> Default = TSTRT
+ Allowed = real&gt;=TSTRT
+ This parameter is used only when OPT_LOC=FIRST or OPT_LOC=EVERY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_SIG_END">
+      <Tip>Time in trace for end of signature, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - TIM_SIG_END<br> Time in trace for end of signature, in seconds.</center></b>
+<pre> Default = TSTRT + 0.5
+ Allowed = real&gt;TIM_SIG_BEG
+ This parameter is used only when OPT_LOC=FIRST or OPT_LOC=EVERY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_FIRST">
+      <Tip>Time of first sample in signature, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - TIM_FIRST<br> Time of first sample in signature, in seconds.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ Time of first sample in signature is used for proper centering of the
+ signature.  TIM_FIRST can be adjusted so that the operator produces
+ no bulk shift.  Normally TIM_FIRST will be approximately
+ -0.5 * length of signature.
+ When OPT_LOC=FILE, the front end tries to initially set TIM_FIRST to
+ match TMIN in the file, but you may override that value.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUT">
+      <Tip>Option for output of signature traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - OPT_OUT<br> Option for output of signature traces.</center></b>
+<pre> Default = ZERO
+ Allowed = ZERO     (Zero signature part of trace and apply operator to rest.)
+ Allowed = NOTHING  (Apply operator to whole trace, zeroing nothing.)
+ Allowed = PASS     (Pass signature traces out unchanged.)
+ Allowed = DELETE   (Delete signature traces.)
+ This parameter is relevant only when OPT_LOC=EVERY or OPT_LOC=FIRST.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INVERT">
+      <Tip>Option whether to invert signature before applying to traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - INVERT<br> Option whether to invert signature before applying to traces.</center></b>
+<pre> Default = YES
+ Allowed = YES (Apply inverted signature to traces).
+ Allowed = NO  (Apply signature itself to traces).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHASE_ONLY">
+      <Tip>Option whether to apply only phase spectrum of the operator.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PHASE_ONLY<br> Option whether to apply only phase spectrum of the operator.</center></b>
+<pre> Default = YES
+ Allowed = YES  (Apply operator only to phase spectrum of traces.)
+ Allowed = NO   (Apply operator to phase and amplitude spectra of traces.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent, for signature inverse calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - DIAG_LOAD<br> Diagonal load, in percent, for signature inverse calculation.</center></b>
+<pre> Default = 2.0
+ Allowed = real&gt;=0.0
+ Diagonal load is only needed if INVERT=YES and PHASE_ONLY=NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_BANDPASS">
+      <Tip>Option whether to bandpass filter the traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - OPT_BANDPASS<br> Option whether to bandpass filter the traces.</center></b>
+<pre> Default = NONE
+ Allowed = NONE       (No bandpass filter)
+ Allowed = BANDPASS   (Pass frequencies between tapers)
+ Allowed = HIGHPASS   (Pass frequencies from low taper to Nyquist)
+ Allowed = LOWPASS    (Pass frequencies from 0.0 to high taper)
+ Allowed = ALLPASS    (Pass all frequencies [may still change phase])
+ Allowed = BANDREJECT (Reject frequencies between tapers)
+ Because DSIG operates in the frequency domain, it can perform a bandpass
+ filter at no additional cost.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Frequency (in Hz) where low frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - FREQ_LOW_NONE<br> Frequency (in Hz) where low frequency taper passes nothing.</center></b>
+<pre> Default = -
+ Allowed = real&gt;=0.0
+ This parameter is only used when OPT_BANDPASS has a value of BANDPASS,
+ HIGHPASS, or BANDREJECT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_FULL">
+      <Tip>Frequency (in Hz) where low freq taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - FREQ_LOW_FULL<br> Frequency (in Hz) where low freq taper passes full amplitude.</center></b>
+<pre> Default = -
+ Allowed = real&gt;=FREQ_LOW_NONE
+ This parameter is only used when OPT_BANDPASS has a value of BANDPASS,
+ HIGHPASS, or BANDREJECT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>Frequency (in Hz) where high freq taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - FREQ_HIGH_FULL<br> Frequency (in Hz) where high freq taper passes full amplitude.</center></b>
+<pre> Default = -
+ Allowed = real&gt;=FREQ_LOW_FULL
+ This parameter is only used when OPT_BANDPASS has a value of BANDPASS,
+ LOWPASS, or BANDREJECT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_NONE">
+      <Tip>Frequency (in Hz) where high frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - FREQ_HIGH_NONE<br> Frequency (in Hz) where high frequency taper passes nothing.</center></b>
+<pre> Default = -
+ Allowed = Nyquist &gt;= real &gt;= FREQ_HIGH_FULL
+ This parameter is only used when OPT_BANDPASS has a value of BANDPASS,
+ LOWPASS, or BANDREJECT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHASE">
+      <Tip>Phase of filter, in degrees.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PHASE<br> Phase of filter, in degrees.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ This parameter is only used when OPT_BANDPASS has a value of BANDPASS,
+ HIGHPASS, LOWPASS, or ALLPASS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT">
+      <Tip>One line comment for history file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - COMMENT<br> One line comment for history file.</center></b>
+<pre> Default = blank
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dsig - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dsig">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DSIG
+ Category   : filters
+ Written    : 1987-08-08   by: Bob Baumel
+ Revised    : 2007-01-03   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Deterministically remove (or apply) source signature.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ DSIG takes a known signature, calculates its inverse, and applies that inverse
+ operator to input traces.  DSIG operates in the frequency domain; i.e., all
+ input traces are Fourier transformed, then multiplied by an operator in the
+ frequency domain (equivalent to convolution in the time domain), then
+ transformed back to the time domain. Options are available for specifying
+ signature location, how to handle the signature traces (if any), whether to
+ apply the inverse of the signature or the signature itself as a frequency-
+ domain operator, whether to apply both the amplitude and phase spectra of the
+ operator or just its phase spectrum, and whether to include a bandpass filter
+ (which can be done at no extra cost because all traces are transformed to the
+ frequency domain in any case).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Signature Locations:
+ 
+ When OPT_LOC=EVERY, signatures are assumed to be embedded in each group of
+ input traces (usually shot profiles), and each group is designatured
+ separately.  Traces must be GATHERED in this case.
+ 
+ When OPT_LOC=FIRST, signatures are assumed to be located only in the FIRST
+ input trace gather, and these are used for designaturing the whole data set.
+ Traces need not be gathered if there is only one signature, located in the
+ very first trace.
+ 
+ For OPT_LOC=FIRST or OPT_LOC=EVERY, if signatures appear in more than one
+ trace of the gather (i.e., if  TR_SIG_END &gt; TR_SIG_BEG) they are combined
+ into a single stacked signature before computing the inverse operator.
+ 
+ When OPT_LOC=FILE, the signature is read from a file. Any file format which
+ is readable by the TRIN process may also be used in DSIG. Only one trace
+ is read from the file.
+ 
+ Signature Centering:
+ 
+ The location of zero-time for a signature determines whether a bulk shift
+ occurs when that signature or inverse signature operator is applied to traces.
+ Typically, the bulk shift can be minimized if the zero-time for the signature
+ is associated with a central high amplitude sample of the signature.
+ 
+ The TIM_FIRST parameter allows the signature to be centered so that DSIG
+ will not cause a bulk shift. Normally TIM_FIRST will be approximately
+ -0.5 * length of signature. When OPT_LOC=FIRST or OPT_LOC=EVERY, it's up to
+ you to specify an appropriate TIM_FIRST. When OPT_LOC=FILE, the front end
+ will initially set TIM_FIRST to match the TMIN value in the file (if the
+ file exists when you build the job), but you may override that value.
+ 
+ Remove or Apply Signature?
+ 
+ The value of INVERT determines whether DSIG removes the signature from or
+ applies the signature to the input traces. For normal designature operation,
+ set INVERT=YES to remove signatures. Setting INVERT=NO allows you to apply
+ any convolutional operator (such as a transfer function derived by TFUN or a
+ wavelet that you wish to attach to synthetics) and, because DSIG operates in
+ the frequency domain, this may be faster than a time-domain convolution in
+ cases when the time-domain function would be a LONG convolutional operator.
+ 
+ Phase-Only Operation:
+ 
+ If PHASE_ONLY=YES, then only the PHASE spectra of the input traces are
+ affected. This may produce more stable results (assuming INVERT=YES) when
+ there are holes in the signature amplitude spectrum. Also, the combination
+ of PHASE_ONLY=YES with INVERT=NO provides the option to apply only the phase
+ spectrum of ANY convolutional operator, such as a transfer function from TFUN.
+ 
+ Bandpass Filter Cost:
+ 
+ Because DSIG works in the frequency domain, it can apply a bandpass filter
+ at no extra cost.  A bandpass filter is recommended when using INVERT=YES
+ with PHASE_ONLY=NO because, in this case, the designature operation tends to
+ amplify noise outside the bandwidth of the signature.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 29. 2007-01-03  Stoeckley    Do not reset pathname to NONE when DT does not
+                               match the value on the file; always check for
+                               incompatible DT.
+ 28. 2006-06-12  B. Menger    Removed Unused Variables.
+ 27. 2002-08-12  Baumel       Add file selection box in GUI; additional bug
+                              fix for flag trace option.
+ 26. 2002-08-01  Goodger      Fix bug with flagged traces being passed
+                              incorrectly.
+ 25. 2002-06-12  Goodger      Pass out all traces rather than flagged traces
+                              only.
+ 24. 2002-06-06  Goodger      Add HDR_FLAG parameter.
+ 23. 2001-02-15  Baumel       In CFE, don't reset TIM_FIRST from signature
+                              file except in GUI updates.
+ 22. 2000-12-07  Baumel       Change wrapped_up flag to skip_wrapup.
+ 21. 2000-04-10  Baumel       Add gui_def to doc.
+ 20. 2000-02-17  Baumel       Make sure front-end message doesn't show up
+                              inappropriately in a back-end update.
+ 19. 2000-02-14  Baumel       Restore ability of front end to set TIM_FIRST
+                              from signature file, but don't require file to
+                              be present &amp; warn user when TIM_FIRST is reset.
+ 18. 2000-02-01  Baumel       For now, remove front end attempt to set
+                              TIM_FIRST from signature file when OPT_LOC=FILE.
+ 17. 2000-01-28  Baumel       Add call to LAV primitive; some other cleanup.
+ 16. 2000-01-17  Baumel       Make compatible with new PATHCHECK primitive.
+ 15. 2000-01-11  Baumel       Move pc_put_options_field calls ahead of pc_put
+                              calls for proper front end operation.
+ 14. 2000-01-07  Baumel       Change parameter name FILENAME to PATHNAME;
+                              add call to PATHCHECK primitive.
+ 13. 1999-12-21  Baumel       Add OPT_LOC = FILE option.
+ 12. 1999-11-30  Baumel       New Convention for specifying bandpass filters.
+ 11. 1999-10-15  Bob Baumel   Converted from old system (postponing the
+                              OPT_LOC=FILE option, for now).
+ 10. 1998-12-15  Vunderink    Begin using the f90 compiler.
+  9. 1995-05-24  Baumel       Allow PHASONLY=YES with INVERT=NO (so can
+                              apply a transfer function in PHASONLY mode).
+  8. 1991-10-02  Peterson     Add COMMENT parameter.
+  7. 1991-02-03  Baumel       Add LOCSIG,OUTSIG,TFIRST,FILE,INVERT options.
+  6. 1990-03-28  Baumel       Add PHASONLY option.
+  5. 1988-10-21  Ball         NWIH and NWPT Conversion
+  4. 1988-08-17  Baumel       Match change in TVFBPS primitive.
+  3. 1988-06-10  Baumel       New convention for mute header word.
+  2. 1988-04-22  Baumel       Add CPSPRT calls.
+  1. 1987-08-08  Bob Baumel   Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

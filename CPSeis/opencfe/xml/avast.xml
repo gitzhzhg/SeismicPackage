@@ -1,0 +1,786 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="avast" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="AVASTPROCESS" title="AVAST Process" rows="24" columns="80">
+    <Label keyword="COMMENT_AVASTACKPROCESS" alignment="center">AVA STack Process</Label>
+    <Label keyword="COMMENT_PRODUCEVARIOUSAMPLITUDEV" alignment="center">Produce various amplitude vs. angle (AVA) stacks.</Label>
+    <Label keyword="LABEL_DOMAIN" alignment="left">DOMAIN=</Label>
+    <Field keyword="DOMAIN" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FULLSTACK" alignment="left">FULLSTACK=</Label>
+    <Field keyword="FULLSTACK" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF_OUT" alignment="left">HDR_OFF_OUT=</Label>
+    <Field keyword="HDR_OFF_OUT" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOLD_CFOS" alignment="left">FOLD_CFOS=</Label>
+    <Field keyword="FOLD_CFOS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHFT_MAX" alignment="left">SHFT_MAX=</Label>
+    <Field keyword="SHFT_MAX" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_QC_CFOS" alignment="left">QC_CFOS=</Label>
+    <Field keyword="QC_CFOS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_QC_CFOS">SELECT_PATHNAME_QC_CFOS=</Button>
+    <Label keyword="EQLAB_PATHNAME_QC_CFOS" alignment="left">=</Label>
+    <Field keyword="PATHNAME_QC_CFOS" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME_QC_TRC" alignment="left">PATHNAME_QC_TRC=</Label>
+    <Field keyword="PATHNAME_QC_TRC" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Array keyword="ANG_CFOS" type="float" maxLength="12" columnName="ANG_CFOS" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="ANG_BEG_ARRAYSET" label="ANG_BEG     ANG_END">
+     <Array keyword="ANG_BEG" type="float" maxLength="12 " columnName="ANG_BEG" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="ANG_END" type="float" maxLength="12 " columnName="ANG_END" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <Label keyword="LABEL_FOLD_ARS_MIN" alignment="left">FOLD_ARS_MIN=</Label>
+    <Field keyword="FOLD_ARS_MIN" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AVASTACKPROCESS" xPos="16" yPos="0" xSize="17" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_PRODUCEVARIOUSAMPLITUDEV" xPos="1" yPos="1" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DOMAIN" xPos="1" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DOMAIN" xPos="8" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MODE" xPos="1" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="8" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FULLSTACK" xPos="22" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FULLSTACK" xPos="32" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_OFF_OUT" xPos="39" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF_OUT" xPos="51" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOLD_CFOS" xPos="1" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_CFOS" xPos="11" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SHFT_MAX" xPos="22" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHFT_MAX" xPos="31" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_QC_CFOS" xPos="42" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="QC_CFOS" xPos="50" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATHNAME_QC_CFOS" xPos="1" yPos="8" xSize="24" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_QC_CFOS" xPos="25" yPos="8" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_QC_CFOS" xPos="26" yPos="8" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_QC_TRC" xPos="8" yPos="9" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_QC_TRC" xPos="25" yPos="9" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="ANG_CFOS" xPos="7" yPos="11" xSize="15" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="ANG_BEG_ARRAYSET" xPos="25" yPos="11" xSize="27" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_FOLD_ARS_MIN" xPos="1" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_ARS_MIN" xPos="14" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="DOMAIN">
+      <Tip>Domain (TIME or DEPTH) of trace samples and velocity picks.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - DOMAIN<br> Domain (TIME or DEPTH) of trace samples and velocity picks.</center></b>
+<pre> Default = TIME
+ Allowed = TIME  Input traces are sampled in time (two way travel).  Velocity
+                 picks (either RMS or interval) are also defined in time.
+ Allowed = DEPTH Input traces are sampled in depth, where the starting depth
+                 is DEP_SCALE*TSTRT and depth increment is DEP_SCALE*DT.
+                 Velocity picks (interval required) are defined in depth.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODE">
+      <Tip>Type of AVA stack or fold of stack output traces desired.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - MODE<br> Type of AVA stack or fold of stack output traces desired.</center></b>
+<pre> Default = CFOS
+ Allowed = CFOS  (Constant Fold Of Stack traces output.)
+ Allowed = ARS   (Angle-Range Stack traces output.)
+ Allowed = FOLD  (FOLD of stack traces output.)
+ If MODE = CFOS, traces are stacked with a constant fold of stack about a
+ given desired center angle.
+ If MODE = ARS, traces within a given angle range are stacked.
+ If MODE = FOLD, output traces carry fold of stack information only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FULLSTACK">
+      <Tip>Whether to include a full stack trace for each input gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - FULLSTACK<br> Whether to include a full stack trace for each input gather.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ Setting FULLSTACK = YES is the preferred way to obtain a full stack from
+ AVAST since this option bypasses the angle calculations. The full stack
+ traces, if included, will be the last stack panel (if SORT_TO_PANELS = YES),
+ or the last trace of each output angle gather (if SORT_TO_PANELS = NO).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF_OUT">
+      <Tip>User defined header word to contain (near) offset upon output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - HDR_OFF_OUT<br> User defined header word to contain (near) offset upon output.</center></b>
+<pre> Default = 48
+ Allowed = NWIH &gt;= HDR_OFF_OUT &gt;= 1
+ Offsets of your INPUT traces are, as usual, assumed to be in header word 6.
+ Offsets aren't particularly meaningful after AVAST, as a (depth-dependent)
+ range of offsets must be stacked in producing each output angle trace. In
+ fact, as angle is the natural replacement for offset after AVAST, header
+ word 6 in the output traces is reset to the center of each angle range (or
+ to the value 90 for the optional fullstack trace), which will be useful if
+ you follow AVAST by AVAGRAD or prestack inversion.
+ 
+ In case you need original offsets (for reapplying a mute based on offset),
+ AVAST saves the "near" offset (i.e., the offset of the first live trace in
+ the input gather) in user defined header word HDR_OFF_OUT. You may then
+ move this value back to header word 6 before reapplying your mute. Please
+ understand that every output trace derived from a given input gather will
+ have the SAME value in this header word; thus, a near angle stack trace
+ will be indicated as having the same "offset" as a far angle stack trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_CFOS">
+      <Tip>Desired fold for the constant fold of stack option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - FOLD_CFOS<br> Desired fold for the constant fold of stack option.</center></b>
+<pre> Default = 11
+ Allowed = odd int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHFT_MAX">
+      <Tip>Allowable shift (in number of traces) from desired center angle.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - SHFT_MAX<br> Allowable shift (in number of traces) from desired center angle.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0
+ SHFT_MAX is the maximum allowable shift (in number of traces) that the center
+ of the stack gather can deviate from the desired angle.  In the CFOS mode,
+ AVAST will maintain the desired fold of stack centered on the desired angle
+ within the SHFT_MAX tolerance.  The stacked trace is dead for times that
+ would exceed the SHFT_MAX tolerance.
+ 
+ Active only if MODE = CFOS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="QC_CFOS">
+      <Tip>Option for creation of CFOS QC files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - QC_CFOS<br> Option for creation of CFOS QC files.</center></b>
+<pre> Default = NONE
+ Allowed = NONE
+ Allowed = TRAJ
+ Allowed = BOTH
+ If QC_CFOS = NONE, then no files are created.
+ 
+ If QC_CFOS = TRAJ, then only a textfile is created, containing angle
+ trajectories for all the desired CFOS angles.  This file will have an
+ ".avast" extension and can be displayed using the AVAST tool in CBYT.
+ 
+ If QC_CFOS = BOTH, then the trajectory file is created and a tracefile is also
+ created, showing the trace samples included in CMP gathers for each desired
+ ANG_CFOS angle.  This tracefile will have a ".trc8" extension and can be
+ viewed in CBYT as an underlay plot for the input data. (The tracefile contains
+ as many traces as the input data, so the BOTH option should NOT be chosen for
+ production jobs.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_QC_CFOS">
+      <Tip>Choose PATHNAME_QC_CFOS using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - SELECT_PATHNAME_QC_CFOS<br> Choose PATHNAME_QC_CFOS using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_QC_CFOS">
+      <Tip>Pathname for the QC file(s) created for the CFOS mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PATHNAME_QC_CFOS<br> Pathname for the QC file(s) created for the CFOS mode.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ The supplied pathname is given a ".avast" extension for the trajectory file.
+ If QC_CFOS = BOTH, the generated tracefile will use this same pathname, but
+ with a ".trc8" extension.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_QC_TRC">
+      <Tip>Pathname of QC tracefile produced when QC_CFOS = BOTH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PATHNAME_QC_TRC<br> Pathname of QC tracefile produced when QC_CFOS = BOTH.</center></b>
+<pre> This is a display-only parameter. When QC_CFOS = BOTH, the tracefile name
+ is generated automatically from PATHNAME_QC_CFOS by replacing its "avast"
+ extension with "trc8".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_CFOS">
+      <Tip>Array of desired angles for the constant fold of stack mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - ANG_CFOS<br> Array of desired angles for the constant fold of stack mode.</center></b>
+<pre> Default =  -
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_BEG">
+      <Tip>Array of beginning angles for the angle-range stack mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - ANG_BEG<br> Array of beginning angles for the angle-range stack mode.</center></b>
+<pre> Default =  -
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_END">
+      <Tip>Array of ending angles for the angle-range stack mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - ANG_END<br> Array of ending angles for the angle-range stack mode.</center></b>
+<pre> Default =  -
+ Allowed = real &gt; ANG_BEG</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_ARS_MIN">
+      <Tip>Minimum fold for live angle-range stack.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - FOLD_ARS_MIN<br> Minimum fold for live angle-range stack.</center></b>
+<pre> Default =  1
+ Allowed = int &gt; 0
+ The stacked trace in the ARS mode will be dead for times where the fold in
+ the desired angle range is less than FOLD_ARS_MIN.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN_TWO" title="Screen_Two" rows="24" columns="80">
+    <Button keyword="SELECT_PATHNAME_VEL">SELECT_PATHNAME_VEL=</Button>
+    <Label keyword="EQLAB_PATHNAME_VEL" alignment="left">=</Label>
+    <Field keyword="PATHNAME_VEL" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME_VEL_INFO" alignment="left"></Label>
+    <Field keyword="PATHNAME_VEL_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_VELTYPE" alignment="left">VELTYPE=</Label>
+    <Field keyword="VELTYPE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TYPEOFVELOCITIESONPATHNA" alignment="center">&lt;----- type of velocities on PATHNAME_VEL if it is a trace file</Label>
+    <Label keyword="LABEL_OPT_AVE" alignment="left">OPT_AVE=</Label>
+    <Field keyword="OPT_AVE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_SMOOTH" alignment="left">LEN_SMOOTH=</Label>
+    <Field keyword="LEN_SMOOTH" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FSE" alignment="left">FSE=</Label>
+    <Field keyword="FSE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MSCL" alignment="left">MSCL=</Label>
+    <Field keyword="MSCL" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TVFSE" alignment="left">TVFSE=</Label>
+    <Field keyword="TVFSE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GATHERSIZEIN" alignment="left">GATHER SIZE IN=</Label>
+    <Field keyword="NUMTR" type="int" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_GATHERSIZEOUT" alignment="left">GATHER SIZE OUT=</Label>
+    <Field keyword="NUMTR_OUT" type="int" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_SORT_TO_PANELS" alignment="left">SORT_TO_PANELS=</Label>
+    <Field keyword="SORT_TO_PANELS" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEP_SCALE" alignment="left">DEP_SCALE=</Label>
+    <Field keyword="DEP_SCALE" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="SELECT_PATHNAME_VEL" xPos="0" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_VEL" xPos="20" yPos="1" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL" xPos="21" yPos="1" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_VEL_INFO" xPos="20" yPos="2" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL_INFO" xPos="21" yPos="2" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VELTYPE" xPos="1" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELTYPE" xPos="9" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_TYPEOFVELOCITIESONPATHNA" xPos="15" yPos="4" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_AVE" xPos="1" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AVE" xPos="16" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_SMOOTH" xPos="43" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_SMOOTH" xPos="54" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FSE" xPos="1" yPos="8" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FSE" xPos="16" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MSCL" xPos="29" yPos="8" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSCL" xPos="34" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TVFSE" xPos="48" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TVFSE" xPos="54" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHERSIZEIN" xPos="1" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR" xPos="16" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHERSIZEOUT" xPos="38" yPos="10" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_OUT" xPos="54" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SORT_TO_PANELS" xPos="1" yPos="12" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SORT_TO_PANELS" xPos="16" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DEP_SCALE" xPos="38" yPos="12" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEP_SCALE" xPos="54" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_PATHNAME_VEL">
+      <Tip>Choose PATHNAME_VEL using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - SELECT_PATHNAME_VEL<br> Choose PATHNAME_VEL using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL">
+      <Tip>Pathname for velocity file to be used in angle calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PATHNAME_VEL<br> Pathname for velocity file to be used in angle calculation.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ This file can be a VELIO velocity file or a modspec file or a TRCIO trace
+ file containing velocity functions.  If this file is a TRCIO file, the
+ parameter VELTYPE must be set correctly.
+ 
+ Also, if this file is a TRCIO trace file, X and Y locations must be stored
+ within this file in header words 7 and 8 (these numbers are hard-wired into
+ the velocity primitives that AVAST calls). Velocity traces in this file
+ must be sorted with X and Y in ascending order, X increasing most rapidly,
+ and must fill a rectangular grid.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL_INFO">
+      <Tip>Status of PATHNAME_VEL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PATHNAME_VEL_INFO<br> Status of PATHNAME_VEL.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="VELTYPE">
+      <Tip>Type of velocities on the PATHNAME_VEL file (if is trace file).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - VELTYPE<br> Type of velocities on the PATHNAME_VEL file (if is trace file).</center></b>
+<pre> Default = VTNM   (RMS velocities versus time)
+ Allowed = VTNM   (RMS velocities versus time)
+ Allowed = VTRM   (RMS velocities versus time)
+ Allowed = VTIN   (interval velocities versus time)
+ Allowed = VZIN   (interval velocities versus depth)
+ This parameter needs to be specified only if the PATHNAME_VEL file is a
+ TRCIO velocity trace file.  Otherwise this parameter is not used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_AVE">
+      <Tip>Whether to average all velocity functions in the file into one.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - OPT_AVE<br> Whether to average all velocity functions in the file into one.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ For OPT_AVE = NO, the angle calculation is done at each velocity location,
+ and the offset limits for each panel are linearly interpolated for
+ intermediate locations.  The intent of the OPT_AVE = NO option is to be able
+ to accommodate a SLOWLY varying water depth.  It is up to you to put in
+ functions that have a smooth lateral variation. It is NOT recommended that
+ this option be used with raw stacking velocites.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_SMOOTH">
+      <Tip>Running average smoothing length for interval velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - LEN_SMOOTH<br> Running average smoothing length for interval velocities.</center></b>
+<pre> Default = 0.2
+ Allowed = real &gt;= 0.0
+ Length of running average smoothing for interval velocity functions.
+ If DOMAIN = TIME then the units are in seconds.
+ If DOMAIN = DEPTH then LEN_SMOOTH is in depth units (meters or feet).
+ If LEN_SMOOTH = 0.0, then no smoothing is done.
+ 
+ Normally some smoothing is required to avoid jagged velocity contours.
+ Typical values of LEN_SMOOTH should at least as great as the sampling
+ interval of your velocity functions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FSE">
+      <Tip>Fold of stack exponential method for scaling stacked traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - FSE<br> Fold of stack exponential method for scaling stacked traces.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0-1.0
+ The Fold of Stack exponential method scales stacked traces by dividing trace
+ samples by the number of live traces stacked together raised to the FSE
+ power.  The FSE method is time-independent.  FSE = 0.0 does no scaling.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSCL">
+      <Tip>Mute Scaling method for scaling stacked traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - MSCL<br> Mute Scaling method for scaling stacked traces.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0-1.0
+ The Mute Scaling method scales stacked traces by multiplying by a complicated
+ empirical formula (with no obvious justification) based on maximum fold and
+ local time-dependent fold.  Mute scaling is intended to compensate for loss
+ of fold due to muting.  MSCL = 0.0 does no scaling.
+ 
+        Scale(MSCL) = 1.0 + MSCL*(((maximum fold)/(actual fold)) - 1.0)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TVFSE">
+      <Tip>Time Varying Fold of Stack Exponential method.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - TVFSE<br> Time Varying Fold of Stack Exponential method.</center></b>
+<pre> Default = 1.0
+ Allowed = 0.0-1.0
+ The Time Varying Fold of Stack Exponential method scales stacked traces by
+ dividing trace samples by the time varying number of live samples stacked
+ together raised to the TVFSE power.  TVFSE = 0.0 does no scaling.  This is an
+ industry-standard method.
+ 
+ If TVFSE /= 0.0, then FSE and MSCL methods are disabled.
+ 
+ For normal AVAST work, TVFSE should be set to 1.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR">
+      <Tip>Size of input gathers; i.e., NUMTR global upon input to AVAST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - NUMTR<br> Size of input gathers; i.e., NUMTR global upon input to AVAST.</center></b>
+<pre> This is a display-only parameter, illustrating the NUMTR global upon input
+ to AVAST. This must be greater than 1, as AVAST requires gathered input.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_OUT">
+      <Tip>Number of output angles, including fullstack if specified.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - NUMTR_OUT<br> Number of output angles, including fullstack if specified.</center></b>
+<pre> This is a display-only parameter, indicating how many angle traces will be
+ output from AVAST, and also includes the fullstack trace if FULLSTACK = YES.
+ When SORT_TO_PANELS = YES, NUMTR_OUT shows how many stack panels you will
+   get, but the output from AVAST is not gathered in this case.
+ When SORT_TO_PANELS = NO, output traces from AVAST *are* gathered, and
+   NUMTR_OUT is actually the NUMTR global upon output from AVAST.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_TO_PANELS">
+      <Tip>Whether to sort output traces to stack panels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - SORT_TO_PANELS<br> Whether to sort output traces to stack panels.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ 
+ If SORT_TO_PANELS = YES, output is sorted to stack panels; i.e., all CMPs
+ for the first CFOS angle (or first ARS angle range), then all CMPs for the
+ second angle, etc.  In this case, the "GATHER SIZE OUT" number displayed
+ on screen is actually the number of stack panels, and the output traces are
+ passed out singly.
+ 
+ If SORT_TO_PANELS = NO, output is in angle gathers; i.e., all CFOS angles
+ (or all ARS angle ranges) for the first CMP, then all angles for the
+ second CMP, etc.  In this case, the "GATHER SIZE OUT" number displayed
+ on screen is actually the number of traces in each output gather.
+ 
+ If you want to look at the output both ways, choose SORT_TO_PANELS = NO,
+ and then run a sort job (This way, you'll do only one sort instead of two!).
+ 
+ Choose SORT_TO_PANELS = YES to produce stack panels for migration.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEP_SCALE">
+      <Tip>Depth interval corresponding to one "second" in traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - DEP_SCALE<br> Depth interval corresponding to one "second" in traces.</center></b>
+<pre> Default = 1000.0
+ Allowed = real &gt; 0.0
+ This parameter is provided for compatibility with other depth processes
+ such as KMIG. However, you really ought to take the default value (1000),
+ since any other value is incompatible with Cbyt.
+ 
+ DEP_SCALE is active iff DOMAIN = DEPTH.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avast - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="avast">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : AVAST
+ Category   : stacks
+ Written    : 1992-02-03   by: Mike Howard
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Produce various amplitude vs. angle (AVA) stacks.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ DOMAIN determines whether processing is performed in time or depth.
+ If DOMAIN = TIME, the input traces must be sampled in time (two way travel).
+ Velocities must also be picked in time and may be type VTNM, VTRM or VTIN.
+ If DOMAIN = DEPTH, the input traces must be sampled in depth.
+ Velocities must be picked in depth and must be type VZIN (interval).
+ 
+ If MODE = ARS, AVAST stacks traces from a CMP gather within the angle ranges
+ specified by the arrays ANG_BEG and ANG_END.  The stacked trace will be dead
+ for times where the fold in the desired angle range is less than FOLD_MIN.
+ 
+ If MODE = CFOS, AVAST first tries to center the desired number of traces on
+ ANG_CFOS.  If the required fold cannot be obtained, the stack is shifted
+ left or right of ANG_CFOS in order the obtain the desired fold.  The maximum
+ allowable shift is given by SHFT_MAX.  The stacked trace is dead for times
+ that would require a shift greater than the SHFT_MAX tolerance.
+ 
+ If MODE = FOLD, AVAST only outputs fold-of-stack traces for use as a
+ diagnostic.
+ 
+ 
+ Angle Calculation
+ 
+ For OPT_AVG = YES, the velocity functions in file PATHNAME_VEL are manipulated
+ in order to come up with a single interval velocity function to be used for
+ the angle calculation.  If the velocities are of type VTNM or VTRM, they are
+ first resampled to the trace sample interval, then averaged, and finally
+ converted to interval velocity using Dix's formula.  If they are of type
+ VTIN or VZIN, they are resampled to the trace sample interval (honoring the
+ constant interval velocity "steps") then averaged.
+ 
+ For OPT_AVG = NO, the angle calculation is done at each velocity location and
+ the offset limits for each panel are linearly interpolated for intermediate
+ locations.
+ 
+ The intent of the OPT_AVG = NO option is to be able to accommodate a SLOWLY
+ varying water depth.  It is up to you to put in functions which have a smooth
+ lateral variation. It is NOT recommended that the option be used with raw
+ stacking velocites.
+ 
+ 
+ Input Traces
+ 
+ Traces must be input as NMO corrected CMP gathers and must be GATHERED;
+ offsets must be non-negative and in increasing order within each gather.
+ 
+ 
+ Output Traces
+ 
+ If SORT_TO_PANELS = YES, output is sorted to stack panels; i.e., all CMPs for
+ the 1st CFOS angle (or ARS angle range), then all CMPs for the 2nd angle, etc.
+ If SORT_TO_PANELS = NO, output is in angle gathers; i.e., all CFOS angles (or
+ all ARS angle ranges) for the 1st CMP, then all angles for the 2nd CMP, etc.
+ If you want to look at the output both ways, choose SORT_TO_PANELS = NO, and
+ then run a sort job (This way, you'll do only one sort instead of two!).
+ Choose SORT_TO_PANELS = YES to produce stack panels for migration. You'll
+ need the data in angle gathers in order to run gradient-intercept analysis
+ (process AVAGRAD) or prestack inversion but, in that case, you might still
+ choose SORT_TO_PANELS = YES in order to migrate the data; then sort your
+ migrated data to angle gathers. For use by processes such as AVAGRAD or
+ prestack inversion, AVAST sets header word 6 to the central angle of each
+ output trace (CFOS angle or center of ARS range). If FULLSTACK = YES, full
+ stack traces are output as the last stack panel (if SORT_TO_PANELS = YES)
+ or the last trace of each angle gather (if SORT_TO_PANELS = NO).
+ 
+ 
+ CFOS Diagnostic Files
+ 
+ If QC_CFOS = TRAJ, then only a textfile is created, containing angle
+ trajectories for all the desired CFOS angles.  This file will have an
+ extension of ".avast" and can be displayed using the AVAST tool in CBYT.
+ 
+ If QC_CFOS = BOTH, then the trajectory file is created and a tracefile is also
+ created, showing the trace samples included in CMP gathers for each desired
+ ANG_CFOS angle.  This tracefile will have a ".trc8" extension and can be
+ viewed in CBYT as an underlay plot for the input data.  (The tracefile
+ contains as many traces as the input data, so the BOTH option should NOT be
+ chosen for production jobs.)
+ 
+ If QC_CFOS = NONE, then no QC files are created.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Traces must be input as NMO corrected stack gathers.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+      Date        Author     Description
+      ----        ------     -----------
+ 42.  2006-09-11  Stoeckley  Add call to pc_register_array_names for SeisSpace.
+ 41.  2006-04-04  Baumel     Documentation change only - pointing out
+                             restrictions when velocity functions are read
+                             from a TRCIO trace file.
+ 40.  2005-11-29  Stoeckley  Add ability to read velocity functions from a
+                              trcio trace file.  Except for the addition of
+                              parameter VELTYPE, all code changes are in the
+                              velio primitive and the new velio4 primitive.
+ 39.  2002-02-27  CIBurch/   Fix documentation references to byte.  Change
+                  Goodger    keyword PATHNAME_QC_BYTE to PATHNAME_QC_TRC.
+ 38.  2002-02-21  Goodger    Fix length problem with file selection boxes. Line
+                             up some parameters for a nicer appearance.  Put
+                             some parameters on a second page to alleviate
+                             crowding.
+ 37.  2002-02-14  Selzler    Added DEPTH DOMAIN option and file selection
+                             boxes to gui for user convenience.
+                             Incorporated Bob's optimizations for search.
+ 36.  2002-02-08  Baumel     Fix bug that caused out-of-memory references for
+                             some angles with MODE = CFOS. Also fix bug that
+                             incorrectly stacked FOLD_CFOS + 1 traces when
+                             shifting to the right.
+ 35.  2001-04-04  Baumel     Fix .avast QC file format for non-integer angles.
+ 34.  2001-02-13  Stoeckley  Replace BYTE with PERMTFILE (which uses TRCIO).
+ 33.  2001-01-10  Baumel     Add HDR_OFF_OUT parameter.
+ 32.  2000-12-07  Baumel     Change wrapped_up flag to skip_wrapup.
+ 31.  2000-12-04  Baumel     Add Help for display-only parameters.
+ 30.  2000-06-27  Baumel     Allowed GATHERED global to remain true on output
+                             when SORT_TO_PANELS = NO, even when there is only
+                             one trace in the output gather (undid the change
+                             of 2000-05-02).
+ 29.  2000-05-24  Baumel     Add logic to avoid isolated, deep, islands of
+                             non-zero values when MODE = ARS (corresponding
+                             logic for MODE = CFOS had already been added in
+                             initial converted version of 2000-04-24).
+ 28.  2000-05-02  Baumel     Another correction in setting of GATHERED global.
+ 27.  2000-05-01  Baumel     Reset GATHERED global depending on SORT_TO_PANELS.
+ 26.  2000-05-01  Baumel     Added SORT_TO_PANELS option.
+ 25.  2000-04-27  Baumel     Another tweak of front end behavior.
+ 24.  2000-04-26  Baumel     Fix bug involving front end behavior.
+ 23.  2000-04-25  Baumel     Fix bug involving identification of dead traces
+                             when QC_CFOS = BOTH and FULLSTACK = YES.
+ 22.  2000-04-24  Baumel     Converted from old system. Various enhancements
+                             (e.g., TSTRT doesn't have to be zero, add
+                             FULLSTACK option). Simplified trace flow; now
+                             requires CMP gathers in, angle gathers out.
+ 21.  1998-11-13  Vunderink  Begin using the f90 compiler.
+ 20.  1998-08-27  Vunderink  Added QCMERGE parameter.
+ 19.  1998-08-13  Vunderink  Fix bug associated with the TSMOOTH paramter.
+ 18.  1998-07-16  Vunderink  Added TSMOOTH and MAXTOC parameters.
+ 17.  1998-07-07  Vunderink  Fix problem with closing Q! byte file when
+                             only on panel and rewrote logic to ignore
+                             dead traces.
+ 16.  1998-06-25  Vunderink  Ignore dead traces
+ 15.  1998-06-17  Vunderink  Fixed angle table file to contain one table
+                             when AVG=YES
+ 14.  1998-06-04  Vunderink  Added dimensions to QC angle table file.
+ 13.  1998-05-20  Vunderink  Added constant fold of stack support.
+ 12.  1997-03-05  Vunderink  Added MODE parameter.
+ 11.  1995-12-11  Goodger    Fix problem with doing only one panel.
+                             The STROT file specified in note 3 containing
+                             the 5 traces was not being written.
+ 10.  1993-09-23  Troutt     Fix problem with "N" not valid when JUSTOUT=
+                             .TRUE. (entering AVAST from "below"). Set
+                             N=1 in IF block that contains DOs 201,202.
+  9.  1992-11-10  Troutt     Add AVG parameter to allow for spatially
+                             varying the offset-vs-time tables. (These
+                             changes were avail. for testing 199-23).
+  8.  1992-09-02  Troutt     Remove all references to parameter "INPUT."
+                             This process requires single trace input, and
+                             the front-end now checks for this, as well as
+                             for TSTRT=0.
+                             Fix storage and scratch calc. and doc for
+                             same.
+  7.  1992-08-27  Howard     Check GETV for interval velocity type (VTIN).
+  6.  1992-06-19  Peterson   Add SAVE option for FNAME.
+  5.  1992-05-18  Peterson   Check to not exceed number of angles (nang)
+  4.  1992-02-25  Howard     Change to pass out traces.
+  3.  1992-02-19  Howard     Add tail mute header.
+  2.  1992-02-05  Howard     Add MINFOLD parameter.
+  1.  1992-02-03  Howard     Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,599 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="masker" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MASKER" title="Masker" rows="28" columns="80">
+    <Label keyword="COMMENT_MASKSEISMICTRACES" alignment="center">Mask Seismic Traces</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG         =</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDDENOTINGFLAGGE" alignment="left">Header word denoting flagged traces.</Label>
+    <Label keyword="LABEL_MASKING_MODE" alignment="left">MASKING_MODE     =</Label>
+    <Field keyword="MASKING_MODE" type="comboBox" maxLength="52" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MASKING_VALUE" alignment="left">MASKING_VALUE    =</Label>
+    <Field keyword="MASKING_VALUE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BLANKFIELDMEANSANILVALUE" alignment="left">(blank field means a NIL value)</Label>
+    <Label keyword="LABEL_FILETYPE" alignment="left">FILETYPE         =</Label>
+    <Field keyword="FILETYPE" type="comboBox" maxLength="33" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TOP_SHIFT" alignment="left">TOP_SHIFT        =</Label>
+    <Field keyword="TOP_SHIFT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_CONSTANTTOADDTOTOPHORIZO" alignment="left">Constant to add to top horizon time (sec).</Label>
+    <Label keyword="LABEL_BOTTOM_SHIFT" alignment="left">BOTTOM_SHIFT     =</Label>
+    <Field keyword="BOTTOM_SHIFT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_CONSTANTTOADDTOBOTTOMHOR" alignment="left">Constant to add to bottom horizon time (sec).</Label>
+    <Label keyword="LABEL_TOP_TAPER" alignment="left">TOP_TAPER        =</Label>
+    <Field keyword="TOP_TAPER" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TAPERAPPLIEDTOTOPHORIZON" alignment="left">Taper applied to top horizon masking (sec).</Label>
+    <Label keyword="LABEL_BOTTOM_TAPER" alignment="left">BOTTOM_TAPER     =</Label>
+    <Field keyword="BOTTOM_TAPER" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TAPERAPPLIEDTOBOTTOMHORI" alignment="left">Taper applied to bottom horizon masking (sec).</Label>
+    <Label keyword="COMMENT_HORIZONS_TO_HEADERS" alignment="left">HORIZONS_TO_HEADERS=</Label>
+    <Field keyword="HORIZONS_TO_HEADERS" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FIRST" alignment="left">HDR_FIRST=</Label>
+    <Field keyword="HDR_FIRST" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_LAST" alignment="left">HDR_LAST =</Label>
+    <Field keyword="HDR_LAST" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Button keyword="SELECT_MODSPEC">Select MODSPEC</Button>
+    <Label keyword="EQLAB_MODSPEC" alignment="left">=</Label>
+    <Field keyword="MODSPEC" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="MODSPEC_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Field keyword="MODSPEC_NHOR" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TOP_MODSPEC_HORIZON" alignment="left">TOP_MODSPEC_HORIZON       =</Label>
+    <Field keyword="TOP_MODSPEC_HORIZON" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BOTTOM_MODSPEC_HORIZON" alignment="left">BOTTOM_MODSPEC_HORIZON    =</Label>
+    <Field keyword="BOTTOM_MODSPEC_HORIZON" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Button keyword="SELECT_TOP_HORIZON">Select TOP_HORIZON</Button>
+    <Label keyword="EQLAB_TOP_HORIZON" alignment="left">=</Label>
+    <Field keyword="TOP_HORIZON" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="TOP_HORIZON_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_BOTTOM_HORIZON">Select BOTTOM_HORIZON</Button>
+    <Label keyword="EQLAB_BOTTOM_HORIZON" alignment="left">=</Label>
+    <Field keyword="BOTTOM_HORIZON" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="BOTTOM_HORIZON_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_MASKSEISMICTRACES" xPos="25" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="1" yPos="2" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="19" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDDENOTINGFLAGGE" xPos="30" yPos="2" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MASKING_MODE" xPos="1" yPos="3" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MASKING_MODE" xPos="19" yPos="3" xSize="52" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MASKING_VALUE" xPos="1" yPos="4" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MASKING_VALUE" xPos="19" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BLANKFIELDMEANSANILVALUE" xPos="30" yPos="4" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FILETYPE" xPos="1" yPos="5" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILETYPE" xPos="19" yPos="5" xSize="33" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TOP_SHIFT" xPos="1" yPos="7" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOP_SHIFT" xPos="19" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_CONSTANTTOADDTOTOPHORIZO" xPos="30" yPos="7" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_BOTTOM_SHIFT" xPos="1" yPos="8" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BOTTOM_SHIFT" xPos="19" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_CONSTANTTOADDTOBOTTOMHOR" xPos="30" yPos="8" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TOP_TAPER" xPos="1" yPos="9" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOP_TAPER" xPos="19" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TAPERAPPLIEDTOTOPHORIZON" xPos="30" yPos="9" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_BOTTOM_TAPER" xPos="1" yPos="10" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BOTTOM_TAPER" xPos="19" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TAPERAPPLIEDTOBOTTOMHORI" xPos="30" yPos="10" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_HORIZONS_TO_HEADERS" xPos="1" yPos="12" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="HORIZONS_TO_HEADERS" xPos="21" yPos="12" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_FIRST" xPos="29" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FIRST" xPos="39" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_LAST" xPos="45" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LAST" xPos="55" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="14" xSize="77" ySize="7"/>
+     <Constraints component="SELECT_MODSPEC" xPos="2" yPos="15" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_MODSPEC" xPos="23" yPos="15" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODSPEC" xPos="24" yPos="15" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MODSPEC_INFO" xPos="24" yPos="16" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MODSPEC_NHOR" xPos="24" yPos="17" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TOP_MODSPEC_HORIZON" xPos="24" yPos="18" xSize="27" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOP_MODSPEC_HORIZON" xPos="51" yPos="18" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BOTTOM_MODSPEC_HORIZON" xPos="24" yPos="19" xSize="27" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BOTTOM_MODSPEC_HORIZON" xPos="51" yPos="19" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="22" xSize="81" ySize="6"/>
+     <Constraints component="SELECT_TOP_HORIZON" xPos="2" yPos="23" xSize="25" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_TOP_HORIZON" xPos="27" yPos="23" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOP_HORIZON" xPos="28" yPos="23" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TOP_HORIZON_INFO" xPos="28" yPos="24" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_BOTTOM_HORIZON" xPos="2" yPos="25" xSize="25" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_BOTTOM_HORIZON" xPos="27" yPos="25" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BOTTOM_HORIZON" xPos="28" yPos="25" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BOTTOM_HORIZON_INFO" xPos="28" yPos="26" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0-NWIH   (normally 0 or 48-55 or 65-NWIH)
+ 
+ If HDR_FLAG = 0, then all traces are masked.  Otherwise, only traces with
+ a flag (non-zero number) found in header word HDR_FLAG are masked.
+ 
+ If HORIZONS_TO_HEADERS is YES, all traces receive the horizon times in
+ their header words regardless of the flag found in header word HDR_FLAG.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MASKING_MODE">
+      <Tip>How to mask the traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - MASKING_MODE<br> How to mask the traces.</center></b>
+<pre> Default = MASK ABOVE AND BELOW
+ Allowed = MASK ABOVE AND BELOW
+ Allowed = MASK ABOVE
+ Allowed = MASK BELOW
+ Allowed = MASK BETWEEN
+ Allowed = NO MASKING
+ 
+ If MASKING_MODE is MASK ABOVE AND BELOW:
+ 
+   All data will be set to MASKING_VALUE (default NIL) above top horizon.
+   All data will be set to MASKING_VALUE (default NIL) below bottom horizon.
+ 
+ If MASKING_MODE is MASK ABOVE:
+ 
+   All data will be set to MASKING_VALUE (default NIL) above top horizon.
+ 
+ If MASKING_MODE is MASK BELOW:
+ 
+   All data will be set to MASKING_VALUE (default NIL) below bottom horizon.
+ 
+ If MASKING_MODE is MASK BETWEEN:
+ 
+   All data will be set to MASKING_VALUE (default NIL) between the top
+   horizon and the bottom horizon (both must be specified), but only where
+   the top horizon is above the bottom horizon.
+ 
+ If MASKING_MODE is NO MASKING:
+ 
+   No data will be reset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MASKING_VALUE">
+      <Tip>Value to put into masked areas of the traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - MASKING_VALUE<br> Value to put into masked areas of the traces.</center></b>
+<pre> Default = blank
+ Allowed = any value (or leave blank to use a NIL value)
+ 
+ WARNING: Setting MASKING_VALUE to something different from NIL or zero may
+ have unintended consequences if you are using a mute taper.  If this is
+ the case, be sure to set TOP_TAPER and BOTTOM_TAPER to zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILETYPE">
+      <Tip>Type of horizon file (or files) to read in.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - FILETYPE<br> Type of horizon file (or files) to read in.</center></b>
+<pre> Default = MODSPEC FILE
+ Allowed = MODSPEC FILE     (single modspec file containing all horizons)
+ Allowed = STATIC FILES     (each horizon in a separate "static" file)
+ 
+ If FILETYPE is "MODSPEC FILE", MODSPEC must be specified.  This file must
+ contain the top and/or bottom horizon to use for masking.
+ 
+ If FILETYPE is "STATIC FILES", TOP_HORIZON and/or BOTTOM_HORIZON must be
+ specified.  These files must be in CPS static file format.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOP_SHIFT">
+      <Tip>Constant to add to top horizon time (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - TOP_SHIFT<br> Constant to add to top horizon time (seconds).</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ 
+ A positive value adds time (shifts the horizon down).
+ A negative value subtracts time (shifts the horizon up).
+ 
+ When masking above the top horizon, TOP_SHIFT should normally be set
+ to zero or to a negative value.
+ 
+ When masking between the top and bottom horizons, TOP_SHIFT should
+ normally be set to a zero or positive value.
+ 
+ Note that this parameter must be specified in SECONDS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BOTTOM_SHIFT">
+      <Tip>Constant to add to bottom horizon time (seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - BOTTOM_SHIFT<br> Constant to add to bottom horizon time (seconds).</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ 
+ A positive value adds time (shifts the horizon down).
+ A negative value subtracts time (shifts the horizon up).
+ 
+ When masking below the bottom horizon, BOTTOM_SHIFT should normally be set
+ to zero or to a positive value.
+ 
+ When masking between the top and bottom horizons, BOTTOM_SHIFT should
+ normally be set to a zero or negative value.
+ 
+ Note that this parameter must be specified in SECONDS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOP_TAPER">
+      <Tip>Length of taper to apply when masking at the top horizon (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - TOP_TAPER<br> Length of taper to apply when masking at the top horizon (sec).</center></b>
+<pre> Default = 0.06
+ Allowed = real &gt;= 0.0
+ 
+ WARNING: Setting MASKING_VALUE to something different from NIL or zero may
+ have unintended consequences if you are using a mute taper.  If this is
+ the case, be sure to set TOP_TAPER and BOTTOM_TAPER to zero.
+ 
+ Note that this parameter must be specified in SECONDS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BOTTOM_TAPER">
+      <Tip>Length of taper to apply when masking at the bottom horizon (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - BOTTOM_TAPER<br> Length of taper to apply when masking at the bottom horizon (sec).</center></b>
+<pre> Default = 0.06
+ Allowed = real &gt;= 0.0
+ 
+ WARNING: Setting MASKING_VALUE to something different from NIL or zero may
+ have unintended consequences if you are using a mute taper.  If this is
+ the case, be sure to set TOP_TAPER and BOTTOM_TAPER to zero.
+ 
+ Note that this parameter must be specified in SECONDS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HORIZONS_TO_HEADERS">
+      <Tip>Whether to insert horizon times into trace headers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - HORIZONS_TO_HEADERS<br> Whether to insert horizon times into trace headers.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ 
+ If this parameter is YES, new user defined header words will be created
+ to contain the horizon times for all horizons on the modspec (or static)
+ files.  All horizons found on the files will be used regardless of whether
+ they are also being used for masking.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FIRST">
+      <Tip>First user-defined header word for storing horizon times.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - HDR_FIRST<br> First user-defined header word for storing horizon times.</center></b>
+<pre>
+ New header words from HDR_FIRST through HDR_LAST are created when
+ HORIZONS_TO_HEADERS is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_LAST">
+      <Tip>Last user-defined header word for storing horizon times.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - HDR_LAST<br> Last user-defined header word for storing horizon times.</center></b>
+<pre>
+ New header words from HDR_FIRST through HDR_LAST are created when
+ HORIZONS_TO_HEADERS is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_MODSPEC">
+      <Tip>Choose a MODSPEC file using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - SELECT_MODSPEC<br> Choose a MODSPEC file using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MODSPEC">
+      <Tip>Pathname for a modspec file containing a set of horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - MODSPEC<br> Pathname for a modspec file containing a set of horizons.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If MASKING_MODE is MASK ABOVE, data above the TOP_MODSPEC_HORIZON in the
+ modspec file will be masked.
+ 
+ If MASKING_MODE is MASK BELOW, data below the BOTTOM_MODSPEC_HORIZON in the
+ modspec file will be masked.
+ 
+ If MASKING_MODE is MASK ABOVE AND BELOW, data above the TOP_MODSPEC_HORIZON
+ in the modspec file, and below the BOTTOM_MODSPEC_HORIZON in the modspec
+ file, will be masked.
+ 
+ If MASKING_MODE is MASK BETWEEN, data below the TOP_MODSPEC_HORIZON in the
+ modspec file, and above the BOTTOM_MODSPEC_HORIZON in the modspec file,
+ will be masked, but only where the TOP_MODSPEC_HORIZON is above the
+ BOTTOM_MODSPEC_HORIZON.
+ 
+ If MASKING_MODE is NO MASKING, no masking will be performed.
+ 
+ This file is required if FILETYPE is "MODSPEC FILE".
+ This file is not used if FILETYPE is "STATIC FILES".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODSPEC_INFO">
+      <Tip>Status of MODSPEC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - MODSPEC_INFO<br> Status of MODSPEC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MODSPEC_NHOR">
+      <Tip>Number of horizons on MODSPEC file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - MODSPEC_NHOR<br> Number of horizons on MODSPEC file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TOP_MODSPEC_HORIZON">
+      <Tip>Modspec horizon number to use for top horizon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - TOP_MODSPEC_HORIZON<br> Modspec horizon number to use for top horizon.</center></b>
+<pre> Default = none
+ Allowed = any horizon on the modspec file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BOTTOM_MODSPEC_HORIZON">
+      <Tip>Modspec horizon number to use for bottom horizon.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - BOTTOM_MODSPEC_HORIZON<br> Modspec horizon number to use for bottom horizon.</center></b>
+<pre> Default = none
+ Allowed = any horizon on the modspec file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_TOP_HORIZON">
+      <Tip>Choose a TOP_HORIZON using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - SELECT_TOP_HORIZON<br> Choose a TOP_HORIZON using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TOP_HORIZON">
+      <Tip>Pathname for top horizon in static file format.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - TOP_HORIZON<br> Pathname for top horizon in static file format.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If MASKING_MODE is MASK ABOVE AND BELOW or MASK ABOVE, data above this
+ TOP_HORIZON will be masked.
+ 
+ If MASKING_MODE is MASK BETWEEN, data below this TOP_HORIZON and above the
+ BOTTOM HORIZON will be masked, but only where the top horizon is above
+ the bottom horizon.
+ 
+ This file is not used if FILETYPE is "MODSPEC FILE".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOP_HORIZON_INFO">
+      <Tip>Status of TOP_HORIZON.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - TOP_HORIZON_INFO<br> Status of TOP_HORIZON.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_BOTTOM_HORIZON">
+      <Tip>Choose a BOTTOM_HORIZON using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - SELECT_BOTTOM_HORIZON<br> Choose a BOTTOM_HORIZON using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="BOTTOM_HORIZON">
+      <Tip>Pathname for bottom horizon in static file format.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - BOTTOM_HORIZON<br> Pathname for bottom horizon in static file format.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If MASKING_MODE is MASK ABOVE AND BELOW or MASK BELOW, data below this
+ BOTTOM_HORIZON will be masked.
+ 
+ If MASKING_MODE is MASK BETWEEN, data below the TOP_HORIZON and above this
+ BOTTOM HORIZON will be masked, but only where the top horizon is above
+ the bottom horizon.
+ 
+ This file is not used if FILETYPE is "MODSPEC FILE".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BOTTOM_HORIZON_INFO">
+      <Tip>Status of BOTTOM_HORIZON.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - BOTTOM_HORIZON_INFO<br> Status of BOTTOM_HORIZON.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>masker - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="masker">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : MASKER                            (mask traces)
+ Category   : miscellaneous
+ Written    : 2003-06-19   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Mask seismic traces by setting masked values to nil.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process masks seismic traces by setting masked values to nil, or to
+ any other user-specified value.
+ 
+ The masked regions are defined by horizon files which are in modspec
+ or static file format.
+ 
+ The top, bottom, and internal portions of seismic traces can be masked.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+005. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+  4. 2005-01-31  Stoeckley  Add parameter MASKING_VALUE.
+  3. 2004-03-09  Stoeckley  Add parameters for shifting horizons and tapering
+                             mutes; set the mute headers when muting; add
+                             NO MASKING to the masking mode options; add
+                             parallel-safe control parameters; add parameter
+                             HORIZONS_TO_HEADERS; remove parameters referring
+                             to flattening horizons.
+  2. 2003-07-28  Stoeckley  Add GUI information field modspec_nhor; fix
+                             problem with reading modspec files; add third
+                             separate static file or horizon for flattening;
+                             add ability to choose which horizons on modspec
+                             file to use; change default for FILETYPE to
+                             MODSPEC FILE; change FILETYPE kombobox to a
+                             combobox.
+  1. 2003-06-19  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="wsep" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="WSEP" title="WSEP" rows="24" columns="80">
+    <Label keyword="LABEL_FILENAME" alignment="left">FILENAME=</Label>
+    <Field keyword="FILENAME" type="string" maxLength="64" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SEPDIMENSIONS" alignment="center">SEP Dimensions</Label>
+    <Border keyword="BORDER1"/>
+    <ArraySet keyword="XST" label="N       D          O               LABEL">
+     <Array keyword="N" type="int" maxLength="8  " columnName="N" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="D" type="float" maxLength="11 " columnName="D" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="O" type="float" maxLength="16 " columnName="O" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="LABEL" type="string" maxLength="31 " columnName="LABEL" editable="yes" sensitive="yes" columnSize="31"/>
+    </ArraySet>
+    <Label keyword="LABEL_OVERRIDE" alignment="left">OVERRIDE=</Label>
+    <Field keyword="OVERRIDE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_FILENAME" xPos="5" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILENAME" xPos="14" yPos="0" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SEPDIMENSIONS" xPos="31" yPos="1" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="5" yPos="2" xSize="66" ySize="8"/>
+     <Constraints component="XST" xPos="5" yPos="3" xSize="69" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_OVERRIDE" xPos="5" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OVERRIDE" xPos="14" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FILENAME">
+      <Tip>Full file name for the output SEP file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - FILENAME<br>Full file name for the output SEP file.</center></b>
+<pre>
+ Default = NONE
+ Allowed = any valid file name
+ Your file name for the SEP output file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="N">
+      <Tip>Number of samples in this dimension.  First entry in this column is the fastest</Tip>
+      <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - N<br>Number of samples in this dimension.  First entry in this column is the fastest</center></b>
+<pre> Default =
+ Allowed &gt;=0 integer
+ Fastest dimension first, (typically the number of samples per trace), then next slowest, on down.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="D">
+      <Tip>Sample rate or increment between samples associated with this dimension.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - D<br>Sample rate or increment between samples associated with this dimension.</center></b>
+<pre> Default =
+ Allowed = floating point number
+ Sample rate for this dimension or "increment" for this dimension.  Distance or time/depth between
+ samples.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="O">
+      <Tip>Origin for this dimension.  (could be starting time for a trace, first inline, e</Tip>
+      <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - O<br>Origin for this dimension.  (could be starting time for a trace, first inline, e</center></b>
+<pre> Default =
+ Allowed = floating point number
+ Origin or starting point for this dimension.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LABEL">
+      <Tip>Label associated with this dimension.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - LABEL<br>Label associated with this dimension.</center></b>
+<pre> Default =
+ Allowed = character string
+ Your label for this dimension.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OVERRIDE">
+      <Tip>Override the settings for N1, D1, O1, L1, and N2?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - OVERRIDE<br>Override the settings for N1, D1, O1, L1, and N2?</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ The settings for the first dimension and the second N2 value are automatically generated unless you say YES.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<b><center>wsep - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="wsep">
+   <Text><![CDATA[<html><head><base href=file:///homes/3DGeo/bmenger/cpseis/src//>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : WSEP    (Write SEP file)
+ Category   : io
+ Written    : 2009-10-12   by: Bill Menger
+ Revised    : 2009-10-12   by: Bill Menger
+ Maturity   : beta
+ Purpose    : Write seismic traces to SEP file
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+This process will allow traces to pass through the flow untouched, but will
+write all traces that come past it into an SEP formatted file.  The file name
+you provide should end in .H and will represent the ascii text file for the
+SEP data.  An associated file of the same name but with an @ added to the end
+will be created with your binary data.  Example:  filename = test.H will create
+two files, test.H and test.H@.  The file test.H is editable and contains your
+metadata about the dataset.  The data is always written in native_float format.
+By default, the first dimension is set to the sample rate.  If the sample rate
+is less than 1.0 the label is set to Time, if greater, it is set to Depth.  You
+can override any values in the ascii header file (test.H above).
+ 
+This process will not sort your data and will not fill in zeroed traces for
+any missing traces in one dimension.  SEP format requires that your data be
+regular in all dimensions, so it is up to you to fill in missing traces in a
+previous process within this flow AND to sort your data in the order in which
+the SEP header is told that the data will be loaded.  No checks exist to
+guarantee that you follow these rules.
+ 
+You are limited to 5 dimensions.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+  1. 2009-10-12  Bill Menger  Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

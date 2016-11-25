@@ -1,0 +1,1160 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : makefile.platforms
+# Category   : stand-alone
+# Written    : 2003-05-13   by: Tom Stoeckley
+# Revised    : 2004-03-01   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Include makefile which defines platforms supported by CPS.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This include file defines appropriate variables for each platform which
+# is supported by CPS (which includes the ~sps and ~spws directories).
+#
+# This include file should be included in other makefiles to provide
+# consistent definitions for the use of compilers and linkers on different
+# platforms.  It is intended that this include file be used by ~sps managers,
+# ~spws managers, and developers in their own directories so that all of
+# the CPS seismic processing code (and related code) will be compiled and
+# linked in a consistent manner.
+#
+# A platform is defined here as a software system.  There can be more than
+# one platform on the same architecture (operating system and hardware).
+# For example: In the linux case (linux operating system on intel machines),
+# several different platforms are based on the Fortran-90 Absoft, Portland
+# Group, and Intel compilers.  In the SGI case, two different platforms might
+# use 32-bit and 64-bit addresses.  Separate platforms should also be created
+# for different versions of compilers and for different optimization/debug
+# levels.
+#
+# To use this include file, the following line should be put into the
+# user's makefile:
+#
+#             include $(CFECUSTOMDIR)/makefile.platforms
+#
+# Input and output variables in this file are upper case.
+# Internally-used variables in this file are lower case.
+#
+#-------------------------------------------------------------------------------
+#                           INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#    SPSDIR              Absolute path to ~sps home directory.
+#    CFECUSTOMDIR        Location of cfecustom makefiles.
+#    CFECUSTOMSCRIPTS    Location of cfecustom scripts.
+#    CFECUSTOMPROGRAMS   Location of cfecustom programs.
+#    ARCHITECTURE        Needed only for validating the platform.
+#    HOST                Name of host computer.
+#
+# The following makefile variables must be set:
+#
+#    INCDIRS        List of directories where include files can be found.
+#    MODDIRS        List of directories where module files can be found.
+#    DIRECTIVES     List of -D directives to define for C and C++ compilers.
+#    MATURITY       Maturity of the ~sps library to link to.
+#
+# Notes:
+#
+#    INCDIRS must not include the -I flags.
+#    MODDIRS must not include the module flags (-M or -p or whatever).
+#    DIRECTIVES must not include the -D flags.
+#    MATURITY must be either alpha or beta or production or none.
+#    If MATURITY is none, no ~sps library will be linked to.
+#    INCDIRS normally should include full paths (except for possibly ..).
+#    MODDIRS normally should include full paths terminating with /$(PLATFORM)
+#     (except for possibly .).
+#
+#    Additional directives representing platform and maturity will be added
+#    to the C and C++ compile commands by this include file, so they should
+#    not be included in the DIRECTIVES variable.
+#
+# Note regarding the Portland Group compiler:
+#
+#    Only the first directory in MODDIRS is used with the Portland Group
+#    compiler, because that compiler accepts only one directory.  For
+#    example, if MODDIRS is set as follows (local platform-specific
+#    directory plus an ~sps modules directory):
+#            MODDIRS = . $(SPSDIR)/$(MATURITY)/modules/$(PLATFORM)
+#    then only the local directory will be used, and links to the modules
+#    in the ~sps modules directory must be placed into the local directory
+#    for all modules not already existing in the local directory.
+#
+#-------------------------------------------------------------------------------
+#                                 ERRORS
+#
+# This include file quits with an error message if any of the above
+# environment variables are not set, or if MATURITY is not set to alpha
+# or beta or production or none.  But it is OK for INCDIRS, MODDIRS, or
+# DIRECTIVES to be missing or blank.
+#
+# This include file also quits with an error message if gmake is not
+# executed in a supported platform-specific directory, or if that directory
+# is not compatible with the host computer or its architecture.
+#
+#-------------------------------------------------------------------------------
+#                           NEW OUTPUT VARIABLES
+#
+# The following variables are defined in this makefile:
+#
+#    PLATFORM          Platform-specific directory in which gmake was typed.
+#    PARENT            Directory just above the platform-specific directory.
+#
+#    FC                Fortran compiler with flags.
+#    FC_FLOATIO        Fortran compiler with flags for FLOATIO.
+#    FC_KMIG           Fortran compiler with flags for KMIG.
+#    FC_PPIO           Fortran compiler with flags for PPIO.
+#    FC_LINK           Fortran linker with flags.
+#
+#    CC                C compiler with flags.
+#    CC_LINK           C linker with flags.
+#
+#    CXX               C++ compiler with flags.
+#    CXX_DEPEND        C++ compiler with flags for generating dependencies.
+#    CXX_LINK          C++ linker with flags.
+#
+#    PURE_LINK         Purify linker with flags.
+#    AR_LINK           Archive library (.a) maker with flags.
+#    SO_LINK           Shared library (.so) maker with flags.
+#
+#    MODEXT            Fortran90 module file extension (with period).
+#    MODFLAG           Fortran90 compiler flag for module directories.
+#    IS_PG_COMPILER    Undefined or set to yes.
+#
+#    SPS_LIBS          Low level ~sps libraries.
+#    FOR_LIBS          Fortran libraries (needed if using C or C++ linker).
+#    GUI_LIBS          X/Motif libraries (needed for most ~spws programs).
+#    MATH_LIBS         Math and miscellaneous libraries.
+#    CPSLIB            The ~sps library (of requested maturity) to link to.
+#
+# Notes:
+#
+#    PLATFORM will not contain the full path.
+#    PARENT   will not contain the full path.
+#    SPS_LIBS will not include prodlib or betalib or alphalib.
+#    CPSLIB will be the absolute path to prodlib or betalib or alphalib.
+#    CPSLIB and SPS_LIBS will be blank if MATURITY is none.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  8. 2004-03-01  Stoeckley  Change MODFLAG to -I for linuxp and linuxp_debug.
+#  7. 2004-02-26  Done       Correct MODFLAG for linuxp and linuxp_debug.
+#  6. 2003-07-17  Goodger    Correct absoft library path for linuxab80.
+#  5. 2003-07-09  Goodger    Added xarch=generic to sol70 compile.
+#  4. 2003-07-08  Goodger    Add platforms linuxab80, linuxab80_debug.
+#  3. 2003-06-20  Stoeckley  Change CC in non-debug platforms to be optimized,
+#                             and remove CC_OPT.
+#  2. 2003-06-16  Stoeckley  Use new scripts for sun Fortran and C and C++
+#                             compilers; add -compat=4 to sun C++ compiler
+#                             flags; add MATURITY option "none" for when
+#                             ~sps libraries are not needed; add altix71
+#                             platform; add -lfortran and -lffio to sgi
+#                             fortran libraries.
+#  1. 2003-05-13  Stoeckley  Initial version, made from Karen's makefile in
+#                            ~sps/alpha/spsmodules, and an older makefile
+#                            with the same name as this one, which has been
+#                            used in ~spws and Tom's directories for a couple
+#                            of years.  Several obsolete platforms
+#                            have been removed or renamed.  Four new SGI
+#                            platforms have been added, but without correct
+#                            contents which will be determined later.  The
+#                            directive -DTESTLIB was removed.  An improved (and
+#                            simplified) means of verifying the suitability
+#                            of the platform-specific directory is implemented.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+# RCS Id : $Id: makefile.platforms,v 1.3 2004/03/25 22:11:23 wjdone Exp spws $
+
+
+##---------------- verify presence of required variables -------------------##
+##---------------- verify presence of required variables -------------------##
+##---------------- verify presence of required variables -------------------##
+
+
+ifeq ($(strip $(SPSDIR)),)
+  $(error environment variable SPSDIR not set)
+endif
+
+ifeq ($(strip $(CFECUSTOMDIR)),)
+  $(error environment variable CFECUSTOMDIR not set)
+endif
+
+ifeq ($(strip $(CFECUSTOMSCRIPTS)),)
+  $(error environment variable CFECUSTOMSCRIPTS not set)
+endif
+
+ifeq ($(strip $(CFECUSTOMPROGRAMS)),)
+  $(error environment variable CFECUSTOMPROGRAMS not set)
+endif
+
+ifeq ($(strip $(ARCHITECTURE)),)
+  $(error environment variable ARCHITECTURE not set)
+endif
+
+ifeq ($(strip $(HOST)),)
+  $(error environment variable HOST not set)
+endif
+
+ifeq ($(strip $(MATURITY)),)
+  $(error makefile variable MATURITY not set)
+endif
+
+
+##---------------- verify permitted value of maturity ---------------------##
+##---------------- verify permitted value of maturity ---------------------##
+##---------------- verify permitted value of maturity ---------------------##
+
+
+whoops = true
+
+ifeq ($(MATURITY), production)
+  whoops = false
+endif
+
+ifeq ($(MATURITY), beta)
+  whoops = false
+endif
+
+ifeq ($(MATURITY), alpha)
+  whoops = false
+endif
+
+ifeq ($(MATURITY), none)
+  whoops = false
+endif
+
+ifeq ($(whoops), true)
+  $(error illegal MATURITY: $(MATURITY) \
+       - must be alpha or beta or production or none)
+endif
+
+
+##--------------------------- initialization -------------------------------##
+##--------------------------- initialization -------------------------------##
+##--------------------------- initialization -------------------------------##
+
+
+PLATFORM = $(notdir $(PWD))
+PARENT   = $(notdir $(patsubst %/,%, $(dir $(CURDIR))))
+
+### Note: CURDIR is the full path of the current directory.
+###       CURDIR is a gmake variable which is always defined.
+###       CURDIR must be used above instead of PWD for situations where rsh
+###       is used, because rsh apparently retains the previous PWD.
+
+
+##------------------ error detection initialization ------------------------##
+##------------------ error detection initialization ------------------------##
+##------------------ error detection initialization ------------------------##
+
+
+permitted_architectures = unset
+permitted_hosts         = unrestricted
+
+### Note: permitted_architectures must be reset to one or more allowed
+###       architectures.
+
+### Note: permitted_hosts must be reset to one or more allowed hosts, but
+###       only in cases where some hosts with the correct architecture cannot
+###       be used (e.g. missing compiler or wrong version of compiler or wrong
+###       version of operating system).
+
+
+##---------------------------- linuxab75 -----------------------------------##
+##---------------------------- linuxab75 -----------------------------------##
+##---------------------------- linuxab75 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab75)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_FLOATIO = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_KMIG    = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_PPIO    = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_LINK    = ab75_f90
+
+  CC         = gcc -c -O3 -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c     -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L$(ABSOFT)/lib -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = -L/usr/applinux/vendors/openmotif/2.1/lib -lXm   \
+                -L/usr/X11R6/lib -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##--------------------------- linuxab75_debug ------------------------------##
+##--------------------------- linuxab75_debug ------------------------------##
+##--------------------------- linuxab75_debug ------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab75_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  JAVA_HOME = /apps/geophysics/jdk1.6.0_04
+  JAVA_DIR_ROOT = $(JAVA_HOME)/jre/lib
+
+  FC         = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_FLOATIO = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_KMIG    = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_PPIO    = ab75_f90 -c     -g -YDEALLOC=MINE -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab75_f90
+
+  CC         = gcc -c -gdwarf -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -gdwarf -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM              -DLINUX -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L$(ABSOFT)/lib -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = -L/usr/applinux/vendors/openmotif/2.1/lib/ -lXm  \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+# GUI_LIBS   = -L/usr/X11R6/lib -lXm -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_DIR_ROOT)/i386 -L$(JAVA_DIR_ROOT)/i386/client \
+              -ljava -ljvm -lverify 
+
+  INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)include/linux \
+             /usr/applinux/vendors/openmotif/2.1/include
+# INCDIRS += /usr/X11R6/include
+
+endif
+
+
+##--------------------------- linuxab75_motif_1_2 --------------------------##
+##--------------------------- linuxab75_motif_1_2 --------------------------##
+##--------------------------- linuxab75_motif_1_2 --------------------------##
+
+
+ifeq ($(PLATFORM), linuxab75_motif_1_2)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = hoeplc03
+
+  FC         = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_FLOATIO = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_KMIG    = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_PPIO    = ab75_f90 -c     -g -YDEALLOC=MINE -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab75_f90
+
+  CC         = gcc -c -gdwarf -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -gdwarf -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+# CXX_LINK   = g++ -static
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM              -DLINUX -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+# SO_LINK    = ld -static
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L$(ABSOFT)/lib -lU77 -lfio -lf90math -lf77math -lV77 -lc
+
+# Motif 1.2 libraries and includes to be used
+  GUI_LIBS   = /usr/local/motif/motif12/lib/libXm.a \
+               -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+  MATH_LIBS  = -lm -lpthread
+
+  INCDIRS += /usr/local/motif/motif12/include
+# INCDIRS += /usr/X11R6/include
+
+endif
+
+
+##--------------------------- linuxab75_motif_2_1 --------------------------##
+##--------------------------- linuxab75_motif_2_1 --------------------------##
+##--------------------------- linuxab75_motif_2_1 --------------------------##
+
+
+ifeq ($(PLATFORM), linuxab75_motif_2_1)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = hoeplc03
+
+  FC         = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_FLOATIO = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_KMIG    = ab75_f90 -c -en -g -YDEALLOC=MINE
+  FC_PPIO    = ab75_f90 -c     -g -YDEALLOC=MINE -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab75_f90
+
+  CC         = gcc -c -gdwarf -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -gdwarf -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+# CXX_LINK   = g++ -static
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM              -DLINUX -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+# SO_LINK    = ld -static
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L$(ABSOFT)/lib -lU77 -lfio -lf90math -lf77math -lV77 -lc
+
+# Motif 2.1 libraries and includes to be used
+  GUI_LIBS   = /usr/local/motif/motif21/lib/libXm.a \
+               -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+  MATH_LIBS  = -lm -lpthread
+
+  INCDIRS += /usr/local/motif/motif21/include
+# INCDIRS += /usr/X11R6/include
+
+endif
+
+##---------------------------- linuxab80 -----------------------------------##
+##---------------------------- linuxab80 -----------------------------------##
+##---------------------------- linuxab80 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_FLOATIO = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_KMIG    = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_PPIO    = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_LINK    = ab80_f90
+
+  CC         = gcc -c -O3 -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c     -Wall -DLINUX -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib -lU77 -lfio -lf90math -lf77math -lV77
+  GUI_LIBS   = -L/usr/applinux/vendors/openmotif/2.1/lib -lXm   \
+                -L/usr/X11R6/lib -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lc
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+
+
+##----------------------------- linuxp -------------------------------------##
+##----------------------------- linuxp -------------------------------------##
+##----------------------------- linuxp -------------------------------------##
+
+
+ifeq ($(PLATFORM), linuxp)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  IS_PG_COMPILER = yes
+
+  FC         = pgf90 -c -Ktrap=fp -Mstandard -O2 -Mvect
+  FC_FLOATIO = pgf90 -c -Ktrap=fp -Mstandard     -Mvect
+  FC_KMIG    = pgf90 -c -Ktrap=fp -Mstandard -O2 -Mvect
+  FC_PPIO    = pgf90 -c -Ktrap=fp -Mstandard -O2 -Mvect
+  FC_LINK    = pgf90
+
+  CC         = gcc -c -O3 -Wall -DLINUXP -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -O3 -Wall -DLINUXP -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUXP -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+# MODFLAG    = -module # NOTE: MODFLAG will be "-module "
+  MODFLAG    = -I
+
+  FOR_LIBS   = -L$(PGI)/linux86/5.0/lib \
+			   -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl \
+			   -lpgftnrtl -static -lpgc
+  GUI_LIBS   =
+  MATH_LIBS  = -lm -lpthread
+
+# MODDIRS := $(word 1, $(MODDIRS))
+
+endif
+
+
+##-------------------------- linuxp_debug ----------------------------------##
+##-------------------------- linuxp_debug ----------------------------------##
+##-------------------------- linuxp_debug ----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxp_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  IS_PG_COMPILER = yes
+
+  FC         = pgf90 -c -Ktrap=fp -Mstandard -g  -Mvect
+  FC_FLOATIO = pgf90 -c -Ktrap=fp -Mstandard -g  -Mvect
+  FC_KMIG    = pgf90 -c -Ktrap=fp -Mstandard -g  -Mvect
+  FC_PPIO    = pgf90 -c -Ktrap=fp -Mstandard -g  -Mvect
+  FC_LINK    = pgf90
+
+  CC         = gcc -c -g  -Wall -DLINUXP -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -g  -Wall -DLINUXP -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUXP -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+# MODFLAG    = -module # NOTE: MODFLAG will be "-module "
+  MODFLAG    = -I
+
+  FOR_LIBS   = -L$(PGI)/linux86/5.0/lib \
+			   -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl \
+			   -lpgftnrtl -static -lpgc
+  GUI_LIBS   =
+  MATH_LIBS  = -lm -lpthread
+
+# MODDIRS := $(word 1, $(MODDIRS))
+
+endif
+
+
+##------------------------------ linuxi71 -----------------------------------##
+##------------------------------ linuxi71 -----------------------------------##
+##------------------------------ linuxi71 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxi71)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = hoeplc01
+
+  FC         = ifc -c -O3
+  FC_FLOATIO = ifc -c -O3
+  FC_KMIG    = ifc -c -O
+  FC_PPIO    = ifc -c -O
+  FC_LINK    = ifc
+
+  CC         = gcc -c -O3 -Wall -DLINUXI -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -O3 -Wall -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUXI -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   =
+  GUI_LIBS   =
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+
+##--------------------------- linuxi71_debug --------------------------------##
+##--------------------------- linuxi71_debug --------------------------------##
+##--------------------------- linuxi71_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), linuxi71_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = hoeplc01
+
+  FC         = ifc -c -g -O3
+  FC_FLOATIO = ifc -c -g -O3
+  FC_KMIG    = ifc -c -O
+  FC_PPIO    = ifc -c -O
+  FC_LINK    = ifc
+
+  CC         = gcc -c -g -Wall -DLINUXI -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -g -Wall -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM         -DLINUXI -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   =
+  GUI_LIBS   =
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+
+##------------------------------- generic ----------------------------------##
+##------------------------------- generic ----------------------------------##
+##------------------------------- generic ----------------------------------##
+
+
+#ifeq ($(PLATFORM), linuxab90_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#ifeq ($(PLATFORM), linuxab80_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), sol62)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), sol62_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), linuxi81_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), linuxi90_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), linuxi91_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxp60_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxp60)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxab90_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxab90)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxab90RHEL44_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxab90RHEL44)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxi91_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), x86_64_intel91_lam)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), x86_64_gfortran_mpich2)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), x86_64_gfortran_lam)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), i686_intel91_lam)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), i686_gfortran_mpich2)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64linuxi91)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), 64sgi73)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), linuxab80RHEL39_debug)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+#
+#ifeq ($(PLATFORM), linuxab80RHEL39)
+#  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+#endif
+
+ifeq ($(PLATFORM), $(CPSEIS_ARCH))
+  include $(SPWSMAKEDIR)/makefile.$(PLATFORM)
+endif
+
+##------------------------------ sol70 ------------------------------------##
+##------------------------------ sol70 ------------------------------------##
+##------------------------------ sol70 ------------------------------------##
+
+
+ifeq ($(PLATFORM), sol70)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol70_f90 -c -fast -xarch=generic -ansi 
+  FC_FLOATIO = sol70_f90 -c -fast -xarch=generic -ansi 
+  FC_KMIG    = sol70_f90 -c -fast -xarch=generic -ansi 
+  FC_PPIO    = sol70_f90 -c -fast -xarch=generic -ansi 
+  FC_LINK    = sol70_f90
+
+  CC         = sol70_cc -c -xO3           -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol70_cc                    
+
+  CXX        = sol70_CC -c      -compat=4 -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol70_CC         -compat=4  
+  CXX_DEPEND = g++       -MM              -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol70_f90 -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/opt/SUNWpro/lib -L/opt/SUNWspro/WS6U2/lib \
+                -L/usr/ccs/lib -L/usr/lib \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath -lF77 -lV77 -lM77
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen
+
+endif
+
+
+##------------------------- sol70_debug ------------------------------------##
+##------------------------- sol70_debug ------------------------------------##
+##------------------------- sol70_debug ------------------------------------##
+
+
+ifeq ($(PLATFORM), sol70_debug)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  JAVA_HOME = /apps/geophysics/jdk1.6.0
+
+  FC         = sol70_f90 -c -g -ansi
+  FC_FLOATIO = sol70_f90 -c -g -ansi
+  FC_KMIG    = sol70_f90 -c    -ansi
+  FC_PPIO    = sol70_f90 -c -g -ansi 
+  FC_LINK    = sol70_f90 
+
+  CC         = sol70_cc -c -g           -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol70_cc                  
+
+  CXX        = sol70_CC -c -g -compat=4 -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol70_CC       -compat=4  
+  CXX_DEPEND = g++       -MM            -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol70_f90 -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/opt/SUNWpro/lib -L/opt/SUNWspro/WS6U2/lib \
+                -L/usr/ccs/lib -L/usr/lib \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath -lF77 -lV77 -lM77
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/sparcv9/ -L$(JAVA_HOME)/jre/lib/sparcv9/server \
+              -ljava -ljvm -lverify
+
+  INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)include/solaris
+
+endif
+
+
+##----------------------------- 32sgi73 ------------------------------------##
+##----------------------------- 32sgi73 ------------------------------------##
+##----------------------------- 32sgi73 ------------------------------------##
+
+
+ifeq ($(PLATFORM), 32sgi73)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -O -32
+  FC_FLOATIO = f90 -c -O -32
+  FC_KMIG    = f90 -c -O -32
+  FC_PPIO    = f90 -c -O -32 
+  FC_LINK    = f90       -32
+
+  CC         = cc  -c -O -32 -DSGI32 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = cc        -32
+
+  CXX        = CC  -c -O -32 -DSGI32 -woff 3252 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = CC        -32
+  CXX_DEPEND = g++ -MM       -DSGI32 -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -lXm -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+# On sgi, warning 3252 is given when calling const function arg with non-const
+# variable, there should be no problem with this.  With 3252 suppressed,
+# calling non-const function arg with const variable still gives error,
+# as we want.
+
+
+##--------------------------- 32sgi73_debug --------------------------------##
+##--------------------------- 32sgi73_debug --------------------------------##
+##--------------------------- 32sgi73_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), 32sgi73_debug)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -g -32
+  FC_FLOATIO = f90 -c -g -32
+  FC_KMIG    = f90 -c -g -32
+  FC_PPIO    = f90 -c -g -32 
+  FC_LINK    = f90       -32
+
+  CC         = cc  -c -g -32 -DSGI32 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = cc        -32
+
+  CXX        = CC  -c -g -32 -DSGI32 -woff 3252 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = CC        -32
+  CXX_DEPEND = g++ -MM       -DSGI32 -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -lXm -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+
+##--------------------------- 64sgi73_debug --------------------------------##
+##--------------------------- 64sgi73_debug --------------------------------##
+##--------------------------- 64sgi73_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), 64sgi73_debug)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -g -64 -Wl,-multigot -O2
+  FC_FLOATIO = f90 -c -g -64 -Wl,-multigot -O2
+  FC_KMIG    = f90 -c -g -64 -Wl,-multigot -O2
+  FC_PPIO    = f90 -c -g -64 -Wl,-multigot -O2 
+  FC_LINK    = f90       -64 -Wl,-multigot -O2
+
+  CC         = cc  -c -g -64 -Wl,-multigot -O2 -DSGI64 
+  CC_LINK    = cc        -64 -Wl,-multigot
+
+  CXX        = CC  -c -g -64 -Wl,-multigot -O2 -DSGI64 -woff 1021
+  CXX_LINK   = CC        -64 -Wl,-multigot
+  CXX_DEPEND = g++ -MM                         -DSGI64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -lXm -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+
+##----------------------------- altix71 ------------------------------------##
+##----------------------------- altix71 ------------------------------------##
+##----------------------------- altix71 ------------------------------------##
+
+
+ifeq ($(PLATFORM), altix71)
+
+  permitted_architectures = altix
+  permitted_hosts         = altix
+
+  FC         = efc -c -O3
+  FC_FLOATIO = efc -c -O3
+  FC_KMIG    = efc -c -O
+  FC_PPIO    = efc -c -O
+  FC_LINK    = efc      
+
+  CC         = gcc -c -O3 -Wall -DLINUXI -DALTIX -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc        -Wall 
+
+  CXX        = g++ -c -O  -Wall -DLINUXI -DALTIX -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++        -Wall 
+  CXX_DEPEND = g++ -MM          -DLINUXI -DALTIX -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -L/usr/local/compilers/intel/compiler70/ia64/lib \
+               -L/usr/lib -Bstatic -lintrins -lIEPCF90 -lF90 -lintrins -limf
+
+     ## The above definition for FOR_LIBS is preliminary and very uncertain.
+     ## (FOR_LIBS is needed only for C and C++ linkers)
+
+  GUI_LIBS   = -lXm -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+##------------------------------ error -------------------------------------##
+##------------------------------ error -------------------------------------##
+##------------------------------ error -------------------------------------##
+
+
+ifeq ($(permitted_architectures), unset)
+  $(warning )
+  $(warning ***************************************************************)
+  $(warning $(HOST)  $(PARENT)/$(PLATFORM)  $(ARCHITECTURE))
+  $(warning ***************************************************************)
+  $(warning wrong directory.)
+  $(warning you should be in a platform-specific subdirectory.)
+  $(warning ***************************************************************)
+  $(error fatal error)
+endif
+
+architecture = $(findstring $(ARCHITECTURE), $(permitted_architectures))
+ifneq ($(architecture), $(ARCHITECTURE))
+  $(warning )
+  $(warning ***************************************************************)
+  $(warning $(HOST)  $(PARENT)/$(PLATFORM)  $(ARCHITECTURE))
+  $(warning ***************************************************************)
+  $(warning wrong architecture for this platform-specific subdirectory.)
+  $(warning permitted architectures are: $(permitted_architectures).)
+  $(warning ***************************************************************)
+  $(error fatal error)
+endif
+
+ifneq ($(permitted_hosts), unrestricted)
+  host = $(findstring $(HOST), $(permitted_hosts))
+  ifneq ($(host), $(HOST))
+    $(warning )
+    $(warning ***************************************************************)
+    $(warning $(HOST)  $(PARENT)/$(PLATFORM)  $(ARCHITECTURE))
+    $(warning ***************************************************************)
+    $(warning wrong host for this platform-specific subdirectory.)
+    $(warning permitted hosts are: $(permitted_hosts).)
+    $(warning ***************************************************************)
+    $(error fatal error)
+  endif
+endif
+
+
+##------------------- get maturity-dependent variables ---------------------##
+##------------------- get maturity-dependent variables ---------------------##
+##------------------- get maturity-dependent variables ---------------------##
+
+
+platform2 = $(PLATFORM)
+
+ifeq ($(PLATFORM), linuxab75_motif_2_1)
+  platform2 = linuxab75_debug
+endif
+
+ifeq ($(PLATFORM), linuxab75_motif_1_2)
+  platform2 = linuxab75_debug
+endif
+
+ifeq ($(platform2), 64linuxp60_debug)
+  SPS_LIBS = -L$(SPSDIR)/lib/64linuxp60 \
+             -lfft -lcgm -lmpi_stubs -llmrk_stubs
+else
+	#SPS_LIBS=-L$(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)/lib -lcgm
+	SPS_LIBS=$(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)/lib/libcgm.a
+#  SPS_LIBS = -L$(SPSDIR)/lib/$(platform2)
+#	        -lcgm
+#	        -lcgm \
+#	       -llmrk_stubs \
+#	       -lmpi_stubs \
+#	       -lfft
+ 
+
+endif
+
+#SPS_LIBS = -L$(SPSDIR)/lib/linuxab75_motif_1_2 \
+#                 -lfft -lcgm -lmpi_stubs -llmrk_stubs
+
+ifeq ($(MATURITY), production)
+  matsym = -DPRODLIB
+  ifeq ($(platform2), 64linuxp60_debug)
+    CPSLIB = $(SPSDIR)/lib/64linuxp60/prodlib.a
+  else
+    CPSLIB = $(SPSDIR)/lib/$(platform2)/prodlib.a
+  endif
+# CPSLIB = $(SPSDIR)/lib/linuxab75_motif_1_2/prodlib.a
+endif
+
+ifeq ($(MATURITY), beta)
+  matsym = -DBETALIB
+  ifeq ($(platform2), 64linuxp60_debug)
+    CPSLIB = $(SPSDIR)/lib/64linuxp60/betalib.a
+  else
+    CPSLIB = $(SPSDIR)/lib/$(platform2)/betalib.a
+  endif
+endif
+
+ifeq ($(MATURITY), alpha)
+  matsym = -DALPHALIB
+  CPSLIB = $(SPSDIR)/lib/$(platform2)/alphalib.a
+endif
+
+ifeq ($(MATURITY), none)
+  matsym =
+  CPSLIB =
+  SPS_LIBS =
+endif
+
+CPSLIB=$(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)/lib/libcps.a
+
+##------------------------ finish up and return ----------------------------##
+##------------------------ finish up and return ----------------------------##
+##------------------------ finish up and return ----------------------------##
+
+
+includes   = $(patsubst %, -I%,         $(INCDIRS))
+modules    = $(patsubst %, $(MODFLAG)%, $(MODDIRS))
+directives = $(patsubst %, -D%,         $(DIRECTIVES)) $(matsym)
+
+ppio_includes = -I$(SPSDIR)/lam-6.5.6/include/cps
+
+FC         += $(modules)
+FC_FLOATIO += $(modules)
+FC_KMIG    += $(modules)
+FC_PPIO    += $(modules) $(ppio_includes)
+CC         += $(directives) $(includes)
+CXX        += $(directives) $(includes)
+CXX_DEPEND += $(directives) $(includes)
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

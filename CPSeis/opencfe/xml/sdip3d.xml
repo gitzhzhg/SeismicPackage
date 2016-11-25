@@ -1,0 +1,1152 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="sdip3d" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SDIP3DPROCESS" title="SDIP3D Process" rows="28" columns="80">
+    <Label keyword="COMMENT_DSEMBLANCEDIPMIX" alignment="center">3D Semblance Dip Mix</Label>
+    <Label keyword="COMMENT_QUICK_DIP_WEIGHTS" alignment="left">QUICK_DIP_WEIGHTS=</Label>
+    <Field keyword="QUICK_DIP_WEIGHTS" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_QUICK_DIP_SEARCH" alignment="left">QUICK_DIP_SEARCH =</Label>
+    <Field keyword="QUICK_DIP_SEARCH" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_OPT_SEMB" alignment="left">OPT_SEMB =</Label>
+    <Field keyword="OPT_SEMB" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_WHETHERTOWEIGHTINPUTTRAC" alignment="left">Whether to weight input trace by local semblance.</Label>
+    <Label keyword="LABEL_PWR_SEMB" alignment="left">PWR_SEMB =</Label>
+    <Field keyword="PWR_SEMB" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_POWEROFSEMBLANCEFORDIPMI" alignment="left">Power of semblance for dip mix.</Label>
+    <Label keyword="LABEL_FCTR_MIX" alignment="left">FCTR_MIX =</Label>
+    <Field keyword="FCTR_MIX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FRACTIONOFORIGINALTRACET" alignment="left">Fraction of original trace to combine with mixed trace.</Label>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN  =</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SEMBLANCEWINDOWLENGTHINS" alignment="left">Semblance window length in seconds for dip search.</Label>
+    <Label keyword="LABEL_OPT_TAPER" alignment="left">OPT_TAPER=</Label>
+    <Field keyword="OPT_TAPER" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TYPEOFTAPERTOAPPLY" alignment="left">Type of taper to apply.</Label>
+    <Border keyword="BORDER1"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X       =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y       =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORD" alignment="left">Header word.</Label>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT      =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT      =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FIRSTORANYBINCENTER" alignment="left">First (or any) bin center.</Label>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC       =</Label>
+    <Field keyword="X_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC       =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BININCREMENT" alignment="left">Bin increment.</Label>
+    <Label keyword="LABEL_MAX_X_BINS" alignment="left">MAX_X_BINS  =</Label>
+    <Field keyword="MAX_X_BINS" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_Y_BINS" alignment="left">MAX_Y_BINS  =</Label>
+    <Field keyword="MAX_Y_BINS" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMAPPROXIMATENUMBER" alignment="left">Maximum approximate number of bins (traces).</Label>
+    <Label keyword="LABEL_DIP_MAX_X" alignment="left">DIP_MAX_X   =</Label>
+    <Field keyword="DIP_MAX_X" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_MAX_Y" alignment="left">DIP_MAX_Y   =</Label>
+    <Field keyword="DIP_MAX_Y" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMDIPMSTRACE" alignment="left">Maximum dip (ms/trace).</Label>
+    <Label keyword="LABEL_DIP_INC_X" alignment="left">dip_inc_x   =</Label>
+    <Field keyword="DIP_INC_X" type="string" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_INC_Y" alignment="left">dip_inc_y   =</Label>
+    <Field keyword="DIP_INC_Y" type="string" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_DIPINCREMENTMSTRACE" alignment="left">Dip increment (ms/trace).</Label>
+    <Label keyword="LABEL_NXDIPS" alignment="left">nxdips      =</Label>
+    <Field keyword="NXDIPS" type="string" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NYDIPS" alignment="left">nydips      =</Label>
+    <Field keyword="NYDIPS" type="string" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALNUMBEROFDIPS" alignment="left">Total number of dips.</Label>
+    <Label keyword="LABEL_NUM_TR_DIP_X" alignment="left">NUM_TR_DIP_X=</Label>
+    <Field keyword="NUM_TR_DIP_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TR_DIP_Y" alignment="left">NUM_TR_DIP_Y=</Label>
+    <Field keyword="NUM_TR_DIP_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRACESEACHSIDEFORDIPSEAR" alignment="left">#Traces each side for dip search.</Label>
+    <Label keyword="LABEL_NXGATHER" alignment="left">nxgather    =</Label>
+    <Field keyword="NXGATHER" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NYGATHER" alignment="left">nygather    =</Label>
+    <Field keyword="NYGATHER" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALTRACESFORDIPSEARCH" alignment="left">Total #traces for dip search.</Label>
+    <Label keyword="LABEL_NUM_TR_MIX_X" alignment="left">NUM_TR_MIX_X=</Label>
+    <Field keyword="NUM_TR_MIX_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TR_MIX_Y" alignment="left">NUM_TR_MIX_Y=</Label>
+    <Field keyword="NUM_TR_MIX_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRACESEACHSIDETOMIX" alignment="left">#Traces each side to mix.</Label>
+    <Label keyword="LABEL_NXMIX" alignment="left">nxmix       =</Label>
+    <Field keyword="NXMIX" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NYMIX" alignment="left">nymix       =</Label>
+    <Field keyword="NYMIX" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALTRACESTOMIX" alignment="left">Total #traces to mix.</Label>
+    <Field keyword="MESSAGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DSEMBLANCEDIPMIX" xPos="26" yPos="0" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_QUICK_DIP_WEIGHTS" xPos="47" yPos="2" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="QUICK_DIP_WEIGHTS" xPos="65" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_QUICK_DIP_SEARCH" xPos="47" yPos="3" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="QUICK_DIP_SEARCH" xPos="65" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OPT_SEMB" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OPT_SEMB" xPos="11" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_WHETHERTOWEIGHTINPUTTRAC" xPos="19" yPos="4" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PWR_SEMB" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWR_SEMB" xPos="11" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_POWEROFSEMBLANCEFORDIPMI" xPos="19" yPos="5" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FCTR_MIX" xPos="1" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FCTR_MIX" xPos="11" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FRACTIONOFORIGINALTRACET" xPos="19" yPos="6" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="1" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="11" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SEMBLANCEWINDOWLENGTHINS" xPos="19" yPos="7" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_TAPER" xPos="1" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TAPER" xPos="11" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_TYPEOFTAPERTOAPPLY" xPos="19" yPos="8" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="10" xSize="21" ySize="16"/>
+     <Constraints component="BORDER2" xPos="23" yPos="10" xSize="21" ySize="16"/>
+     <Constraints component="LABEL_HDR_X" xPos="2" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="15" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="24" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="37" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORD" xPos="45" yPos="11" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="2" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="15" yPos="12" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="24" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="37" yPos="12" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FIRSTORANYBINCENTER" xPos="45" yPos="12" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="2" yPos="13" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="15" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="24" yPos="13" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="37" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BININCREMENT" xPos="45" yPos="13" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_X_BINS" xPos="2" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_X_BINS" xPos="15" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_Y_BINS" xPos="24" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_Y_BINS" xPos="37" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMAPPROXIMATENUMBER" xPos="45" yPos="14" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DIP_MAX_X" xPos="2" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_MAX_X" xPos="15" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_MAX_Y" xPos="24" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_MAX_Y" xPos="37" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMDIPMSTRACE" xPos="45" yPos="16" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_X" xPos="2" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_X" xPos="15" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_Y" xPos="24" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_Y" xPos="37" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_DIPINCREMENTMSTRACE" xPos="45" yPos="17" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NXDIPS" xPos="2" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NXDIPS" xPos="15" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NYDIPS" xPos="24" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NYDIPS" xPos="37" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALNUMBEROFDIPS" xPos="45" yPos="18" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_DIP_X" xPos="2" yPos="20" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_DIP_X" xPos="15" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_DIP_Y" xPos="24" yPos="20" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_DIP_Y" xPos="37" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRACESEACHSIDEFORDIPSEAR" xPos="45" yPos="20" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NXGATHER" xPos="2" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NXGATHER" xPos="15" yPos="21" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NYGATHER" xPos="24" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NYGATHER" xPos="37" yPos="21" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALTRACESFORDIPSEARCH" xPos="45" yPos="21" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_MIX_X" xPos="2" yPos="23" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_MIX_X" xPos="15" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_MIX_Y" xPos="24" yPos="23" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_MIX_Y" xPos="37" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRACESEACHSIDETOMIX" xPos="45" yPos="23" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NXMIX" xPos="2" yPos="24" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NXMIX" xPos="15" yPos="24" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NYMIX" xPos="24" yPos="24" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NYMIX" xPos="37" yPos="24" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALTRACESTOMIX" xPos="45" yPos="24" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MESSAGE" xPos="1" yPos="27" xSize="79" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="QUICK_DIP_WEIGHTS">
+      <Tip>Option whether to decimate the traces used for the dip search.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - QUICK_DIP_WEIGHTS<br> Option whether to decimate the traces used for the dip search.</center></b>
+<pre> Default = YES
+ Allowed = YES  use a subset of the traces in moving gather for dip search.
+ Allowed = NO   use all traces in moving gather for dip search.
+ 
+ If QUICK_DIP_WEIGHTS = YES, only the traces along the two orthogonal axes
+ through the middle of the moving gather, plus all additional traces to be
+ subsequently mixed, are used in the dip search.
+ 
+ For example, using a moving gather containing 7 x 7 traces total, with plans
+ to mix 3 x 3 traces in the middle of the moving gather:
+ 
+   QUICK_DIP_WEIGHTS = NO will use all 49 traces for the dip search.
+   QUICK_DIP_WEIGHTS = YES will use only 17 traces for the dip search.
+ 
+ Using QUICK_DIP_WEIGHTS = YES and/or QUICK_DIP_SEARCH = YES will speed up
+ the dip search, which dominates the timing when dip searching is being done,
+ with probably little loss of quality.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="QUICK_DIP_SEARCH">
+      <Tip>Option whether to decimate the dip searches being performed.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - QUICK_DIP_SEARCH<br> Option whether to decimate the dip searches being performed.</center></b>
+<pre> Default = YES
+ Allowed = YES  use a subset of combinations of X and Y dips for dip search.
+ Allowed = NO   use all combinations of X and Y dips for dip search.
+ 
+ If QUICK_DIP_SEARCH = YES, only the dips in the X and Y orthogonal
+ directions, but not dips in other directions, are used in the dip search.
+ 
+ For example, testing 7 dips in the X direction and 7 dips in the Y direction:
+ 
+   QUICK_DIP_SEARCH = NO will use all 49 dip combinations in the dip search.
+   QUICK_DIP_SEARCH = YES will use only 14 dips in the dip search.
+ 
+ Using QUICK_DIP_WEIGHTS = YES and/or QUICK_DIP_SEARCH = YES will speed up
+ the dip search, which dominates the timing when dip searching is being done,
+ with probably little loss of quality.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SEMB">
+      <Tip>Option whether to weight input trace by the local semblance value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - OPT_SEMB<br> Option whether to weight input trace by the local semblance value.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ If OPT_SEMB = NO, then only the mixed trace is weighted by the semblance:
+ 
+    TR_OUT = TR_IN * FCTR_MIX + TR_MIX * (1-FCTR_MIX) * SEMB**PWR_SEMB.
+ 
+ If OPT_SEMB = YES, then both the input trace and the mixed trace are weighted
+ by the semblance:
+ 
+    TR_OUT = [ TR_IN * FCTR_MIX + TR_MIX * (1-FCTR_MIX) ] * SEMB**PWR_SEMB.
+ 
+ OPT_SEMB = YES results in an output trace that is more strongly modulated by
+ the local semblance than if OPT_SEMB = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWR_SEMB">
+      <Tip>Raise local semblance to the PWR_SEMB power for trace weighting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PWR_SEMB<br> Raise local semblance to the PWR_SEMB power for trace weighting.</center></b>
+<pre> Default = 0.5
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FCTR_MIX">
+      <Tip>Fraction of original trace to combine with mixed trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - FCTR_MIX<br> Fraction of original trace to combine with mixed trace.</center></b>
+<pre> Default = 0.5
+ Allowed = 0.0 &lt;= real &lt;= 1.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the time window, in sec, for the semblance calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - WIN_LEN<br> Length of the time window, in sec, for the semblance calculation.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ 
+ WIN_LEN is used for dip search calculations prior to generating mixed traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_TAPER">
+      <Tip>Type of taper to apply when forming the mixed trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - OPT_TAPER<br> Type of taper to apply when forming the mixed trace.</center></b>
+<pre> Default = NONE
+ Allowed = LINEAR
+ Allowed = COSINE
+ Allowed = NONE
+ 
+ If OPT_TAPER = LINEAR or COSINE, then a taper is applied to traces to be
+ mixed so that the center trace has the greatest weight and the farthest
+ traces have the least weight.  Either a linear or cosine taper is used, as
+ specified.
+ 
+ If OPT_TAPER = NONE, then the traces to be mixed are all weighted uniformly.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word containing the X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - HDR_X<br> Header word containing the X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word containing the Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - HDR_Y<br> Header word containing the Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>X coordinate of the first (or any) trace in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - X_INIT<br> X coordinate of the first (or any) trace in the X direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the center of any bin measured in the X direction.
+ This value does not have to correspond to the first actual trace in the
+ X direction, since this could in fact vary from line to line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Y coordinate of the first (or any) trace in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - Y_INIT<br> Y coordinate of the first (or any) trace in the Y direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the center of any bin measured in the Y direction.
+ This value does not have to correspond to the first actual trace (or
+ first actual line) in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment of HDR_X between bin centers in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - X_INC<br> Increment of HDR_X between bin centers in the X direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the bin increment (or width) in the X direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment of HDR_Y between bin centers in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - Y_INC<br> Increment of HDR_Y between bin centers in the Y direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the bin increment (or width) in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_X_BINS">
+      <Tip>Maximum number of X bins in any one Y-line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - MAX_X_BINS<br> Maximum number of X bins in any one Y-line.</center></b>
+<pre> Default = blank
+ Allowed = integer &gt; 0
+ 
+ This value must be specified.  The maximum number of traces which will
+ be stored on disk at any one time will be slightly greater than MAX_X_BINS
+ times (2*NUM_TR_MIX_Y + 1).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_Y_BINS">
+      <Tip>Maximum number of Y bins (lines).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - MAX_Y_BINS<br> Maximum number of Y bins (lines).</center></b>
+<pre> Default = blank
+ Allowed = integer &gt; 0 (or blank if not requesting diagnostic traces)
+ 
+ This value must be specified if you are requesting any diagnostic output
+ files (see separate screen).
+ 
+ This parameter is needed only for reserving disk space for the requested
+ files, and needs to be approximate only.  But if the files will be
+ very large, the parameter is important because the number of available
+ file extents may otherwise be insufficient.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MAX_X">
+      <Tip>Maximum dip in X direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - DIP_MAX_X<br> Maximum dip in X direction to use in the dip search calculation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ Dips are in ms/trace in the X direction.
+ 
+ A total of (2*DIP_X/DIP_INC_X + 1) dips are tested in the X direction,
+ from -DIP_MAX_X to +DIP_MAX_X.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MAX_Y">
+      <Tip>Maximum dip in Y direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - DIP_MAX_Y<br> Maximum dip in Y direction to use in the dip search calculation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ Dips are in ms/trace in the Y direction.
+ 
+ A total of (2*DIP_X/DIP_INC_Y + 1) dips are tested in the Y direction,
+ from -DIP_MAX_Y to +DIP_MAX_Y.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_X">
+      <Tip>Dip increment in X direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - DIP_INC_X<br> Dip increment in X direction to use in the dip search calculation.</center></b>
+<pre>
+ Dip increments are in ms/trace in the X direction.
+ 
+ A total of (2*DIP_X/DIP_INC_X + 1) dips are tested in the X direction,
+ from -DIP_MAX_X to +DIP_MAX_X.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.
+ 
+ This value is calculated from the Nyquist frequency and the NUM_TR_DIP_X
+ parameter to keep from aliasing the dip search on the farthest traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_Y">
+      <Tip>Dip increment in Y direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - DIP_INC_Y<br> Dip increment in Y direction to use in the dip search calculation.</center></b>
+<pre>
+ Dip increments are in ms/trace in the Y direction.
+ 
+ A total of (2*DIP_X/DIP_INC_Y + 1) dips are tested in the Y direction,
+ from -DIP_MAX_Y to +DIP_MAX_Y.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.
+ 
+ This value is calculated from the Nyquist frequency and the NUM_TR_DIP_Y
+ parameter to keep from aliasing the dip search on the farthest traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NXDIPS">
+      <Tip>Total number of dips to be tested in X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NXDIPS<br> Total number of dips to be tested in X direction.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NYDIPS">
+      <Tip>Total number of dips to be tested in Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NYDIPS<br> Total number of dips to be tested in Y direction.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_DIP_X">
+      <Tip>Number of traces on each side in X direction for dip testing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NUM_TR_DIP_X<br> Number of traces on each side in X direction for dip testing.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ This is the number of traces on each side of the center trace.
+ A total of (2*NUM_TR_DIP_X + 1) traces are used in the dip search calculation
+ in the X direction.
+ 
+ A total of (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces are used
+ altogether in the dip search calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_DIP_Y">
+      <Tip>Number of traces on each side in Y direction for dip testing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NUM_TR_DIP_Y<br> Number of traces on each side in Y direction for dip testing.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ This is the number of traces on each side of the center trace.
+ A total of (2*NUM_TR_DIP_Y + 1) traces are used in the dip search calculation
+ in the Y direction.
+ 
+ A total of (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces are used
+ altogether in the dip search calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NXGATHER">
+      <Tip>Total number of traces in X direction for dip search.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NXGATHER<br> Total number of traces in X direction for dip search.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NYGATHER">
+      <Tip>Total number of traces in Y direction for dip search.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NYGATHER<br> Total number of traces in Y direction for dip search.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_MIX_X">
+      <Tip>Number of traces on each side in X direction to mix together.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NUM_TR_MIX_X<br> Number of traces on each side in X direction to mix together.</center></b>
+<pre> Default = 1
+ Allowed = integer &gt;= 0 and =&lt; NUM_TR_DIP_X
+ 
+ This is the number of traces on each side of the center trace.
+ 
+ A total of (2*NUM_TR_MIX_X + 1) times (2*NUM_TR_MIX_Y + 1) traces are mixed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_MIX_Y">
+      <Tip>Number of traces on each side in Y direction to mix together.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NUM_TR_MIX_Y<br> Number of traces on each side in Y direction to mix together.</center></b>
+<pre> Default = 1
+ Allowed = integer &gt;= 0 and =&lt; NUM_TR_DIP_Y
+ 
+ This is the number of traces on each side of the center trace.
+ 
+ A total of (2*NUM_TR_MIX_X + 1) times (2*NUM_TR_MIX_Y + 1) traces are mixed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NXMIX">
+      <Tip>Total number of traces in X direction to mix together.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NXMIX<br> Total number of traces in X direction to mix together.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NYMIX">
+      <Tip>Total number of traces in Y direction to mix together.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - NYMIX<br> Total number of traces in Y direction to mix together.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MESSAGE">
+      <Tip>Message regarding number of requested diagnostic files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - MESSAGE<br> Message regarding number of requested diagnostic files.</center></b>
+<pre>
+ This information refers to the diagnostic files requested on the
+ "Diagnostic Output Files" screen.  That screen should be visited
+ to insure that the requests are correct and the status of each
+ requested file is acceptable.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DIAGNOSTICOUTPUTFILES" title="Diagnostic Output Files" rows="28" columns="80">
+    <Label keyword="LABEL_BASENAME" alignment="left">BASENAME   =</Label>
+    <Field keyword="BASENAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="SAVE_MEDGE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MEDGE" alignment="left">PATH_MEDGE =</Label>
+    <Field keyword="PATH_MEDGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MEDGE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_SEDGE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SEDGE" alignment="left">PATH_SEDGE =</Label>
+    <Field keyword="PATH_SEDGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_SEDGE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_MIXED" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIXED" alignment="left">PATH_MIXED =</Label>
+    <Field keyword="PATH_MIXED" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MIXED_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_SEMB" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SEMB" alignment="left">path_semb  =</Label>
+    <Field keyword="PATH_SEMB" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_SEMB_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_XDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_XDIP" alignment="left">path_xdip  =</Label>
+    <Field keyword="PATH_XDIP" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_XDIP_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_YDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_YDIP" alignment="left">path_ydip  =</Label>
+    <Field keyword="PATH_YDIP" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_YDIP_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_ORIG" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_ORIG" alignment="left">path_orig  =</Label>
+    <Field keyword="PATH_ORIG" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_LARGEFILE" alignment="center">(large file)</Label>
+    <Field keyword="PATH_ORIG_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_FLAT" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_FLAT" alignment="left">path_flat  =</Label>
+    <Field keyword="PATH_FLAT" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">(large file)</Label>
+    <Field keyword="PATH_FLAT_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_MIDDLE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIDDLE" alignment="left">path_middle=</Label>
+    <Field keyword="PATH_MIDDLE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MIDDLE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_BASENAME" xPos="7" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BASENAME" xPos="19" yPos="0" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SAVE_MEDGE" xPos="1" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MEDGE" xPos="7" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MEDGE" xPos="19" yPos="2" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MEDGE_INFO" xPos="19" yPos="3" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_SEDGE" xPos="1" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEDGE" xPos="7" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEDGE" xPos="19" yPos="5" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SEDGE_INFO" xPos="19" yPos="6" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_MIXED" xPos="1" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MIXED" xPos="7" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIXED" xPos="19" yPos="8" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MIXED_INFO" xPos="19" yPos="9" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_SEMB" xPos="1" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEMB" xPos="7" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEMB" xPos="19" yPos="11" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SEMB_INFO" xPos="19" yPos="12" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_XDIP" xPos="1" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_XDIP" xPos="7" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_XDIP" xPos="19" yPos="14" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_XDIP_INFO" xPos="19" yPos="15" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_YDIP" xPos="1" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_YDIP" xPos="7" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_YDIP" xPos="19" yPos="17" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_YDIP_INFO" xPos="19" yPos="18" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_ORIG" xPos="1" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_ORIG" xPos="7" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_ORIG" xPos="19" yPos="20" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LARGEFILE" xPos="4" yPos="21" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_ORIG_INFO" xPos="19" yPos="21" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_FLAT" xPos="1" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_FLAT" xPos="7" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_FLAT" xPos="19" yPos="23" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="4" yPos="24" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_FLAT_INFO" xPos="19" yPos="24" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_MIDDLE" xPos="1" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MIDDLE" xPos="7" yPos="26" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIDDLE" xPos="19" yPos="26" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MIDDLE_INFO" xPos="19" yPos="27" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="BASENAME">
+      <Tip>Base name for pathnames for diagnostic trace output files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - BASENAME<br> Base name for pathnames for diagnostic trace output files.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ This basename is used to create path names for files which will contain
+ diagnostic traces.  This basename must not include a filename extension.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_MEDGE">
+      <Tip>Whether to save edge detection traces to PATH_MEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_MEDGE<br> Whether to save edge detection traces to PATH_MEDGE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MEDGE">
+      <Tip>Pathname for Meek edge detection traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_MEDGE<br> Pathname for Meek edge detection traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One edge detection trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MEDGE_INFO">
+      <Tip>Status of PATH_MEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_MEDGE_INFO<br> Status of PATH_MEDGE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_SEDGE">
+      <Tip>Whether to save edge detection traces to PATH_SEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_SEDGE<br> Whether to save edge detection traces to PATH_SEDGE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEDGE">
+      <Tip>Pathname for semblance edge detection traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_SEDGE<br> Pathname for semblance edge detection traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One edge detection trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEDGE_INFO">
+      <Tip>Status of PATH_SEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_SEDGE_INFO<br> Status of PATH_SEDGE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_MIXED">
+      <Tip>Whether to save mixed traces to PATH_MIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_MIXED<br> Whether to save mixed traces to PATH_MIXED.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIXED">
+      <Tip>Pathname for mixed traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_MIXED<br> Pathname for mixed traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One mixed trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIXED_INFO">
+      <Tip>Status of PATH_MIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_MIXED_INFO<br> Status of PATH_MIXED.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_SEMB">
+      <Tip>Whether to save semblance traces to PATH_SEMB.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_SEMB<br> Whether to save semblance traces to PATH_SEMB.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEMB">
+      <Tip>Pathname for diagnostic traces of semblance values found.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_SEMB<br> Pathname for diagnostic traces of semblance values found.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One semblance trace will be output to the file for each trace processed.
+ Semblances are between zero and one.
+ The file will be an 8-bit file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEMB_INFO">
+      <Tip>Status of PATH_SEMB.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_SEMB_INFO<br> Status of PATH_SEMB.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_XDIP">
+      <Tip>Whether to save dip traces to PATH_XDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_XDIP<br> Whether to save dip traces to PATH_XDIP.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_XDIP">
+      <Tip>Pathname for diagnostic traces of dips found in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_XDIP<br> Pathname for diagnostic traces of dips found in the X direction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One dip trace will be output to the file for each trace processed.
+ Dips are in milliseconds per trace.
+ The file will be an 8-bit file.
+ 
+ The traces will be dead if dip searches are not done in the X direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_XDIP_INFO">
+      <Tip>Status of PATH_XDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_XDIP_INFO<br> Status of PATH_XDIP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_YDIP">
+      <Tip>Whether to save dip traces to PATH_YDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_YDIP<br> Whether to save dip traces to PATH_YDIP.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_YDIP">
+      <Tip>Pathname for diagnostic traces of dips found in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_YDIP<br> Pathname for diagnostic traces of dips found in the Y direction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One dip trace will be output to the file for each trace processed.
+ Dips are in milliseconds per trace.
+ The file will be an 8-bit file.
+ 
+ The traces will be dead if dip searches are not done in the Y direction.
+ (This is the case for the 2D SDIP process.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_YDIP_INFO">
+      <Tip>Status of PATH_YDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_YDIP_INFO<br> Status of PATH_YDIP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_ORIG">
+      <Tip>Whether to save original moving gathers to PATH_ORIG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_ORIG<br> Whether to save original moving gathers to PATH_ORIG.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ORIG">
+      <Tip>Pathname for diagnostic traces of original gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_ORIG<br> Pathname for diagnostic traces of original gathers.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These are the original moving gathers used for doing the dip search.
+ One moving gather will be output to the file for each trace processed.
+ Each moving gather contains all of the traces used to do a dip search
+ for each trace processed.  Each moving gather will contain
+ (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces.
+ 
+ This file can be very large.
+ The file will be an 8-bit file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ORIG_INFO">
+      <Tip>Status of PATH_ORIG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_ORIG_INFO<br> Status of PATH_ORIG.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_FLAT">
+      <Tip>Whether to save flattened moving gathers to PATH_FLAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_FLAT<br> Whether to save flattened moving gathers to PATH_FLAT.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_FLAT">
+      <Tip>Pathname for diagnostic traces of flattened gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_FLAT<br> Pathname for diagnostic traces of flattened gathers.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These are the moving gathers as they have been flattened using the results
+ of the dip search.  One moving gather will be output to the file for each
+ trace processed.  Each moving gather contains all of the traces used to do
+ a dip search for each trace processed.  Each moving gather will contain
+ (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces.
+ 
+ This file can be very large.
+ The file will be an 8-bit file.
+ 
+ The traces will be same as original gathers if dip searches are not done.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_FLAT_INFO">
+      <Tip>Status of PATH_FLAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_FLAT_INFO<br> Status of PATH_FLAT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_MIDDLE">
+      <Tip>Whether to save middle traces to PATH_MIDDLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - SAVE_MIDDLE<br> Whether to save middle traces to PATH_MIDDLE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIDDLE">
+      <Tip>Pathname for middle trace of each moving gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_MIDDLE<br> Pathname for middle trace of each moving gather.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ Each trace output will be the trace from the moving gather which is the
+ closest to the output trace location.  Therefore each trace should be the
+ same as an original input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIDDLE_INFO">
+      <Tip>Status of PATH_MIDDLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PATH_MIDDLE_INFO<br> Status of PATH_MIDDLE.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip3d - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="sdip3d">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SDIP3D             (3D Semblance Dip Mix)
+ Category   : filters
+ Written    : 1996-09-10   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : 3D coherence enhancement by mixing along dominant dip direction.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ SDIP3D is a 3D coherence enhancement process that operates on stacked or
+ migrated data.  Each input trace is replaced by a mix of itself and its
+ neighbors.  Traces are mixed along the direction of dominant dip as
+ determined by a semblance search within small windows down the trace.
+ 
+ SDIP3D is designed to be functionally identical to SDIP, but to allow dip
+ estimates and dip mixing in both the X and Y directions.  SDIP3D is somewhat
+ slower than SDIP because it uses the MGATHER3D primitive to maintain a
+ 3D moving gather using a disk file for temporary trace storage.  SDIP uses
+ the MGATHER primitive to maintain a 2D moving gather without the need of
+ a disk file.  Both SDIP and SDIP3D use the SDIPUTIL primitive to do the
+ dip search and calculate the output traces.
+ 
+ SDIP3D will also be slowed down with respect to SDIP if dips are searched
+ for in both the X and Y directions, since all combinations of X and Y dips
+ are tested.
+ 
+-------------------------------------------------------------------------------
+                         DETAILS OF OPERATION
+ 
+ 1. Within each window, (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces,
+    centered on the input trace, are used to perform a semblance dip search
+    to determine which dip has the maximum semblance.  A total of
+    (2*DIP_MAX_X + 1) times (2*DIP_MAX_Y + 1) dips are tested.  The dip with
+    the maximum semblance is referred to as the dominant dip.  Each window
+    length is WIN_LEN seconds long, and the windows move down the trace one
+    sample at a time.
+ 
+ 
+ 2. For each window, a total of (2*NUM_TR_MIX_X + 1) times (2*NUM_TR_MIX_Y + 1)
+    traces, centered on the input trace, are weighted by the taper specified
+    by OPT_TAPER and then mixed along the dominant dip to form a mixed
+    trace.
+ 
+ 
+ 3. The output trace is formed from the mixed trace, sample by sample, using
+    one of the following two equations:
+ 
+    If OPT_SEMB = NO, then only the mixed trace is weighted by the
+    semblance and the output trace is formed as follows:
+ 
+      TR_OUT =   TR_IN * FCTR_MIX  +  TR_MIX * (1-FCTR_MIX) * SEMB**PWR_SEMB
+ 
+    If OPT_SEMB = YES, then the input trace and the mixed trace are both
+    weighted by the semblance and the output trace is formed as follows:
+ 
+      TR_OUT = [ TR_IN * FCTR_MIX + TR_MIX * (1-FCTR_MIX) ] * SEMB**PWR_SEMB
+ 
+    where:
+ 
+      TR_OUT   = Output trace.
+      TR_IN    = Input trace.
+      TR_MIX   = Mixed trace.
+      FCTR_MIX = Weighting factor between input and mixed trace.
+      SEMB     = Local semblance measured along the dominant dip.
+      PWR_SEMB = Power to raise the semblance for semblance weighting.
+ 
+    OPT_SEMB = YES results in an output trace that is more strongly modulated
+    by the local semblance than if OPT_SEMB = NO.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+  1. The bin centers and bin widths are used to identify the locations
+     of traces to use for dip searching and mixing.  This insures that
+     the correct traces are used in both the X and Y directions, even if
+     the starting X coordinates of different lines are not the same or
+     there are missing traces.  The following binning parameters:
+                        X_INIT       Y_INIT
+                        X_INC        Y_INC
+     should match the actual inline and crossline spacing of the input
+     traces.  If two or more traces fall into the same bin, only one
+     trace in the bin will be used for dip searching and mixing.
+ 
+ 
+  4. Example of use of the following dip parameters:
+                        DIP_X         DIP_Y
+                        DIP_INC_X     DIP_INC_Y
+ 
+     Using DIP_X = 10 and DIP_INC_X = 2:
+            five negative X-dips (-10,-8,-6,-4,-2),
+            one zero X-dip,
+            and five positive X-dips (2,4,6,8,10) will be tested.
+ 
+     Using DIP_Y = 6 and DIP_INC_Y = 3:
+            two negative Y-dips (-6,-3),
+            one zero Y-dip,
+            and two positive Y-dips (3,6) will be tested.
+ 
+     WARNING: Computer time is proportional to the product of the number
+     of dips tested in each direction!
+ 
+ 
+  6. The input traces should be sorted to either inline or crossline
+     order.  The inline direction corresponds to traces in the same
+     Y bin, and with X bins incrementing by one bin per trace.  The
+     crossline direction corresponds to traces in the same X bin, and
+     with Y bins incrementing by one bin per trace.  The trace spacing
+     should be such that there is generally one trace in each bin,
+     although some bins can be empty.
+ 
+ 
+  7. Each output trace is a mixed version of each input trace.  Traces
+     are output in the same order as they are input.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+009. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+008. 2006-01-10  B. Menger  Removed Unused Variables.
+  7. 2004-08-10  Lucas      Added wrapup logic to combine the SDIPUTIL files
+                            into single files when running a parallel job.
+  6. 2004-06-08  Lucas      Added logic block for parallelization.
+  5. 2002-03-11  Stoeckley  Set limits on number of displayed digits in GUI
+                             for floating point numbers to correct an
+                             occasional GUI display problem..
+  4. 2001-12-13  Stoeckley  Change the DIP_INC_X and DIP_INC_Y parameters
+                             to be informational only (now automatically
+                             calculated to protect against aliasing); add
+                             MAX_Y_BINS parameter; put output diagnostics
+                             onto separate trace files so that they can all
+                             be obtained at the same time; improve the dip
+                             search algorithm.
+  3. 2001-08-24  Stoeckley  Add options for speeding up dip searches.
+  2. 2001-08-17  Stoeckley  Converted from old system, replacing some code
+                             with calls to the new SDIPUTIL, MGATHER3D, and
+                             TWEIGHTS primitives.
+  1. 1996-09-10  Stoeckley  Original Version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

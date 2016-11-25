@@ -1,0 +1,666 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dmo3d" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DMO3DPROCESS" title="DMO3D Process" rows="24" columns="80">
+    <Label keyword="COMMENT_DDMOMACROPROCESS" alignment="center">3D DMO macro Process</Label>
+    <Label keyword="COMMENT_MACROFORPERFORMINGDMOON3" alignment="center">Macro for performing DMO on 3D data.</Label>
+    <Label keyword="LABEL_OFF_MAX" alignment="left">OFF_MAX=</Label>
+    <Field keyword="OFF_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX=</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_DMO" alignment="left">VEL_DMO=</Label>
+    <Field keyword="VEL_DMO" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MDT" alignment="left">OPT_MDT=</Label>
+    <Field keyword="OPT_MDT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MUTE" alignment="left">OPT_MUTE=</Label>
+    <Field keyword="OPT_MUTE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NTIM" alignment="left">NTIM=</Label>
+    <Field keyword="NTIM" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CALC_OFFSET" alignment="left">CALC_OFFSET=</Label>
+    <Field keyword="CALC_OFFSET" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_INL" alignment="left">HDR_INL=</Label>
+    <Field keyword="HDR_INL" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_INIT" alignment="left">INL_INIT=</Label>
+    <Field keyword="INL_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_INC" alignment="left">INL_INC=</Label>
+    <Field keyword="INL_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_WID" alignment="left">INL_WID=</Label>
+    <Field keyword="INL_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_LAST" alignment="left">INL_LAST=</Label>
+    <Field keyword="INL_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_TOT" alignment="left">INL_TOT=</Label>
+    <Field keyword="INL_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CRL" alignment="left">HDR_CRL=</Label>
+    <Field keyword="HDR_CRL" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_INIT" alignment="left">CRL_INIT=</Label>
+    <Field keyword="CRL_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_INC" alignment="left">CRL_INC=</Label>
+    <Field keyword="CRL_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_WID" alignment="left">CRL_WID=</Label>
+    <Field keyword="CRL_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_LAST" alignment="left">CRL_LAST=</Label>
+    <Field keyword="CRL_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_TOT" alignment="left">CRL_TOT=</Label>
+    <Field keyword="CRL_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC=</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_WID" alignment="left">OFF_WID=</Label>
+    <Field keyword="OFF_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_LAST" alignment="left">OFF_LAST=</Label>
+    <Field keyword="OFF_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT=</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DDMOMACROPROCESS" xPos="22" yPos="1" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_MACROFORPERFORMINGDMOON3" xPos="15" yPos="2" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MAX" xPos="1" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MAX" xPos="9" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="25" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="34" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_DMO" xPos="50" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_DMO" xPos="58" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MDT" xPos="1" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MDT" xPos="9" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_MUTE" xPos="17" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MUTE" xPos="26" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NTIM" xPos="34" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NTIM" xPos="39" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CALC_OFFSET" xPos="54" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CALC_OFFSET" xPos="66" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="3" yPos="8" xSize="71" ySize="16"/>
+     <Constraints component="LABEL_HDR_INL" xPos="5" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_INL" xPos="14" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_INIT" xPos="5" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_INIT" xPos="14" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_INC" xPos="29" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_INC" xPos="37" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_WID" xPos="52" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_WID" xPos="60" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_LAST" xPos="5" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_LAST" xPos="14" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_TOT" xPos="29" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_TOT" xPos="37" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CRL" xPos="5" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CRL" xPos="14" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_INIT" xPos="5" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_INIT" xPos="14" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_INC" xPos="29" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_INC" xPos="37" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_WID" xPos="52" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_WID" xPos="60" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_LAST" xPos="5" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_LAST" xPos="14" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_TOT" xPos="29" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_TOT" xPos="37" yPos="17" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="5" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="14" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="5" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="14" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="29" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="37" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_WID" xPos="52" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_WID" xPos="60" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_LAST" xPos="5" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_LAST" xPos="14" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="29" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="37" yPos="22" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OFF_MAX">
+      <Tip>Maximum offset in dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OFF_MAX<br> Maximum offset in dataset.</center></b>
+<pre> Default = 3000
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency to be preserved in data, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - FREQ_MAX<br> Maximum frequency to be preserved in data, in Hz.</center></b>
+<pre> Default = 90
+ Allowed = real &gt; 0.0
+ FREQ_MAX is used in the DMO operator calculation as the highest frequency to
+ preserve in the data.  Larger values of FREQ_MAX require significantly more
+ run-time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_DMO">
+      <Tip>Minimum propagation velocity in medium.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - VEL_DMO<br> Minimum propagation velocity in medium.</center></b>
+<pre> Default = 1500
+ Allowed = real &gt; 0.0
+ VEL_DMO is used to calculate the maximum dip to be preserved in the data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MDT">
+      <Tip>Option for handling Missing or Dead input Traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OPT_MDT<br> Option for handling Missing or Dead input Traces.</center></b>
+<pre> Default = DEL
+ Allowed = DEL
+ Allowed = FILL
+ Allowed = KILL
+ Output traces corresponding to missing or dead input traces are deleted
+ (OPT_MDT = DEL), filled in (OPT_MDT = FILL) or killed (OPT_MDT = KILL).
+ Traces affected by the FILL option will always have their mute headers set to
+ the first and last non-zero samples.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MUTE">
+      <Tip>Whether to restore the previous mute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OPT_MUTE<br> Whether to restore the previous mute.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If OPT_MUTE = YES, then the output trace mute header words are reset to the
+ corresponding input trace values and the MUTE process is called to restore
+ the previous mute.
+ If OPT_MUTE = NO, then the output trace mute header words are set to the
+ first and last non-zero samples.  The MUTE process is not called.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NTIM">
+      <Tip>Number of Traces In Memory for GSTK.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - NTIM<br> Number of Traces In Memory for GSTK.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0
+ Generally NTIM should be set large enough so that disk swapping is minimized,
+ but small enough to avoid restrictions on memory availability or cost.
+ 
+ NTIM should be set to a minimum of the number of bins in a rectangular array
+ that might be populated by a DMO broadcast operator for the largest offset.
+ Larger values may increase efficiency, but at some point limits on memory
+ availability and memory cost will establish an upper limit on NTIM.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CALC_OFFSET">
+      <Tip>Re-calculate offsets for 3D data only.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CALC_OFFSET<br> Re-calculate offsets for 3D data only.</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ If CALC_OFFSET = YES, offsets are re-calculated as above.
+ If CALC_OFFSET = NO, offsets are assigned from values of header word 6.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_INL">
+      <Tip>Header word for inline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - HDR_INL<br> Header word for inline coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_INIT">
+      <Tip>Value of HDR_INL for center of first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - INL_INIT<br> Value of HDR_INL for center of first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_INC">
+      <Tip>Increment between bins in inline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - INL_INC<br> Increment between bins in inline direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_WID">
+      <Tip>Width of bins in inline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - INL_WID<br> Width of bins in inline direction.</center></b>
+<pre> Default = INL_INC
+ Allowed = INL_INC &gt;= real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_LAST">
+      <Tip>Value of HDR_INL for center of last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - INL_LAST<br> Value of HDR_INL for center of last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= INL_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_TOT">
+      <Tip>Total number of bins in inline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - INL_TOT<br> Total number of bins in inline direction.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CRL">
+      <Tip>Header word for crossline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - HDR_CRL<br> Header word for crossline coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_INIT">
+      <Tip>Value of HDR_CRL for center of first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CRL_INIT<br> Value of HDR_CRL for center of first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_INC">
+      <Tip>Increment between bins in crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CRL_INC<br> Increment between bins in crossline direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_WID">
+      <Tip>Width of bins in crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CRL_WID<br> Width of bins in crossline direction.</center></b>
+<pre> Default = CRL_INC
+ Allowed = CRL_INC &gt;= real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_LAST">
+      <Tip>Value of HDR_CRL for center of last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CRL_LAST<br> Value of HDR_CRL for center of last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= CRL_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_TOT">
+      <Tip>Total number of bins in crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CRL_TOT<br> Total number of bins in crossline direction.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word for offsets.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - HDR_OFF<br> Header word for offsets.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>Value of HDR_OFF for center of first offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OFF_INIT<br> Value of HDR_OFF for center of first offset bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Increment between offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OFF_INC<br> Increment between offset bins.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_WID">
+      <Tip>Width of offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OFF_WID<br> Width of offset bins.</center></b>
+<pre> Default = OFF_INC
+ Allowed = OFF_INC &gt;= real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_LAST">
+      <Tip>Value of HDR_OFF for center of last offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OFF_LAST<br> Value of HDR_OFF for center of last offset bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= OFF_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Total number of offset bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OFF_TOT<br> Total number of offset bins.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmo3d - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dmo3d">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DMO3D         (3D DMO macro)
+ Category   : migrations
+ Written    : 1991-10-29   by: Mike Howard
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Macro for performing DMO on 3D data.
+ Portability: No known limitations.
+ Parallel   : NO
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ DMO3D is a macro designed to perform 3D DMO on 3D datasets.  It can also be
+ used as a general DMO process for special cases, including 2D datasets for
+ which CODMO is too restrictive.
+ 
+ DMO3D uses the DMO process KDMO, a Kirchhoff DMO with the Hale algorithm to
+ prevent operator aliasing.  (Unlike previous versions, DMO3D now uses only
+ the Kirchhoff-Hale algorithm.)  DMO3D calls the RESTH, KDMO, GSTK, RESTH and
+ MUTE processes internally with the following parameters.
+ 
+ (Parameter values indicated by "*" below are set identical to DMO3D input
+ parameter values.)
+ 
+        RESTH
+          HDR_INL = *,  INL_INIT = *,  INL_INC = *,  INL_WID = *,  INL_TOT = *
+          HDR_CRL = *,  CRL_INIT = *,  CRL_INC = *,  CRL_WID = *,  CRL_TOT = *
+ 
+        KDMO
+          COORD = 3D, BIN_WID = computed , VEL_DMO = *, FREQ_MAX = *,
+          OFF_MAX = *
+ 
+        GSTK
+          NTIM=* , TVFSE= 0.0, OPT_MDT = *,
+ 
+          HDR_INL  = *,      HDR_CRL  = *,        HDR_OFF  = *,
+          INL_INIT = *,      CRL_INIT = *,        OFF_INIT = *,
+          INL_INC  = *,      CRL_INC  = *,        OFF_INC  = *,
+          INL_WID  = *,      CRL_WID  = *,        OFF_WID  = *,
+          INL_LAST = *,      CRL_LAST = *,        OFF_LAST = *,
+          INL_TOT  = *,      CRL_TOT  = *,        OFF_TOT  = *
+ 
+        RESTH
+          MODE = APPLY
+ 
+        MUTE
+          OPT_MUTE = REST_HEAD, LEN_TAPER = 0.0
+ 
+ 
+ Missing or Dead Input Trace Option
+ 
+ The OPT_MDT parameter allows the user to control processing of missing or
+ dead input traces.  Output traces corresponding to missing or dead input
+ traces are deleted (OPT_MDT = DEL), filled in (OPT_MDT = FILL) or killed
+ (OPT_MDT = KILL).  Traces affected by the FILL option will always have
+ their mute headers set to the first and last non-zero samples. FILL option
+ will only output traces with non-zero samples.  However, KILL option
+ outputs all traces including dead and live traces. Users may need to fix
+ up the headers of those traces generated by FILL or KILL option,
+ which have -1 in header word 32.
+ 
+ 
+ Muting Option
+ 
+ If OPT_MUTE = YES, then the output trace mute header words are reset to the
+ corresponding input trace values and the MUTE process is called to restore
+ the previous mute.
+ If OPT_MUTE = NO, then the output trace mute header words are set to the
+ first and last non-zero samples.  The MUTE process is not called.
+ 
+ 
+ Offset Calculation Option
+ 
+ If CALC_OFFSET = YES, the source and receiver surveyed coordinates are used
+ to calculate the offset as follows.
+ 
+       Offset      = SQRT( (HDR(11)-HDR(14))**2 +
+                           (HDR(12)-HDR(15))**2  )
+ 
+ If CALC_OFFSET = NO, header word 6 is used for offset.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ *** WARNING ***
+ 
+ DMO3D requires well sampled data for proper operation.  Poor sampling is
+ frequently caused by trace editing, wide range of azimuth, holes (missing
+ traces) in common offset panels and acquisition design.  Sampling problems
+ can produce amplitude imbalance, noise and other artifacts.
+ 
+ Poor sampling can be addressed in several ways.
+ 
+     1.  Use before stack migration.
+ 
+     2.  Use data reconstruction.
+ 
+     3.  Use DMOPREP to rotate the source - receiver azimuth to the inline
+     direction.
+ 
+     4.  Use CODMO on 2D sail lines.
+ 
+ 
+ Common Offset Operation
+ 
+ In 3D common offset operation normally the input data is sorted by inline and
+ crossline header words and has a restricted range of offset.  OFF_TOT should
+ be set to 1 and OFF_INIT should be set to the nominal offset of the dataset.
+ DMO3D will set the offset header word of the output data to the value of
+ OFF_INIT.
+ 
+ 
+ Compositing Offsets Operation
+ 
+ When using DMO3D to composite over offsets (DMO with stacked data output),
+ inline and crossline parameters should be set normally, but OFF_TOT should be
+ set to 1 and OFF_INIT should normally be set to 0.0.  DMO3D will set the
+ offset header word of the output data to the value of OFF_INIT.
+ 
+ 
+ 3D Velocity Analysis Operation
+ 
+ When DMO3D is used to prepare a 3D dataset that will be used for semblance
+ velocity analysis only, the offset parameters should be set normally,
+ INL_INC and CRL_INC should be set based on the desired velocity analysis
+ location spacing and INL_WID and CRL_WID should be set to the desired widths
+ of the velocity analysis bins.  (Normally in this case INL_WID and CRL_WID
+ will be much smaller than INL_INC and CRL_INC.)
+ 
+ 
+ Memory Allocation
+ 
+ Generally NTIM should be set large enough so that disk swapping is minimized,
+ but small enough to control cost and avoid restrictions on memory
+ availability.
+ 
+ NTIM should be set to a minimum of the number of bins in a rectangular array
+ that might be populated by a DMO broadcast operator for the largest offset
+ within the job.  Larger values may increase efficiency, but at some point
+ limits on memory availability and memory cost will establish an upper limit
+ on NTIM.
+ 
+ 
+ Source and Receiver Locations After DMO or Stack
+ 
+ Even though GSTK calculates values for source and receiver surveyed
+ coordinate header words, source and receiver locations after DMO or stack are
+ not well defined.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+020. 2006-06-20  B. Menger   Removed Unused Variables.
+ 19. 2002-03-07 CI Burch   Documentation change only
+ 18. 2002-02-28 Chiu       Change output header word 1 to have sequential
+                           increment.
+ 17. 2002-02-21 Chiu       Fix frontend problem of CALC_OFFSET parameter.
+ 16  2001-05-14 Chiu       Fix frontend problem in pattern_stop2
+ 15. 2001-03-21 Chiu       Add pc_get_update_state() /= PC_GUI in checking
+                           parameters.
+ 14. 2001-02-14 Chiu       Change wrapped_up to skip_wrapup.
+ 13. 2000-08-23 Chiu       Use new coordinate for header 7 and 8.
+ 12. 2000-06-23 Chiu       Conform with the review team's standard.
+ 11. 2000-06-14 Chiu       Add Gui.
+ 10. 2000-03-21 Chiu       Remove PC_BACKEND check for pc_put_contol.
+ 9.  2000-01-27 Chiu       Convert into New CPS.
+ 8.  1998-11-13 Vunderink  Begin using the f90 compiler.
+ 7.  1998-04-28 Vunderink  Changed COKDMO to COKDMO3 and added Howard
+                           version of COKDMO.
+ 6.  1998-04-28 Vunderink  Added KDMO algorithm.
+ 5.  1997-02-11 Vunderink  Added bin width parameters and BIN4 option.
+ 4.  1997-01-21 Vunderink  Added offset parameters
+ 3.  1997-01-19 Vunderink  Documentation change only.
+ 2.  1997-12-30 Vunderink  Added HB# and HL# parameters
+ 1.  1991-10-29 Howard     Original Version
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,9 @@
+#!/bin/sh -x
+unalias -a 
+. ~/.bashrc
+cd /apps/fusiongeo/cpseis/sample_work_files
+ifort -g -02 -o test_with_io.exe \
+-I/homes/3DGeo/bmenger/cpseis/platforms/x86_64_intel91_lam test_with_io.f90 \
+-L/homes/3DGeo/bmenger/cpseis/platforms/x86_64_intel91_lam/lib -lcps \
+-L/apps/fusiongeo/thirdparty/fftw-2.1.5/platforms/x86_64_intel91/lib -lfftw -lrfftw \
+-L/apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib -lmpi -llam -llammpi++ -llamf77mpi -lpthread -lm 

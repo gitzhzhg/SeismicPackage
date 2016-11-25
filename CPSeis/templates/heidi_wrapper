@@ -1,0 +1,262 @@
+/****
+!!!
+!!!         Primitive C Wrapper Template for Fortran to C Interfaces
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!!  3. 2002-10-23  Stoeckley  Minor history doc and ident string changes.
+!!!  2. 2002-05-02  Stoeckley  Add this template revision history.
+!!!  1. 2001-10-23  Stoeckley  Initial version (replaces BOTCH).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!
+!!! This file can be used as a template for Fortran-to-C interfaces.
+!!! See c2f_interface.h (and below) for details.
+!!!
+!!! This primitive named HEIDI_WRAPPER is a working example of a C-style
+!!! wrapper class which interfaces to the Fortran-style class named HEIDI.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!
+!!! The primitives HEIDI_WRAPPER and HEIDI do no useful work.
+!!! The primitives HEIDI_WRAPPER and HEIDI include the following illustrations:
+!!!
+!!!  (1) use of a creatable/deletable Fortran90 class with a hidden data
+!!!        structure.
+!!!  (2) capability of the C code to store a Fortran90 pointer to the Fortran90
+!!!        object.
+!!!  (3) conversions of variables between Fortran and C variable types.
+!!!  (4) dealing correctly with character strings passed between C and Fortran.
+!!!
+!!! The following files are used (in the order called):
+!!!
+!!!   heidi_wrapper.h      C wrapper class header file.
+!!!   heidi_wrapper.c      C wrapper class implementation file.
+!!!   heidi_frou.f90       Private auxiliary file.
+!!!   heidi.f90            File containing the original Fortran class.
+!!!
+!!! To use the original Fortran class HEIDI from C, call this C wrapper class
+!!! HEIDI_WRAPPER, which looks like any other C class.  For example:
+!!!
+!!!          #include "heidi_wrapper.h"
+!!!          main()
+!!!          {
+!!!            HeidiWrapperStruct *heidi;
+!!!            heidi = heidi_wrapper_create ();
+!!!                    heidi_wrapper_solve  (heidi);
+!!!                    heidi_wrapper_delete (heidi);
+!!!          }
+!!!
+!!!-----------------------------------------------------------------------------
+****/
+
+
+/****
+!<CPS_v1 type="PRIMITIVE"/>
+****/
+/*-------------------------- heidi_wrapper.c -------------------------------*/
+/*-------------------------- heidi_wrapper.c -------------------------------*/
+/*-------------------------- heidi_wrapper.c -------------------------------*/
+
+      /* other files are:  heidi_wrapper.h  heidi.f90  heidi_frou.f90 */
+
+/****
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                        C P S   P R I M I T I V E
+!
+! Name       : HEIDI_WRAPPER
+! Category   : --> should match the main file of this primitive.
+! Written    : 2001-01-01   by: NNNN
+! Revised    : 2001-01-01   by: NNNN
+! Maturity   : beta
+! Purpose    : --> should match the main file of this primitive.
+! Portability: No known limitations.
+!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                         GENERAL DESCRIPTION
+!
+!
+!-------------------------------------------------------------------------------
+!</descript_doc>
+
+
+!<calling_doc>
+!-------------------------------------------------------------------------------
+!                      INPUT AND OUTPUT ARGUMENTS
+!
+! For each subroutine or function documented below, each argument is
+! flagged as follows:
+!        i = value required upon INPUT.
+!        o = value set by the routine upon OUTPUT.
+!        b = value BOTH required upon input and changed upon output.
+!
+!  For pointers, the flag (i,o,b) refers to the contents pointed to
+!  by the pointer, not to the value of the pointer itself.  The pointer
+!  value is required upon INPUT in all cases.
+!
+!-------------------------------------------------------------------------------
+!                          CALLING SEQUENCE
+!
+!            o
+!           this = heidi_wrapper_create ();
+!
+!            o                            b     o    i    b
+!           iii  = heidi_wrapper_solve  (this, fff, ddd, ccc);
+!
+!                                         b
+!                  heidi_wrapper_delete (this);
+!
+!
+! HeidiWrapperStruct *this  = pointer to the HEIDI_WRAPPER object.
+! float               fff[] = description of this output array.
+! double              ddd   = description of this input variable.
+! char               *ccc   = description of this input/output string.
+! int                 iii   = description of this returned variable.
+!
+! fff must be dimensioned at least [HEIDI_WRAPPER_NFFF].
+! ccc must be dimensioned at least [HEIDI_WRAPPER_NCCC].
+!
+!-------------------------------------------------------------------------------
+!</calling_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                            REVISION HISTORY
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. 2001-01-01  NNNN       Initial version.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<portability_doc>
+!-------------------------------------------------------------------------------
+!                         PORTABILITY LIMITATIONS
+!
+! No known limitations.
+!
+!-------------------------------------------------------------------------------
+!</portability_doc>
+****/
+
+
+/*-------------------------- start of module ------------------------------*/
+/*-------------------------- start of module ------------------------------*/
+/*-------------------------- start of module ------------------------------*/
+
+
+char HEIDI_WRAPPER_IDENT[100] =
+"$Id: heidi_wrapper.c,v 1.3 2002/10/23 17:47:02 Stoeckley prod sps $";
+
+#include "heidi_wrapper.h"
+#include "c2f_interface.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+
+/*---------------------- fortran spelling adjustments ----------------------*/
+/*---------------------- fortran spelling adjustments ----------------------*/
+/*---------------------- fortran spelling adjustments ----------------------*/
+
+
+#if NEED_UNDERSCORE
+#define heidi_frou_create    heidi_frou_create_
+#define heidi_frou_delete    heidi_frou_delete_
+#define heidi_frou_solve     heidi_frou_solve_
+#elif NEED_CAPITALS
+#define heidi_frou_create    HEIDI_FROU_CREATE
+#define heidi_frou_delete    HEIDI_FROU_DELETE
+#define heidi_frou_solve     HEIDI_FROU_SOLVE
+#endif
+
+
+/*-------------------------- fortran prototypes ----------------------------*/
+/*-------------------------- fortran prototypes ----------------------------*/
+/*-------------------------- fortran prototypes ----------------------------*/
+
+
+struct _HeidiWrapperStruct
+{
+  F90Pointer fpoint;
+  /* plus anything not used by the original Fortran class */
+};
+
+void heidi_frou_create (F90Pointer *fpoint);
+void heidi_frou_delete (F90Pointer *fpoint);
+int  heidi_frou_solve  (F90Pointer *fpoint,
+                              REAL fff[], DOUBLE *ddd, char *ccc);
+
+
+/*----------------------------- create -----------------------------------*/
+/*----------------------------- create -----------------------------------*/
+/*----------------------------- create -----------------------------------*/
+
+
+HeidiWrapperStruct *heidi_wrapper_create ()
+{
+  HeidiWrapperStruct *this;
+  this = (HeidiWrapperStruct*)malloc(sizeof(HeidiWrapperStruct));
+  heidi_frou_create(&this->fpoint);
+  return this;
+}
+
+
+/*----------------------------- delete -----------------------------------*/
+/*----------------------------- delete -----------------------------------*/
+/*----------------------------- delete -----------------------------------*/
+
+
+void heidi_wrapper_delete (HeidiWrapperStruct *this)
+{
+  heidi_frou_delete(&this->fpoint);
+  free(this);
+}
+
+
+/*----------------------------- solve -----------------------------------*/
+/*----------------------------- solve -----------------------------------*/
+/*----------------------------- solve -----------------------------------*/
+
+
+int heidi_wrapper_solve
+               (HeidiWrapperStruct *this, float fff[], double ddd, char *ccc)
+{
+  int    i;
+  int    iii;
+  REAL   fff9[HEIDI_WRAPPER_NFFF];
+  DOUBLE ddd9;
+
+  ddd9 = (DOUBLE)ddd;
+  iii = (int)heidi_frou_solve(&this->fpoint, fff9, &ddd9, ccc);
+  for(i = 0; i < HEIDI_WRAPPER_NFFF; i++) { fff[i] = (float)fff9[i]; }
+  return iii;
+}
+
+
+/*-------------------------------- end ------------------------------------*/
+/*-------------------------------- end ------------------------------------*/
+/*-------------------------------- end ------------------------------------*/
+

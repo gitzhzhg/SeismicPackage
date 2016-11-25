@@ -1,0 +1,786 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="slst" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SLSTPROCESS" title="SLST Process" rows="24" columns="80">
+    <Label keyword="COMMENT_SLANTSTACK" alignment="center">SLant STack</Label>
+    <Label keyword="LABEL_OPT_GEOM" alignment="left">OPT_GEOM=</Label>
+    <Field keyword="OPT_GEOM" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DIR" alignment="left">OPT_DIR=</Label>
+    <Field keyword="OPT_DIR" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SAVE" alignment="left">HDR_SAVE=</Label>
+    <Field keyword="HDR_SAVE" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC=</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_LAST" alignment="left">OFF_LAST=</Label>
+    <Field keyword="OFF_LAST" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT=</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_P_INIT" alignment="left">P_INIT  =</Label>
+    <Field keyword="P_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_P_INC" alignment="left">P_INC  =</Label>
+    <Field keyword="P_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_P_LAST" alignment="left">P_LAST  =</Label>
+    <Field keyword="P_LAST" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_P_TOT" alignment="left">P_TOT  =</Label>
+    <Field keyword="P_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TSTRT_OUT" alignment="left">TSTRT_OUT=</Label>
+    <Field keyword="TSTRT_OUT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TAPER_BEG" alignment="left">TAPER_BEG=</Label>
+    <Field keyword="TAPER_BEG" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TAU_MAX" alignment="left">TAU_MAX  =</Label>
+    <Field keyword="TAU_MAX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TAPER_END" alignment="left">TAPER_END=</Label>
+    <Field keyword="TAPER_END" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_LOW_NONE" alignment="left">FREQ_LOW_NONE   =</Label>
+    <Field keyword="FREQ_LOW_NONE" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_LOW_FULL" alignment="left">FREQ_LOW_FULL   =</Label>
+    <Field keyword="FREQ_LOW_FULL" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_HIGH_FULL" alignment="left">FREQ_HIGH_FULL  =</Label>
+    <Field keyword="FREQ_HIGH_FULL" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_HIGH_NONE" alignment="left">FREQ_HIGH_NONE  =</Label>
+    <Field keyword="FREQ_HIGH_NONE" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SEMB" alignment="left">OPT_SEMB=</Label>
+    <Field keyword="OPT_SEMB" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEMB_THRESH" alignment="left">SEMB_THRESH=</Label>
+    <Field keyword="SEMB_THRESH" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEMB_WEIGHT" alignment="left">SEMB_WEIGHT=</Label>
+    <Field keyword="SEMB_WEIGHT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SLANTSTACK" xPos="25" yPos="1" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_GEOM" xPos="56" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_GEOM" xPos="66" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DIR" xPos="2" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DIR" xPos="11" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SAVE" xPos="21" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SAVE" xPos="30" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="2" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="11" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="21" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="29" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_LAST" xPos="39" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_LAST" xPos="48" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="58" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="66" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_P_INIT" xPos="2" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="P_INIT" xPos="11" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_P_INC" xPos="21" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="P_INC" xPos="29" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_P_LAST" xPos="39" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="P_LAST" xPos="48" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_P_TOT" xPos="58" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="P_TOT" xPos="66" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TSTRT_OUT" xPos="2" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TSTRT_OUT" xPos="12" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TAPER_BEG" xPos="26" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPER_BEG" xPos="36" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TAU_MAX" xPos="2" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAU_MAX" xPos="12" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TAPER_END" xPos="26" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPER_END" xPos="36" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_LOW_NONE" xPos="2" yPos="16" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_NONE" xPos="19" yPos="16" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_LOW_FULL" xPos="2" yPos="17" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_FULL" xPos="19" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_HIGH_FULL" xPos="2" yPos="18" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_FULL" xPos="19" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_HIGH_NONE" xPos="2" yPos="19" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_NONE" xPos="19" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_SEMB" xPos="5" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SEMB" xPos="15" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SEMB_THRESH" xPos="23" yPos="22" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEMB_THRESH" xPos="36" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEMB_WEIGHT" xPos="48" yPos="22" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEMB_WEIGHT" xPos="61" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_GEOM">
+      <Tip>Slant stack algorithm to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OPT_GEOM<br> Slant stack algorithm to use.</center></b>
+<pre> Default = LS
+ Allowed = LS     (Line  Source algorithm -- a simple slant stack.)
+ Allowed = PJ     (Point Source algorithm -- J0 Bessel function.)
+ Allowed = PA     (Point Source algorithm -- asymptotic approximation.)
+ Allowed = PB     (Point Source algorithm -- Brysk-McCowan method.)
+ Allowed = PB1    (Same as PB but ignores reverse dip.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DIR">
+      <Tip>Direction for the slant stack transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OPT_DIR<br> Direction for the slant stack transform.</center></b>
+<pre> Default = FOR2
+ Allowed = FOR1   From (X,T) to (P,Tau), one way only.
+ Allowed = FOR2   From (X,T) to (P,Tau), so you can return.
+ Allowed = INV1   From (P,Tau) to (X,T), one way only.
+ Allowed = INV2   From (P,Tau) to (X,T), returning after FOR2.
+ If OPT_DIR = FOR1, transform from (X,T) to (P,Tau), setting headers so NMO
+ and stack can be done in (P,Tau) domain.
+ 
+ If OPT_DIR = FOR2, transform from (X,T) to (P,Tau), setting headers so you
+ can return to (X,T) with the original headers.
+ 
+ If OPT_DIR = INV1, transform from (P,Tau) to (X,T), if not returning after
+ OPT_DIR = FOR2 or if you want to specify the output offsets.
+ 
+ If OPT_DIR = INV2, transform from (P,Tau) to (X,T), if returning after
+ OPT_DIR = FOR2.  Output offsets are the same as the original (X,T) traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SAVE">
+      <Tip>First of 3 consecutive header words for saving offset and mutes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - HDR_SAVE<br> First of 3 consecutive header words for saving offset and mutes.</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH
+ Header words HDR_SAVE, HDR_SAVE + 1 and HDR_SAVE + 2 are used to save the
+ original trace offset, head mute value and tail mute value when
+ OPT_DIR = FOR2 or INV2.  (The HDR_SAVE header words must be user defined
+ headers.)
+ 
+ HDR_SAVE is ignored if OPT_DIR = FOR1 or INV1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>First offset to generate when OPT_DIR = INV1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OFF_INIT<br> First offset to generate when OPT_DIR = INV1.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ OFF_INIT is only used when OPT_DIR = INV1 (and also when OPT_DIR = INV2 and
+ OPT_GEOM = PB.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Increment for generated offsets when OPT_DIR = INV1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OFF_INC<br> Increment for generated offsets when OPT_DIR = INV1.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ OFF_INC is only used when OPT_DIR = INV1 (and also when OPT_DIR = INV2 and
+ OPT_GEOM = PB).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_LAST">
+      <Tip>Last offset to generate when OPT_DIR = INV1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OFF_LAST<br> Last offset to generate when OPT_DIR = INV1.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ OFF_LAST is only used when OPT_DIR = INV1 (and also when OPT_DIR = INV2 and
+ OPT_GEOM = PB.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Total number of offsets to use (FOR) or generate (INV).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OFF_TOT<br> Total number of offsets to use (FOR) or generate (INV).</center></b>
+<pre> Default = NUMTR
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="P_INIT">
+      <Tip>First P value to generate when OPT_DIR = FOR1 or FOR2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - P_INIT<br> First P value to generate when OPT_DIR = FOR1 or FOR2.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ P_INIT is only used when OPT_DIR = FOR1 or FOR2.
+ 
+ Note: P-value units are MICROseconds/distance.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="P_INC">
+      <Tip>Increment for generated p-values when OPT_DIR = FOR1 or FOR2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - P_INC<br> Increment for generated p-values when OPT_DIR = FOR1 or FOR2.</center></b>
+<pre> Default = 5.0
+ Allowed = real &gt;= 0.0
+ P_INC is only used when OPT_DIR = FOR1 or FOR2.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="P_LAST">
+      <Tip>Last P value to generate when OPT_DIR = FOR1 or FOR2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - P_LAST<br> Last P value to generate when OPT_DIR = FOR1 or FOR2.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ P_LAST is only used when OPT_DIR = FOR1 or FOR2.
+ 
+ Note: P-value units are MICROseconds/distance.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="P_TOT">
+      <Tip>Total number of P-values to use (INV) or generate (FOR).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - P_TOT<br> Total number of P-values to use (INV) or generate (FOR).</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0
+ Normally, P_TOT should not be less than OFF_TOT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSTRT_OUT">
+      <Tip>Time of first sample in output traces (this changes the globals).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - TSTRT_OUT<br> Time of first sample in output traces (this changes the globals).</center></b>
+<pre> Default = TSTRT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPER_BEG">
+      <Tip>Number of traces to taper at start of gather before slant stack.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - TAPER_BEG<br> Number of traces to taper at start of gather before slant stack.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAU_MAX">
+      <Tip>Maximum tau-value to use (INV) or generate (FOR).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - TAU_MAX<br> Maximum tau-value to use (INV) or generate (FOR).</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; 0.0
+ This parameter does not change any globals.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPER_END">
+      <Tip>Number of traces to taper at end of gather before slant stack.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - TAPER_END<br> Number of traces to taper at end of gather before slant stack.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Frequency (in Hz) where low frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - FREQ_LOW_NONE<br> Frequency (in Hz) where low frequency taper passes nothing.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;=0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_FULL">
+      <Tip>Frequency (in Hz) where low freq taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - FREQ_LOW_FULL<br> Frequency (in Hz) where low freq taper passes full amplitude.</center></b>
+<pre> Default = 4.0
+ Allowed = real&gt;=FREQ_LOW_NONE</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>Frequency (in Hz) where high freq taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - FREQ_HIGH_FULL<br> Frequency (in Hz) where high freq taper passes full amplitude.</center></b>
+<pre> Default = 75.0
+ Allowed = real&gt;=FREQ_LOW_FULL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_NONE">
+      <Tip>Frequency (in Hz) where high frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - FREQ_HIGH_NONE<br> Frequency (in Hz) where high frequency taper passes nothing.</center></b>
+<pre> Default = 85.0
+ Allowed = Nyquist &gt;= real &gt;= FREQ_HIGH_FULL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SEMB">
+      <Tip>Semblance option to use for artifact reduction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OPT_SEMB<br> Semblance option to use for artifact reduction.</center></b>
+<pre> Default = NONE
+ Allowed = THRESH  (Accept scan only when Semblance &gt;= SEMB_THRESH.)
+ Allowed = WEIGHT  (Multiply output by Semblance**SEMB_WEIGHT.)
+ Allowed = NONE    (Do not use semblance artifact reduction.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEMB_THRESH">
+      <Tip>Semblance threshold value when OPT_SEMB = THRESH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - SEMB_THRESH<br> Semblance threshold value when OPT_SEMB = THRESH.</center></b>
+<pre> Default = 0.2
+ Allowed = real &gt; 0.0
+ Suggested SEMB_THRESH values are in the range of 0.2 to 0.3.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEMB_WEIGHT">
+      <Tip>Semblance exponent when OPT_SEMB = WEIGHT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - SEMB_WEIGHT<br> Semblance exponent when OPT_SEMB = WEIGHT.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ 
+ Not active if OPT_GEOM = PJ.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slst - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="slst">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SLST    (SLant STack)
+ Category   : transforms
+ Written    : 1986-06-28   by: Bob Baumel
+ Revised    : 2007-01-03   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Transform seismic data both ways between (X,T) and (P,Tau)
+              domains.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ SLST performs a Slant Stack (also known as "Radon Transform") transform
+ of seismic trace gathers (usually CMP gathers or shot profiles) in both
+ directions between the (X,T) and (P,Tau) domains.
+ 
+ SLST performs both line-source (simple) slant stacks and point-source
+ (cylindrical) slant stacks.  The cylindrical slant stack can be calculated
+ using explicit Bessel functions, or asymptotic approximation, or the
+ Brysk-McCowan method.  Most options also allow semblance windowing to reduce
+ artifacts.
+ 
+ The user has the option to return to the (X,T) domain after some (P,Tau)
+ processing (such as deconvolution).
+ 
+ Applications of (P,Tau) processing include multiple attenuation, dip
+ filtering, and enhancement of doubly mode converted (PSSP) events.  SLST also
+ serves as a preprocessing step for various inversion algorithms, and is used
+ with the PMOD modeling process.
+ 
+ 
+ Header Words
+ 
+ Offsets and P-values are BOTH kept in header word 6 (P-values have units of
+ MICROSECONDS per unit distance).  P-values replace offsets in FORward
+ transforms, and vice-versa in INVerse transforms. When OPT_DIR = FOR2 or INV2,
+ header words HDR_SAVE, HDR_SAVE + 1 and HDR_SAVE + 2 are used to save the
+ original trace offset, head mute value and tail mute value.  (The HDR_SAVE
+ header words must be user defined headers.)
+ 
+ SLST always sets words 1, 2, 3, 4, 6 and 64 for each output trace.  Words 2
+ and 64 are usually reset to 1 and NDPT, except that when OPT_DIR=INV2 the
+ original (X,T) mutes are restored (see below for additional details when
+ opt_geom = PB or PB1).  Word 6 is always reset to the P-value or
+ offset of the output trace.
+ 
+ For each header word OTHER than those just listed, and for each OPT_DIR
+ option except FOR1, the (N)th header of the output gather is taken from the
+ (N)th header of the input gather (filling zeros when output gather is bigger
+ than input gather).
+ 
+ 
+ OPT_DIR Options and Header Words
+ 
+ To be sure of recovering original headers when going from (X,T) to (P,TAU)
+ and back to (X,T), use FOR2 and INV2 transforms, and make sure you generate
+ at least as many traces in the (P,TAU) domain as you start with in the (X,T)
+ domain.  Also, make sure HDR_SAVE is set the same in both the INV2 and the
+ FOR2 transform.
+ 
+ The FOR1 option is intended to supply usable headers for all your (P,TAU)
+ output traces if you intend to remain in (P,TAU), and process to stack in
+ that domain.  With this option, each header word of the (P,TAU) output trace
+ [except for words 1, 2, 3, 4, 6 and 64] is set to the AVERAGE of all the
+ non-zero values in this header word in the (X,T) input gather.  [Note that
+ every trace of the output gather gets the SAME header, except in words 1, 4,
+ and 6].
+ 
+ The OPT_DIR=INV2 option produces output traces at your original (X,T) offsets.
+ Use OPT_DIR=INV1 if you want to explicitly specify the offsets to output,
+ or if your (P,TAU) data was NOT obtained by transform from (X,T); e.g., if
+ the input is synthetic (P,TAU) traces generated by PMOD.
+ 
+ 
+ OPT_GEOM Options
+ 
+ The actual slant stack algorithm used is specified by the OPT_GEOM parameter.
+ Normally the LS (line source) option should be used for shot profile and CMP
+ inputs.  More detail can be found in the Algorithm Description Section.
+ 
+ 
+ Rho Filter
+ 
+ SLST always applies the "RHO" filter symmetrically in FORward and INVerse
+ transforms, chosen so that reflection events have the SAME wavelet in (X,T)
+ and (P,TAU) domains.  (But NON-reflection events, such as refractions, may
+ have different wavelets.)   For OPT_GEOM=LS, the RHO filter is SQRT(i*omega)
+ in the FORward transform, and SQRT(-i*omega) in INVerse transform.  For
+ GEOM=Px, the RHO filter is (i*omega) in FORward transform, and (-i*omega) in
+ the INVerse transform.  [Fourier sign convention here is that (i*omega)
+ represents time differentiation.]
+ 
+ 
+ Signed Offsets and P-values
+ 
+ SLST allows negative and positive offsets and P-values, but negative values
+ are truly meaningful only with the line-source (OPT_GEOM=LS) transform.  To
+ perform a two-sided transform of split-spread data, first use SETWORD to add
+ signs to the offsets; then run SLST with OPT_GEOM=LS, generating a full
+ range of negative and positive P's.  (But see Advice for Users for another
+ method.)
+ 
+ The point-source (GEOM=Px) case, because it assumes cylindrical symmetry,
+ ignores signs of offsets and P-values.  It won't reject negative offsets or
+ P-values, but only their absolute values are used in the calculation.
+ 
+ 
+ Semblance Based Artifact Reduction
+ 
+ SLST provides Semblance Windowing (OPT_SEMB = THRESH) and Weighting
+ (OPT_SEMB = WEIGHT) options which can reduce aliasing and edge-effect
+ artifacts. These semblance options are usable in both FORward and INVerse
+ transforms with any OPT_GEOM value except PJ.
+ 
+ OPT_SEMB = THRESH provides semblance windowing. This feature was described by
+ Stoffa et al (1981).  It is performed by dividing the input gather into
+ overlapping subarrays; then for each subarray, the output at each (P,TAU)
+ point is accepted only when the semblance exceeds a specified threshold.  This
+ can substantially reduce artifacts, although it may distort wavelets and
+ introduce trace-to-trace amplitude variations.  It roughly doubles execution
+ time because SLST chooses the subarrays so each input trace gets counted
+ twice.  Suggested range for SEMB_THRESH is 0.2 to 0.3.
+ 
+ OPT_SEMB = WEIGHT  provides the simpler option of semblance weighting.  In
+ this case, the input is not divided into subarrays, and the output is simply
+ multiplied by Semblance**SEMB_WEIGHT.  This doesn't reduce artifacts as well
+ as semblance windowing, but is considerably faster; typically, it adds only
+ about 20% to the execution time.  Typical value for SEMB_WEIGHT is 1.0.
+ 
+ 
+ TSTRT_OUT Parameter
+ 
+ The TSTRT_OUT parameter in SLST alters the TSTRT global.  This is most
+ commonly used for resetting TSTRT to zero when performing an INV1 transform
+ of synthetic (P,TAU) data from PMOD which was preferably generated with
+ slightly negative TSTRT to be sure of including events located near TAU=0.
+ Of course, you may also do the reverse; i.e., set TSTRT_OUT slightly negative
+ in a FORward transform to be sure you fully image events that show up near
+ TAU=0 (such as direct arrivals or surface waves).
+ 
+ 
+ Applications
+ 
+ Attenuation of multiples by deconvolution in the (P,TAU) domain is described
+ in a Conoco Research Report by Durrani and Baumel (1990).  This technique is
+ useful when velocity discrimination is lacking between primaries and
+ multiples.  Still more slant stack applications are discussed in Yilmaz's
+ book on Seismic Processing (1987).
+ 
+ 
+ REFERENCES
+ 
+  H. Brysk and D.W. McCowan, 1986, A slant-stack procedure for point-
+    source data, GEOPHYSICS, Vol 51, pp 1370-1386.
+ 
+  J.A. Durrani and R.T. Baumel, 1990, Multiple Attenuation by (p,tau)
+    Processing in Somalia Block 28, Conoco Res. Rpt. 8754-Q01-003-1-90.
+ 
+  Mike Howard, 1983, Slant Stacks, Conoco Research Report 687-2-1-83.
+ 
+  M.E. Kappus, A.J. Harding, and J.A. Orcutt, 1990, A comparison of
+    tau-p transform methods, GEOPHYSICS, Vol 55, pp 1202-1215.
+ 
+  A.R. Mitchell and P.G. Kelamis, 1990, Efficient tau-p hyperbolic
+    velocity filtering, GEOPHYSICS, Vol 55, pp 619-625.
+ 
+  P.L. Stoffa, P. Buhl, J.B. Diebold, and F. Wenzel, 1981, Direct map-
+    ping of seismic data to the domain of intercept time and ray para-
+    meter--A plane-wave decomposition, GEOPHYSICS, Vol 46, pp 255-267.
+ 
+  R.H. Tatham and D.V. Goolsbee, 1984, Separation of S-wave and P-wave
+    reflections offshore western Florida, GEOPHYSICS, V 49, pp 493-508.
+ 
+  O. Yilmaz, 1987, Seismic Data Processing, published by Society of
+    Exploration Geophysicists, Tulsa, OK.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Normally, input data will be shot profile or CMP gathers.  Offset must
+ monotonically increase or decrease.
+ 
+ Input and output P-values are in MICROSECONDS per unit distance.  Positive dip
+ is increasing travel time with increasing offset.
+ 
+ Using a negative P_INIT value (e.g. -100) will better preserve wavelet
+ character at the gather edges when OPT_GEOM = LS or PA.
+ 
+ 
+ Suggested Parameter Values for Simple Applications
+ 
+     OPT_DIR = FOR2 to transform from (X,T) to (P,Tau) space and
+             = INV2 to transform from (P,Tau) to (X,T) space.
+ 
+     OPT_GEOM should be set to LS.
+ 
+     Make sure header words 48 - 50 do not contain information you do not want
+     written over (or set HDR_SAVE to another value).
+ 
+     OFF_TOT = number of traces in input gathers.
+ 
+     P_INIT = minimum P-value to preserve (may be negative), [P-value is
+     dip in microseconds per trace (in X-T space) divided by the offset
+     increment in feet or meters.]
+ 
+     P_INC = approximately 5.0 microseconds per foot, or less
+ 
+     P_TOT = INT(1.5 + (P_LAST - P_INIT)/P_INC).  P_TOT &gt;= OFF_TOT
+ 
+     Set RHO filter parameters to pass the useful frequency range in the data.
+ 
+     (Take defaults for all other parameters.)
+ 
+ 
+ Split Spread Shot Profiles
+ 
+ For better run-time efficiency, split spread shot profiles should be broken
+ up into equivalent off-end shot profiles.  The forward off-end shot profiles
+ can be processed through SLST separately from the reverse off-end shot
+ profiles.  (Separate jobs are required if the forward and reverse off-end
+ shot profiles have different offset polarity.)   Alternatively, you can use
+ SETWORD and TSORT to give both kinds of off-end shot profile the same offset
+ range and trace order and then process both through SLST in the same job.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 40. 2007-01-03 Stoeckley  Fixed a bug which kept the high cut filter from
+                            being increased above the original nyquist, even
+                            when the sample interval was made smaller.  Also
+                            fixed two bugs in the HelpSection which caused
+                            SeisSpace menus not to show the prompts for the
+                            two parameters P_LAST and SEMB_WEIGHT.
+039. 2006-06-20  B. Menger   Removed Unused Variables.
+ 38. 2004-05-24 SMCook     Fixed problem with expanded headers being rejected.
+ 37. 2002-09-11 Goodger    Use mth module for binning
+ 36. 2002-07-01 SMCook     Fixed OFF_TOT GATHER trap (bug report #790).
+ 35. 2002-05-06 Vunderink  Added parallel control parameters
+ 34. 2002-03-28 SMCook     Corrected situation where in INV2 mode the process
+                            would erroneously abort if the input gathers did
+                            not have full trace counts.
+ 33. 2001-11-01 SMCook     Temporarily commented out parallel control
+                            statements to be compatible with current betalib
+                            version of DECON.
+ 32. 2001-07-31 SMCook     Group logic removed and
+                Vunderink   added parallel control parameters.
+ 31. 2001-06-11 SMCook     Put conditional clause around "debug file" logic in
+                            wrapup function.  Was causing fatal error, but at
+                            such a late stage that output was unaffected.
+                            PRODUCTION.
+ 30. 2001-05-04 SMCook     Fixed erroneous check -- the check comparing NWPT
+                            and 2*NW_LIVE should only be applied for geom PJ.
+ 29. 2001-04-25 SMCook     All options now work.  Removed restrictions on use
+                            of PBx geometries, and on semblance noise
+                            suppression.
+                           Problems with PBx modes turned out to be related
+                            to variable XOUTMINI in the slst_bm_setup routine,
+                            and a rho-filter coefficient that wasn't scaled.
+                           Added trap forbidding negative P_INIT values for
+                            PBx geometries.
+                           Added separate SEMB_WEIGHT parameter for clarity.
+                           Made minor user documentation changes.
+                           Removed most commented/debug/obsolete code.
+ 28. 2001-04-06 SMCook     Removed restriction on time and tau ranges.
+                           Removed restriction forcing use of FOR2/INV2 modes.
+                           Still disabled:  PB and PB1 methods.
+                           Still disabled:  Semblance noise attenuation.
+                           Corrected the GUI (comments concerning disabled
+                            options were removed, OFF_LAST and P_LAST were
+                            previously omitted, etc.).
+                           Removed all references to earlier attempts at
+                            interprocess communication (had experimented with
+                            basing defaults on earlier SLST in same job).
+ 27. 2000-12-29 SMCook     Changed wrapped_up to skip_wrapup.
+ 26. 2000-12-05 SMCook     Corrected operation of 3-point interpolator in inner
+                            loop.  Terms had been wrongly modified during the
+                            recent conversion from the old system, causing
+                            noise in the output.
+ 25. 2000-11-29 SMCook     (MAJOR) Converted to new CPS system.  Much of
+                            the preliminary work by Mike O'Brian.
+ 24. 1998-11-11 Goodger    Begin using fortran90 compiler.
+ 23. 1997-05-12 Vunderink  Save original HW 64
+ 22. 1990-10-22 Baumel     Added DIR=INV1 and INV2, and HUD# parameter,
+                           GEOM=PB and PB1, semblance WINDOWING, more
+                           robust setup (e.g., independent of trace
+                           order), extensive documentation re-write.
+ 21. 1989-10-06 Baumel     Added DIR=FOR1 and FOR2 options.
+ 20. 1989-05-27 Baumel     Improved hyperbolic velocity windowing option.
+ 19. 1989-02-06 Baumel     Semblance calculation more robust.
+ 18. 1989-01-05 Baumel     Match new CPS velocity file conventions;
+                           also add alternate return if offsets out of
+                           range.
+ 17. 1988-11-21 Baumel     Extra created traces have dead headers
+                           rather than copies of first input trace.
+ 16. 1988-11-14 Baumel     Allow variable-degree semblance weighting.
+ 15. 1988-10-27 Baumel     Allow X0 and P0 (P_INIT) negative when GEOM=L.
+ 14. 1988-09-29 Sinton     NWIH conversion and SQRTFN removed.
+ 13. 1988-08-17 Baumel     Match new form of TVFBPS primitive.
+ 12. 1988-06-10 Baumel     Add Semblance Weighting feature.
+ 11. 1987-11-11 Baumel     &amp;  Hill Improve efficiency of
+                           interpolation for velocity windowing in
+                           subroutine SLSTCAL.
+ 10. 1987-05-03 Baumel     Interpolate vel. functions with INTPVELF.
+ 9.  1987-01-16 Baumel     Add IPRT parameter (print switch).
+ 8.  1986-12-14 Baumel     Add "exact" Hankel slant stack.
+ 7.  1986-10-29 Baumel     Multiple velocity functions for windowing.
+ 6.  1986-09-02 Baumel     Change SQRT to SQRTFN, add T0NEW parameter.
+ 5.  1986-08-22 Baumel     RHO filter by FFT instead of convolution.
+ 4.  1986-08-18 Baumel     Call to MEMPRT added.
+ 3.  1986-07-30 Baumel     PARAMETERS CHANGED (for memory management).
+ 2.  1986-07-20 Baumel     Change Header use;  Bandpass in RHO filter.
+ 1.  1986-06-28 Baumel     Add hyperbolic velocity windowing.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

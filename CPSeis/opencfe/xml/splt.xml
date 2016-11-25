@@ -1,0 +1,1799 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="splt" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SPLTPROCESS" title="SPLT Process" rows="24" columns="80">
+    <Label keyword="COMMENT_SECTIONPLOTPROCESS" alignment="center">Section PLoT Process</Label>
+    <Label keyword="COMMENT_PLOTASECTIONOFSEISMICTRA" alignment="center">Plot a section of seismic traces.</Label>
+    <Label keyword="LABEL_TIME" alignment="left">TIME=</Label>
+    <Field keyword="TIME" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IPS" alignment="left">IPS=</Label>
+    <Field keyword="IPS" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TPI" alignment="left">TPI=</Label>
+    <Field keyword="TPI" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LRRL" alignment="left">LRRL=</Label>
+    <Field keyword="LRRL" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TR" alignment="left">NUM_TR=</Label>
+    <Field keyword="NUM_TR" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CT" alignment="left">CT=</Label>
+    <Field keyword="CT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Array keyword="SID" type="string" maxLength="40" columnName="SID" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CS_SID" alignment="left">CS_SID=</Label>
+    <Field keyword="CS_SID" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SECTIONPLOTPROCESS" xPos="18" yPos="1" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_PLOTASECTIONOFSEISMICTRA" xPos="11" yPos="2" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIME" xPos="1" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME" xPos="6" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_IPS" xPos="20" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IPS" xPos="27" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TPI" xPos="41" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TPI" xPos="45" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LRRL" xPos="1" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LRRL" xPos="6" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_TR" xPos="20" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR" xPos="27" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CT" xPos="41" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CT" xPos="45" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SID" xPos="1" yPos="8" xSize="43" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_CS_SID" xPos="51" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CS_SID" xPos="58" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TIME">
+      <Tip>Maximum trace time to plot (time at bottom of plotted trace).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TIME<br> Maximum trace time to plot (time at bottom of plotted trace).</center></b>
+<pre> Default = Time on job data screen
+ Allowed = real &gt; 0.0
+ TIME*IPS + SDAS cannot exceed the maximum plot height.  Maximum plot height
+ is 30 inches for HP and 40 inches for HP5000A.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IPS">
+      <Tip>Vertical trace scaling - increment (in. or cm) per second.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - IPS<br> Vertical trace scaling - increment (in. or cm) per second.</center></b>
+<pre> Default = 5.0
+ Allowed = real &gt; 0.0
+ The maximum value of IPS is
+ 
+         (number of samples per second)*(65535+0.01)/(RES*4096.0),
+ 
+ where RES is the resolution (either 200 or 400 dots per inch).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TPI">
+      <Tip>Lateral trace spacing - traces per increment (in. or cm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TPI<br> Lateral trace spacing - traces per increment (in. or cm).</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0
+ TPI cannot be less than 2.0 traces per inch.
+ TPI cannot exceed 0.5*(plot resolution).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LRRL">
+      <Tip>Plot traces left to right (LR) or right to left (RL).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - LRRL<br> Plot traces left to right (LR) or right to left (RL).</center></b>
+<pre> Default = RL
+ Allowed = LR, RL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR">
+      <Tip>Maximum number of traces to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NUM_TR<br> Maximum number of traces to plot.</center></b>
+<pre> Default = 100
+ Allowed = 12000 &gt;= int &gt; 0
+ NUM_TR/TPI cannot exceed the maximum plot length.  Maximum plot length is 240
+ inches for INDIGO and 200 inches for CONPLOT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CT">
+      <Tip>Plotting gain - LAV is plotted as CT channels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CT<br> Plotting gain - LAV is plotted as CT channels.</center></b>
+<pre> Default = 5.0
+ Allowed = real &gt; 0.0
+ The largest absolute value (LAV) is plotted as CT/2 channels, where a channel
+ is the plotted lateral trace spacing.  (Since it is presumed that the sample
+ with the LAV is near another with similar amplitude and opposite polarity,
+ the pair plot as CT channels.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SID">
+      <Tip>Plot annotation text fields (Section IDentification).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SID<br> Plot annotation text fields (Section IDentification).</center></b>
+<pre> Default = -
+ Allowed = char(40) array of 4
+ The characters ", = * ( )" cannot be used in a SID entry.  An array of four
+ identical SID fields is provided.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CS_SID">
+      <Tip>Character size for SID, in inches or cm.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CS_SID<br> Character size for SID, in inches or cm.</center></b>
+<pre> Default = 0.27 inch
+ Allowed = less than 1 inch.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="BASIC_ANNOTATION_PARAMETERS" title="Basic_Annotation_Parameters" rows="30" columns="80">
+    <Label keyword="LABEL_SCALE" alignment="left">SCALE=</Label>
+    <Field keyword="SCALE" type="string" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CS_SCALE" alignment="left">CS_SCALE=</Label>
+    <Field keyword="CS_SCALE" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Array keyword="HDR_LAB" type="int" maxLength="9" columnName="HDR_LAB" editable="yes" sensitive="yes"/>
+    <Array keyword="NAM_LAB" type="string" maxLength="16" columnName="NAM_LAB" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CS_LAB" alignment="left">CS_LAB=</Label>
+    <Field keyword="CS_LAB" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LAB_INIT" alignment="left">LAB_INIT=~</Label>
+    <Field keyword="LAB_INIT" type="string" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CHG" alignment="left">HDR_CHG=</Label>
+    <Field keyword="HDR_CHG" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LAB_INC" alignment="left">LAB_INC=</Label>
+    <Field keyword="LAB_INC" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TRCE_ARRAYSET" label="TRCE   SHOT    INTV  INCR  TOTL">
+     <Array keyword="TRCE" type="float" maxLength="7  " columnName="TRCE" editable="yes" sensitive="yes" columnSize="7"/>
+     <Array keyword="SHOT" type="string" maxLength="8  " columnName="SHOT" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="INTV" type="int" maxLength="6  " columnName="INTV" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="INCR" type="int" maxLength="6  " columnName="INCR" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="TOTL" type="int" maxLength="6  " columnName="TOTL" editable="yes" sensitive="yes" columnSize="6"/>
+    </ArraySet>
+    <ArraySet keyword="TRTIC_ARRAYSET" label="TRTIC  INTIC  ITTIC">
+     <Array keyword="TRTIC" type="float" maxLength="7  " columnName="TRTIC" editable="yes" sensitive="yes" columnSize="7"/>
+     <Array keyword="INTIC" type="int" maxLength="7  " columnName="INTIC" editable="yes" sensitive="yes" columnSize="7"/>
+     <Array keyword="ITTIC" type="int" maxLength="7  " columnName="ITTIC" editable="yes" sensitive="yes" columnSize="7"/>
+    </ArraySet>
+    <Label keyword="LABEL_LTAB" alignment="left">LTAB=</Label>
+    <Field keyword="LTAB" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VL" alignment="left">OPT_VL=</Label>
+    <Field keyword="OPT_VL" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WID_VL" alignment="left">WID_VL=</Label>
+    <Field keyword="WID_VL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AR_BEG" alignment="left">AR_BEG=</Label>
+    <Field keyword="AR_BEG" type="string" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AR_END" alignment="left">AR_END=</Label>
+    <Field keyword="AR_END" type="string" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AR_HT" alignment="left">AR_HT=</Label>
+    <Field keyword="AR_HT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AR_LEN" alignment="left">AR_LEN=</Label>
+    <Field keyword="AR_LEN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_ATBM" alignment="left">PATH_ATBM=</Label>
+    <Field keyword="PATH_ATBM" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FRTB" alignment="left">FRTB=</Label>
+    <Field keyword="FRTB" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_SCALE" xPos="4" yPos="1" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCALE" xPos="10" yPos="1" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CS_SCALE" xPos="18" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CS_SCALE" xPos="27" yPos="1" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LAB" xPos="1" yPos="4" xSize="12" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="NAM_LAB" xPos="17" yPos="4" xSize="19" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_CS_LAB" xPos="39" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CS_LAB" xPos="49" yPos="4" xSize="6" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_LAB_INIT" xPos="39" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LAB_INIT" xPos="49" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CHG" xPos="62" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CHG" xPos="70" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LAB_INC" xPos="39" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LAB_INC" xPos="49" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TRCE_ARRAYSET" xPos="1" yPos="10" xSize="36" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="TRTIC_ARRAYSET" xPos="1" yPos="16" xSize="24" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_LTAB" xPos="1" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LTAB" xPos="6" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_VL" xPos="13" yPos="23" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VL" xPos="20" yPos="23" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WID_VL" xPos="29" yPos="23" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WID_VL" xPos="36" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AR_BEG" xPos="1" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AR_BEG" xPos="8" yPos="25" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AR_END" xPos="13" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AR_END" xPos="20" yPos="25" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AR_HT" xPos="30" yPos="25" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AR_HT" xPos="36" yPos="25" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AR_LEN" xPos="50" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AR_LEN" xPos="57" yPos="25" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PATH_ATBM" xPos="1" yPos="27" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_ATBM" xPos="11" yPos="27" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FRTB" xPos="1" yPos="29" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FRTB" xPos="6" yPos="29" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SCALE">
+      <Tip>Lateral distance scale marker (mile or kilometer marker).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SCALE<br> Lateral distance scale marker (mile or kilometer marker).</center></b>
+<pre> Default = NO
+ Allowed = YES/NO or real
+ SCALE = YES plots a mile or kilometer marker above the trace plot using the
+ difference between header word 17 values of the first two traces to determine
+ the size of the marker.
+ SCALE = NO doesn't plot distance scale marker.
+ SCALE = a number interprets the number as the difference between header word
+ 17 values of two adjacent traces (in feet or meters).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CS_SCALE">
+      <Tip>Character size for SCALE, in inches or cm.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CS_SCALE<br> Character size for SCALE, in inches or cm.</center></b>
+<pre> Default = 0.13 inch
+ Allowed = Less than 1 inch.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_LAB">
+      <Tip>Header word to plot as a trace label above section.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_LAB<br> Header word to plot as a trace label above section.</center></b>
+<pre> Default = 7
+ Allowed = 0 - NWIH, array of 4
+ Four automatic trace labels are allowed, HDR_LAB(1) - HDR_LAB(4).  Label(1) is
+ plotted nearest the trace plot and labels(2-4) are stacked sequentially above
+ label(1).
+ If any of HDR_LAB(1-4)=0, do not plot that label.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NAM_LAB">
+      <Tip>Name to plot adjacent to automatic or manual trace labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NAM_LAB<br> Name to plot adjacent to automatic or manual trace labels.</center></b>
+<pre> Default = -
+ Allowed = char(16) array of 4
+ NAM_LAB is an array of names to plot adjacent to automatic or manual trace
+ labels to identify them.  The array has an element for each of the four
+ labels.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CS_LAB">
+      <Tip>Character size for trace label(A-D), in inches or cm.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CS_LAB<br> Character size for trace label(A-D), in inches or cm.</center></b>
+<pre> Default = 0.13 inch
+ Allowed = real &gt; 0.0 array of 2</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LAB_INIT">
+      <Tip>Trace number for the first automatic trace label.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - LAB_INIT<br> Trace number for the first automatic trace label.</center></b>
+<pre> Default = 50
+ Allowed = int (1 to NUM_TR)
+ Allowed = SHOT
+ Allowed = HDR
+ If LAB_INIT = an integer, the first automatic trace label will be plotted
+ above that trace number.
+ If LAB_INIT = SHOT, HDR_LAB(1) must be zero and HDR_LAB(2) labels are plotted
+ above manual shotpoint labels.
+ If LAB_INIT = HDR, the HDR_LAB(1) label is plotted above the first trace and
+ subsequently wherever the header word HDR_CHG changes.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CHG">
+      <Tip>Plot automatic trace labels wherever HDR_CHG changes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_CHG<br> Plot automatic trace labels wherever HDR_CHG changes.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ Active only if LAB_INIT = HDR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LAB_INC">
+      <Tip>Trace number increment between automatic trace labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - LAB_INC<br> Trace number increment between automatic trace labels.</center></b>
+<pre> Default = 50
+ Allowed = int &gt; 0
+ LAB_INIT and LAB_INC have the same function on each panel if the panel option
+ is chosen, i.e. the pattern starts over for each new panel.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRCE">
+      <Tip>Manual shot point labels</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TRCE<br> Manual shot point labels</center></b>
+<pre> Default = -
+ Allowed = int linked array(50)
+ Trace number to shart shot point label.
+ Numbers may range from 1 to NUM_TR</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOT">
+      <Tip>Manual shot point labels</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SHOT<br> Manual shot point labels</center></b>
+<pre> Default = -
+ Allowed = char linked array(50)
+ First shot point to label
+ 8 characters may be used per shot.  Do not use , = ( ) or *.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTV">
+      <Tip>Manual shot point labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - INTV<br> Manual shot point labels.</center></b>
+<pre> Default = -
+ Allowed = integer linked array(50)
+ The number of trace intervals between shot point labels.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INCR">
+      <Tip>Manual shot point labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - INCR<br> Manual shot point labels.</center></b>
+<pre> Default = -
+ Allowed = integer linked array(50)
+ The shot point increment to the next label.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOTL">
+      <Tip>Manual shot point labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TOTL<br> Manual shot point labels.</center></b>
+<pre> Default = -
+ Allowed = integer linked array(50)
+ The total number of shot points to do.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRTIC">
+      <Tip>Manual shot tic marks</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TRTIC<br> Manual shot tic marks</center></b>
+<pre> Default = -
+ Allowed = integer linked array(50)
+ The trace number to start shot point tics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTIC">
+      <Tip>Manual shot tic marks.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - INTIC<br> Manual shot tic marks.</center></b>
+<pre> Default = -
+ Allowed = integer linked array(50)
+ The number of trace intervals between shot point tics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ITTIC">
+      <Tip>Manual shot tic marks.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - ITTIC<br> Manual shot tic marks.</center></b>
+<pre> Default = -
+ Allowed = integer linked array(50)
+ The total number of tics to do.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LTAB">
+      <Tip>Plot automatic or manual trace labels on top and bottom of plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - LTAB<br> Plot automatic or manual trace labels on top and bottom of plot.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If LTAB = NO, then plot labels on top of section only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VL">
+      <Tip>Plot vertical lines, blanks or timing marks under labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - OPT_VL<br> Plot vertical lines, blanks or timing marks under labels.</center></b>
+<pre> Default = NO
+ Allowed = YES  (Plot a vertical line under the trace labels.)
+ Allowed = NO   (No marking under the trace labels.)
+ Allowed = BTL  (Blank the Timing Lines under the trace labels.)
+ Allowed = TM   (Plot 10 mil Timing Marks under the trace labels.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WID_VL">
+      <Tip>Width of vertical lines under labels, in inches or cm.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - WID_VL<br> Width of vertical lines under labels, in inches or cm.</center></b>
+<pre> Default = 0.005 inch
+ Allowed = real &gt; 0.0
+ The front-end will insure that WID_VL is at least one dot larger than the WT
+ parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AR_BEG">
+      <Tip>Label for the arrow pointing toward the start of the plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - AR_BEG<br> Label for the arrow pointing toward the start of the plot.</center></b>
+<pre> Default = -
+ Allowed = char(3)
+ Normally strings such as N, S, SE are used. If AR_BEG = BLANK, no arrow is
+ plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AR_END">
+      <Tip>Label for the arrow pointing toward the end of the plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - AR_END<br> Label for the arrow pointing toward the end of the plot.</center></b>
+<pre> Default = -
+ Allowed = char(3)
+ Normally strings such as N, S, SE are used.  If AR_END = BLANK, no arrow is
+ plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AR_HT">
+      <Tip>Height of the direction arrow head.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - AR_HT<br> Height of the direction arrow head.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ If AR_HT = 0.0, then arrow head height will be calculated as 0.035 * IPS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AR_LEN">
+      <Tip>Length of the direction arrow.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - AR_LEN<br> Length of the direction arrow.</center></b>
+<pre> Default = 2.5
+ Allowed = real &gt; 0.0
+ Typical values are 2.5 inches or 6.35 cm.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ATBM">
+      <Tip>Pathname for file containing the automatic title block master.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PATH_ATBM<br> Pathname for file containing the automatic title block master.</center></b>
+<pre> Default = -
+ Allowed = char
+ If PATH_ATBM is non-blank and the filename has the extension .atbm, SPLT will
+ automatically plot a title block based on the history file and the automatic
+ title block master file.  If the extension is not .atbm, the contents of the
+ file will be plotted as text in the title block space.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FRTB">
+      <Tip>Factor for reducing the title block size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - FRTB<br> Factor for reducing the title block size.</center></b>
+<pre> Default = 1.0
+ Allowed = 1.0 &gt;= real &gt; 0.0
+ If your title block is too long to be plotted, SPLT will automatically reduce
+ the size to avoid running off the bottom of the plot.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="HARDCOPY_RELATED_PARAMETERS" title="Hardcopy_Related_Parameters" rows="24" columns="80">
+    <Label keyword="COMMENT_HARDCOPYPARAMETERS" alignment="center">Hardcopy Parameters</Label>
+    <Label keyword="LABEL_DEV_LOC" alignment="left">DEV_LOC=</Label>
+    <Field keyword="DEV_LOC" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_QUALITY" alignment="left">QUALITY=</Label>
+    <Field keyword="QUALITY" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DEV" alignment="left">OPT_DEV=</Label>
+    <Field keyword="OPT_DEV" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COPIES" alignment="left">COPIES=</Label>
+    <Field keyword="COPIES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INIT" alignment="left">INIT=</Label>
+    <Field keyword="INIT" type="string" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOLD" alignment="left">FOLD=</Label>
+    <Field keyword="FOLD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_HARDCOPYPARAMETERS" xPos="7" yPos="1" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DEV_LOC" xPos="1" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEV_LOC" xPos="9" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_QUALITY" xPos="20" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="QUALITY" xPos="29" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DEV" xPos="39" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DEV" xPos="47" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_COPIES" xPos="21" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COPIES" xPos="29" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INIT" xPos="42" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INIT" xPos="47" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOLD" xPos="1" yPos="8" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD" xPos="6" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="DEV_LOC">
+      <Tip>Local device to use for plotting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - DEV_LOC<br> Local device to use for plotting.</center></b>
+<pre> Default = HP5000A (HP5000 plotter 2nd floor lobo)
+ Allowed = HP      (HP     plotter 3rd floor lobo)
+ Allowed = TEST    (Run SPLT but write .rpt file only and don't make a plot.)
+ Allowed = SAVECGM (Save a CGM file in current directory; do not plot.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="QUALITY">
+      <Tip>Quality for HP5000 plots.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - QUALITY<br> Quality for HP5000 plots.</center></b>
+<pre> Default = PROD
+ Allowed = PROD
+ Allowed = MAX
+ Allowed = FAST
+ Active only if DEV_LOC = HP5000. PROD = production quality, normal speed.
+ MAX = Maximum quality, slowest speed.  FAST = poorest quality, fast speed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DEV">
+      <Tip>Options for local Versatec A or B plotters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - OPT_DEV<br> Options for local Versatec A or B plotters.</center></b>
+<pre> Default = PAPER
+ Allowed = PAPER
+ Allowed = FILM
+ Active only if DEV_LOC = HP5000.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COPIES">
+      <Tip>Number of copies to make of this plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - COPIES<br> Number of copies to make of this plot.</center></b>
+<pre> Default = 1
+ Allowed = 1 - 99</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INIT">
+      <Tip>Processor or technician initials for plot identification.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - INIT<br> Processor or technician initials for plot identification.</center></b>
+<pre> Default = -
+ Allowed = char(3)
+ Initials are plotted at the end of the plot in the identification section so
+ operators can determine which are your plots.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD">
+      <Tip>Whether operators should fold this plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - FOLD<br> Whether operators should fold this plot.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TRACE_APPEARANCE_PARAMETERS" title="Trace_Appearance_Parameters" rows="24" columns="80">
+    <Label keyword="COMMENT_TRACEAPPEARANCEPARAMETER" alignment="center">Trace Appearance Parameters</Label>
+    <Label keyword="LABEL_METH_CCT" alignment="left">METH_CCT=</Label>
+    <Field keyword="METH_CCT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CCTF" alignment="left">CCTF=</Label>
+    <Field keyword="CCTF" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NVRT" alignment="left">NVRT=</Label>
+    <Field keyword="NVRT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NORM" alignment="left">NORM=</Label>
+    <Field keyword="NORM" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WT" alignment="left">WT=</Label>
+    <Field keyword="WT" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VA" alignment="left">VA=</Label>
+    <Field keyword="VA" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VASTRT" alignment="left">VASTRT=</Label>
+    <Field keyword="VASTRT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VAI" alignment="left">VAI=</Label>
+    <Field keyword="VAI" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RP" alignment="left">RP=</Label>
+    <Field keyword="RP" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_TRACEAPPEARANCEPARAMETER" xPos="5" yPos="1" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_METH_CCT" xPos="1" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METH_CCT" xPos="10" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CCTF" xPos="19" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CCTF" xPos="27" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NVRT" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NVRT" xPos="10" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NORM" xPos="19" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NORM" xPos="27" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WT" xPos="35" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WT" xPos="41" yPos="5" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VA" xPos="1" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VA" xPos="10" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VASTRT" xPos="19" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VASTRT" xPos="26" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VAI" xPos="35" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VAI" xPos="41" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RP" xPos="49" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RP" xPos="52" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="METH_CCT">
+      <Tip>Method to use for the calculated CT factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - METH_CCT<br> Method to use for the calculated CT factor.</center></b>
+<pre> Default = NONE
+ Allowed = NONE
+ Allowed = MED
+ Allowed = NOMED
+ If METH_CCT = NONE, then use the CT parameter, do not use the calculated CT.
+ 
+ If METH_CCT = MED, then use a calculated CT that plots the median absolute
+ amplitude of the plotted traces as CCTF channels.  (CT = CCTF * LAV/MEDIAN)
+ The median calculation uses only nonzero sample values below the head mute.
+ 
+ If METH_CCT = NOMED, then use a calculated CT that plots unit amplitude of
+ the plotted traces as CCTF channels.  This method assumes the traces have
+ already been median scaled, i.e. scaled so that the median absolute amplitude
+ is 1.0.  (CT = CCTF * LAV)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CCTF">
+      <Tip>Parameter to use in calculated CT factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CCTF<br> Parameter to use in calculated CT factor.</center></b>
+<pre> Default = 0.35
+ Allowed = real &gt; 0.0
+ Recommended values are 0.35 for relative amplitude plots and 0.9 for
+ structural (XP) plots.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NVRT">
+      <Tip>Invert plotted traces so that the last sample is plotted on top</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NVRT<br> Invert plotted traces so that the last sample is plotted on top</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NORM">
+      <Tip>Determine plotting gain using individual trace LAV or dataset LAV.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NORM<br> Determine plotting gain using individual trace LAV or dataset LAV.</center></b>
+<pre> Default = ALL
+ Allowed = ALL
+ Allowed = EACH
+ If NORM = ALL, then use the same gain for all traces based on the maximum LAV
+ of all the plotted traces.  (Old NORM=NO.)
+ If NORM = EACH, then calculate a gain for each trace individually based on
+ the LAV of that trace.  (Old NORM=YES.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WT">
+      <Tip>Number of dots to use for the wiggle trace line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - WT<br> Number of dots to use for the wiggle trace line.</center></b>
+<pre> Default = 1
+ Allowed = 0, 1, 2
+ WT can be 0 only if VA = YES.  WT must be 1 if making dual polarity plots.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VA">
+      <Tip>Variable area option - fill in positive lobe of the wiggle trace?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - VA<br> Variable area option - fill in positive lobe of the wiggle trace?</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If VA = NO, you will get a wiggle trace only plot.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VASTRT">
+      <Tip>Variable area start shading option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - VASTRT<br> Variable area start shading option.</center></b>
+<pre> Default = 0.0
+ Allowed = 1.0 &gt;= VASTRT &gt;= 0.0
+ VA shading will shade the amplitude range from VASTRT*LAV to LAV.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAI">
+      <Tip>Variable intensity option - plot every other VA raster scan?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - VAI<br> Variable intensity option - plot every other VA raster scan?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If VAI = YES, every other scan will be plotted in the VA raster area so that
+ overlapping trace lobes do no obliterate each other.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RP">
+      <Tip>Reverse polarity option - multiply samples by -1 before plotting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - RP<br> Reverse polarity option - multiply samples by -1 before plotting.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TRACE_SELECTION_PARAMETERS" title="Trace_Selection_Parameters" rows="24" columns="80">
+    <Label keyword="COMMENT_TRACESELECTIONPARAMETERS" alignment="center">Trace Selection Parameters</Label>
+    <Label keyword="COMMENT_WILLUSETHISPATTERNUNTILN" alignment="center">Will use this pattern until NUM_TR (screen 1) traces are selected</Label>
+    <Label keyword="LABEL_SKIP_INIT" alignment="left">SKIP_INIT=</Label>
+    <Field keyword="SKIP_INIT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_DO" alignment="left">NUM_DO=</Label>
+    <Field keyword="NUM_DO" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_SKIP" alignment="left">NUM_SKIP=</Label>
+    <Field keyword="NUM_SKIP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_TRACESELECTIONPARAMETERS" xPos="6" yPos="1" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_WILLUSETHISPATTERNUNTILN" xPos="6" yPos="2" xSize="65" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SKIP_INIT" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SKIP_INIT" xPos="11" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_DO" xPos="24" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_DO" xPos="31" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_SKIP" xPos="1" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_SKIP" xPos="11" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SKIP_INIT">
+      <Tip>Number of traces to skip initially in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SKIP_INIT<br> Number of traces to skip initially in the DO-SKIP selection.</center></b>
+<pre> Default = 0
+ Allowed = int&gt;=0
+ The DO-SKIP trace selection method consists of initially skipping SKIP_INIT
+ traces, then sequentially plotting ("doing") NUM_DO consecutive traces
+ and skipping NUM_SKIP consecutive traces until NUM_TR total traces are
+ processed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DO">
+      <Tip>Number of traces to process at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NUM_DO<br> Number of traces to process at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ The DO-SKIP trace selection method consists of initially skipping SKIP_INIT
+ traces, then sequentially plotting ("doing") NUM_DO consecutive traces
+ and skipping NUM_SKIP consecutive traces until NUM_TR total traces are
+ processed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SKIP">
+      <Tip>Number of traces to skip at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NUM_SKIP<br> Number of traces to skip at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 0
+ Allowed = int&gt;=0
+ The DO-SKIP trace selection method consists of initially skipping SKIP_INIT
+ traces, then sequentially plotting ("doing") NUM_DO consecutive traces
+ and skipping NUM_SKIP consecutive traces until NUM_TR total traces are
+ processed.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="PANELANDBLANKTRACEPARAMETERS" title="Panel and Blank Trace Parameters" rows="24" columns="80">
+    <Label keyword="COMMENT_PANELANDBLANKTRACEPARAME" alignment="center">Panel and Blank Trace Parameters</Label>
+    <Label keyword="LABEL_NTPP" alignment="left">NTPP=</Label>
+    <Field keyword="NTPP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NROW" alignment="left">NROW=</Label>
+    <Field keyword="NROW" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="PCOL_ARRAYSET" label="PCOL     PROW     PLBL">
+     <Array keyword="PCOL" type="int" maxLength="9  " columnName="PCOL" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="PROW" type="int" maxLength="9  " columnName="PROW" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="PLBL" type="string" maxLength="32 " columnName="PLBL" editable="yes" sensitive="yes" columnSize="32"/>
+    </ArraySet>
+    <Label keyword="LABEL_PLCS" alignment="left">PLCS=</Label>
+    <Field keyword="PLCS" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RSPP" alignment="left">RSPP=</Label>
+    <Field keyword="RSPP" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_BT" alignment="left">HDR_BT=</Label>
+    <Field keyword="HDR_BT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BTHC" alignment="left">BTHC=</Label>
+    <Field keyword="BTHC" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PANELANDBLANKTRACEPARAME" xPos="3" yPos="1" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NTPP" xPos="1" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NTPP" xPos="6" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NROW" xPos="17" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NROW" xPos="22" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PCOL_ARRAYSET" xPos="1" yPos="5" xSize="53" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_PLCS" xPos="1" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLCS" xPos="9" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RSPP" xPos="20" yPos="12" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RSPP" xPos="25" yPos="12" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_BT" xPos="1" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_BT" xPos="8" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BTHC" xPos="17" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BTHC" xPos="25" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="NTPP">
+      <Tip>Number of traces per panel.  NTPP = 0 means do not use panels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NTPP<br> Number of traces per panel.  NTPP = 0 means do not use panels.</center></b>
+<pre> Default = 0
+ Allowed = int &lt; NUM_TR</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NROW">
+      <Tip>Number of rows of panels to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - NROW<br> Number of rows of panels to plot.</center></b>
+<pre> Default = 1
+ Allowed = 1 - 26</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PCOL">
+      <Tip>Column number of the panel you want to label.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PCOL<br> Column number of the panel you want to label.</center></b>
+<pre> Default = -
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROW">
+      <Tip>Row number of the panel you want to label.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PROW<br> Row number of the panel you want to label.</center></b>
+<pre> Default = -
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLBL">
+      <Tip>Label for panel.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PLBL<br> Label for panel.</center></b>
+<pre> Default = -
+ Allowed = char (32)
+ If PLBL begins with a period followed by a blank (. ), then that label will
+ not be plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLCS">
+      <Tip>Panel label character size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PLCS<br> Panel label character size.</center></b>
+<pre> Default = 0.3
+ Allowed = 0.05 - 0.3 inches
+ Suggested values are 0.3 inches, 0.75 cm.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RSPP">
+      <Tip>Repeat trace labeling (automatic or manual) on each panel.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - RSPP<br> Repeat trace labeling (automatic or manual) on each panel.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If RSPP = YES, then each panel is treated as a separate section.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_BT">
+      <Tip>Insert blank traces when header word HDR_BT changes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_BT<br> Insert blank traces when header word HDR_BT changes.</center></b>
+<pre> Default = 3
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BTHC">
+      <Tip>Number of blank traces to insert when header word BTHW changes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - BTHC<br> Number of blank traces to insert when header word BTHW changes.</center></b>
+<pre> Default = 0
+ Allowed = &lt; NUM_TR
+ If BTHC = 0, then blank traces and timing line numbers are automatically
+ inserted between panels (if paneling is being done).
+ If BTHC &gt; 0, then blank traces are inserted only when header word BTHW
+ changes.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TIMING_LINE_PARMETERS" title="Timing_Line_Parmeters" rows="24" columns="80">
+    <Label keyword="COMMENT_TIMINGLINEPARAMETERS" alignment="center">Timing Line Parameters</Label>
+    <Label keyword="COMMENT_MILS" alignment="center">MILS</Label>
+    <Array keyword="TLDOTS" type="int" maxLength="6" columnName="TLDOTS" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TLCS" alignment="left">TLCS=</Label>
+    <Field keyword="TLCS" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TLST" alignment="left">TLST=</Label>
+    <Field keyword="TLST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_" alignment="center">10</Label>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">50</Label>
+    <Label keyword="LABEL_TBST" alignment="left">TBST=</Label>
+    <Field keyword="TBST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TBIB" alignment="left">TBIB=</Label>
+    <Field keyword="TBIB" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TBTOT" alignment="left">TBTOT=</Label>
+    <Field keyword="TBTOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="center">100</Label>
+    <Label keyword="EZGUI_COMMENT_3" alignment="center">400</Label>
+    <Label keyword="EZGUI_COMMENT_4" alignment="center">500</Label>
+    <Label keyword="EZGUI_COMMENT_5" alignment="center">1000</Label>
+    <Layout>
+     <Constraints component="COMMENT_TIMINGLINEPARAMETERS" xPos="12" yPos="1" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_MILS" xPos="0" yPos="3" xSize="4" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TLDOTS" xPos="5" yPos="3" xSize="9" ySize="7" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_TLCS" xPos="16" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TLCS" xPos="21" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TLST" xPos="38" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TLST" xPos="43" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_" xPos="0" yPos="4" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="0" yPos="5" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TBST" xPos="16" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TBST" xPos="21" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TBIB" xPos="38" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TBIB" xPos="43" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TBTOT" xPos="54" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TBTOT" xPos="60" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="0" yPos="6" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_3" xPos="0" yPos="7" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_4" xPos="0" yPos="8" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_5" xPos="0" yPos="9" xSize="4" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TLDOTS">
+      <Tip>Number of dots to use for as many as 6 levels of timing lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TLDOTS<br> Number of dots to use for as many as 6 levels of timing lines.</center></b>
+<pre> Default = 0, 0, 1, 0, 0, 2
+ Allowed = 0 - 4 array(6)
+ A zero entered for any level causes that level to be omitted in plotting.
+ 
+            Line Spacing       Default
+       10 mil      0 dots
+       50      0
+       100     1
+       400     0
+       500     0
+       1000        2</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TLCS">
+      <Tip>Timing line character size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TLCS<br> Timing line character size.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ If TLCS = 0.0, then character size will be 0.035*IPS.
+ If TLCS = -1, then no timing lines will be plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TLST">
+      <Tip>Timing line starting position, in mils from top of section.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TLST<br> Timing line starting position, in mils from top of section.</center></b>
+<pre> Default = 0
+ Allowed = integer &gt; 0
+ Annotation will always be referenced to top of section (TSTRT).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TBST">
+      <Tip>Trace number to start blanking timing lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TBST<br> Trace number to start blanking timing lines.</center></b>
+<pre> Default = -
+ Allowed = int &lt; NUM_TR</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TBIB">
+      <Tip>Trace number increment between blank timing lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TBIB<br> Trace number increment between blank timing lines.</center></b>
+<pre> Default = -
+ Allowed = int &lt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TBTOT">
+      <Tip>Total number of times to blank timing lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TBTOT<br> Total number of times to blank timing lines.</center></b>
+<pre> Default = -
+ Allowed = int &lt; 0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="VELOCITY_FUNCTION_PARAMTERS" title="Velocity_Function_Paramters" rows="24" columns="80">
+    <Label keyword="COMMENT_VELOCITYFUNCTIONPARAMETE" alignment="center">Velocity Function Parameters</Label>
+    <Label keyword="LABEL_PATH_VEL" alignment="left">PATH_VEL=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FRVF" alignment="left">FRVF=</Label>
+    <Field keyword="FRVF" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VINT" alignment="left">VINT=</Label>
+    <Field keyword="VINT" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VXTOL" alignment="left">VXTOL=</Label>
+    <Field keyword="VXTOL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_VELOCITYFUNCTIONPARAMETE" xPos="16" yPos="1" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_VEL" xPos="1" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="10" yPos="3" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FRVF" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FRVF" xPos="10" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VINT" xPos="21" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VINT" xPos="26" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VXTOL" xPos="36" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VXTOL" xPos="42" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PATH_VEL">
+      <Tip>Pathname of the file containing velocity functions to plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PATH_VEL<br> Pathname of the file containing velocity functions to plot.</center></b>
+<pre> Default = -
+ Allowed = char
+ Velocity function names within the file must be distinct.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FRVF">
+      <Tip>Factor for reducing plotted velocity function size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - FRVF<br> Factor for reducing plotted velocity function size.</center></b>
+<pre> Default = 1.0
+ Allowed = 1.0 &gt;= FRVF &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINT">
+      <Tip>Options for velocity function interpolation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - VINT<br> Options for velocity function interpolation.</center></b>
+<pre> Default = TINT5
+ Allowed = TINT5  (Time interpolation to 5.5 sec.)
+ Allowed = TINT7  (Time interpolation to 7.0 sec.)
+ Allowed = TINT15 (Time interpolation to 15.0 sec.)
+ Allowed = ORI   (Original function + interpolated times every 0.5 sec. )
+ Allowed = VELO   (Velocity interpolation.)
+ Allowed = NONE   (Plot function without change.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VXTOL">
+      <Tip>Tolerance for determining equality of coordinate values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - VXTOL<br> Tolerance for determining equality of coordinate values.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ SPLT looks at the value of the velocity file coordinate header for the first
+ two traces to determine whether the file should be read in increasing or
+ decreasing order.  This may be difficult if the coordinate header does not
+ monotonically increase or decrease.  In this case you should set VXTOL
+ non-zero so that if the header value of the two traces falls within VXTOL of
+ each other, SPLT will look at more traces to determine the order.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="BLOCKBOUNDARIES_TIELINES_SIDELAB" title="Block Boundaries_Tie Lines_Side Labels" rows="27" columns="80">
+    <Label keyword="COMMENT_BLOCKBOUNDARIESTIELINESS" alignment="center">Block Boundaries, Tie Lines, Side Labels</Label>
+    <Label keyword="LABEL_PATH_BLK" alignment="left">PATH_BLK=~</Label>
+    <Field keyword="PATH_BLK" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BLCS" alignment="left">BLCS=</Label>
+    <Field keyword="BLCS" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_TIE1" alignment="left">PATH_TIE1=</Label>
+    <Field keyword="PATH_TIE1" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_TIE2" alignment="left">PATH_TIE2=</Label>
+    <Field keyword="PATH_TIE2" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TICS" alignment="left">TICS=</Label>
+    <Field keyword="TICS" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TBOT" alignment="left">TBOT=</Label>
+    <Field keyword="TBOT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TITR_ARRAYSET" label="TITR TIE">
+     <Array keyword="TITR" type="int" maxLength="5  " columnName="TITR" editable="yes" sensitive="yes" columnSize="5"/>
+     <Array keyword="TIE" type="string" maxLength="40 " columnName="TIE" editable="yes" sensitive="yes" columnSize="40"/>
+    </ArraySet>
+    <ArraySet keyword="SLTIM_ARRAYSET" label="SLTIM SLBL                    SLSZ  SLROW">
+     <Array keyword="SLTIM" type="float" maxLength="6  " columnName="SLTIM" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="SLBL" type="string" maxLength="24 " columnName="SLBL" editable="yes" sensitive="yes" columnSize="24"/>
+     <Array keyword="SLSZ" type="float" maxLength="6  " columnName="SLSZ" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="SLROW" type="int" maxLength="5  " columnName="SLROW" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Label keyword="EZGUI_COMMENT_6" alignment="center">Block Boundaries, Tie Lines, Side Labels</Label>
+    <Layout>
+     <Constraints component="COMMENT_BLOCKBOUNDARIESTIELINESS" xPos="17" yPos="1" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_BLK" xPos="1" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_BLK" xPos="11" yPos="3" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_BLCS" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BLCS" xPos="11" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PATH_TIE1" xPos="1" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_TIE1" xPos="11" yPos="7" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_TIE2" xPos="1" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_TIE2" xPos="11" yPos="9" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TICS" xPos="1" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TICS" xPos="11" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TBOT" xPos="1" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TBOT" xPos="11" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TITR_ARRAYSET" xPos="1" yPos="15" xSize="48" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="SLTIM_ARRAYSET" xPos="7" yPos="22" xSize="44" ySize="3" xStretch="true" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_6" xPos="17" yPos="26" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PATH_BLK">
+      <Tip>Pathname of file containing block boundary information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PATH_BLK<br> Pathname of file containing block boundary information.</center></b>
+<pre> Default = -
+ Allowed = char
+ File must be built with the BBLK utility.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BLCS">
+      <Tip>Block label character size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - BLCS<br> Block label character size.</center></b>
+<pre> Default = 0.3
+ Allowed = 0.05 - 0.3 inches
+ Suggested size is 0.3 inches or 0.762 cm.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_TIE1">
+      <Tip>Pathname of file containing line-tie information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PATH_TIE1<br> Pathname of file containing line-tie information.</center></b>
+<pre> Default = -
+ Allowed = char
+ File must be built with the BTIE utility.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_TIE2">
+      <Tip>Pathname of the second file containing line-tie information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PATH_TIE2<br> Pathname of the second file containing line-tie information.</center></b>
+<pre> Default = -
+ Allowed = char
+ File must be built with the BTIE utility.  Information in this file will be
+ plotted above that from PATH_TIE1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TICS">
+      <Tip>Line-tie character size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TICS<br> Line-tie character size.</center></b>
+<pre> Default = 0.07
+ Allowed = real &gt; 0.0
+ Suggested size is 0.07 inches or 0.18 cm.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TBOT">
+      <Tip>Plot line-tie marks on bottom of section as well as the top.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TBOT<br> Plot line-tie marks on bottom of section as well as the top.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TITR">
+      <Tip>Trace numbers for manual line-tie labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TITR<br> Trace numbers for manual line-tie labels.</center></b>
+<pre> Default = -
+ Allowed = int linked array(50)
+ Manual lie-ties cannot be used if PATH_TIE is specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIE">
+      <Tip>Manual line-tie labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TIE<br> Manual line-tie labels.</center></b>
+<pre> Default = -
+ Allowed = char linked array(50)
+ 40 characters may be used per label.  Do not use , = ( ) or *.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLTIM">
+      <Tip>Manual side labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SLTIM<br> Manual side labels.</center></b>
+<pre> Default = -
+ Allowed = real linked array(50)
+ The time in seconds to position the label.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLBL">
+      <Tip>Manual side labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SLBL<br> Manual side labels.</center></b>
+<pre> Default = -
+ Allowed = char linked array(50)
+ The annotation for the side label.  24 characters available.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLSZ">
+      <Tip>Manual side labels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SLSZ<br> Manual side labels.</center></b>
+<pre> Default = .15
+ Allowed = real linked array(50)
+ The character size of the side label in inches or cm.  A zero here will be
+ plotted at .15 inch.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLROW">
+      <Tip>Manual side labels</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SLROW<br> Manual side labels</center></b>
+<pre> Default = 1
+ Allowed = integer linked array(50)
+ The row you are labeling refers to paneled plots.  If you are not paneling
+ use 1.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="GRAPHSTYLEPLOTS" title="Graph Style Plots" rows="24" columns="80">
+    <Label keyword="COMMENT_GRAPHSTYLEOFPLOTS" alignment="center">Graph Style of Plots</Label>
+    <Label keyword="LABEL_FLST" alignment="left">FLST=</Label>
+    <Field keyword="FLST" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FL" alignment="left">HDR_FL=</Label>
+    <Field keyword="HDR_FL" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OVJD" alignment="left">OVJD=</Label>
+    <Field keyword="OVJD" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OVWD" alignment="left">OVWD=</Label>
+    <Field keyword="OVWD" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_DL" alignment="left">HDR_DL=</Label>
+    <Field keyword="HDR_DL" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DLREF" alignment="left">DLREF=</Label>
+    <Field keyword="DLREF" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DLU100" alignment="left">DLU100=</Label>
+    <Field keyword="DLU100" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PL" alignment="left">HDR_PL=</Label>
+    <Field keyword="HDR_PL" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PLREF" alignment="left">PLREF=</Label>
+    <Field keyword="PLREF" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PLU100" alignment="left">PLU100=</Label>
+    <Field keyword="PLU100" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REZT" alignment="left">REZT=</Label>
+    <Field keyword="REZT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PMSE" alignment="left">PMSE=</Label>
+    <Field keyword="PMSE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PMSE100" alignment="left">PMSE100=</Label>
+    <Field keyword="PMSE100" type="float" maxLength="4" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_GRAPHSTYLEOFPLOTS" xPos="4" yPos="1" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FLST" xPos="5" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FLST" xPos="14" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FL" xPos="20" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FL" xPos="29" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OVJD" xPos="37" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OVJD" xPos="47" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="56" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="64" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OVWD" xPos="69" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OVWD" xPos="74" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_DL" xPos="5" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_DL" xPos="14" yPos="5" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DLREF" xPos="20" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DLREF" xPos="29" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DLU100" xPos="37" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DLU100" xPos="47" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_PL" xPos="5" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PL" xPos="14" yPos="7" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PLREF" xPos="20" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLREF" xPos="29" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PLU100" xPos="37" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLU100" xPos="47" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REZT" xPos="5" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REZT" xPos="14" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PMSE" xPos="20" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PMSE" xPos="29" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PMSE100" xPos="37" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PMSE100" xPos="47" yPos="9" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FLST">
+      <Tip>Fold of stack indicator.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - FLST<br> Fold of stack indicator.</center></b>
+<pre> Default = 0
+ Allowed = integer
+ Plots a fold of stack indicator as an open circle between zero time and
+ 100 mils with 100% of FLST plotted at zero time.  FLST=maximum fold.  Zero =
+ no fold of stack indicator plotted.  Fold will be plotted between the top
+ of the section and the first 100 mils.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FL">
+      <Tip>Header word to use for FLST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_FL<br> Header word to use for FLST.</center></b>
+<pre> Default = 5
+ Allowed = 1 - NWIH
+ Word 5 is the fold of stack which is standard for the FLST parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OVJD">
+      <Tip>Velocity to use for OVJD tics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - OVJD<br> Velocity to use for OVJD tics.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt; 0.0
+ Plots a tic mark at time = offset/(OVJD velocity).  Used to verify field
+ geometry.
+ If OVJD = 0.0, then do not plot tics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word carrying offset to use for OVJD tics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_OFF<br> Header word carrying offset to use for OVJD tics.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OVWD">
+      <Tip>Thickness of OVJD tic marks.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - OVWD<br> Thickness of OVJD tic marks.</center></b>
+<pre> Default = 0.01 inches
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_DL">
+      <Tip>Header word to use for dashed line plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_DL<br> Header word to use for dashed line plot.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ Word 19 is the elevation which would be the standard use for this parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DLREF">
+      <Tip>Reference number to be plotted at zero time for HDR_DL</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - DLREF<br> Reference number to be plotted at zero time for HDR_DL</center></b>
+<pre> Default = -
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DLU100">
+      <Tip>Units representing 100 mils for HDR_DL</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - DLU100<br> Units representing 100 mils for HDR_DL</center></b>
+<pre> Default = -
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PL">
+      <Tip>Header word to use for plus sign plot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HDR_PL<br> Header word to use for plus sign plot.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ Works the same as the HDR_DL option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLREF">
+      <Tip>Reference number to be plotted at zero time for HDR_PL</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PLREF<br> Reference number to be plotted at zero time for HDR_PL</center></b>
+<pre> Default = -
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLU100">
+      <Tip>Units representing 100 mils for HDR_PL</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PLU100<br> Units representing 100 mils for HDR_PL</center></b>
+<pre> Default = -
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REZT">
+      <Tip>Reference elevation to zero time</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - REZT<br> Reference elevation to zero time</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ Reference elevation (HDR_DL and HDR_PL) and fold of stack (FLST) to zero
+ time.  If there is a negative tstrt, zero time will be below the top of the
+ section.  REZT=NO will reference elevation and flst to the top of the section
+ rather than zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PMSE">
+      <Tip>Plot midpoint surface elevation in box above section?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PMSE<br> Plot midpoint surface elevation in box above section?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PMSE100">
+      <Tip>Units representing 100 mils for PMSE</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PMSE100<br> Units representing 100 mils for PMSE</center></b>
+<pre> Default = 1.0
+ Allowed = 1.0 to 1000.0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="AUTOMATICPOSITIONINGOFANNOTATION" title="Automatic Positioning of Annotation" rows="24" columns="80">
+    <Label keyword="COMMENT_AUTOMATICPOSITIONINGOFAN" alignment="center">Automatic Positioning of Annotation</Label>
+    <Label keyword="LABEL_CALD" alignment="left">CALD=</Label>
+    <Field keyword="CALD" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SDAS" alignment="left">SDAS=</Label>
+    <Field keyword="SDAS" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCDA" alignment="left">SCDA=</Label>
+    <Field keyword="SCDA" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIDA" alignment="left">TIDA=</Label>
+    <Field keyword="TIDA" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ARDA" alignment="left">ARDA=</Label>
+    <Field keyword="ARDA" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEDA" alignment="left">SEDA=</Label>
+    <Field keyword="SEDA" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AUTOMATICPOSITIONINGOFAN" xPos="15" yPos="1" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CALD" xPos="1" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CALD" xPos="6" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SDAS" xPos="21" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SDAS" xPos="26" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCDA" xPos="42" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCDA" xPos="47" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIDA" xPos="1" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIDA" xPos="6" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ARDA" xPos="21" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ARDA" xPos="26" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEDA" xPos="42" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEDA" xPos="47" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="CALD">
+      <Tip>Automatic calculation of annotation location above section.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CALD<br> Automatic calculation of annotation location above section.</center></b>
+<pre> Default = YES
+ Allowed = YES, NO, YREV
+ If CALD = YES, SPLT calculates the location of annotation elements above the
+ section automatically.
+ If CALD = NO, you will be prompted for individual location values.
+ If CALD = YREV, you must review the values SPLT calculates automatically.
+ 
+ You cannot exit the front-end until CALD has been set to YES or NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SDAS">
+      <Tip>Distance above zero time to plot the first SID line (in. or cm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SDAS<br> Distance above zero time to plot the first SID line (in. or cm).</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0
+ Active if CALD = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCDA">
+      <Tip>Distance of scale above the section.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SCDA<br> Distance of scale above the section.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0
+ Active if CALD = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIDA">
+      <Tip>Distance above the section to plot the line tie (in. or cm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - TIDA<br> Distance above the section to plot the line tie (in. or cm).</center></b>
+<pre> Default = -
+ Allowed = real &gt;= 0.1 inch
+ Active if CALD = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ARDA">
+      <Tip>Distance of the direction arrow above the section.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - ARDA<br> Distance of the direction arrow above the section.</center></b>
+<pre> Default = 2.5
+ Allowed = real &gt; 0.1 inch
+ Typical values are 2.5 (English) or 6.35 (metric).
+ Active if CALD = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEDA">
+      <Tip>Distance of the survace elevation plot above the section.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - SEDA<br> Distance of the survace elevation plot above the section.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0
+ Active if CALD = NO.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>splt - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="splt">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SPLT   (Section PLoT)
+ Category   : plot
+ Written    : 1989-01-28   by: Karen Goodger
+ Revised    : 2007-01-03   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Plot a section of seismic traces.
+ Portability: 32 bit word size
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ SPLT is a highly versatile process that produces seismic trace plots on a
+ variety of plotting devices.  Because the number of options relating to trace
+ plotting are very numerous and the options relating to annotation are even
+ more numerous, SPLT is a process for the expert user.  (There are over 170
+ parameters.)
+ 
+ Parameters are located in functionally related groups on the parameter entry
+ screens; these groups are listed below.  The first group consists of the
+ seven essential parameters required to produce a basic plot.  The second
+ group consists of basic annotation parameters.  Users with modest
+ requirements will not need to visit additional parameter groups.
+ 
+ 
+ SPLT Parameter Categories
+ 
+   Automatic Annotation Positioning
+   Basic Annotation
+   Basic Plot
+   Block Boundaries and Line-ties
+   Graph-style Plots
+   Hardcopy Related
+   Manual Shotpoint-style Annotation
+   Panel and Blank Trace
+   Side Label
+   Statics Annotation
+   Timing Lines
+   Trace Appearance
+   Trace Selection
+   Velocity Functions
+ 
+ 
+ Length Units
+ 
+ Depending on the choice of English or metric units on the Project_data screen,
+ SPLT will automatically use inches or miles where appropriate (English) or
+ centimeters or kilometers where appropriate (metric).  Exceptions to this rule
+ are documented.  Plotting limitations or restrictions are typically
+ documented only in inches.
+ 
+ 
+ Limitations
+ 
+ Maximum plot length is 240 inches for INDIGO and 200 inches for CGM.  Maximum
+ plot height is 30 inches for HP plotters and 35 inches for Indigo and Versatec
+ plotters.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Basic Plot
+ 
+ Basic plot parameters are those required to produce the simplest plots.
+ These parameters are:
+ 
+ TIME      Maximum trace time to plot (time at bottom of plotted trace).
+ IPS       Vertical trace scaling - increment (in. or cm) per second.
+ TPI       Lateral trace spacing - traces per increment (in. or cm).
+ LRRL      Plot traces left to right (LR) or right to left (RL).
+ NUM_TR    Maximum number of traces to plot.
+ CT        Plotting gain - LAV is plotted as CT channels.
+ SID       Plot annotation (Section IDentification).
+ 
+ 
+ Basic Annotation
+ 
+ Basic annotation parameters are those required for the simplest plot
+ annotation.  These parameters are:
+ 
+ CALD      Automatic calculation of annotation location above section.
+ 
+ SCALE     Lateral distance scale marker (mile or kilometer marker).
+ 
+ HDR_LAB(1-4)  Header word to plot as an automatic trace label above section.
+ LAB_INIT  Trace number of the first trace label.
+ HDR_CHG   Plot automatic trace labels wherever HDR_CHG changes.
+ LAB_INC   Trace number increment between trace labels.
+ NAM_LAB   Name(s) to identify automatic or manual trace labels.
+ LTAB      Plot trace labels on top and bottom of section.
+ CS_LAB    Character size for trace label(1-4).
+ 
+ 
+ OPT_VL    Whether to plot vertical lines, blanks or timing marks under
+       labels.
+ WID_VL    Width of vertical lines under labels.
+ 
+ AR_BEG    Label for the direction arrow pointing to the start of the plot.
+ AR_END    Label for the direction arrow pointing to the end of the plot.
+ AR_HT     Height of the direction arrowhead.
+ AR_LEN    Length of the direction arrow.
+ ARDA      Height of the direction arrow above top of plot.
+ 
+ PATH_ATBM Pathname for file containing the automatic title block master.
+ FRTB      Factor for reducing the title block size.
+ 
+ 
+ Automatic Annotation Location
+ 
+ Setting CALD=YES adjusts parameters SDAS,TIDA,ARDA and SEDA in order to
+ prevent annotation from overlapping vertically. This calculation is made at
+ workfile building time.
+-------------------------------------------------------------------------------
+ 
+                             REVISION HISTORY
+ 
+    date        author      description
+    ----        ------      -----------
+36. 2007-01-03  Stoeckley   Add call to pc_register_array_names for SeisSpace;
+                             remove more unused variables.
+35. 2006-01-10  B. Menger   Removed Unused Variables.
+34. 2003-12-09  Goodger     Set ymax to a maximum of 40 inches. This solves
+                            the problem of splt outputting an extra panel.
+33. 2003-08-28  Goodger     Doc changes for Houston plotters.
+32. 2003-08-14  Goodger     Remove hard coded path.
+31. 2002-04-29  k.goodger - Fix overplotting problem with nam_lab parameter.
+                            Fix problem cutting off top line of SID.
+30. 2002-02-22  k.goodger - Add option to output to a cgm file.  Add plotter
+                            HP5000.  Remove indigo and versatec plotters.
+29. 2001-12-10  k.goodger - Fix bug in routine tblk (routine that plots the
+                            title block) which was causing an internal compiler
+                            error on the intel compiler.
+                            Take care of warning messages generated by intel
+                            compiler.
+28. 2001-10-18  k.goodger - Save the unit number for the dplt control cards
+                            to insure it is the same for successive splts.
+                            Build cards for dplttest if testlib and dplt if
+                            prodlib. This change resolves problems with
+                            timing lines, when not the first plot.
+27. 2001-08-14  k.goodger - Write the plotting scale to the history file,
+                            called PLOTSCALE.
+26. 2001-08-09  k.goodger - Call new title block routine, ATBLK.
+25. 2001-08-02  k.goodger - Fix bug in plbl routine. It was sending a null
+                            to the symbol routine.
+24. 2001-04-30  k.goodger - Removed check in skip_init trap against num_tr.
+23. 2001-03-22  k.goodger - Do not allow a zero time.
+22. 2001-02-23  k.goodger - Rename plot files names if jobname is greater
+                            than 9 characters.
+21. 2001-02-15  k.goodger - Fix bug with dev_loc=SAVE.
+20. 2001-02-06  k.goodger - Do not output dplt or spst when opt_loc=test.
+                            Fix bug with arrows when conp.
+19. 2001-01-24  k.goodger - Add HP and Versatec devices.
+18. 2001-01-15  k.goodger - Uppercase tie lines in a file.
+17. 2000-12-12  k.goodger - Add printout of title block file.
+16. 2000-12-08  k.goodger - Wrapup flag changes.  Added an error flag to
+                            splt_vf.
+15. 2000-12-05  k.goodger - Print some dplt control card info to online.
+14. 2000-12-04  k.goodger - Do not plot minus sign on water depths.  Fix
+                            problem with FOLD not coming out on sticker id.
+13. 2000-11-30  k.goodger - Removed calles to hist_init and hist_write. This
+                            fixes the problem of velocity functions
+                            overplotting.
+12. 2000-10-31  k.goodger - Remove some repeated code which was causing
+                            velocity function failure.
+11. 2000-10-27  k.goodger - Add call to ATB.
+10. 2000-10-18  k.goodger - If job name is longer than 10 characters, create
+                            a random name to use for the plot file rather than
+                            the job name.  The vax cannot handle plot file
+                            names longer than 10 characters.
+                            Fix front end problem.  Variable nsid was not
+                            initialized.
+09. 2000-09-27  k.goodger - Fix paneling problem when there is only 1 row.
+08. 2000-09-18  k.goodger - Correct problem with blank trace traps.
+07. 2000-09-18  k.goodger - Fix problem with bthc option.
+                            Fix problem with intermediate tic marks not
+                            showing up.
+                            Implement blank timing lines.
+06. 2000-09-14  k.goodger - Correct ovwd parameter to accept decimal.
+                            Convert scale parameter to upper case.
+                            Convert side labels to upper case.
+                            Make hdr_dl sensitive.
+                            Change VINT OR&amp;I to ORI.
+                            Correct problems with more than 1 plot in a job.
+                            Convert plbl to upper case.
+05. 2000-09-12  k.goodger - Print error message if velocity funcion headers
+                            do not match the data headers.
+                            Reset some array counters back to zero.
+                            Correct metric conversion problems with tics,
+                            tida, and arda.
+04. 2000-09-11  k.goodger - Remove and old array which was not allocated
+                            and causing a job abort with no messages.
+03. 2000-09-10  k.goodger - Fix problem getting into trtic field.
+                            Reposition some screen 2 parameters.
+                            Inform user of maximum total on manual shot
+                            point array.
+                            Add an element trap to the totl field of the
+                            shot point array to check range for that
+                            card.
+                            Correct problem of setting ntpp back to zero.
+02. 2000-09-07  k.goodger - Insure path filled in for path_vel parameter.
+                            Adust CALD parameters.
+                            Correct problem with elevation plot having
+                            incorrect Y coordinate.
+                            Fix velocity label.
+                            Allow lower case in LAB_INIT parameter.
+                            Turn off manual trace array if hdr_lab set.
+                            Fix bug with two plots in a job.
+                            Bug report 25.
+01. 2000-08-17  k.goodger - Initial conversion to new CPS.
+***********************************************************************
+01. 1999-05-04  k.goodger - remove email to node pogun.  removed nesp
+                            from doc.
+***********************************************************************
+09. 1998-11-18  k.goodger - fix arunment in call to splt_vf.  it was
+                            delcared character in the calling routine
+                            but used as hollerith in the receiving
+                            routine.  fix problem in spltckh involving
+                            getarg.
+08. 1998-11-10  k.goodger - put a save statement in each subroutine.
+                            begin using fortran90 compiler.
+07. 1998-09-16  k.goodger - hitemax was set to 70.0 if a half scale
+                            only.  this will not work due to memory
+                            limitations in the indigo.
+06. 1998-08-06  k.goodger - removed node howwe.  front end change only.
+05. 1998-07-27  k.goodger - add the njob parameter to the atb call.
+04. 1998-05-04  k.goodger - update documentation on plotting nodes.
+03. 1998-04-14  k.goodger - make corresponding corrections in thit
+                            routine that was made to tblk routine in
+                            revision 2.  made a note in tblk routine
+                            that thit will also need changes.
+02. 1998-04-01  k.goodger - correct problem with plotting blank cards
+                            in the title block.
+01. 1998-01-22  k.goodger - call dcodet to find out the unit number
+                            being used by dcode.  it may not be unit 5.
+**********************************************************************
+10. 1997-10-08  k.goodger - add aberdeen plotters to documentation.
+09. 1997-09-04  k.goodger - change bias on check for nils. routine cdp.
+                            some values close to zero, but not nil were
+                            not getting plotted.
+08. 1997-09-03  k.goodger - increase xmax when title block falls on a
+                            hsr page.
+07. 1997-08-15  k.goodger - adjust y-coordinate on cdpi plot labels
+                            so that they do not overlap.
+06. 1997-08-04  k.goodger - insure calculated vxbias parameter is
+                            positive.
+05. 1997-06-30  k.goodger - ignore nils on the static plot.  routine
+                            cdp.
+04. 1997-06-18  k.goodger - add norway plotting nodes. remove aberdeen
+                            nodes.
+03. 1997-02-17  k.goodger - add flpt parameter.
+02. 1997-02-03  k.goodger - fix problem with elevation plot not honoring
+                            paneling.
+01. 1997-01-20  k.goodger - documentation change on node po4001.
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,575 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="genfilt" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="GENFILTPROCESS" title="GENFILT Process" rows="24" columns="80">
+    <Label keyword="COMMENT_GENERALFILTERINCLUDESFOR" alignment="center">GENeral FILTer (includes former FILTR, WVLT)</Label>
+    <Label keyword="COMMENT_GENERALFREQUENCYDOMAINFI" alignment="center">General frequency domain filter and wavelet building process.</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRAPEZOIDFILTERINGOPTION" alignment="center">Trapezoid Filtering Option</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_FILTER_TYPE" alignment="left">FILTER_TYPE=</Label>
+    <Field keyword="FILTER_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_LOW_NONE" alignment="left">FREQ_LOW_NONE=</Label>
+    <Field keyword="FREQ_LOW_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_LOW_FULL" alignment="left">FREQ_LOW_FULL=</Label>
+    <Field keyword="FREQ_LOW_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_HIGH_FULL" alignment="left">FREQ_HIGH_FULL=</Label>
+    <Field keyword="FREQ_HIGH_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_HIGH_NONE" alignment="left">FREQ_HIGH_NONE=</Label>
+    <Field keyword="FREQ_HIGH_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OTHERFILTERINGOPTIONS" alignment="center">Other Filtering Options</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_AMP_PWR" alignment="left">AMP_PWR=</Label>
+    <Field keyword="AMP_PWR" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PHAS_PWR" alignment="left">PHAS_PWR=</Label>
+    <Field keyword="PHAS_PWR" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PHAS_ADD" alignment="left">PHAS_ADD=</Label>
+    <Field keyword="PHAS_ADD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_SHIFT" alignment="left">TIM_SHIFT=</Label>
+    <Field keyword="TIM_SHIFT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SIGMA" alignment="left">SIGMA=</Label>
+    <Field keyword="SIGMA" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PEAKFREQUENCY" alignment="left">Peak Frequency=</Label>
+    <Field keyword="PEAK_FREQ" type="float" maxLength="12" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_OVERALLPHASE" alignment="left">Overall Phase=</Label>
+    <Field keyword="TOTAL_PHASE" type="float" maxLength="12" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_GENERALFILTERINCLUDESFOR" xPos="10" yPos="1" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_GENERALFREQUENCYDOMAINFI" xPos="2" yPos="2" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="3" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="15" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRAPEZOIDFILTERINGOPTION" xPos="18" yPos="6" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="7" xSize="61" ySize="5"/>
+     <Constraints component="LABEL_FILTER_TYPE" xPos="3" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILTER_TYPE" xPos="15" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FREQ_LOW_NONE" xPos="3" yPos="9" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_NONE" xPos="18" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_LOW_FULL" xPos="33" yPos="9" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_LOW_FULL" xPos="48" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_HIGH_FULL" xPos="3" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_FULL" xPos="18" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_HIGH_NONE" xPos="33" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_HIGH_NONE" xPos="48" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OTHERFILTERINGOPTIONS" xPos="19" yPos="13" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="14" xSize="61" ySize="5"/>
+     <Constraints component="LABEL_AMP_PWR" xPos="3" yPos="15" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AMP_PWR" xPos="18" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PHAS_PWR" xPos="33" yPos="15" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PHAS_PWR" xPos="48" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PHAS_ADD" xPos="3" yPos="16" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PHAS_ADD" xPos="18" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_SHIFT" xPos="33" yPos="16" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_SHIFT" xPos="48" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SIGMA" xPos="3" yPos="17" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SIGMA" xPos="18" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PEAKFREQUENCY" xPos="3" yPos="20" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PEAK_FREQ" xPos="18" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OVERALLPHASE" xPos="33" yPos="20" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOTAL_PHASE" xPos="48" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are filtered.  Otherwise, only traces with
+ a flag set in header word HDR_FLAG are filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILTER_TYPE">
+      <Tip>Type of trapezoid frequency filter to apply (if any).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - FILTER_TYPE<br> Type of trapezoid frequency filter to apply (if any).</center></b>
+<pre> Default = ALLPASS
+ Allowed = ALLPASS     (Pass all frequencies from 0.0 to Nyquist)
+ Allowed = BANDPASS    (Pass frequencies from low taper to high taper)
+ Allowed = LOWPASS     (Pass frequencies from 0.0 to high taper)
+ Allowed = HIGHPASS    (Pass frequencies from low taper to Nyquist)
+ Allowed = BANDREJECT  (Reject frequencies from low taper to high taper)
+ 
+ In the FILTER_TYPE descriptions below, frequency parameters are listed in
+ the required order, from low frequency to high frequency.
+ 
+ If FILTER_TYPE=ALLPASS, then pass all frequencies from 0.0 frequency to
+ Nyquist (Specification of FREQ_LOW_NONE, FREQ_LOW_FULL, FREQ_HIGH_FULL, and
+ FREQ_HIGH_NONE parameters irrelevant in this case).
+ 
+ If FILTER_TYPE=BANDPASS, then reject between 0.0 frequency and FREQ_LOW_NONE,
+ pass between FREQ_LOW_FULL and FREQ_HIGH_FULL, reject between FREQ_HIGH_NONE
+ and Nyquist, with linear tapers between the pass and reject regions.
+ 
+ If FILTER_TYPE=LOWPASS, then pass between 0.0 frequency and FREQ_HIGH_FULL,
+ reject between FREQ_HIGH_NONE and Nyquist, with a linear taper between pass
+ and reject regions (Specification of FREQ_LOW_NONE and FREQ_LOW_FULL
+ parameters irrelevant in this case).
+ 
+ If FILTER_TYPE=HIGHPASS, then reject between 0.0 frequency and FREQ_LOW_NONE,
+ pass between FREQ_LOW_FULL and Nyquist, with a linear taper between pass and
+ reject regions (Specification of FREQ_HIGH_FULL and FREQ_HIGH_NONE parameters
+ irrelevant in this case).
+ 
+ If FILTER_TYPE=BANDREJECT (also known as a "NOTCH" filter), then pass
+ between 0.0 frequency and FREQ_LOW_NONE, reject between FREQ_LOW_FULL and
+ FREQ_HIGH_FULL, pass between FREQ_HIGH_NONE and Nyquist, with linear tapers
+ between the pass and reject regions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Frequency where low frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - FREQ_LOW_NONE<br> Frequency where low frequency taper passes nothing.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the FILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_FULL">
+      <Tip>Frequency where low frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - FREQ_LOW_FULL<br> Frequency where low frequency taper passes full amplitude.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the FILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>Frequency where high frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - FREQ_HIGH_FULL<br> Frequency where high frequency taper passes full amplitude.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the FILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_NONE">
+      <Tip>Frequency where high frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - FREQ_HIGH_NONE<br> Frequency where high frequency taper passes nothing.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the FILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AMP_PWR">
+      <Tip>Multiply the Fourier transform by ABS(omega)**AMP_PWR.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - AMP_PWR<br> Multiply the Fourier transform by ABS(omega)**AMP_PWR.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ This option multiplies the Fourier transform of the input traces by
+ ABS(omega)**AMP_PWR.  This allows high frequencies to be enhanced or
+ attenuated relative to low frequencies.  AMP_PWR = 1.0 constitutes a rho
+ filter.  AMP_PWR = 0.0 has no effect on the data.
+ 
+ A Ricker wavelet is applied if AMP_PWR = 2.0 and SIGMA &gt; 0.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHAS_PWR">
+      <Tip>Multiply the Fourier transform by (i*omega)**PHAS_PWR.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PHAS_PWR<br> Multiply the Fourier transform by (i*omega)**PHAS_PWR.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ This option multiplies the Fourier transform of the input traces by
+ (i*omega)**PHAS_PWR.  PHAS_PWR = 1.0 constitutes differentiation;
+ PHAS_PWR = -1.0 constitutes integration.  (Fractional differentiation and
+ integration are also allowed.)  PHAS_PWR = 0.0 has no effect on the data.
+ 
+ Setting PHAS_PWR /= 0.0 causes a phase shift of 90 * PHAS_PWR degrees. The
+ overall phase of the filter, in degrees, is determined by both PHAS_PWR
+ and PHAS_ADD according to the formula:
+            TOTAL_PHASE  =  90 * PHAS_PWR  +  PHAS_ADD</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PHAS_ADD">
+      <Tip>Constant phase, in degrees, to be added to the phase spectrum.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PHAS_ADD<br> Constant phase, in degrees, to be added to the phase spectrum.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ This constant phase, in degrees is added to the phase otherwise determined
+ by the PHAS_PWR parameter. The overall phase of the filter, in degrees, is
+ given by the formula:
+            TOTAL_PHASE  =  90 * PHAS_PWR  +  PHAS_ADD</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_SHIFT">
+      <Tip>Bulk time shift, in ms, to be applied to the data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - TIM_SHIFT<br> Bulk time shift, in ms, to be applied to the data.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ Positive values of TIM_SHIFT shift the data downwards, negative values shift
+ it upwards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SIGMA">
+      <Tip>Include a Gaussian wavelet of standard deviation SIGMA (in ms).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - SIGMA<br> Include a Gaussian wavelet of standard deviation SIGMA (in ms).</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ This option includes a Gaussian wavelet in the filter, where the wavelet is
+ given by
+             exp(-0.5*(SIGMA*omega)**2) in the frequency domain and by
+             exp(-0.5*(t/SIGMA)**2)     in the time domain.
+ 
+ SIGMA, in ms, is the standard deviation of the Gaussian in the time domain.
+ If SIGMA = 0.0, then the Gaussian wavelet is not applied.
+ 
+ A Ricker wavelet is applied if SIGMA &gt; 0.0 and AMP_PWR = 2.0 while defaults
+ are taken on the other parameters.
+ 
+ A "Generalized Ricker Wavelet" is applied if SIGMA &gt; 0.0 and AMP_PWR is set
+ to a value greater than zero but not equal to 2.0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PEAK_FREQ">
+      <Tip>Peak frequency in Hz of Ricker (or Generalized Ricker) wavelet.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PEAK_FREQ<br> Peak frequency in Hz of Ricker (or Generalized Ricker) wavelet.</center></b>
+<pre> Display-only parameter showing the frequency, in Hz, at which maximum
+ amplitude is attained by the operator defined by the SIGMA, AMP_PWR, and
+ PHAS_PWR parameters. This field is left blank when the operator would take
+ its maximum amplitude at infinite frequency.
+ 
+ Note: The calculation of PEAK_FREQ does *not* account for the effects of
+ any trapezoid filter that may be present. Thus (for example), the displayed
+ PEAK_FREQ might even be greater than Nyquist.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOTAL_PHASE">
+      <Tip>Overall phase of the operator, in degrees.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - TOTAL_PHASE<br> Overall phase of the operator, in degrees.</center></b>
+<pre> Display-only parameter showing the overall phase of the operator, in
+ degrees. This is determined by the PHAS_PWR and PHAS_ADD parameters
+ according to the formula:
+            TOTAL_PHASE  =  90 * PHAS_PWR  +  PHAS_ADD</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>genfilt - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="genfilt">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : GENFILT (GENeral FILTer) [includes former FILTR, WVLT]
+ Category   : filters
+ Written    : 1987-10-04   by: Bob Baumel
+ Revised    : 2007-01-03   by: S. Chiu
+ Maturity   : production
+ Purpose    : General frequency domain filter and wavelet building process.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ GENFILT is a general frequency domain filtering process that can also apply
+ a variety of simple wavelets.  All GENFILT operations are performed in the
+ frequency domain.  Each option is applied independently of the others; there
+ is no limitation on the number of options that can be used in each call to
+ the process.
+ 
+ Normally these options will be used one at a time, although certain
+ combinations may be useful (e.g., see Include a Ricker Wavelet, below).
+ 
+ 
+ Trapezoid Frequency Filtering
+ 
+ Trapezoid frequency filtering is available with ALLPASS, BANDPASS, LOWPASS,
+ HIGHPASS, and BANDREJECT options. Frequency filtering in GENFILT is not
+ time varying.
+ 
+ 
+ Time Shift
+ 
+ TIM_SHIFT is a bulk time shift, in ms, to be applied to the data.
+ (Positive values shift data downward, negative values shift data upwards.)
+ 
+ 
+ Phase Shift
+ 
+ The PHAS_PWR and PHAS_ADD parameters each contribute constant phase shifts.
+ The overall phase of the filter, in degrees, is given by the formula:
+ 
+            TOTAL_PHASE  =  90 * PHAS_PWR  +  PHAS_ADD
+ 
+ These parameters are set independently from the trapezoid filtering
+ options. Thus, GENFILT may apply a non-zero phase shift even when
+ FILTER_TYPE = BANDREJECT -- an option which is not usually available in
+ other CPS filtering processes.
+ 
+ 
+ Multiply Fourier Transform by ABS(omega)**AMP_PWR
+ 
+ This option multiplies the Fourier transform of the input traces by
+ ABS(omega)**AMP_PWR.  This allows high frequencies to be enhanced or
+ attenuated relative to low frequencies.  AMP_PWR = 1.0 constitutes a rho
+ filter.  AMP_PWR = 0.0 has no effect on the data.
+ 
+ 
+ Multiply Fourier Transform by (i*omega)**PHAS_PWR
+ 
+ This option multiplies the Fourier transform of the input traces by
+ (i*omega)**PHAS_PWR.  PHAS_PWR = 1.0 constitutes differentiation;
+ PHAS_PWR = -1.0 constitutes integration.  (Fractional differentiation and
+ integration are also allowed.)  PHAS_PWR = 0.0 has no effect on the data.
+ 
+ 
+ Include a Gaussian Wavelet
+ 
+ This option includes a Gaussian wavelet in the filter, where the wavelet is
+ given by
+          exp(-0.5*(SIGMA*omega)**2) in the frequency domain and by
+          exp(-0.5*(t/SIGMA)**2)     in the time domain.
+ 
+ SIGMA, in ms, is the standard deviation of the Gaussian in the time domain.
+ If SIGMA = 0.0, then the Gaussian wavelet is not applied.
+ 
+ (If defaults are not taken on parameters other than SIGMA, the wavelet
+ applied may not be Gaussian in shape and SIGMA may not be its exact standard
+ deviation. See additional information below.)
+ 
+ 
+ Include a Ricker Wavelet
+ 
+ GENFILT applies a Ricker Wavelet if SIGMA &gt; 0.0 and AMP_PWR = 2.0 and
+ defaults are taken on all other parameters.
+ 
+ A "Generalized Ricker Wavelet" is applied if SIGMA &gt; 0.0 and AMP_PWR is set
+ to a value greater than zero but not equal to 2.0 and defaults are taken on
+ all other parameters.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ The operation of GENFILT may be thought of as a filter, like the former
+ FILTR, or as applying a wavelet, like the former WVLT. Both ways of thinking
+ are equally valid and useful.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                    GENFILT REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+  9. 2007-01-03 Chiu       Pad extra zeros before FFT to avoid FFT
+                           wrap around.
+  8. 2002-02-21 Baumel     Add HDR_FLAG parameter.
+  7. 2001-04-30 Baumel     Change wrapped_up flag to skip_wrapup.
+  6. 2000-12-04 Baumel     Add Help for display-only parameters; restore
+                           FILTER_TYPE = BANDREJECT option; eliminate
+                           re-muting after filtering; change PHASE parameter
+                           to PHAS_ADD (handled independently from trapezoid
+                           filter parameters); modify logic to allow
+                           bandps_check call in GUI updates.
+  5. 2000-09-19 O'Brien    Removed FILTER_TYPE == NONE and
+                             FILTER_TYPE == BANDREJECT options
+  4. 2000-08-31 O'Brien    Remove bandps_check call from GUI updates
+  3. 2000-08-10 O'Brien    Implement FFT scaling
+                           Changed FILTER_TYPE default to ALLPASS
+                           Changed NSTORE to represent REAL words
+  2. 2000-05-17 O'Brien    Allow overall phase of wavelet to be properly
+                           reported to the GUI
+  1. 2000-05-16 O'Brien    Combination of FILTR and WVLT with absence of
+                           FILTR's filter from file option.
+ 
+ 
+                      FILTR REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 13. 1998-11-13 Vunderink  Begin using the f90 compiler.
+ 12. 1990-12-07 Baumel     Replace FILTGS call by FILTRGS for OPT=2
+                           to fix occasional bombs in FILTGS.
+ 11. 1990-04-25 Baumel     Fix STRINI call (add 'LTR' arg) for OPT=2.
+ 10. 1990-03-07 Peterson   Zero array where OPT=2 operator is read in.
+  9. 1989-05-03 Baumel     Some cleanup after M Howard's STROT mod.
+  8. 1989-01-19 Howard     New DTRIN &amp; DTROT Mod
+  7. 1988-09-26 Ball       NWIH and NWPT Conversion
+  6. 1988-08-17 Baumel     Match new form of TVFBPS primitive.
+  5. 1988-08-02 Baumel     Write to history file with NCODE.
+  4. 1988-06-02 Baumel     New convention for mute header word.
+  3. 1988-04-23 Baumel     Add CPSPRT calls.
+  2. 1988-03-09 Baumel     Added NOTCH filter capability.
+  1. 1987-10-04 Baumel     Original working version.
+ 
+ 
+                      WVLT REVISION HISTORY
+ 
+    Date     Author        Description
+    ----     ------        -----------
+ 9. 1998-11-24 Goodger     Begin using the fortran90 compiler.
+ 8. 1994-01-26 Baumel      Improved internal callability (uses GETSCR);
+                           recognizes HW64 for tail mute (calls MUTEHW);
+                           some modernization of code (although still
+                           includes Pointers &amp; Hollerith).
+ 7. 1988-09-29 Peterson    NWIH AND NWPT CONVERSION.
+ 6. 1988-08-17 Baumel      Match new form of TVFBPS primitive.
+ 5. 1988-08-02 Baumel      Write to history file with NCODE.
+ 4. 1988-06-02 Baumel      New conventions for mute header word.
+ 3. 1988-03-09 Baumel      Add NOTCH filter capability.
+ 2. 1987-10-04 Baumel      Add TSHIFT parameter, set ISAVE=1.
+ 1. 1987-02-03 Baumel      Original working version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

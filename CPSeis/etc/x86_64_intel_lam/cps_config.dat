@@ -1,0 +1,152 @@
+/* ******************* CPS Configuration File***********************************
+                         production version
+Format is keyword=value
+Have have embeded blanks before or after =
+Can have comment lines starting with # or blank lines
+Can have comment blocks starting with /* in column 1 and ending with */ in column 1
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                             REVISION HISTORY
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!33.  2009-06-11  Menger     Added x86_64_intel_lam variable to be substituted.
+!32.  2007-11-07  Goodger    Changed pbs server to lm11.
+!31.  2004-09-07  SMCook     Changed value of LANDMARK_OWHOME_LINUX.
+!30.  2004-06-18  SMCook     Changed value of LANDMARK_OWHOME_LINUX.
+!29.  2004-06-10  Goodger    Set back to cpsdata_nodes.dat.
+!28.  2004-05-19  Goodger    Set to use cpsdata_nodes_beta.dat.
+!27.  2004-05-19  Goodger    Add keyword pfio_reserve_file_space_na.
+!26.  2004-03-30  Goodger    Add keyword cps_template_dir.
+!25.  2004-03-02  Goodger    Add keyword cps_pbs_type.
+!24.  2004-02-17  Goodger    Change landmark_owhome_sol to /apps/ow from
+!                            appl/ow.
+!23.  2004-02-04  Goodger    Change rcp node to hoeplm05.
+!22.  2004-02-03  Goodger    Change cpsacct_pbs_server1 to hoeplm05.
+!21.  2004-01-26  Goodger    Add keyword for location.
+!20.  2003-11-12  Goodger    Add platform_default parameters.
+!19.  2003-09-02  SMCook     Removed jobmon variables (now stored elsewhere).
+!                            Removed CPS runtime dependency on presence of the
+!                             Landmark devkit, thereby eliminating several
+!                             variables.
+!                            Made LANDMARK_OW_HOME variable platform-dependent
+!                             due to Landmark-on-Linux availability.
+!18.  2003-08-05  SMCook     Changed LANDMARK_LM_LICENSE_FILE to 27000@globallm
+!17.  2003-05-30  Burch      File locking changes.
+!16.  2003-05-19  Burch      Added new keywords for new pfio code.
+!15.  2003-05-12  Goodger    Added keywords for batchtmp directory and 
+!                            batchtmp nodes file.
+!14.  2003-05-06  SMCook     Corrected values of bin_path.  Solaris version was
+!                             plain wrong, Linux version relied on links.
+!13.  2003-04-28  SMCook     Added new jobmon_pbs_queue_names B1390 and B1530.
+!12.  2003-04-21  SMCook     Corrected value of LANDMARK_SWDEV_HOME.
+!11.  2003-04-16  SMCook     Changed Landmark link directories from ow to owold.
+!                            Added more nodes lists for jobmon configuration.
+!10.  2003-04-01  SMCook     Jobmon keyword jobmon_pbs_queue_names added.
+! 9.  2003-03-24  SMCook     Jobmon keywords added.  Also, note that there are
+!                             plans to modify cnfg to allow the values of the
+!                             variables to have whitespace (use quotes).
+! 8.  2003-03-17  Goodger    Change keyword for cps_acct_pbs_server.
+! 7.  2003-03-17  Goodger    Added revision history section.
+! 6.  2003-03-13  Glover     Changed directory for cps_log_dir.
+! 5.  2003-03-13  Cook       Added more landmark keywords.
+! 4.  2003-03-06  Cook       Added bin path keywords for solaris and linux.
+! 3.  2003-03-06  Goodger    Changed cps_node_name9 and name10.
+! 2.  2003-02-11  Cook       Landmark keywords added.
+! 1.  2003-02-11  Goodger    First checkin.
+!
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+*/ *****************************************************************************
+#--- put the machine name you want things to run on by default below
+CFE_EXEC_NODE_DEFAULT      = localhost
+CGETSYS_LINUX_MACHINE1     = modi
+CGETSYS_LINUX_MACHINE2     = none
+CGETSYS_LINUX_MACHINE3     = none
+CGETSYS_LINUX_MACHINE4     = none
+CGETSYS_LINUX_MACHINE5     = none
+CGETSYS_LINUX_MACHINE6     = none
+CGETSYS_LINUX_MACHINE7     = none
+CGETSYS_LINUX_MACHINE8     = none
+CGETSYS_LINUX_MACHINE9     = none
+CGETSYS_LINUX_MACHINE10    = none
+CGETSYS_SOLARIS_MACHINE1   = none
+
+#--- put your open pbs server node name below.
+CPSACCT_PBS_SERVER1        = modi
+CPSACCT_PBS_SERVER2        = none
+
+CPSDOC_NODES_FILE          = /homes/3DGeo/bmenger/3dgeo/cpseis/etc/cpsDOC_nodes.dat
+
+#location of lock files: Note :nn indicates number of multiple lock files.
+cps_lock_file              = /homes/3DGeo/bmenger/3dgeo/cpseis/log/cps_lockfile.dat:2
+cps_mess_lock_file         = /homes/3DGeo/bmenger/3dgeo/cpseis/log/cps_mess_lockfile.dat
+
+# location where cps log files are written.
+cps_log_dir                = /homes/3DGeo/bmenger/3dgeo/cpseis/log
+
+# location of source code directory
+cps_source_dir             = /homes/3DGeo/bmenger/3dgeo/cpseis/src
+cps_doc_suffix             = .f90
+
+# location where templates needed by cps programs are kept
+cps_template_dir           = /homes/3DGeo/bmenger/3dgeo/cpseis/etc
+
+# host to run commands if host name can not be deciphered.
+cps_main_host              = $HOSTNAME
+
+# prefixes pfio uses to decipher a file's host node.
+cps_node_name1             = none
+cps_node_name2             = none
+cps_node_name3             = none
+cps_node_name4             = none
+cps_node_name5             = none
+cps_node_name6             = none
+cps_node_name7             = none
+cps_node_name8             = none
+cps_node_name9             = none
+cps_node_name10            = none
+
+# locations of cpsdata, cpswork and cpstemp node files.
+cpsdata_nodes_file         = /homes/3DGeo/bmenger/3dgeo/cpseis/etc/cpsdata_nodes.dat
+cpstemp_nodes_file         = /homes/3DGeo/bmenger/3dgeo/cpseis/etc/cpstemp_nodes.dat
+cpswork_nodes_file         = /homes/3DGeo/bmenger/3dgeo/cpseis/etc/cpswork_nodes.dat
+
+# maximum number of reserve file space in concurrent operation.
+pfio_max_reserves_per_node = 3
+pfio_port_file             = /homes/3DGeo/bmenger/3dgeo/cpseis/log/cps_ports.dat
+pfio_hort_file             = /homes/3DGeo/bmenger/3dgeo/cpseis/log/cps_horts.dat
+# lock file version to use when a lock file is empty.
+cps_default_lock_file_ver  = 1
+
+# default pfio file extent size.
+pfio_file_extent_size      = 250000000
+
+# disk io rate to calculate sleep times when waiting for reserve file.
+pfio_max_io_rate           = 40000000
+
+# script to use to delete a file-can be changed for debugging.
+filescrub_script           = /homes/3DGeo/bmenger/3dgeo/cpseis/platforms/x86_64_intel_lam/bin/filescrub
+
+# command to use for a rsh with a time out-can be changed for debugging.
+rsh_timeout_command        = /homes/3DGeo/bmenger/3dgeo/cpseis/platforms/x86_64_intel_lam/bin/rsh_timeout
+
+# command to reserve file space-can be changed for debugging.
+pfio_reserve_file_space    = /homes/3DGeo/bmenger/3dgeo/cpseis/platforms/x86_64_intel_lam/bin/filereserve
+pfio_reserve_file_space_na = /homes/3DGeo/bmenger/3dgeo/cpseis/platforms/x86_64_intel_lam/bin/filereservenetapps
+
+sps_home_dir               = /homes/3DGeo/bmenger/3dgeo/cpseis
+sps_install_dir            = /homes/3DGeo/bmenger/3dgeo/cpseis
+cps_batchtmp_dir           = /tmp/$HOSTNAME
+cps_batchtmp_nodes_file    = /homes/3DGeo/bmenger/3dgeo/cpseis/etc/cfebld_batchtmp_dirs
+cps_platform_default_linux = linuxi91
+cps_platform_default_sol   = sol62
+cps_rcp_node               = alpha.fusiongeo.local
+cps_pbs_type               = pbspro
+location                   = houston
+
+bin_path_solaris1          = none
+bin_path_linux1            = /homes/3DGeo/bmenger/3dgeo/cpseis/platforms/x86_64_intel_lam/bin

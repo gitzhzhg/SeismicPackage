@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="tslice" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCREEN1" title="TSLICE" rows="24" columns="80">
+    <Label keyword="COMMENT_TSLICETIMESLICEOUTPUT" alignment="center">TSLICE - Time SLICE output.</Label>
+    <Label keyword="COMMENT_OUTPUTSLICESTOTHETRACEFL" alignment="center">Output slices to the trace flow and / or disk</Label>
+    <Label keyword="LABEL_OPTION" alignment="left">OPTION  =</Label>
+    <Field keyword="OPTION" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_NAME" alignment="left">PATH_NAME=</Label>
+    <Field keyword="PATH_NAME" type="string" maxLength="64" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLOW_HDR" alignment="left">SLOW_HDR  =</Label>
+    <Field keyword="SLOW_HDR" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_HDR" alignment="left">FAST_HDR  =</Label>
+    <Field keyword="FAST_HDR" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLOW_TOT" alignment="left">SLOW_TOT  =</Label>
+    <Field keyword="SLOW_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_TOT" alignment="left">FAST_TOT  =</Label>
+    <Field keyword="FAST_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLICE_TOT" alignment="left">SLICE_TOT  =</Label>
+    <Field keyword="SLICE_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLOW_MIN" alignment="left">SLOW_MIN  =</Label>
+    <Field keyword="SLOW_MIN" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_MIN" alignment="left">FAST_MIN  =</Label>
+    <Field keyword="FAST_MIN" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLICE_MIN" alignment="left">SLICE_MIN  =</Label>
+    <Field keyword="SLICE_MIN" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLOW_MAX" alignment="left">SLOW_MAX  =</Label>
+    <Field keyword="SLOW_MAX" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_MAX" alignment="left">FAST_MAX  =</Label>
+    <Field keyword="FAST_MAX" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLICE_MAX" alignment="left">SLICE_MAX  =</Label>
+    <Field keyword="SLICE_MAX" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLOW_INC" alignment="left">SLOW_INC  =</Label>
+    <Field keyword="SLOW_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_INC" alignment="left">FAST_INC  =</Label>
+    <Field keyword="FAST_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SLICE_INC" alignment="left">SLICE_INC  =</Label>
+    <Field keyword="SLICE_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAST_SCALE" alignment="left">FAST_SCALE=</Label>
+    <Field keyword="FAST_SCALE" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Array keyword="SLICE_HEADER" type="int" maxLength="128" columnName="SLICE_HEADER" editable="yes" sensitive="yes" columnSize="15"/>
+    <Layout>
+     <Constraints component="COMMENT_TSLICETIMESLICEOUTPUT" xPos="14" yPos="1" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUTSLICESTOTHETRACEFL" xPos="1" yPos="2" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPTION" xPos="1" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPTION" xPos="10" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_NAME" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_NAME" xPos="11" yPos="5" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLOW_HDR" xPos="1" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_HDR" xPos="12" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_HDR" xPos="25" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_HDR" xPos="36" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLOW_TOT" xPos="1" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_TOT" xPos="12" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_TOT" xPos="25" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_TOT" xPos="36" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLICE_TOT" xPos="49" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLICE_TOT" xPos="61" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLOW_MIN" xPos="1" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_MIN" xPos="12" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_MIN" xPos="25" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_MIN" xPos="36" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLICE_MIN" xPos="49" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLICE_MIN" xPos="61" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLOW_MAX" xPos="1" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_MAX" xPos="12" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_MAX" xPos="25" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_MAX" xPos="36" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLICE_MAX" xPos="49" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLICE_MAX" xPos="61" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLOW_INC" xPos="1" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_INC" xPos="12" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_INC" xPos="25" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_INC" xPos="36" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SLICE_INC" xPos="49" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLICE_INC" xPos="61" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FAST_SCALE" xPos="25" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_SCALE" xPos="36" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLICE_HEADER" xPos="3" yPos="14" xSize="15" ySize="4" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPTION">
+      <Tip>Output option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - OPTION<br> Output option.</center></b>
+<pre> Default = EXTRENAL
+ Allowed = EXTRENAL output slice traces extrnally after tslice.
+ Allowed = INTRENAL output slice traces intrnally to a file.
+ Allowed = BOTH  output both after tslice and to file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_NAME">
+      <Tip>Output file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - PATH_NAME<br> Output file name.</center></b>
+<pre> Default = NONE
+ Allowed = Character.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLOW_HDR">
+      <Tip>Header word for the direction across output traces direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLOW_HDR<br> Header word for the direction across output traces direction.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_HDR">
+      <Tip>Header word for along the output traces direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - FAST_HDR<br> Header word for along the output traces direction.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLOW_TOT">
+      <Tip>Number of output bins in the across trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLOW_TOT<br> Number of output bins in the across trace direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_TOT">
+      <Tip>Number of output bins in the along trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - FAST_TOT<br> Number of output bins in the along trace direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLICE_TOT">
+      <Tip>Number of output time slices.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLICE_TOT<br> Number of output time slices.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLOW_MIN">
+      <Tip>Minimum output value for the across trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLOW_MIN<br> Minimum output value for the across trace direction.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_MIN">
+      <Tip>Minimum output value for the along trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - FAST_MIN<br> Minimum output value for the along trace direction.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLICE_MIN">
+      <Tip>Minimum output time slice value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLICE_MIN<br> Minimum output time slice value.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLOW_MAX">
+      <Tip>Maximum output value for the across trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLOW_MAX<br> Maximum output value for the across trace direction.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_MAX">
+      <Tip>Maximum output value for the along trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - FAST_MAX<br> Maximum output value for the along trace direction.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLICE_MAX">
+      <Tip>Maximum output time slice value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLICE_MAX<br> Maximum output time slice value.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLOW_INC">
+      <Tip>Output bin increment in the across trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLOW_INC<br> Output bin increment in the across trace direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_INC">
+      <Tip>Output bin increment in the along trace direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - FAST_INC<br> Output bin increment in the along trace direction.</center></b>
+<pre> Default = 1.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLICE_INC">
+      <Tip>Output time slice increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLICE_INC<br> Output time slice increment.</center></b>
+<pre> Default = 1.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAST_SCALE">
+      <Tip>Output time origin and sample rate scale factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - FAST_SCALE<br> Output time origin and sample rate scale factor.</center></b>
+<pre> Default = 100
+ Allowed = real&gt;0
+ The output trace time sample rate will be set to FAST_INC / FAST_SCALE
+ The output trace time origin      will be set to FAST_MIN / FAST_SCALE</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SLICE_HEADER">
+      <Tip>Header word slice array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - SLICE_HEADER<br> Header word slice array.</center></b>
+<pre> Default = none
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslice - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="tslice">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : tslice
+ Category   : Sorts
+ Written    : 2000-05-01   by: Douglas Hanson
+ Revised    : 2007-01-03   by: Douglas Hanson Clean up code.
+ Maturity   : production
+ Purpose    : put time slices to the trace flow and/or a data file.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Tslice puts time slices to the trace flow and/or a data file.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+  tslice passes out its traces MINP at a time.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author         Description
+     ----       ------         -----------
+  9  2007-01-03 Douglas Hanson Clean up code.
+     2003-11-07 Douglas Hanson Have tslice stack traces.
+     2003-04-11 Douglas Hanson Put into alphalib
+  8  2001-02-16 Douglas Hanson Allow SLICE_TOT=0
+  7  2000-12-15 Douglas Hanson Correct use of no_more_traces
+  6  2000-12-12 Douglas Hanson Add skip_wrapup
+  5  2000-09-20 Douglas Hanson Fix slice_header ezgui error.
+  4  2000-09-19 Douglas Hanson No if test for control cards.
+  3  2000-09-06 Douglas Hanson fix headslice gui error
+  2  2000-08-25 Douglas Hanson cpsfcr
+  1  1999-12-01 Douglas Hanson Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

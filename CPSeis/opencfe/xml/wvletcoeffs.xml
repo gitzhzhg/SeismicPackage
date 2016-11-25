@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="wvletcoeffs" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN01" title="SCREEN01" rows="1" columns="1" minCellWidth="8" minCellHeight="12">
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_TYPE_WAVELET" alignment="left">TYPE_WAVELET=</Label>
+    <Field keyword="TYPE_WAVELET" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_COEF" alignment="left">NUM_COEF=</Label>
+    <Field keyword="NUM_COEF" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="BORDER1" xPos="4" yPos="0" xSize="48" ySize="3"/>
+     <Constraints component="LABEL_TYPE_WAVELET" xPos="7" yPos="1" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_WAVELET" xPos="20" yPos="1" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_COEF" xPos="32" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_COEF" xPos="41" yPos="1" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TYPE_WAVELET">
+      <Tip>Type of wavelet to use in the wavelet transform.</Tip>
+      <Text><![CDATA[<html>
+<b><center>wvletcoeffs - TYPE_WAVELET<br> Type of wavelet to use in the wavelet transform.</center></b>
+<pre> Default = COIF
+ Allowed = ASYM   (Use Least Asymmetric wavelet transform.)
+ Allowed = BEYL   (Use Beylkin wavelet transform.)
+ Allowed = COIF   (Use Coiflet wavelet transform.)
+ Allowed = DAUB   (Use Daubechies wavelet transform.)
+ Allowed = HAAR   (Use Haar wavelet transform.)</pre></html>]]></Text>
+     </Help>
+     <Help component="NUM_COEF">
+      <Tip>Number of coefficients to use in the wavelet transform.</Tip>
+      <Text><![CDATA[<html>
+<b><center>wvletcoeffs - NUM_COEF<br> Number of coefficients to use in the wavelet transform.</center></b>
+<pre> Default = 20
+ Allowed = 4, 12, 20      (If TYPE_WAVELET =  DAUB.)
+ Allowed = 8, 12, 20      (If TYPE_WAVELET =  ASYM.)
+ Allowed = 6, 12, 24, 30  (If TYPE_WAVELET =  COIF.)
+ Allowed = 18             (If TYPE_WAVELET =  BEYL.)
+ Allowed = 2              (If TYPE_WAVELET =  HAAR.)</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+  </CommandArea>
+  <Help component="wvletcoeffs">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R I M I T I V E
+ 
+ Name       : WVLETCOEFFS (WaVeLET COEFFicient tableS)
+ Category   : filters
+ Written    : 2001-01-12   by: Phil Anno
+ Revised    : 2001-02-23   by: Phil Anno
+ Maturity   : production   2001-06-11
+ Purpose    : Define coefficient tables for discrete wavelet transforms
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ Define coefficient data tables for discrete wavelet transforms
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+  Contact Phil Anno to coordinate data changes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+  2. 2001-06-11  Phil Anno   Moved common code from DWTF/DWTP to WVLETCOEFFS.
+                             Added GUI functions to make this a GUI primitive.
+                             PRODUCTION.
+  1. 2001-01-12  Phil Anno   Initial version.
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="gdiv" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="GDIVPROCESS" title="GDIV Process" rows="24" columns="80">
+    <Label keyword="COMMENT_GEOMETRICDIVERGENCECORRE" alignment="center">Geometric DIVergence correction</Label>
+    <Label keyword="COMMENT_APPLYAMPLITUDEGAINTOCOMP" alignment="center">Apply amplitude gain to compensate for geometric spreading</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE =</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_AVE" alignment="left">OPT_AVE =</Label>
+    <Field keyword="OPT_AVE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_DEP" alignment="left">OFF_DEP =</Label>
+    <Field keyword="OFF_DEP" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_REF" alignment="left">TIM_REF =</Label>
+    <Field keyword="TIM_REF" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_VEL">Select PATHNAME_VEL</Button>
+    <Label keyword="EQLAB_PATHNAME_VEL" alignment="left">=</Label>
+    <Field keyword="PATHNAME_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_VEL_INFO" type="string" maxLength="74" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_GEOMETRICDIVERGENCECORRE" xPos="23" yPos="1" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLYAMPLITUDEGAINTOCOMP" xPos="10" yPos="2" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="9" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="16" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_AVE" xPos="6" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AVE" xPos="16" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OFF_DEP" xPos="6" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_DEP" xPos="16" yPos="8" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TIM_REF" xPos="6" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_REF" xPos="16" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_VEL" xPos="1" yPos="12" xSize="19" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_VEL" xPos="20" yPos="12" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL" xPos="21" yPos="12" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL_INFO" xPos="21" yPos="13" xSize="74" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Whether to APPLY or REMOVE divergence correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - MODE<br> Whether to APPLY or REMOVE divergence correction.</center></b>
+<pre> Default = APPLY
+ Allowed = APPLY   (Apply correction for amplitude decay.)
+ Allowed = REMOVE  (Remove correction for amplitude decay, ie restore decay.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_AVE">
+      <Tip>Whether to average all velocity functions in the file into one.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - OPT_AVE<br> Whether to average all velocity functions in the file into one.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If OPT_AVE = YES, and your velocity file contains more than one function,
+ GDIV uses an average of all velocity functions in calculating the divergence
+ correction.
+ 
+ For OPT_AVE = NO, use the spatially varying grid of velocity functions in the
+ velocity file in calculating the divergence correction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_DEP">
+      <Tip>Whether to use the offset dependent divergence correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - OFF_DEP<br> Whether to use the offset dependent divergence correction.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ For OFF_DEP = YES, GDIV performs an offset dependent geometric divergence
+ correction.
+ 
+ For OFF_DEP = NO, GDIV scales trace values by (V^2)*T, where T is the
+ time in the trace and V is the stacking velocity at time T.  This calculation
+ ignores offset (and is the correction done by the former CPS process AMPR).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_REF">
+      <Tip>Reference time, in seconds, for unity gain.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - TIM_REF<br> Reference time, in seconds, for unity gain.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ If TIM_REF &gt;= TSTRT, then the GDIV expansion is scaled so that the gain at
+ time TIM_REF is approximately unity.  (Normally TIM_REF is set to a time
+ corresponding to the middle or shallow part of the section to avoid the large
+ scale factors caused by squaring velocity.)
+ 
+ If TIM_REF &lt; TSTRT, then do not normalize the gain function.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_VEL">
+      <Tip>Choose PATHNAME_VEL using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - SELECT_PATHNAME_VEL<br> Choose PATHNAME_VEL using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL">
+      <Tip>Pathname for the velocity file to be used by GDIV.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PATHNAME_VEL<br> Pathname for the velocity file to be used by GDIV.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ Pathname for the velocity file to be used in calculating the divergence
+ correction.  Velocity functions must be stacking or RMS velocities.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL_INFO">
+      <Tip>Status of PATHNAME_VEL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PATHNAME_VEL_INFO<br> Status of PATHNAME_VEL.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gdiv - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="gdiv">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : GDIV  (Geometric DIVergence correction)
+ Category   : amplitude_mod
+ Written    : 1998-05-20   by: Bob Baumel
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Apply amplitude gain to compensate for geometric spreading.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ GDIV corrects for the wavefront spreading component of amplitude decay in
+ seismic field data.  The wavefront spreading component of amplitude decay is
+ variously known as geometric spreading, spherical divergence or geometric
+ divergence.
+ 
+ If OFF_DEP = NO, then GDIV does a simple offset independent gain calculation
+ ((V^2)*T), where T is the time in the trace and V is the stacking velocity
+ at time T.  This calculation ignores offset (and is the correction done by
+ the former CPS process AMPR).
+ 
+ If OFF_DEP = YES, then GDIV does the following more correct offset dependent
+ gain calculation.
+ 
+ Trace values are scaled by the factor:
+ 
+         (T * V^2 / V1) * SQRT(1 + A), where
+ 
+            A = (V^2 - V1^2) * X^2 / (T0^2 * V^4), and
+            X  = offset of this trace,
+            T  = trace time at offset X,
+            T0 = zero-offset time of this event,
+            V  = stacking velocity, extracted at time T0,
+            V1 = surface velocity (extracted from vel fun at time 0),
+            and we assume that T and T0 are related by the NMO equation:
+            T^2 = T0^2 + (X/V)^2 .
+ 
+ 
+ Reference
+ Newman, P., 1973, Divergence Effects in a Layered Earth: Geophysics, 38,
+ 481 - 488.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Overall Scaling
+ If TIM_REF &gt;= TSTRT, then the GDIV expansion is scaled so that the gain at
+ time TIM_REF is approximately unity.  GDIV applies a single scale factor to
+ the entire datase, selected so the expansion value at the center of the
+ velocity grid for a zero-offset trace is unity at time TIM_REF.  (Normally
+ TIM_REF is set to a time corresponding to the middle or shallow part of the
+ section to avoid the large scale factors caused by squaring velocity.)
+ 
+ If TIM_REF &lt; TSTRT, then the gain function is not normalized.
+ 
+ 
+ Multiples
+ GDIV cannot correct the amplitudes accurately for both primaries and
+ multiples.  The correction can only be accurate for events with moveout
+ matching your velocity functions.  Therefore using GDIV with primary stacking
+ velocities will not accurately compensate for the amplitude decay of
+ multiples.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 12. 2006-12-04  D. Glover  Added NULLIFY statements for Intel compiler.
+ 11. 2001-10-18  Stoeckley  Add file selection box and file status message.
+ 10. 2001-02-15  Stoeckley  Remove extraneous XML tag.
+  9. 2000-12-08  Stoeckley  Change wrapup flag.
+  8. 2000-07-20  Coleman    Fixed line wrap (line &gt; 80 characters)
+  7. 2000-05-16  Coleman    Added GUI and set header word 25 to LAV
+  6. 2000-04-17  Coleman    Added RCS Ident string
+  5. 2000-03-09  Coleman    Added pathcheck,FILENAME_LENGTH,combo box support.
+  4. 1999-12-13  Coleman    Converted from old system
+  3. 1998-06-02  Baumel     Renamed GDIV. Add offset-dependent correc-
+                            tion, removal option, many other changes;
+                            also modernize code for F90.
+                            Moved to conlib.
+  2. 1989-07-12  Howard     Correct call to GETP when PUTP not called.
+  1. 1989-02-28  Tippett    AMPR - The converted CONSEIS version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

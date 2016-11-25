@@ -1,0 +1,215 @@
+<!-- gui.dtd -->
+<!-- ======================================================================= -->
+<!-- A Document Type Definition for describing the grammar for the XML       -->
+<!-- language that describes the layout of components in a                   -->
+<!-- Graphical User Interface.				                     -->
+<!-- ========================================================================-->
+
+<!-- A complete layout consists of a single Window which has a unique keyword-->
+<!-- associated with it. A window has an optional menubar and toolbar and one-->
+<!-- command area. A command area is commonly used to contains the screens   -->
+<!-- describing a CFE process.                                               -->
+<!-- Screens are top top-level containers for other GUI components.          -->
+<!-- Screens consists of a component section and a layout section.           -->
+<!-- The layout section describes the layout constraints for each GUI        -->
+<!-- component.                                                              -->
+
+<!-- Element Gui:  There is only one top-level window in a single Gui 		 -->
+<!-- description.															 -->
+
+<!ELEMENT Gui ( Window | Dialog )>
+
+<!-- Element Window: A top-level window can have an optional menubar, an     -->
+<!-- optional toolbar and (always) has a command area. Every window is 		 -->
+<!-- by a keyword.															 -->
+
+<!ELEMENT Window ( MenuBar?, Toolbar?, HelpPanel?, CommandArea, Help? ) >
+<!ATTLIST Window
+	keyword ID #REQUIRED width NMTOKEN #IMPLIED height NMTOKEN #IMPLIED>
+	
+<!-- Element Dialog: A top-level dialog can have an optional menubar, an     -->
+<!-- optional toolbar and (always) has a command area. Every dialog is 		 -->
+<!-- by a keyword.	A dialog is different from a window in the sense 	     -->
+<!-- that a window cannot be set to be modal or non-modal while a dialog 	 -->
+<!-- can be modal or non-modal.												 -->
+
+<!ELEMENT Dialog ( MenuBar?, Toolbar?, HelpPanel?, CommandArea, Help? ) >
+<!ATTLIST Dialog
+	keyword ID #REQUIRED
+	modal (true | false) "false" width NMTOKEN #IMPLIED height NMTOKEN #IMPLIED>
+
+<!-- Element Menubar: A menu bar has one or more menu elements.				 -->
+
+<!ELEMENT MenuBar (Menu+) >
+
+<!-- Element Menu: A menu element can have a menu item, which is essentially -->
+<!-- a button, a label or a separator.										 -->
+
+<!ELEMENT Menu ( Button | Label | Separator )+ >
+<!ATTLIST Menu label CDATA #REQUIRED>
+
+<!-- Element Toolbar: A toolbar element can have a button or a separator.    -->
+
+<!ELEMENT Toolbar ( Button | Separator )+ >
+
+<!-- Element PopupMenu:	A popup menu element can have a popup menu. 		 -->
+
+<!ELEMENT PopupMenu ( Button | Separator )+ >
+<!ATTLIST PopupMenu
+	keyword ID #REQUIRED>
+
+<!-- A component for the component help tip.								 -->
+<!-- "top" position is above the screens but below the top area buttons   	 -->
+<!-- "topMost" position is above the screens and above the top area buttons  -->
+<!-- Same logic for bottom 													 -->
+
+<!ELEMENT HelpPanel EMPTY>
+<!ATTLIST HelpPanel keyword ID #REQUIRED
+		  position (top | bottom | topMost | bottomMost) "top"> 
+
+<!-- Element CommandArea: Command area contains the screens describing the   -->
+<!-- CFE process.															 -->
+
+<!ELEMENT CommandArea (TopAreaComponent?, ( ScrollableScreen | Screen )+, BottomAreaComponent?)>
+<!ATTLIST CommandArea keyword ID #REQUIRED>
+
+<!-- Element TopAreaComponent: Component for GUI elements that are displayed   	-->
+<!-- for all the screens. This component is at the top, below the toolbar.	 	-->
+
+<!ELEMENT TopAreaComponent ( Screen )>
+
+<!-- Element BottomAreaComponent: Component for GUI elements that are displayed   	-->
+<!-- for all the screens. This component is at the bottom, below the toolbar.	 	-->
+
+<!ELEMENT BottomAreaComponent ( Screen )>
+
+<!-- Element Separator:	A separator element is to separate buttons in        -->
+<!-- a toolbar or a menubar into logically separate units.                   -->
+
+<!ELEMENT Separator EMPTY>
+
+<!-- Element GuiComponents: All the GUI controls that can be added to the    -->
+<!-- GUI layout.															 -->
+
+<!ENTITY % GuiComponents "( Border | Label | ToggleButton | RadioButtons | Button | Field | Array | ArraySet | PopupMenu)+" >
+
+<!-- Element ScrollableScreen: A screen or screens that can be scrolled.  		-->
+
+<!ELEMENT ScrollableScreen (Screen)+>
+
+<!-- A Screen is a top-level container object for all the GUI components     -->
+<!-- contained by it. It has optional help section associated with itself.   -->
+<!-- The screen has two separate sections: the components to be added to     -->
+<!-- the screen and the constraints that are to be used while adding the     -->
+<!-- components.															 -->
+
+<!ELEMENT Screen ( %GuiComponents;, Layout, ( HelpSection? ) )>
+<!ATTLIST Screen keyword ID #REQUIRED
+                 title CDATA #REQUIRED
+		 columns NMTOKEN "80"
+		 rows NMTOKEN "24" minCellWidth NMTOKEN "8" minCellHeight NMTOKEN "12">
+                 
+<!-- Layout for a screen. Separating Layout from gui controls allows for a   -->
+<!-- more flexible way of constructing GUI documents. The layout section     -->
+<!-- can be changed without the need to change the GUI components.           -->
+
+<!ELEMENT Layout (Constraints)+ >
+
+<!-- A Constraints object specifies the layout of a component. The component can 		-->
+<!-- be a Button, Label, RadioButtons, Field, Array, ArraySet .							-->
+
+<!ELEMENT Constraints EMPTY>
+<!ATTLIST Constraints component IDREF #REQUIRED
+		      xPos NMTOKEN #REQUIRED
+                      yPos NMTOKEN #REQUIRED
+                      xSize NMTOKEN "1"
+                      ySize NMTOKEN "1"
+                      xStretch ( true | false ) "true"
+                      yStretch ( true | false ) "true"
+                      >
+
+<!-- A Border component 															   -->
+
+<!ELEMENT Border EMPTY>
+<!ATTLIST Border keyword ID #REQUIRED
+		 title CDATA #IMPLIED> 
+
+<!-- A label component 																			-->
+
+<!ELEMENT Label ( #PCDATA )>
+<!ATTLIST Label keyword ID #REQUIRED
+                alignment ( left | center | right ) "center" >
+
+<!-- A component for a group of radio buttons. This is a group of toggle buttons 			-->
+<!-- only one of which can be selected at a time 											-->
+
+<!-- A toggle button component		-->
+
+<!ELEMENT ToggleButton ( #PCDATA )>
+<!ATTLIST ToggleButton keyword ID #REQUIRED >
+
+<!ELEMENT RadioButtons ( Button )+>
+<!ATTLIST RadioButtons keyword ID #REQUIRED>
+
+<!-- A button component																			-->
+
+<!ELEMENT Button ( #PCDATA )>
+<!ATTLIST Button keyword ID #REQUIRED
+                 accelerator NMTOKENS #IMPLIED>
+
+<!-- A Field component. A Field can be string field component, an integer field 			-->
+<!-- component, a float field component or an option component.  							-->
+
+<!ELEMENT Field  EMPTY >
+<!ATTLIST Field type ( int | float | string | comboBox | modifiedComboBox) #REQUIRED
+                keyword ID #REQUIRED
+		maxLength NMTOKEN "6"
+                editable ( yes | no ) "yes"
+                sensitive ( yes | no ) "yes">
+
+<!-- An array component. This component displays an array of data which can be 			-->
+<!-- an array of floats, integers, strings or options. A special type is the "list"		-->
+<!-- which displays its data in the form of a list of items one or more of which 		-->
+<!-- are selectable. An array component	can have an optional help.						-->
+
+<!ELEMENT Array EMPTY >
+<!ATTLIST Array type ( int | float | string | option | combo | list ) #REQUIRED
+                keyword ID #REQUIRED
+		maxLength NMTOKEN #REQUIRED
+		columnSize NMTOKEN "0" 
+		columnName CDATA #REQUIRED
+                editable ( yes | no ) "yes"
+                sensitive ( yes | no ) "yes"
+		clickMode ( ignore | immediate ) "ignore">
+
+<!-- A container object for array components. An array set is a collection of array		-->
+<!-- components.																		-->
+
+<!ELEMENT ArraySet ( Array )+>
+<!ATTLIST ArraySet keyword ID #REQUIRED
+                   label CDATA #REQUIRED
+		   editable ( yes | no ) "yes"                   
+		   sensitive ( yes | no ) "yes"
+		clickMode ( ignore | immediate ) "ignore">
+
+
+<!-- Help Section element. Every top-level window has one help section associated 		-->
+<!-- with itself. The help section consists of zero or more help elements				-->
+
+<!ELEMENT HelpSection (Help* ) >
+
+<!-- An element for implementing help sections. A Help can consist of a Tip or 			-->
+<!-- or a Text. The Tip is displayed when a component gains focus. The Text 			-->
+<!-- is displayed when help is explicitly invoked for a given component					-->
+
+<!ELEMENT Help ( Tip?, Text )>
+<!ATTLIST Help 
+	component IDREF #REQUIRED>
+
+<!-- An element for help tip 															-->
+
+<!ELEMENT Tip ( #PCDATA )>
+
+<!-- An element for help text															-->
+
+<!ELEMENT Text ( #PCDATA )>

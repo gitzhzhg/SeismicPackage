@@ -1,0 +1,72 @@
+#! /bin/sh
+#-------------------------------------------------------------------------------
+#                          fix_dependencies
+#-------------------------------------------------------------------------------
+# Take output from gcc -MM and put it into nice format for makefile.
+# This script should be called with no arguments.
+#------------------------------------------------------------------------------
+
+
+##------------------- separate lines for each dependency --------------------##
+##------------------- separate lines for each dependency --------------------##
+##------------------- separate lines for each dependency --------------------##
+
+awk '/:/ { print ""; for (i = 1; i <= NF; i++) { print $i }}
+        !/:/ { for (i = 1; i <= NF; i++)  { print $i }}' |
+
+##--------------- remove backslashes, I'll put in my own later --------------##
+##--------------- remove backslashes, I'll put in my own later --------------##
+##--------------- remove backslashes, I'll put in my own later --------------##
+
+awk '!/\\/ {print $0 }' |
+
+##------------------------- remove long file specs ------------------------##
+##------------------------- remove long file specs ------------------------##
+##------------------------- remove long file specs ------------------------##
+
+# original statement:
+#
+# awk -F/ '{ print $NF }' |
+
+
+# statement introduced 2000-11-22 (to keep subdirectory under "include"):
+#
+# awk -F/ '{ if (NF > 1) { if ($(NF-1) == "include") { print $NF }
+#                         else { print $(NF-1)"/"$NF } }
+#            else { print $NF } }' |
+
+
+# more robust statement introduced 2003-04-28:
+
+awk -F/ '{ if (NF > 2) { if ($(NF-2) == "include") { print $(NF-1)"/"$NF }
+                         else { print $NF } }
+           else { print $NF } }' |
+
+##----------------------- output in makefile form -------------------------##
+##----------------------- output in makefile form -------------------------##
+##----------------------- output in makefile form -------------------------##
+
+# Use nawk because awk has bug.
+# nawk not available on linux.
+# nawk replaced by gawk 2002-03-18.
+# apparently awk does not have the bug on linux.
+# awk still has bug on solaris, but it does not appear to cause a problem.
+# gawk works correctly on both linux and solaris.
+
+
+#gawk 'BEGIN { FS = "\n"; RS = "" }
+#         { print ""
+#         if (NF > 1) { print $1"\t\t\t\t\t\\" } else { print $1 }
+#         for (i = 2; i < NF; i++) { print "\t\t"$i"\t\t\t\\" }
+#         if (NF > 1) print "\t\t"$NF}'
+
+gawk 'BEGIN { FS = "\n"; RS = "" }
+         { print ""
+         if (NF > 1) { print $1"\t\t\t\t\t\\" } else { print $1 }
+         for (i = 2; i < NF; i++) { print "\t\t"$i"\t\t\t\\" }
+         if (NF > 1) print "\t\t"$NF}'
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

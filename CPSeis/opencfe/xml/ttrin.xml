@@ -1,0 +1,794 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ttrin" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TTRINPROCESS" title="TTRIN Process" rows="27" columns="80">
+    <Label keyword="COMMENT_READSEISMICTRACESFROMMAG" alignment="center">Read seismic traces from magnetic tape.</Label>
+    <Label keyword="LABEL_COMMENT" alignment="left">COMMENT=</Label>
+    <Field keyword="COMMENT" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FORMAT" alignment="left">FORMAT=</Label>
+    <Field keyword="FORMAT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MEDIA" alignment="left">MEDIA=</Label>
+    <Field keyword="MEDIA" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HISTORY" alignment="left">HISTORY=</Label>
+    <Field keyword="HISTORY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VERSION" alignment="left">VERSION=</Label>
+    <Field keyword="VERSION" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REST_PS" alignment="left">REST_PS=</Label>
+    <Field keyword="REST_PS" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CLEAN" alignment="left">1CLEAN=</Label>
+    <Field keyword="CLEAN" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TAPE_HOST" alignment="left">TAPE_HOST=</Label>
+    <Field keyword="TAPE_HOST" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USERID" alignment="left">USERID=</Label>
+    <Field keyword="USERID" type="string" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PROJECT" alignment="left">PROJECT=</Label>
+    <Field keyword="PROJECT" type="string" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SUB_PROJECT" alignment="left">SUB_PROJECT=</Label>
+    <Field keyword="SUB_PROJECT" type="string" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TASK" alignment="left">TASK=</Label>
+    <Field keyword="TASK" type="string" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEFAULTS" alignment="left">DEFAULTS=</Label>
+    <Field keyword="DEFAULTS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FILL_ROWS" alignment="left">FILL_ROWS=</Label>
+    <Field keyword="FILL_ROWS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_ROWS" alignment="left">NUM_ROWS=</Label>
+    <Field keyword="NUM_ROWS" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="VOLUME_ARRAYSET" label="VOLUME                                          TOT_DO SKIP_INIT NUM_DO NUM_SKIP">
+     <Array keyword="VOLUME" type="string" maxLength="48 " columnName="VOLUME" editable="yes" sensitive="yes" columnSize="48"/>
+     <Array keyword="TOT_DO" type="int" maxLength="7  " columnName="TOT_DO" editable="yes" sensitive="yes" columnSize="7"/>
+     <Array keyword="SKIP_INIT" type="int" maxLength="9  " columnName="SKIP_INIT" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="NUM_DO" type="int" maxLength="7  " columnName=" NUM_DO" editable="yes" sensitive="yes" columnSize="7"/>
+     <Array keyword="NUM_SKIP" type="int" maxLength="9  " columnName=" NUM_SKIP" editable="yes" sensitive="yes" columnSize="9"/>
+    </ArraySet>
+    <Border keyword="BORDER1" title=" Segy Related Parameters"/>
+    <Label keyword="LABEL_MESS_SEGY" alignment="left">MESS_SEGY=</Label>
+    <Field keyword="MESS_SEGY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IG_EOF" alignment="left">IG_EOF=</Label>
+    <Field keyword="IG_EOF" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MOD_SEGY" alignment="left">MOD_SEGY=</Label>
+    <Field keyword="MOD_SEGY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="SBYTE_ARRAYSET" label="SBYTE BYTES CPS_HDR WTYPE">
+     <Array keyword="SBYTE" type="int" maxLength="6  " columnName="SBYTE" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="BYTES" type="int" maxLength="6  " columnName="BYTES" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="CPS_HDR" type="int" maxLength="8  " columnName="CPS_HDR" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="WTYPE" type="string" maxLength="5  " columnName="WTYPE" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Label keyword="LABEL_DUMP_SEGY" alignment="left">DUMP_SEGY=</Label>
+    <Field keyword="DUMP_SEGY" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_READSEISMICTRACESFROMMAG" xPos="10" yPos="0" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COMMENT" xPos="1" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT" xPos="9" yPos="2" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FORMAT" xPos="1" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FORMAT" xPos="9" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MEDIA" xPos="19" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MEDIA" xPos="29" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HISTORY" xPos="37" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HISTORY" xPos="45" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VERSION" xPos="50" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VERSION" xPos="58" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_REST_PS" xPos="1" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REST_PS" xPos="9" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CLEAN" xPos="16" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CLEAN" xPos="23" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TAPE_HOST" xPos="30" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPE_HOST" xPos="40" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_USERID" xPos="1" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USERID" xPos="8" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PROJECT" xPos="17" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PROJECT" xPos="25" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SUB_PROJECT" xPos="36" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SUB_PROJECT" xPos="48" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TASK" xPos="59" yPos="8" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK" xPos="64" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEFAULTS" xPos="1" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEFAULTS" xPos="10" yPos="10" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FILL_ROWS" xPos="16" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILL_ROWS" xPos="26" yPos="10" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_ROWS" xPos="32" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ROWS" xPos="41" yPos="10" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VOLUME_ARRAYSET" xPos="1" yPos="12" xSize="83" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="3" yPos="18" xSize="80" ySize="9"/>
+     <Constraints component="LABEL_MESS_SEGY" xPos="4" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MESS_SEGY" xPos="14" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_IG_EOF" xPos="20" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IG_EOF" xPos="27" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MOD_SEGY" xPos="33" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MOD_SEGY" xPos="42" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SBYTE_ARRAYSET" xPos="50" yPos="20" xSize="28" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_DUMP_SEGY" xPos="4" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DUMP_SEGY" xPos="14" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="COMMENT">
+      <Tip>Not Active-A comment to pass along to the tape operators.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - COMMENT<br> Not Active-A comment to pass along to the tape operators.</center></b>
+<pre> Default =
+ Allowed = char &lt; 120
+ The comment field will be stored with the other parameters in the work file.
+ It is meant to be a comment for the tape operators. At present it is
+ not passed to the operators, and only serves as a document card.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FORMAT">
+      <Tip>Format of the tapes being read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - FORMAT<br> Format of the tapes being read.</center></b>
+<pre> Default = CPS
+ Allowed = CPS   (one trace per read)
+ Allowed = BLK   (one block per read - faster read)
+ Allowed = SEGY
+ Allowed = CPS-NSC  (one trace per read, headers on 1st volume only)
+ Allowed = BLK-NSC
+ NA-Allowed = DIGI  (Digicon internal format)
+ NA-Allowed = CONI  (Conoco Internal format)
+ NA-Allowed = CON3  (Conoco Internal 3D format)
+ NA-Allowed = SEGD  (SEGD-8084, 2D, 32 bit data, 10 16 bit headers)
+ NA-Allowed = SERC  (SERCEL SEGD-8058, 32 bit IEEE)
+ NA-Allowed = 8048  (SEGD-8048, no headers read)
+ NA-Allowed = 8058  (SEGD 20 byte header, no headers read)
+ Options SEGD and SERC write files containing RP and PP data for the CFG
+ geometry process.  These files are written to the current directory.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MEDIA">
+      <Tip>Media type of the tapes being read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - MEDIA<br> Media type of the tapes being read.</center></b>
+<pre> Default = 3590HD
+ Allowed = 3590  (Magstar cartridges)
+ Allowed = 3480
+ Allowed = 8mm
+ Allowed = DLT
+ Allowed = NR3590
+ Allowed = LTO
+ Allowed = 3592
+ 3590 and 3592 are IBM that will be handled by the IBM3494 tape robot.
+ NR3590 is a non-robotic manually loaded IBM 3590 tape.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HISTORY">
+      <Tip>Whether to transfer histories from the input tapes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - HISTORY<br> Whether to transfer histories from the input tapes.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VERSION">
+      <Tip>Customized versions to deal with particular vendor tapes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - VERSION<br> Customized versions to deal with particular vendor tapes.</center></b>
+<pre> Default = NONE
+ Allowed = NONE      (No custom tape read)
+ Allowed = WESTERN1  (Western Geophysical multi-file segy format)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REST_PS">
+      <Tip>Whether to restore records from permanent save tapes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - REST_PS<br> Whether to restore records from permanent save tapes.</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ If REST_PS = YES, then restore files to current directory and print filenames
+ in .rpt file. The files will be copied back to the node and directory where
+ the job was submitted. Make sure your rhosts file is set properly!
+ 
+ If REST_PS = NO, then do not restore files but print filenames in .rpt file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CLEAN">
+      <Tip>Controls checking for bad data values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - CLEAN<br> Controls checking for bad data values.</center></b>
+<pre> Default = NONE
+ Allowed = NONE/ZERO/KILL
+ NONE ... No checking for NAN or INF.
+ ZERO ... Zero values that are NAN or INF
+ KILL ... Kill whole trace if a NAN or INF is found.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPE_HOST">
+      <Tip>User can choose a specific tape host.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - TAPE_HOST<br>  User can choose a specific tape host.</center></b>
+<pre> Default = odi90
+ Allowed = odi90
+ Allowed = odi74
+ Allowed = odi91
+ Allowed = hoeplgp01    (LTO)
+ Allowed = jaws         (Alaska only)
+ User can choose a specific tape host</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USERID">
+      <Tip>Userid for PDN.  Second element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - USERID<br> Userid for PDN.  Second element of PDN descriptor array.</center></b>
+<pre> Default = current userid
+ Allowed = any valid userid (char 8)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROJECT">
+      <Tip>Project name for PDN.  Third element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PROJECT<br> Project name for PDN.  Third element of PDN descriptor array.</center></b>
+<pre> Default = value of PROJECT parameter in PROJ_DATA
+ Allowed = char (10)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SUB_PROJECT">
+      <Tip>Sub-project name for PDN.  Fourth element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - SUB_PROJECT<br> Sub-project name for PDN.  Fourth element of PDN descriptor array.</center></b>
+<pre> Default = BLANK
+ Allowed = char (10)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK">
+      <Tip>Task name for PDN.  Fifth element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - TASK<br> Task name for PDN.  Fifth element of PDN descriptor array.</center></b>
+<pre> Default = BLANK
+ Allowed = char (10)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEFAULTS">
+      <Tip>Whether to default PDN or VOLUME to system or old workfile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - DEFAULTS<br> Whether to default PDN or VOLUME to system or old workfile.</center></b>
+<pre> Default = SYS
+ Allowed = SYS  (Set PDN or VOLUME defaults to system values.)
+ Allowed = OLD  (Set PDN or VOLUME defaults to old workfile values.)
+ System defaults are:
+   MED echoes the value of the MEDIA parameter.
+   USERID defaults to the current userid.
+   PROJECT defaults to the value of the PROJECT parameter in PROJECT_DATA.
+   SUB_PROJECT defaults to BLANK.
+   TASK defaults to BLANK.
+ 
+ DEFAULTS is a front-end only parameter and operates only when editing old
+ workfiles.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILL_ROWS">
+      <Tip>Whether to fill in PDN or VOLUME array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - FILL_ROWS<br> Whether to fill in PDN or VOLUME array.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ FILL_ROWS is a toggle for automatic filling in of the PDN or VOLUME
+ arrays based on the entry in the last row.  Values of the first 5 PDN
+ elements are repeated and a counter is incremented by 1 for each row.  The
+ alpha part of VOLUME repeats and the numeric part is incremented by 1.
+ row.
+ 
+ FILL_ROWS is a front-end only parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ROWS">
+      <Tip>Number of PDN or VOLUME array rows to fill.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - NUM_ROWS<br> Number of PDN or VOLUME array rows to fill.</center></b>
+<pre> Default = 1
+ Allowed = 1 - 100
+ NUM_ROWS determines the number of array rows to be filled by the FILL
+ parameter.  NUM_ROWS is a front-end only parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VOLUME">
+      <Tip>VOLSER or PDN identifier label for tapes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - VOLUME<br> VOLSER or PDN identifier label for tapes.</center></b>
+<pre> Default = blank
+ Allowed = char(48) (array)
+ VOLUME  is a tape data set identifier
+ If the length of volume is &lt;= 6 alpha-nums then volume is a volser label.
+ Note that a volser is an external label, and the internal label will
+ be blank if the tape is non-labeled.
+ If the length of volume is &gt;  6  but &lt; 45 alpha-nums then the volume is
+ interpreted as a catalogued data set name, i.e. a PDN. The tape catalogue
+ server will look up the volsers corresponding to volume.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOT_DO">
+      <Tip>Total number of traces to read in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - TOT_DO<br> Total number of traces to read in the DO-SKIP selection.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SKIP_INIT">
+      <Tip>Number of traces to skip initially in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - SKIP_INIT<br> Number of traces to skip initially in the DO-SKIP selection.</center></b>
+<pre> Default = -
+ Allowed = int &gt;= 0 (linked array)
+ The DO-SKIP trace selection method consists of initially skipping SKIP_INIT
+ traces, then sequentially reading NUM_DO consecutive traces and skipping
+ NUM_SKIP consecutive traces until TOT_DO total traces are read.
+ Set to zero for BLK format.
+ 
+ A DO-SKIP selection may be specified independently for each input tape or PDN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DO">
+      <Tip>Number of traces to read at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - NUM_DO<br> Number of traces to read at a time in the DO-SKIP selection.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SKIP">
+      <Tip>Number of traces to skip at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - NUM_SKIP<br> Number of traces to skip at a time in the DO-SKIP selection.</center></b>
+<pre> Default = -
+ Allowed = int &gt;= 0 (linked array)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MESS_SEGY">
+      <Tip>Whether to print a diagnostic message regarding SEGY file size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - MESS_SEGY<br> Whether to print a diagnostic message regarding SEGY file size.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IG_EOF">
+      <Tip>Whether to ignore single EOF marks on SEGY inputs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - IG_EOF<br> Whether to ignore single EOF marks on SEGY inputs.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If IG_EOF = NO, then TOT_DO parameter controls when to stop reading traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MOD_SEGY">
+      <Tip>Whether to modify default mapping of SEGY headers to CPS headers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - MOD_SEGY<br> Whether to modify default mapping of SEGY headers to CPS headers.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If MOD_SEGY = YES, parameters for specifying the SEGY to CPS header mapping
+ are activated.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SBYTE">
+      <Tip>Starting byte of the SEGY header to be moved.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - SBYTE<br> Starting byte of the SEGY header to be moved.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BYTES">
+      <Tip>Number of bytes to be moved to a CPS header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - BYTES<br> Number of bytes to be moved to a CPS header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CPS_HDR">
+      <Tip>CPS header word to receive the SEGY header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - CPS_HDR<br> CPS header word to receive the SEGY header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WTYPE">
+      <Tip>Treat Segy header word as I(integer), or F(floating point).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - WTYPE<br> Treat Segy header word as I(integer), or F(floating point).</center></b>
+<pre> Default = -
+ Allowed = char(8) (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DUMP_SEGY">
+      <Tip>An integer dump of the segy headers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - DUMP_SEGY<br> An integer dump of the segy headers.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="VMOD_PERMSAVE" title="Vmod_Permsave" rows="24" columns="80">
+    <Label keyword="LABEL_PATH_VMOD" alignment="left">PATH_VMOD=</Label>
+    <Field keyword="PATH_VMOD" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_PATH_VMOD" xPos="1" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VMOD" xPos="11" yPos="2" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PATH_VMOD">
+      <Tip>Pathname for restoring velocity model files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PATH_VMOD<br> Pathname for restoring velocity model files.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ If answered, it is assumed that this data is a velocity model permsave
+ tape.  The velocity model data as well as the processing records (in this
+ case hgrid files), will be restored to path_vmod.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrin - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ttrin">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ Name       : TTRIN
+ Category   : io
+ Written    : 2000-07-28   by: RSDay
+ Revised    : 2006-11-27   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Tape Input of Seismic Traces from magnetic tape
+ Portability: Unix Operating Systems
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ TTRIN always starts a new loop within a CPS job.  If more than one TTRIN is
+ present in a job each starts its own loop and ignores traces from a previous
+ loop if one is present.
+ 
+ TTRIN reads all the traces sequentially from the first PDN or tape specified
+ then reads the traces from the second PDN or tape, etc.  An optional do-skip
+ selection may be specified for each PDN or tape to be read.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Tape Formats
+ 
+ In this new version of TTRIN the DEBE, ISP and USER-defined tape formats are
+ not supported.  These formats, and many others, can be read by the Seismic
+ Support operators and copied to disk or other tape formats.
+ 
+ 
+ PDN Defaults When Editing Old Workfiles
+ 
+ When editing an old workfile, the DEFAULTS parameter allows users to select
+ either system default values (SYS) or default values from the old workfile
+ (OLD).  DEFAULTS is a front-end only parameter.
+ 
+ 
+ Filling in Rows of PDN or VOLUME Arrays Automatically
+ 
+ The FILL_ROWS parameter is a toggle for automatic filling of the PDN or
+ VOLUME arrays based on the entry in the last row.  Values of the first 5 PDN
+ elements are repeated and a counter is incremented by 1 for each row.  The
+ alpha part of VOLUME is repeated and the numeric part is incremented by 1 for
+ each row.  FILL_ROWS is a front-end only parameter.
+ 
+ 
+ SEGY Header Word Mapping
+ 
+ Parameters are provided that allow for customized mapping of CPS header words
+ from SEGY tapes.  Normally these will not be required and the default will
+ suffice.  The default is applied first and only the headers specified in the
+ custom mapping will be changed.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 71. 2006-11-27  Stoeckley  Replace pc_register_tab_group w HelpSection line;
+                             fix error in HelpSection to fix a gui problem in
+                             SeisSpace.
+ 70. 2006-08-24  D. Glover  Added NULLIFY statements for Intel compiler.
+ 69. 2006-06-20  Stoeckley  Add call to pc_register_tab_group for SeisSpace.
+ 68. 2006-06-06  Stoeckley  Add call to pc_register_array_names for SeisSpace.
+ 67. 2006-03-01  Goodger    Remove unused variables.
+ 66. 2005-12-01  Goodger    Check flag to determine if header record has
+                            been found.
+ 65. 2005-05-17  Goodger    Add 3592.
+ 64. 2005-03-15  Goodger    Fix bug which would not allow a processing
+                            record to be in the first 6 records.
+ 63. 2005-02-24  Goodger    Replace transfer function with cmem_cpy_c.
+ 59. 2004-09-20  Goodger    Attempt a forced tape unload after a failure to
+                            open problem.
+ 58. 2004-01-19  Goodger    Change tape_host in Alaska from mink to jaws.
+ 57. 2003-12-19  Goodger    Insure tape_host is hoeplgp01 for LTO tapes.
+ 56. 2003-12-16  Goodger    Add segy tape dump option.
+ 55. 2003-12-05  Goodger    Do not allow blanks in VOLUME or any volume
+                            fields.
+ 54. 2003-11-20  Goodger    Change media default to 3590HD.  Change
+                            tape_host default to odi90.
+ 53. 2003-10-31  Goodger    Insure mink tape_host option if Alaska.
+ 52. 2003-10-22  Goodger    Check for media type 3590hd in pdn.  Force
+                            tape_host to be odi90 in that case.  Activated
+                            end session trap.  One existed, but it was not
+                            being called.
+ 51. 2003-10-10  Goodger    Write out control card tapequeue which will be
+                            read by the job builder.  This change corresponds
+                            to buildjob.f90 revision 129.
+ 50. 2003-10-06  Goodger    Added a trap for the tape_host parameter.  Default
+                            was changed from hoepodi90 to odi74.
+ 49. 2003-09-29  RSDay      Changed close proceedure .
+ 48. 2003-08-05  Goodger    Insure tape_host default is odi74.
+ 47. 2003-07-30  RSDay      Added tape_host gui component for odi74 and odi90
+                            access. Added ttrin_get_hosts.
+ 46. 2003-05-29  RSDay      3590HD added to media list(high density 3590)
+ 45. 2003-05-01  RSDay      Fix for extra EOF after tape label. This caused
+                            problems with the file count and confusion over
+                            where data started.
+ 44. 2003-03-25  RSDay      Added more error checking to ttrin_save_prec.
+ 43. 2003-03-12  RSDAY      Fixed bug when last tape record had &lt; tpr traces.
+                            Fixed initial skip bug that occured for tpr &gt; 1.
+                            Start using tpioclnt_asread to do asynch read
+                            aheads.
+ 42. 2003-02-14  RSDay      Eliminated fixed array in ttrin_new_cps_tcf.
+ 41. 2003-02-10  RSDay      added media types 3480, LTO,and NR3590. Added
+                            support for CPS input tapes with multiple
+                            traces per record(TPR format). ttrin_new_cps_tcf
+                            added to unpack traces for TPR format.
+ 40. 2002-10-10  Schmauch   Remove Ponca City specific configuration info.
+                            Rely on tapecnfg.h.
+ 39. 2002-09-25  Schmauch   Allow upper case if volume is typed in.
+ 38. 2002-09-25  Schmauch   Made ttrin pdn building identical to ttrot.
+ 37. 2002-08-12  Goodger    Change default on TOT_DO to 99999999.
+ 36. 2002-07-30  Goodger    Read and output velocity model permsaves.
+ 35. 2002-04-18  Schmauch   Always byte swap before =.
+ 34. 2002-02-04  Goodger    Make volume gui field as large as TTROTs.
+ 33. 2002-02-04  Goodger    Detect if there is a garbage card on permsave
+                            records, and if so skip it, to compensate for a
+                            ttrot bug.  Use fortran to write out records
+                            rather than cio to avoid extent problems.
+                            Fix warnings generated by intel compiler.
+ 32. 2001-10-18  Schmauch   Use tcatclient module for all tapecat
+                            communication.
+ 31. 2001-09-10  Schmauch   Fix logical bug with tot_do and multiple tapes.
+ 30. 2001-08-27  Goodger    Fix bug causing header loss on cray tapes.
+ 29. 2001-08-03  Goodger    Replace history module with manhist module.
+ 28. 2001-07-10  Schmauch   Argument list to tcclient_recv changed. PRODUCTION.
+ 27. 2001-04-04  R.S.Day    More information to stdout about reel switches.
+                            Stopped mount of extra reel in PDN when trace
+                            count is exceeded.
+ 26. 2001-03-08  R.S.Day    Fixed logic with header count when history was
+                            missing for CPS tapes.
+ 25. 2001-02-06  R.S.Day    allowed process record path name increased to 80
+ 24. 2001-02-01  R.S.Day    Added DLT support.
+                            Added option BLK-NSC to read in multi-volume
+                            BLKD tape format. More diagnostic print.
+ 23. 2001-01-18  R.S.Day    Restore of process records no longer uses rcp
+                            to place file in front end directory.
+ 22. 2001-01-09  Selzler    Added support for CPS-NSC (Multi-reel tapes
+                            created on Network Supercomputer Center).
+                            Moved tcclient_halt call so gui does not open
+                            too many sockets to tapecat server.
+ 21. 2001-01-04  RSDay      No longer throwing away empty lines in perm save
+                            records. Fixed problem with a card being dropped
+                            from PR=CON perm save records.
+ 20. 2000-12-14  RSDay      Converted to skip_wrapup flag
+ 19. 2000-12-07  RSDay      Fixed bug in perm save record restore that
+                            was creating blank cards on output.
+ 18. 2000-11-28  RSDay      trimmed line feed from perm save records to
+                            compensate for cio_fputline adding a line feed
+                            fixed problem with unix file names for perm
+                            save records.
+ 17. 2000-11-15  RSDay      replaced wrdc_ibm_to_float with
+                            wrdc_ibm_to_float_c for CPS reads
+ 16. 2000-11-10  RSDay      Fixed tail mute setting. Was not set by mutehw.
+ 15. 2000-10-25  RSDay      Fixed problem reporting label on non labeled tapes.
+ 14. 2000-10-20  RSDay      Worked around an absoft bug on intels. The
+                            segy header parsing had problems until I replaced
+                            an explicit loop with array syntax
+                            i.e. thd(1:nwrd)=obj%rbuf(1:nwrd)
+                            changed gui behavior for segy header mapping.
+ 13. 2000-10-18  RSDay      Fixed perm save files. Eliminated PR= card
+                            from the perm save files. Eliminated 1 column
+                            shift of the output card images and blank cards
+ 12. 2000-10-11  RSDay      Fixed ttrin_getpdn logic for multi_reels.
+                            Slight change to ttrin_next_vol.
+ 11. 2000-10-06  RSDay      Rnamed FILL to FILL_ROWS, and moved location
+                            of some gui fields. Desensitized DEFAULT.
+                            Removed LABEL field. Added ttrin_end_trap
+ 10. 2000-10-02  RSDay      Added optional use of the clean module to
+                            catch bad data values. Eliminated unused pointer
+                            in the ttrin structure.
+  9. 2000-09-27  RSDay      Found another byte swapping problem on linux.
+                            This one was for old CPS tapes with IBM data.
+                            Also needed to invoke the optional swap
+                            parameter on segy_unpack_segyhd to correct linux
+                            problems. Fixed linux byte swapping for segy
+                            custom header mapping.
+  8. 2000-09-05  RSDay      Changed a pc_warning in update to pc_info.
+                            Corrected linux byte swapping for SEGY input.
+                            Redeleted COUNTER which somehow made it into the
+                            last update.
+  7. 2000-08-31  RSDay      Fixed a logic error in BLK format handling
+                            of multiple volumes. Also fixed the problem of
+                            BLK format passing out 1 less trace than
+                            requested. BLK format fixed to set lav and mute.
+                            Fixed linux byte swapping problem for BLK tapes.
+                            Removed irrelevant counter field in help section.
+                            The tpioclnt layer has replaced the direct calls
+                            to tapeio functions. TTRIN auto detects the node
+                            it is on and uses sockets if not on odi74.
+  6. 2000-08-23  RSDay      Increased the GUI field length for volume.
+                            Fixed a bug in ttrin_getpdn. Added the function
+                            ttrin_build_pdn, and added gui fields for project,
+                            sub_project,task, and userid. Rearranged some
+                            code to look more like ttrot. Fixed default
+                            behavior of tot_do. Added userid checking of
+                            catalogued volumes. jobname variable increased
+                            to 16 bytes. Sequential count set for header 1.
+                            Eliminated a real to integer transfer call
+                            since there is a bug in the transfer function.
+                            Added commented lines for future socket io calls.
+  5. 2000-08-17  RSDay      Fixed check of sample rate from history when
+                            format=BLK.
+                            Fixed bugs in buffer allocation for BLK format and
+                            in the logic in ttrin_blkd.
+                            Altered logic so BLK format will read in
+                            only tot_do traces from a reel.
+  4. 2000-08-14  RSDay      Fixed up call to wrdc_ibm_to_float to
+                            avoid problem with passed buffer sizes.
+                            Using obj%nhdtape in place of nhdwd
+                            (eliminated) and introduced obj%ndpttape.The
+                            value of ndpttape is set by a call to history_rop
+                            Also changed the default wdtype behavior to IBM
+                            which corrects a problem reading in old CPS tapes.
+                            Fixed a problem that showed up with linux
+                            internal fortran reads of a character string
+                            when there were line feeds in the string
+  3. 2000-08-01  RSDay      Arguments of tapeio primitives changed to be
+                            consistent with pfio interface.
+  2. 2000-07-28  RSDay      Original
+  1. 1999-11-19  CI Burch   Initial redesign of new process
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

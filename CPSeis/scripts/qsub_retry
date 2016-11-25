@@ -1,0 +1,100 @@
+#!/bin/bash
+. ~/.bashrc
+#<CPS_v1 type="AUXILIARY_FILE" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : qsub_retry
+# Category   : stand-alone
+# Written    : 2002-01-30   by: Donna K. Vunderink
+# Revised    : 2002-01-31   by: Donna K. Vunderink
+# Maturity   : production
+# Purpose    : Shell script to retry the qsub command in case of a failure
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This script is used to to retry the qsub command in case of a failure.
+#
+# Usage:
+#       qsub_retry paramters
+#
+# where
+#       paramters  =  qsub parameters
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  2. 2002-01-31  Vunderink  Fixed to pass all qsub parameters
+#  1. 2002-01-30  Vunderink  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+# RCS Id : $Id: qsub_retry,v 1.2 2002/01/31 13:10:23 Vunderink prod sps $
+
+
+if [ $# = 0 ]
+	then
+	echo "Usage: qsub_retry file"
+	exit 1
+fi
+
+number=0
+if (! which qsub 2>/dev/null ) ; then
+	JOB1=$(echo $1 | awk 'BEGIN{FS="."}{print $1}')
+	DIR=$(dirname $JOB1)
+	JOB=$(echo $JOB1 | awk 'BEGIN{FS="/"}{print $NF}')
+	PID=$$
+	touch $DIR/${JOB}_${PID}.submitted
+	rm -f $DIR/${JOB}_.submitted
+	echo "You need to look at this file:"
+	echo $*
+  	status=$?
+	exit $status
+fi
+while [ "$number" -lt 1800 ] ; do
+  qsub $*
+  status=$?
+  if [ $status = 0 ]
+     then
+	echo "submitted ok"
+       break
+  else
+     echo "problem submitting job. Status = $status"
+     exit 1
+  fi
+  number=`expr $number + 10`
+  sleep $number
+done
+if [ $status = 1 ]
+then
+exit 1
+fi
+

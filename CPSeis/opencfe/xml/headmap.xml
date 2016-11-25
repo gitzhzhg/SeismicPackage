@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="headmap" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="HEADMAPPROCESS" title="HEADMAP Process" rows="40" columns="80">
+    <Label keyword="COMMENT_HEADMAP" alignment="center">HEADMAP</Label>
+    <Label keyword="COMMENT_HEADERWORDMAPPINGFUNCTIO" alignment="center">HEADer word MAPping function</Label>
+    <Label keyword="COMMENT_LOOKUPTABLEANDMATCHSTRAT" alignment="center">Lookup table and match strategy</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_TRIGGER" alignment="left">HDR_TRIGGER =</Label>
+    <Field keyword="HDR_TRIGGER" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_MAP" alignment="left">HDR_MAP =</Label>
+    <Field keyword="HDR_MAP" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG  =</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MODE" alignment="left">MODE        =</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="14" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TOLERANCE" alignment="left">TOLERANCE =</Label>
+    <Field keyword="TOLERANCE" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TRIGGER_ARRAYSET" label="TRIGGER       MAP">
+     <Array keyword="TRIGGER" type="float" maxLength="14 " columnName="TRIGGER" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="MAP" type="float" maxLength="14 " columnName="MAP" editable="yes" sensitive="yes" columnSize="14"/>
+    </ArraySet>
+    <Button keyword="SELECT_TABLE_PATHNAME">Select TABLE_PATHNAME</Button>
+    <Label keyword="EQLAB_TABLE_PATHNAME" alignment="left">=</Label>
+    <Field keyword="TABLE_PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="TABLE_PATHNAME_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_MISSSTRATEGY" alignment="center">Miss strategy</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_OPT_MISSES" alignment="left">OPT_MISSES =</Label>
+    <Field keyword="OPT_MISSES" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MISSES_DEFAULT" alignment="left">MISSES_DEFAULT =</Label>
+    <Field keyword="MISSES_DEFAULT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_HEADMAP" xPos="31" yPos="0" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDMAPPINGFUNCTIO" xPos="20" yPos="1" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LOOKUPTABLEANDMATCHSTRAT" xPos="5" yPos="3" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="5" yPos="4" xSize="66" ySize="12"/>
+     <Constraints component="LABEL_HDR_TRIGGER" xPos="8" yPos="5" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TRIGGER" xPos="22" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_MAP" xPos="33" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_MAP" xPos="43" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="54" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="66" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="8" yPos="7" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="22" yPos="7" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TOLERANCE" xPos="41" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOLERANCE" xPos="53" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TRIGGER_ARRAYSET" xPos="8" yPos="9" xSize="31" ySize="6" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_TABLE_PATHNAME" xPos="0" yPos="17" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_TABLE_PATHNAME" xPos="21" yPos="17" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TABLE_PATHNAME" xPos="22" yPos="17" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TABLE_PATHNAME_INFO" xPos="16" yPos="18" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MISSSTRATEGY" xPos="5" yPos="20" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="5" yPos="21" xSize="59" ySize="3"/>
+     <Constraints component="LABEL_OPT_MISSES" xPos="8" yPos="22" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MISSES" xPos="21" yPos="22" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MISSES_DEFAULT" xPos="35" yPos="22" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MISSES_DEFAULT" xPos="52" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_TRIGGER">
+      <Tip>Header word whose value determines the value placed in HDR_MAP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - HDR_TRIGGER<br> Header word whose value determines the value placed in HDR_MAP.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH
+ 
+ If HDR_TRIGGER takes on a value in the TRIGGER array, then the value in
+ HDR_MAP is set to the corresponding value in the MAP array.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_MAP">
+      <Tip>Header word whose values are to be set with the look-up table.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - HDR_MAP<br> Header word whose values are to be set with the look-up table.</center></b>
+<pre> Default = 31
+ Allowed = 1 - NWIH
+ 
+ If HDR_TRIGGER takes on a value in the TRIGGER array, then the value in
+ HDR_MAP is set to the corresponding value in the MAP array.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ 
+ If HDR_FLAG = 0, then header mapping will be done on all traces.  Otherwise,
+ mapping will be done only on traces with a flag set in header word HDR_FLAG.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODE">
+      <Tip>Method for comparing HDR_TRIGGER values with TRIGGER values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - MODE<br> Method for comparing HDR_TRIGGER values with TRIGGER values.</center></b>
+<pre> Default = EXACT
+ Allowed = EXACT
+ Allowed = ROUND
+ Allowed = TRUNCATE
+ Allowed = NEAR
+ 
+ MODE = EXACT produces a match only if the values are identical (real number
+ comparison.)
+ 
+ MODE = ROUND or TRUNCATE first convert the values to integers and matches if
+ the integers are identical.  ROUND and TRUNCATE use the common mathematical
+ interpretation of rounding and truncating functions.  ROUND (6.5) will match
+ 7, but not 6, and TRUNCATE (6.5) will match 6.
+ 
+ MODE = NEAR produces a match if the absolute value of the difference between
+ the HDR_TRIGGER value and TRIGGER value is equal to or less than the value of
+ TOLERANCE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOLERANCE">
+      <Tip>Tolerance value used with MODE = NEAR.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - TOLERANCE<br> Tolerance value used with MODE = NEAR.</center></b>
+<pre> Default = 0.5
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRIGGER">
+      <Tip>Array of constant values to check against HDR_TRIGGER values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - TRIGGER<br> Array of constant values to check against HDR_TRIGGER values.</center></b>
+<pre> Default = -
+ Allowed = real array (linked).  no limit on number of entries.
+ 
+ If HDR_TRIGGER takes on a value in the TRIGGER array, then the value in
+ HDR_MAP is set to the corresponding value in the MAP array.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAP">
+      <Tip>Array of values associated with values in the TRIGGER array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - MAP<br> Array of values associated with values in the TRIGGER array.</center></b>
+<pre> Default = -
+ Allowed = real array (linked).  no limit on number of entries.
+ 
+ If HDR_TRIGGER takes on a value in the TRIGGER array, then the value in
+ HDR_MAP is set to the corresponding value in the MAP array.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_TABLE_PATHNAME">
+      <Tip>Choose TABLE_PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - SELECT_TABLE_PATHNAME<br> Choose TABLE_PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TABLE_PATHNAME">
+      <Tip>Name for the input trigger table file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - TABLE_PATHNAME<br> Name for the input trigger table file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If TABLE_PATHNAME = NONE, then input the trigger table manually.
+ 
+ If TABLE_PATHNAME is specified, the trigger table is read from the
+ file and the manual table entry is not used.
+ 
+ The file should have the same appearance as the manual table entry area:
+        two columns.
+        first column containing TRIGGER.
+        second column containing MAP.
+        free-field format is allowed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TABLE_PATHNAME_INFO">
+      <Tip>Status of TABLE_PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - TABLE_PATHNAME_INFO<br> Status of TABLE_PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OPT_MISSES">
+      <Tip>Whether to set MISSES_DEFAULT into HDR_MAP when no match is found.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - OPT_MISSES<br> Whether to set MISSES_DEFAULT into HDR_MAP when no match is found.</center></b>
+<pre> Default = NO
+ Allowed = YES
+ Allowed = NO
+ 
+ If OPT_MISSES = NO, then the value in HDR_MAP will be unchanged if no match
+ is found for that trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MISSES_DEFAULT">
+      <Tip>Value to write to HDR_MAP when no TRIGGER match occurs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - MISSES_DEFAULT<br> Value to write to HDR_MAP when no TRIGGER match occurs.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>headmap - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="headmap">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : HEADMAP    (HEADer word MAPping function)
+ Category   : headers
+ Written    : 2001-03-28   by: Brad Kruse
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Set values for any header word based on values from another.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ HEADMAP uses a look-up table to set values of HDR_MAP based on values of
+ HDR_TRIGGER.  Based on user specified arrays TRIGGER and MAP, if HDR_TRIGGER
+ takes on a value in the TRIGGER array, then the value in the HDR_MAP header
+ word is set to the corresponding value in the MAP array.
+ 
+ The MODE parameter determines the scheme used for determining whether there
+ is a match between a value in the HDR_TRIGGER header word, and a value in
+ the TRIGGER array.
+ 
+     MODE = EXACT produces a match only if the values are identical (real
+     number comparison).
+ 
+     MODE = ROUND or TRUNCATE first convert the values to integers and
+     produce a match if the integers are identical.  ROUND and TRUNCATE use
+     the common mathematical intepretation of rounding and truncating
+     functions.  ROUND (6.5) will match 7, but not 6, and TRUNCATE (6.5) will
+     match 6.
+ 
+     MODE = NEAR produces a match if the absolute value of the difference
+     between the HDR_TRIGGER value and a TRIGGER value is equal to or less
+     than the value of TOLERANCE.
+ 
+ HEADMAP searches for a match starting from the top of the TRIGGER array.  If
+ a match is found, the search is stopped for that trace.  (only the first of
+ any possible multiple matches is use.)
+ 
+ If OPT_MISSES = YES, then the value of HDR_MAP is set to MISSES_DEFAULT if no
+ match is found for that trace.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+    Date        Author      Description
+    ----        ------      -----------
+003. 2006-10-16 D. Glover   Added NULLIFY statements for Intel compiler.
+ 2. 2005-10-24  Stoeckley   Remove 100-line limit on table entries for
+                             TRIGGER and MAP; add ability to input the
+                             table from a file.
+ 1. 2001-03-30  Brad Kruse  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

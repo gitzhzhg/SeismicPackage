@@ -1,0 +1,84 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##-------------------------- 64linuxi91_debug -------------------------------##
+##-------------------------- 64linuxi91_debug -------------------------------##
+##-------------------------- 64linuxi91_debug -------------------------------##
+
+# Before compiling and running, first do:
+# > setenv INTEL 9.1
+# > source /apps/compilers/intel_91/fce/9.1.041/bin/ifortvars.csh
+#JAVA_HOME = /apps/geophysics/jdk1.6.0_amd64
+
+permitted_architectures = x86_64
+#permitted_architectures = ix86-intel-linux
+#permitted_architectures = ix86-64-intel-linux
+# cannot gcc/g++ 3's on lc06, need it on lc04
+# using lc06 must use btype_* drivers from cps in programs/cbyt
+#permitted_hosts         = unrestricted
+#permitted_hosts         = hoeplx03
+#permitted_hosts         = hoeplx944
+permitted_hosts          = modi
+
+FC         = ifort -c -g -TV
+FC_AB90EP  = ifort -c -g -TV
+FC_O1      = ifort -c -g -TV
+FC_FLOATIO = ifort -c -g -TV
+FC_INTERPOLATE  = ifort -c -g -TV
+FC_KMIG    = ifort -c -g -TV
+FC_PPIO    = ifort -c -g -TV
+#ppio_includes = -I/apps/compilers/intel/ict/3.0/intel64/mpi/3.0/include64
+FC_UNDER   = ifort -c -g -TV
+FC_LINK    = ifort
+
+### gcc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+CC         = icc -c -g -TV -Wall -mcmodel=medium -DLINUX -DLINUXI -D_REENTRANT \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+CC_IBSMA   = icc -c -g -TV -Wall -mcmodel=medium -DLINUX -DLINUXI -D_REENTRANT \
+                                             -D_LARGEFILE_SOURCE \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+CC_LINK    = icc
+
+CXX        = g++ -c -g -TV -Wall -mcmodel=medium -DLINUX -DLINUXI \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+CXX_IBSMA  = g++ -c -g -TV -Wall -mcmodel=medium -DLINUX -DLINUXI -D_REENTRANT \
+                                             -D_LARGEFILE_SOURCE \
+                                             -D_FILE_OFFSET_BITS=64 \
+                                             -DIA64 -D_64LINUXI91
+CXX_LINK   = ifort -nofor_main
+CXX_DEPEND = g++ -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared
+
+MODEXT     = .mod
+MODFLAG    = -I
+
+
+FOR_LIBS   = /usr/lib64/libstdc++.so.5 \
+             /usr/lib/gcc-lib/x86_64-redhat-linux/3.3.4/libstdc++.a \
+             $(CPSEIS_INSTALL_DIR)/intel_x86_64/libimf.a
+
+#             /usr/lib/gcc-lib/x86_64-redhat-linux/3.2.3/libstdc++.a \
+
+GUI_LIBS    = /usr/X11R6/lib64/libXm.a \
+              /usr/X11R6/lib64/libXmu.a \
+              /usr/X11R6/lib64/libXp.a \
+              /usr/X11R6/lib64/libXext.a \
+              /usr/X11R6/lib64/libXt.a \
+              /usr/X11R6/lib64/libSM.a \
+              /usr/X11R6/lib64/libICE.a \
+              /usr/X11R6/lib64/libX11.a
+
+#MATH_LIBS  = /usr/lib64/libm.a \
+#             /usr/lib64/libpthread.a \
+#             /usr/lib64/libc.a
+MATH_LIBS = /usr/lib64/libm.a -lpthread -lc
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/amd64 -L$(JAVA_HOME)/jre/lib/amd64/server \
+            -ljava -ljvm -lverify
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)/include/linux /usr/include /usr/X11R6/include

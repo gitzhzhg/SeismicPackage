@@ -1,0 +1,1514 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="pstmig" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCREEN1" title="PSTMIG" rows="32" columns="80">
+    <Label keyword="COMMENT_PHASESHIFTFKCASCADEDFKAN" alignment="center">Phase shift, FK, Cascaded FK and common angle migration</Label>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X  =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y  =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_HDR" alignment="left">OFF_HDR =</Label>
+    <Field keyword="OFF_HDR" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT=</Label>
+    <Field keyword="X_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT=</Label>
+    <Field keyword="X_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST=</Label>
+    <Field keyword="X_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC=</Label>
+    <Field keyword="X_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT=</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT=</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST=</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC=</Label>
+    <Field keyword="Y_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_TOT" alignment="left">TIM_TOT=</Label>
+    <Field keyword="TIM_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INIT" alignment="left">TIM_INIT=</Label>
+    <Field keyword="TIM_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_LAST" alignment="left">TIM_LAST=</Label>
+    <Field keyword="TIM_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INC" alignment="left">TIM_INC=</Label>
+    <Field keyword="TIM_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT=</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_LAST" alignment="left">OFF_LAST=</Label>
+    <Field keyword="OFF_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC=</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_TOT" alignment="left">RAY_TOT=</Label>
+    <Field keyword="RAY_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_INIT" alignment="left">RAY_INIT=</Label>
+    <Field keyword="RAY_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_LAST" alignment="left">RAY_LAST=</Label>
+    <Field keyword="RAY_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_INC" alignment="left">RAY_INC=</Label>
+    <Field keyword="RAY_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_FFT" alignment="left">X_FFT  =</Label>
+    <Field keyword="X_FFT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_FFT" alignment="left">Y_FFT  =</Label>
+    <Field keyword="Y_FFT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_FFT" alignment="left">TIM_FFT =</Label>
+    <Field keyword="TIM_FFT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TAPER" alignment="left">X_TAPER=</Label>
+    <Field keyword="X_TAPER" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TAPER" alignment="left">Y_TAPER=</Label>
+    <Field keyword="Y_TAPER" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TERP" alignment="left">X_TERP =</Label>
+    <Field keyword="X_TERP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TERP" alignment="left">Y_TERP =</Label>
+    <Field keyword="Y_TERP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_FILE" alignment="left">X_FILE =</Label>
+    <Field keyword="X_FILE" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_FILE" alignment="left">Y_FILE =</Label>
+    <Field keyword="Y_FILE" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONST_VEL" alignment="left">CONST_VEL=</Label>
+    <Field keyword="CONST_VEL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_VEL">SELECT PATH_VEL</Button>
+    <Label keyword="EQLAB_PATH_VEL" alignment="left">=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_STR">SELECT PATH_STR</Button>
+    <Label keyword="EQLAB_PATH_STR" alignment="left">=</Label>
+    <Field keyword="PATH_STR" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REF_NAME" alignment="left">REF_NAME=</Label>
+    <Field keyword="REF_NAME" type="string" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIG" alignment="left">PATH_MIG=</Label>
+    <Field keyword="PATH_MIG" type="string" maxLength="60" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIMENSION" alignment="left">DIMENSION=</Label>
+    <Field keyword="DIMENSION" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SORT_ORDER" alignment="left">SORT_ORDER=</Label>
+    <Field keyword="SORT_ORDER" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PAR_IO" alignment="left">PAR_IO  =</Label>
+    <Field keyword="PAR_IO" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STR_TYPE" alignment="left">STR_TYPE~=</Label>
+    <Field keyword="STR_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIG_TYPE" alignment="left">MIG_TYPE=</Label>
+    <Field keyword="MIG_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DIR" alignment="left">OPT_DIR   =</Label>
+    <Field keyword="OPT_DIR" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OBLIQUITY" alignment="left">OPT_OBLIQUITY=</Label>
+    <Field keyword="OPT_OBLIQUITY" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ALL_OUT" alignment="left">ALL_OUT  =</Label>
+    <Field keyword="ALL_OUT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DISK_BUF" alignment="left">DISK_BUF=</Label>
+    <Field keyword="DISK_BUF" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_COMMON_ANGLE" alignment="left">OPT_COMMON_ANGLE=</Label>
+    <Field keyword="OPT_COMMON_ANGLE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AMP_PWR" alignment="left">AMP_PWR  =</Label>
+    <Field keyword="AMP_PWR" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_LIM" alignment="left">DIP_LIM =</Label>
+    <Field keyword="DIP_LIM" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VELOCITY_SCALE" alignment="left">VELOCITY_SCALE=</Label>
+    <Field keyword="VELOCITY_SCALE" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FSWP" alignment="left">FSWP     =</Label>
+    <Field keyword="FSWP" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DAP" alignment="left">DAP    =</Label>
+    <Field keyword="DAP" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_PHASE_TABLE" alignment="left">NUM_PHASE_TABLE=</Label>
+    <Field keyword="NUM_PHASE_TABLE" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="FREQ_TIM_ARRAYSET" label="FREQ_TIM       FREQ_LOW_NONE   FREQ_HIGH_FULL">
+     <Array keyword="FREQ_TIM" type="float" maxLength="15 " columnName="FREQ_TIM" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="FREQ_LOW_NONE" type="float" maxLength="15 " columnName="FREQ_LOW_NONE" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="FREQ_HIGH_FULL" type="float" maxLength="15 " columnName=" FREQ_HIGH_FULL" editable="yes" sensitive="yes" columnSize="15"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_PHASESHIFTFKCASCADEDFKAN" xPos="5" yPos="0" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="1" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="9" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="19" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="27" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_HDR" xPos="38" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_HDR" xPos="47" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="3" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="9" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="21" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="28" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="40" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="47" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="59" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="65" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="3" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="9" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="21" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="28" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="40" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="47" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="59" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="65" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_TOT" xPos="1" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_TOT" xPos="9" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INIT" xPos="19" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INIT" xPos="28" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_LAST" xPos="38" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_LAST" xPos="47" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INC" xPos="57" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INC" xPos="65" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="1" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="9" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="19" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="28" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_LAST" xPos="38" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_LAST" xPos="47" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="57" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="65" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_TOT" xPos="1" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_TOT" xPos="9" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_INIT" xPos="19" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_INIT" xPos="28" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_LAST" xPos="38" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_LAST" xPos="47" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_INC" xPos="57" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_INC" xPos="65" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_FFT" xPos="1" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_FFT" xPos="9" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_FFT" xPos="19" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_FFT" xPos="27" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_FFT" xPos="37" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_FFT" xPos="46" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TAPER" xPos="1" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TAPER" xPos="9" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TAPER" xPos="19" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TAPER" xPos="27" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TERP" xPos="1" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TERP" xPos="9" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TERP" xPos="19" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TERP" xPos="27" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_FILE" xPos="1" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_FILE" xPos="9" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_FILE" xPos="19" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_FILE" xPos="27" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONST_VEL" xPos="1" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONST_VEL" xPos="11" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_VEL" xPos="1" yPos="15" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VEL" xPos="17" yPos="15" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="18" yPos="15" xSize="51" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATH_STR" xPos="1" yPos="16" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_STR" xPos="17" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_STR" xPos="18" yPos="16" xSize="51" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_REF_NAME" xPos="1" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REF_NAME" xPos="10" yPos="17" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PATH_MIG" xPos="1" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIG" xPos="10" yPos="18" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIMENSION" xPos="1" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIMENSION" xPos="11" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SORT_ORDER" xPos="21" yPos="20" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SORT_ORDER" xPos="32" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PAR_IO" xPos="42" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PAR_IO" xPos="51" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_STR_TYPE" xPos="60" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STR_TYPE" xPos="70" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MIG_TYPE" xPos="1" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIG_TYPE" xPos="10" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DIR" xPos="21" yPos="21" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DIR" xPos="32" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OBLIQUITY" xPos="42" yPos="21" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OBLIQUITY" xPos="56" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ALL_OUT" xPos="1" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ALL_OUT" xPos="11" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DISK_BUF" xPos="21" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DISK_BUF" xPos="30" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_COMMON_ANGLE" xPos="41" yPos="22" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_COMMON_ANGLE" xPos="58" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_AMP_PWR" xPos="1" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AMP_PWR" xPos="11" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_LIM" xPos="21" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_LIM" xPos="30" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VELOCITY_SCALE" xPos="41" yPos="23" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELOCITY_SCALE" xPos="56" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FSWP" xPos="1" yPos="24" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FSWP" xPos="11" yPos="24" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DAP" xPos="21" yPos="24" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DAP" xPos="29" yPos="24" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_PHASE_TABLE" xPos="1" yPos="25" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_PHASE_TABLE" xPos="17" yPos="25" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_TIM_ARRAYSET" xPos="1" yPos="27" xSize="48" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_X">
+      <Tip>Header word indicating the x line direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - HDR_X<br> Header word indicating the x line direction.</center></b>
+<pre> Default = 7
+ Allowed = 1&lt;=int&lt;=64
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word indicating the crossline direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - HDR_Y<br> Header word indicating the crossline direction.</center></b>
+<pre> Default = 7
+ Allowed = 1&lt;=int&lt;=64
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_HDR">
+      <Tip>header word for offset groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OFF_HDR<br> header word for offset groups.</center></b>
+<pre> Default = 6
+ Allowed = 1&lt;=int&lt;=64
+ For common angle migration PSTMIG gets the
+ ray parameter from header word hdr_offset* 1 000 000.
+ Hence the ray parameter units are microseconds per meter
+ for velcoities in meters / second.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Number of image locations to migrate data to in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_TOT<br> Number of image locations to migrate data to in the X direction.</center></b>
+<pre> Default = 101
+ Allowed = int&gt;0
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>First X image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_INIT<br> First X image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by hdr_x.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Last X image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_LAST<br> Last X image location to migrate data to.</center></b>
+<pre> Default = 100
+ Allowed = real
+ Units are determined by hdr_x.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>X image location spacing to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_INC<br> X image location spacing to migrate data to.</center></b>
+<pre> Default = 1
+ Allowed = real
+ Units are determined by hdr_x.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Number of image locations to migrate data to in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_TOT<br> Number of image locations to migrate data to in the Y direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>First Y image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_INIT<br> First Y image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by hdr_y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Last Y image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_LAST<br> Last Y image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by hdr_y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Y image location spacing to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_INC<br> Y image location spacing to migrate data to.</center></b>
+<pre> Default = 1
+ Allowed = real
+ Units are determined by hdr_y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_TOT">
+      <Tip>Number of image time points to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - TIM_TOT<br> Number of image time points to migrate data to.</center></b>
+<pre> Default = NDPT
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INIT">
+      <Tip>Minimum time to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - TIM_INIT<br> Minimum time to migrate data to.</center></b>
+<pre> Default = TSTRT
+ Allowed = real
+ Units are defined by the velocity.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_LAST">
+      <Tip>Maximum time to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - TIM_LAST<br> Maximum time to migrate data to.</center></b>
+<pre> Default = ( NDPT-1 )*DT+TSTRT
+ Allowed = real&gt;=TIM_INIT
+ Units are defined by the velocity.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INC">
+      <Tip>Time increment to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - TIM_INC<br> Time increment to migrate data to.</center></b>
+<pre> Default = DT
+ Allowed = real&gt;0
+ Units are defined by the velocity.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Number of offset groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OFF_TOT<br> Number of offset groups.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>Minimum offset in the output image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OFF_INIT<br> Minimum offset in the output image.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are defined by velocity.
+ If an input traces offset is outside the range defined by
+ OFF_TOT,OFF_INIT,OFF_LAST,OFF_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_LAST">
+      <Tip>Maximum offset in the output image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OFF_LAST<br> Maximum offset in the output image.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are defined by velocity.
+ If an input traces offset is outside the range defined by
+ OFF_TOT,OFF_INIT,OFF_LAST,OFF_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Output image offset spacing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OFF_INC<br> Output image offset spacing.</center></b>
+<pre> Default = 25
+ Allowed = real
+ Units are defined by vleocity.
+ If an input traces offset is outside the range defined by NOFF, OFFMIN, OFFINC
+ the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_TOT">
+      <Tip>Number of ray parameter groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - RAY_TOT<br> Number of ray parameter groups.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_INIT">
+      <Tip>Minimum ray parameter in the output image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - RAY_INIT<br> Minimum ray parameter in the output image.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are defined by velcoity and are in microseconds per distance unit.
+ If an input traces ray parameter is outside the range defined by
+ RAY_TOT,RAY_INIT,RAY_LAST,RAY_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_LAST">
+      <Tip>Maximum ray parameter in the output image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - RAY_LAST<br> Maximum ray parameter in the output image.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are defined by velcoity and are in microseconds per distance unit.
+ If an input traces ray parameter is outside the range defined by
+ RAY_TOT,RAY_INIT,RAY_LAST,RAY_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_INC">
+      <Tip>Output image ray parameter spacing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - RAY_INC<br> Output image ray parameter spacing.</center></b>
+<pre> Default = 2
+ Allowed = real
+ Units are defined by velcoity and are in microseconds per distance unit.
+ If an input traces ray parameter is outside the range defined by
+ RAY_TOT,RAY_INIT,RAY_LAST,RAY_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_FFT">
+      <Tip>Number of X fft samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_FFT<br> Number of X fft samples.</center></b>
+<pre> Default = -1
+ Allowed -1, integer &gt;= X_TOT
+ Using -1 sets X_FFT to the next power of 2 &gt; X_TOT
+ PSTMIG works best if X_FFT is a product of pwoers of 2,3 and 5</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_FFT">
+      <Tip>Number of Y fft samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_FFT<br> Number of Y fft samples.</center></b>
+<pre> Default = -1
+ Allowed -1, integer &gt;= Y_TOT
+ Using -1 sets Y_FFT to the next power of 2 &gt; Y_TOT
+ PSTMIG works best if Y_FFT is a product of pwoers of 2,3 and 5</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_FFT">
+      <Tip>Number of TIME fft samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - TIM_FFT<br> Number of TIME fft samples.</center></b>
+<pre> Default = -1
+ Allowed -1, integer &gt;= TIM_TOT
+ Using -1 sets TIM_FFT to the next power of 2 &gt; TIM_TOT
+ PSTMIG works best if TIM_FFT is a product of pwoers of 2,3 and 5</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TAPER">
+      <Tip>X taper length.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_TAPER<br> X taper length.</center></b>
+<pre> Default = 0
+ Allowed integer &gt;= 0
+ PSTMIG will taper the horizontal fft a X_TAPER traces forom either edge.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TAPER">
+      <Tip>Y taper length.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_TAPER<br> Y taper length.</center></b>
+<pre> Default = 0
+ Allowed integer &gt;= 0
+ PSTMIG will taper the horizontal fft a Y_TAPER traces forom either edge.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TERP">
+      <Tip>X interpolation factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_TERP<br> X interpolation factor.</center></b>
+<pre> Default = 1
+ Allowed integer &gt;= 1
+ PSTMIG will interpolate the data in the X direction by a factor of
+ X_TERP in the FFT domain.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TERP">
+      <Tip>Y interpolation factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_TERP<br> Y interpolation factor.</center></b>
+<pre> Default = 1
+ Allowed integer &gt;= 1
+ PSTMIG will interpolate the data in the Y direction by a factor of
+ Y_TERP in the FFT domain.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_FILE">
+      <Tip>Number of file decompositions in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - X_FILE<br> Number of file decompositions in the X direction.</center></b>
+<pre> Default = 1
+ Allowed integer &gt;= 1
+ During migration PSTMIG must transpose the input data from
+ X - Y order to Y - X order and back.
+ To do this efficiently PSTMIG will write the data to X_FILE * Y_FILES
+ disk files and then transpose each of these subfiles.
+ Increasing either X_FILE or Y_FILE reduces the total disk space.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_FILE">
+      <Tip>Number of file decompositions in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - Y_FILE<br> Number of file decompositions in the Y direction.</center></b>
+<pre> Default = 1
+ Allowed integer &gt;= 1
+ During migration PSTMIG must transpose the input data from
+ X - Y order to Y - X order and back.
+ To do this efficiently PSTMIG will write the data to X_FILE * Y_FILES
+ disk files and then transpose each of these subfiles.
+ Increasing either X_FILE or Y_FILE reduces the total disk space.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_VEL">
+      <Tip>Constant velocity to use if PATH_VEL=NONE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - CONST_VEL<br> Constant velocity to use if PATH_VEL=NONE.</center></b>
+<pre> Default = 1
+ Allowed = real &gt; 0.
+ pstmig will use a constant velcoity of CONST_VEL if PATH_VEL=NONE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VEL">
+      <Tip>Name of migration velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - SELECT_PATH_VEL<br> Name of migration velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL">
+      <Tip>Name of migration velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PATH_VEL<br> Name of migration velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_STR">
+      <Tip>Name of stretch velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - SELECT_PATH_STR<br> Name of stretch velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_STR">
+      <Tip>Name of stretch velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PATH_STR<br> Name of stretch velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REF_NAME">
+      <Tip>Name of migration velocity reference function.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - REF_NAME<br> Name of migration velocity reference function.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIG">
+      <Tip>Name of migration data file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PATH_MIG<br> Name of migration data file.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIMENSION">
+      <Tip>The dimensionality of the migration and data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - DIMENSION<br> The dimensionality of the migration and data.</center></b>
+<pre> Default = 2D
+ Allowed = 2D means 2D time migration.
+ Allowed = 3D means 3D time migration.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_ORDER">
+      <Tip>Type of input and output order.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - SORT_ORDER<br> Type of input and output order.</center></b>
+<pre> Default = X_IS_FAST
+ Allowed = X_IS_FAST data order is x line - CROSSLINE
+ Allowed = Y_X data order is CROSSLINE - x line</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PAR_IO">
+      <Tip>Flag for parrellel IOI.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PAR_IO<br> Flag for parrellel IOI.</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES
+ Currently this is disabled.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STR_TYPE">
+      <Tip>Type of stretching.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - STR_TYPE<br> Type of stretching.</center></b>
+<pre> Default = NONE
+ Allowed = NONE
+ Currently PSTMIG does not do any internal stretching use STRETCH externaly
+ until this is changed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIG_TYPE">
+      <Tip>Type of imaging.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - MIG_TYPE<br> Type of imaging.</center></b>
+<pre> Default = PHASE    - Phase shift time migration.
+ Allowed = PHASE    - Phase shift time migration.
+ Allowed = FK       - FK time migration.
+ Allowed = CASCADED - Cascaded time migration.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DIR">
+      <Tip>Imaging direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OPT_DIR<br> Imaging direction.</center></b>
+<pre> Default = FORWARD
+ Allowed = FORWARD migration or
+ Allowed = INVERSE migration, modeling.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OBLIQUITY">
+      <Tip>Obliquity correction option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OPT_OBLIQUITY<br> Obliquity correction option.</center></b>
+<pre> Default = NONE
+ Allowed = NONE
+ Allowed = SURFACE
+ Allowed = FULL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ALL_OUT">
+      <Tip>Output all image traces defined by the image grid.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - ALL_OUT<br> Output all image traces defined by the image grid.</center></b>
+<pre> Default = YES
+ Allowed = YES KMIG will output all image traces defined by the X,Y grid.
+ Allowed = NO  KMIG will output only those image trace which have an input
+ within the image bin.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DISK_BUF">
+      <Tip>Image stage flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - DISK_BUF<br> Image stage flag.</center></b>
+<pre> Default = YES
+ Allowed = NO
+ Allowed = YES
+ Allowed = INPUT
+ Allowed = MIGRATE
+ Allowed = OUTPUT
+ PSTMIG constructs a full volume migrated image from the input data.
+ 
+ If DISK_BUF = NO or NDIM = 2 PSTMIG stores this data in memory.  This is
+ intended for use on the T3E where the memory can be allocated from many
+ processors.  The J90 or C90 share memory and are much mor limited in this
+ regard.  Normally you should use DISK_BUF = YES on the J90 or C90.  See note
+ 12 for further discussion of its use on the T3E.
+ 
+ If DISK_BUF = YES, INPUT,MIGRATE or OUTPUT  PSTMIG stores the data in a disk
+ file.  This will default to a tmp disk file whose name will be something like
+ PSTMIG_XXX.data, where the XXX will be replaced by an integer corresponding to
+ the PSTMIG process number within the job.  By default this will go to a tmp
+ disk and will be deleted when the job completes.  For more details on how ow
+ to use the INPUT,MIGRATE, OUTPUT procedure, see NOTE 14.
+ 
+ You can direct this work disk file to a ptmp file by includeing the ptmp path
+ within the disk file name, e.g.  MIGFILE =
+ /home/bdrt/ptmp/hansodw/PSTMIG.image
+ 
+ This will create a file using ptmp disk space.  This file will be removed
+ automaticaly following job completion.  If a job aborts and you have used the
+ ptmp disk you may need to delete the data file manually.
+ 
+ If you are going to run concurrent PSTMIG jobs, make sure to use a unique file
+ name for MIGFILE for each separate PSTMIG job that uses ptmp disk space.
+ 
+ Make sure you use the same ptmp MIGFILE file name for each of the three jobs
+ in a DISK_BUF =  INPUT, MIGRATE or OUTPUT job series.
+ 
+ The T3E has a very small tmp disk space.  Therfore you should always use a
+ ptmp file name for MIGFILE on the T3E.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_COMMON_ANGLE">
+      <Tip>Use common angle imaging.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OPT_COMMON_ANGLE<br> Use common angle imaging.</center></b>
+<pre> Default = NO
+ Allowed = YES PSTMIG will     use a comon angle imaging algorithm.
+ Allowed = NO  PSTMIG will not use a comon angle imaging algorithm.
+ within the image bin.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AMP_PWR">
+      <Tip>Amplitude coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - AMP_PWR<br> Amplitude coefficient.</center></b>
+<pre> Default = 1.
+ Allowed = real &gt;= 0.
+ for migration scale amplitudes by:
+ ( v ( 0 ) * Kz ( 0 ) ) / ( v ( t ) * Kz ( t ) )] ** AMP_PWR
+ for modeling  scale amplitudes by:
+ ( v ( t ) * Kz ( t ) ) / ( v ( 0 ) * Kz ( 0 ) )] ** AMP_PWR</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_LIM">
+      <Tip>Maximum migration dip scaler.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - DIP_LIM<br> Maximum migration dip scaler.</center></b>
+<pre> default = 1.
+ allowed = 0.&lt;= real &lt;= 1.
+ PSTMIG will migrate up to DIP_LIM * the theoretical max dip
+ for each frequency.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VELOCITY_SCALE">
+      <Tip>Migration velocity scaler.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - VELOCITY_SCALE<br> Migration velocity scaler.</center></b>
+<pre> default = 1.
+ allowed = real &gt; 0.
+ PSTMIG will scale the input migration velocity field by VELOCITY_SCALE
+ before imaging.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FSWP">
+      <Tip>Fold of Stack Weighting Power.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - FSWP<br> Fold of Stack Weighting Power.</center></b>
+<pre> Default = 0.5
+ Allowed = 1.0 &gt;= real &gt;= 0.0
+ FSWP weighting causes traces to be weighted such that New Amplitude = Old
+ Amplitude ** FSWP.  This is an effort to control lateral edge artifacts.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DAP">
+      <Tip>Dip Attenuation Parameter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - DAP<br> Dip Attenuation Parameter.</center></b>
+<pre> Default = 1
+ Allowed = int &gt;= 0
+ FKTMIG can perform a sort of dip filtering in the F-K plane.
+ If DAP &gt; 1 then steep dips will be attenuated
+ (with more attenuation for larger values of DAP ).
+ DAP = 1 produces no dip filtering.  DAP = 0 causes increased steeply
+ dipping energy.
+ 
+ DAP = 2 or 3 is often used to attenuate random noise if there is little
+ steeply dipping desirable signal.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_PHASE_TABLE">
+      <Tip>Number of ray parameters in table.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - NUM_PHASE_TABLE<br> Number of ray parameters in table.</center></b>
+<pre> Default = 500
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_TIM">
+      <Tip>Time values for the time - frequency aperture.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - FREQ_TIM<br> Time values for the time - frequency aperture.</center></b>
+<pre> Default = 0
+ Allowed = real ( array )
+ When MIG_TYPE=PHASE, PSTMIG migrates only the frequencies between
+ FREQ_LOW_NONE and FREQ_HIGH_FULL at time FREQ_TIM.  Frequency values are
+ linearly interpolated between input array values for each image time value.
+ For MIG_TYPE=FK, CASCADED all frequencies are migrated at all times.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_LOW_NONE">
+      <Tip>Lower frequency limit values for the time - frequency aperture.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - FREQ_LOW_NONE<br> Lower frequency limit values for the time - frequency aperture.</center></b>
+<pre> Default = 0
+ Allowed = real ( array )
+ When MIG_TYPE=PHASE, PSTMIG migrates only the frequencies between
+ FREQ_LOW_NONE and FREQ_HIGH_FULL at time FREQ_TIM.  Frequency values are
+ linearly interpolated between input array values for each image time value.
+ For MIG_TYPE=FK, CASCADED all frequencies are migrated at all times.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_HIGH_FULL">
+      <Tip>Upper frequency limit values for the time - frequency aperture.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - FREQ_HIGH_FULL<br> Upper frequency limit values for the time - frequency aperture.</center></b>
+<pre> Default = 0
+ Allowed = real ( array )
+ When MIG_TYPE=PHASE, PSTMIG migrates only the frequencies between
+ FREQ_LOW_NONE and FREQ_HIGH_FULL at time FREQ_TIM.  Frequency values are
+ linearly interpolated between input array values for each image time value.
+ For MIG_TYPE=FK, CASCADED all frequencies are migrated at all times.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pstmig - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="pstmig">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PSTMIG
+ Category   : Migrations
+ Written    : 2000-01-13   by: Douglas Hanson
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : PHASE SHIFT, FK and Cascaded FK migration and modeling.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ PSTMIG uses Phaseshift, FK and Cascaded FK migration and modeling to image
+ poststack input data.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+                        INPUT PARAMETERS
+ 
+ Name  Default  Valid    Description
+ ----  -------  -----    -----------
+ 
+-----------------------------------------------------------------------
+ This process is re-enterable.
+-----------------------------------------------------------------------
+                              NOTES
+ 
+ 
+ NOTE 0.
+ 
+ The following nomenclature is used in these notes:
+ 
+ An input bin - a trace bin defined by the parameters X_TOT, X_INIT,
+ X_INC and Y_TOT, Y_INIT, Y_INC that is filled by an input traces.
+ 
+ An image bin - a trace bin defined by the parameters X_TOT, X_INIT,
+ X_INC and Y_TOT, Y_INIT, Y_INC.  If an image bin is not filled by
+ an input trace, it will be treated as a zero trace during imaging.  These
+ traces can be output by setting ALL_OUT = YES.
+ 
+ A migration bin - a trace bin defined by the parameters X_FFT, X_INIT,
+ X_INC and Y_FFT, Y_INIT, Y_INC.  Where X_FFT and Y_FFT are
+ the spatial fft lengths.  Migration bins falling outside the range defined by
+ X_TOT and Y_TOT are treated as zero traces during imaging.
+ 
+ NOTE 1.
+ 
+ PSTMIG is a 2D and 3D post stack phase shift, FK, cascaded FK
+ and common angle migration inverse migration (modeling) program.
+ In the phase shift and common angle mode it can
+ migrate/model normal downgoing waves and/or turning maves.
+ 
+ 
+ NOTE 2.  Parameters PATH_REF and REF_NAME - migration velocity function
+ 
+ PSTMIG uses a single velocity function for migration and modeling.  Input
+ parameter PATH_REF defines the CPS velocity file conatining the reference
+ velocity function.
+ 
+ Input parameter REF_NAME is the reference function name.  If REF_NAME = FIRST,
+ the first function is used.
+ 
+ The reference velocity function used for migration is in a CPS velocity file
+ defined by theand may be a VTRM, VTAV VTIN, VZRM, VZAV or VZIN function.
+ 
+ The input velocity function will be converted internally to a uniformly
+ sampled VTIN function.
+ 
+ 
+ NOTE 3.  Parameter OPT_DIR
+ 
+ PSTMIG uses a phase shift or FK  operation to either: migrate input data to an
+ output image (OPT_DIR = MIGRATE) or model output data from an input image
+ (OPT_DIR = MODEL)
+ 
+ 
+ NOTE 4.  Parameter MIG_TYPE
+ 
+ PSTMIG can be used to phase shift image normal downgoing waves only, (MIG_TYPE
+ = NORMAL), turning waves only,      (MIG_TYPE = TURNING), or both downgoing
+ and turning waves, (MIG_TYPE = BOTH).  or FK or CASCADED FK migrate the input
+ data.
+ 
+ 
+ NOTE 5.  Multiple group migration.
+ 
+ PSTMIG will migrate traces within a defined grouping defined by the parameters
+ OFF_HDR, OFF_INIT and OFF_INC.  If OFF_HDR is non zero PSTMIG will monitor the
+ group location of each input trace.  When the group number changes the current
+ group will be migrated and output.  After all of the current group image
+ traces have been output PSTMIG will begin to input the traces for the next
+ group.  Note the input data should be sorted by the group value so that all
+ group 1 traces are together, followed by group 2 and so forth.  Group traces
+ do not need to be gathered together.
+ 
+ 
+ NOTE 6.  Input trace ordering.
+ 
+ If SORT_ORDER=X_IS_FAST:
+ Traces whould be ordered by header words HDR_X, and HDR_Y within
+ migration groups.  That is: header word HDR_X should change slowest and
+ HDR_Y should change slowest.  All traces which share a common value of
+ header word HDR_Y should be sorted together.  However within such a single
+ line the header word HDR_X need not be ordered.
+ The opposite is true s SORT_ORDER=Y_IS_FAST.
+ 
+ NOTE 7.
+ 
+ There should be a single trace within any single migration bin.  If PSTMIG
+ finds more than one input trace in a single bin it will intentionaly abort.
+ 
+ 
+ NOTE 8.  Output header words.
+ 
+ PSTMIG reset header words: HDR_X,HDR_Y, 1, 3, 4, 25 for all output
+ traces.
+ 
+ 
+ NOTE 9.  ALL_OUT - output all image bins.
+ 
+ When ALL_OUT = YES traces are generated and output for every image bin defined
+ by X_TOT,X_INIT,X_INC and Y_TOT, Y_INIT, Y_INC regardless of
+ whether or not there was a corresponding input trace.  For those output traces
+ which did not have a corresponding input trace the header words other than
+ those listed above are obtained by interpolating from the surrounding image
+ trace bins which did have input traces.
+ 
+ For 3D the header words are first filled in in the X direction and then those
+ that are still missing are filled in in the Y direction.
+ 
+ For example, suppose you had set the PSTMIG input parameters:
+ 
+ NDIM = 2, HDR_X = 7, X_TOT = 101, X_INIT = 0, X_INC = 1, HDR_Y
+ = 8, Y_TOT = 1, Y_INIT = 0, Y_INC = 1,
+ 
+ and had read the input traces for X bins X = 10-20,30-90 into PSTMIG, Here
+ traces for X bins (HDR_X = 7) X = 1-9, X = 21-29 and X = 91-101 are
+ missing.
+ 
+ If you use ALL_OUT = NO only those image trace bins that were filled by input
+ traces will be output, so you will get image traces for X bins X =
+ 10-20,30-90.
+ 
+ If you use ALL_OUT = YES you will get an output trace for X bins 1-101. header
+ words for the missing input traces will be interpolate from the surrounding
+ input trace header words.  E.G.  for output traces X = 1-9 header words will
+ be those of input trace X = 10.  for output traces X = 21-29 the header words
+ will be linearly interpolated from input trace X = 20 and X = 30.  Header
+ words for output traces X = 91-101 will be those of input trace X = 90.
+ 
+ NOTE 10 using STRETCH before and after PSTMIG.
+ 
+ Use CPS process STRETCH before and after PSTMIG to apply a Stolt stretch to
+ correct for lateraly velocity variations.  Pre -migration use STRETCH with
+ MODE = FORWARD  Post-migration use STRETCH with MODE = INVERSE In both cases
+ use parameters PATH_REF and REF_NAME to point to the same reference velocity
+ function used in PSTMIG.  NOte, however that STRETCH will stretch the data for
+ the RMS versions of the input and reference velocity functions and PSTMIG will
+ migrate with the interval velocity of the reference velocity functions.  You
+ may use any CPS velocity type such as VTIN or VTRM for the velocity functions.
+ PSTMIG and STRETCH convert from the input type to the required VTIN and VTRM
+ types respectively.
+ 
+ 
+ Note 11 MIGFILE, DISK_BUF
+ 
+ PSTMIG constructs a full volume migrated image from the input data.
+ 
+ If DISK_BUF = NO or NDIM = 2 PSTMIG stores this data in memory.  This is
+ intended for use on the T3E where the memory can be allocated from many
+ processors.  The J90 or C90 share memory and are much mor limited in this
+ regard.  Normally you should use DISK_BUF = YES on the J90 or C90.  See note
+ 12 for further discussion of its use on the T3E.
+ 
+ If DISK_BUF = YES, INPUT,MIGRATE or OUTPUT  PSTMIG stores the data in a disk
+ file.  This will default to a tmp disk file whose name will be something like
+ PSTMIG_XXX.data, where the XXX will be replaced by an integer corresponding to
+ the PSTMIG process number within the job.  By default this will go to a tmp
+ disk and will be deleted when the job completes.  For more details on how ow
+ to use the INPUT,MIGRATE, OUTPUT procedure, see NOTE 14.
+ 
+ You can direct this work disk file to a ptmp file by includeing the ptmp path
+ within the disk file name, e.g.  MIGFILE =
+ /home/bdrt/ptmp/hansodw/PSTMIG.image
+ 
+ This will create a file using ptmp disk space.  This file will be removed
+ automaticaly following job completion.  If a job aborts and you have used the
+ ptmp disk you may need to delete the data file manually.
+ 
+ If you are going to run concurrent PSTMIG jobs, make sure to use a unique file
+ name for MIGFILE for each separate PSTMIG job that uses ptmp disk space.
+ 
+ Make sure you use the same ptmp MIGFILE file name for each of the three jobs
+ in a DISK_BUF =  INPUT, MIGRATE or OUTPUT job series.
+ 
+ The T3E has a very small tmp disk space.  Therfore you should always use a
+ ptmp file name for MIGFILE on the T3E.
+ 
+ 
+ NOTE 12.  DISK_BUF = INPUT, MIGRATE or OUTPUT series.
+ 
+ If NDIM = 2 or DISK_BUF = YES or DISK_BUF = NO the data will be input,
+ migrated, and output all in one job.
+ 
+ On the T3E only 2 PEs are required to input and output the data.  But many PEs
+ can be used to migrate it.  If the data is input, migrate and output all in
+ one job most of the PEs are idle during data input and output.  Because you
+ are charged for the entire time the PEs are allocated to a job, whether they
+ are busy or not, this can seriously degrade PSTMIGs cost performance.
+ 
+ To improve efficiency, you may choose to break the migration process into
+ discrete steps using DISK_BUF = INPUT, MIGRATE, OUTPUT.
+ 
+ To do this create 3 jobs including: data input, such as QTRIN, PSTMIG and data
+ output such as QTROT.
+ 
+ The three jobs are the same except:
+ 
+ JOB 1 - DISK_BUF = INPUT
+ 
+ PSTMIG will store input data in MIGFILE but will not migrate or output it to
+ the QTROT file.  Use 2 PEs on the T3E for this job.  Run this job first.
+ 
+ JOB 2 - DISK_BUF = MIGRATE
+ 
+ PSTMIG will migrate the data in MIGFILE but will not input or output it to the
+ QTROT file.  Use many PEs on the T3E for this job.  Run this job after JOB 1
+ has completed
+ 
+ JOB 3 - DISK_BUF = OUTPUT
+ 
+ PSTMIG will output the migrated data in MIGFILE.  Use 2 PEs on the T3E for
+ this job.  Run this job after JOB 2 has completed.
+ 
+ You may choose to delete the QTRIN input file after JOB 1 completes.  A single
+ trace input is required for JOB 2 and JOB 3 but these do not need to be real
+ traces, you could generate them with RNSYN.
+ 
+ You may only input a single migration group using this option.
+ 
+ You should make sure MIGFILE will be placed on PTMP so it will be saved from
+ one job to another.
+ 
+ For more details on how ow to use the INPUT,MIGRATE, OUTPUT procedure, see
+ Note 14.
+ 
+ Note 13 FFT lengths
+ 
+ X_FFT, Y_FFT and TIM_FFT are the fft lengths in the X, Y and T
+ directionrespecively.  PSTMIG uses a mixed radix fft, so any of these can be
+ a product of power of 2, 3 and 5.
+ 
+ X_FFT must be -1 or &gt; =  X_TOT, Similary Y_FFT must be -1 or &gt;=
+ Y_TOT
+ 
+ For OPT_DIR = MIGRATE - TIM_FFT must be -1 or &gt; =  NDPT where NDPT is the
+ input trace length.
+ 
+ For OPT_DIR = MODEL - TIM_FFT must be -1 or &gt; =  TIM_TOT where TIM_TOT is
+ the output trace length.
+ 
+ If the input X fft length parameters X_FFT = -1 it defaults to the first
+ power of 2 &gt; =  X_TOT.  Y_FFT and TIM_FFT are treated similarly.
+ 
+ Note X_FFT and Y_FFT are the actual number of trace bins actually used
+ in the migration.  By rounding the spatial ffts upwards PSTMIG has padded the
+ input traces with a null zone from X_TOT+1 - X_FFT in the X direction
+ and from Y_TOT+1 - Y_FFT in the Y direction.
+ 
+ For 2D migrations PSTMIG keeps the entire input data section and no data is
+ written to disk.  For 3D migrations PSTMIG keeps (X_FFT/2+1)*Y_TOT
+ complex traces on disk.  On Crays these traces are packed 2-1 on disk The
+ length of these traces is the max of NDPT, NTOUT.  Hence the disk space is
+ approximately: Disk size (bytes) = [ (X_FFT/2+1) * Y_TOT *
+ MAX (NDPT,NTOUT) / 2] * 8
+ 
+ Note 14  Pre-Stack Zero-Offset Time Migration (PZOTM) using PSTMIG
+ (Sometimes Called Pseudo Pre-Stack Time Migration (PPSTM))
+ 
+ PZOTM Methodology
+ 
+ The following is a description of the PZOTM method/approach and how it was
+ implemented on LOBO 3D data.  The basic PZOTM processing sequence is as
+ follows:
+ 
+ NMO - DMO - Migrate - VA - STK - Inverse Migrate - Final Migrate
+ 
+ The DMO and initial migration steps are performed on common offsets The
+ initial migration and inverse migration are performed using a single average
+ velocity function.  A single function is used in order to make the inverse
+ more exact.  The choice of the single velocity function can be important,
+ particularly in areas of complex geology.  Runnine some 2D tests using various
+ single velocity functions is one way that may help in the selection of the
+ initial migration velocity function.  The final migration can be performed
+ using a smoothed version of the final stacking velocities, picked  after the
+ initial migration.  However, this approach does not always work. See sections
+ on Initial Migration (DPSTMIG8A) and Final Forward Migration for more details
+ on velocities.  Note that VA stands for velocity analysis.
+ 
+ The Phase-Shift algorithm is used to do the forward and inverse migration
+ steps.  The final migration step can be any migration algorithm (e.g.  FK,
+ Phase-Shift, Kirchhoff)
+ 
+ DMO and STK are the composite steps.  No velocity analysis should be necessary
+ after DMO, prior to the initial migration step, since no composite is being
+ performed in the migration step itself.
+ 
+ 
+ PZOTM in Practice
+ 
+ This section describes a series of jobs that were used to perform PZOTM on
+ LOBO 3D data.  These jobs should be used as a guide for future PZOTM work. Of
+ course, different data will require some variation on the parameters, but
+ those will be obvious.  The focus here will be on the not so obvious
+ parameters and how to avoid certain pitfalls.  Note that QTRIN and QTROT are
+ the required I/O modules, and these are used in all the jobs with the
+ exception of the stack job that uses PTRIN.  For reference, the CINF files can
+ be found in USER1:[ROY.FNB.PPMSTK].
+ 
+ Initial Migration
+ 
+ This initial migration step requires that each common offset be migrated in a
+ series of three jobs if the migration is performed on the T3E.  If the J90 is
+ used, then the migration can be done in one job.  The reason three jobs are
+ needed on the T3E is because the I/O steps in PSTMIG are very time consuming
+ and thus are not able to use many PEs efficiently.  The following is the
+ series of three jobs:
+ 
+ DPSTMIG8A
+ 
+ The input data is a single common offset volume after NMO and DMO application.
+ This series of three jobs is run on each of the DMO offsets. In the LOBO
+ case, there were 16 offsets, which meant running 48 jobs to migrate the data.
+ Note that for most 2D data, all offsets can be migrated in one job by setting
+ the OFF_HDR, OFF_MIG and OFF_INC parameters appropriately. All 2D jobs / tests
+ should be run on the J90.
+ 
+ Some important parameter considerations are:
+ 
+ FSWP, DAP, X_FFT, Y_FFT and TIM_FFT.
+ 
+ It is recommended that these parameters be tested prior to making a production
+ run.  Getting the right FFT lengths are critical to minimize wrap-around
+ affects.  FSWP=0 and DAP=1 (the defaults) should be reasonable.  This job
+ used values of 0.5 and 3, which appeared to work well.  In theory, 0 and 1
+ should work fine.  FSWP should always be set to zero if any fold variations
+ exist in the common offset volumes.  See the parameter descriptions in the
+ docs for more information. When in doubt, run some 2D tests.
+ 
+ This initial job runs using only 2 PEs.  It saves no time or money to use more
+ PEs.  The ALL_OUT parameter should be set to YES.  This will keep all data
+ migrated into any gaps which might exist.  This is particularly important for
+ land data, but can also be critical in marine data where significant cable
+ feathering leads to fold variations.
+ 
+ DISK_BUF should be set to INPUT.  This will create and store a file on the
+ PTMP disk that will be used in the remaining two jobs.  DO NOT store this file
+ on the TMP disk as it can get quite large.
+ 
+ Finally, the migration velocity should be a simple single velocity function.
+ As stated earlier, the choice of this function could be important,
+ particularly in areas of complex geology.  It is also important if one wishes
+ to skip the inverse migration step and do a residual migration instead.  In
+ that case, one would want to be careful that the data were not over-migrated
+ in the initial migration step.
+ 
+ DPSTMIG8B
+ 
+ This job is the same as 8A with the following exceptions:
+ 
+ Only 1 input trace is required, since the data for this job is already stored
+ in the PTMP file specified in the first job.  DISK_BUF is set to MIGRATE.
+ Multiple PEs can be used.  In this job, 40 PEs were used to do the migration.
+ This job is the fastest of the three jobs.  The input and output steps are the
+ most time consuming.
+ 
+ DPSTMIG8c
+ 
+ This is the final job in the initial migration series.  It is the same as 8B
+ with the following exceptions:
+ 
+ DISK_BUF is set to OUTPUT.  The number of PEs used should be set to 2, as in
+ 8A.  Note that the MIGFILE stored on PTMP is automatically deleted once the
+ job completes.  One should account for the size of the MIGFILE and the QTROT
+ output file when considering the amount of disk space needed to migrate each
+ offset.
+ 
+ VA
+ 
+ Once all offsets are migrated, velocity analysis can be performed using the
+ preferred method.  Jobs to do the velocity analysis have not been included in
+ this discussion.  Prior to generating velocity panels (e.g. GVSs), the mute
+ headers should be set so that data migrated into gaps will not be
+ automatically muted in the GVS process.  Setting HW 2 = 0 and HW 64 = last
+ sample in trace will avoid this problem.  The importance of setting the mute
+ headers is discussed in more detail in the next section.
+ 
+ Note that the velocities picked on the migrated data are still just stacking
+ velocities.  Smoothing these velocities and using them in the final forward
+ migration may or may not be appropriate depending on the complexity of the
+ data.
+ 
+ Stack (STK)
+ 
+ DGS130
+ 
+ Since the data are already in common offset order, PTRIN can be used as the
+ input module for the stack job.  This is advantageous since PTRIN reads a
+ single trace from a common bin of each offset etc., thus allowing efficient
+ use of the process STK to stack the data.  GSTK should be avoided at all costs
+ to stack the data since it is extremely Y when compared to STK.
+ 
+ Setting the mute parameters properly prior to stack is extremely important.
+ The mute headers should be set as HW 2 = 0 and HW 64 = last sample in trace.
+ Setting HW 64 is not as critical as setting HW 2.  This is necessary because
+ in the migration step, data were migrated into traces where no data existed
+ previously.  Those original dead traces had their mutes set to the bottom of
+ the trace and if left unaltered, the STK process will think these traces are
+ dead and not include the data in the stack. This is extremely important in
+ data with large gaps in the common offsets, typical of land data.  It is less
+ important for marine data, but can be an issue if significant cable feathering
+ causes fold variations in the common offsets (e.g.  Gulf of Mexico Witch 3D
+ data).  For the LOBO data, the mute on the stack of the migrated offsets was
+ set using a GRAB file that was created from a DMO stack volume.  If no stack
+ volume is available prior to migration, then a) create a stack and extract the
+ mute index or b) pick the mute manually on the stack of the migrated offsets.
+ For marine data, option b is feasible, but this may not be as easy on land
+ data.  Further testing revealed that for our data it was not necessary to
+ retain data beyond the survey edges after the stack.  We originally believed
+ that this data needed to be kept for the inverse migration step.  The inverse
+ migration step was performed on a stack volume in which we kept data beyond
+ the survey edge and on one which we muted the data beyond the edge.  Both
+ inverse migrated products were then forward migrated and compared.  No
+ significant differences were seen in the two final volumes.
+ 
+ For the LOBO data, it did not make a significant difference if we retained the
+ data beyond the survey edge prior to performing the inverse migration.
+ However, the need to keep this extra data may be a function of dip direction
+ around the survey perimeter and the single velocity function used to perform
+ the initial migration.  Therefore, it is recommended that the data beyond the
+ survey edges be retained after stack.  The amount of additional disk space
+ this would require should be taken into consideration since it may not be
+ trivial.
+ 
+ Prior to stack, the data should have NMc reverse applied using the velocities
+ that were used to moveout the data prior to migration.  Do not use the
+ velocity used in the initial migration in this step.  Of course, the NMc
+ forward step should use the latest velocities picked in the velocity analysis
+ performed on the migrated data.
+ 
+ Inverse Migration
+ 
+ DFIN125
+ 
+ The input to this job is the stack of the migrated offsets.  This job was run
+ on the J90 using 16 CPUs.  Some important parameter considerations are:
+ 
+ FSWP and DAP should be set to 0 and 1 respectively, regardless of what was
+ used in the initial migration job.  For example, using a DAP other than 1 for
+ this and the final migration job would continue to discriminate against steep
+ dips, which is undesirable.
+ 
+ X_TOT, Y_TOT and TIM_TOT should be set equal to X_FFT, Y_FFT and
+ TIM_FFT The reasoning here is that we want to keep all data that is inverse
+ migrated (modeled) into the padded area so that it exists for the final
+ forward migration step.  Failure to keep this data will likely result in a
+ degraded final migrated image since any dipping data modeled into the padded
+ area would not exist and therefore not be migrated back into the 3D volume or
+ 2D line. OPT_DIR should be set to MODEL to do the inverse migration.  Continue
+ to use ALL_OUT = YES in order to keep data modeled into gaps and beyond the
+ survey edge.  The same velocity function used in the initial forward migration
+ should also be used in the inverse migration.
+ 
+ Final Forward Migration
+ 
+ DFIN126
+ 
+ The input to the final forward migration is the inverse migrated data set (the
+ stack) output in the previous job.  This job was also run on the J90 using 16
+ CPUs.  Some parameter considerations are:
+ 
+ Again, FSWP and DAP should be set to 0 and 1 respectively.  X_TOT,
+ Y_TOT and TIM_TOT should be set to their original values from the initial
+ migration job.  We only want to keep what we want in the final migration and
+ not the padded data.  The STRETCH process needs to be included before and
+ after PSTMIG for the final migration since a velocity field is used as opposed
+ to a single velocity function.  The reference velocity we used for the final
+ migration was a single average velocity function derived from the  smoothed
+ stacking velocities that were picked on the migrated data.
+ 
+ Probably the most important consideration for the final forward migration is
+ what velocity field to use.  There is no guarantee that using 100% of the
+ smoothed final stacking velocities, picked on the migrated data, will be
+ appropriate.  For LOBO, we used a 100% smoothed version of our final stacking
+ velocities picked on the migrated data, and this worked pretty well.
+ 
+ However, this approach did not work very well with the Witch data.  In the
+ Witch 3D survey, more structural complexity is present (salt structures
+ flanked by mini-basins with significant lateral velocity variation between
+ them).  When 100% of the smoothed final stacking velocities were used, data
+ around the salt were migrated reasonably well, but data in the mini-basin were
+ under-migrated significantly.  In fact, it was necessary to increase the
+ migration velocity by near 20% in the mini-basin in order to migrate the data
+ in that area properly.  One approach to solving this problem would be to
+ generate migration velocity percentage panels for selected velocity lines and
+ modify the velocities by the appropriate percentages.  This velocity field
+ could then be used for the final migration.
+ 
+ NOTE 13 DAP parameter  99/01/14 The amplitude is scaled  by the DAP
+ parameter in PSTMIG for modeling and migration.  The factor (Kz/W)**DAP has
+ traditionally been used in FK migrations as a poor mans dip filter.  In FK
+ migration the migration step applies this scale factor, and modeling applies
+ the inverse of this weighting.  According to theory, the default value of
+ DAP=1.  PSTMIG phase shift, in order to mimic FK migration behavior, provided
+ the DAP parameter for dip filtering.  However a careful comparison of the
+ phase shift and FK formulas indicates that, in principle, DAP=1 and that the
+ scaling (or its inverse)  should only be applied to the modeling step.  Hence,
+ the latest PSTMIG applies (Kz/W)** (DAP-1) weighting for migration, and
+ (W/Kz)**DAP for modeling.  You must use the same DAP value for your modeling
+ and migration steps if you want modeling followed by migration to be
+ approximately the identity operatorc
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+     Date        Author         Description
+     ----        ------         -----------
+ 32. 2006-12-04  D. Glover      Added NULLIFY statements for Intel compiler
+ 31. 2006-06-06  Stoeckley      Add pc_register_array_names for SeisSpace.
+ 30. 2006-01-10  B. Menger      Removed Unused Variables.
+ 29  2005-01-31  Douglas Hanson Use new headsave structure.
+ 28  2003-04-01  Douglas Hanson Add common angle imaging.
+ 27  2001-10-25  Goodger        Rename labels beginning with if to get around
+                                intel compiler bug.
+ 26  2001-09-04  Douglas Hanson Fix bottom mute bug.
+ 25  2001-08-29  RSDay          Eliminated update_state test in update
+ 24  2001-08-24  RSDay          Fixed call to velutil_convert
+                                Fixed gui field for PATH_VEL
+ 23  2001-08-23  Douglas Hanson Add pathhchoose.
+ 22  2001-04-10  Douglas Hanson Adopt pi from named_constants.
+ 21  2001-04-05  Douglas Hanson Correct frequency increment.
+ 20  2001-01-02  Douglas Hanson Adapt to expanded pario
+ 19  2000-12-15  Douglas Hanson Correct use of no_more_traces
+ 18  2000-12-12  Douglas Hanson Add skip_wrapup
+ 17  2000-11-27  Douglas Hanson Fix OPT_DIR bug.
+ 16  2000-10-24  Douglas Hanson Adopt X - Y parameters.
+ 15  2000-09-19  Douglas Hanson No if test for control cards.
+ 14  2000-09-06  Douglas Hanson Modify velgrid_size usage
+ 13  2000-09-06  Douglas Hanson Improve documentation.
+ 12  2000-08-28  Douglas Hanson Improve documentation.
+ 11  2000-08-25  Douglas Hanson cpsfcr
+ 10  1999-10-07  Douglas Hanson Use unique file names and optimal paths.
+  9  1999-09-08  Douglas Hanson Use integer arithmetic for efficiecency.
+  8  1999-09-01  Douglas Hanson Add ONEOUT parameter.
+  7  1999-08-31  Douglas Hanson Add Stolt forward and inverse DMO.
+  6  1999-08-24  Douglas Hanson Modify output trace counter for X_TOT=0.
+  5  1999-08-23  Douglas Hanson Disable report files.
+  4  1999-07-23  Douglas Hanson Add the ONEGRP parameter.
+  3  1999-07-23  Douglas Hanson Adopt offset conventions.
+  2  1999-07-22  Douglas Hanson Add VELOCITY_SCALE velocity analysis parameter.
+  1  1997-08-05  Douglas Hanson Original version
+-----------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

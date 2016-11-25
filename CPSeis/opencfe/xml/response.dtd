@@ -1,0 +1,394 @@
+<!-- response.dtd  -->
+
+<!-- The client message element. -->
+
+<!ELEMENT Message ( Reply )>
+
+<!-- The reply element. The reply element can contain only one  -->
+<!-- or more messages at a time. -->
+
+<!ELEMENT Reply ( Close | 
+	Error | Info | Warning |
+	InsertElements | RemoveElements | 
+	JumpArray | JumpArrayElement | JumpArraySet | JumpArraySetRow | 
+	JumpField | JumpScreen | 
+	ClearElements | ModifyElements | ModifyField | ModifyProcess | 
+	OptionsArray | OptionsField | 
+	SensitiveArray | SensitiveArraySet | SensitiveField | SensitiveScreen | JumpWindow |
+	ClearSelection | SetArrayBackgroundColor | SetGUI | TerminateApp | ReplaceGUI | SetWindowTitle | 
+	SelectRadioButton | SelectToggleButton | Beep | Visible | ClientVersion | ShowHelp)+>
+
+
+<!--
+  - An generic text node.
+  -->
+  
+<!ELEMENT MessageText ( #PCDATA )>
+
+
+<!--
+  - A message for closing the current process.
+  -->
+  
+<!ELEMENT Close EMPTY>
+<!ATTLIST Close windowId NMTOKEN #REQUIRED>
+
+
+<!--
+  - An error message for a dialog box.  This message can only be sent
+  - by the server.
+  -->
+  
+<!ELEMENT Error EMPTY>
+<!ATTLIST Error windowId NMTOKEN #REQUIRED
+		elements CDATA   #REQUIRED
+                startElement NMTOKEN #IMPLIED
+                endElement NMTOKEN #IMPLIED>
+
+<!--
+  - An warning message for a dialog box.  This message can only be sent
+  - by the server.
+  -->
+  
+<!ELEMENT Warning EMPTY>
+<!ATTLIST Warning windowId NMTOKEN #REQUIRED
+		  elements CDATA #REQUIRED
+                  startElement NMTOKEN #IMPLIED
+                  endElement NMTOKEN #IMPLIED>
+                  
+<!--
+  - An information message for a dialog box.  This message can only be
+  - sent by the server.
+  -->
+  
+<!ELEMENT Info EMPTY>
+<!ATTLIST Info windowId NMTOKEN #REQUIRED
+	       elements CDATA #REQUIRED
+               startElement NMTOKEN #IMPLIED
+               endElement NMTOKEN #IMPLIED>
+
+<!--
+  - Inserts elements into an array.  This message can be sent by either
+  - the client or the server.  If it is sent by the client, it is merely
+  - a request.  If the request is granted, the server will responds with a
+  - INSERT_ELEMENTS message.
+  -->
+  
+<!ELEMENT InsertElements>
+<!ATTLIST InsertElements windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED
+			 			 elements CDATA #REQUIRED
+                         startElement NMTOKEN #REQUIRED
+                         endElement NMTOKEN #REQUIRED>
+
+<!--
+  - Removes elements from an array.  This message can be sent by either
+  - the client or the server.  If it is sent by the client, it is merely
+  - a request.  If the request is granted, the server will responds with a
+  - REMOVE_ELEMENTS message.
+  -->
+  
+<!ELEMENT RemoveElements EMPTY>
+<!ATTLIST RemoveElements windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED
+                         startElement NMTOKEN #REQUIRED
+                         endElement NMTOKEN #REQUIRED>
+
+<!--
+  - Removes all the elements from an array. 
+  -->
+  
+<!ELEMENT ClearElements EMPTY>
+<!ATTLIST ClearElements windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client should jump to a different array.  This 
+  - message should be sent only by the server.
+  -->
+  
+<!ELEMENT JumpArray EMPTY>
+<!ATTLIST JumpArray windowId NMTOKEN #REQUIRED
+                    keyword NMTOKEN #REQUIRED>
+
+<!--
+  - Indicates that the client should jump to a given element within a
+  - given array.  This message should be sent only by the server.
+  -->
+  
+<!ELEMENT JumpArrayElement EMPTY>
+<!ATTLIST JumpArrayElement windowId NMTOKEN #REQUIRED
+                           keyword NMTOKEN #REQUIRED
+                           value CDATA #REQUIRED>
+
+
+<!--
+  - Indicates that the client should jump to a different array set.  This 
+  - message should be sent only by the server.
+  -->
+  
+<!ELEMENT JumpArraySet EMPTY>
+<!ATTLIST JumpArraySet windowId NMTOKEN #REQUIRED
+                       keyword NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client should jump to a given row within a
+  - given array set.  This message should be sent only by the server.
+  -->
+  
+<!ELEMENT JumpArraySetRow EMPTY>
+<!ATTLIST JumpArraySetRow windowId NMTOKEN #REQUIRED
+                          keyword NMTOKEN #REQUIRED
+                          rowNumber NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client should jump to a different field.  This 
+  - message should be sent only by the server.
+  -->
+  
+<!ELEMENT JumpField EMPTY>
+<!ATTLIST JumpField windowId NMTOKEN #REQUIRED
+                    keyword NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client should jump to a different screen.  This 
+  - message should be sent only by the server.
+  -->
+  
+<!ELEMENT JumpScreen EMPTY>
+<!ATTLIST JumpScreen windowId NMTOKEN #REQUIRED
+                     keyword NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that elements from an array are modified.  This message
+  - can be sent from either the client or the server.  If sent from the
+  - client, the message is treated as a request.  If the server rejects
+  - the request, the server should transmit a MODIFY_ELEMENTS message 
+  - indicating the new values for the array elements.
+  -->
+  
+<!ELEMENT ModifyElements EMPTY>
+<!ATTLIST ModifyElements windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED
+                         elements CDATA #REQUIRED
+                         startElement NMTOKEN #REQUIRED
+                         endElement NMTOKEN #IMPLIED>
+
+<!--
+  - Indicates that elements from an array are to be replaced entirely.  
+  -->
+  
+<!ELEMENT ReplaceElements EMPTY>
+<!ATTLIST ReplaceElements windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED
+                         elements CDATA #REQUIRED>
+
+
+<!--
+  - Indicates that the value for a field is modified.  This message
+  - can be sent from either the client or the server.  If sent from the
+  - client, the message is treated as a request.  If the server rejects
+  - the request, the server should transmit a MODIFY_FIELD message 
+  - indicating the new value of the field.
+  -->
+  
+<!ELEMENT ModifyField EMPTY>
+<!ATTLIST ModifyField windowId NMTOKEN #REQUIRED
+                      keyword NMTOKEN #REQUIRED
+                      value CDATA #REQUIRED>
+
+
+<!--
+  - Indicates that a different process for client modification.  This
+  - message can originate from either the client or the server.  If the
+  - message originates from the client, the server should respond by
+  - returning the XML description of the process and its GUI.  If this 
+  - message originates from the server, it should be accompanied by the
+  - XML description of both the process and its GUI.
+  -->
+  
+<!ELEMENT ModifyProcess EMPTY>
+<!ATTLIST ModifyProcess windowId NMTOKEN #REQUIRED>
+
+
+<!--
+  - Sets the options available for a single option menu  This message
+  - is sent by the server to initialize the options available in a
+  - single field.
+  -->
+  
+<!ELEMENT OptionsField EMPTY>
+<!ATTLIST OptionsField windowId NMTOKEN #REQUIRED
+                       keyword NMTOKEN #REQUIRED
+                       elements CDATA #REQUIRED
+                       startElement NMTOKEN #IMPLIED
+                       endElement NMTOKEN #IMPLIED>
+
+
+<!--
+  - Sets the options available for a set of option menu.  This message
+  - is sent by the server to initialize the options available in each
+  - element of an array.
+  -->
+  
+<!ELEMENT OptionsArray EMPTY>
+<!ATTLIST OptionsArray windowId NMTOKEN #REQUIRED
+                       keyword NMTOKEN #REQUIRED
+                       elements CDATA #REQUIRED
+                       startElement NMTOKEN #IMPLIED
+                       endElement NMTOKEN #IMPLIED>
+
+
+
+<!--
+  - Sets the sensitivity of a single array.  This is set by the server
+  - to indicate the sensitivty for an array (insensitive arrays appear
+  - as "grayed out").
+  -->
+  
+<!ELEMENT SensitiveArray EMPTY>
+<!ATTLIST SensitiveArray windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED
+                         value ( true | false ) "true">
+
+
+<!--
+  - Sets the sensitivity of an array set.  This is set by the server
+  - to indicate the sensitivty for an array set (insensitive array sets
+  - appear as "grayed out").
+  -->
+  
+<!ELEMENT SensitiveArraySet EMPTY>
+<!ATTLIST SensitiveArraySet windowId NMTOKEN #REQUIRED
+                            keyword NMTOKEN #REQUIRED
+                            value ( true | false ) "true">
+
+
+<!--
+  - Sets the sensitivity of a single field.  This is set by the server
+  - to indicate the sensitivty for a field (insensitive fields appear
+  - as "grayed out").
+  -->
+  
+<!ELEMENT SensitiveField EMPTY>
+<!ATTLIST SensitiveField windowId NMTOKEN #REQUIRED
+                         keyword NMTOKEN #REQUIRED
+                         value ( true | false ) "true">
+
+<!-- Sets the sensitivity of a TabPane Screen-->
+
+<!ELEMENT SensitiveScreen EMPTY>
+<!ATTLIST SensitiveScreen windowId NMTOKEN #REQUIRED
+			  keyword NMTOKEN #REQUIRED
+			  value ( true | false )> 
+
+
+<!-- Sets the background color for selection in an array. Three colors are defined
+   - HLIGHT1 color (green)
+   - HLIGHT2 color (red)
+   - HLIGHT3 color (purple)   
+-->
+
+<!ELEMENTS SetArrayBackgroundColor EMPTY>
+<!ATTLIST SetArrayBackgroundColor value CDATA #REQUIRED >
+
+<!-- Clear the selection background color -->
+
+<!ELEMENTS ClearSelection EMPTY>
+<!ATTLIST ClearSelection windowId NMTOKEN #REQUIRED
+			 keyword NMTOKEN #REQUIRED>
+
+ 
+<!-- Message for a new GUI layout. The GUI builder is builds the GUI -->
+<!-- on the client side when it receives this message.	-->
+
+<!ELEMENT SetGUI EMPTY>
+<!ATTLIST SetGUI windowId NMTOKEN #REQUIRED
+		 value   CDATA #REQUIRED
+		 keyword (true | false) "false">
+
+<!--
+  - Terminate the application.  This message can be instantiated from
+  - both the client and the server.  If instantiated from the client, this
+  - message is merely a request to terminate.  Ther server indicates that
+  - the client can (and must) terminate by passing back a TERMINATE_APP
+  - message.
+  -->
+  
+<!ELEMENT TerminateApp EMPTY>
+
+<!-- 
+  - Message for setting the GUI in an existing window. 
+  -->
+  
+<!ELEMENT ReplaceGUI EMPTY>
+<!ATTLIST ReplaceGUI windowId NMTOKEN #REQUIRED
+		keyword NMTOKEN #REQUIRED
+		value CDATA #REQUIRED>
+
+<!--
+ - Message for setting the top-level window title. 
+ -->
+ 	
+<!ELEMENT SetWindowTitle EMPTY>
+<!ATTLIST SetWindowTitle windowId NMTOKEN #REQUIRED
+		keyword NMTOKEN #REQUIRED
+		value CDATA #REQUIRED>
+		
+<!--
+ - Message for selecting a radio button in a radio button group.
+ -->
+ 	
+<!ELEMENT SelectRadioButton EMPTY>
+<!ATTLIST SelectRadioButton windowId NMTOKEN #REQUIRED
+		keyword NMTOKEN #REQUIRED>
+
+<!--
+ - Message for selecting a toggle button.
+ -->
+ 	
+<!ELEMENT SelectToggleButton EMPTY>
+<!ATTLIST SelectToggleButton windowId NMTOKEN #REQUIRED
+		keyword NMTOKEN #REQUIRED
+        value ( true | false ) "true">
+
+<!--
+ - Message for a beep action
+ -->
+ 		
+<!ELEMENT Beep EMPTY>
+
+<!--
+ - Message for jumping to an existing window 
+ --> 		
+ 
+ <!ELEMENT JumpWindow EMPTY>
+ <!ATTLIST JumpWindow windowId NMTOKEN #REQUIRED>
+ 
+<!-- 
+ - Message for setting the visibility of a component 
+ -->
+  
+<!ELEMENT Visible EMPTY>
+<!ATTLIST Visible windowId NMTOKEN #REQUIRED
+			keyword NMTOKEN #REQUIRED
+			value (true | false) "true">
+			
+<!-- 
+  - Message for showing help window. The only attribute specifies
+  - the location of the application help file.
+  -->
+  
+<!ELEMENT ShowHelp EMPTY>
+<!ATTLIST ShowHelp value CDATA #REQUIRED>
+
+<!-- Message for Client Version. -->
+<!ELEMENT ClientVersion EMPTY>
+
+
+ 

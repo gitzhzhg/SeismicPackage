@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="pairmerge" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PAIRMERGEPROCESS" title="PAIRMERGE Process" rows="24" columns="80">
+    <Label keyword="COMMENT_MERGEAPAIROFTRACES" alignment="center">Merge a Pair of Traces</Label>
+    <Label keyword="LABEL_MIN_VALUE_ONE" alignment="left">MIN_VALUE_ONE   =</Label>
+    <Field keyword="MIN_VALUE_ONE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NEGATIVEOFMAX_VALUE_ONEF" alignment="left">(negative of MAX_VALUE_ONE for edge detection)</Label>
+    <Label keyword="LABEL_MAX_VALUE_ONE" alignment="left">MAX_VALUE_ONE   =</Label>
+    <Field keyword="MAX_VALUE_ONE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMDATATRACEVALUEFOR" alignment="left">(maximum data trace value for edge detection)</Label>
+    <Label keyword="LABEL_MIN_VALUE_TWO" alignment="left">MIN_VALUE_TWO   =</Label>
+    <Field keyword="MIN_VALUE_TWO" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BETWEEN00AND10FOREDGEDET" alignment="left">(between 0.0 and 1.0 for edge detection)</Label>
+    <Label keyword="LABEL_MAX_VALUE_TWO" alignment="left">MAX_VALUE_TWO   =</Label>
+    <Field keyword="MAX_VALUE_TWO" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FOREDGEDETECTION" alignment="left">(1.0 for edge detection)</Label>
+    <Label keyword="LABEL_CUTOFF_VALUE_TWO" alignment="left">CUTOFF_VALUE_TWO=</Label>
+    <Field keyword="CUTOFF_VALUE_TWO" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SAMEASMIN_VALUE_TWOFORED" alignment="left">(same as MIN_VALUE_TWO for edge detection)</Label>
+    <Layout>
+     <Constraints component="COMMENT_MERGEAPAIROFTRACES" xPos="24" yPos="1" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MIN_VALUE_ONE" xPos="1" yPos="3" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_VALUE_ONE" xPos="18" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NEGATIVEOFMAX_VALUE_ONEF" xPos="28" yPos="3" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_VALUE_ONE" xPos="1" yPos="4" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_VALUE_ONE" xPos="18" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMDATATRACEVALUEFOR" xPos="28" yPos="4" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MIN_VALUE_TWO" xPos="1" yPos="6" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_VALUE_TWO" xPos="18" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BETWEEN00AND10FOREDGEDET" xPos="28" yPos="6" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_VALUE_TWO" xPos="1" yPos="7" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_VALUE_TWO" xPos="18" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FOREDGEDETECTION" xPos="28" yPos="7" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CUTOFF_VALUE_TWO" xPos="1" yPos="9" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CUTOFF_VALUE_TWO" xPos="18" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SAMEASMIN_VALUE_TWOFORED" xPos="28" yPos="9" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MIN_VALUE_ONE">
+      <Tip>Minimum sample value to keep from trace 1.</Tip>
+      <Text><![CDATA[<html>
+<b><center>pairmerge - MIN_VALUE_ONE<br> Minimum sample value to keep from trace 1.</center></b>
+<pre> Default = -1.0
+ Allowed = any value
+ 
+ The sample values from trace 1 will be linearly scaled so that input
+ values from MIN_VALUE_ONE to MAX_VALUE_ONE will be mapped to values from
+ -1.0 to 0.0 for possible placing on the output trace.
+ 
+ Any sample values from trace 1 which are less than MIN_VALUE_ONE will
+ be treated as if they are equal to MIN_VALUE_ONE.
+ 
+ For edge detection, set this value to the minimum original data value.</pre></html>]]></Text>
+     </Help>
+     <Help component="MAX_VALUE_ONE">
+      <Tip>Maximum sample value to keep from trace 1.</Tip>
+      <Text><![CDATA[<html>
+<b><center>pairmerge - MAX_VALUE_ONE<br> Maximum sample value to keep from trace 1.</center></b>
+<pre> Default = +1.0
+ Allowed = any value &gt; MIN_VALUE_ONE
+ 
+ The sample values from trace 1 will be linearly scaled so that input
+ values from MIN_VALUE_ONE to MAX_VALUE_ONE will be mapped to values from
+ -1.0 to 0.0 for possible placing on the output trace.
+ 
+ Any sample values from trace 1 which are greater than MAX_VALUE_ONE will
+ be treated as if they are equal to MAX_VALUE_ONE.
+ 
+ For edge detection, set this value to the maximum original data value.</pre></html>]]></Text>
+     </Help>
+     <Help component="MIN_VALUE_TWO">
+      <Tip>Minimum sample value to keep from trace 2.</Tip>
+      <Text><![CDATA[<html>
+<b><center>pairmerge - MIN_VALUE_TWO<br> Minimum sample value to keep from trace 2.</center></b>
+<pre> Default = -1.0
+ Allowed = any value
+ 
+ The sample values from trace 2 will be linearly scaled so that input
+ values from MIN_VALUE_TWO to MAX_VALUE_TWO will be mapped to values from
+ 0.0 to +1.0 for possible placing on the output trace.
+ 
+ Any sample values from trace 2 which are less than MIN_VALUE_TWO will
+ be treated as if they are equal to MIN_VALUE_TWO.
+ 
+ For edge detection, set this value to a number between 0.0 and 1.0 (for
+ example 0.2).</pre></html>]]></Text>
+     </Help>
+     <Help component="MAX_VALUE_TWO">
+      <Tip>Maximum sample value to keep from trace 2.</Tip>
+      <Text><![CDATA[<html>
+<b><center>pairmerge - MAX_VALUE_TWO<br> Maximum sample value to keep from trace 2.</center></b>
+<pre> Default = +1.0
+ Allowed = any value &gt; MIN_VALUE_TWO
+ 
+ The sample values from trace 2 will be linearly scaled so that input
+ values from MIN_VALUE_TWO to MAX_VALUE_TWO will be mapped to values from
+ 0.0 to +1.0 for possible placing on the output trace.
+ 
+ Any sample values from trace 2 which are greater than MAX_VALUE_TWO will
+ be treated as if they are equal to MAX_VALUE_TWO.
+ 
+ For edge detection, set this value to 1.0.</pre></html>]]></Text>
+     </Help>
+     <Help component="CUTOFF_VALUE_TWO">
+      <Tip>Cutoff sample value from trace 2.</Tip>
+      <Text><![CDATA[<html>
+<b><center>pairmerge - CUTOFF_VALUE_TWO<br> Cutoff sample value from trace 2.</center></b>
+<pre> Default = 0.0
+ Allowed = any value between MIN_VALUE_TWO and MAX_VALUE_TWO</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>pairmerge - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="pairmerge">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PAIRMERGE
+ Category   : miscellaneous
+ Written    : 2001-09-21   by: Tom Stoeckley
+ Revised    : 2001-09-21   by: Tom Stoeckley
+ Maturity   : production   2001-12-13
+ Purpose    : Merge a pair of traces into a single trace.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process merges a pair of traces into a single trace by setting each
+ sample of the output trace to a scaled version of the input sample of
+ one of the two input traces, using a specified criterion for choosing
+ which input trace sample to use.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Here is a summary of how the input trace amplitudes will map to the
+ output trace:
+ 
+    Trace 1 amplitudes:  MIN_VALUE_ONE  maps to  -1.0
+    Trace 1 amplitudes:  MAX_VALUE_ONE  maps to   0.0
+ 
+    Trace 2 amplitudes:  MIN_VALUE_TWO  maps to   0.0
+    Trace 2 amplitudes:  MAX_VALUE_ONE  maps to  +1.0
+ 
+    If the original trace 2 amplitude exceeds CUTOFF_VALUE_TWO,
+    the output trace will receive the mapped value from trace 2.
+    Otherwise the output trace will receive the mapped value from trace 1.
+ 
+ 
+ To use this process to merge EDA3D traces with the original traces to
+ produce an enhanced version of an EDA (edge detection attribute) 3D data
+ volume, let the first trace be the original data trace and the second
+ trace be the EDA trace, and then set the parameters as follows:
+ 
+          MIN_VALUE_ONE = minimum original data trace amplitude.
+          MAX_VALUE_ONE = maximum original data trace amplitude.
+ 
+          MIN_VALUE_TWO = approximately 0.2
+          MAX_VALUE_TWO = 1.0
+ 
+       CUTOFF_VALUE_TWO = the same value as MIN_VALUE_TWO.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+  2.
+  1. 2001-12-13  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

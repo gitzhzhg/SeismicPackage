@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="rcpout" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="RCPOUTPROCESS" title="RCPOUT Process" rows="26" columns="92">
+    <Label keyword="COMMENT_RCPDISKFILESAFTERJOBEXEC" alignment="center">RCP disk files after job executes.</Label>
+    <Label keyword="LABEL_OPT_FILE" alignment="left">OPT_FILE =</Label>
+    <Field keyword="OPT_FILE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WARNINGYOUMUSTHAVEARHOST" alignment="center">WARNING: You must have a .rhost file setup on the remote node</Label>
+    <Border keyword="BORDER1" title=" Input Files"/>
+    <Border keyword="BORDER2" title=" Output Files"/>
+    <Label keyword="LABEL_REMOTE_USER" alignment="left">REMOTE_USER =</Label>
+    <Field keyword="REMOTE_USER" type="string" maxLength="30" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REMOTE_NODE" alignment="left">REMOTE_NODE =</Label>
+    <Field keyword="REMOTE_NODE" type="string" maxLength="30" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_DIR_TO" alignment="left">PATH_DIR_TO =</Label>
+    <Field keyword="PATH_DIR_TO" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAMES_FROM">Select PATHNAME</Button>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS PATHNAMES_FROM">
+     <Array keyword="STATUS" type="string" maxLength="6  " columnName="STATUS" editable="no" sensitive="yes" columnSize="6"/>
+     <Array keyword="PATHNAMES_FROM" type="string" maxLength="140" columnName=" PATHNAMES_FROM" editable="yes" sensitive="yes" columnSize="36"/>
+    </ArraySet>
+    <Array keyword="PATHNAMES_TO" type="string" maxLength="140" columnName=" PATHNAMES_TO" editable="yes" sensitive="yes" columnSize="43"/>
+    <Button keyword="SELECT_PATH_LIST_FROM">Select PATH_LIST_FROM</Button>
+    <Button keyword="SELECT_PATH_LIST_TO">Select PATH_LIST_TO</Button>
+    <Field keyword="PATH_LIST_FROM" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_TO" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_FROM_INFO" type="string" maxLength="43" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_LIST_TO_INFO" type="string" maxLength="43" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_RCPDISKFILESAFTERJOBEXEC" xPos="33" yPos="0" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_FILE" xPos="2" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FILE" xPos="12" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_WARNINGYOUMUSTHAVEARHOST" xPos="43" yPos="2" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="2" yPos="4" xSize="47" ySize="22"/>
+     <Constraints component="BORDER2" xPos="53" yPos="4" xSize="45" ySize="22"/>
+     <Constraints component="LABEL_REMOTE_USER" xPos="54" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REMOTE_USER" xPos="67" yPos="5" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_REMOTE_NODE" xPos="54" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REMOTE_NODE" xPos="67" yPos="6" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_DIR_TO" xPos="54" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_DIR_TO" xPos="67" yPos="7" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAMES_FROM" xPos="3" yPos="8" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="3" yPos="9" xSize="45" ySize="12" xStretch="true" yStretch="true"/>
+     <Constraints component="PATHNAMES_TO" xPos="54" yPos="9" xSize="43" ySize="12" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST_FROM" xPos="3" yPos="22" xSize="21" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST_TO" xPos="54" yPos="22" xSize="19" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="PATH_LIST_FROM" xPos="3" yPos="23" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_TO" xPos="54" yPos="23" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_FROM_INFO" xPos="3" yPos="24" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_TO_INFO" xPos="54" yPos="24" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_FILE">
+      <Tip>Source of input files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - OPT_FILE<br> Source of input files.</center></b>
+<pre> Default = PATHNAMES
+ Allowed = PATHNAMES, PATH_LIST
+ If OPT_FILE = PATHNAMES, file(s) listed in PATHNAMES array.
+ If OPT_FILE = PATH_LIST, file(s) listed in file indicated by PATH_LIST.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffixes, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REMOTE_USER">
+      <Tip>Remote logon id that will be used for the rcp.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - REMOTE_USER<br>Remote logon id that will be used for the rcp.</center></b>
+<pre> Default = Current user id
+ Allowed = char*40
+ 
+ Remote logon id that will be used for the rcp command.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REMOTE_NODE">
+      <Tip>Remote machine name that will be used for the rcp.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - REMOTE_NODE<br>Remote machine name that will be used for the rcp.</center></b>
+<pre> Default = hotce03.ho.conoco.com
+ Allowed = char*40
+ 
+ Remote machine name that will be used for the rcp command.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_DIR_TO">
+      <Tip>The default directory name appended to remote pathnames.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATH_DIR_TO<br>The default directory name appended to remote pathnames.</center></b>
+<pre> Default = /t/REMOTE_USER
+ Allowed = char*160
+ 
+ The default directory name appended to remote pathnames.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAMES_FROM">
+      <Tip>Choose PATHNAME_FROM using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - SELECT_PATHNAMES_FROM<br> Choose PATHNAME_FROM using a file selection dialog box.</center></b>
+<pre> Choose PATHNAME_FROM using a file selection dialog box.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>File status.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - STATUS<br> File status.</center></b>
+<pre> R   -- File found and readable.
+ RE  -- File not found or not readable.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES_FROM">
+      <Tip>Pathname(s) for the file(s) to be copied using rcp.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATHNAMES_FROM<br> Pathname(s) for the file(s) to be copied using rcp.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of file(s) to be copied to remote location via rcp.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES_TO">
+      <Tip>Pathname(s) for the remote file(s) to be created.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATHNAMES_TO<br> Pathname(s) for the remote file(s) to be created.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of remote file(s) to be created via rcp.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST_FROM">
+      <Tip>This button accesses the Select PATH_LIST_FROM dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - SELECT_PATH_LIST_FROM<br> This button accesses the Select PATH_LIST_FROM dialog box.</center></b>
+<pre> Choose a PATH_LIST_FROM via a file selection dialog.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST_TO">
+      <Tip>This button accesses the Select PATH_LIST_TO dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - SELECT_PATH_LIST_TO<br> This button accesses the Select PATH_LIST_TO dialog box.</center></b>
+<pre> Choose a PATH_LIST_TO via a file selection dialog.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_FROM">
+      <Tip>Pathname of file containing pathnames of files to be copied.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATH_LIST_FROM<br> Pathname of file containing pathnames of files to be copied.</center></b>
+<pre> Default =  -
+ Allowed = char
+ Pathname of file containing list of pathnames of files to be copied.  This
+ file must be an ascii file with one pathname on each line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_TO">
+      <Tip>Pathname of file containing pathnames of remote files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATH_LIST_TO<br> Pathname of file containing pathnames of remote files.</center></b>
+<pre> Default =  -
+ Allowed = char
+ Pathname of file containing list of pathnames of remote files to be created.
+ This file must be an ascii file with one pathname on each line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_FROM_INFO">
+      <Tip>File status for PATH_LIST_FROM.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATH_LIST_FROM_INFO<br> File status for PATH_LIST_FROM.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_TO_INFO">
+      <Tip>File status for PATH_LIST_TO.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PATH_LIST_TO_INFO<br> File status for PATH_LIST_TO.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rcpout - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="rcpout">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : rcpout
+ Category   : miscellaneous
+ Written    : 2002-09-10   by: Donna K. Vunderink
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Transfer disk files to a remote node via rcp.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ RCPOUT uses rcp to transfer disk files to a remote node.  The disk files may
+ be specified in one of two ways.
+ 
+     1. Enter the individual pathnames of the files to transfer in the
+        PATHNAMES_FROM array parameter.
+ 
+     2. Specify, in PATH_LIST_FROM, the pathname of a listfile containing
+        pathnames of files to transfer.  This file must be an ascii file with
+        one pathname on each line.  (Listfiles can be written and edited with
+        the Build Listfile utility in CFE.)
+ 
+ 
+   **** NOTE **** NOTE **** NOTE **** NOTE **** NOTE **** NOTE **** NOTE ****
+   *                                                                        *
+   *  Before submitting any CPS batch job that contains the RCPOUT process, *
+   *  the user MUST setup a .rhost file in the REMOTE_USER account on the   *
+   *  REMOTE_NODE.  The .rhost MUST allow remote command execution by rsh   *
+   *  from any node assigned to the R batch queue.                          *
+   *                                                                        *
+   **** NOTE **** NOTE **** NOTE **** NOTE **** NOTE **** NOTE **** NOTE ****
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ PATHNAME COMPLETION
+ -------------------
+ 
+ Any "from" filename that is not a complete pathname is pre-affixed with the
+ JOB_DATA parameter PATHNAME_TRCIO.  Likewise, any "to" that is not a complete
+ pathname is pre-affixed with the RCPOUT parameter PATH_DIR_TO.
+ 
+ 
+ FILE TRANSFER
+ -------------
+ 
+ RCPOUT will use the prcp program to transfer a disk file from the local node
+ to a remote node.  The format of the pathname on the remote node is:
+ 
+                       REMOTE_USER@REMOTE_NODE:filename
+ 
+ where
+       REMOTE_USER = userid on the remote node
+       REMOTE_NODE = name of the remote machine
+       filename    = full pathname for the file on the remote node
+ 
+ The RCPOUT process submits a separate batch job to perform the file transfer.
+ This batch job runs in the R batch queue.  Before submitting any CPS batch
+ job that contains the RCPOUT process, the user must setup a .rhost file in
+ the REMOTE_USER account on the REMOTE_NODE.  The .rhost must allow remote
+ command execution by rsh from any node assigned to the R batch queue.
+ 
+ The separate batch job for the file transfer will be placed in the same
+ directory as the originating job and called
+ 
+                            rcpoutREQID_IPN.job
+ 
+ where
+      REQID = the PBS request id of the originating job
+      IPN   = the IPN number of the RCPOUT process in the originating job
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 3.  2006-12-04  D. Glover  Added NULLIFY statements for Intel compiler.
+ 2.  2006-06-06  Stoeckley  Add call to pc_register_array_names for SeisSpace.
+ 1.  2002-09-23  Vunderink  Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

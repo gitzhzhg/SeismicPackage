@@ -1,0 +1,40 @@
+##--------------------- makefile.i686_intel91_lam ------------------------##
+##--------------------- makefile.i686_intel91_lam ------------------------##
+##--------------------- makefile.i686_intel91_lam ------------------------##
+
+CC           := gcc -m32 -c -g -O0 -fPIC -Wall -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DLINUXI -DPARALLEL
+CXX          := g++ -m32 -c -g -O0 -fPIC -Wall -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DLINUXI -DPARALLEL
+F90          := ifort -c -g -O2 -fPIC -heap-arrays 10000 -unroll -threads
+MOD_PREFIX   := -I
+MOD_SUFFIX   := mod
+
+MPI_INCS     := $(LAM_DIR)/include
+JAVA_INCS    := $(JAVA_HOME)/include $(JAVA_HOME)/include/linux
+GUI_INCS     := 
+#GUI_INCS     := /usr/include /usr/include/Xm /usr/include/X11 /usr/include/X11/SM /usr/include/X11/ICE \
+#                /usr/include/X11/Xt /usr/include/X11/Xm /usr/include/X11/Xmu /usr/include/X11/Xext
+
+LD_SHARED    := ifort -nofor-main -cxxlib -shared
+LD_STATIC    := ifort -nofor-main -cxxlib
+ARCHIVE      := ar rc
+
+JAVA_LIBS    := -L$(JAVA_HOME)/jre/lib/i386 -lverify -ljava -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+FFTW_LIBS    := -L$(FFTW_DIR)/lib -lfftw -lrfftw
+#FFTW_LIBS    := $(FFTW_DIR)/lib/libfftw.a $(FFTW_DIR)/lib/librfftw.a
+
+MPI_LIBS     := -L$(LAM_DIR)/lib -lmpi -llam -llamf77mpi
+#MPI_LIBS     := -L$(LAM_DIR)/lib -llammpi++ -lmpi -llam -ldl -lpthread      # in GeoPRO General.mk
+
+#GUI_LIBS     := -L/usr/lib64 -lXm -lXmu -lXp -lXext -lXt -lSM -lICE -lX11
+GUI_LIBS     :=
+
+F90_LIBS     :=
+#CXX_LIBS     := -lstdc++ -lm -lgcc_s -lc -lgcc_s
+CXX_LIBS     :=
+MATH_LIBS    := -lutil -lc -lm -lpthread
+OTHER_LIBS   := -L/usr/lib/ -lc -lrt -lpthread
+OTHER_LIBS   += -L/usr/lib/gcc-lib/i386-redhat-linux/3.2.3/ -lg2c
+
+##------------------------------ end -------------------------------------##
+##------------------------------ end -------------------------------------##
+##------------------------------ end -------------------------------------##

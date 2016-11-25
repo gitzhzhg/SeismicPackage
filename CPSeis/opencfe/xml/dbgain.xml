@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dbgain" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DBGAINPROCESS" title="DBGAIN Process" rows="24" columns="80">
+    <Label keyword="COMMENT_APPLYANEXPONENTIALDBSGAI" alignment="center">Apply an exponential (dB/s) gain to trace data.</Label>
+    <Label keyword="LABEL_GAIN_RATE" alignment="left">GAIN_RATE=</Label>
+    <Field keyword="GAIN_RATE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REF_TIM" alignment="left">REF_TIM=</Label>
+    <Field keyword="REF_TIM" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_APPLYANEXPONENTIALDBSGAI" xPos="1" yPos="1" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_GAIN_RATE" xPos="1" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GAIN_RATE" xPos="11" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REF_TIM" xPos="27" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REF_TIM" xPos="35" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="11" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="27" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="35" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="GAIN_RATE">
+      <Tip>Exponential gain parameter, in dB/s.</Tip>
+      <Text><![CDATA[<html>
+<b><center>dbgain - GAIN_RATE<br> Exponential gain parameter, in dB/s.</center></b>
+<pre> Default = 6.0
+ Allowed = real
+ Exponential gain will be applied to the trace, where GAIN_RATE is the rate of
+ change of trace gain, in dB/s.</pre></html>]]></Text>
+     </Help>
+     <Help component="REF_TIM">
+      <Tip>Whether the reference time is zero time or mute time.</Tip>
+      <Text><![CDATA[<html>
+<b><center>dbgain - REF_TIM<br> Whether the reference time is zero time or mute time.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE  (Reference time is mute time.)
+ Allowed = ZERO  (Reference time is zero time.)
+ REF_TIM has two functions:  1. The reference time for the gain calculation
+ and 2. The reference time for the top of the window for applying the gain.
+ 
+ The exponential gain is applied starting at REF_TIM + TIM_ADD.  Note that if
+ OPT_TIM = ZERO, REF_TIM is zero time which will not be the top of the trace
+ if TSTRT /= zero.</pre></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Exponential gain starts at REF_TIM + TIM_ADD.</Tip>
+      <Text><![CDATA[<html>
+<b><center>dbgain - TIM_ADD<br> Exponential gain starts at REF_TIM + TIM_ADD.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the time window over which exponential gain is applied.</Tip>
+      <Text><![CDATA[<html>
+<b><center>dbgain - WIN_LEN<br> Length of the time window over which exponential gain is applied.</center></b>
+<pre>Default = len tr
+Allowed = real &gt; 0.0
+Length of the time window, in seconds, over which exponential gain is applied.
+A constant gain is applied from the bottom of the window to the end of the
+ trace.</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>dbgain - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dbgain">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DBGAIN
+ Category   : amplitude_mod
+ Written    : 1997-10-27   by: Donna Vunderink
+ Revised    : 2000-12-07   by: Bob Baumel
+ Maturity   : production   2001-06-11
+ Purpose    : Apply an exponential (dB/s) gain to trace data.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ DBGAIN applies an exponential gain to traces.  The actual gain applied is
+ given by:
+                  gain(t) = 10.0 ** (GAIN_RATE * t / 20.0),
+ 
+ where the exponential gain parameter GAIN_RATE is expressed in dB/s and the
+ time is referenced either to 0.0 (REF_TIM = ZERO) or the mute time
+ (REF_TIM = MUTE).
+ 
+ A positive value of GAIN_RATE results in an increasing gain as a function of
+ time while a negative value of GAIN_RATE results in a decreasing gain as a
+ function of time.
+ 
+ The gain is applied to the trace over a window beginning at a time
+ REF_TIM + TIM_ADD.  The length of the time window is WIN_LEN.  Unity gain is
+ applied above the window and a constant gain is applied from the bottom of
+ the window to the end of the trace.
+ 
+ A plot of an increasing gain function follows.
+ 
+  gain
+      |                xxxxxxxxxxxxx
+      |               x
+      |              x
+      |             x
+      |            x
+      |           x
+      |          x
+      |         x
+      |_xxxxxxxx____________________ time
+        |<---->|<----->|
+        |   |      |
+        |   |     WIN_LEN
+        | TIM_ADD
+        |
+      REF_TIM
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ The definition of decibel measure, referenced to amplitude is:
+      difference (in dB)  =  20.0 * LOG10 (amplitude/reference amplitude);
+ thus, an amplitude ratio of 2.0 corresponds to 6.0 dB (or 6.020599...).
+ 
+ Typical values for GAIN_RATE in seismic processing applications range from
+ 2.0 to 6.0 dB/s.
+ 
+ Handling of TOP_MUTE and BOTTOM_MUTE headers:
+ When REF_TIM = MUTE, the gain window is defined relative to the TOP_MUTE
+ header word. For either REF_TIM = MUTE or REF_TIM = ZERO, the gain window
+ will not extend below the BOTTOM_MUTE time; i.e., applied gain is always
+ constant below the BOTTOM_MUTE time.
+ 
+ Relationship to TPOW process:
+ When REF_TIM = ZERO, the effect of DBGAIN is nearly identical to that of
+ TPOW if, in the TPOW process, one chooses PWR = 0.0 and BETA is selected as:
+               BETA  =  GAIN_RATE * LN(10.0) / 20.0
+ where "LN" denotes natural (base e) logarithm. The only differences are in
+ handling of mute header words (which TPOW ignores), and an overall scale
+ factor when the top of the gain window is not at time zero.
+ 
+ Reversibility:
+ The effect of DBGAIN can be undone by running another DBGAIN with reversed
+ sign of GAIN_RATE, assuming that nothing has been done in the meantime to
+ alter the values of the mute header words.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                       REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 8.  2001-06-11  Baumel       Change wrapped_up flag to skip_wrapup.
+                              PRODUCTION.
+ 7.  2000-07-25  Baumel       Add gui_def to doc (no changes in code).
+ 6.  2000-03-21  Baumel       Fix initialization of WIN_LEN parameter.
+ 5.  2000-03-20  Baumel       Clean up code, increase efficiency, add
+                              option field for CFE.
+ 4.  1999-10-27  Sharp        Removed calls to pc_get and pc_put from main
+                              processing routine
+ 3.  1999-10-11  Sharp        Convert to new system using F90
+ 2.  1998-11-13  Vunderink    Begin using the f90 compiler.
+ 1.  1997-10-27  Vunderink    Original version.
+ 
+------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

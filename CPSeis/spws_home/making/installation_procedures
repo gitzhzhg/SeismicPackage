@@ -1,0 +1,63 @@
+         INSTALLATION_PROCEDURES                        2004-06-01
+------------------------------------------------------------------------------
+This is a working document.
+The contents of this document need to be decided by all of us.
+This is only my attempt to get things started so I will know how to do things.
+------------------------------------------------------------------------------
+Scripts to install on local architecture:
+
+     gmake install   (runs install_spws_program)
+
+     install_spws_program             <program>
+     install_spws_script              <script>
+     install_spws_links
+
+Scripts to install on all architectures (these also tag the RCS files):
+
+     install_spws_program_everywhere  <program>  (runs gmake install everywhere)
+     install_spws_script_everywhere   <script>
+
+File containing node and platform for each architecture:
+
+     installation_locations
+------------------------------------------------------------------------------
+To install an ~spws program everywhere:
+
+     Run the following script on a node which supports RCS:
+
+           install_spws_program_everywhere <program>
+
+     where <program> is the name of the program executable.
+
+     The above script performs the following tasks:
+
+      (a) Calls tag_rcs_files_everywhere to tag all the latest
+          versions of source code in all source code directories
+          with the same date used by install_spws_program_everywhere
+          to identify the installed programs.
+
+      (b) Runs "gmake install" (which runs install_spws_program)
+          on an appropriate node for each desired architecture.
+
+     WARNING: All RCS directories must contain the latest versions
+     of source files before running this script.
+------------------------------------------------------------------------------
+To install an ~spws script everywhere:
+
+     Run the following script on a node which supports RCS:
+
+           install_spws_script_everywhere <script>
+
+     where <script> is the name of the script to install.
+
+     The above script performs the following tasks:
+
+      (a) Tags the latest version of the script source code with the same
+          date used by install_spws_script to identify the installed script.
+ 
+      (b) Runs install_spws_script on an appropriate node for each desired
+          architecture.
+ 
+     WARNING: The relevant RCS directory must contain the latest version
+     of the script being installed.
+------------------------------------------------------------------------------

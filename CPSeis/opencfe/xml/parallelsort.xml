@@ -1,0 +1,534 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="parallelsort" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PARALLELSORTPROCESS" title="PARALLELSORT Process" rows="24" columns="80">
+    <Label keyword="COMMENT_PERFORMAPARALLELTRACESOR" alignment="center">Perform a parallel trace sort across nodes</Label>
+    <Label keyword="COMMENT_GOTOTHETSORTTABTOENTERPA" alignment="center">Go to the TSORT tab to enter parameters</Label>
+    <Layout>
+     <Constraints component="COMMENT_PERFORMAPARALLELTRACESOR" xPos="18" yPos="2" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_GOTOTHETSORTTABTOENTERPA" xPos="19" yPos="4" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="TSORTPROCESS" title="TSORT Process" rows="24" columns="80">
+    <Label keyword="COMMENT_SORTTRACESBYHEADERWORDVA" alignment="center">Sort traces by header word values.</Label>
+    <Label keyword="LABEL_MNTOD" alignment="left">MNTOD=</Label>
+    <Field keyword="MNTOD" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ATOD" alignment="left">ATOD=</Label>
+    <Field keyword="ATOD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_PRINT" alignment="left">OPT_PRINT=</Label>
+    <Field keyword="OPT_PRINT" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SORT" alignment="left">OPT_SORT=</Label>
+    <Field keyword="OPT_SORT" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PRI" alignment="left">HDR_PRI =</Label>
+    <Field keyword="HDR_PRI" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_INIT" alignment="left">PRI_INIT =</Label>
+    <Field keyword="PRI_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_INC" alignment="left">PRI_INC =</Label>
+    <Field keyword="PRI_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEC" alignment="left">HDR_SEC =</Label>
+    <Field keyword="HDR_SEC" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEC_INIT" alignment="left">SEC_INIT =</Label>
+    <Field keyword="SEC_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEC_INC" alignment="left">SEC_INC =</Label>
+    <Field keyword="SEC_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TERT" alignment="left">HDR_TERT=</Label>
+    <Field keyword="HDR_TERT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERT_INIT" alignment="left">TERT_INIT=</Label>
+    <Field keyword="TERT_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERT_INC" alignment="left">TERT_INC=</Label>
+    <Field keyword="TERT_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_HEADERLOCATIONSFORSTORIN" alignment="center">Header Locations for Storing Bin Values From Sort</Label>
+    <Label keyword="LABEL_HDR_PRI_BIN" alignment="left">HDR_PRI_BIN =</Label>
+    <Field keyword="HDR_PRI_BIN" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEC_BIN" alignment="left">HDR_SEC_BIN =</Label>
+    <Field keyword="HDR_SEC_BIN" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TERT_BIN" alignment="left">HDR_TERT_BIN =</Label>
+    <Field keyword="HDR_TERT_BIN" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OUTPUT_CHOICE" alignment="left">OUTPUT_CHOICE=</Label>
+    <Field keyword="OUTPUT_CHOICE" type="comboBox" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_FIRST" alignment="left">PRI_FIRST=</Label>
+    <Field keyword="PRI_FIRST" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_LAST" alignment="left">PRI_LAST=</Label>
+    <Field keyword="PRI_LAST" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ABORT_CHOICE" alignment="left">ABORT_CHOICE=</Label>
+    <Field keyword="ABORT_CHOICE" type="comboBox" maxLength="41" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SORTTRACESBYHEADERWORDVA" xPos="19" yPos="0" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MNTOD" xPos="5" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MNTOD" xPos="14" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ATOD" xPos="30" yPos="2" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ATOD" xPos="35" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_PRINT" xPos="45" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_PRINT" xPos="55" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SORT" xPos="5" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SORT" xPos="14" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_PRI" xPos="5" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PRI" xPos="14" yPos="6" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_INIT" xPos="23" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_INIT" xPos="33" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_INC" xPos="47" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_INC" xPos="56" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEC" xPos="5" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEC" xPos="14" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEC_INIT" xPos="23" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEC_INIT" xPos="33" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEC_INC" xPos="47" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEC_INC" xPos="56" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TERT" xPos="5" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TERT" xPos="14" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERT_INIT" xPos="23" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERT_INIT" xPos="33" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERT_INC" xPos="47" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERT_INC" xPos="56" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="10" xSize="77" ySize="5"/>
+     <Constraints component="COMMENT_HEADERLOCATIONSFORSTORIN" xPos="3" yPos="11" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_PRI_BIN" xPos="3" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PRI_BIN" xPos="17" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEC_BIN" xPos="28" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEC_BIN" xPos="42" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TERT_BIN" xPos="53" yPos="13" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TERT_BIN" xPos="68" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OUTPUT_CHOICE" xPos="1" yPos="17" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUTPUT_CHOICE" xPos="15" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PRI_FIRST" xPos="32" yPos="17" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_FIRST" xPos="42" yPos="17" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_LAST" xPos="56" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_LAST" xPos="65" yPos="17" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ABORT_CHOICE" xPos="11" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ABORT_CHOICE" xPos="24" yPos="19" xSize="41" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MNTOD">
+      <Tip>Maximum Number of Traces On Disk at once.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - MNTOD<br> Maximum Number of Traces On Disk at once.</center></b>
+<pre> Default = 10000
+ Allowed = int &gt; 0
+ 
+ MNTOD is the maximum number of traces to store on disk at once for the
+ sorting operation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ATOD">
+      <Tip>Whether to store All input Traces On Disk at once?.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - ATOD<br> Whether to store All input Traces On Disk at once?.</center></b>
+<pre> Default = N
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_PRINT">
+      <Tip>Option whether to print detailed or summary sort statistics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - OPT_PRINT<br> Option whether to print detailed or summary sort statistics.</center></b>
+<pre> Default = DETAILED
+ Allowed = DETAILED   (Print detailed sort statistics.)
+ Allowed = SUMMARY   (Print summary sort statistics.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SORT">
+      <Tip>Option for selecting common sorts or a custom sort.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - OPT_SORT<br> Option for selecting common sorts or a custom sort.</center></b>
+<pre> Default = CUSTOM
+ Allowed = COMMON_MIDPOINT ( 8, 7, 6)
+ Allowed = COMMON_SOURCE   ( 9,10, 1)
+ Allowed = COMMON_RECEIVER (10, 9, 1)
+ Allowed = COMMON_OFFSET   ( 6, 8, 7)
+ Allowed = CUSTOM</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PRI">
+      <Tip>Header word designating primary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HDR_PRI<br> Header word designating primary sort bins.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ 
+ HDR_PRI is the least rapidly changing sort header for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_INIT">
+      <Tip>Value for the center of ANY primary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PRI_INIT<br> Value for the center of ANY primary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_INC">
+      <Tip>Increment for primary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PRI_INC<br> Increment for primary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ PRI_INC is the increment between, and the width of, primary sort bins.
+ If PRI_INC &lt; 0, traces will be output in descending order of HDR_PRI.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEC">
+      <Tip>Header word designating secondary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HDR_SEC<br> Header word designating secondary sort bins.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH
+ 
+ HDR_SEC has intermediate rapidity of change for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEC_INIT">
+      <Tip>Value for the center of ANY secondary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - SEC_INIT<br> Value for the center of ANY secondary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEC_INC">
+      <Tip>Increment for secondary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - SEC_INC<br> Increment for secondary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ SEC_INC is the increment between, and the width of, secondary sort bins.
+ If SEC_INC &lt; 0, traces will be output in descending order of HDR_SEC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TERT">
+      <Tip>Header word designating tertiary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HDR_TERT<br> Header word designating tertiary sort bins.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH
+ 
+ HDR_TERT is the most rapidly changing sort header for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERT_INIT">
+      <Tip>Value for the center of ANY tertiary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - TERT_INIT<br> Value for the center of ANY tertiary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERT_INC">
+      <Tip>Increment for tertiary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - TERT_INC<br> Increment for tertiary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ TERT_INC is the increment between, and the width of, tertiary sort bins.
+ If TERT_INC &lt; 0, traces will be output in descending order of HDR_TERT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PRI_BIN">
+      <Tip>Header word in which to store value of primary sort bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HDR_PRI_BIN<br> Header word in which to store value of primary sort bin center.</center></b>
+<pre> Default = 0
+ Allowed = 0 or any valid header word number
+ 
+ If HDR_PRI_BIN &gt; 1, then store the value of the primary bin center in
+ header location HDR_PRI_BIN of the output trace header.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEC_BIN">
+      <Tip>Header word in which to store value of secondary sort bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HDR_SEC_BIN<br> Header word in which to store value of secondary sort bin center.</center></b>
+<pre> Default = 0
+ Allowed = 0 or any valid header word number
+ 
+ If HDR_SEC_BIN &gt; 1, then store the value of the secondary bin center in
+ header location HDR_SEC_BIN of the output trace header.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TERT_BIN">
+      <Tip>Header word in which to store value of tertiary sort bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HDR_TERT_BIN<br> Header word in which to store value of tertiary sort bin center.</center></b>
+<pre> Default = 0
+ Allowed = 0 or any valid header word number
+ 
+ If HDR_TERT_BIN &gt; 1, then store the value of the tertiary bin center in
+ header location HDR_TERT_BIN of the output trace header.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_CHOICE">
+      <Tip>Whether to output the traces to all nodes or a single node.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - OUTPUT_CHOICE<br> Whether to output the traces to all nodes or a single node.</center></b>
+<pre> Default = all nodes
+ Allowed = all nodes
+ Allowed = single node
+ 
+ All output traces are normally distributed across all nodes based on the
+ PRI_FIRST and PRI_LAST parameters, so that the first traces will be moved
+ to the first node, and the last traces will be moved to the last node, in
+ a parallel job.
+ 
+ However, if the SINGLE NODE choice is made, all of the output traces will
+ be placed onto the boss node (node number 0), and the PRI_FIRST and PRI_LAST
+ parameters will be ignored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_FIRST">
+      <Tip>Value for the center of the FIRST primary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PRI_FIRST<br> Value for the center of the FIRST primary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Traces will be sorted so that the first traces will be moved to the first
+ node, and the last traces will be moved to the last node, in a parallel job.
+ To be able to do this, the parameters PRI_FIRST and PRI_LAST must be specified
+ so that the traces will be dispersed relatively evenly to all of the nodes.
+ 
+ If the parameters PRI_FIRST and PRI_LAST are not accurate, then the first
+ and last nodes might receive an excess or deficiency of traces compared with
+ the middle nodes, which will result in a less efficient distribution of
+ traces.  However, the traces will still be sorted properly.
+ 
+ Note that the parameter PRI_FIRST must be the value for the center of the
+ FIRST primary sort bin, whereas the parameter PRI_INIT can be the value for
+ the center of ANY primary sort bin.  If PRI_INIT corresponds to the first
+ primary sort bin, then parameters PRI_FIRST and PRI_INIT can be the same.
+ 
+ The PRI_FIRST and PRI_LAST parameters are ignored if the SINGLE NODE option
+ is chosen for the OUTPUT_CHOICE parameter.  In this case, all of the output
+ traces will be put on the first (boss) node.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_LAST">
+      <Tip>Value for the center of the LAST primary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PRI_LAST<br> Value for the center of the LAST primary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Traces will be sorted so that the first traces will be moved to the first
+ node, and the last traces will be moved to the last node, in a parallel job.
+ To be able to do this, the parameters PRI_FIRST and PRI_LAST must be specified
+ so that the traces will be dispersed relatively evenly to all of the nodes.
+ 
+ If the parameters PRI_FIRST and PRI_LAST are not accurate, then the first
+ and last nodes might receive an excess or deficiency of traces compared with
+ the middle nodes, which will result in a less efficient distribution of
+ traces.  However, the traces will still be sorted properly.
+ 
+ The PRI_FIRST and PRI_LAST parameters are ignored if the SINGLE NODE option
+ is chosen for the OUTPUT_CHOICE parameter.  In this case, all of the output
+ traces will be put on the first (boss) node.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ABORT_CHOICE">
+      <Tip>Conditions under which the job should abort.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - ABORT_CHOICE<br> Conditions under which the job should abort.</center></b>
+<pre> Default = abort if MPI initialization error or only one node.
+ Allowed = abort if MPI initialization error or only one node.
+ Allowed = proceed if MPI initialization error or only one node.
+ 
+ If there is an MPI initialization error, or if only one node is being used
+ in the job, this process will work exactly like the TSORT process if you
+ choose to proceed.  Otherwise, if there is an MPI initialization error, or
+ if only one node is being used in the job, a fatal error will be generated.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<b><center>parallelsort - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="parallelsort">
+   <Text><![CDATA[<html><head><base href=file:///home/tstoeckley/development/svn/trunk/cpseis/opencfe/xml/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R O C E S S
+ 
+ Name       : PARALLELSORT
+ Category   : sorts
+ Written    : 2010-02-22   by: Tom Stoeckley
+ Revised    : 2010-02-22   by: Tom Stoeckley
+ Maturity   : beta
+ Purpose    : Perform a parallel sort of large trace datasets.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ PARALLELSORT performs a parallel sort of large trace datasets across nodes
+ in a parallel job.  This process first sorts the input trace streams on
+ individual nodes, then merges the output sorted trace streams from the
+ various nodes, putting the first traces on the first node and the last
+ traces on the last node.  Alternatively, there is an option to put all of
+ the sorted traces onto a single node.
+ 
+ PARALLELSORT calls the TSORT process internally to sort the input trace streams
+ on each node, and then uses the TMERGE primitive to merge the traces coming
+ out of TSORT.  The TMERGE primitive uses MPI to move the traces to the correct
+ node.
+ 
+ If the job contains only a single node, PARALLELSORT works just like TSORT.
+ 
+ See the TSORT process for further information about the sorting procedure.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           ADVICE FOR USERS
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          REVISION HISTORY
+ 
+      Date       Author     Description
+      ----       ------     -----------
+   1. 2010-02-22 Stoeckley  First version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

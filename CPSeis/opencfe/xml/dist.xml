@@ -1,0 +1,601 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dist" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DISTPROCESS" title="DIST Process" rows="30" columns="80">
+    <Label keyword="COMMENT_PROBABILITYDISTRIBUTIONF" alignment="center">Probability DISTribution function of trace or header values.</Label>
+    <Border keyword="BORDER1" title=" General"/>
+    <Label keyword="LABEL_OPT_IN" alignment="left">OPT_IN=</Label>
+    <Field keyword="OPT_IN" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_IN" alignment="left">HDR_IN=</Label>
+    <Field keyword="HDR_IN" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TYPE_OUTPUT" alignment="left">TYPE_OUTPUT=</Label>
+    <Field keyword="TYPE_OUTPUT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ABS" alignment="left">ABS=</Label>
+    <Field keyword="ABS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IGNORE_ZEROS" alignment="left">IGNORE_ZEROS=</Label>
+    <Field keyword="IGNORE_ZEROS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2" title=" Binning Scheme"/>
+    <Label keyword="LABEL_OPT_BINS" alignment="left">OPT_BINS=</Label>
+    <Field keyword="OPT_BINS" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VAL_MIN" alignment="left">VAL_MIN=</Label>
+    <Field keyword="VAL_MIN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VAL_MAX" alignment="left">VAL_MAX=</Label>
+    <Field keyword="VAL_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_BINS" alignment="left">NUM_BINS=</Label>
+    <Field keyword="NUM_BINS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_SIZE" alignment="left">(Bin Size =</Label>
+    <Field keyword="BIN_SIZE" type="float" maxLength="12" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_" alignment="center">)</Label>
+    <Border keyword="BORDER3" title=" Windowing Scheme"/>
+    <Label keyword="LABEL_OPT_WIN" alignment="left">OPT_WIN=</Label>
+    <Field keyword="OPT_WIN" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FIXEDWINDOW" alignment="center">Fixed Window</Label>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MUTEWINDOW" alignment="center">Mute Window</Label>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER4" title=" Optional TRCIO Graph"/>
+    <Label keyword="LABEL_PATH_TROT" alignment="left">PATH_TROT=</Label>
+    <Field keyword="PATH_TROT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFDIAGRAMBARS" alignment="center">Number of diagram bars</Label>
+    <Label keyword="LABEL_NUM_TR" alignment="left">NUM_TR=</Label>
+    <Field keyword="NUM_TR" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center"></Label>
+    <Label keyword="COMMENT_LENGTHOFDIAGRAMBARS" alignment="center">Length of diagram bars</Label>
+    <Label keyword="LABEL_NSPT" alignment="left">NSPT  =</Label>
+    <Field keyword="NSPT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SAMPLESPERTRACE" alignment="center">(samples per trace)</Label>
+    <Layout>
+     <Constraints component="COMMENT_PROBABILITYDISTRIBUTIONF" xPos="10" yPos="0" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="2" yPos="2" xSize="75" ySize="5"/>
+     <Constraints component="LABEL_OPT_IN" xPos="4" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_IN" xPos="11" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_IN" xPos="20" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_IN" xPos="27" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="55" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="64" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TYPE_OUTPUT" xPos="7" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_OUTPUT" xPos="19" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ABS" xPos="32" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ABS" xPos="36" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_IGNORE_ZEROS" xPos="47" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IGNORE_ZEROS" xPos="60" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER2" xPos="2" yPos="8" xSize="75" ySize="5"/>
+     <Constraints component="LABEL_OPT_BINS" xPos="4" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_BINS" xPos="13" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VAL_MIN" xPos="27" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VAL_MIN" xPos="35" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VAL_MAX" xPos="53" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VAL_MAX" xPos="61" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_BINS" xPos="9" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_BINS" xPos="18" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BIN_SIZE" xPos="31" yPos="11" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_SIZE" xPos="42" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_" xPos="55" yPos="11" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="2" yPos="14" xSize="75" ySize="6"/>
+     <Constraints component="LABEL_OPT_WIN" xPos="4" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_WIN" xPos="12" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_FIXEDWINDOW" xPos="7" yPos="17" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="25" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="33" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="50" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="58" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MUTEWINDOW" xPos="7" yPos="18" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="25" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="33" yPos="18" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="50" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="58" yPos="18" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER4" xPos="2" yPos="21" xSize="75" ySize="6"/>
+     <Constraints component="LABEL_PATH_TROT" xPos="4" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_TROT" xPos="14" yPos="22" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFDIAGRAMBARS" xPos="5" yPos="24" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR" xPos="29" yPos="24" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR" xPos="36" yPos="24" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="47" yPos="24" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LENGTHOFDIAGRAMBARS" xPos="5" yPos="25" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NSPT" xPos="29" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NSPT" xPos="36" yPos="25" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SAMPLESPERTRACE" xPos="47" yPos="25" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_IN">
+      <Tip>Whether to use trace samples or header word values as input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - OPT_IN<br> Whether to use trace samples or header word values as input.</center></b>
+<pre> Default = TRACE
+ Allowed = TRACE
+ Allowed = HEADER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_IN">
+      <Tip>Number of header word to use for input values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - HDR_IN<br> Number of header word to use for input values.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+&lt;pm&gt;
+ If HDR_FLAG = 0, then all traces are processed.  Otherwise, only traces with
+ a flag set in header word HDR_FLAG are processed.
+&lt;/pm&gt;</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TYPE_OUTPUT">
+      <Tip>Type of distribution function graph the output traces will form.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - TYPE_OUTPUT<br> Type of distribution function graph the output traces will form.</center></b>
+<pre> Default = PDF
+ Allowed = PDF, CDF, 1-PDF, 1-CDF
+ TYPE_OUTPUT = PDF gives a Probability Density Function graph (fraction of
+ values falling in a given bin).
+ 
+ TYPE_OUTPUT = CDF gives a Cumulative Distribution Function graph (integral of
+ the PDF).
+ 
+ TYPE_OUTPUT = 1-PDF gives a 1 - PDF graph, or fraction of values outside each
+ bin.
+ 
+ TYPE_OUTPUT = 1-CDF gives a 1 - CDFgraph, or fraction of values in higher
+ bins.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ABS">
+      <Tip>Whether to take absolute value of input values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - ABS<br> Whether to take absolute value of input values.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IGNORE_ZEROS">
+      <Tip>Whether to ignore (do not bin) zero input values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - IGNORE_ZEROS<br> Whether to ignore (do not bin) zero input values.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_BINS">
+      <Tip>Method for specifying first and last bin values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - OPT_BINS<br> Method for specifying first and last bin values.</center></b>
+<pre> Default = CENTER
+ Allowed = CENTER
+ Allowed = OUTSIDE
+ If OPT_BINS = CENTER, then VAL_MIN and VAL_MAX specify first and last bin
+ center values.
+ 
+ If OPT_BINS = OUTSIDE, then VAL_MIN specifies the lowest value in the first
+ bin and VAL_MAX specifies the highest (noninclusive) value in the last bin.
+ The OUTSIDE option is useful for specifying circular bin arrays.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAL_MIN">
+      <Tip>Value used to specify first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - VAL_MIN<br> Value used to specify first bin.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAL_MAX">
+      <Tip>Value used to specify last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - VAL_MAX<br> Value used to specify last bin.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; VAL_MIN</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_BINS">
+      <Tip>Number of bins used to represent the value range.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - NUM_BINS<br> Number of bins used to represent the value range.</center></b>
+<pre> Default = 1000
+ Allowed = int &gt; 1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_SIZE">
+      <Tip>The size of a bin of the specified histogram.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - BIN_SIZE<br> The size of a bin of the specified histogram.</center></b>
+<pre>
+ The max and min values, and the number of bins, determine the size of
+ each bin.  That size is calculated, and displayed for the user.
+ 
+ The value of this field cannot be set directly.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_WIN">
+      <Tip>Method to use for specifying trace time window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - OPT_WIN<br> Method to use for specifying trace time window.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE     (Window defined by times measured from mute.)
+ Allowed = FIXED    (Window is fixed.)
+ DIST uses only the trace samples within the trace time window.
+ 
+ If OPT_WIN = FIXED, then the window is specified by TIM_BEG and TIM_END.
+ 
+ If OPT_WIN = MUTE, then the window is specified by TIM_ADD and WIN_LEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Time for top of trace window if OPT_WIN = FIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - TIM_BEG<br> Time for top of trace window if OPT_WIN = FIXED.</center></b>
+<pre> Default = TSTRT
+ Allowed = real &gt;= TSTRT
+ The window top will be set at the larger of TIM_BEG, in seconds,
+ or the mute time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Time for bottom of trace window if OPT_WIN = FIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - TIM_END<br> Time for bottom of trace window if OPT_WIN = FIXED.</center></b>
+<pre> Default =  end of trace
+ Allowed = real &gt;= TIM_BEG
+ The window bottom will be set at the smaller of TIM_END, in seconds,
+ or the tail mute time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Time at top of window = mute time + TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - TIM_ADD<br> Time at top of window = mute time + TIM_ADD.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ TIM_ADD in seconds is added to mute time to find the first sample.
+ 
+ Active only if OPT_WIN = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - WIN_LEN<br> Time at bottom of window = time at top of window + WIN_LEN.</center></b>
+<pre> Default = trace length
+ Allowed = real &gt; 0.0
+ WIN_LEN is the length of the trace window in seconds.
+ Bottom of window cannot be below tail mute time.
+ 
+ Active only if OPT_WIN = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_TROT">
+      <Tip>Pathname for the TRCIO file containing output graph traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - PATH_TROT<br> Pathname for the TRCIO file containing output graph traces.</center></b>
+<pre> Default =
+ Allowed = char
+ If PATH_TROT = NONE, the graph values are printed in the .rpt file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR">
+      <Tip>Number of output graph traces; NUM_TR must divide NUM_BINS.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - NUM_TR<br> Number of output graph traces; NUM_TR must divide NUM_BINS.</center></b>
+<pre> Default = 1000
+ Allowed = int =&lt; NUM_BINS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NSPT">
+      <Tip>Number of samples in each output trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - NSPT<br> Number of samples in each output trace.</center></b>
+<pre> Default = 1000
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dist - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dist">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : DIST   (DISTribution function)
+ Category   : diagnostics
+ Written    : 1993-09-01   by: C I Burch
+ Revised    : 2006-06-12   by: B. Menger
+ Maturity   : production
+ Purpose    : Calculate distribution function of trace or header values.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ DIST performs distribution function (histogram) analysis of either trace
+ sample values or header word values.  The analysis is done by assigning each
+ input value to a bin corresponding to an amplitude range that includes the
+ input value.  After all input values have been binned, the number of values
+ assigned to a bin as a fraction of the total number of input values may be
+ plotted as a function of bin number or bin center value.  Such a graph is
+ the probability density function (PDF).
+ 
+ 
+ Text Output
+ If PATH_TROT is "NONE," the graph values are printed in the .rpt
+ file.  Other statistics of the binned values are printed in the .rpt file,
+ including minimum, maximum, mean, standard deviation and certain percentiles.
+ 
+ All percentiles are based on bin occupation numbers and may be inexact by
+ bin_width/2.
+ 
+ 
+ Graphical Output
+ Graphical output is provided by the TRCIO file output.
+ Four types of graph can be chosen:
+ 
+      PDF       Probability Density Function (PDF); fraction of
+                  values falling in a given bin.
+      CDF       Cumulative Distribution Function (CDF); integral of
+                  the PDF.
+      1-PDF     1 - PDF or fraction of values outside each bin.
+      1-CDF     1 - CDF or fraction of values in higher bins.
+ 
+ Each output trace represents one or more bins.  The center value of the bins
+ represented by each output trace is the amplitude ordinate of the
+ distribution graph.  The number of live samples in each output trace
+ represents the probability ordinate of the distribution graph.  Displaying
+ these traces in CBYT and using the header dump option provides easy access
+ to distribution function information.  Output header words are:
+ 
+ 
+    HEADER               DESCRIPTION
+      1      Sequential output trace number
+      3      Fraction of binned values occupying this bin (PDF)
+      4      Fraction of binned values in this or lower bin (CDF)
+      5      Fraction of binned values outside this bin (1 - PDF)
+      6      Fraction of binned values in higher bins (1 - CDF)
+      7      Type of graph represented (header 3-6)
+      8      Bin center value  (x-ordinate)
+      9      Bin width
+      10     Median of binned values
+      11     Total values in this bin
+      12     Total values in this or lower bin
+      13     Total values binned
+      14     Number of live samples in this trace (NSPT*fraction)
+ 
+ 
+ Mute Time
+ DIST ignores all trace samples that lie above the head mute time or below the
+ tail mute time.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Traces pass through DIST unchanged.
+ 
+ Input values outside the amplitude range of the bins are ignored.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author    Description
+     ----        ------    -----------
+031. 2006-06-12  B. Menger   Removed Unused Variables.
+ 30. 2005-12-15  Stoeckley Change Val_Count and Vals_Binned_Count from integer
+                            to double precision to allow values &gt; 2Gig.
+ 29. 2002-09-19  Goodger   Use mth_module for binning where OPT_BINS=CENTER.
+ 28. 2002-08-13  Goodger   Default win_len to trace length and insure it is
+                           not zero if opt_win=mute.
+                           Change bin_size from double precision to real to
+                           solve display problem.
+                           Move some error checking to traps.
+                           Shift header words used to avoid trcio resetting
+                           word 2.
+ 27. 2002-06-26  CIBurch/  Correct bin index calculation.
+                 Goodger
+ 26. 2002-05-22  Goodger   Change variables to double precision.
+ 25. 2001-09-10  Goodger   Remove extra definitions of Lun.
+ 24. 2001-08-30  CIBurch/  Calculate and print RMS of binned values.
+                 Goodger   Change print* to writes.
+ 23. 2001-05-14  SMCook    Updated GUI to use new "box labelling system".
+ 22. 2001-04-03  SMCook    Bug report #352: doesn't work when OPT_IN = HEADER.
+                            Valid data was being inadvertantly thrown out by
+                            incorrect less than/greater than (&lt; &gt;) logic.
+                           Also found and fixed erroneous BIN CENTER values in
+                            printout.
+                           Also made GUI much more intelligible.
+                           Also caught pointer that wasn't nullified.
+ 21. 2001-02-14  B. Kruse  Change name for wrapup flag to SKIP_WRAPUP for
+                            clarity, and slightly change how it is used.
+ 20. 2000-11-20  B. Kruse  Bug Report #163, continued.  Correct bin-center
+                            values in Percentiles table.
+ 19. 2000-11-15  B. Kruse  Bug report #163: Correct default NUM_TR from 100
+                            to 1000.  Add HELP documentation to clarify
+                            TIM_BEG and TIM_END times are in seconds.
+                            Identify samples rejected as out-of-range.
+                            Correct failure to accumulate data from trace
+                            samples.
+ 18. 2000-10-05  B. Kruse  Added help section for BIN_SIZE, a read-only
+                            parameter
+ 17. 2000-08-01  B. Kruse  Correct output file description from
+                            'bytefile' to TRCIO (or '.trc32') file.
+16.  2000-06-14 B. Kruse   Update GUI layout.
+15.  2000-06-13 B. Kruse   Bug report: PDF differences, CDF reported NaN
+                           Review comments
+14.  2000-05-15 B. Kruse   Insert GUI layout into source file.
+13.  2000-03-07 B. Kruse   Review comments:  Remove comment lines before the
+.                          prolog, change STROT to TROT.   Use standard
+.                          pathname.  Add PATHCHECK and TROT references
+.                          for the output file.
+12.  1999-11-19 B. Kruse   Removed formfeed characters
+11.  1999-11-05 B. Kruse   Converted to New System
+10.  1999-04-29 Vunderink  Moved check for NTOTB being 0 to before mean
+                           calculation
+ 9.  1998-12-14 Vunderink  Begin using the f90 compiler.
+ 8.  1998-08-13 C I Burch  Added printout of mean and std. deviation
+ 7.  1997-06-30 Vunderink  Added header number to printout
+ 6.  1997-06-23 Vunderink  Do not stack printout when FILE=NONE
+ 5.  1997-06-23 Vunderink  Add "NONE" option for FILE parameter
+ 4.  1996-06-19 Vunderink  Corrected error in saving globals
+ 3.  1996-05-24 Vunderink  Changed output header words so that HD(1) is
+                           trace number
+ 2.  1996-05-23 Vunderink  Changed output to be STROT file
+ 1.  1993-09-01 C I Burch  Original version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

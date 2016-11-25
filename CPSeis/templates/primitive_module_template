@@ -1,0 +1,662 @@
+!!!
+!!!                       Primitive Module Template
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!! 14. 2002-10-23  Stoeckley  Minor documentation and ident string changes.
+!!! 13. 2002-06-07  Stoeckley  Remove unnecessary IMPLICIT NONE and RETURN
+!!!                             statements.
+!!! 12. 2001-10-22  Stoeckley  Add advice concerning the RCS ident string;
+!!!                             add code check-in instructions.
+!!! 11. 2001-03-15  Stoeckley  Add gui_def and HelpSection sections.
+!!! 10. 2000-09-18  Stoeckley  Add closing angle bracket to closing header
+!!!                             word doc tag.
+!!!  9. 2000-08-24  Stoeckley  Add information as to which documentation
+!!!                             sections are optional and can be omitted;
+!!!                             fix RCS ident string line to be less likely
+!!!                             to exceed 80 characters.
+!!!  8. 1999-11-11  Stoeckley  Add ident string for RCS.
+!!!  7. 1999-09-22  Stoeckley  Add subdirectory miscellaneous.
+!!!  6. 1999-09-20  Stoeckley  Remove some documentation tags and add
+!!!                             reference to other files.
+!!!  5. 1999-08-19  Stoeckley  Added word "private" to data structure.
+!!!  4. 1999-07-21  Stoeckley  Added documentation regarding the "opt" flag
+!!!                             and more instructions regarding arguments.
+!!!  3. 1999-07-15  Selzler    Standard dates, "opt" flag, avoid "index".
+!!!  2. 1999-06-22  Vunderink  Added tags for all doc sections.
+!!!  1. 1999-06-14  Stoeckley  Initial version.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         GENERAL INFORMATION
+!!!
+!!! This template for primitive modules constitutes part of the standards
+!!! for writing primitive modules for the Conoco Processing System.  This
+!!! template, including the instructions and comments within this template,
+!!! is to be used for creating primitive modules or converting them from
+!!! the old processing system.
+!!!
+!!! All of the instructions, comments, and sample code in this template are
+!!! commented out with three exclamation points to allow new code to be
+!!! inserted and tested without having to delete this information first.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         SUPPORTING DOCUMENTS
+!!!
+!!! (1) Documentation accessed by the CPSDOC program.
+!!! (2) Templates for processes and primitives            (in ~sps/templates).
+!!! (3) Coding Standards for Mixing Programming Languages (in ~sps/templates).
+!!! (4) Detailed Fortran Coding Standards                 (in ~sps/templates).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       INITIAL STEPS TO PERFORM
+!!!
+!!! (1) Copy this template to a new file with the name "xxxx.f90" where
+!!!     "xxxx" is the name of your primitive module.
+!!!
+!!! (2) Make the following replacements in this template wherever they occur:
+!!!     Replace  xxxx or XXXX  with the primitive name.
+!!!     Replace  2001-01-01    with the current check-in date (year-month-day).
+!!!     Replace      NNNN      with your name.
+!!!
+!!! (3) Insert your code (including documentation) into this template at
+!!!     locations where instructions are found.  Make sure all inserted code
+!!!     conforms to the appropriate standards, including naming conventions.
+!!!
+!!! (4) If this primitive is to be an object, you can use the examples in
+!!!     this template for a data structure and subroutines to create and
+!!!     delete and clear this structure.  Otherwise you can OMIT the examples.
+!!!
+!!! (5) Delete all instructions, comments, and sample code (lines beginning
+!!!     with !!!) in this file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       CODE CHECK-IN INSTRUCTIONS
+!!!
+!!! (1) Test the code thoroughly until you believe that it is ready
+!!!     for BETA TESTING if it is to be placed into betalib, or ALPHA
+!!!     TESTING if it is to be placed into alphalib.
+!!!
+!!! (2) Make sure the code compiles and works on all available compilers.
+!!!
+!!! (3) Set the Revised field (in the brief doc) to current check-in date
+!!!     and author.
+!!!
+!!! (4) Make sure a new entry has been added to the revision history, and
+!!!     set this entry to the current check-in date.
+!!!
+!!! (5) Check the code using the checkc script.
+!!!
+!!! (6) Check in the new code before 3:00 p.m.
+!!!
+!!! (7) If this code is to be included by a user as a custom compile in
+!!!     a CPS job, you should make sure that the RCS ident string includes
+!!!     the file name, revision date, author, and maturity (custom) to
+!!!     insure that the correct information is displayed in the report file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!
+!!!
+!<CPS_v1 type="PRIMITIVE"/>
+!!------------------------------- xxxx.f90 --------------------------------!!
+!!------------------------------- xxxx.f90 --------------------------------!!
+!!------------------------------- xxxx.f90 --------------------------------!!
+
+        ! other files are:  xxxx_crou.c  xxxx_frou.f90  xxxx.h
+ 
+!!! --> Delete from the above list any other files which do NOT exist.
+!!! --> There must NOT be an xxxx.c file.
+!!! --> Omit the above line if there are no other files.
+!!!
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                        C P S   P R I M I T I V E
+!
+! Name       : XXXX 
+! Category   : --> math, filters, io, etc. (subdirectory)
+! Written    : 2001-01-01   by: NNNN
+! Revised    : 2001-01-01   by: NNNN
+! Maturity   : beta
+! Purpose    : --> description for single-line context-sensitive help.
+! Portability: No known limitations.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Choose the category from this list of subdirectories:
+!!!
+!!!      character     math          moves      io           velocity
+!!!      filters       memory        packs      sorts        miscellaneous
+!!!      main_prog     migrations    plot       synthetics
+!!!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                         GENERAL DESCRIPTION            
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Description of this particular algorithm, how it differs from other
+!!!  --> algorithms for the general problem and when you may want to use it.
+!!!  --> Include information on whether the process is appropriate for 2D
+!!!  --> and/or 3D work.
+!!!
+!!!  --> If this primitive has specialized or limited use (e.g. needed only
+!!!  --> by the back-end main program), that use should be documented here.
+!
+!-------------------------------------------------------------------------------
+!</descript_doc>
+
+
+!<trace_io_doc>
+!-------------------------------------------------------------------------------
+!                     TRACE INPUT/OUTPUT REQUIREMENTS     
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!
+!-------------------------------------------------------------------------------
+!</trace_io_doc>
+
+
+!<global_doc>
+!-------------------------------------------------------------------------------
+!                           GLOBAL PARAMETERS             
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!
+!-------------------------------------------------------------------------------
+!</global_doc>
+
+ 
+!<header_word_doc>
+!-------------------------------------------------------------------------------
+!                          TRACE HEADER WORDS            
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!
+!-------------------------------------------------------------------------------
+!</header_word_doc>
+
+
+!<calling_doc>
+!-------------------------------------------------------------------------------
+!                      INPUT AND OUTPUT ARGUMENTS        
+!
+! For each subroutine or function documented below, each argument is
+! flagged as follows:
+!   i = intent(in)    = value required upon INPUT.
+!   o = intent(out)   = value set by the routine upon OUTPUT.
+!   b = intent(inout) = value BOTH required upon input and changed upon output.
+!
+! Optional arguments are also flagged as follows:
+!   opt = this argument is optional.
+!
+!-------------------------------------------------------------------------------
+!                          CALLING SEQUENCE               
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> This section should list all subroutines and functions in this
+!!!  --> module, and information about their arguments, in a format
+!!!  --> similar to that illustrated here, customized as appropriate.
+!!!
+!!!  --> If this module contains several groups of related routines which
+!!!  --> would be more clearly documented separately, or if this module
+!!!  --> contains routines which require sufficient documentation to warrant
+!!!  --> a separate section, there can be several sections such as this one,
+!!!  --> appropriately individually titled.
+!!!
+!!!                o                i     b      o
+!!!              hello = XXXX     (aaaa, cvar , msg)
+!!!
+!!!                                 i     b      o
+!!!              call    XXXX_YYY (bbbb, cvar , msg)
+!!!
+!!!                                      opt    opt
+!!!                                 i     i      o
+!!!              call    XXXX_ZZZ (bbbb, indx, value)
+!!!
+!!!  --> The type and description of each argument should be shown in a table
+!!!  --> such as that shown below.  If an argument is optional, it should be
+!!!  --> so identified below as well as above, with an explanation of the
+!!!  --> action taken when the argument is omitted.  If an argument is passed
+!!!  --> as a pointer, it should be so identified below.  If an array is passed
+!!!  --> as an assumed shape array, its indices should be indicated with
+!!!  --> colons (:) below.
+!!!
+!!! character(len=*)           aaaa(*) =    --> description 
+!!! character(len=8),pointer   bbbb(:) =    --> description 
+!!! double precision           cvar    =    --> description
+!!! character(len=*)           msg     =    --> description 
+!!! integer                    hello   =    --> description
+!!! integer         ,optional  indx    =    --> description
+!!! double precision,optional  value   =    --> description
+!!!
+!!!  --> Add any additional notes about the use of the routines, or about
+!!!  --> their arguments, here.
+!!!
+!-------------------------------------------------------------------------------
+!</calling_doc>
+
+
+!<advice_doc>
+!-------------------------------------------------------------------------------
+!                            ADVICE FOR USERS             
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Enter here more lengthy or more detailed advice than is appropriate
+!!!  --> for the above documentation.
+!
+!-------------------------------------------------------------------------------
+!</advice_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                             REVISION HISTORY              
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. 2001-01-01  NNNN       Initial version.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Copy the old revision history to this location if it exists,
+!!!  --> and renumber as necessary.
+!!!
+!!!  --> The revision history should be listed in descending order, with
+!!!  --> the most recent revision at the top.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<portability_doc>
+!-------------------------------------------------------------------------------
+!                         PORTABILITY LIMITATIONS         
+!
+! No known limitations.
+! This process requires 8-byte (64-bit) word sizes.
+! This process packs and unpacks values in 8-byte words.
+! This process contains the following platform-dependent code...
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!!
+!!!  --> Omit or modify the inappropriate lines above.
+!!!  --> Also you can add additional portability details here.
+!!!
+!-------------------------------------------------------------------------------
+!</portability_doc>
+
+
+!<compile_doc>
+!-------------------------------------------------------------------------------
+!                      SPECIAL COMPILING REQUIREMENTS      
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Description of any special compiler or linking requirements
+!!!  --> or restrictions.
+!
+!-------------------------------------------------------------------------------
+!</compile_doc>
+
+
+!<algorithm_doc>
+!-------------------------------------------------------------------------------
+!                   ALGORITHM DESCRIPTION FOR DEVELOPERS   
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Description of this particular algorithm, related theory and
+!!!  --> relevant references.
+!
+!-------------------------------------------------------------------------------
+!</algorithm_doc>
+
+
+!<programming_doc>
+!-------------------------------------------------------------------------------
+!                           PROGRAMMING NOTES             
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Enter here more lengthy or more detailed information which may be
+!!!  --> required.
+!
+!-------------------------------------------------------------------------------
+!</programming_doc>
+
+
+!-------------------------------------------------------------------------------
+!<gui_def>
+!!!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Screen layout information for the GUI goes in this section.
+!!!  --> Here is an example of the format to be used, with a few
+!!!  --> incomplete explanations below.
+!!!
+!!!  --> NOTE:
+!!!  --> This section is needed only for a primitive which encapsulates
+!!!  --> parameters used by several processes and provides a SCREEN LAYOUT
+!!!  --> and CONTEXT SENSITIVE HELP to those processes.  A process which
+!!!  --> uses this primitive can then include a line like this at the
+!!!  --> appropriate location within its own gui_def section where you
+!!!  --> want the screen layout from this primitive to reside:
+!!!  -->                    <include xxxx.f90>
+!!!
+!<NS XXXX Process/NC=80>
+!
+!!! --> Here is an example:
+!!! --> (Only one exclamation point should start each line)
+!!!
+!!!PATHNAME=`SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+!!!
+!!!               PUSH_ME `P          NDPT~~=~`XXXXXX
+!!!
+!!!          Comments can be placed anywhere like this comment.
+!!!
+!!!      ACTION=~~~`CCCCC           HDR_FLAG=~~~`II
+!!!
+!!!   `-----------------------   `-----------------------     XCOORDS
+!!!    METHOD_A~=`CCCCCC          METHOD_B~=`CCCCCC           `FFFFFFFFF
+!!!    HDR_SEL_A=`II              HDR_SEL_B=`II               `FFFFFFFFF
+!!!    ENTRIES_ACOMMENT_A         ENTRIES_BCOMMENT_B          `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    COMPLEMENT_A=`CC           COMPLEMENT_B=`CC            `FFFFFFFFF
+!!!   `-----------------------   `-----------------------     `FFFFFFFFF
+!!!
+!!!          [COMMENT]XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+!!!
+!!!<PARMS PATHNAME[/ML=128/XST]>
+!!!<PARMS ENTRIES_A_ARRAYSET[/XST/YST]>
+!!!<PARMS ENTRIES_B_ARRAYSET[/XST/YST]>
+!!!<PARMS COMMENT_A[/ML=20/XST]>
+!!!<PARMS COMMENT_B[/ML=20/XST]>
+!!!<PARMS ZZZZZZ[/NULL]>
+!!!
+!!!
+!!! --> Here is some useful information (although not complete):
+!!!
+!!! -->          integer text fields are represented by `IIIIII
+!!! -->   floating point text fields are represented by `FFFFFF
+!!! --> character string text fields are represented by `SSSSSS
+!!! -->    informational text fields are represented by `XXXXXX (any data type)
+!!! -->             combo box fields are represented by `CCCCCC (any data type)
+!!! -->          a box around an area is represented by `------
+!!!
+!!! --> The number of characters in a field is the above count including `.
+!!! --> A scalar keyword is followed by an equal sign and the field.
+!!! --> An array keyword is above a column of fields, aligned to begin above `.
+!!! --> A pushbutton is represented by a keyword plus a space plus `P.
+!!! --> Spaces before and after the equal sign must be represented by ~~~.
+!!! --> Linked arrays butt up against each other.
+!!! --> /NC specifies the width of the dialog box in characters (should be 80).
+!!! --> /ML specifies the max number of characters to allow if > field length.
+!!! --> /ML=128/XST should be specified for path names.
+!!! --> /XST/YST should be specified for each set of linked arrays.
+!!! --> /XST should be specified when ML is specified.
+!!!
+!!! --> If a parameter in the HelpSection is not to be displayed in this
+!!! --> section, a line like this should be included in this section:
+!!! -->                    <PARMS ZZZZZZ [/NULL]>
+!!!
+!!! --> If an informational field is not to show its keyword, the keyword
+!!! --> can be enclosed in square brackets and the equal sign can be omitted.
+!
+!</gui_def>
+!-------------------------------------------------------------------------------
+
+
+!-------------------------------------------------------------------------------
+!<HelpSection>
+!!!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Context-sensitive help for the GUI and for the DOC program
+!!!  --> goes in this section.  Two different formats are supported,
+!!!  --> either of which can be used.  Both formats are shown for
+!!!  --> keywords KEYWORD1 and KEYWORD2.  Every parameter in the gui_def
+!!!  --> section must have an entry in this section.  Each parameter must
+!!!  --> have a <tip>, a Default line, and one or more Allowed lines,
+!!!  --> followed optionally (but usually) by additional information.
+!!!
+!!!  --> NOTE: For display-only parameters (i.e. informational fields
+!!!  --> designated with XXXXXXX in the gui_def section), the keyword line
+!!!  --> below should look like this:
+!!!  -->    <Help KEYWORD="keyword1" TYPE="DISPLAY_ONLY">
+!!!  --> and the Default and Allowed lines are optional.
+!!!
+!!!  --> NOTE:
+!!!  --> This section is needed only for a primitive which encapsulates
+!!!  --> parameters used by several processes and provides a SCREEN LAYOUT
+!!!  --> and CONTEXT SENSITIVE HELP to those processes.  A process which
+!!!  --> uses this primitive can then include a line like this at the
+!!!  --> appropriate location within its own gui_def section where you
+!!!  --> want the screen layout from this primitive to reside:
+!!!  -->                    <include xxxx.f90>
+!!!  --> This context sensitive help will then also become available to
+!!!  --> that process.
+!!!
+!!! --> Here are some examples:
+!!! --> (Only one exclamation point should start each line)
+!!!
+!!!<Help KEYWORD="keyword1">
+!!!<Tip> Here is the one-line context-sensitive help for this parameter. </Tip>
+!!! Default = dddddddd   ! this can be a default value or a short phrase.
+!!! Allowed = pppppppp   ! this can be a range of values or a short phrase.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached.
+!!!</Help>
+!!!
+!!!
+!!!<Help KEYWORD="keyword2">
+!!!<Tip> Here is the one-line context-sensitive help for this parameter. </Tip>
+!!! Default = dddddddd   ! this is the default value from a list of options.
+!!! Allowed = ppppppp1   Short description for option 1.
+!!! Allowed = ppppppp2   Short description for option 2.
+!!! Allowed = ppppppp3   Short description for option 3.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached.
+!!! is reached.
+!!!</Help>
+!!!
+!!!
+!!!<help keyword1> Here is the one-line context-sensitive help for this param.
+!!! Default = dddddddd   ! this can be a default value or a short phrase.
+!!! Allowed = pppppppp   ! this can be a range of values or a short phrase.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached.
+!!!
+!!!
+!!!<help keyword2> Here is the one-line context-sensitive help for this param.
+!!! Default = dddddddd   ! this is the default value from a list of options.
+!!! Allowed = ppppppp1   Short description for option 1.
+!!! Allowed = ppppppp2   Short description for option 2.
+!!! Allowed = ppppppp3   Short description for option 3.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached.
+!!! is reached.
+!!!
+!</HelpSection>
+!-------------------------------------------------------------------------------
+
+
+
+!!-------------------------- start of module ------------------------------!!
+!!-------------------------- start of module ------------------------------!!
+!!-------------------------- start of module ------------------------------!!
+
+
+      module xxxx_module
+!!!   use zzzz_module     ! provide a line like this for each module you use.
+      implicit none
+
+!!! Either make everything public with selected subroutines private:
+!!!
+!!!   public
+!!!   private :: xxxx_sub1
+!!!   private :: xxxx_sub2
+!!!
+!!! Or make everything private with selected subroutines public:
+!!!
+!!!   private
+!!!   public :: xxxx_create
+!!!   public :: xxxx_delete
+!!!   public :: xxxx_clear
+!!!   public :: xxxx_sub1
+!!!   public :: xxxx_sub2
+
+      character(len=100),public,save :: XXXX_IDENT = &
+'$Id: primitive_module_template,v 1.14 2002/10/24 14:30:56 Stoeckley custom sps $'
+
+
+!!-------------------------- data structure -------------------------------!!
+!!-------------------------- data structure -------------------------------!!
+!!-------------------------- data structure -------------------------------!!
+
+!!! If a data structure is needed, it can be defined here.
+!!! The data structure can be made public or private.
+!!! OTHERWISE OMIT THIS SECTION.
+!!!
+
+      type,public :: xxxx_struct              
+!!!   sequence                      ! delete this line if not needed.
+      private
+
+!!!     --> put your data structure variables here.
+
+      end type xxxx_struct
+
+
+!!---------------------------- interfaces ---------------------------------!!
+!!---------------------------- interfaces ---------------------------------!!
+!!---------------------------- interfaces ---------------------------------!!
+
+!!! If any interface blocks are needed, they can be placed here.
+!!! OTHERWISE OMIT THIS SECTION.
+
+
+!!------------------------------ data -------------------------------------!!
+!!------------------------------ data -------------------------------------!!
+!!------------------------------ data -------------------------------------!!
+
+!!! If any data is needed, it can be placed here, and made public or private.
+!!! OTHERWISE OMIT THIS SECTION (except for the "contains" line).
+
+      contains
+
+
+!!----------------------------- create ------------------------------------!!
+!!----------------------------- create ------------------------------------!!
+!!----------------------------- create ------------------------------------!!
+
+!!! If a constructor is needed, it can be placed here.
+!!! This subroutine allocates and initializes the data structure.
+!!! OTHERWISE OMIT THIS SECTION.
+!!!
+
+      subroutine xxxx_create (obj)
+      type(xxxx_struct),pointer :: obj       ! arguments
+
+      allocate (obj)    ! omit if OBJ is not to be passed as a pointer.
+!!!
+!!! Nullify any pointers as follows:
+!!!
+!!!   nullify (obj%aaaa)
+!!!
+      call xxxx_clear (obj)   ! initialize the data structure variables.
+      end subroutine xxxx_create
+
+
+!!------------------------------ delete -----------------------------------!!
+!!------------------------------ delete -----------------------------------!!
+!!------------------------------ delete -----------------------------------!!
+
+!!! If a destructor is needed, it can be placed here.
+!!! This subroutine clears and deallocates the data structure.
+!!! OTHERWISE OMIT THIS SECTION.
+!!!
+
+      subroutine xxxx_delete (obj)
+      type(xxxx_struct),pointer :: obj       ! arguments
+
+      call xxxx_clear (obj)
+!!!
+!!! Make sure ALL POINTERS in your data structure are deallocated.
+!!! as follows (unless the CLEAR subroutine does this):
+!!!
+!!!   if (associated(obj%aaaa)) deallocate (obj%aaaa)
+!!!
+      deallocate(obj)    ! omit if OBJ is not to be passed as a pointer.
+      end subroutine xxxx_delete
+
+
+!!----------------------------- clear -------------------------------------!!
+!!----------------------------- clear -------------------------------------!!
+!!----------------------------- clear -------------------------------------!!
+
+!!! A subroutine to clear the data structure can be placed here if needed.
+!!! OTHERWISE OMIT THIS SECTION.
+!!!
+
+      subroutine xxxx_clear (obj)
+      type(xxxx_struct) :: obj       ! arguments
+
+!!! Initialize all data structure variables here.
+!!! This should include conditionally deallocating any pointers before
+!!!   possibly reallocating them as illustrated.
+!!!
+!!!   if (associated(obj%aaaa)) deallocate (obj%aaaa)
+!!!   allocate (obj%aaaa,...)
+
+      end subroutine xxxx_clear
+
+
+!!----------------------------- subroutines -------------------------------!!
+!!----------------------------- subroutines -------------------------------!!
+!!----------------------------- subroutines -------------------------------!!
+
+!!! Put your subroutines here.  They can be copied from old code.
+!!! There can be a separate section for each subroutine (or for each set
+!!! of related subroutines) if they are large.
+
+
+!!----------------------------- end of module -----------------------------!!
+!!----------------------------- end of module -----------------------------!!
+!!----------------------------- end of module -----------------------------!!
+
+
+      end module xxxx_module
+
+
+!!--------------------------------- end -----------------------------------!!
+!!--------------------------------- end -----------------------------------!!
+!!--------------------------------- end -----------------------------------!!
+

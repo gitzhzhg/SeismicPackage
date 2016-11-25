@@ -1,0 +1,61 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##--------------------------- linuxi90_debug --------------------------------##
+##--------------------------- linuxi90_debug --------------------------------##
+##--------------------------- linuxi90_debug --------------------------------##
+
+# Before compiling and running, first do:
+# > setenv INTEL 9.0
+# > source /apps/compilers/intel/fc/9.0/bin/ifortvars.csh
+
+permitted_architectures = ix86-intel-linux
+# cannot gcc/g++ 3's on lc06, need it on lc04
+# using lc06 must use btype_* drivers from cps in programs/cbyt
+permitted_hosts         = hoeplc06
+
+FC         = ifort -c -g -O0 -pc64 -mp -traceback
+FC_O1      = ifort -c -g -O0 -pc64 -mp -traceback
+FC_FLOATIO = ifort -c -g -O0 -pc64 -mp -traceback
+FC_INTERPOLATE  = ifort -c -g -O0 -pc64 -mp -traceback
+FC_KMIG    = ifort -c -g -O0 -pc64 -mp -traceback
+FC_PPIO    = ifort -c -g -OO -pc64 -mp -traceback
+FC_UNDER   = ifort -c -g -O0 -pc64 -mp -traceback
+FC_LINK    = ifort
+
+CC         = gcc -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                              -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = gcc -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                              -D_LARGEFILE_SOURCE \
+                                              -D_FILE_OFFSET_BITS=64
+CC_LINK    = gcc
+
+CXX        = g++ -c -g -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = g++ -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                               -D_LARGEFILE_SOURCE \
+                                               -D_FILE_OFFSET_BITS=64
+CXX_LINK   = ifort -nofor_main
+CXX_DEPEND = g++ -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared
+
+MODEXT     = .mod
+MODFLAG    = -I
+
+# FOR_LIBS   = /usr/lib/libstdc++.so.3 \
+
+# FOR_LIBS   = /usr/lib/gcc-lib/i386-redhat-linux/3.0.1/libstdc++.a
+  FOR_LIBS   = /usr/lib/libstdc++.so.5 \
+               /usr/lib/gcc-lib/i386-redhat-linux/3.2.3/libstdc++.a
+
+#GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+
+GUI_LIBS    = /usr/X11R6/lib/libXm.a /usr/X11R6/lib/libXmu.a \
+              -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+MATH_LIBS  = -lm -lpthread
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += /usr/include

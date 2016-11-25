@@ -1,0 +1,2512 @@
+ 
+###########      Cfg_help     revised  26 July 1996         #############
+###########      Cfg_help     revised  26 July 1996         #############
+###########      Cfg_help     revised  26 July 1996         #############
+
+
+
+######################## windowbox help ##################################
+######################## windowbox help ##################################
+######################## windowbox help ##################################
+################ copied from Wbox_help on 26 July 1996 ###################
+
+
+#           Wbox_help                    revised  26 July 1996
+
+#  Help for windowboxes (data entry windows created using the wbox routines
+#  on library wboxlib.a).
+
+#  The contents of this file should be copied into in the application's
+#  context-sensitive help file.  Overview help on keys is displayed 
+#  whenever the user presses CTRL-HELP or CTRL-F1 or CTRL-PF1.
+#  Context-sensitive help is optionally displayed when the user's pointer
+#  gets into the general message area or the array index area at the bottom 
+#  of the windowbox.  Context-sensitive help is also displayed for the 
+#  transient datafields used for finding an array index or an array value.
+
+#  You should also include context-sensitive help in this file, for all
+#  datafields in your windowbox (except prompt names or other fields
+#  with switch variable zero).  To do this, use identifiers typed as
+#  follows:
+#                        help*boxname_ident:
+#
+#  where boxname = the name specified in the call to wbox_create2 or
+#                    dbox_create2 or fbox_create2,
+#    and ident   = the identification integer specified in the
+#                    registration call for the variable.
+# 
+#    (Help can also be displayed for prompts associated with a variable,
+#    if the switch variable for the prompt is not zero.  In this case,
+#    the identification integer is the negative of that for the variable.)
+ 
+
+help*wbox_find_index:\
+----------------------ARRAY INDEX TO FIND-----------------------------\n\
+Type here the array index you wish to go to.  The array (or arrays)\n\
+will be scrolled if necessary.  If you just press RETURN or another non-\n\
+printable key, you will be transferred to the VALUE field at the right\n\
+(if the windowbox is wide enough to show it), where you will be able to\n\
+choose an array value rather than an array index.
+
+ 
+help*wbox_find_value:\
+----------------------ARRAY VALUE TO FIND-----------------------------\n\
+Type here the array value you wish to go to.  The array (or arrays)\n\
+will be scrolled if necessary.  If the array is a numeric array, you will\n\
+go to the nearest value in the array.  If the array is a character string\n\
+array, you will go the the value for which there is the greatest number\n\
+of beginning matching characters.
+
+ 
+help*wbox_message_line:\
+----------------------GENERAL MESSAGE AREA----------------------------\n\
+Transient messages are displayed in this line.  When there are no messages,\n\
+the type of the active datafield is displayed.  If the active datafield\n\
+is a numeric or text entry field, the current input mode is displayed.  This\n\
+input mode, and the exact location to edit, can be changed by using the\n\
+shifted arrow keys, or by repeatedly pressing mouse button 1.  Press\n\
+CTRL-HELP, CTRL-PF1, or CTRL-F1 for a description of all special action keys.
+
+ 
+help*wbox_index_line:\
+----------------------ARRAY INDEX MESSAGE AREA------------------------\n\
+When the active datafield is the element of an array, the array index,\n\
+and the length of the array, are shown in this line.  If you wish to\n\
+go to a specific array index or array value, you can press FIND or CTRL-F.\n\
+This action will temporarily display datafields on this line where you\n\
+can make your choice.  Press CTRL-HELP, CTRL-PF1, or CTRL-F1 for a\n\
+description of all special action keys.
+
+ 
+overview*wbox_keyhelp:\
+HELP ON KEYS WHICH HAVE SPECIAL FUNCTIONS IN TABLES OF DATA.\n\
+ALSO HELP ON COLOR OPTIONS (AND OTHER RESOURCES) FOR THE TABLES.\n\
+\n\
+----------------------SUMMARY OF HELP ON KEYS-------------------------\n\
+\n\
+Mouse button number 1 can be used to navigate between datafields, edit\n\
+within text-entry datafields, control scrollbars, or activate buttons\n\
+(pushbuttons, toggle buttons, and radio buttons).  The keys can also be\n\
+used for these and other purposes, summarized here and detailed below.\n\
+\n\
+TAB  SHIFT-TAB                            Move into or out of the windowbox.\n\
+ARROW  CTRL-ARROW  SHIFT-CTRL-ARROW  PREV  NEXT  Move to another datafield.\n\
+TAB  SHIFT-TAB   F20  SHIFT-F20   CTRL-T  Move to another datafield group.\n\
+SHIFT-ARROW        DELETE                 Edit a text datafield.\n\
+HELP            PF1       F1              Activate context-sensitive help.\n\
+CTRL-HELP  CTRL-PF1  CTRL-F1              Get this overview help on keys.\n\
+RETURN  SELECT  Activate a pushbutton, toggle button, or radio button.\n\
+ENTER           Same as the last arrow key (LEFT, RIGHT, UP, DOWN) used.\n\
+CTRL-D  DO      Undo most recent value, and toggle between last two values.\n\
+CTRL-S          Toggle among three keymodes for using arrow and tab keys.\n\
+CTRL-F  FIND    Find a desired index or value in the current column.\n\
+CTRL-M          Find the next matching value in the current column.\n\
+CTRL-N          Find the next non-matching value in the current column.\n\
+CTRL-V          Find ANY value which matches ANY OTHER in the current column.\n\
+CTRL-R  REMOVE  Remove a row and put it into the row-buffer.\n\
+CTRL-I  INSERT  Insert a row from the row-buffer, or insert an empty row.\n\
+CTRL-P          Paste a row from the row-buffer.\n\
+CTRL-C          Clear the row-buffer.\n\
+CTRL-H          Save table to file (for printing).\n\
+CTRL-[number]   Activate or deactivate or change debug print.\n\
+\n\
+---------------------------DEFINITIONS--------------------------------\n\
+\n\
+A WINDOWBOX is a special rectangular area in a Motif dialog box or main\n\
+   window.  This rectangular area, outlined with a 5-pixel-wide black\n\
+   border, is used primarily for displaying and editing arrays of numbers.\n\
+   This help describes common features of all windowboxes.  A windowbox\n\
+   contains one or more datafield groups, each of which contains one or\n\
+   more datafields. It also displays one or two message lines at the bottom.\n\
+   One or more windowboxes, and possibly text fields or buttons which\n\
+   are not part of any windowbox, may reside in the same dialog box or\n\
+   main window.  The buttons along the bottom of a dialog box are not part\n\
+   of any windowbox.\n\
+\n\
+A DATAFIELD is an individual text field (into which the user might be able\n\
+   to enter text or numbers), or a pushbutton, a toggle button, or a radio\n\
+   button.  These text fields and buttons look and behave similarly to\n\
+   Motif widgets.\n\
+\n\
+A DATAFIELD GROUP is either a set of linked arrays, or the set of all\n\
+   datafields which are not part of any array.  It is similar to a\n\
+   Motif "tab group".\n\
+\n\
+A SET OF LINKED ARRAYS consists of one or more side-by-side columns of\n\
+   datafields, where each column is an array.  All arrays in such a set\n\
+   always have the same number of array elements.  These arrays can be\n\
+   scrolled together (using a scrollbar or special keys) to bring into view\n\
+   all elements of the arrays.\n\
+\n\
+----------------------MOVING FROM FIELD TO FIELD----------------------\n\
+\n\
+Use mouse button 1 to move to any datafield.  It can also be used to\n\
+scroll a set of linked arrays using the normal actions of a scrollbar.\n\
+\n\
+Use ARROW keys to move up, down, left, or right to adjacent datafields\n\
+within the same datafield group.  Arrays will scroll as necessary.\n\
+The ENTER key will do the same thing as the last ARROW key used.\n\
+\n\
+Use TAB or SHIFT-TAB to move into or out of the windowbox to/from other\n\
+parts of the dialog box.  This is a standard Motif action.\n\
+\n\
+Use TAB or SHIFT-TAB or F20 or SHIFT-F20 or CTRL-T to move from one\n\
+datafield group to another within the windowbox.\n\
+\n\
+  [For keymode 2 (see CTRL-S below), you must use TAB and SHIFT-TAB\n\
+  (instead of LEFT and RIGHT) to move left or right to adjacent datafields\n\
+  within a datafield group, rather than from one datafield group to another.]\n\
+\n\
+  [Keymode 3 disables the use of TAB and SHIFT-TAB for any purpose within\n\
+  the windowbox because of the Motif action which may also occur.]\n\
+\n\
+Use CTRL-ARROW or SHIFT-CTRL-ARROW to move to top, bottom, left edge, or\n\
+right edge within a datafield group.  In arrays, the SHIFT-CTRL-UP and\n\
+SHIFT-CTRL-DOWN keys cause movement to the very beginning or end of the\n\
+arrays (scrolling as necessary), whereas the CTRL-UP (or PREV) and\n\
+CTRL-DOWN (or NEXT) keys scroll one screen-full at a time.\n\
+\n\
+------------------EDITING WITHIN A TEXT DATA FIELD--------------------\n\
+\n\
+Use mouse button 1 to move within a text datafield, and to change between\n\
+replace, insert, and overstrike text entry modes.  The current mode is\n\
+shown in a message area at the bottom.  For replace and overstrike modes,\n\
+highlighted text will be replaced when the next printable key is pressed.\n\
+For insert mode, text pushed off the right is lost.\n\
+\n\
+Alternately, use SHIFT-LEFT and SHIFT-RIGHT to move within a text datafield.\n\
+     [For keymode 2 (see CTRL-S below), you can also use LEFT and RIGHT\n\
+     for this purpose.]\n\
+\n\
+Alternately, use SHIFT-UP or SHIFT-DOWN to change between replace, insert,\n\
+and overstrike text entry modes.\n\
+\n\
+Use the DELETE key to delete a character to the left of the curser. \n\
+If all characters are deleted, the previous value reappears.\n\
+\n\
+-------------------MISCELLANEOUS SPECIAL ACTION KEYS------------------\n\
+\n\
+Use mouse button 1 (or RETURN or SELECT) to activate the highlighted\n\
+     pushbutton or toggle button or radio button.\n\
+Use DO (or CTRL-D) to undo the most recently typed value, and to toggle\n\
+     between the last two values.\n\
+Use HELP (or PF1 or F1) to activate context-sensitive help, which will be\n\
+     displayed for each field as it becomes active, and for all fields swept \n\
+     over by the pointer (with or without holding down a mouse button).\n\
+Use CTRL-HELP (or CTRL-PF1 or CTRL-F1) to get this help on keys.\n\
+Use CTRL-[an integer] to choose a debug mode (same as resource wboxdebug).\n\
+\n\
+-----------------SPECIAL OPTIONS WITHIN ARRAY FIELDS------------------\n\
+\n\
+Use FIND (or CTRL-F) to go to a desired index or value in the current column.\n\
+     The closest match will be found.\n\
+Use CTRL-M to find the next matching value in the current column.\n\
+Use CTRL-N to find the next non-matching value in the current column.\n\
+Use CTRL-V to find ANY value which matches ANY OTHER in the current column.\n\
+Use REMOVE (or CTRL-R) to remove a row and put it into the row-buffer.\n\
+Use INSERT (or CTRL-I) to insert a row from the row-buffer.\n\
+     If the row-buffer is empty, or contains a row from a different set of\n\
+     linked arrays, or the array index of the current row does not match\n\
+     the array index previously saved, the inserted row is set to nils.\n\
+Use CTRL-P (paste) like INSERT, except the current row does not have to\n\
+     match the saved row.  This enables moving rows from one row to another.\n\
+Use CTRL-C (clear) to clear the row-buffer to nils.\n\
+The current index, and the maximum current number of indices, are shown \n\
+     in a message area at the bottom.\n\
+You can resize this dialog box by grabbing its border with the mouse, to \n\
+     increase or decrease the number of rows and columns visible.  This is \n\
+     particularly useful when you have a long set of linked arrays, or a \n\
+     bunch of columns on the right which are not currently needed. \n\
+In some applications, the keys for inserting and removing rows might work\n\
+     slightly differently from the above description.\n\
+\n\
+---------------ALTERNATIVE WAYS TO USE ARROW AND TAB KEYS--------------\n\
+\n\
+Use CTRL-S (referred to above) to toggle between three keymodes for using\n\
+   arrow and tab keys (corresponding to values of the resource wboxkeymode):\n\
+\n\
+wboxkeymode 1 (most similar to EZED, and to Motif style for buttons):      \n\
+  to move within a datafield:        SHIFT-LEFT   SHIFT-RIGHT              \n\
+  to move to another datafield:      LEFT         RIGHT                    \n\
+  to move between datafield groups:  F20  SHIFT-F20  CTRL-T  TAB  SHIFT-TAB\n\
+\n\
+wboxkeymode 2 (most similar to Motif style for text):                      \n\
+  to move within a datafield:         SHIFT-LEFT  SHIFT-RIGHT  LEFT  RIGHT \n\
+  to move to another datafield:       TAB   SHIFT-TAB                      \n\
+  to move between datafield groups:   F20   SHIFT-F20   CTRL-T             \n\
+\n\
+wboxkeymode 3 (reduces conflict between windowboxes and Motif):            \n\
+  to move within a datafield:         SHIFT-LEFT   SHIFT-RIGHT             \n\
+  to move to another datafield:       LEFT         RIGHT                   \n\
+  to move between datafield groups:   F20   SHIFT-F20   CTRL-T             \n\
+\n\
+----------------------------RESOURCES---------------------------------\n\
+\n\
+The following resource be set for tables in an app-defaults file,\n\
+or in your own .Xdefaults table.  The examples shown are commonly-\n\
+used defaults (although not necessarily the defaults in this program).\n\
+\n\
+The font resource and color resources may have to be customized for\n\
+different X-window servers and for individual preferences.\n\
+On gray-scale monitors, the colors automatically change to shades of gray.\n\
+On black-white monitors, the colors automatically change to black or white.\n\
+\n\
+To change any resource, just add lines like these examples to your\n\
+.Xdefaults file in your home directory, and then load the file into\n\
+your server by typing xrdb .Xdefaults.  (The information in parentheses\n\
+should not be typed.)\n\
+\n\
+\n\
+*wboxdebug:  0    (0 = no debug print, 1 = standard debug print,\n\
+                               2 = extensive debug print, 3 = very extensive)\n\
+                              (also changable with the CTRL-0, CTRL-1, CTRL-2,\
+ and CTRL-3 keys)\n\
+\n\
+*wboxtiny:  0   (0 = invisible tiny pushbutton, needed for technical reasons)\n\
+                          1 or more = visible tiny pushbutton of\
+ indicated size for debug purposes)\n\
+\n\
+*wboxkeymode:   1    (1 = use arrow keys to move left and right,\n\
+                                    2 = use TAB and SHIFT-TAB to move\
+ left and right,\n\
+                                    3 = like 1 except TAB and SHIFT-TAB\
+ not used at all)\n\
+                                   (also changable with the CTRL-S key)\n\
+\n\
+*wboxscrollbars:   2        (0 = no scrollbars, 1 = as needed, 2 = always)\n\
+\n\
+*wboxscrollwidth:   17        (width of scrollbars in pixels)\n\
+\n\
+*wboxmaxrows:      10   (maximum number of array rows to initially display)\n\
+\n\
+*wboxfont:         9x15        (name of font to use)\n\
+\n\
+*wboxbackground:   gray        (background color of tables)\n\
+\n\
+*wboxbutton:       light blue   (background color of pushable pushbutton)\n\
+\n\
+*wboxhighlight:    light blue   (background color of enterable text field)\n\
+\n\
+*wboxpressed:      gold    (color of pressable, pressed toggle/radio button)\n\
+\n\
+*wboxtopshadow:    white     (top shadow of pushbutton, bottom of text box)\n\
+\n\
+*wboxbottomshadow: black     (bottom shadow of pushbutton, top of textbox)\n\
+\n\
+*wboxnormaltext:   black       (color of most text)\n\
+\n\
+*wboxdimtext:      gray40      (color of dimmed-out text)\n\
+\n\
+*wboxenterbox:     red   (color of small rectangle around field with focus)\n\
+\n\
+*wboxmessagetext:  white       (color of most messages in message areas)\n\
+\n\
+*wboxmessageloud:  blue      (color of important messages in message areas)\n\
+\n\
+*wboxmessagebox:   black       (color of box around message areas)\n\
+\n\
+NOTE REGARDING GRAY COLORS:\n\
+The color "black" is the same as "gray0".\n\
+The color "white" is the same as "gray100".\n\
+The color "gray" might be similar to as "gray50" or "gray75".\n\
+You can specify any shade of gray by using the name "gray" appended\n\
+by any integer between 0 and 100.\n\
+\n\
+-------------------------------END------------------------------------
+
+overview*DATABOX_HARDCOPY:\
+Press OK to save the contents of this table to a file.\n\
+Press Cancel if you decide NOT to save this table to a file.\n\
+\n\
+If you do not like the default filename, change it.  If you do not\n\
+type an extension, the extension ".hardcopy" will be added for you.\n\
+\n\
+The following information is saved to the file:\n\
+(1) An image of the visible table area (inside the dark black
+square).\n\
+(2) The full listing of all scrollable arrays in the table.\n\
+\n\
+It is possible to get an extremely large file if the scrollable\n\
+arrays are long.  For this reason, the approximate length of the\n\
+file is shown.\n\
+\n\
+After this file is saved, it can be edited with a text editor,\n\
+printed, and/or processed by awk or another program.\n\
+\n\
+
+
+
+
+
+############################ HELP FOR TABLES ###########################
+############################ HELP FOR TABLES ###########################
+############################ HELP FOR TABLES ###########################
+######## originally copied from fg.lay on 3 February 1995 ##############
+
+
+
+################## LINE DESCRIPTION CARDS
+################## LINE DESCRIPTION CARDS
+################## LINE DESCRIPTION CARDS
+
+
+overview*LD_CARDS:\
+\n\
+Overview help for line desciption cards goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons\n\
+when it is permitted to type (or re-type) numbers in that column.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+overview*ADDITIONAL_LD_CARDS:\
+\n\
+Overview help for additional line desciption cards goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons\n\
+when it is permitted to type (or re-type) numbers in that column.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+overview*LD_CARDS_QC:\
+\n\
+Overview help for line desciption cards Q/C goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons\n\
+when it is permitted to type (or re-type) numbers in that column.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+For NO CHAINING, the DIST column will remain blank, except when showing\n\
+   interpolated values (i.e. the horizontal distance values which will\n\
+   be calculated on the Cray from XLOC and YLOC).\n\
+
+############# chaining
+
+
+help*ld_top*chaining:\
+For HORIZONTAL CHAINING, DIST is a horizontal distance corresponding to\n\
+   changes in the XLOC and YLOC coordinates only.  The XLOC column will\n\
+   remain blank (will be calculated from the DIST and YLOC columns).\n\
+For SLOPE CHAINING, DIST is a sloping distance corresponding to changes\n\
+   in the XLOC and YLOC coordinates, and changes in ELEV (the elevation).\n\
+   The XLOC column will remain blank (will be calculated from the DIST\n\
+   and YLOC and ELEV columns).\n\
+For NO CHAINING, DIST is a horizontal distance corresponding to changes\n\
+   in the XLOC and YLOC coordinates.  The DIST column will remain blank\n\
+   (will be calculated from the XLOC and YLOC columns).\n\
+The blank column (DIST or XLOC) will be temporarily filled in when showing\n\
+   interpolated values (i.e. viewing the values which will be calculated\n\
+   on the Cray).\n\
+The CHAINING parameter can be set by the user only when beginning to build\n\
+   LD cards manually, or when changing it between HORIZONTAL and SLOPE.\n\
+   If a survey file is being read in, it is set to NO CHAINING.\n\
+   If an LD file is being read in, it is set to the value saved on the file.\n\
+
+help*ld_top*chaining*horizontal chaining:\
+For HORIZONTAL CHAINING, DIST is a horizontal distance corresponding to\n\
+   changes in the XLOC and YLOC coordinates only.  The XLOC column will\n\
+   remain blank (will be calculated from the DIST and YLOC columns).\n\
+
+help*ld_top*chaining*slope chaining:\
+For SLOPE CHAINING, DIST is a sloping distance corresponding to changes\n\
+   in the XLOC and YLOC coordinates, and changes in ELEV (the elevation).\n\
+   The XLOC column will remain blank (will be calculated from the DIST\n\
+   and YLOC and ELEV columns).\n\
+
+help*ld_top*chaining*no chaining:\
+For NO CHAINING, DIST is a horizontal distance corresponding to changes\n\
+   in the XLOC and YLOC coordinates.  The DIST column will remain blank\n\
+   (will be calculated from the XLOC and YLOC columns).\n\
+
+
+
+################## line number
+
+help*ld_top*active.text:\
+Line number to display in the arrays below.\n\
+Normally 0 for 2-D lines and consecutive positive integers for 3-D data.\n\
+\n\
+This line number is placed into the following CPS header words:\n\
+   Scratch header word 26 for traces with a source on this line.\n\
+   Scratch header word 27 for traces with a receiver on this line.\n\
+   The average of the source and receiver line numbers is also placed\n\
+   into header word 38.\n\
+
+help*ld_table*scale.scale:\
+Slide this scale to choose the line number to display in the arrays below.\n\
+
+help*ld_table*scale.right:\
+Press this arrow key to display the arrays for the next line.\n\
+
+help*ld_table*scale.left:\
+Press this arrow key to display the arrays for the previous line.\n\
+
+
+
+
+
+################ shotpoint
+
+help*ld_table_1:\
+SP# is the shotpoint (surveyed flag number) corresponding to the XLOC and\n\
+YLOC values on this LD card.\n\
+\n\
+This shotpoint is placed into the following CPS header words:\n\
+   Scratch header word 29 for traces with a source at this flag.\n\
+   Scratch header word 28 for traces with a receiver at this flag.\n\
+   Header word 37 for traces with a midpoint at or near this flag.\n\
+
+
+
+
+
+################ incremental distance
+
+help*ld_table_2:\
+DIST is the distance from the previous flag (on the previous\n\
+   LD card) to the present flag (on this LD card) in feet or meters.\n\
+   If this is the first card for this line, the value of DIST is the\n\
+   absolute X coordinate (same as XLOC).\n\
+For HORIZONTAL CHAINING, DIST is a horizontal distance corresponding to\n\
+   changes in the XLOC and YLOC coordinates only.\n\
+For SLOPE CHAINING, DIST is a sloping distance corresponding to changes\n\
+   in the XLOC and YLOC coordinates, and changes in ELEV (the elevation).\n\
+For NO CHAINING, the DIST column will remain blank, except when showing\n\
+   interpolated values (i.e. the horizontal distance values which will\n\
+   be calculated on the Cray from XLOC and YLOC).\n\
+Blank values in this field will be interpolated by downward repetition.\n\
+
+
+
+################ xloc
+
+help*ld_table_3:\
+XLOC is the absolute X coordinate of the flag (shotpoint number) on this LD\n\
+   card, in feet or meters.\n\
+Unless NO CHAINING is in effect, The XLOC column will remain blank, except\n\
+   when showing interpolated values (i.e. viewing the values which will\n\
+   be calculated on the Cray from DIST and YLOC).\n\
+Blank values in this field will be linearly interpolated and extrapolated.\n\
+\n\
+This X coordinate (appropriately skidded) is placed into the following\n\
+CPS header words:\n\
+   Header word 11 for traces with a source at this flag.\n\
+   Header word 14 for traces with a receiver at this flag.\n\
+The average of the source and receiver X coordinates is the midpoint\n\
+   X coordinate of a trace.\n\
+The midpoint X coordinate is placed into header word 17 (but only if\n\
+   the FIXDIST parameter is zero or negative).\n\
+The midpoint X coordinate is placed into unassigned header word 58.\n\
+
+
+
+################ yloc
+
+help*ld_table_4:\
+YLOC is the absolute Y coordinate of the flag (shotpoint number) on this LD\n\
+   card, in feet or meters.\n\
+Blank values in this field will be linearly interpolated and extrapolated.\n\
+\n\
+This Y coordinate (appropriately skidded) is placed into the following\n\
+CPS header words:\n\
+   Header word 12 for traces with a source at this flag.\n\
+   Header word 15 for traces with a receiver at this flag.\n\
+The average of the source and receiver Y coordinates is the midpoint\n\
+   Y coordinate of a trace.\n\
+The midpoint Y coordinate is placed into header word 18 (but only if\n\
+   the FIXDIST parameter is zero or negative).\n\
+The midpoint Y coordinate is placed into unassigned header word 59.\n\
+
+
+
+################ elevation
+
+help*ld_table_5:\
+ELEV is the elevation of the flag (shotpoint number) on this LD card, in\n\
+    feet or meters.\n\
+Blank values in this field will be linearly interpolated, and extrapolated\n\
+    with the first or last value in the column.\n\
+\n\
+For sources, this elevation is used only for sources which do not have\n\
+    elevations specified on the PP cards.\n\
+If a source has an inline skid (specified on the PP cards) large enough\n\
+    to put it closer to a different flag, it will be assigned the elevation\n\
+    of that closer flag if a new elevation has not been specified on the\n\
+    PP cards.\n\
+\n\
+This elevation (appropriately skidded) is placed into the following\n\
+CPS header words:\n\
+   Header word 13 for traces with a source at this flag.\n\
+   Header word 16 for traces with a receiver at this flag.\n\
+   Header word 19 for traces with a midpoint at or near this flag.\n\
+
+
+################ xgrid
+
+help*ld_table_6:\
+XGRID is the X coordinate of the flag (shotpoint number) on this LD\n\
+   card, in grid coordinates.\n\
+XGRID is calculated from XLOC and YLOC using the grid transformation\n\
+   (origin and rotation matrix).\n\
+
+
+
+################ ygrid
+
+help*ld_table_7:\
+YGRID is the Y coordinate of the flag (shotpoint number) on this LD\n\
+   card, in grid coordinates.\n\
+YGRID is calculated from XLOC and YLOC using the grid transformation\n\
+   (origin and rotation matrix).\n\
+
+
+
+################ hole depth
+
+help*ld_table_8:\
+HD is the default hole depth of the source, in feet or meters.\n\
+TUH is the corresponding default uphole time, in milliseconds.\n\
+Blank values in this field will be linearly interpolated, and extrapolated\n\
+    with the first or last value in the column.\n\
+These values are used only for sources which do not have values for\n\
+    new hole depth or new uphole time specified on the PP cards.\n\
+
+
+
+################ uphole time
+
+help*ld_table_9: ATTNHELP: help*ld_table_8
+
+
+
+################ receiver static
+
+help*ld_table_10:\
+TR is the receiver static in milliseconds.\n\
+TS is the source static in milliseconds.\n\
+Blank values in this field will be linearly interpolated, and extrapolated\n\
+    with the first or last value in the column.\n\
+
+
+
+################ source static
+
+help*ld_table_11: ATTNHELP: help*ld_table_10
+
+
+
+################ receiver inline skid
+
+help*ld_table_12:\
+XSD is the receiver skid in the inline direction, in feet or meters.\n\
+   A positive number is a skid toward the next (increasing) LD card location.\n\
+YSD is the receiver skid in the crossline direction (perpendicular to\n\
+   the local direction of the line), in feet or meters.\n\
+   A positive number is a skid to the left, when facing toward the\n\
+   next (increasing) LD card location.\n\
+Note that these skids are NOT generally in the X and Y directions.\n\
+Blank values in these two fields are interpreted as zero.\n\
+
+
+
+################ receiver crossline skid
+
+help*ld_table_13: ATTNHELP: help*ld_table_12
+
+
+
+################ receiver elevation skid
+
+help*ld_table_14:\
+ELSD is the receiver skid in elevation, in feet or meters.\n\
+A positive number is an increase in elevation, with respect to the elevation\n\
+   of the shotpoint location.\n\
+Blank values in this field are interpreted as zero.\n\
+
+
+
+
+################ select column
+
+help*ld_table_15:\
+This column shows which flags are selected (for special display\n\
+or for special operations).  Each small pushbutton indicates one of\n\
+the following situations for each flag:\n\
+    blank:      the flag has NOT been selected.\n\
+    Y (yes):    the flag has been individually selected.\n\
+    n (no):     the flag has been individually NON-selected.\n\
+    T (top):    the flag is the first flag in a list of selected flags.\n\
+    B (bottom): the flag is the last flag in a list of selected flags.\n\
+    asterisk:   the flag falls within a list of selected flags.\n\
+Each time you press one of these pushbuttons, the selection code\n\
+for that flag will be incremented.\n\
+
+
+################ azimuth column
+
+help*ld_table_17:\
+This column shows the azimuth (direction angle in degrees) of this\n\
+flag from the preceding flag.\n\
+
+
+
+################ S column
+
+help*ld_table_18:\
+This column shows how many sources are actually at the\n\
+specified flag.  A blank means that there are no sources\n\
+at the flag.  A question mark means that source gathers\n\
+have not been calculated yet, or are out-of-date.\n\
+
+
+
+################ R column
+
+help*ld_table_19:\
+This column shows an 'R' if any traces are actually recorded by\n\
+a receiver at the specified flag.  A blank means that the\n\
+receiver (if any) at this flag is not used by any source.\n\
+A question mark means that receiver gathers have not been\n\
+calculated yet, or are out-of-date.\n\
+
+
+
+################ active column
+
+help*ld_table_20:\
+This column shows which flag is the "active" flag.\n\
+The active flag may be specially marked on a plot, or\n\
+specially chosen for other displays or tables.\n\
+
+
+
+################ cumulative ground position column   LD_GP1
+
+help*ld_table_21:\
+This column shows the sequential ground position for this flag.\n\
+\n\
+This ground position is used when the "FIXDIST" parameter\n\
+is set to 0 or to a negative number.\n\
+\n\
+This ground position starts with a value of 1 for the first flag\n\
+on the first line, and increments from flag to flag and from line\n\
+to line without repeating and without skipping any numbers.\n\
+
+
+
+################ matchable ground position column   LD_GP2
+
+help*ld_table_22:\
+This column shows the sequential ground position for this flag.\n\
+\n\
+This ground position is used when the "FIXDIST" parameter\n\
+is set to a positive number.\n\
+\n\
+This ground position is assigned in such a way that flags on two\n\
+different lines will have the same ground position if they have\n\
+the same shotpoint.  This will work as intended only if all lines\n\
+have the same shotpoints and shotpoint increments (although they do\n\
+not have to start and stop on the same shotpoints).\n\
+
+
+
+################ ground position column   LD_GP3
+
+help*ld_table_23:\
+This column shows the sequential ground position for this flag.\n\
+This ground position is placed into the following CPS header words:\n\
+   Header word 46 for traces with a source at this flag.\n\
+   Header word 47 for traces with a receiver at this flag.\n\
+\n\
+If the "FIXDIST" parameter is set to 0 or to a negative number:\n\
+   The ground position starts with a value of 1 for the first flag\n\
+   on the first line, and increments from flag to flag and from line\n\
+   to line without repeating and without skipping any numbers.\n\
+\n\
+If the "FIXDIST" parameter is set to a positive number:\n\
+   The ground position is assigned in such a way that flags on two\n\
+   different lines will have the same ground position if they have\n\
+   the same shotpoint.  This will work as intended only if all lines\n\
+   have the same shotpoints and shotpoint increments (although they do\n\
+   not have to start and stop on the same shotpoints).\n\
+   If everything is OK, the first ground position on all lines will\n\
+   be 1 or greater.  However, if some lines do not match appropriately,\n\
+   the first ground position on those lines will be 0.\n\
+   The line will not match appropriately if its shotpoint increment\n\
+   is not uniform, or does not match the shotpoint increment on other\n\
+   lines, or the line does not have shotpoint numbers in common with\n\
+   other lines.\n\
+
+
+
+################ ground position columns in list of lines
+
+help*linelist_table_10:\
+This column shows the sequential ground position for the first or last\n\
+   flag on each seismic line.\n\
+This ground position is placed into the following CPS header words:\n\
+   Header word 46 for traces with a source at this flag.\n\
+   Header word 47 for traces with a receiver at this flag.\n\
+\n\
+If the "FIXDIST" parameter is set to 0 or to a negative number:\n\
+   The ground position starts with a value of 1 for the first flag\n\
+   on the first line, and increments from flag to flag and from line\n\
+   to line without repeating and without skipping any numbers.\n\
+\n\
+If the "FIXDIST" parameter is set to a positive number:\n\
+   The ground position is assigned in such a way that flags on two\n\
+   different lines will have the same ground position if they have\n\
+   the same shotpoint.  This will work as intended only if all lines\n\
+   have the same shotpoints and shotpoint increments (although they do\n\
+   not have to start and stop on the same shotpoints).\n\
+   If everything is OK, the first ground position on all lines will\n\
+   be 1 or greater.  However, if some lines do not match appropriately,\n\
+   the first ground position on those lines will be 0.\n\
+   The line will not match appropriately if its shotpoint increment\n\
+   is not uniform, or does not match the shotpoint increment on other\n\
+   lines, or the line does not have shotpoint numbers in common with\n\
+   other lines.\n\
+
+
+help*linelist_table_11: ATTNHELP: help*linelist_table_10
+
+
+
+################ actual cumulative distance column   FG_CUM
+
+help*ld_table_16:\
+This column shows the ACTUAL horizontal cumulative distance\n\
+of this flag from the start of the line, measured from flag\n\
+to flag, using the ACTUAL horizontal incremental distance\n\
+between flags.\n\
+\n\
+If FIXDIST is zero, this column will show a zero for the first\n\
+flag on the line.\n\
+\n\
+If FIXDIST is positive or negative, this column will show a value\n\
+which might be different from zero for the first flag on the line.\n\
+This first value will be a multiple of FIXDIST; it will be equal\n\
+to zero or greater than zero if everything is OK, or less than zero\n\
+if the line does not match appropriately.\n\
+The line will not match appropriately if its shotpoint increment\n\
+is not uniform, or does not match the shotpoint increment on other\n\
+lines, or the line does not have shotpoint numbers in common with\n\
+other lines.\n\
+
+
+
+################ uniform cumulative distance column   LD_UNIFORM
+
+help*ld_table_24:\
+This column shows the UNIFORM horizontal cumulative distance\n\
+of this flag from the start of the line, using the SPECIFIED\n\
+uniform incremental distance between flags.\n\
+\n\
+If FIXDIST is zero, this column will show a zero for the first\n\
+flag on the line.\n\
+\n\
+If FIXDIST is positive or negative, this column will show a value\n\
+which might be different from zero for the first flag on the line.\n\
+This first value will be a multiple of FIXDIST; it will be equal\n\
+to zero or greater than zero if everything is OK, or less than zero\n\
+if the line does not match appropriately.\n\
+The line will not match appropriately if its shotpoint increment\n\
+is not uniform, or does not match the shotpoint increment on other\n\
+lines, or the line does not have shotpoint numbers in common with\n\
+other lines.\n\
+\n\
+Normally, trace header words 17 and 18 contain the true X and Y\n\
+midpoint coordinates.  However, if FIXDIST is positive, header\n\
+word 17 will be derived from this value (appropriately skidded)\n\
+for the source and receiver of the trace, using FIXDIST as the\n\
+specified uniform incremental distance between flags, and header\n\
+word 18 will be zero.\n\
+
+
+
+################ error flags
+
+help*ld_table_25:\
+This column shows the following error flags:\n\
+\n\
+An 'I' means that the incremental distance between two flags\n\
+           exceeds the specified criterion.\n\
+A 'C' means that the actual cumulative distance from the beginning\n\
+           of the line differs from the uniform cumulative distance\n\
+           (calculated from the specified incremental distance)\n\
+           by the specified criterion.\n\
+An 'A' means that the azimuth direction of the flag from the previous\n\
+           flag changes by an amount specified.\n\
+           
+
+################ dead flags
+
+help*ld_table_26:\
+The first character in this column shows whether any source at the\n\
+flag is alive, dead, reverse-polarity, or missing on the input reels,\n\
+as determined by the ZT1 cards (first table of zero-trace cards).\n\
+\n\
+A blank means that the source is live.\n\
+A 'D' means that the source is dead.\n\
+An 'R' means that the source is reverse-polarity.\n\
+An 'M' means that the source is missing on the input reels.\n\
+\n\
+An asterisk (*) in the second column means that SOME traces with\n\
+a source at this flag might be dead, reverse-polarity, or missing,\n\
+as specified by the ZT4 cards.\n\
+
+
+help*ld_table_27:\
+The first character in this column shows whether any receiver at the\n\
+flag is alive, dead, reverse-polarity, or missing on the input reels,\n\
+as determined by the ZT2 cards (second table of zero-trace cards).\n\
+\n\
+A blank means that the receiver is live.\n\
+A 'D' means that the receiver is dead.\n\
+An 'R' means that the receiver is reverse-polarity.\n\
+An 'M' means that the receiver is missing on the input reels.\n\
+\n\
+An asterisk (*) in the second column means that SOME traces with\n\
+a receiver at this flag might be dead, reverse-polarity, or missing,\n\
+as specified by the ZT4 cards.\n\
+
+
+
+################## RECEIVER PATTERN CARDS
+################## RECEIVER PATTERN CARDS
+################## RECEIVER PATTERN CARDS
+
+
+overview*RP_POP:\
+\n\
+Overview help for receiver pattern cards goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+################ active column
+
+help*rp_table_14:\
+This column shows which RP card is the "active" card.\n\
+The active card may represent the card associated with\n\
+a specific trace or group or PP card, or might also\n\
+be used for other identification purposes.\n\
+
+
+
+################ pattern number
+
+help*rp_table_1:\
+Receiver pattern number (any integer) referred to on the PP cards.\n\
+
+
+
+################ total number of channels
+
+help*rp_table_2:\
+Total number of channels described by all of the RP cards\n\
+in this receiver pattern.\n\
+
+
+
+################ cumulative number of channels
+
+help*rp_table_3:\
+Cumulative number of channels described by all of the RP cards\n\
+up through this card in this receiver pattern.\n\
+
+
+
+################ flag
+
+help*rp_table_4:\
+This variable specifies whether the trace numbers in the shot profile change\n\
+fastest in the inline (X) direction or in the crossline (Y) direction.  You\n\
+must specify X or Y in this field.  The choice is irrelevant unless both\n\
+#X and #Y are greater than one (that is, you have a rectangular array of\n\
+receivers).\n\
+\n\
+Two additional FLAG options are available (FLAG=SKIP and FLAG=DUP) to\n\
+facilitate describing two particular types of situations where the LD cards\n\
+are used in an irregular manner in some shot profiles.\n\
+\n\
+To handle these cases, one or more additional RP cards can\n\
+be built for a given pattern number, in addition to the card(s) with FLAG=X\n\
+and/or FLAG=Y.  By setting FLAG=SKIP or FLAG=DUP, you can specify a shotpoint\n\
+(and corresponding line number) which will be either skipped, or used twice,\n\
+in the receiver spread (as if you had a missing or duplicate LD card).  The\n\
+specified location must exist on an LD card.  Note that when you set\n\
+FLAG=SKIP or FLAG=DUP, the shotpoint and line number will be ACTUAL\n\
+locations rather than dummy or relative locations, and that all columns\n\
+to the right of these will be irrelevant.\n\
+\n\
+You may want to use FLAG=SKIP to handle the case where a particular\n\
+shotpoint was not used (skipped over) while laying out receivers,\n\
+such that adjacent channels were recorded by receivers on each side of this\n\
+shotpoint.  The receiver pattern described by the other RP cards with the\n\
+same pattern number will automatically skip over this location.\n\
+\n\
+You may want to use FLAG=DUP to handle the case where\n\
+a particular shotpoint was used twice while laying out receivers,\n\
+such that two adjacent channels were recorded at the same\n\
+shotpoint.  The receiver pattern described by the other RP cards with the\n\
+same pattern number will automatically use this location twice.\n\
+
+
+
+################ shotpoint of first receiver
+
+help*rp_table_5:\
+This is the shotpoint of the first receiver described on this Receiver\n\
+Pattern card.  It is a dummy location which is replaced by the receiver\n\
+shotpoint number on any PP card which references this Receiver Pattern card.\n\
+The only time this number means anything is when you have more than one\n\
+Receiver Pattern card with the same Receiver Pattern number.  In such a case,\n\
+subsequent Receiver Pattern cards are related to the first card by the\n\
+difference in the shotpoints.\n\
+\n\
+If FLAG=SKIP or FLAG=DUP, this is an ACTUAL shotpoint (described on an LD\n\
+card) which is either skipped or duplicated when laying out receivers.\n\
+
+
+
+################ line number of first receiver
+
+help*rp_table_6:\
+This is the line number of the first receiver described on this Receiver \n\
+Pattern card.  It is a dummy location which is replaced by the receiver line\n\
+number on any PP card which references this Receiver Pattern card.\n\
+The only time this number means anything is when you have more than one\n\
+Receiver Pattern card with the same Receiver Pattern number.  In such a case,\n\
+subsequent Receiver Pattern cards are related to the first card by the\n\
+difference in the line numbers.\n\
+\n\
+If FLAG=SKIP or FLAG=DUP, this is the ACTUAL line number of a shotpoint\n\
+(described on an LD card) which is either skipped or duplicated when laying\n\
+out receivers.\n\
+
+
+
+################ number of receivers in inline direction
+
+help*rp_table_7:\
+#X is the number of receivers oriented in the inline direction (along the\n\
+    line) beginning at the specified shotpoint and line number.\n\
+Note that this direction is not necessarily in the X direction.\n\
+This parameter is irrelevant if FLAG=SKIP or FLAG=DUP.\n\
+
+
+
+################ spacing between receivers in inline direction
+
+help*rp_table_8:\
+XINC is the spacing between receivers, measured in LD card intervals.  In\n\
+   other words, XINC is an integer (positive, negative, or zero) which \n\
+   specifies how many LD cards we must move in order to go from one \n\
+   receiver to the next.\n\
+For example, if the LD shotpoint interval is 0.5 and the receiver shotpoint\n\
+   interval is 1.0, you must specify XINC=2.\n\
+This parameter is irrelevant if FLAG=SKIP or FLAG=DUP.\n\
+
+
+
+################ number of receivers in crossline direction
+
+help*rp_table_9:\
+#Y is the number of receivers oriented in the crossline direction (at \n\
+the same shotpoint but on different lines) beginning at the specified \n\
+shotpoint and line number.\n\
+Note that this direction is not necessarily in the Y direction.\n\
+This parameter is irrelevant if FLAG=SKIP or FLAG=DUP.\n\
+
+
+
+################ spacing between receivers in crossline direction
+
+help*rp_table_10:\
+YINC is the spacing between receivers, measured in line intervals.  In other\n\
+   words, XINC is an integer (positive, negative, or zero) which specifies\n\
+   how many lines we must move in order to go from one receiver to the next.\n\
+For example, if one receiver is on line 7 and the next receiver is on line 5,\n\
+   you must specify YINC=-2.\n\
+This parameter is irrelevant if FLAG=SKIP or FLAG=DUP.\n\
+
+
+
+################ pattern skid in inline direction
+
+help*rp_table_11:\
+XSKID is the receiver skid in the inline direction, in feet or meters.\n\
+   A positive number is a skid toward the next (increasing) LD card location.\n\
+YSKID is the receiver skid in the crossline direction (perpendicular to\n\
+   the local direction of the line), in feet or meters.\n\
+   A positive number is a skid to the left, when facing toward the\n\
+   next (increasing) LD card location.\n\
+Note that these skids are NOT generally in the X and Y directions.\n\
+Note that these skids actually relate to a particular channel number\n\
+   (or trace number) in a shot profile, and not to actual receiver ground\n\
+   positions; therefore these skids are rarely used.\n\
+These two parameters are irrelevant if FLAG=SKIP or FLAG=DUP.\n\
+
+
+
+################ pattern skid in crossline direction
+
+help*rp_table_12: ATTNHELP: help*rp_table_11
+
+
+
+################ pattern skid in elevation
+
+help*rp_table_13:\
+ESKID is the receiver skid in elevation, in feet or meters.\n\
+A positive number is an increase in elevation, with respect to the elevation\n\
+   of the shotpoint location.\n\
+Note that this elevation skid actually relates to a particular channel number\n\
+   (or trace number) in a shot profile, and not to actual receiver ground\n\
+   positions; therefore this elevation skid is rarely used.\n\
+This parameter is irrelevant if FLAG=SKIP or FLAG=DUP.\n\
+
+
+
+
+
+
+################## PROFILE PATTERN CARDS
+################## PROFILE PATTERN CARDS
+################## PROFILE PATTERN CARDS
+
+
+overview*PP_POP:\
+\n\
+Overview help for profile pattern cards goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+
+################ active column
+
+help*pp_table_19:\
+This column shows which PP card is the "active" card.\n\
+The active card may represent the card associated with\n\
+a specific trace or group, or might also be used for\n\
+other identification purposes.\n\
+
+
+
+################ first file number
+
+help*pp_table_1:\
+This column shows an optional file number to be associated with.\n\
+the first group (shot profile) described by this PP card.\n\
+The file numbers will increment from this value for any\n\
+additional groups described by this card.\n\
+This file number need not be unique.  It might represent\n\
+a field file number on observer sheets, or a record number\n\
+on a tape.  It is intended for identification purposes\n\
+and is not used for any other purpose.\n\
+
+
+
+################ shotpoint of source
+
+help*pp_table_2:\
+This is the shotpoint of the first source described on this PP card.\n\
+This field cannot be blank.\n\
+
+
+
+################ line number of source
+
+help*pp_table_3:\
+This is the line number of the first source described on this PP card.\n\
+Blank values in this field will be interpolated by downward repetition.\n\
+
+
+
+################ shotpoint of first receiver
+
+help*pp_table_4:\
+This is the shotpoint of the first receiver described on this PP card.\n\
+This number replaces the shotpoint listed on the referenced RP card.\n\
+This field cannot be blank.\n\
+
+
+
+################ line number of first receiver
+
+help*pp_table_5:\
+This is the line number of the first receiver described on this PP card.\n\
+This number replaces the line number listed on the referenced RP card.\n\
+Blank values in this field will be interpolated by downward repetition.\n\
+
+
+
+################ pattern number
+
+help*pp_table_6:\
+Receiver pattern number (any integer) which refers to the appropriate \n\
+  RP card.  \n\
+Blank values in this field will be interpolated by downward repetition.\n\
+
+
+
+################ source skid in inline direction
+
+help*pp_table_7:\
+XSKID is the source skid in the inline direction, in feet or meters.\n\
+   A positive number is a skid toward the next (increasing) LD card location.\n\
+YSKID is the source skid in the crossline direction (perpendicular to\n\
+   the local direction of the line), in feet or meters.\n\
+   A positive number is a skid to the left, when facing toward the\n\
+   next (increasing) LD card location.\n\
+Note that these skids are NOT generally in the X and Y directions.\n\
+Blank values in these two fields are interpreted as zero.\n\
+
+
+
+################ source skid in crossline direction
+
+help*pp_table_8: ATTNHELP: help*pp_table_7
+
+
+
+################ hold
+
+help*pp_table_9:\
+This is the number of groups which will have the specified source skid\n\
+    (XSKID and YSKID).  If this is less than the total number of groups\n\
+    described on this PP card, the remaining groups will have no skid.\n\
+The minimum value is one.\n\
+Blank values in this field are interpreted as equal to one.\n\
+If you type the value 999, it is interpreted as an infinite number, so that\n\
+    ALL the groups on this PP card will have the source skid.\n\
+
+
+
+################ new source elevation
+
+help*pp_table_10:\
+ELEV is a new source elevation, in feet or meters.  This is needed only when\n\
+   the source has an elevation different from that specified on the LD cards.\n\
+This value applies only to the first file described on this PP card.\n\
+If left blank, the elevation on the LD card applies.\n\
+
+
+
+################ new source hole depth
+
+help*pp_table_11:\
+HD is a new hole depth, in feet or meters.  This is needed only when the\n\
+    source has a hole depth different from that specified on the LD cards.\n\
+This value applies only to the first file described on this PP card.\n\
+If left blank, the hole depth on the LD card applies.\n\
+
+
+
+################ new source uphole time
+
+help*pp_table_12:\
+TUH is a new uphole time, in milliseconds.  This is needed only when \n\
+   the source has an uphole time different from the uphole time specified \n\
+   on the LD cards.\n\
+This value applies only to the first file described on this PP card.\n\
+If left blank, the uphole time on the LD card applies.\n\
+
+
+
+################ source moveup
+
+help*pp_table_13:\
+If more than one source is specified on this PP card, this is the moveup, in\n\
+    LD card intervals, of each source.  This can be positive, negative, \n\
+    or zero.\n\
+Blank values in this field will be interpolated by downward repetition.\n\
+
+
+
+################ receiver moveup
+
+help*pp_table_14:\
+If more than one source is specified on this PP card, this is the moveup,\n\
+    in LD card intervals, of the first receiver in each shot profile.\n\
+This can be positive, negative, or zero.\n\
+Blank values in this field will be interpolated by downward repetition.\n\
+
+
+
+################ number of groups
+
+help*pp_table_15:\
+This is the number of groups (shot profiles) described on this PP card.\n\
+It must be 1 or more.\n\
+
+
+
+################ number of traces
+
+help*pp_table_16:\
+This is the number of traces in all of the groups\n\
+described on this PP card.\n\
+
+
+
+################ thru group number
+
+help*pp_table_17:\
+This is the last group number described on this PP card.  It must be larger\n\
+    than the value on the preceding PP card, and smaller than the value\n\
+    on the following PP card.  The first group number described on this PP\n\
+    card is one greater than the last group number on the preceding PP card.\n\
+    If this is the first card, the first group number is one.\n\
+If only one group is described on this PP card, this value must exceed that\n\
+    on the preceding card by one.\n\
+
+
+
+################ thru trace number
+
+help*pp_table_18:\
+This is the sequential trace number for the last trace in the\n\
+last group described on this PP card.\n\
+The sequential trace number is a sequential value, counting up\n\
+from 1, through the entire survey.\n\
+
+
+
+
+################# ZERO SOURCES
+################# ZERO SOURCES
+################# ZERO SOURCES
+
+
+
+overview*ZT1_CARDS:\
+\n\
+Overview help for zero-trace cards of type 1 goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+
+################ active column
+
+help*zt_table_15:\
+This column shows which ZT card is the "active" card.\n\
+
+help*zt_table_25: ATTNHELP: help*zt_table_15
+help*zt_table_36: ATTNHELP: help*zt_table_15
+help*zt_table_48: ATTNHELP: help*zt_table_15
+
+
+
+################ code
+
+help*zt_table_11:\
+Type ZERO (first letter is sufficient) to kill these traces.\n\
+Type REV  (first letter is sufficient) to reverse the polarity of these \n\
+            traces.\n\
+Type MISS (first letter is sufficient) if these traces are missing (not \n\
+            on the input reels), and therefore the corresponding headers \n\
+            are to be skipped.\n\
+
+
+help*zt_table_21: ATTNHELP: help*zt_table_11
+help*zt_table_31: ATTNHELP: help*zt_table_11
+help*zt_table_41: ATTNHELP: help*zt_table_11
+
+
+
+################ from shotpoint
+
+help*zt_table_12:\
+Range of shotpoint numbers (at given line number) of sources to be killed\n\
+    or reversed.  The beginning and ending shotpoints can be in either order.\n\
+To kill or reverse only one source, specify the same shotpoint in both\n\
+    shotpoint columns; the program will default the second column to match \n\
+    the first.\n\
+
+
+
+################ to shotpoint
+
+help*zt_table_13:\
+Range of shotpoint numbers (at given line number) of sources to be killed\n\
+    or reversed.  The beginning and ending shotpoints can be in either order.\n\
+To kill or reverse only one source, specify the same shotpoint in both\n\
+    shotpoint columns; the program will default the second column to match \n\
+    the first.\n\
+
+
+
+################ line number
+
+help*zt_table_14:\
+Line number of sources to be killed or reversed.\n\
+
+
+
+
+
+
+################# ZERO RECEIVERS
+################# ZERO RECEIVERS
+################# ZERO RECEIVERS
+
+
+
+overview*ZT2_CARDS:\
+\n\
+Overview help for zero-trace cards of type 2 goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+################ from shotpoint
+
+help*zt_table_22:\
+Range of shotpoint numbers (at given line number) of receivers to be killed\n\
+    or reversed.  The beginning and ending shotpoints can be in either order.\n\
+To kill or reverse only one receiver, specify the same shotpoint in both\n\
+    shotpoint columns; the program will default the second column to match \n\
+    the first.\n\
+
+
+
+################ to shotpoint
+
+help*zt_table_23:\
+Range of shotpoint numbers (at given line number) of receivers to be killed\n\
+    or reversed.  The beginning and ending shotpoints can be in either order.\n\
+To kill or reverse only one receiver, specify the same shotpoint in both\n\
+    shotpoint columns; the program will default the second column to match \n\
+    the first.\n\
+
+
+
+################ line number
+
+help*zt_table_24:\
+Line number of receivers to be killed or reversed.\n\
+
+
+
+
+
+
+################# ZERO TRACES IN GROUPS
+################# ZERO TRACES IN GROUPS
+################# ZERO TRACES IN GROUPS
+
+
+
+overview*ZT3_CARDS:\
+\n\
+Overview help for zero-trace cards of type 3 goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+################ from group
+
+help*zt_table_32:\
+Range of group numbers for which one or more traces are to be killed or\n\
+    reversed.  The beginning and ending group numbers can be in either order.\n\
+To kill or reverse traces in only one group, specify the same group number\n\
+    in both group columns; the program will default the second column to \n\
+    match the first.\n\
+To kill or reverse the same traces in all groups, specify the range 1 \n\
+    to 99999 (or any sufficiently large value).\n\
+
+
+
+################ to group
+
+help*zt_table_33:\
+Range of group numbers for which one or more traces are to be killed or\n\
+    reversed.  The beginning and ending group numbers can be in either order.\n\
+To kill or reverse traces in only one group, specify the same group number\n\
+    in both group columns; the program will default the second column to \n\
+    match the first.\n\
+To kill or reverse the same traces in all groups, specify the range 1 \n\
+    to 99999 (or any sufficiently large value).\n\
+
+
+
+################ from channel
+
+help*zt_table_34:\
+Range of trace numbers, in the specified group(s), to be killed or reversed.\n\
+    The beginning and ending trace numbers can be in either order.\n\
+To kill or reverse only one trace in the specified group(s), specify the\n\
+    same trace number in both trace columns; the program will default the\n\
+    second column to match the first.\n\
+To kill or reverse all of the traces in the specified group(s), specify the\n\
+    range 1 to 99999 (or any sufficiently large value).\n\
+
+
+
+################ to channel
+
+help*zt_table_35:\
+Range of trace numbers, in the specified group(s), to be killed or reversed.\n\
+    The beginning and ending trace numbers can be in either order.\n\
+To kill or reverse only one trace in the specified group(s), specify the\n\
+    same trace number in both trace columns; the program will default the\n\
+    second column to match the first.\n\
+To kill or reverse all of the traces in the specified group(s), specify the\n\
+    range 1 to 99999 (or any sufficiently large value).\n\
+
+
+
+
+
+
+
+################# RANGE OF RECEIVER IN RANGE OF SOURCES
+################# RANGE OF RECEIVER IN RANGE OF SOURCES
+################# RANGE OF RECEIVER IN RANGE OF SOURCES
+
+
+
+overview*ZT4_CARDS:\
+\n\
+Overview help for zero-trace cards of type 4 goes here.\n\
+\n\
+The names at the tops of each column of numbers are pushbuttons.\n\
+When the pushbutton is pressed, that column toggles between being\n\
+highlighted (meaning that the user can type into the column) or\n\
+un-highlighted (meaning the user has no access to that column).\n\
+This functionality is provided to allow the user to decide which\n\
+columns should be protected from accidental changes, or automatically\n\
+skipped over when arrowing from one column to another.\n\
+
+
+
+################ from source shotpoint
+
+help*zt_table_42:\
+Range of shotpoint numbers (at given line number) of sources for which a\n\
+  range of receivers are to be killed or reversed.  The beginning and ending\n\
+  shotpoints can be in either order.\n\
+To kill or reverse a range of receivers for only one source, specify the\n\
+  same shotpoint in both shotpoint columns; the program will default the\n\
+  second column to match the first.\n\
+
+
+
+################ to source shotpoint
+
+help*zt_table_43:\
+Range of shotpoint numbers (at given line number) of sources for which a\n\
+  range of receivers are to be killed or reversed.  The beginning and ending\n\
+  shotpoints can be in either order.\n\
+To kill or reverse a range of receivers for only one source, specify the\n\
+  same shotpoint in both shotpoint columns; the program will default the\n\
+  second column to match the first.\n\
+
+
+
+################ source line number
+
+help*zt_table_44:\
+Line number of sources for which some receivers are to be killed or reversed.\n\
+
+
+
+################ from receiver shotpoint
+
+help*zt_table_45:\
+Range of shotpoint numbers (at given line number) of receivers to be killed\n\
+  or reversed (for specified sources).  The beginning and ending shotpoints\n\
+  can be in either order.\n\
+To kill or reverse only one receiver, specify the same shotpoint in both\n\
+  shotpoint columns; the program will default the second column to match\n\
+  the first.\n\
+
+
+
+################ to receiver shotpoint
+
+help*zt_table_46:\
+Range of shotpoint numbers (at given line number) of receivers to be killed\n\
+  or reversed (for specified sources).  The beginning and ending shotpoints\n\
+  can be in either order.\n\
+To kill or reverse only one receiver, specify the same shotpoint in both\n\
+  shotpoint columns; the program will default the second column to match\n\
+  the first.\n\
+
+
+
+################ receiver line number
+
+help*zt_table_47:\
+Line number of receivers (for specified sources) to be killed or reversed.\n\
+
+
+
+
+################## TRACE HEADERS TABLE
+################## TRACE HEADERS TABLE
+################## TRACE HEADERS TABLE
+
+
+help*fixdist.text:\
+FIXDIST is the fixed inline distance increment.  If FIXDIST is\n\
+  not zero, several things happen for each line:\n\
+\n\
+If FIXDIST>0 or FIXDIST<0:\n\
+   (1) The actual inline distance to each flag is replaced by a\n\
+  regularized measurement, such that the distance from flag to\n\
+  flag (from one LD card to the next) is assumed equal to the\n\
+  absolute value of FIXDIST.\n\
+   (2) If there is more than one line, the inline coordinates of\n\
+  all flags on all lines are set to values that will match up the\n\
+  shotpoints of all the lines, such that the minimum inline\n\
+  coordinate will be zero.  This will give sensible results only\n\
+  if the shotpoint increment is the same for all lines.\n\
+\n\
+If FIXDIST>0:\n\
+   (1) The CMP X-coordinate is replaced by the (now fixed) "center"\n\
+  CMP inline distance, and the CMP Y-coordinate is set to 0.\n\
+   (2) The "nearest" CMP shotpoint and elevation are replaced by\n\
+  the "center" CMP shotpoint and elevation.\n\
+   (3) The sequential ground position is set so that matching\n\
+  shotpoints on different lines will have the same value.  This\n\
+  will work correctly only if the LD card shotpoint increment\n\
+  is the same for all lines, and matches the smallest ground\n\
+  position spacing for the data set.\n\
+\n\
+
+
+
+
+overview*HEADER_POP:\
+\n\
+This table shows CPS trace headers calculated from the field geometry.\n\
+\n\
+\n\
+The following definitions might be helpful:\n\
+\n\
+SEQUENTIAL GROUND POSITION - This is the LD card number.  If\n\
+  FIXDIST is positive, this is set differently, as described\n\
+  below.\n\
+\n\
+INLINE DISTANCE - The distance measured along the (possibly\n\
+  crooked) line, beginning with a value of zero for the first\n\
+  flag on that line.  If FIXDIST is not zero, this inline\n\
+  distance is altered as described below.\n\
+\n\
+NEAREST CMP quantity - The quantity corresponds to a point on the\n\
+  (possibly crooked) line closest to the true (X,Y) midpoint,\n\
+  which may not actually fall on the line.\n\
+\n\
+CENTER CMP quantity - The quantity corresponds to a point halfway\n\
+  between the source and receiver as measured along the (possibly\n\
+  crooked) line.  The location of this point is specified by the\n\
+  average of the source and receiver inline distances.  However,\n\
+  if the source and/or receiver of a trace have skids large\n\
+  enough to put them closer to different flags, these quantities\n\
+  will be calculated as if the source and/or receiver were at those\n\
+  closer flags.  (This allows the trace to fall into the middle of\n\
+  the correct CMP bin when a fixed inline distance is requested.)\n\
+\n\
+FIXDIST is the fixed inline distance increment.  If FIXDIST is\n\
+  not zero, several things happen for each line:\n\
+\n\
+If FIXDIST>0 or FIXDIST<0:\n\
+   (1) The actual inline distance to each flag is replaced by a\n\
+  regularized measurement, such that the distance from flag to\n\
+  flag (from one LD card to the next) is assumed equal to the\n\
+  absolute value of FIXDIST.\n\
+   (2) If there is more than one line, the inline coordinates of\n\
+  all flags on all lines are set to values that will match up the\n\
+  shotpoints of all the lines, such that the minimum inline\n\
+  coordinate will be zero.  This will give sensible results only\n\
+  if the shotpoint increment is the same for all lines.\n\
+\n\
+If FIXDIST>0:\n\
+   (1) The CMP X-coordinate is replaced by the (now fixed) "center"\n\
+  CMP inline distance, and the CMP Y-coordinate is set to 0.\n\
+   (2) The "nearest" CMP shotpoint and elevation are replaced by\n\
+  the "center" CMP shotpoint and elevation.\n\
+   (3) The sequential ground position is set so that matching\n\
+  shotpoints on different lines will have the same value.  This\n\
+  will work correctly only if the LD card shotpoint increment\n\
+  is the same for all lines, and matches the smallest ground\n\
+  position spacing for the data set.\n\
+\n\
+
+
+
+
+################## SOURCE GATHERS TABLE
+################## SOURCE GATHERS TABLE
+################## SOURCE GATHERS TABLE
+
+
+overview*GROUPS_POP:\
+\n\
+This table shows a list of all source gathers ( often referred to\n\
+as "groups" by Conoco seismic data processors and technicians).\n\
+\n\
+
+
+help*groups_table_1:\
+This column contains ths shotpoint of the source.\n\
+\n\
+A blank field means that there are no LD cards describing this location.\n\
+\n\
+
+
+help*groups_table_2:\
+This column contains ths line number of the source.\n\
+\n\
+A blank field means that there are no LD cards describing this location.\n\
+\n\
+
+
+help*groups_table_3:\
+This column contains ths shotpoint of the first receiver (channel 1)\n\
+for this source.\n\
+\n\
+A blank field means that there are no LD cards describing this location.\n\
+\n\
+
+
+help*groups_table_4:\
+This column contains ths line number of the first receiver (channel 1)\n\
+for this source.\n\
+\n\
+A blank field means that there are no LD cards describing this location.\n\
+\n\
+
+
+help*groups_table_5:\
+This column shows the increment (moveup) in shotpoint units from the\n\
+source for this group to the source for the next group (next row down).\n\
+\n\
+A blank field means that there are no LD cards describing this location,\n\
+or the corresponding location in the next group.\n\
+\n\
+
+
+help*groups_table_6:\
+This column shows the increment (moveup) in line-number units from the\n\
+source for this group to the source for the next group (next row down).\n\
+\n\
+A blank field means that there are no LD cards describing this location,\n\
+or the corresponding location in the next group.\n\
+\n\
+
+
+help*groups_table_7:\
+This column shows the increment (moveup) in shotpoint units from the\n\
+first receiver for this group to the first receiver for the next group\n\
+(next row down).\n\
+\n\
+A blank field means that there are no LD cards describing this location,\n\
+or the corresponding location in the next group.\n\
+\n\
+
+
+help*groups_table_8:\
+This column shows the increment (moveup) in line-number units from the\n\
+first receiver for this group to the first receiver for the next group\n\
+(next row down).\n\
+\n\
+A blank field means that there are no LD cards describing this location,\n\
+or the corresponding location in the next group.\n\
+\n\
+
+
+help*groups_table_9:\
+This column shows the increment (moveup) in shotpoint units from the\n\
+source for this group to the first receiver for this group.\n\
+\n\
+A blank field means that there are no LD cards describing the location\n\
+of the source or first receiver of this group.\n\
+\n\
+
+
+help*groups_table_10:\
+This column shows the increment (moveup) in line-number units from the\n\
+source for this group to the first receiver for this group.\n\
+\n\
+A blank field means that there are no LD cards describing the location\n\
+of the source or first receiver of this group.\n\
+\n\
+
+
+help*groups_table_23:\
+This column shows an asterisk if this group is mentioned on one\n\
+or more ZT3 cards.  If this group is mentioned, this means that\n\
+one or more channels (traces) in this group are dead, reverse-polarity,\n\
+or missing on the input reals.\n\
+\n\
+A blank field means that this group is not mentioned on any ZT3 cards.\n\
+\n\
+
+
+help*groups_table_88:\
+This column contains flags for missing information.\n\
+\n\
+The letters "rp" in the middle of the column indicate a missing\n\
+   receiver pattern.  This would mean that there are no RP cards\n\
+   corresponding to the receiver pattern number on the PP card\n\
+   describing this group.\n\
+\n\
+The letters "F" and "L" in the left side of the column indicate\n\
+   a missing flag or line, respectively, for the source location.\n\
+   This would mean that there are no LD cards with the corresponding\n\
+   shotpoint and line number of this source.\n\
+\n\
+The letters "F" and "L" in the right side of the column indicate\n\
+   a missing flag or line, respectively, for the receiver location\n\
+   of the first channel of this group.\n\
+   This would mean that there are no LD cards with the corresponding\n\
+   shotpoint and line number of this receiver.\n\
+\n\
+
+
+
+################## CMP GATHERS TABLE
+################## CMP GATHERS TABLE
+################## CMP GATHERS TABLE
+
+
+overview*MIDPOINTS_POP:\
+\n\
+This table shows a list of all CMP gathers.\n\
+To see the list, you must create CMP gathers using the Data Control\n\
+Panel.\n\
+\n\
+If there are any unplaced traces (i.e. if there are any traces whose\n\
+coordinates cannot be determined because of missing RP or LD cards),\n\
+all of the unplaced traces will be put into the first CMP bin,\n\
+which will not have any bin center coordinates.\n\
+\n\
+
+
+help*cmp_table_16:\
+If you type a new minimum CMP X grid coordinate into this field,\n\
+the grid transformation will be changed (by changing the X origin\n\
+value) so that all X grid coordinates will now be consistent with\n\
+this new minimum value.  (The CMP Y grid coordinates will not be\n\
+affected.)\n\
+\n\
+Normally, the desirable minimum CMP X grid coordinate is 1.\n\
+(Or you might want to set to 1 the minimum CMP X grid coordinate\n\
+which has a live fold greater than zero.)\n\
+\n\
+When you change this value, you will NOT make the CMP gathers\n\
+out-of-date, even though the grid transform is being changed.\n\
+\n\
+
+
+help*cmp_table_17:\
+If you type a new minimum CMP Y grid coordinate into this field,\n\
+the grid transformation will be changed (by changing the Y origin\n\
+value) so that all Y grid coordinates will now be consistent with\n\
+this new minimum value.  (The CMP X grid coordinates will not be\n\
+affected.)\n\
+\n\
+Normally, the desirable minimum CMP Y grid coordinate is 1 when\n\
+the FIXDIST is zero, and 0 otherwise.\n\
+(Or you might want to set to 1 the minimum CMP Y grid coordinate\n\
+which has live fold greater than zero.)\n\
+\n\
+When you change this value, you will NOT make the CMP gathers\n\
+out-of-date, even though the grid transform is being changed.\n\
+\n\
+
+
+help*cmp_table_26:\
+If you type a new maximum CMP X grid coordinate into this field,\n\
+the grid transformation will be changed (by changing the X origin\n\
+value) so that all X grid coordinates will now be consistent with\n\
+this new maximum value.  (The CMP Y grid coordinates will not be\n\
+affected.)\n\
+\n\
+When you change this value, you will NOT make the CMP gathers\n\
+out-of-date, even though the grid transform is being changed.\n\
+\n\
+
+
+help*cmp_table_27:\
+If you type a new maximum CMP Y grid coordinate into this field,\n\
+the grid transformation will be changed (by changing the Y origin\n\
+value) so that all Y grid coordinates will now be consistent with\n\
+this new maximum value.  (The CMP X grid coordinates will not be\n\
+affected.)\n\
+\n\
+When you change this value, you will NOT make the CMP gathers\n\
+out-of-date, even though the grid transform is being changed.\n\
+\n\
+
+
+help*cmp_table_6:\
+If you type a new CMP X grid coordinate into this field,\n\
+the grid transformation will be changed (by changing the X origin\n\
+value) so that all X grid coordinates will now be consistent with\n\
+this new value.  (The CMP Y grid coordinates will not be affected.)\n\
+\n\
+When you change this value, you will NOT make the CMP gathers\n\
+out-of-date, even though the grid transform is being changed.\n\
+\n\
+
+
+help*cmp_table_7:\
+If you type a new CMP Y grid coordinate into this field,\n\
+the grid transformation will be changed (by changing the Y origin\n\
+value) so that all Y grid coordinates will now be consistent with\n\
+this new value.  (The CMP X grid coordinates will not be affected.)\n\
+\n\
+When you change this value, you will NOT make the CMP gathers\n\
+out-of-date, even though the grid transform is being changed.\n\
+\n\
+
+
+help*cmp_table_33:\
+This number (between 1 and 9) represents the sub-bin (within the\n\
+CMP bin) which contains the largest number of traces in the bin.\n\
+The CMP bin is evenly divided into 9 identical sub-bins as follows:\n\
+\n\
+         7  8  9    (Y coord is more than   Y bin center coordinate)\n\
+         4  5  6    (Y coord apprx equal to Y bin center coordinate)\n\
+         1  2  3    (Y coord is less than   Y bin center coordinate)\n\
+         |  |  |\n\
+         |  |  ---> (X coord is more than   X bin center coordinate)\n\
+         |  ------> (X coord apprx equal to X bin center coordinate)\n\
+         ---------> (X coord is less than   X bin center coordinate)\n\
+\n\
+If the trace midpoints are well centered near the center of the bin,\n\
+this sub-bin number should be 5.\n\
+\n\
+
+
+
+################## GRID TRANSFORM POPUP
+################## GRID TRANSFORM POPUP
+################## GRID TRANSFORM POPUP
+
+
+overview*TRANSFORM_POP:\
+\n\
+This table shows the grid transformation (origin and rotation matrix)\n\
+used to sort seismic traces into CMP gathers (or CMP bins).\n\
+\n\
+The left column contains values for a "temporary" or "test" transformation.\n\
+The user can type into any datafield, and all other dependent datafields\n\
+will be updated, so that a complete and valid transformation is always\n\
+represented (although it might not be the one you want!).\n\
+\n\
+The right column displays values for the transform which is actually used\n\
+to create CMP gathers.\n\
+\n\
+To copy the temporary transform to the actual transform, press OK or APPLY.\n\
+To reset the temporary transform to match the actual transform, press RESET\
+ or CANCEL.\n\
+\n\
+\n\
+------------------------------------------------------------------------\n\
+\n\
+HERE IS ONE SUGGESTED WAY TO DERIVE A GRID TRANSFORM FOR YOUR DATASET\n\
+GRAPHICALLY, WITHOUT DOING ANY MANUAL CALCULATIONS.  (You may find other\n\
+ways to accomplish this goal.)\n\
+\n\
+\n\
+INITIAL PREPARATION:\n\
+\n\
+(1) Read in the JD for your desired 3-D dataset.\n\
+\n\
+(2) Pop up the Grid Transform dialog box and preset the grid transform\n\
+    values.  You must set the X and Y grid width and choose a right-handed\n\
+    or left-handed coordinate system.  Since you do not know the X and Y\n\
+    origins or the rotation angle, you can set these to zero (or to any other\n\
+    values you want).  If you know an approximate rotation angle, type it\n\
+    in.  Then press APPLY to update the grid transformation to the new\n\
+    values.  Finally, to conserve space, make the Grid Transformation\n\
+    dialog box smaller so that only the X and Y origin and the rotation\n\
+    angle are visible.\n\
+\n\
+(3) Create CMP gathers (using the Data Control Panel) using this\n\
+    (undoubtedly poor) grid transformation.  Then relax the data lock\n\
+    (so you can change the grid transform later) by selecting "lock changes\n\
+    to S/R gathers" instead of "lock changes to S/R/CMP gathers".\n\
+\n\
+SEE HOW GOOD YOUR ROTATION ANGLE IS:\n\
+\n\
+(4) Display a "bin centers distribution" plot:\n\
+      Pop up QC Plots (under the Plots menu).\n\
+      Select the "Bin Centers Distribution" attribute.\n\
+      Press either the "Survey Coordinates" or the "Grid Coordinates"\n\
+        radio button (your choice).\n\
+      Press the "Update Coordinates" pushbutton.\n\
+      Toggle "Extended Colors" on if necessary (maybe not necessary).\n\
+      Press OK to get the plot.\n\
+      Press "Options..." (or use mouse button 3) and choose "Picking\n\
+        Options..." to get the Pick Menu popup.  Toggle off "Show Original\n\
+        Transform" and "Show New Transform".\n\
+\n\
+(5) What the "bin centers distribution" plot means:\n\
+    The various colors in the this plot represent the predominant\n\
+    location of trace midpoints within their CMP bins, as identified by\n\
+    the small 9-color diagram.  The color gray (labelled "5") means\n\
+    that the trace midpoints fall predominantly in the middle of the\n\
+    bin (desirable).  You will note that the colors in the "bin centers\n\
+    distribution" plot are arranged in a somewhat irregular checkerboard\n\
+    pattern.  The larger the square patches in this pattern are, the more\n\
+    accurate the rotation angle currently is.  If the rotation angle\n\
+    is very wrong, the square patches in this pattern will be very small,\n\
+    with only a few CMP bins (or even only one bin) within each square.\n\
+    If the rotation angle is nearly correct, the square patches will be\n\
+    large.  If the rotation angle is dead right, the entire plot will be\n\
+    the same color (with the possible exception of a few bins with\n\
+    irregularities caused by lots of skids, etc.)\n\
+\n\
+OBTAIN AN APPROXIMATE ROTATION ANGLE:\n\
+\n\
+(6) If the square patches in the "bin centers distribution" plot are\n\
+    a lot bigger than a single CMP bin, you already have an approximate\n\
+    rotation angle and can skip to step (12).  But if the square patches\n\
+    are very small, continue with step (7).\n\
+\n\
+(7) Select the "Change Angle" picking option on the Pick Menu popup.\n\
+\n\
+(8) Click and drag the pointer along a direction which you want to be\n\
+    parallel to the X axis in the grid coordinate system.  This might be\n\
+    along the edge of the survey, or along any "active line" which you\n\
+    choose to have displayed on the plot.  For accuracy, drag along as much\n\
+    of the full length of the plot as you can.  There are four orthogonal\n\
+    directions you can choose from, depending on your desired orientation\n\
+    of the grid system.  You can watch the rotation angle value in the\n\
+    Grid Transform dialog box to help you choose the direction you want.\n\
+    You can click and drag as many times as you wish until you are happy\n\
+    with the result.\n\
+\n\
+(9) Save the new grid transform with the rotation angle you just picked.\n\
+    Do this either by pressing "Save Transform" on the Pick Menu popup,\n\
+    or by pressing "Apply" on the Grid Transformation popup.  Verify that\n\
+    this save was successful by noting that the value of this new angle\n\
+    has been copied to the right side of the Grid Transformation popup.\n\
+    Then remove the "bin centers distribution" plot to get it out of the way.\n\
+\n\
+GET NEW CMP GATHERS AND NEW PLOT:\n\
+\n\
+(10) Create CMP gathers again, with this improved grid transform, by\n\
+     repeating step (3).  It will be faster this time.\n\
+\n\
+(11) Display a new "bin centers distribution" plot by repeating step (4).\n\
+\n\
+CHOOSE A TEMPORARY ORIGIN:\n\
+\n\
+(12) Choose the "CMP Distribution Plot" picking option on the Pick Menu\n\
+     popup.  This picking option works just like zooming up a small area,\n\
+     except in this case you will get a new type of plot of the selected\n\
+     area.\n\
+\n\
+(13) Select a SMALL area (3 or 4 CMP's square) anywhere within the "bin\n\
+     centers distribution" plot, but preferably in a gray patch.  This\n\
+     will give you a detailed plot of a few adjacent CMP bins whose midpoints\n\
+     are approximately centered.  Make a MENTAL NOTE of which gray area you\n\
+     are using.\n\
+\n\
+(14) Press "Options..." or use mouse button 3 and choose "Picking Options..."\n\
+     to get the Pick Menu popup for this CMP distribution plot.  Then choose\n\
+     "Define Origin" and click the pointer on any location which should\n\
+     be a bin center.  This becomes a temporary origin which will be changed\n\
+     later.\n\
+\n\
+REFINE THE ROTATION ANGLE:\n\
+\n\
+(15) Choose another "CMP Distribution Plot" by repeating steps (12) and (13).\n\
+     But this time, select another similar small area within a color patch\n\
+     ADJACENT to the gray patch used previously.\n\
+\n\
+(16) Repeat step (14), but this time choose "Refine Angle" and again click\n\
+     the pointer on any location which should be a bin center.  This causes\n\
+     a small rotation around the temporary origin previously picked, in\n\
+     order to swing the coordinate system so that the point you just picked\n\
+     ends up as close as possible to the center of its bin.\n\
+\n\
+(17) Save the new grid transform with the new (temporary) origin and\n\
+     the new (refined) angle by repeating step (9).  Then remove the\n\
+     "bin centers distribution" plot and both "CMP distribution" plots.\n\
+\n\
+CHECK YOUR RESULT:\n\
+\n\
+(18) Repeat steps (10) and (11).  Now the "bin centers distribution" plot\n\
+     should have much larger squares, and ideally should be all gray, which\n\
+     means that the trace midpoints over the survey are well-centered within\n\
+     their respective bins.  To verify your results, you can choose one\n\
+     or more new "CMP distribution" plots to look at.  If further\n\
+     refinements are needed, you can repeat steps (12) through (18).\n\
+\n\
+CHOOSE THE FINAL ORIGIN:\n\
+\n\
+(19) Pop up the list of CMP gathers.  Set any X and Y bin center to any\n\
+     integers you wish by typing anywhere in the rightmost two columns.\n\
+     If you want the first X bin center to be 1, for example, you can type\n\
+     a 1 into the first location in the X column, or into the "minimum"\n\
+     field above the X column.  When you type into any field, the origin\n\
+     is moved from the center of one bin to the center of another bin\n\
+     without moving any bin boundaries.  This has the effect of re-defining\n\
+     the origin WITHOUT putting your CMP gathers out-of-date.\n\
+\n\
+YOU ARE FINISHED!\n\
+\n\
+
+
+
+
+#HERE IS ONE SUGGESTED WAY TO DERIVE A GRID TRANSFORM FOR YOUR DATASET\n\
+#GRAPHICALLY, WITHOUT DOING ANY MANUAL CALCULATIONS:\n\
+#\n\
+#\n\
+#INITIAL PREPARATION:\n\
+#\n\
+#(1) Read in the JD for your desired 3-D dataset.\n\
+#\n\
+#(2) Pop up the Grid Transform dialog box and preset the grid transform\n\
+#    values.  You must set XWIDTH and YWIDTH and choose a right-handed\n\
+#    or left-handed coordinate system.  Since you do not know XORG, YORG,\n\
+#    or ANGLE, you can set these to zero (or to any other values you want).\n\
+#\n\
+#(3) Create CMP gathers (using the Data Control Panel) using this\n\
+#    (undoubtedly poor) grid transformation.\n\
+#\n\
+#OBTAIN AN APPROXIMATE ANGLE:\n\
+#\n\
+#(4) Display a "bin centers distribution" plot:\n\
+#      Pop up QC Plots (under the Plots menu).\n\
+#      Select bin centers distribution.\n\
+#      Toggle extended colors on.\n\
+#      Press OK to get the plot.\n\
+#      Under "Options..." (or mouse button 3) choose "Picking Options...":\n\
+#        Toggle off "show original transform" and "show new transform".\n\
+#        Choose "change angle" picking option.\n\
+#\n\
+#      The various colors in the "bin centers distribution" plot represent\n\
+#        the predominant location of trace midpoints within their bins, as\n\
+#        identified by the small 9-color diagram.  You will note that the\n\
+#        colors are arranged in a checkerboard pattern.  The orientation of\n\
+#        this pattern corresponds to the desired orientation of the\n\
+#        grid coordinate system (i.e. the desired rotation angle).  The\n\
+#        larger the squares in this pattern are, the more accurate the\n\
+#        rotation angle currently is.\n\
+#\n\
+#      Select the "Change Angle Option" and click and drag the pointer\n\
+#        along a direction parallel to the colored squares in the\n\
+#        "bin centers distribution" plot.\n\
+#        For accuracy, drag along a color boundary over the full length\n\
+#        of the plot.  The direction you drag will be parallel to the\n\
+#        X axis in the grid coordinate system.  There are four orthogonal\n\
+#        directions you can choose from, depending on your desired\n\
+#        orientation of the grid system.  You can watch the ANGLE\n\
+#        value in the Grid Transform dialog box to help you choose\n\
+#        the direction you want.\n\
+#\n\
+#(5) Save the new grid transform with the angle you just picked.\n\
+#\n\
+#CHOOSE A TEMPORARY ORIGIN AND REFINE THE ANGLE:\n\
+#\n\
+#(6) Create CMP gathers again (it will be faster this time).\n\
+#\n\
+#(7) Pop up QC Plots (under the Plots menu) again, and replace the\n\
+#    "bin centers distribution" plot by pressing "replace plot",\n\
+#    "update coordinates", and "OK".\n\
+#\n\
+#(8) Choose "CMP distribution" plot and select a SMALL area (3 or 4 CMP's\n\
+#    square) anywhere within the "bin centers distribution" plot.  This\n\
+#    will give you a detailed plot of a few adjacent CMP bins.  Choose\n\
+#    "define origin" and click the pointer on any location which should\n\
+#    be a bin center.  This becomes a temporary origin which will be changed\n\
+#    later.\n\
+#\n\
+#(9) Choose another "CMP distribution" plot and select another similar small\n\
+#    area near the previous selection within the "bin centers distribution"\n\
+#    plot.  The best area to select is within an adjacent colored region.\n\
+#    This gives you a new detailed plot of a few adjacent CMP bins.  Choose\n\
+#    "refine angle" and click the pointer on any location which should\n\
+#    be a bin center.  This causes a small rotation around the temporary\n\
+#    origin previously picked, in order to swing the coordinate system\n\
+#    so that the point you just picked ends up as close as possible to\n\
+#    the center of a bin.\n\
+#\n\
+#(10) Save the new grid transform with the new (temporary) origin and\n\
+#     the new (refined) angle.\n\
+#\n\
+#CHECK YOUR RESULT:\n\
+#\n\
+#(11) Repeat (6) and (7).  Now the "bin centers distribution" plot should\n\
+#     have much larger squares, and ideally should be all gray, which means\n\
+#     that the trace midpoints over the survey are well-centered within\n\
+#     their respective bins.  To verify your results, you can choose one\n\
+#     or more new "CMP distribution" plots to look at.  If further\n\
+#     refinements are needed, you can repeat (8), (9), and (10).\n\
+#     Then repeat this step (11).\n\
+#\n\
+#CHOOSE THE FINAL ORIGIN:\n\
+#\n\
+#(12) Pop up the list of CMP gathers.  Set the first X and Y bin centers\n\
+#     to 1 (or to any other integers you wish).  The origin is moved from\n\
+#     the center of one bin to the center of another bin without moving any\n\
+#     bin boundaries.  This has the effect of re-defining the origin\n\
+#     without putting your CMP gathers out-of-date.\n\
+#\n\
+#YOU ARE FINISHED!\n\
+#\n\
+
+
+
+
+
+help*tp_popup*xorigin.text:\
+This is the X origin of the grid coordinate system, in feet or meters.\n\
+\n\
+
+
+
+help*tp_popup*yorigin.text:\
+This is the Y origin of the grid coordinate system, in feet or meters.\n\
+\n\
+
+
+
+help*tp_popup*angle.text:\
+This is the angle of the grid coordinate system, in degrees.\n\
+This is the angle, measured from the X-axis in the distance (survey)\n\
+coordinate system to the X-axis in the grid coordinate system.\n\
+Changing this number will automatically change the rotation matrix\n\
+(and inverse rotation matrix) to maintain a valid transformation.\n\
+\n\
+
+
+
+help*tp_popup*xwidth.text:\
+This is the inline spacing (and bin width) in the X-direction of the\n\
+grid coordinate system, in feet or meters.\n\
+Changing this number will automatically change the rotation matrix\n\
+(and inverse rotation matrix) to maintain a valid transformation.\n\
+\n\
+
+
+
+help*tp_popup*ywidth.text:\
+This is the crossline spacing (and bin width) in the Y-direction of the\n\
+grid coordinate system, in feet or meters.\n\
+Changing this number will automatically change the rotation matrix\n\
+(and inverse rotation matrix) to maintain a valid transformation.\n\
+\n\
+
+
+
+help*tp_popup*hand:\
+Choose here whether you want the grid coordinate system to be a\n\
+right-handed or left-handed system.\n\
+A right-handed system has a positive Y-axis which is 90 degrees\n\
+counter-clockwise from the positive X-axis.\n\
+A left-handed system has a positive Y-axis which is 90 degrees\n\
+clockwise from the positive X-axis.\n\
+Changing this choice will automatically change the rotation matrix\n\
+(and inverse rotation matrix) to maintain a valid transformation.\n\
+\n\
+
+help*tp_popup*hand*right handed coordinate system: ATTNHELP: help*tp_popup*hand
+help*tp_popup*hand*left handed coordinate system: ATTNHELP: help*tp_popup*hand
+
+
+
+help*tp_popup*dx11.text:\
+This is one of the four values (in feet or meters) of the rotation\n\
+matrix which describes the grid coordinate system.\n\
+The rotation matrix (and inverse rotation matrix) are normally\n\
+calculated from the X and Y grid widths, the rotation angle, and\n\
+the right/left handedness choice.\n\
+Changing this number will automatically change other values\n\
+to maintain a valid transformation.\n\
+\n\
+
+help*tp_popup*dx21.text: ATTNHELP: help*tp_popup*dx11.text
+help*tp_popup*dx12.text: ATTNHELP: help*tp_popup*dx11.text
+help*tp_popup*dx22.text: ATTNHELP: help*tp_popup*dx11.text
+
+
+
+help*tp_popup*dn11.text:\
+This is one of the four values (in feet or meters) of the inverse rotation\n\
+matrix which describes the grid coordinate system.\n\
+The inverse rotation matrix (and forward rotation matrix) are normally\n\
+calculated from the X and Y grid widths, the rotation angle, and\n\
+the right/left handedness choice.\n\
+Changing this number will automatically change other values\n\
+to maintain a valid transformation.\n\
+\n\
+
+
+help*tp_popup*dn21.text: ATTNHELP: help*tp_popup*dn11.text
+help*tp_popup*dn12.text: ATTNHELP: help*tp_popup*dn11.text
+help*tp_popup*dn22.text: ATTNHELP: help*tp_popup*dn11.text
+
+
+
+help*tp_popup*xorigin2:\
+This is a value in the grid transformation which is actually in use\n\
+for calculating CMP gathers.\n\
+The value to the left (which you can change) belongs to a "temporary"\n\
+or "test" grid transformation.\n\
+\n\
+To copy the temporary transform to the actual transform, press OK or APPLY.\n\
+To reset the temporary transform to match the actual transform, press RESET\
+ or CANCEL.\n\
+\n\
+
+help*tp_popup*yorigin2: ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*angle2:   ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*xwidth2:  ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*ywidth2:  ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*hand2:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dx11a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dx21a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dx12a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dx22a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dn11a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dn21a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dn12a:    ATTNHELP: help*tp_popup*xorigin2
+help*tp_popup*dn22a:    ATTNHELP: help*tp_popup*xorigin2
+
+
+
+help*tp_popup*xloc.text:\
+ANY X SURVEYED COORDINATE.\n\
+Type any X surveyed coordinate into this field.\n\
+Using the X and Y surveyed coordinates, the corresponding\n\
+X and Y grid coordinates will be calculated, using the\n\
+"temporary" or "test" grid transformation displayed\n\
+in the left column above.\n\
+\n\
+
+
+help*tp_popup*yloc.text:\
+ANY Y SURVEYED COORDINATE.\n\
+Type any Y surveyed coordinate into this field.\n\
+Using the X and Y surveyed coordinates, the corresponding\n\
+X and Y grid coordinates will be calculated, using the\n\
+"temporary" or "test" grid transformation displayed\n\
+in the left column above.\n\
+\n\
+
+
+help*tp_popup*xgrid.text:\
+ANY X GRID COORDINATE.\n\
+Type any X grid coordinate into this field.\n\
+Using the X and Y grid coordinates, the corresponding\n\
+X and Y surveyed coordinates will be calculated, using the\n\
+"temporary" or "test" grid transformation displayed\n\
+in the left column above.\n\
+\n\
+
+
+help*tp_popup*ygrid.text:\
+ANY Y GRID COORDINATE.\n\
+Type any Y grid coordinate into this field.\n\
+Using the X and Y grid coordinates, the corresponding\n\
+X and Y surveyed coordinates will be calculated, using the\n\
+"temporary" or "test" grid transformation displayed\n\
+in the left column above.\n\
+\n\
+
+
+help*tp_popup*which:\
+Choose here how you want to do the calculations for the fields\n\
+immediately above this option menu.\n\
+You can choose whether to calculate the grid coordinates\n\
+from the surveyed coordinates, or vice versa.\n\
+\n\
+If you type a surveyed coordinate above, this option menu\n\
+will be changed to calculate grid coordinates.\n\
+If you type a grid coordinate above, this option menu\n\
+will be changed to calculate surveyed coordinates.\n\
+\n\
+
+help*tp_popup*which*calculate grid coordinates from surveyed coordinates:\
+ ATTNHELP: help*tp_popup*which
+help*tp_popup*which*calculate surveyed coordinates from grid coordinates:\
+ ATTNHELP: help*tp_popup*which
+
+
+
+help*tp_popup*  OK  *:\
+Press this OK button to copy the temporary transform (left column)\n\
+to the actual transform (right column), and then to pop down this\n\
+dialog box.\n\
+\n\
+
+
+help*tp_popup*Apply:\
+Press this APPLY button to copy the temporary transform (left column)\n\
+to the actual transform (right column).\n\
+\n\
+
+
+help*tp_popup*Reset:\
+Press this RESET button to reset the temporary transform (left column)\n\
+to match the actual transform (right column).\n\
+\n\
+
+
+help*tp_popup*Cancel:\
+Press this CANCEL button to reset the temporary transform (left column)\n\
+to match the actual transform (right column), and then to pop down this\n\
+dialog box.\n\
+\n\
+
+
+help*tp_popup*Data Control...:\
+Press this button to pop up the Data Control Panel, which can be used\n\
+to create CMP gathers.\n\
+\n\
+
+
+help*tp_popup* Help *:\
+Press this HELP button to get overview help for this dialog box.\n\
+\n\
+
+
+
+############ GENERAL STUFF
+############ GENERAL STUFF
+############ GENERAL STUFF
+
+
+help*goto.goto:\
+Press this button to show a menu of often-used dialog boxes to pop up.\n\
+This is a handy alternative to using the menubar in the main window.\n\
+\n\
+
+
+
+##################### END OF HELP FOR TABLES ###########################
+##################### END OF HELP FOR TABLES ###########################
+##################### END OF HELP FOR TABLES ###########################
+
+
+###################### help for READ JD popup #############################
+###################### help for READ JD popup #############################
+###################### help for READ JD popup #############################
+
+
+help*readjd*act.tog:\
+Turn on the toggle button for each part of the JD file which you wish to\n\
+read in.  If the toggle button is depressed, the corresponding cards will\n\
+be read into memory, and will either replace any existing cards, or will\n\
+be appended to any existing cards.\n\
+\n\
+Turn off the toggle button for each part of the JD file which you wish\n\
+to skip.  If the toggle button is not depressed, the corresponding cards\n\
+will not be read into memory, and the cards currently in memory will not\n\
+be modified.\n\
+\n\
+For convenience, you can press the "read all/none" button to simultaneously\n\
+turn all the toggle buttons on or off.\n\
+\n\
+
+
+
+help*readjd*act.app:\
+Select the "append" button if you want to append all the cards from the\n\
+JD file to the end of all cards currently in memory.  The cards currently\n\
+in memory are retained.\n\
+\n\
+Select the "replace" button if you want to delete the cards currently\n\
+in memory before reading in the cards from the JD file.\n\
+\n\
+For convenience, you can press the "append/replace" button to simultaneously\n\
+turn all the "append" and "replace" buttons on or off.\n\
+\n\
+If the option button below reads "ONLY use LD cards which replace SELECTED\n\
+matching lines or flags", then the action regarding LD cards is different:\n\
+   - No LD cards will be deleted or appended.\n\
+   - LD cards currently in memory will be replaced by matching LD cards\n\
+       from the JD file (i.e. same line number and shotpoint), but ONLY\n\
+       if the matching line and/or matching flag is SELECTED.\n\
+\n\
+If the option button below reads "ONLY use LD cards which replace ANY\n\
+matching lines or flags", then the action regarding LD cards is different:\n\
+   - No LD cards will be deleted or appended.\n\
+   - LD cards currently in memory will be replaced by matching LD cards\n\
+       from the JD file (i.e. same line number and shotpoint), whether\n\
+       or not the matching line and/or matching flag is selected.\n\
+\n\
+
+
+help*readjd*act.push1: ATTNHELP: help*readjd*act.tog
+help*readjd*act.push2: ATTNHELP: help*readjd*act.app
+help*readjd*act.rep:   ATTNHELP: help*readjd*act.app
+help*readjd*opt:       ATTNHELP: help*readjd*act.app
+help*readjd*opt*one:   ATTNHELP: help*readjd*act.app
+help*readjd*opt*two:   ATTNHELP: help*readjd*act.app
+help*readjd*opt*three: ATTNHELP: help*readjd*act.app
+
+
+
+################################# end #####################################
+################################# end #####################################
+################################# end #####################################
+

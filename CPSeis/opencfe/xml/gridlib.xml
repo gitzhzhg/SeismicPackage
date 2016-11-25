@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="gridlib" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+  </CommandArea>
+  <Help component="gridlib">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                       C P S   P R I M I T I V E
+ 
+ Name       : GRIDLIB
+ Category   : velocity
+ Written    : 2004-04-13   by: Bill Done
+ Revised    : 2007-01-03   by: Brian Macy
+ Maturity   : production
+ Purpose    : Read, write, and manipulate modspec grids.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ --&gt; Insert description information here.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Wherever possible, use the object interface subroutines. These are denoted
+ by the prefix "gridlib_obj_".
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 15. 2007-01-03  Brian Macy Add optional argument to not permit znons in
+                            the model built by gridlib_model_from_grid and
+                            gridlib_model_from_warp_grid.
+014. 2006-06-27  D. Glover  Added NULLIFY statements for Intel compiler.
+ 13. 2006-02-09  Brian Macy Fixed bug in handling units conversion for
+                            gradient grids.  Eliminate hard-coded units
+                            parameter in binary grid header.
+ 12. 2006-01-31  Brian Macy Changed declaration of domain variable in
+                            gridlib_read_def_model_parms.
+ 11. 2006-01-24  Brian Macy Added subroutine gridlib_read_def_model_parms and
+                            data structure gridlib_modspecheader_struct.  Also
+                            added private subroutines gridlib_decode,
+                            gridlib_upcase, and gridlib_keywrd to facilitate
+                            parsing of modspec header.
+ 10. 2006-01-10  B. Menger  Removed Unused Variables.
+  9. 2005-09-12  Bill Done  Change format statement in subroutine
+                            gridlib_print_parms_insertion to prevent field
+                            overflow and assure white space between fields.
+  8. 2005-01-31  Bill Done  Remove velocity clipping code from subroutines
+                            gridlib_model_from_grid, gridlib_compute_velocity,
+                            gridlib_model_from_warp_grid.
+  7. 2004-09-30  Bill Done  Declare interfaces gridlib_read_grid_header,
+                            gridlib_read_grid, and gridlib_write_grid public.
+  6. 2004-09-28  Bill Done  The pgi compiler seemed to be sensitive to having
+                            an interface and module procedure with the same
+                            name. So gridlib_read_grid_header() was renamed
+                            gridlib_read_abgrid_header() and subroutine
+                            gridlib_read_grid was rename gridlib_read_abgrid.
+                            gridlib_read_well() and gridlib_write_well()
+                            had len=256 replaced with len=* for several input
+                            character parameters.
+  5. 2004-09-23  Bill Done  Add interface subroutines for using gridlib_struct
+                            user defined type. Add calling_doc documentation
+                            for the new gridlib_struct interface routines.
+  4. 2004-06-15  Bill Done  Modify subroutines gridlib_model_from_grid and
+                            gridlib_model_from_warp_grid to first read the
+                            input grid header to determine the input grid
+                            size, then allocate a local array to receive
+                            the input grid, then read the grid.
+  3. 2004-05-06  Bill Done  Make subroutines gridlib_read_grid_data and
+                            gridlib_read_agrid_data private. Add description,
+                            attributes, cunits, and punits to parameter list
+                            of several subroutines. Remove ngridmax parameter
+                            from subroutine gridlib_read_agrid_header. Make
+                            dimension of character units variable len=*
+                            where possible. Add subroutine
+                            gridlib_print_parms_insertion.
+  2. 2004-04-19  Bill Done  Add subroutine gridlib_compute_velocity_torz to
+                            compute velocity from time or depth modspecs.
+                            Add subroutine gridlib_read_grid_header to just
+                            read the header info for the grid. Correct order
+                            of type declarations.
+  1. 2004-04-13  Bill Done  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

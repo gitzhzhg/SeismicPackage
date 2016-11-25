@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="cfe_incjobname" width="512" height="384">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN1" title="screen1" rows="8" columns="40">
+    <Field keyword="ROOT" type="string" maxLength="17" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL2" alignment="left">Starting Value  =</Label>
+    <Field keyword="START" type="string" maxLength="17" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL3" alignment="left">Increment       =</Label>
+    <Field keyword="INC" type="int" maxLength="17" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL4" alignment="left">Ending Value    =</Label>
+    <Field keyword="END" type="string" maxLength="17" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL5" alignment="left">#ToDo           =</Label>
+    <Field keyword="TODO" type="int" maxLength="17" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="ROOT" xPos="20" yPos="1" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL2" xPos="2" yPos="2" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="START" xPos="20" yPos="2" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL3" xPos="2" yPos="3" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INC" xPos="20" yPos="3" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL4" xPos="2" yPos="4" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="END" xPos="20" yPos="4" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL5" xPos="2" yPos="5" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TODO" xPos="20" yPos="5" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="ROOT">
+      <Tip>The constant part of the jobname. (Incrementing part is a suffix.)</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe_incjobname - ROOT<br> The constant part of the jobname. (Incrementing part is a suffix.)</center></b>
+<pre> Default =
+ Allowed = char*15</pre></html>]]></Text>
+     </Help>
+     <Help component="START">
+      <Tip>Initial value of the incrementing part of the jobname.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe_incjobname - START<br> Initial value of the incrementing part of the jobname.</center></b>
+<pre> Default =
+ Allowed = char*15
+ START may be numeric or alphabetic.  Examples:  1, 01, A, AA, 101.</pre></html>]]></Text>
+     </Help>
+     <Help component="INC">
+      <Tip>Amount of increment between successive jobnames.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe_incjobname - INC<br> Amount of increment between successive jobnames.</center></b>
+<pre> Default =
+ Allowed = int /= 0
+ INC = 1 means use the natural increment in numeric or alphabetic sequences.
+ Example of sequences with INC = 1:  1, 2, 3 or A, B, C or 08, 09, 10.
+ 
+ INC = 2 means use twice the natural increment in numeric or alphabetic
+ sequences.  Example:  1, 3, 5 or A, C, E or 08, 10, 12.
+ 
+ INC = n means use n times the natural increment in numeric or alphabetic
+ sequences.
+ 
+ INC &lt; 1 is permitted but may be risky since a "1" or an "A" cannot be
+ decremented.</pre></html>]]></Text>
+     </Help>
+     <Help component="END">
+      <Tip>Last value of the incrementing part of the jobname.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe_incjobname - END<br> Last value of the incrementing part of the jobname.</center></b>
+<pre> Default =
+ Allowed = char*15</pre></html>]]></Text>
+     </Help>
+     <Help component="TODO">
+      <Tip>Total number of incrementing jobnames to build.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe_incjobname - TODO<br> Total number of incrementing jobnames to build.</center></b>
+<pre> Default =
+ Allowed = int &gt; 0</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="40">
+     <Button keyword="OK"> OK </Button>
+     <Button keyword="PREVIEW">Preview</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="OK" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PREVIEW" xPos="7" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="16" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="35" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="OK">
+       <Tip>Enter the jobnames in the Jobnames list and remove pop-up.</Tip>
+       <Text><![CDATA[<html>
+<b><center>cfe_incjobname - OK<br> Enter the jobnames in the Jobnames list and remove pop-up.</center></b>
+<pre> Default =
+ Allowed =
+ Button that enters the incrementing jobnames in the Jobnames list on the
+ Submit Job screen and removes pop-up.</pre></html>]]></Text>
+      </Help>
+      <Help component="PREVIEW">
+       <Tip>Temporarily enter the jobnames in the Jobnames list.</Tip>
+       <Text><![CDATA[<html>
+<b><center>cfe_incjobname - PREVIEW<br> Temporarily enter the jobnames in the Jobnames list.</center></b>
+<pre> Default =
+ Allowed =
+ Button that temporarily enters the incrementing jobnames in the Jobnames list
+ on the Submit Job screen.  Press OK to make the entries permanent.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Make no entries in the Jobnames list and remove pop-up.</Tip>
+       <Text><![CDATA[<html>
+<b><center>cfe_incjobname - CANCEL<br> Make no entries in the Jobnames list and remove pop-up.</center></b>
+<pre> Default =
+ Allowed =
+ Button that makes no entries in the Jobnames list on the Submit Job screen
+ and removes pop-up.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>This button accesses the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>cfe_incjobname - HELP<br> This button accesses the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+ </Window>
+</Gui>

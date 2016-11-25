@@ -1,0 +1,1806 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="cpsmod" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PROGRAMPARAMETERFILESENVIRONMENT" title="Program Parameter Files-Environment" rows="24" columns="80">
+    <Button keyword="SELECT_PATH_OPEN">PATH_OPEN</Button>
+    <Label keyword="EQLAB_PATH_OPEN" alignment="left">=</Label>
+    <Field keyword="PATH_OPEN" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Button keyword="OPEN_IT">OPEN_IT</Button>
+    <Button keyword="SELECT_PATH_SAVE">PATH_SAVE</Button>
+    <Label keyword="EQLAB_PATH_SAVE" alignment="left">=</Label>
+    <Field keyword="PATH_SAVE" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Button keyword="SAVE_IT">SAVE_IT</Button>
+    <Label keyword="LABEL_SAVE_TYPE" alignment="left">SAVE_TYPE=</Label>
+    <Field keyword="SAVE_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOT1" alignment="left">SHOT1=</Label>
+    <Field keyword="SHOT1" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXSHOTS" alignment="left">MAXSHOTS=</Label>
+    <Field keyword="MAXSHOTS" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PERJOB" alignment="center">(per job)</Label>
+    <Label keyword="LABEL_SHOT_INC" alignment="left">SHOT_INC=</Label>
+    <Field keyword="SHOT_INC" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXJOBS" alignment="left">MAXJOBS=</Label>
+    <Field keyword="MAXJOBS" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="SELECT_PATH_OPEN" xPos="1" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_OPEN" xPos="11" yPos="1" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_OPEN" xPos="12" yPos="1" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OPEN_IT" xPos="1" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATH_SAVE" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_SAVE" xPos="11" yPos="4" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SAVE" xPos="12" yPos="4" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SAVE_IT" xPos="1" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SAVE_TYPE" xPos="1" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_TYPE" xPos="11" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SHOT1" xPos="4" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOT1" xPos="10" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXSHOTS" xPos="1" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAXSHOTS" xPos="10" yPos="11" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PERJOB" xPos="17" yPos="11" xSize="9" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SHOT_INC" xPos="1" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOT_INC" xPos="10" yPos="12" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXJOBS" xPos="2" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAXJOBS" xPos="10" yPos="13" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_PATH_OPEN">
+      <Tip>Invoke dialogue box to select an input parameter file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_PATH_OPEN<br>  Invoke dialogue box to select an input parameter file</center></b>
+<pre> Default =
+ Allowed =
+ Invoke dialogue box to select an input parameter file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_OPEN">
+      <Tip>An input parameter file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_OPEN<br> An input parameter file</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ An input parameter file in one of the supported formats.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPEN_IT">
+      <Tip>Press button to read a parameter file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - OPEN_IT<br>Press button to read a parameter file</center></b>
+<pre></pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_SAVE">
+      <Tip>Invoke dialogue box to choose an output parameter file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_PATH_SAVE<br>  Invoke dialogue box to choose an output parameter file</center></b>
+<pre> Default =
+ Allowed =
+ Invoke dialogue box to select an output parameter file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SAVE">
+      <Tip>An output parameter file name</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_SAVE<br>  An output parameter file name</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ An output parameter file name</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_IT">
+      <Tip>Press button to save a parameter file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SAVE_IT<br> Press button to save a parameter file</center></b>
+<pre> Will save the modeling parameters to the PATH_SAVE file
+ in a format consistent  with the setting of SAVE_TYPE.
+ Shell scripts will also be generated for several of the
+ output types (E2D,I2D,I3D,A3D). If SAVE_TYPE=I3D a QC plot
+ may pop up. Some directory setup may also occur depending
+ upon the output type.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_TYPE">
+      <Tip>Choose the format to use for the path_save file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SAVE_TYPE<br> Choose the format to use for the path_save file</center></b>
+<pre> Default = A2D
+ Allowed = A2D
+ Allowed = E2D
+ Allowed = I2D
+ Allowed = I3D
+ Allowed = A3D0
+ Allowed = A3D
+ Choose the format to use for the path_save file
+ A2D and E2D are 2D acoustic and elastic modeling programs
+ that use explicit finite difference operators. I2D targets a
+ 2D illumination program. I3D targets a SITI 3D illumination.
+ A3D0 is a 3D acoustic exploding reflector program. A3D is an
+ acoustic 3D shot modeling program.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOT1">
+      <Tip>Starting shot for this job</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SHOT1<br> Starting shot for this job</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;0
+ Starting shot for this job.
+ Used by E2D and I2D, I3D options.
+ Model shots in the range shot1 to shot1+maxshots-1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAXSHOTS">
+      <Tip>Limit on the number of shots modeled per submitted job</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - MAXSHOTS<br> Limit on the number of shots modeled per submitted job</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;0
+ Limit on the number of shots modeled per submitted job.
+ Model shots in the range shot1 to shot1+maxshots-1.
+ CPSMOD jobs that run A2D will model no more than maxshots shots.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOT_INC">
+      <Tip>Skip shots</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SHOT_INC<br> Skip shots</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;0
+ Do evey SHOT_INC'th shot.
+ Model shots shot1, shot1+shotinc, etc</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAXJOBS">
+      <Tip>Limit on the number of jobs running simultaneously</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - MAXJOBS<br> Limit on the number of jobs running simultaneously</center></b>
+<pre> Default = 1
+ Allowed = &lt;=100
+ Limit on the number of jobs running simultaneously. This
+ parameter is used if a project file is defined by PATH_PROJ.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="GRIDANDMODELPARAMETERS" title="Grid and Model Parameters" rows="28" columns="80">
+    <Label keyword="COMMENT_PHYSICALMODELUSEAMODMODU" alignment="center">Physical Model Use amod module here</Label>
+    <Border keyword="BORDER1" title=" Anisotropic velocity definition"/>
+    <Label keyword="LABEL_OPT_ANISO" alignment="left">OPT_ANISO=</Label>
+    <Field keyword="OPT_ANISO" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="TITLE_MOD_ARRAYSET" label="TITLE_MOD OPT_MOD CONST_MOD DEPTH_MOD GRAD_MOD  PATH_MOD">
+     <Array keyword="TITLE_MOD" type="string" maxLength="10 " columnName="TITLE_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="OPT_MOD" type="string" maxLength="8  " columnName="OPT_MOD" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="CONST_MOD" type="float" maxLength="10 " columnName="CONST_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="DEPTH_MOD" type="float" maxLength="10 " columnName="DEPTH_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="GRAD_MOD" type="float" maxLength="10 " columnName="GRAD_MOD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="PATH_MOD" type="string" maxLength="128" columnName="PATH_MOD" editable="yes" sensitive="yes" columnSize="30"/>
+    </ArraySet>
+    <Label keyword="LABEL_VMIN" alignment="left">VMIN=</Label>
+    <Field keyword="VMIN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VMAX" alignment="left">VMAX=</Label>
+    <Field keyword="VMAX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SPACEANDTIMECOMPUTATIONA" alignment="center">Space and Time Computational Grids</Label>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT=</Label>
+    <Field keyword="X_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_ORG" alignment="left">X_ORG=</Label>
+    <Field keyword="X_ORG" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC=</Label>
+    <Field keyword="X_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_HDR" alignment="left">X_HDR=</Label>
+    <Field keyword="X_HDR" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT=</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_ORG" alignment="left">Y_ORG=</Label>
+    <Field keyword="Y_ORG" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC=</Label>
+    <Field keyword="Y_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_HDR" alignment="left">Y_HDR=</Label>
+    <Field keyword="Y_HDR" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_TOT" alignment="left">Z_TOT=</Label>
+    <Field keyword="Z_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_ORG" alignment="left">Z_ORG=</Label>
+    <Field keyword="Z_ORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_INC" alignment="left">Z_INC=</Label>
+    <Field keyword="Z_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z_MAX" alignment="left">Z_MAX=</Label>
+    <Field keyword="Z_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T_TOT" alignment="left">T_TOT=</Label>
+    <Field keyword="T_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T_ORG" alignment="left">T_ORG=</Label>
+    <Field keyword="T_ORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T_INC" alignment="left">T_INC=</Label>
+    <Field keyword="T_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T_MAX" alignment="left">T_MAX=</Label>
+    <Field keyword="T_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_UNITS" alignment="left">UNITS</Label>
+    <Field keyword="UNITS" type="string" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DTMAX" alignment="left">DTMAX=</Label>
+    <Field keyword="DTMAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GRIDMAX" alignment="left">GRIDMAX=</Label>
+    <Field keyword="GRIDMAX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BOUNDARYCONDITIONS" alignment="center">Boundary Conditions</Label>
+    <Label keyword="LABEL_TOP_BC" alignment="left">TOP_BC=</Label>
+    <Field keyword="TOP_BC" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SIDE_BC" alignment="left">SIDE_BC=</Label>
+    <Field keyword="SIDE_BC" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ABC_STYLE" alignment="left">ABC_STYLE=</Label>
+    <Field keyword="ABC_STYLE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ABC_SWATH_SIZE" alignment="left">ABC_SWATH_SIZE=</Label>
+    <Field keyword="ABC_SWATH_SIZE" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PHYSICALMODELUSEAMODMODU" xPos="2" yPos="1" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="0" yPos="3" xSize="79" ySize="10"/>
+     <Constraints component="LABEL_OPT_ANISO" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_ANISO" xPos="11" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TITLE_MOD_ARRAYSET" xPos="1" yPos="6" xSize="81" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_VMIN" xPos="2" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VMIN" xPos="7" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VMAX" xPos="17" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VMAX" xPos="22" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SPACEANDTIMECOMPUTATIONA" xPos="2" yPos="17" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="2" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="8" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_ORG" xPos="21" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_ORG" xPos="27" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="40" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="46" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_HDR" xPos="57" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_HDR" xPos="63" yPos="18" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_Y_TOT" xPos="2" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="8" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_ORG" xPos="21" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_ORG" xPos="27" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="40" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="46" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_HDR" xPos="57" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_HDR" xPos="63" yPos="19" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_Z_TOT" xPos="2" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_TOT" xPos="8" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z_ORG" xPos="21" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_ORG" xPos="27" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z_INC" xPos="40" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_INC" xPos="46" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z_MAX" xPos="57" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z_MAX" xPos="63" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T_TOT" xPos="2" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T_TOT" xPos="8" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T_ORG" xPos="21" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T_ORG" xPos="27" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T_INC" xPos="40" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T_INC" xPos="46" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T_MAX" xPos="57" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T_MAX" xPos="63" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_UNITS" xPos="2" yPos="23" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="UNITS" xPos="8" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DTMAX" xPos="20" yPos="23" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DTMAX" xPos="26" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GRIDMAX" xPos="41" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GRIDMAX" xPos="49" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BOUNDARYCONDITIONS" xPos="2" yPos="25" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TOP_BC" xPos="2" yPos="26" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOP_BC" xPos="9" yPos="26" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SIDE_BC" xPos="23" yPos="26" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SIDE_BC" xPos="31" yPos="26" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ABC_STYLE" xPos="43" yPos="26" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ABC_STYLE" xPos="53" yPos="26" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ABC_SWATH_SIZE" xPos="2" yPos="27" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ABC_SWATH_SIZE" xPos="17" yPos="27" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_ANISO">
+      <Tip>Velocity model file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - OPT_ANISO<br> Velocity model file name.</center></b>
+<pre> Default = ISOTROPIC
+ Allowed = ISOTROPIC    Isotropic time and depth migration.
+ Allowed = ANISOTROPIC  Vertical anisotropic time and depth migration.
+ Allowed = TILTED_BED   Tilted bed anisotropic depth migration.
+ Allowed = ISOELASTIC   Vp, Vs, Denisty for E2D
+ Allowed = ANIELASTIC   Vp, Vs, Denisty, epsilon, delta for E2D</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TITLE_MOD">
+      <Tip>Title of model coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - TITLE_MOD<br> Title of model coefficient.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MOD">
+      <Tip>How each model coefficient is defined.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - OPT_MOD<br> How each model coefficient is defined.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_MOD">
+      <Tip>Constant value for model coeffieicnt at depth DEPTH_MOD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - CONST_MOD<br> Constant value for model coeffieicnt at depth DEPTH_MOD.</center></b>
+<pre> Default = 2000.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEPTH_MOD">
+      <Tip>Depth from which graident is measured.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - DEPTH_MOD<br> Depth from which graident is measured.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRAD_MOD">
+      <Tip>Gradient for mdoel coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - GRAD_MOD<br> Gradient for mdoel coefficient.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MOD">
+      <Tip>Name of model coefficient file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_MOD<br> Name of model coefficient file.</center></b>
+<pre> Default = NONE
+ Allowed = character
+ The X_SIN coefficient is the sine of the anisotropic coefficient dip angle
+ projected into the x,z plane.
+ The Y_SIN coefficient is the sine of the anisotropic coefficient dip angle
+ projected into the y,z plane.
+ For a horizontal geometry x_sin = y_sin = 0.
+ For a 30 degree dip from the horizontal in the x direction, x_sin = .5
+ For a 45 degree dip from the horizontal in the x direction, x_sin = .7071
+ The true dip of the anisotropic coefficient from the z axis is:
+ asin ( sqrt ( 1. - x_sin**2 - y_sin**2 ) )
+ If any PATH_MOD entry is other than NONE or CONST_MOD IS not equal to 0.
+ AMOD assumes an anisotropic model.
+ Then PATH_MOD(1) is the vZ values and the group velocity is
+ 1/v(a)**2 = cos(a)**2/vz**2 + sin(a)**2/vx**2 * (1 + 2*ETA*cos(a)**2 )
+ If TYPE_TABLE_CALC = TIME, PATH_MOD(1) is assumed to be the stacking velocity.
+ Otherwise, PATH_MOD(1) is assumed to be the vertical interval velocity.
+ If PATH_MOD(2) is NONE the steep dip anisotropic coefficient is CONST_MOD</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VMIN">
+      <Tip>Min velocity to use for stability-accuracy limit estimates</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VMIN<br> Min velocity to use for stability-accuracy limit estimates</center></b>
+<pre> Default = 1500
+ Allowed = REAL&gt;0
+ Min velocity to use for DTMAX and GRIDMAX estimate</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VMAX">
+      <Tip>Max velocity to use for stability-accuracy limit estimates</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VMAX<br>Max velocity to use for stability-accuracy limit estimates</center></b>
+<pre> Default = 4500
+ Allowed = REAL&gt;0
+ Max velocity to use for DTMAX and GRIDMAX estimate</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Number of x grid points</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - X_TOT<br> Number of x grid points</center></b>
+<pre> Default = 1
+ Allowed = Integer &gt; 0
+ Number of x grid points.
+ A2D sets this from the recording geometry.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_ORG">
+      <Tip>The X origin</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - X_ORG<br> The X origin</center></b>
+<pre> Default = 0.0
+ Allowed = Real
+ The computational X origin. Use grid units if header 7-8 are used and
+ physical units if header 17-18 are specified. This parameter needs
+ to be consistent with the velocity model.
+ For A2D the origin will be determined by the shot
+ location and receiver pattern and x_org is ignored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Computational bin size in the x direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - X_INC<br> Computational bin size in the x direction</center></b>
+<pre> Default = 10.0
+ Allowed = Real&gt;0
+ Computational grid size in x direction. Use grid units
+ if header 7-8 are used. Use physical units if header
+ 17-18 are specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_HDR">
+      <Tip>CPS header consistent with spatial x-coordinates</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - X_HDR<br> CPS header consistent with spatial x-coordinates</center></b>
+<pre> Default = 7
+ Allowed =
+ CPS header consistent with spatial x-coordinates. If
+ header 7 or 8 is used the x and y coordinates are in
+ grid units and the coordinates will be scaled by the grid
+ transform during computation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>number of y grid pointes</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Y_TOT<br> number of y grid pointes</center></b>
+<pre> Default = 1
+ Allowed = Integer &gt; 0
+ Number of y grid points in computational window</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_ORG">
+      <Tip>Min y location of the computational window</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Y_ORG<br> Min y location of the computational window</center></b>
+<pre> Default =
+ Allowed =
+ The computational Y origin. Use grid units if header 7-8 are used and
+ physical units if header 17-18 are specified. This parameter needs
+ to be consistent with the velocity model.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Computational grid size in y direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Y_INC<br> Computational grid size in y direction</center></b>
+<pre> Default = 10.0
+ Allowed = real&gt;0
+ Computational grid size in y direction</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_HDR">
+      <Tip>CPS header consistent with spatial y-coordinates</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Y_HDR<br> CPS header consistent with spatial y-coordinates</center></b>
+<pre> Default = 8
+ Allowed =
+ CPS header consistent with spatial y-coordinates. If
+ header 7 or 8 is used the x and y coordinates will
+ be scaled by the grid transform during computation</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_TOT">
+      <Tip>Number of depth points in the computational grid</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Z_TOT<br> Number of depth points in the computational grid</center></b>
+<pre> Default = 1
+ Allowed = Integer &gt; 0
+ Number of depth points in the computational grid.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_ORG">
+      <Tip>Origin of the depth axis.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Z_ORG<br> Origin of the depth axis.</center></b>
+<pre> Default = 0.0
+ Allowed = Real
+ Origin of the z or depth axis. The units are assumed to be the
+ same as the units specified by project_data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_INC">
+      <Tip>Computational grid size in z direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Z_INC<br>Computational grid size in z direction</center></b>
+<pre> Default = 8.0
+ Allowed = Real &gt; 0
+ Computational grid size in z direction.
+ The units are assumed to be the same as the units
+ specified by project_data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z_MAX">
+      <Tip>Maximum depth of modeling window</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - Z_MAX<br> Maximum depth of modeling window</center></b>
+<pre> Default = 0.0
+ Allowed =
+ Maximum depth of modeling window.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="T_TOT">
+      <Tip>Total number of time steps</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - T_TOT<br> Total number of time steps</center></b>
+<pre> Default = 100
+ Allowed = Integer &gt; 0
+ Total number of time step. This is computed
+ from T_MAX and T_INC. T_TOT = T_MAX/T_INC + 1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="T_ORG">
+      <Tip>Start time in sec - not used</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - T_ORG<br> Start time in sec - not used</center></b>
+<pre> Default =
+ Allowed =
+ Start time in sec - not used</pre></head></html>]]></Text>
+     </Help>
+     <Help component="T_INC">
+      <Tip>Computational time step in seconds</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - T_INC<br> Computational time step in seconds</center></b>
+<pre> Default =
+ Allowed = Positive
+ Computational time step in seconds.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="T_MAX">
+      <Tip>Maximum elapsed time to model in sec</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - T_MAX<br> Maximum elapsed time to model in sec</center></b>
+<pre> Default = 1.0
+ Allowed =
+ Maximum elapsed time to model in sec</pre></head></html>]]></Text>
+     </Help>
+     <Help component="UNITS">
+      <Tip>Value for survey units - informative</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - UNITS<br> Value for survey units - informative</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DTMAX">
+      <Tip>Max allowed time step for FD modeling</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - DTMAX<br> Max allowed time step for FD modeling</center></b>
+<pre> Default =
+ Allowed =
+ Max allowed time step limit to use with finite difference modeling options.
+ Estimate = 0.5*dx/vmax</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GRIDMAX">
+      <Tip>Max recomended computational bin size</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - GRIDMAX<br> Max recomended computational bin size</center></b>
+<pre> Default =
+ Allowed =
+ Max allowed computational bin size. vmin/(f*fmax)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOP_BC">
+      <Tip>Boundary condition to apply at the top surface</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - TOP_BC<br> Boundary condition to apply at the top surface</center></b>
+<pre> Default = DIRICHLET
+ Allowed = DIRICHLET
+ Allowed = ABSORB
+ Allowed = NEUMAN
+ Dirichlet sets P=0 at z=0. Neuman implies normal derivative of P
+ vanishes at z=0. A paraxial BC is applied at the top
+ if ABSORP is chosen.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SIDE_BC">
+      <Tip>Boundary condition to apply at the side surfaces</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SIDE_BC<br> Boundary condition to apply at the side surfaces</center></b>
+<pre> Default =
+ Allowed =
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="ABC_STYLE">
+      <Tip>Type of absorbing BC to apply</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - ABC_STYLE<br> Type of absorbing BC to apply</center></b>
+<pre> Default =
+ Allowed =
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="ABC_SWATH_SIZE">
+      <Tip>Size of absorbing BC swath in grid nodes</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - ABC_SWATH_SIZE<br> Size of absorbing BC swath in grid nodes</center></b>
+<pre> Default = 10
+ Allowed =
+ If the b.c. is set to ABSORB then the wave field will be
+ damped over this many grid nodes.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="RECORDINGPARAMETERS" title="Recording Parameters" rows="27" columns="80">
+    <Label keyword="LABEL_DT_OUT" alignment="left">DT_OUT =</Label>
+    <Field keyword="DT_OUT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_REC">PATH_REC</Button>
+    <Label keyword="EQLAB_PATH_REC" alignment="left">=</Label>
+    <Field keyword="PATH_REC" type="string" maxLength="104" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HORIZONTALSEISMICPROFILE" alignment="center">+++ Horizontal Seismic Profile Recording +++</Label>
+    <Label keyword="LABEL_HSP_OPT" alignment="left">HSP_OPT</Label>
+    <Field keyword="HSP_OPT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_HSP_LOC">HSP_LOC</Button>
+    <Label keyword="EQLAB_HSP_LOC" alignment="left">=</Label>
+    <Field keyword="HSP_LOC" type="string" maxLength="104" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NCABLE" alignment="left">NCABLE=</Label>
+    <Field keyword="NCABLE" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CABLESPACING" alignment="left">CableSpacing=</Label>
+    <Field keyword="CABLESPACING" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HSP_NAME" alignment="left">HSP_NAME=</Label>
+    <Field keyword="HSP_NAME" type="string" maxLength="32" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HSP_DEP" alignment="left">HSP_DEP =</Label>
+    <Field keyword="HSP_DEP" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HSP_NUM" alignment="left">HSP_NUM=</Label>
+    <Field keyword="HSP_NUM" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HSP_XORG" alignment="left">HSP_XORG=</Label>
+    <Field keyword="HSP_XORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HSP_YORG" alignment="left">HSP_YORG=</Label>
+    <Field keyword="HSP_YORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_GEOPHONE1OFFSETFROMSOURC" alignment="center">geophone 1 offset from source</Label>
+    <Label keyword="LABEL_HSP_XINC" alignment="left">HSP_XINC=</Label>
+    <Field keyword="HSP_XINC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HSP_YINC" alignment="left">HSP_YINC=</Label>
+    <Field keyword="HSP_YINC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PHONESPACINGMULTIPLEOFX_" alignment="center">phone spacing-multiple of x_inc y_inc</Label>
+    <Label keyword="LABEL_L_PAD" alignment="left">L_PAD=</Label>
+    <Field keyword="L_PAD" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_R_PAD" alignment="left">R_PAD=</Label>
+    <Field keyword="R_PAD" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IL_AP" alignment="left">IL_AP=</Label>
+    <Field keyword="IL_AP" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_XL_AP" alignment="left">XL_AP=</Label>
+    <Field keyword="XL_AP" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_VERTICALSEISMICPROFILERE" alignment="center">+++ Vertical Seismic Profile Recording +++</Label>
+    <Label keyword="LABEL_VSP_OPT" alignment="left">VSP_OPT</Label>
+    <Field keyword="VSP_OPT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_VSP_LOC">VSP_LOC</Button>
+    <Label keyword="EQLAB_VSP_LOC" alignment="left">=</Label>
+    <Field keyword="VSP_LOC" type="string" maxLength="104" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VSP_NAME" alignment="left">VSP_NAME=</Label>
+    <Field keyword="VSP_NAME" type="string" maxLength="32" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VSP_DEP" alignment="left">VSP_DEP =</Label>
+    <Field keyword="VSP_DEP" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VSP_NUM" alignment="left">VSP_NUM=</Label>
+    <Field keyword="VSP_NUM" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VSP_XORG" alignment="left">VSP_XORG=</Label>
+    <Field keyword="VSP_XORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VSP_YORG" alignment="left">VSP_YORG=</Label>
+    <Field keyword="VSP_YORG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VSP_INC" alignment="left">VSP_INC=</Label>
+    <Field keyword="VSP_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SNAPSHOTRECORDING" alignment="center">+++ Snapshot Recording +++</Label>
+    <Label keyword="LABEL_SNAP_NAME" alignment="left">SNAP_NAME=</Label>
+    <Field keyword="SNAP_NAME" type="string" maxLength="32" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SNAP_START" alignment="left">SNAP_START =</Label>
+    <Field keyword="SNAP_START" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SNAP_DT" alignment="left">SNAP_DT =</Label>
+    <Field keyword="SNAP_DT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SNAP_STOP" alignment="left">SNAP_STOP=</Label>
+    <Field keyword="SNAP_STOP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SNAP_DECX" alignment="left">SNAP_DECX=</Label>
+    <Field keyword="SNAP_DECX" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SNAP_DECY" alignment="left">SNAP_DECY=</Label>
+    <Field keyword="SNAP_DECY" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_DT_OUT" xPos="2" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DT_OUT" xPos="11" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_REC" xPos="2" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_REC" xPos="11" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_REC" xPos="12" yPos="3" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_HORIZONTALSEISMICPROFILE" xPos="2" yPos="5" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HSP_OPT" xPos="2" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_OPT" xPos="9" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_HSP_LOC" xPos="2" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_HSP_LOC" xPos="10" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_LOC" xPos="11" yPos="7" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NCABLE" xPos="2" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NCABLE" xPos="9" yPos="8" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CABLESPACING" xPos="20" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CABLESPACING" xPos="33" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HSP_NAME" xPos="2" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_NAME" xPos="11" yPos="9" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HSP_DEP" xPos="2" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_DEP" xPos="11" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HSP_NUM" xPos="22" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_NUM" xPos="30" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HSP_XORG" xPos="2" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_XORG" xPos="11" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HSP_YORG" xPos="21" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_YORG" xPos="30" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_GEOPHONE1OFFSETFROMSOURC" xPos="41" yPos="11" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HSP_XINC" xPos="2" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_XINC" xPos="11" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HSP_YINC" xPos="21" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HSP_YINC" xPos="30" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PHONESPACINGMULTIPLEOFX_" xPos="41" yPos="12" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_L_PAD" xPos="5" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="L_PAD" xPos="11" yPos="13" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_R_PAD" xPos="24" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="R_PAD" xPos="30" yPos="13" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_IL_AP" xPos="5" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IL_AP" xPos="11" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_XL_AP" xPos="24" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XL_AP" xPos="30" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_VERTICALSEISMICPROFILERE" xPos="2" yPos="16" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VSP_OPT" xPos="2" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_OPT" xPos="9" yPos="17" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_VSP_LOC" xPos="2" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_VSP_LOC" xPos="10" yPos="18" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_LOC" xPos="11" yPos="18" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VSP_NAME" xPos="2" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_NAME" xPos="11" yPos="19" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VSP_DEP" xPos="2" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_DEP" xPos="11" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VSP_NUM" xPos="23" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_NUM" xPos="31" yPos="20" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VSP_XORG" xPos="2" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_XORG" xPos="11" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VSP_YORG" xPos="22" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_YORG" xPos="31" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VSP_INC" xPos="42" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VSP_INC" xPos="50" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SNAPSHOTRECORDING" xPos="2" yPos="23" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SNAP_NAME" xPos="2" yPos="24" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SNAP_NAME" xPos="12" yPos="24" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SNAP_START" xPos="2" yPos="25" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SNAP_START" xPos="14" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SNAP_DT" xPos="24" yPos="25" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SNAP_DT" xPos="33" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SNAP_STOP" xPos="42" yPos="25" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SNAP_STOP" xPos="52" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SNAP_DECX" xPos="2" yPos="26" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SNAP_DECX" xPos="12" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SNAP_DECY" xPos="23" yPos="26" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SNAP_DECY" xPos="33" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="DT_OUT">
+      <Tip>Output trace sample rate(sec) for VSP and HSP files</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - DT_OUT<br> Output trace sample rate(sec) for VSP and HSP files</center></b>
+<pre> Default = 0.004
+ Allowed = Real &gt; T_INC
+ Output trace sample rate(sec) for VSP and HSP files.
+ Defaults to the job_data sample rate. This is only relevant
+ for forward fd modeling options.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_REC">
+      <Tip>Specify a directory for recording data</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_PATH_REC<br> Specify a directory for recording data</center></b>
+<pre> Default =
+ Allowed = 104 character
+ Invoke a dialogue to choose an output directory.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_REC">
+      <Tip>Specify a directory for recording output</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_REC<br> Specify a directory for recording output</center></b>
+<pre> Default = NONE
+ Allowed =
+ Specify a directory for recording output. This is
+ where hsp, vsp and snapshot files will be saved.
+ A2D jobs will store trace files in this directory.
+ E2D jobs will store output to subdirectories of
+ path_rec.
+ I3D will use this as the parent directory for output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_OPT">
+      <Tip>Choose a method for specifying geophone locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_OPT<br> Choose a method for specifying geophone locations</center></b>
+<pre> Default = GRID
+ Allowed = GRID
+ Allowed = FILE
+ HSP geophone coordinates can be specified from a FILE, or
+ by the HSP GRID parameters. The HSP GRID parameters put
+ the HSP phones on a regular constant depth grid.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_HSP_LOC">
+      <Tip>Specify a columnated ascii file with HSP X Y Z locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_HSP_LOC<br> Specify a columnated ascii file with HSP X Y Z locations</center></b>
+<pre> Default =
+ Allowed = 104 CHARACTER
+ Invoke a file selection dialogue</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_LOC">
+      <Tip>Specify a columnated ascii file with HSP X Y Z locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_LOC<br>Specify a columnated ascii file with HSP X Y Z locations</center></b>
+<pre> Default =
+ Allowed = 104 CHARACTER
+ Specify a columnated ascii file with HSP X Y Z locations.
+ Blank lines and lines starting with # are ignored</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NCABLE">
+      <Tip>Number of cables per shot to record</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - NCABLE<br> Number of cables per shot to record</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;=1
+  Number of cables to record per shot. The number
+  of geophones recorded per shot will be ncable*hsp_num.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CABLESPACING">
+      <Tip>Distance between cables within a streamer</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - CABLESPACING<br> Distance between cables within a streamer</center></b>
+<pre> Default = 0
+ Allowed = Real&gt;=0
+ Distance between cables within a streamer.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_NAME">
+      <Tip>Specify a trace file name for recording seismic traces</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_NAME<br> Specify a trace file name for recording seismic traces</center></b>
+<pre> Default =
+ Allowed = 32 Character
+ Specify a trace file name for recording seismic traces. This
+ is the name without a path or suffix. The hsp file name will be
+ a catenation of path_rec + hsp_name. The exact name is sensitive
+ the output style. The hsp file is stored in the SU file format for
+ A2D and in ! segy format for E2D. I3D will output a segy file.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_DEP">
+      <Tip>Z location of the geophones</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_DEP<br> Z location of the geophones</center></b>
+<pre> Default = 0
+ Allowed = Real&gt;0
+ Z location of the geophones. Is forced to be a multiple
+ of Z_INC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_NUM">
+      <Tip>Number of geophones to record per cable</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_NUM<br> Number of geophones to record per cable</center></b>
+<pre> Default = 0
+ Allowed = Integer&gt;=0
+  Number of geophones to record per cable. The number
+  of geophones recorded will be ncable*hsp_num. Less than 10000</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_XORG">
+      <Tip>Geophone starting x position relative to source</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_XORG<br> Geophone starting x position relative to source</center></b>
+<pre> Default = 0.0
+ Allowed = REAL
+ First geophone starting x position. This is the offset
+ relative to the shot location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_YORG">
+      <Tip>Geophone starting y position relative to source</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_YORG<br> Geophone starting y position relative to source</center></b>
+<pre> Default = 0.0
+ Allowed = REAL
+ First geophone starting y position. This is the offset
+ relative to the shot location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_XINC">
+      <Tip>Geophone bin spacing in x direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_XINC<br>Geophone bin spacing in x direction</center></b>
+<pre> Default = 10.0
+ Allowed = REAL
+ Geophone bin spacing in x direction</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HSP_YINC">
+      <Tip>Geophone bin spacing in y direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HSP_YINC<br>Geophone bin spacing in y direction</center></b>
+<pre> Default = 0.0
+ Allowed = REAL
+ Geophone bin spacing in y direction</pre></head></html>]]></Text>
+     </Help>
+     <Help component="L_PAD">
+      <Tip>Pad grid to left of shot and geophone locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - L_PAD<br> Pad grid to left of shot and geophone locations</center></b>
+<pre> Default = 40
+ Allowed = Integer&gt;=0
+ Pad grid to left of shot and geophone locations.
+ Specify as an integer number of grid nodes.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="R_PAD">
+      <Tip>Pad grid to right of shot and geophone locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - R_PAD<br> Pad grid to right of shot and geophone locations</center></b>
+<pre> Default = 40
+ Allowed = Integer&gt;=0
+ Pad grid to right of shot and geophone locations.
+ Specify as an integer number of grid nodes.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IL_AP">
+      <Tip>Computational window in the cross cable direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - IL_AP<br> Computational window in the cross cable direction</center></b>
+<pre> Default = 0
+ Allowed = real&gt;0
+ Perform computatiuon in a window at least this big in the
+ x-line or cross-cable direction. Specify in survey units
+ of meters or feet.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XL_AP">
+      <Tip>Computational window in the in line direction</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - XL_AP<br> Computational window in the in line direction</center></b>
+<pre> Default = 0
+ Allowed = real&gt;0
+ Perform computatiuon in a window at least this big in the
+ in-line or cable direction. Will be ignored for 2D
+ modeling. Specify in survey units of meters or feet.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_OPT">
+      <Tip>Choose a method for specifying geophone locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_OPT<br> Choose a method for specifying geophone locations</center></b>
+<pre> Default = GRID
+ Allowed = GRID
+ Allowed = FILE
+ VSP geophone coordinates can be specified from a FILE, or
+ by the VSP GRID parameters. The VSP GRID parameters put
+ the VSP phones on a regular grid at a fixed X-Y position.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_VSP_LOC">
+      <Tip>Specify a columnated ascii file with VSP X Y Z locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_VSP_LOC<br> Specify a columnated ascii file with VSP X Y Z locations</center></b>
+<pre> Default =
+ Allowed = 104 CHARACTER
+ Invoke a file selection dialogue</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_LOC">
+      <Tip>Specify a columnated ascii file with VSP X Y Z locations</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_LOC<br>Specify a columnated ascii file with VSP X Y Z locations</center></b>
+<pre> Default =
+ Allowed = 104 CHARACTER
+ Specify a columnated ascii file with VSP X Y Z locations
+ Blank lines and lines starting with # are ignored</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_NAME">
+      <Tip>Name of vsp file without path</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_NAME<br> Name of vsp file without path</center></b>
+<pre> Default =
+ Allowed = 32 character
+ Name of vsp file without path.
+ for A2D - vsp file = path_rec/vsp_name.trc
+ for E2D - vsp file = path_rec/shot#/vsp_name.trc</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_DEP">
+      <Tip>Depth of first VSP geophone</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_DEP<br> Depth of first VSP geophone</center></b>
+<pre> Default = 0.0
+ Allowed = Real
+ Depth of first VSP geophone. This value
+ will be forced onto the nearest Z-grid point.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_NUM">
+      <Tip>Number of VSP geophones to record</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_NUM<br> Number of VSP geophones to record</center></b>
+<pre> Default = 0
+ Allowed = Integer between 0 and Z_TOT
+ Number of VSP geophones to record.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_XORG">
+      <Tip>X Location of the VSP geophones</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_XORG<br> X Location of the VSP geophones</center></b>
+<pre> Default =
+ Allowed = Real
+ X Location of the VSP geophones.
+ This is absolute X and not relative to the shot location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_YORG">
+      <Tip>Y Location of the VSP geophones</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_YORG<br> Y Location of the VSP geophones</center></b>
+<pre> Default =
+ Allowed = Real
+ Y Location of the VSP geophones
+ This is absolute Y and not relative to the shot location.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VSP_INC">
+      <Tip>Depth increment between VSP geophones</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - VSP_INC<br> Depth increment between VSP geophones</center></b>
+<pre> Default = 10.0
+ Allowed = Real
+ Depth increment between VSP geophones. The increment
+ will be forced to be a multiple of Z_INC</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SNAP_NAME">
+      <Tip>Name of snapshot file without path_rec</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SNAP_NAME<br> Name of snapshot file without path_rec</center></b>
+<pre> Default =
+ Allowed = 32 character
+ Name of snapshot file without path. The full snapshot
+ file name = a catenation of path_rec + snap_name +
+ shot x location + "vo"</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SNAP_START">
+      <Tip>Time(ms) of the first snapshot</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SNAP_START<br> Time(ms) of the first snapshot</center></b>
+<pre> Default = 0
+ Allowed = Integer
+ Time(ms) of the first snapshot.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SNAP_DT">
+      <Tip>Time(ms) between snapshots</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SNAP_DT<br> Time(ms) between snapshots</center></b>
+<pre> Default = 0
+ Allowed = Integer
+ A snapshot will be recorded every SNAP_DT ms
+ Set SNAP_DT&lt;=0 for no snapshots</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SNAP_STOP">
+      <Tip>Max time(ms) of the last snapshot</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SNAP_STOP<br> Max time(ms) of the last snapshot</center></b>
+<pre> Default = 100000
+ Allowed = Integer
+ Will not record a snapshot after time=snap_stop.
+ Specify time in units of ms.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SNAP_DECX">
+      <Tip>Decimate snapshot wavefield</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SNAP_DECX<br> Decimate snapshot wavefield</center></b>
+<pre> Default = 1
+ Allowed = Integer
+ Will resord every nth point in the x direction</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SNAP_DECY">
+      <Tip>Decimate snapshot wavefield</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SNAP_DECY<br> Decimate snapshot wavefield</center></b>
+<pre> Default = 1
+ Allowed = Integer
+ Will record every nth point in the y direction</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SOURCINGPARAMETERS" title="Sourcing Parameters" rows="24" columns="80">
+    <Label keyword="LABEL_SRC_SPEC" alignment="left">SRC_SPEC</Label>
+    <Field keyword="SRC_SPEC" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_PROJ">PATH_PROJ</Button>
+    <Label keyword="EQLAB_PATH_PROJ" alignment="left">=</Label>
+    <Field keyword="PATH_PROJ" type="string" maxLength="104" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TSKFILE" alignment="left">TSKFILE=</Label>
+    <Field keyword="TSKFILE" type="string" maxLength="58" editable="yes" sensitive="yes"/>
+    <Button keyword="INIT_PROJ">INIT_PROJ</Button>
+    <Button keyword="SELECT_PATH_INFO">PATH_INFO</Button>
+    <Label keyword="EQLAB_PATH_INFO" alignment="left">=</Label>
+    <Field keyword="PATH_INFO" type="string" maxLength="104" editable="yes" sensitive="yes"/>
+    <Button keyword="INIT_TASKS">INIT_TASKS</Button>
+    <Label keyword="LABEL_SHOTS_PER_LINE" alignment="left">SHOTS_PER_LINE=</Label>
+    <Field keyword="SHOTS_PER_LINE" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOT_LINES" alignment="left">SHOT_LINES=</Label>
+    <Field keyword="SHOT_LINES" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_NUM" alignment="left">SRC_NUM=</Label>
+    <Field keyword="SRC_NUM" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_SPACING" alignment="left">LINE_SPACING=</Label>
+    <Field keyword="LINE_SPACING" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_THETA" alignment="left">SRC_THETA=</Label>
+    <Field keyword="SRC_THETA" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_DELTA" alignment="left">SRC_DELTA=</Label>
+    <Field keyword="SRC_DELTA" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_DEP" alignment="left">SRC_DEP=</Label>
+    <Field keyword="SRC_DEP" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_XORG" alignment="left">SRC_XORG=</Label>
+    <Field keyword="SRC_XORG" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_XINC" alignment="left">SRC_XINC=</Label>
+    <Field keyword="SRC_XINC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ABSOLUTECOORDINATES" alignment="center">absolute coordinates</Label>
+    <Label keyword="LABEL_SRC_YORG" alignment="left">SRC_YORG=</Label>
+    <Field keyword="SRC_YORG" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_YINC" alignment="left">SRC_YINC=</Label>
+    <Field keyword="SRC_YINC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">absolute coordinates</Label>
+    <Button keyword="SELECT_PATH_SRC">SELECT PATH_SRC</Button>
+    <Label keyword="EQLAB_PATH_SRC" alignment="left">=</Label>
+    <Field keyword="PATH_SRC" type="string" maxLength="104" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FMIN" alignment="left">FMIN =</Label>
+    <Field keyword="FMIN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FMAX" alignment="left">FMAX =</Label>
+    <Field keyword="FMAX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FPEAK" alignment="left">FPEAK =</Label>
+    <Field keyword="FPEAK" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Button keyword="PLOTIT">PLOTIT</Button>
+    <Layout>
+     <Constraints component="LABEL_SRC_SPEC" xPos="2" yPos="1" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_SPEC" xPos="10" yPos="1" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATH_PROJ" xPos="2" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_PROJ" xPos="12" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_PROJ" xPos="13" yPos="3" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TSKFILE" xPos="2" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TSKFILE" xPos="10" yPos="4" xSize="58" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INIT_PROJ" xPos="2" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATH_INFO" xPos="2" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_INFO" xPos="12" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_INFO" xPos="13" yPos="7" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="INIT_TASKS" xPos="2" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SHOTS_PER_LINE" xPos="2" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOTS_PER_LINE" xPos="17" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SHOT_LINES" xPos="27" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOT_LINES" xPos="38" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_NUM" xPos="51" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_NUM" xPos="59" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_SPACING" xPos="4" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_SPACING" xPos="17" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_THETA" xPos="28" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_THETA" xPos="38" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_DELTA" xPos="49" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_DELTA" xPos="59" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_DEP" xPos="3" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_DEP" xPos="11" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_XORG" xPos="2" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_XORG" xPos="11" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_XINC" xPos="25" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_XINC" xPos="34" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ABSOLUTECOORDINATES" xPos="47" yPos="13" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SRC_YORG" xPos="2" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_YORG" xPos="11" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_YINC" xPos="25" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_YINC" xPos="34" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="47" yPos="14" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATH_SRC" xPos="2" yPos="16" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_SRC" xPos="18" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SRC" xPos="19" yPos="16" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FMIN" xPos="2" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FMIN" xPos="9" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FMAX" xPos="2" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FMAX" xPos="9" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FPEAK" xPos="2" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FPEAK" xPos="10" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLOTIT" xPos="2" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SRC_SPEC">
+      <Tip>Choose how source coordinates are specified</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_SPEC<br> Choose how source coordinates are specified</center></b>
+<pre> Default = SKIP
+ Allowed = SKIP
+ Allowed = INFO
+ Choose how source coordinates are specified. Can
+ use either a regular skip pattern, or one can get
+ coordinates from an fxinfo file. If SRC_SPEC=SKIP
+ then SRC_NUM  shots are modeled starting at SRC_XORG
+ and incrementing by SRC_XINC. If SRC_SPEC=INFO the
+ shot locations are set from the PATH_INFO file. The
+ path_info and path_proj values are ignored when the
+ SKIP option is chosen</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_PROJ">
+      <Tip>Dialogue to select a project file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_PATH_PROJ<br> Dialogue to select a project file</center></b>
+<pre> Default =
+ Allowed = Character
+ Dialogue to select an optional project file name.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_PROJ">
+      <Tip>Specify a project file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_PROJ<br> Specify a project file</center></b>
+<pre> Default =
+ Allowed = Character
+ Specify an optional project file. The key components
+ of a project file are an fxinfo file list, and a task list file.
+ The task file is used to coordinate the work done by batch
+ parallel jobs. In the case of CPSMOD the tasks are either the shot
+ locations or an I3D sub-domain to be modeled. Use a project file if
+ you want to use mutiple jobs to generate multiple synthetic shots, or
+ if a large I3D project is broken into sub-domains. If the project
+ file points to an fxinfo list, the input shot positions will be
+ obtained from the info file. An info file is a summary of the
+ gathers in one or more seismic files(e.g. the shot locations).
+ The task file keeps track of the status of work or "tasks".
+ If there is no info list the shot locations are determined by
+ the pattern given by src_num, src_xorg, src_xinc.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSKFILE">
+      <Tip>Informative - itask file name setting for project</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - TSKFILE<br> Informative - itask file name setting for project</center></b>
+<pre> Default =
+ Allowed = Character
+ This is the file name used when the init_tasks button is activated.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INIT_PROJ">
+      <Tip>Press button to save a project file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - INIT_PROJ<br> Press button to save a project file</center></b>
+<pre> Write out a project file. Be careful that you do
+ not overwrite a project file that is in use. See
+ the help for path_proj for the details.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_INFO">
+      <Tip>Dialogue to select an input fxinfo file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_PATH_INFO<br> Dialogue to select an input fxinfo file</center></b>
+<pre> Default =
+ Allowed = Character
+ Dialogue to select an input fxinfo file. The fxinfo file will be
+ used to determine the shot locations if SRC_SPEC=INFO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_INFO">
+      <Tip>Specify an fxinfo file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_INFO<br> Specify an fxinfo file</center></b>
+<pre> Default =
+ Allowed = Character
+ Specify an optional fxinfo file. The fxinfo file will be
+ used to determine the shot locations if SRC_SPEC=INFO. This field
+ will be set by the project file if a name of an existing
+ project file is specified for PATH_PROJ. If no path_info
+ is specified the shot locations are determined by
+ src_num, src_xorg, and src_xinc.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INIT_TASKS">
+      <Tip>Press button to save a task file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - INIT_TASKS<br> Press button to save a task file</center></b>
+<pre> A task file will be generated if there is an project file
+ specified. Be careful not to overwrite a task file
+ that is being used by a project with active jobs. The project
+ file is also written. A task file contains a work list.
+ i.e. a list of shots or a list of brick sub-domains.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOTS_PER_LINE">
+      <Tip>Number of shots in one shot line</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SHOTS_PER_LINE<br> Number of shots in one shot line</center></b>
+<pre> Default = 0
+ Allowed = &gt;=0
+ The number of shots in one shot line. If SRC_SPEC=SKIP then
+ the user sets this. If SRC_SPEC=INFO and PATH_INFO
+ is set, the value is obtained from the path_info file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOT_LINES">
+      <Tip>Number of shot lines to model</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SHOT_LINES<br> Number of shot lines to model</center></b>
+<pre> Default = 1
+ Allowed = &gt;=1
+ The number of shot lines to model. If SRC_SPEC=SKIP then
+ the user sets this. If SRC_SPEC=INFO and PATH_INFO
+ is set, the value is obtained from the path_info file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_NUM">
+      <Tip>The total number of shots to model</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_NUM<br> The total number of shots to model</center></b>
+<pre> Default = 1
+ Allowed = &gt;=0
+ The total number of shots to model.
+ If SRC_SPEC=SKIP then the value is limited by
+ src_num &lt;= shots_per_line x shot_lines.
+ If SRC_SPEC=INFO and PATH_INFO is set, the value is
+ obtained from the path_info file.
+ The number of shots modeled within a job can be modified
+ by the maxshots parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_SPACING">
+      <Tip>Physical distance between shot lines</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - LINE_SPACING<br> Physical distance between shot lines</center></b>
+<pre> Default = 0
+ Allowed = &gt;=0
+ The physical distance between sequential shot lines.  In units
+ of Feet or Meters consistent with survey units. Normally this
+ should be an integer multiple of the x or y bin width that is
+ used to define the grid transform.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_THETA">
+      <Tip>Shot line angle wrt E</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_THETA<br> Shot line angle wrt E</center></b>
+<pre> Default = 0
+ Allowed = &gt;=0
+ Shot line angle wrt E</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_DELTA">
+      <Tip>Physical distance between sequential shots</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_DELTA<br> Physical distance between sequential shots</center></b>
+<pre> Default = 0
+ Allowed = &gt;=0
+ The physical distance between sequential shots.
+  In units survey units of Feet or Meters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_DEP">
+      <Tip>Place sources at this depth</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_DEP<br> Place sources at this depth</center></b>
+<pre> Default = 0.0
+ Allowed = Real
+ Place sources at this depth. Will be forced to be
+ a multiple of Z_INC. Units should be consistent
+ with the survey UNITS field of PROJECT_DATA.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_XORG">
+      <Tip>First shot x location</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_XORG<br> First shot x location</center></b>
+<pre> Default = 0.0
+ Allowed =
+ The x location of the first shot. The value is in grid units if
+ x_hdr=7 or in phyical distance if x_hdr=17.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_XINC">
+      <Tip>Change in x coordinate between sequential shots</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_XINC<br> Change in x coordinate between sequential shots</center></b>
+<pre> Default = 10.0
+ Allowed = REAL
+ Change in x coordinate between sequential shots. If src_spec
+ = INFO this is set from the info file and it represents
+ an average shot spacing, not the actual shot spacing which
+ may be variable. It is forced to be a multiple of x_inc.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_YORG">
+      <Tip>First shot y location</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_YORG<br> First shot y location</center></b>
+<pre> Default = 0.0
+ Allowed =
+ The y location of the first shot. The value is in grid units if
+ y_hdr=8 or in phyical distance if y_hdr=18.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_YINC">
+      <Tip>Change in y coordinate between sequential shots</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SRC_YINC<br> Change in y coordinate between sequential shots</center></b>
+<pre> Default = 0.0
+ Allowed = REAL
+ Change in y coordinate between sequential shots. If src_spec
+ is = INFO this is set from the info file and it represents
+ an average shot spacing, not the actual shot spacing which
+ may be variable.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_SRC">
+      <Tip>Invoke dialogue to choose a source wavelet file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SELECT_PATH_SRC<br> Invoke dialogue to choose a source wavelet file</center></b>
+<pre> Default =
+ Allowed =
+ Invoke dialogue to choose a source wavelet file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC">
+      <Tip>A source wavelet file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PATH_SRC<br> A source wavelet file</center></b>
+<pre> Default =
+ Allowed =
+ A source wavelet file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FMIN">
+      <Tip>Min frequency of source in HZ</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - FMIN<br> Min frequency of source in HZ</center></b>
+<pre> Default = 4
+ Allowed = REAL
+ Min frequency of source in HZ</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FMAX">
+      <Tip>Max frequency of source in HZ</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - FMAX<br> Max frequency of source in HZ</center></b>
+<pre> Default = 40
+ Allowed = REAL
+ Max frequency of source in HZ</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FPEAK">
+      <Tip>Peak frequency of the source wavelet</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - FPEAK<br> Peak frequency of the source wavelet</center></b>
+<pre> Default =
+ Allowed =
+ Peak frequency of the source wavelet.
+ Used by I3D, I2D, A2D</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOTIT">
+      <Tip>Press button to plot sources</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PLOTIT<br> Press button to plot sources</center></b>
+<pre> plot</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DOMAINDECOMPOSITION" title="Domain Decomposition" rows="24" columns="80">
+    <Label keyword="COMMENT_" alignment="center">+++</Label>
+    <Label keyword="COMMENT_CONTROLSPATIALDECOMPOSIT" alignment="center">Control Spatial Decomposition for Parallel 3D Jobs +++</Label>
+    <Label keyword="LABEL_BRICK" alignment="left">BRICK</Label>
+    <Field keyword="BRICK" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BRICK_SAVE" alignment="left">BRICK_SAVE</Label>
+    <Field keyword="BRICK_SAVE" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NX_BRICKS" alignment="left">NX_BRICKS=</Label>
+    <Field keyword="NX_BRICKS" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BX_OVRLP" alignment="left">BX_OVRLP=</Label>
+    <Field keyword="BX_OVRLP" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BX_SIZ" alignment="left">BX_SIZ=</Label>
+    <Field keyword="BX_SIZ" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NY_BRICKS" alignment="left">NY_BRICKS=</Label>
+    <Field keyword="NY_BRICKS" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BY_OVRLP" alignment="left">BY_OVRLP=</Label>
+    <Field keyword="BY_OVRLP" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BY_SIZ" alignment="left">BY_SIZ=</Label>
+    <Field keyword="BY_SIZ" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NZ_BRICKS" alignment="left">NZ_BRICKS=</Label>
+    <Field keyword="NZ_BRICKS" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BZ_OVRLP" alignment="left">BZ_OVRLP=</Label>
+    <Field keyword="BZ_OVRLP" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BZ_SIZ" alignment="left">BZ_SIZ=</Label>
+    <Field keyword="BZ_SIZ" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Button keyword="SAVE_BREAKUP_PARMS">SAVE_BREAKUP_PARMS</Button>
+    <Layout>
+     <Constraints component="COMMENT_" xPos="4" yPos="0" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_CONTROLSPATIALDECOMPOSIT" xPos="9" yPos="0" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_BRICK" xPos="1" yPos="2" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BRICK" xPos="6" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_BRICK_SAVE" xPos="13" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BRICK_SAVE" xPos="23" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NX_BRICKS" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NX_BRICKS" xPos="11" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BX_OVRLP" xPos="18" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BX_OVRLP" xPos="27" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BX_SIZ" xPos="35" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BX_SIZ" xPos="42" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NY_BRICKS" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NY_BRICKS" xPos="11" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BY_OVRLP" xPos="18" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BY_OVRLP" xPos="27" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BY_SIZ" xPos="35" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BY_SIZ" xPos="42" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NZ_BRICKS" xPos="1" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NZ_BRICKS" xPos="11" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BZ_OVRLP" xPos="18" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BZ_OVRLP" xPos="27" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BZ_SIZ" xPos="35" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BZ_SIZ" xPos="42" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_BREAKUP_PARMS" xPos="1" yPos="8" xSize="18" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="BRICK">
+      <Tip>Number of sub-blocks in along the X axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BRICK<br> Number of sub-blocks in along the X axis</center></b>
+<pre> Default = NO
+ Allowed = YES|NO
+ Activate or deactivate domain decomposition</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BRICK_SAVE">
+      <Tip>Save files with brick information</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BRICK_SAVE<br> Save files with brick information</center></b>
+<pre> Default = NO
+ Allowed = YES|NO
+ Will save files with information that can be plotted with Gocad
+ Boundaries of brick sub-domains and shot locations belonging to the
+ sub-domains.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NX_BRICKS">
+      <Tip>Number of sub-blocks in along the X axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - NX_BRICKS<br> Number of sub-blocks in along the X axis</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;=1
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The calculaion for modeling or illumination is broken
+ into nx_bricks sub-domains along the X axis.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BX_OVRLP">
+      <Tip>Number of grid points that overlap along the X axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BX_OVRLP<br> Number of grid points that overlap along the X axis</center></b>
+<pre> Default = 0
+ Allowed = Integer&gt;=0
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The parameter nx_ovrlp controls the overlap between
+ adjacent spatial block along the X axis.
+ This parameter is relevant to I3D only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BX_SIZ">
+      <Tip>Maximum number of grid points for a X axis block</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BX_SIZ<br> Maximum number of grid points for a X axis block</center></b>
+<pre> Default = x_tot
+ Allowed = Integer&gt;0
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The parameter nx_siz indicates the maximum number of grid
+ points in an X-domain sub-block.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NY_BRICKS">
+      <Tip>Number of sub-blocks in along the Y axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - NY_BRICKS<br> Number of sub-blocks in along the Y axis</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;=1
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The calculation for modeling or illumination is broken
+ into sub-domains along the Y axis.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BY_OVRLP">
+      <Tip>Number of grid points that overlap along the Y axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BY_OVRLP<br> Number of grid points that overlap along the Y axis</center></b>
+<pre> Default = 0
+ Allowed = Integer&gt;=0
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The parameter ny_ovrlp controls the overlap between
+ adjacent spatial block along the Y axis.
+ This parameter is relevant to I3D only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BY_SIZ">
+      <Tip>Maximum number of grid points for a Y axis block</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BY_SIZ<br> Maximum number of grid points for a Y axis block</center></b>
+<pre> Default = y_tot
+ Allowed = Integer&gt;0
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The parameter ny_siz indicates the maximum number of grid
+ points in an Y-domain sub-block.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NZ_BRICKS">
+      <Tip>Number of sub-blocks in along the Z axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - NZ_BRICKS<br> Number of sub-blocks in along the Z axis</center></b>
+<pre> Default = 1
+ Allowed = Integer&gt;=1
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The calculation for modeling or illumination is broken
+ into sub-domains along the Z axis.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BZ_OVRLP">
+      <Tip>Number of grids overlap along the Z axis</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BZ_OVRLP<br> Number of grids overlap along the Z axis</center></b>
+<pre> Default = 0
+ Allowed = Integer&gt;=0
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The parameter nz_ovrlp controls the overlap between
+ adjacent spatial block along the Y axis.
+ This parameter is relevant to I3D only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BZ_SIZ">
+      <Tip>Maximum number of grid points for a Z axis block</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - BZ_SIZ<br> Maximum number of grid points for a Z axis block</center></b>
+<pre> Default = z_tot
+ Allowed = Integer&gt;0
+ The brick parameters allow the user to do a spatial domain decomposition of
+ the calculation. The parameter nz_siz indicates the maximum number of grid
+ points in an Z-domain sub-block.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_BREAKUP_PARMS">
+      <Tip>Press button to save a parameter file for the breakup program</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - SAVE_BREAKUP_PARMS<br> Press button to save a parameter file for the breakup program</center></b>
+<pre> Will create a file breakup_par.txt that is meant as input for the
+ breakup program The breakup program will read in a model and create
+ nx_bricks*ny_bricks sub-volumes.
+ Using breakup to write the output models can take significant time for a
+ large input model!</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cpsmod - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="cpsmod">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : CPSMOD
+ Category   : SYNTHETICS
+ Written    : 2004-09-30   by: R.S.Day
+ Revised    : 2006-06-12   by: R.S.Day
+ Maturity   : production
+ Purpose    : Set modeling parameters for modeling programs
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ CPSMOD is a generic interface for modeling and illumination calculations. It
+ allows the user to specify an acquisition geometry for sources and
+ receievers with one interface. The parameters are converted by CPSMOD into
+ application specific parameter file needed by a program (e.g. for A2D or E2D)
+ The parameter files are written while CPSMOD is in GUI mode. CPSMOD will run
+ the appropriate modeling program when the job is submitted to a queue.
+ 
+ CPSMOD is a cps process that is setup only. That is to say, it invokes a
+ modeling program at setup time and does not enter into any trace flows.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Some screen parameters are irrelevant for some modeling programs.For instance
+ 2D modeling generally ignores Y parameters that are in the 3rd dimension.
+ 
+ When shot modeling one can specify source locations via a simple skip pattern
+ or one can input the locations through a PATH_INFO file.
+ 
+ The domain decomposition tab is used for large 3D calculations such as I3D or
+ A3D. It is used to specify a block domain decomposition of a calculation.
+ For I3D the decomposition devides the output into, generally overlapping,
+ windows in the x-y plane. For A3D, A3D0, E3D the computation is broken
+ into sub-domains that run on different.
+ 
+ To maximize your effectiveness with CPSMOD, it is helpful to know something
+ about FXINFO files from the FXINFO process and project files used by the
+ TASKMAN process. These two file type are useful if you want to generate
+ shots located at survey locations, and if one wants to run multiple jobs
+ to generate more than a few shots.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 14  2006-06-12  R.S.Day    Added SHOT_INC parameter for I3D option.
+ 13  2006-03-21  R.S.Day    Reformat output of I3D shell script.
+ 12  2006-03-14  R.S.Day    Fixed format problem with I3D parameter file
+ 11. 2006-02-23  R.S.Day    Corrected incorrect zero value of rotation angle.
+ 10. 2006-02-16  R.S.Day    Added save_breakup_parms button. Declared more
+                            public functions.Added cpsmod_save_breakup.
+                            Fix problem with file nameing convention.
+  9. 2006-01-26  R.S.Day    Snapshot decimation added. Fixes for left handed
+                            grid transforms.
+  8. 2005-12-06  R.S.Day    Bricking support added for A3D, A3D0, I3D.
+                            Fixed grid scaling problem in update.
+                            Improved cpsmod_script_name. Added &amp;
+                            cpsmod_save_script_a3d, cpsmod_put_card,
+                            cpsmod_put_jobbeg,cpsmod_put_jobend
+                            cpsmod_get_task, cpsmod_siti_hdr,cpsmod_put_task,
+                            Fix cpsmod_brick_work bug. Generate SITI hdrs.
+  7. 2005-10-25  R.S.Day    Add support for A3D. Added sub-domain decomposition
+                            for I3D and A3D. Fixed task file writing.
+  6. 2005-08-23  R.S.Day    Make path_info always sensitive. Increase
+                            max allowed size of source arrays.
+  5. 2005-08-18  R.S.Day    Converted to parallel safe mode. All CPUs work.
+                            Sensitivity changes. Delete unused variables.
+                            Changes to I3D options.
+  4. 2005-07-28  R.S.Day    Added support for SITI illumination - I3D
+                            Additional GUI parameters for geometry description
+  3. 2005-04-19  R.S.Day    A3D0 and I2D added
+  2. 2004-12-09  R.S.Day    E2D modeling is enabled. Use amod module to input
+                            anisotropic models.
+  1. 2004-09-30  R.S.Day    Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,41 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                              replace_if_different
+#-------------------------------------------------------------------------------
+#             replace_if_different    SOURCE   DESTINATION   PRINT
+#
+# If file SOURCE is different from file DESTINATION, SOURCE will be moved
+# to DESTINATION.  The name of the destination file will be printed.
+#
+# If file SOURCE is the same as file DESTINATION, SOURCE will be deleted.
+# The PRINT string (which should be a single letter) will be printed.
+# A period will be printed if the PRINT string is missing.
+#-------------------------------------------------------------------------------
+
+   set source      = $1
+   set destination = $2
+   set print       = $3
+
+   if($print == "") set print = "."
+
+   diff --brief $destination $source >& /dev/null
+
+   # $status == 0 means the files match.
+   # $status == 1 means the files differ.
+   # $status == 2 means a file is missing.
+
+   # The destination file is replaced only if the source file is different.
+   # This keeps gmake from recompiling stuff when not necessary.
+
+   if($status == 0) then
+       \rm $source
+       echo -n "$print"
+   else
+       \mv $source $destination
+       echo -n " $destination "
+   endif
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+

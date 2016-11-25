@@ -1,0 +1,855 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="sdip" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SDIPPROCESS" title="SDIP Process" rows="24" columns="80">
+    <Label keyword="COMMENT_DSEMBLANCEDIPMIX" alignment="center">2D Semblance Dip Mix</Label>
+    <Label keyword="COMMENT_OPT_SEMB" alignment="left">OPT_SEMB  =</Label>
+    <Field keyword="OPT_SEMB" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_WHETHERTOWEIGHTINPUTTRAC" alignment="left">Whether to weight input trace by local semblance.</Label>
+    <Label keyword="LABEL_PWR_SEMB" alignment="left">PWR_SEMB  =</Label>
+    <Field keyword="PWR_SEMB" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_POWEROFSEMBLANCEFORDIPMI" alignment="left">Power of semblance for dip mix.</Label>
+    <Label keyword="LABEL_FCTR_MIX" alignment="left">FCTR_MIX  =</Label>
+    <Field keyword="FCTR_MIX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FRACTIONOFORIGINALTRACET" alignment="left">Fraction of original trace to combine with mixed trace.</Label>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN   =</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SEMBLANCEWINDOWLENGTHINS" alignment="left">Semblance window length in seconds for dip search.</Label>
+    <Label keyword="LABEL_OPT_TAPER" alignment="left">OPT_TAPER =</Label>
+    <Field keyword="OPT_TAPER" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TYPEOFTAPERTOAPPLY" alignment="left">Type of taper to apply.</Label>
+    <Label keyword="LABEL_DIP_MAX" alignment="left">DIP_MAX   =</Label>
+    <Field keyword="DIP_MAX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMDIPINMILLISECONDS" alignment="left">Maximum dip in milliseconds per trace.</Label>
+    <Label keyword="LABEL_DIP_INC" alignment="left">dip_inc   =</Label>
+    <Field keyword="DIP_INC" type="string" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_DIPINCREMENTINMILLISECON" alignment="left">Dip increment in milliseconds per trace.</Label>
+    <Label keyword="LABEL_NDIPS" alignment="left">ndips     =</Label>
+    <Field keyword="NDIPS" type="string" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALNUMBEROFDIPSWHICHWI" alignment="left">Total number of dips which will be tested.</Label>
+    <Label keyword="LABEL_NUM_TR_DIP" alignment="left">NUM_TR_DIP=</Label>
+    <Field keyword="NUM_TR_DIP" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRACESONEACHSIDEOFCENTER" alignment="left"># traces on each side of center trace for dip testing.</Label>
+    <Label keyword="LABEL_NGATHER" alignment="left">ngather   =</Label>
+    <Field keyword="NGATHER" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALTRACESWHICHWILLBEUS" alignment="left">Total # traces which will be used for dip testing.</Label>
+    <Label keyword="LABEL_NUM_TR_MIX" alignment="left">NUM_TR_MIX=</Label>
+    <Field keyword="NUM_TR_MIX" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="left"># traces on each side of center trace to mix.</Label>
+    <Label keyword="LABEL_NMIX" alignment="left">nmix      =</Label>
+    <Field keyword="NMIX" type="string" maxLength="3" editable="no" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="left">Total # traces which will be used for mixing.</Label>
+    <Label keyword="LABEL_HDR_LINE" alignment="left">HDR_LINE  =</Label>
+    <Field keyword="HDR_LINE" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDTOIDENTIFYLINE" alignment="left">Header word to identify lines.</Label>
+    <Label keyword="LABEL_LINE_INIT" alignment="left">LINE_INIT =</Label>
+    <Field keyword="LINE_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERVALUEFORCENTEROFFI" alignment="left">Header value for center of first (or any) line.</Label>
+    <Label keyword="LABEL_LINE_INC" alignment="left">LINE_INC  =</Label>
+    <Field keyword="LINE_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INCREMENTBETWEENLINES" alignment="left">Increment between lines.</Label>
+    <Field keyword="MESSAGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DSEMBLANCEDIPMIX" xPos="26" yPos="0" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OPT_SEMB" xPos="1" yPos="2" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="OPT_SEMB" xPos="12" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_WHETHERTOWEIGHTINPUTTRAC" xPos="20" yPos="2" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PWR_SEMB" xPos="1" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWR_SEMB" xPos="12" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_POWEROFSEMBLANCEFORDIPMI" xPos="20" yPos="3" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FCTR_MIX" xPos="1" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FCTR_MIX" xPos="12" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FRACTIONOFORIGINALTRACET" xPos="20" yPos="4" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="1" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="12" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SEMBLANCEWINDOWLENGTHINS" xPos="20" yPos="5" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_TAPER" xPos="1" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TAPER" xPos="12" yPos="6" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_TYPEOFTAPERTOAPPLY" xPos="20" yPos="6" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DIP_MAX" xPos="1" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_MAX" xPos="12" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMDIPINMILLISECONDS" xPos="20" yPos="8" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC" xPos="1" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC" xPos="12" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_DIPINCREMENTINMILLISECON" xPos="20" yPos="9" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NDIPS" xPos="1" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NDIPS" xPos="12" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALNUMBEROFDIPSWHICHWI" xPos="20" yPos="10" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_DIP" xPos="1" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_DIP" xPos="12" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRACESONEACHSIDEOFCENTER" xPos="20" yPos="12" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NGATHER" xPos="1" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NGATHER" xPos="12" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALTRACESWHICHWILLBEUS" xPos="20" yPos="13" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_MIX" xPos="1" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_MIX" xPos="12" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="20" yPos="15" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NMIX" xPos="1" yPos="16" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NMIX" xPos="12" yPos="16" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="20" yPos="16" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_LINE" xPos="1" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LINE" xPos="12" yPos="18" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDTOIDENTIFYLINE" xPos="20" yPos="18" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INIT" xPos="1" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INIT" xPos="12" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERVALUEFORCENTEROFFI" xPos="20" yPos="19" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INC" xPos="1" yPos="20" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INC" xPos="12" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_INCREMENTBETWEENLINES" xPos="20" yPos="20" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MESSAGE" xPos="1" yPos="22" xSize="79" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_SEMB">
+      <Tip>Option whether to weight input trace by the local semblance value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - OPT_SEMB<br> Option whether to weight input trace by the local semblance value.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ If OPT_SEMB = NO, then only the mixed trace is weighted by the semblance:
+ 
+    TR_OUT = TR_IN * FCTR_MIX + TR_MIX * (1-FCTR_MIX) * SEMB**PWR_SEMB.
+ 
+ If OPT_SEMB = YES, then both the input trace and the mixed trace are weighted
+ by the semblance:
+ 
+    TR_OUT = [ TR_IN * FCTR_MIX + TR_MIX * (1-FCTR_MIX) ] * SEMB**PWR_SEMB.
+ 
+ OPT_SEMB = YES results in an output trace that is more strongly modulated by
+ the local semblance than if OPT_SEMB = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWR_SEMB">
+      <Tip>Raise local semblance to the PWR_SEMB power for trace weighting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PWR_SEMB<br> Raise local semblance to the PWR_SEMB power for trace weighting.</center></b>
+<pre> Default = 0.5
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FCTR_MIX">
+      <Tip>Fraction of original trace to combine with mixed trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - FCTR_MIX<br> Fraction of original trace to combine with mixed trace.</center></b>
+<pre> Default = 0.5
+ Allowed = 0.0 &lt;= real &lt;= 1.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the time window, in sec, for the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - WIN_LEN<br> Length of the time window, in sec, for the dip search calculation.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ 
+ WIN_LEN is used for dip search calculations prior to generating mixed traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_TAPER">
+      <Tip>Type of taper to apply when forming the mixed trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - OPT_TAPER<br> Type of taper to apply when forming the mixed trace.</center></b>
+<pre> Default = NONE
+ Allowed = LINEAR
+ Allowed = COSINE
+ Allowed = NONE
+ 
+ If OPT_TAPER = LINEAR or COSINE, then a taper is applied to traces to be
+ mixed so that the center trace has the greatest weight and the farthest
+ traces have the least weight.  Either a linear or cosine taper is used, as
+ specified.
+ 
+ If OPT_TAPER = NONE, then the traces to be mixed are all weighted uniformly.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MAX">
+      <Tip>Maximum dip, in ms/tr, to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - DIP_MAX<br> Maximum dip, in ms/tr, to use in the dip search calculation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ A total of NDIPS dips are tested, from -DIP_MAX to +DIP_MAX.
+ Computer time is roughly proportional to the number of dips tested.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC">
+      <Tip>Dip increment, in ms/tr, to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - DIP_INC<br> Dip increment, in ms/tr, to use in the dip search calculation.</center></b>
+<pre> Default = 2.0
+ Allowed = real &gt; 0.0
+ 
+ This value is calculated from the Nyquist frequency and the NUM_TR_DIP
+ parameter to keep from aliasing the dip search on the farthest traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NDIPS">
+      <Tip>Total number of dips to be tested.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - NDIPS<br> Total number of dips to be tested.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_DIP">
+      <Tip>Number of traces on each side of the center trace for dip testing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - NUM_TR_DIP<br> Number of traces on each side of the center trace for dip testing.</center></b>
+<pre> Default = 3
+ Allowed = integer &gt;= 0
+ 
+ A total of (2*NUM_TR_DIP + 1) traces are used in the dip search calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NGATHER">
+      <Tip>Total number of traces for dip testing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - NGATHER<br> Total number of traces for dip testing.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_MIX">
+      <Tip>Number of traces on each side of the center trace to mix.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - NUM_TR_MIX<br> Number of traces on each side of the center trace to mix.</center></b>
+<pre> Default = 1
+ Allowed = integer &gt;= 0 and =&lt; NUM_TR_DIP
+ 
+ A total of (2*NUM_TR_MIX + 1) traces are mixed together.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NMIX">
+      <Tip>Total number of traces to mix together.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - NMIX<br> Total number of traces to mix together.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_LINE">
+      <Tip>Header word designating 2D lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - HDR_LINE<br> Header word designating 2D lines.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH
+ 
+ HDR_LINE is used to identify 2D lines that SDIP will operate on individually.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INIT">
+      <Tip>Value of HDR_LINE for the first (or any) 2D line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - LINE_INIT<br> Value of HDR_LINE for the first (or any) 2D line.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the center of any bin designating a 2D line.
+ This value does not have to correspond to the first actual 2D line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INC">
+      <Tip>Increment of HDR_LINE between 2D lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - LINE_INC<br> Increment of HDR_LINE between 2D lines.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ This value must be the bin increment (or width) designating a 2D line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MESSAGE">
+      <Tip>Message regarding number of requested diagnostic files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - MESSAGE<br> Message regarding number of requested diagnostic files.</center></b>
+<pre>
+ This information refers to the diagnostic files requested on the
+ "Diagnostic Output Files" screen.  That screen should be visited
+ to insure that the requests are correct and the status of each
+ requested file is acceptable.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DIAGNOSTICOUTPUTFILES" title="Diagnostic Output Files" rows="28" columns="80">
+    <Label keyword="LABEL_BASENAME" alignment="left">BASENAME   =</Label>
+    <Field keyword="BASENAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="SAVE_MEDGE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MEDGE" alignment="left">PATH_MEDGE =</Label>
+    <Field keyword="PATH_MEDGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MEDGE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_SEDGE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SEDGE" alignment="left">PATH_SEDGE =</Label>
+    <Field keyword="PATH_SEDGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_SEDGE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_MIXED" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIXED" alignment="left">PATH_MIXED =</Label>
+    <Field keyword="PATH_MIXED" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MIXED_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_SEMB" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SEMB" alignment="left">path_semb  =</Label>
+    <Field keyword="PATH_SEMB" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_SEMB_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_XDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_XDIP" alignment="left">path_xdip  =</Label>
+    <Field keyword="PATH_XDIP" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_XDIP_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_YDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_YDIP" alignment="left">path_ydip  =</Label>
+    <Field keyword="PATH_YDIP" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_YDIP_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_ORIG" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_ORIG" alignment="left">path_orig  =</Label>
+    <Field keyword="PATH_ORIG" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_LARGEFILE" alignment="center">(large file)</Label>
+    <Field keyword="PATH_ORIG_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_FLAT" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_FLAT" alignment="left">path_flat  =</Label>
+    <Field keyword="PATH_FLAT" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_3" alignment="center">(large file)</Label>
+    <Field keyword="PATH_FLAT_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_MIDDLE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIDDLE" alignment="left">path_middle=</Label>
+    <Field keyword="PATH_MIDDLE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MIDDLE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_BASENAME" xPos="7" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BASENAME" xPos="19" yPos="0" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SAVE_MEDGE" xPos="1" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MEDGE" xPos="7" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MEDGE" xPos="19" yPos="2" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MEDGE_INFO" xPos="19" yPos="3" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_SEDGE" xPos="1" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEDGE" xPos="7" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEDGE" xPos="19" yPos="5" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SEDGE_INFO" xPos="19" yPos="6" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_MIXED" xPos="1" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MIXED" xPos="7" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIXED" xPos="19" yPos="8" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MIXED_INFO" xPos="19" yPos="9" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_SEMB" xPos="1" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEMB" xPos="7" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEMB" xPos="19" yPos="11" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SEMB_INFO" xPos="19" yPos="12" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_XDIP" xPos="1" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_XDIP" xPos="7" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_XDIP" xPos="19" yPos="14" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_XDIP_INFO" xPos="19" yPos="15" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_YDIP" xPos="1" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_YDIP" xPos="7" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_YDIP" xPos="19" yPos="17" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_YDIP_INFO" xPos="19" yPos="18" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_ORIG" xPos="1" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_ORIG" xPos="7" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_ORIG" xPos="19" yPos="20" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LARGEFILE" xPos="4" yPos="21" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_ORIG_INFO" xPos="19" yPos="21" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_FLAT" xPos="1" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_FLAT" xPos="7" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_FLAT" xPos="19" yPos="23" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_3" xPos="4" yPos="24" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_FLAT_INFO" xPos="19" yPos="24" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_MIDDLE" xPos="1" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MIDDLE" xPos="7" yPos="26" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIDDLE" xPos="19" yPos="26" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MIDDLE_INFO" xPos="19" yPos="27" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="BASENAME">
+      <Tip>Base name for pathnames for diagnostic trace output files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - BASENAME<br> Base name for pathnames for diagnostic trace output files.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ This basename is used to create path names for files which will contain
+ diagnostic traces.  This basename must not include a filename extension.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_MEDGE">
+      <Tip>Whether to save edge detection traces to PATH_MEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_MEDGE<br> Whether to save edge detection traces to PATH_MEDGE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MEDGE">
+      <Tip>Pathname for Meek edge detection traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_MEDGE<br> Pathname for Meek edge detection traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One edge detection trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MEDGE_INFO">
+      <Tip>Status of PATH_MEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_MEDGE_INFO<br> Status of PATH_MEDGE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_SEDGE">
+      <Tip>Whether to save edge detection traces to PATH_SEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_SEDGE<br> Whether to save edge detection traces to PATH_SEDGE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEDGE">
+      <Tip>Pathname for semblance edge detection traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_SEDGE<br> Pathname for semblance edge detection traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One edge detection trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEDGE_INFO">
+      <Tip>Status of PATH_SEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_SEDGE_INFO<br> Status of PATH_SEDGE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_MIXED">
+      <Tip>Whether to save mixed traces to PATH_MIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_MIXED<br> Whether to save mixed traces to PATH_MIXED.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIXED">
+      <Tip>Pathname for mixed traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_MIXED<br> Pathname for mixed traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One mixed trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIXED_INFO">
+      <Tip>Status of PATH_MIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_MIXED_INFO<br> Status of PATH_MIXED.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_SEMB">
+      <Tip>Whether to save semblance traces to PATH_SEMB.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_SEMB<br> Whether to save semblance traces to PATH_SEMB.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEMB">
+      <Tip>Pathname for diagnostic traces of semblance values found.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_SEMB<br> Pathname for diagnostic traces of semblance values found.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One semblance trace will be output to the file for each trace processed.
+ Semblances are between zero and one.
+ The file will be an 8-bit file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEMB_INFO">
+      <Tip>Status of PATH_SEMB.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_SEMB_INFO<br> Status of PATH_SEMB.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_XDIP">
+      <Tip>Whether to save dip traces to PATH_XDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_XDIP<br> Whether to save dip traces to PATH_XDIP.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_XDIP">
+      <Tip>Pathname for diagnostic traces of dips found in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_XDIP<br> Pathname for diagnostic traces of dips found in the X direction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One dip trace will be output to the file for each trace processed.
+ Dips are in milliseconds per trace.
+ The file will be an 8-bit file.
+ 
+ The traces will be dead if dip searches are not done in the X direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_XDIP_INFO">
+      <Tip>Status of PATH_XDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_XDIP_INFO<br> Status of PATH_XDIP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_YDIP">
+      <Tip>Whether to save dip traces to PATH_YDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_YDIP<br> Whether to save dip traces to PATH_YDIP.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_YDIP">
+      <Tip>Pathname for diagnostic traces of dips found in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_YDIP<br> Pathname for diagnostic traces of dips found in the Y direction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One dip trace will be output to the file for each trace processed.
+ Dips are in milliseconds per trace.
+ The file will be an 8-bit file.
+ 
+ The traces will be dead if dip searches are not done in the Y direction.
+ (This is the case for the 2D SDIP process.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_YDIP_INFO">
+      <Tip>Status of PATH_YDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_YDIP_INFO<br> Status of PATH_YDIP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_ORIG">
+      <Tip>Whether to save original moving gathers to PATH_ORIG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_ORIG<br> Whether to save original moving gathers to PATH_ORIG.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ORIG">
+      <Tip>Pathname for diagnostic traces of original gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_ORIG<br> Pathname for diagnostic traces of original gathers.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These are the original moving gathers used for doing the dip search.
+ One moving gather will be output to the file for each trace processed.
+ Each moving gather contains all of the traces used to do a dip search
+ for each trace processed.  Each moving gather will contain
+ (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces.
+ 
+ This file can be very large.
+ The file will be an 8-bit file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ORIG_INFO">
+      <Tip>Status of PATH_ORIG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_ORIG_INFO<br> Status of PATH_ORIG.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_FLAT">
+      <Tip>Whether to save flattened moving gathers to PATH_FLAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_FLAT<br> Whether to save flattened moving gathers to PATH_FLAT.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_FLAT">
+      <Tip>Pathname for diagnostic traces of flattened gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_FLAT<br> Pathname for diagnostic traces of flattened gathers.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These are the moving gathers as they have been flattened using the results
+ of the dip search.  One moving gather will be output to the file for each
+ trace processed.  Each moving gather contains all of the traces used to do
+ a dip search for each trace processed.  Each moving gather will contain
+ (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces.
+ 
+ This file can be very large.
+ The file will be an 8-bit file.
+ 
+ The traces will be same as original gathers if dip searches are not done.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_FLAT_INFO">
+      <Tip>Status of PATH_FLAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_FLAT_INFO<br> Status of PATH_FLAT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_MIDDLE">
+      <Tip>Whether to save middle traces to PATH_MIDDLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - SAVE_MIDDLE<br> Whether to save middle traces to PATH_MIDDLE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIDDLE">
+      <Tip>Pathname for middle trace of each moving gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_MIDDLE<br> Pathname for middle trace of each moving gather.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ Each trace output will be the trace from the moving gather which is the
+ closest to the output trace location.  Therefore each trace should be the
+ same as an original input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIDDLE_INFO">
+      <Tip>Status of PATH_MIDDLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PATH_MIDDLE_INFO<br> Status of PATH_MIDDLE.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>sdip - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="sdip">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SDIP           (Semblance Dip Mix)
+ Category   : filters
+ Written    : 1988-12-01   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Coherence enhancement by mixing along dominant dip direction.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ SDIP is a 2D coherence enhancement process that operates on stacked or
+ migrated lines.  Each input trace is replaced by a mix of itself and its
+ neighbors.  Traces are mixed along the direction of dominant dip as
+ determined by a semblance search within small windows down the trace.
+ 
+ SDIP uses the MGATHER primitive to maintain a moving gather of traces,
+ and the SDIPUTIL primitive to do the dip search and calculate the output
+ traces.
+ 
+-------------------------------------------------------------------------------
+                         DETAILS OF OPERATION
+ 
+ 1. Within each window, (2*NUM_TR_DIP + 1) traces, centered on the input trace,
+    are used to perform a semblance dip search to determine which dip has
+    the maximum semblance.  A total of (2*DIP_MAX + 1) dips are tested.  The
+    dip with the maximum semblance is referred to as the dominant dip.  Each
+    window length is WIN_LEN seconds long, and the windows move down the trace
+    one sample at a time.
+ 
+ 
+ 2. For each window, (2*NUM_TR_MIX + 1) traces, centered on the input trace,
+    are weighted by the taper specified by OPT_TAPER and then mixed along the
+    dominant dip to form a mixed trace.
+ 
+ 
+ 3. The output trace is formed from the mixed trace, sample by sample, using
+    one of the following two equations:
+ 
+    If OPT_SEMB = NO, then only the mixed trace is weighted by the
+    semblance and the output trace is formed as follows:
+ 
+      TR_OUT =   TR_IN * FCTR_MIX  +  TR_MIX * (1-FCTR_MIX) * SEMB**PWR_SEMB
+ 
+    If OPT_SEMB = YES, then the input trace and the mixed trace are both
+    weighted by the semblance and the output trace is formed as follows:
+ 
+      TR_OUT = [ TR_IN * FCTR_MIX + TR_MIX * (1-FCTR_MIX) ] * SEMB**PWR_SEMB
+ 
+    where:
+ 
+      TR_OUT   = Output trace.
+      TR_IN    = Input trace.
+      TR_MIX   = Mixed trace.
+      FCTR_MIX = Weighting factor between input and mixed trace.
+      SEMB     = Local semblance measured along the dominant dip.
+      PWR_SEMB = Power to raise the semblance for semblance weighting.
+ 
+    OPT_SEMB = YES results in an output trace that is more strongly modulated
+    by the local semblance than if OPT_SEMB = NO.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+014. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+ 13. 2002-03-11  Stoeckley  Set limits on number of displayed digits in GUI
+                             for floating point numbers to correct an
+                             occasional GUI display problem.
+ 12. 2001-12-11  Stoeckley  Change the DIP_INC_X and DIP_INC_Y parameters
+                             to be informational only (now automatically
+                             calculated to protect against aliasing);
+                             put output diagnostics onto separate trace
+                             files so that they can all be obtained at the
+                             same time, improve the dip search algorithm.
+ 11. 2001-08-17  Stoeckley  Move some code to the new SDIPUTIL and TWEIGHTS
+                             primitives; add optional diagnostic output.
+ 10. 2001-06-11  Stoeckley  Change wrapup flag.
+  9. 2000-11-27  Stoeckley  Add missing required documentation sections.
+  8. 2000-04-25  Stoeckley  Converted from old system.
+  7. 1998-11-05  Goodger    Begin using the fortran90 compiler.
+  6. 1996-06-03  Vunderink  Added call to MUTEHW to mute input traces.
+  5. 1996-05-30  Vunderink  Added call to MUTEHW to mute mixed trace.
+  4. 1990-07-09  Stoeckley  Add parameter MT2.
+  3. 1989-05-01  Stoeckley  Changed call to modified primitive SEMDIP.
+  2. 1989-04-11  Stoeckley  Fix bug in SDIPSCL.
+  1. 1988-12-01  Stoeckley  Original Version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

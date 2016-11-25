@@ -1,0 +1,82 @@
+#! /bin/csh -f
+
+# remove_old_platform
+#
+# $Id: remove_old_platform,v 1.2 2004/03/04 14:07:43 wjdone Exp $
+#
+# run this script to remove an old platform in all of the ~spws directories.
+#
+# simply type this:
+#                     remove_old_platform xxxx
+# to remove an old platform-dependent subdirectory xxxx everywhere,
+# including all of its contents.'
+#
+# the environment variable SPWSDIR is used to point to the ~spws directory.
+
+#--------------------------------------------------------------------------
+
+if($1 == "") then
+     echo ''
+     echo '-----------------------------------------------------------------'
+     echo ' Run this script to remove an old platform in all of the ~spws'
+     echo ' directories.'
+     echo ''
+     echo ' Simply type this:'
+     echo ''
+     echo '                     remove_old_platform xxxx'
+     echo ''
+     echo ' to remove an old platform-dependent subdirectory xxxx everywhere,'
+     echo ' including all of its contents.'
+     echo '-----------------------------------------------------------------'
+     echo ''
+     exit
+endif
+
+#--------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+#--------------------------------------------------------------------------
+
+set name = $SPWSDIR/lib
+if(-d $name/$1) then
+  echo removing $name/$1
+  cd $name; \rm -r $1
+endif
+
+
+set name = $SPWSDIR/making
+if(-d $name/$1) then
+  echo removing $name/$1
+  cd $name; \rm -r $1
+endif
+
+
+foreach name ($SPWSDIR/oop/*)
+  if(-d $name/$1) then
+    echo removing $name/$1
+    cd $name; \rm -r $1
+  endif
+end
+
+
+foreach name ($SPWSDIR/util/*)
+  if(-d $name/$1) then
+    echo removing $name/$1
+    cd $name; \rm -r $1
+  endif
+end
+
+
+foreach name ($SPWSDIR/programs/*)
+  if(-d $name/$1) then
+    echo removing $name/$1
+    cd $name; \rm -r $1
+  endif
+end
+
+#--------------------------------------------------------------------------
+

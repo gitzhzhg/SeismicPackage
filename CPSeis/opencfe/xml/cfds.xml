@@ -1,0 +1,751 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="cfds" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="CFDSPROCESS" title="CFDS Process" rows="26" columns="80">
+    <Label keyword="COMMENT_CALCULATEFLOATINGDATUMSH" alignment="center">Calculate Floating Datum Shifts (Formerly AER)</Label>
+    <Label keyword="COMMENT_CONVERTTOTALSTATICSTOPRE" alignment="center">Convert total statics to pre-NMO and post-NMO shifts.</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE     =</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Field keyword="INFO" type="string" maxLength="56" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CMP_X" alignment="left">HDR_CMP_X=</Label>
+    <Field keyword="HDR_CMP_X" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CMP_Y" alignment="left">HDR_CMP_Y=</Label>
+    <Field keyword="HDR_CMP_Y" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_XANDYBINHEADERWORDS" alignment="left"> X and Y bin header words.</Label>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT   =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT   =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FIRSTBINCOORDINATES" alignment="left"> First bin coordinates.</Label>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC    =</Label>
+    <Field keyword="X_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC    =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BINWIDTHS" alignment="left"> Bin widths.</Label>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST   =</Label>
+    <Field keyword="X_LAST" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST   =</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_LASTBINCOORDINATES" alignment="left"> Last bin coordinates.</Label>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT    =</Label>
+    <Field keyword="X_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT    =</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFBINS" alignment="left"> Number of bins.</Label>
+    <Label keyword="LABEL_X_SMOOTH" alignment="left">X_SMOOTH =</Label>
+    <Field keyword="X_SMOOTH" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_SMOOTH" alignment="left">Y_SMOOTH =</Label>
+    <Field keyword="Y_SMOOTH" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFBINSTOSMOOTH" alignment="left"> Number of bins to smooth.</Label>
+    <Label keyword="LABEL_HDR_PRE" alignment="left">Header words containing pre-NMO and post-NMO static shifts:</Label>
+    <Field keyword="HDR_PRE" type="string" maxLength="4" editable="no" sensitive="yes"/>
+    <Field keyword="HDR_POST" type="string" maxLength="4" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_FILEOFAVERAGESTATICFOREA" alignment="left">File of average static for each CMP (for BUILD and SET Mode):</Label>
+    <Button keyword="SELECT_PATHNAME_CMP">Select PATHNAME_CMP  =</Button>
+    <Label keyword="EQLAB_PATHNAME_CMP" alignment="left">=</Label>
+    <Field keyword="PATHNAME_CMP" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_CMP_INFO" type="string" maxLength="59" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_INPUTREFRACTIONSTATICSFI" alignment="left">Input Refraction Statics files:</Label>
+    <Button keyword="SELECT_PATHNAME_REFR1">Select PATHNAME_REFR1=</Button>
+    <Label keyword="EQLAB_PATHNAME_REFR1" alignment="left">=</Label>
+    <Field keyword="PATHNAME_REFR1" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_REFR1_INFO" type="string" maxLength="59" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_REFR2">Select PATHNAME_REFR2=</Button>
+    <Label keyword="EQLAB_PATHNAME_REFR2" alignment="left">=</Label>
+    <Field keyword="PATHNAME_REFR2" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_REFR2_INFO" type="string" maxLength="59" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_REFR3">Select PATHNAME_REFR3=</Button>
+    <Label keyword="EQLAB_PATHNAME_REFR3" alignment="left">=</Label>
+    <Field keyword="PATHNAME_REFR3" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_REFR3_INFO" type="string" maxLength="59" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_REFR4">Select PATHNAME_REFR4=</Button>
+    <Label keyword="EQLAB_PATHNAME_REFR4" alignment="left">=</Label>
+    <Field keyword="PATHNAME_REFR4" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_REFR4_INFO" type="string" maxLength="59" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_CALCULATEFLOATINGDATUMSH" xPos="16" yPos="0" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_CONVERTTOTALSTATICSTOPRE" xPos="12" yPos="1" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="3" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="14" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="INFO" xPos="22" yPos="3" xSize="56" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CMP_X" xPos="3" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CMP_X" xPos="14" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CMP_Y" xPos="28" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CMP_Y" xPos="39" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_XANDYBINHEADERWORDS" xPos="53" yPos="5" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="3" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="14" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="28" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="39" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FIRSTBINCOORDINATES" xPos="53" yPos="6" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="3" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="14" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="28" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="39" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BINWIDTHS" xPos="53" yPos="7" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="3" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="14" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="28" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="39" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_LASTBINCOORDINATES" xPos="53" yPos="8" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="3" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="14" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="28" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="39" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFBINS" xPos="53" yPos="9" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_X_SMOOTH" xPos="3" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_SMOOTH" xPos="14" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_SMOOTH" xPos="28" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_SMOOTH" xPos="39" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFBINSTOSMOOTH" xPos="53" yPos="10" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_PRE" xPos="3" yPos="12" xSize="59" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PRE" xPos="62" yPos="12" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_POST" xPos="67" yPos="12" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FILEOFAVERAGESTATICFOREA" xPos="1" yPos="14" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_CMP" xPos="1" yPos="15" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_CMP" xPos="23" yPos="15" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_CMP" xPos="24" yPos="15" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_CMP_INFO" xPos="24" yPos="16" xSize="59" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_INPUTREFRACTIONSTATICSFI" xPos="1" yPos="17" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_REFR1" xPos="1" yPos="18" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_REFR1" xPos="23" yPos="18" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR1" xPos="24" yPos="18" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR1_INFO" xPos="24" yPos="19" xSize="59" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_REFR2" xPos="1" yPos="20" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_REFR2" xPos="23" yPos="20" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR2" xPos="24" yPos="20" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR2_INFO" xPos="24" yPos="21" xSize="59" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_REFR3" xPos="1" yPos="22" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_REFR3" xPos="23" yPos="22" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR3" xPos="24" yPos="22" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR3_INFO" xPos="24" yPos="23" xSize="59" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_REFR4" xPos="1" yPos="24" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_REFR4" xPos="23" yPos="24" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR4" xPos="24" yPos="24" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_REFR4_INFO" xPos="24" yPos="25" xSize="59" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Whether to use FGD, BUILD or SET mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - MODE<br> Whether to use FGD, BUILD or SET mode.</center></b>
+<pre> Default = FGD
+ Allowed = FGD    (Get input information from FGD process in same job.)
+ Allowed = BUILD  (Get input information from input trace stream.)
+ Allowed = SET    (Set headers in input trace stream.)
+ 
+ MODE = FGD is a one-step option requiring only one job.
+ 
+ MODE = BUILD for the first job and MODE = SET for the second job (or another
+ loop in the same job) is the two-step option you must use if FGD is not
+ available for this dataset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO">
+      <Tip>Description of MODE parameter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - INFO<br> Description of MODE parameter.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_CMP_X">
+      <Tip>Header word for CMP X grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - HDR_CMP_X<br> Header word for CMP X grid coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CMP_Y">
+      <Tip>Header word for CMP Y grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - HDR_CMP_Y<br> Header word for CMP Y grid coordinate.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ Not active with MODE = SET.
+ 
+ HDR_CMP_Y is set to zero (0) for 2D work.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>Initial value for CMP X grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - X_INIT<br> Initial value for CMP X grid coordinate.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Initial value for CMP Y grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - Y_INIT<br> Initial value for CMP Y grid coordinate.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment for CMP X grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - X_INC<br> Increment for CMP X grid coordinate.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;0.0
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment for CMP Y grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - Y_INC<br> Increment for CMP Y grid coordinate.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;0.0
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Last value of CMP X grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - X_LAST<br> Last value of CMP X grid coordinate.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;=X_INIT
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Last value of CMP Y grid coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - Y_LAST<br> Last value of CMP Y grid coordinate.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;=Y_INIT
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Total number of CMP X grid coordinate values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - X_TOT<br> Total number of CMP X grid coordinate values.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Total number of CMP Y grid coordinate values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - Y_TOT<br> Total number of CMP Y grid coordinate values.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ 
+ Not active with MODE = SET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_SMOOTH">
+      <Tip>Number of CMPs to smooth over in the X grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - X_SMOOTH<br> Number of CMPs to smooth over in the X grid direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0 and odd
+ 
+ Not active with MODE = BUILD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_SMOOTH">
+      <Tip>Number of CMPs to smooth over in the Y grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - Y_SMOOTH<br> Number of CMPs to smooth over in the Y grid direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0 and odd
+ 
+ Not active with MODE = BUILD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PRE">
+      <Tip>Number of the header word pre-shift will be written to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - HDR_PRE<br> Number of the header word pre-shift will be written to.</center></b>
+<pre>
+ The output pre-shift will be written to header word 56 if any refraction
+ files are entered.  Otherwise, the calculated pre-shift will be written to
+ header word 39.
+ 
+ This field reminds the user which header word is being written.  The value of
+ this field cannot be set directly.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_POST">
+      <Tip>Number of the header word post-shift will be written to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - HDR_POST<br> Number of the header word post-shift will be written to.</center></b>
+<pre>
+ The output post-shift will be written to header word 57 if any refraction
+ files are entered.  Otherwise, the calculated post-shift will be written to
+ header word 40.
+ 
+ This field reminds the user which header word is being written.  The value of
+ this field cannot be set directly.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_CMP">
+      <Tip>Choose PATHNAME_CMP using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - SELECT_PATHNAME_CMP<br> Choose PATHNAME_CMP using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_CMP">
+      <Tip>Pathname for static file holding the average static for each CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_CMP<br> Pathname for static file holding the average static for each CMP.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ For MODE = FGD, the file may optionally be requested for information or
+                 diagnostic purposes.
+ For MODE = BUILD, the file is created for use in a later job when MODE = SET.
+ For MODE = SET, the file from a previous job is read in and used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_CMP_INFO">
+      <Tip>Status of PATHNAME_CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_CMP_INFO<br> Status of PATHNAME_CMP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_REFR1">
+      <Tip>Choose PATHNAME_REFR1 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - SELECT_PATHNAME_REFR1<br> Choose PATHNAME_REFR1 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR1">
+      <Tip>Pathname for statics file holding refraction statics values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR1<br> Pathname for statics file holding refraction statics values.</center></b>
+<pre> Default = NONE
+ Allowed = char (array)
+ 
+ CFDS operates on the sum of the statics found in all the files and assumes the
+ statics are refraction statics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR1_INFO">
+      <Tip>Status of PATHNAME_REFR1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR1_INFO<br> Status of PATHNAME_REFR1.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_REFR2">
+      <Tip>Choose PATHNAME_REFR2 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - SELECT_PATHNAME_REFR2<br> Choose PATHNAME_REFR2 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR2">
+      <Tip>Pathname for statics file holding refraction statics values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR2<br> Pathname for statics file holding refraction statics values.</center></b>
+<pre> Default = NONE
+ Allowed = char (array)
+ 
+ CFDS operates on the sum of the statics found in all the files and assumes the
+ statics are refraction statics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR2_INFO">
+      <Tip>Status of PATHNAME_REFR2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR2_INFO<br> Status of PATHNAME_REFR2.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_REFR3">
+      <Tip>Choose PATHNAME_REFR3 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - SELECT_PATHNAME_REFR3<br> Choose PATHNAME_REFR3 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR3">
+      <Tip>Pathname for statics file holding refraction statics values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR3<br> Pathname for statics file holding refraction statics values.</center></b>
+<pre> Default = NONE
+ Allowed = char (array)
+ 
+ CFDS operates on the sum of the statics found in all the files and assumes the
+ statics are refraction statics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR3_INFO">
+      <Tip>Status of PATHNAME_REFR3.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR3_INFO<br> Status of PATHNAME_REFR3.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_REFR4">
+      <Tip>Choose PATHNAME_REFR4 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - SELECT_PATHNAME_REFR4<br> Choose PATHNAME_REFR4 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR4">
+      <Tip>Pathname for statics file holding refraction statics values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR4<br> Pathname for statics file holding refraction statics values.</center></b>
+<pre> Default = NONE
+ Allowed = char (array)
+ 
+ CFDS operates on the sum of the statics found in all the files and assumes the
+ statics are refraction statics.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REFR4_INFO">
+      <Tip>Status of PATHNAME_REFR4.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PATHNAME_REFR4_INFO<br> Status of PATHNAME_REFR4.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>cfds - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="cfds">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R O C E S S
+ 
+ Name       : CFDS      (Calculate Floating Datum Shifts) [Formerly AER]
+ Category   : statics
+ Written    : 1990-05-15   by: Tom Stoeckley
+ Revised    : 2006-09-18   by: D. Glover
+ Maturity   : production
+ Purpose    : Convert total statics to pre-NMO and post-NMO shifts.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           GENERAL DESCRIPTION
+ 
+ General
+ 
+ CFDS operation consists of the following steps:
+ 
+    1.  CFDS accepts information on the total trace static from the FGD
+    process, from input traces or from refraction statics files.
+ 
+    2.  It calculates the average static for each CMP.
+ 
+    3.  It optionally smooths the average static.
+ 
+    4.  Then it calculates the pre-NMO shift and the post-NMO shift and sets
+    these values in appropriate header words.
+ 
+ The pre-NMO shift is also known as "shift-pre" and is used to convert to a
+ floating datum.  The post-NMO shift is also known as "shift-post" and is used
+ to convert from a floating datum to the final datum.  (Pre-NMO shifts and
+ post-NMO shifts calculated from refraction statics files are known as
+ "shift-rpre" and "shift-rpost.")
+ 
+ Shift-post is simply the average of the total statics for all traces in a
+ given CMP and is a constant for all the traces within a CMP.  Shift-pre, for
+ a given trace, is the total static minus shift-post for that trace.  For any
+ trace, shift-pre plus shift-post equals the total static.
+ 
+ 
+ Modes of Operation
+ 
+ If MODE = FGD and refraction statics files are NOT listed:
+ 
+     CFDS receives information on trace total statics and CMP trace occupation
+     from the FGD process and from header word 40.  In this case, CFDS
+     calculates shift-pre and shift-post values and sets shift-pre values in
+     header word 39 and shift-post values in header word 40 all in one job.
+ 
+     The FGD process must be present in the same job as CFDS regardless of
+     whether headers are being applied.  If headers are not being applied, use
+     the SETUP option in FGD.
+ 
+ If MODE = BUILD or MODE = SET and refraction statics files are NOT listed:
+ 
+     CFDS operates in a two-step mode with all the traces running though CFDS
+     in each step.  In the first job (MODE = BUILD) average statics for each
+     CMP are calculated from information in the trace headers and written to a
+     CMP file.  Trace headers are not changed.
+ 
+     In the second job, or another loop in the same job (MODE = SET), the CMP
+     file is read and shift-pre and shift-post values are calculated.
+     Shift-pre values are set in header word 39 and shift-post values are set
+     in header word 40. This option is used if FGD is not available for the
+     dataset.
+ 
+ If MODE = FGD and refraction statics files ARE listed:
+ 
+     CFDS receives information on CMP trace occupation from the FGD process
+     and uses as the total trace static the sum of the statics found in all
+     the refraction statics files entered.  CFDS then separates the total
+     refraction (or other) static into shift-rpre and shift-rpost values and
+     sets the appropriate headers (shift-rpre value in header word 56 and the
+     shift-rpost value in header word 57).  Input trace header word 40 values
+     are ignored.
+ 
+     The FGD process must be present in the same job as CFDS regardless of
+     whether headers are being applied.  If headers are not being applied, use
+     the SETUP option in FGD.
+ 
+ If MODE = BUILD or MODE = SET and refraction statics files ARE listed:
+ 
+     CFDS operates in a two-step mode with all the traces running though CFDS
+     in each step.  CFDS receives information on CMP trace occupation from the
+     input trace headers and uses as the total trace static the sum of the
+     statics found in all the refraction statics files entered.  In the first
+     job (MODE = BUILD) average statics for each CMP are calculated and
+     written to a CMP file.  Trace headers are not changed.  Input trace
+     header word 40 values are ignored.
+ 
+     In the second job, or another loop in the same job (MODE = SET), the CMP
+     file is read and shift-rpre and shift-rpost values are calculated.
+     Shift-rpre values are set in header word 56 and shift-rpost values are
+     set in header word 57. This option is used if FGD is not available for
+     the dataset.
+ 
+     The refraction statics files must be entered in both JOBS.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         ADVICE FOR USERS
+ 
+ 
+ CFDS does NOT apply any static shifts.  Pre-NMO and post-NMO statics are
+ normally applied using the SHFT process.
+ 
+ 
+ WARNING
+ 
+ If refraction statics files are NOT listed then the total trace static must
+ be set in header word 40 of input traces.  In all cases HDR_CMP_X and
+ HDR_CMP_Y must carry appropriate CMP information.  Normally it is easiest to
+ do this by using CFG to apply proper header values.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          REVISION HISTORY
+ 
+     Date       Author      Description
+     ----       ------      -----------
+031. 2006-09-18  D. Glover  Added NULLIFY statements for Intel compiler.
+ 30. 2002-05-22  Stoeckley  Add file selection boxes and file status fields;
+                              convert refraction static file pathnames from
+                              array to scalars; improve the GUI; simplify
+                              the code; fix a bug with the SET option when
+                              two or more refraction statics files are
+                              specified.
+ 29. 2002-02-04  Stoeckley   Change name of two argument keywords to HIST
+                              and NHIST in call to statio_write_file.
+ 28. 2001-06-04  CI Burch    Documentation change only.
+ 27. 2001-02-13  Brad Kruse  Change name for wrapup flag to SKIP_WRAPUP for
+                             clarity, and slightly change how it is used.
+ 26. 2000-11-29  Brad Kruse  Bug report #195.  Removed screen label, changed
+                             default for hdr_cmp_y to zero (0), making default
+                             operation 2D instead of 3D.
+ 25. 2000-11-13  Brad Kruse  Added screen label 'For 2d, set hdr_cmp_y=0'
+                             for Bug Report #176.
+ 24. 2000-10-05  Brad Kruse  Added HDR_PRE, HDR_POST helps sections.
+ 23. 2000-08-29  Brad Kruse  Correct memory leak, due to not deallocating
+                             obj%pathname_refr.  Reported by Donna Vunderink
+                             while debugging CFE memory leaks.  Corrected GUI
+                             to require PATHNAME_CMP if mode = BUILD or SET.
+ 22. 2000-08-28  Brad Kruse  Correct error report #35.  Crash in FGD mode if
+                             PATHNAME_CMP was not set.  Corrected error that
+                             rejected Y_LAST and Y_LAST if &lt;= 0.
+ 21. 2000-08-10  Brad Kruse  Correct indexing error that caused the first
+                             refraction static file to be read each time, when
+                             multiple refraction static files are specified.
+ 20. 2000-08-09  Brad Kruse  Bug report 6.  Implemented pathname check for
+                             PATHNAME_CMP in FGD mode, as well as BUILD
+                             and SET modes.
+ 19. 2000-08-08  Brad Kruse  Bug report 5.  Correct x_tot/x_last trap, y_tot/
+                             y_last trap, enable obj%lun to print info, limit
+                             CMP summary in CFDS_SMOOTH to 120 values, and
+                             detect when all refraction files have been
+                             removed.
+ 18. 2000-08-07  Brad Kruse  Bug report 4.  Update cfds_initialize to
+                             change default mode to FGD, and default filename
+                             to NONE.  Change Help and Update to allow
+                             setting HDR_CMP_Y to 0.  Corrected cfds_update
+                             to check X/Y_LAST and X/Y_TOT updates in all
+                             modes.
+ 17. 2000-07-28  Brad Kruse  Update GUI per change from INL/CRL to Y/X grid
+                             parameters.
+ 16. 2000-05-23  Brad Kruse  Correct FGD mode error: HDR 39,40 are set wrong
+ 15. 2000-05-10  Brad Kruse  Fix infinite loop in update for FGD mode.
+ 14. 2000-05-08  Kruse       Implement FGD mode.
+ 13. 2000-04-05  Kruse       Update calls to newly revised statutil module.
+ 12. 2000-04-04  Kruse       Change for update to statutil module, add
+                             read-only GUI parameters HDR_PRE and HDR_POST.
+                             Add the RCS ID.
+ 11. 2000-03-24  Kruse       Remove TOP.LAY and BOT.LAY includes from the
+                             GUI layout.
+ 10. 2000-03-10  Kruse       Change to use STATIO and STATUTIL instead of
+                             STATICS_UTIL (by Stoeckley). Add combo boxes.
+                             Checkout GUI support.
+ 9.  1999-11-14 Dorman      Convert to new CPS standards and Fortran 90
+ 8.  1999-09-29 Troutt      Renamed from AER to CFDS per CI Burch.
+ 7.  1999-08-31 Troutt      Begin full f90 conversion.
+ 6.  1998-12-14 Vunderink   Begin using the f90 compiler.
+ 5.  1994-02-11 Troutt      Add error checking for HPALLOC calls.
+ 4.  1991-06-21 Howard      Fix unitialized variabel bug for UNICOS.
+ 3.  1990-10-23 Peterson    Include error and abort arguments on calls to
+                             HPALLOC and HPDEALLC.
+ 2.  1990-10-22 Stoeckley   Add new options MODE=BUILD and MODE=SET.
+ 1.  1990-05-15 Stoeckley   Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

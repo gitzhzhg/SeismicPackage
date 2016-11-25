@@ -1,0 +1,885 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="tdc" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCREEN1" title="tdc_1" rows="24" columns="80">
+    <Label keyword="COMMENT_TIMETODEPTHCONVERSION" alignment="center">Time to Depth Conversion</Label>
+    <Label keyword="LABEL_OPT_VEL" alignment="left">OPT_VEL  =</Label>
+    <Field keyword="OPT_VEL" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DATUM" alignment="left">OPT_DATUM  =</Label>
+    <Field keyword="OPT_DATUM" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MEMORY_SIZE" alignment="left">MEMORY_SIZE=</Label>
+    <Field keyword="MEMORY_SIZE" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONST_VEL" alignment="left">CONST_VEL=</Label>
+    <Field keyword="CONST_VEL" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONST_DATUM" alignment="left">CONST_DATUM=</Label>
+    <Field keyword="CONST_DATUM" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEPTH_SCALE" alignment="left">DEPTH_SCALE=</Label>
+    <Field keyword="DEPTH_SCALE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_VEL">Select PATH_VEL</Button>
+    <Label keyword="EQLAB_PATH_VEL" alignment="left">=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_DATUM">Select PATH_DATUM</Button>
+    <Label keyword="EQLAB_PATH_DATUM" alignment="left">=</Label>
+    <Field keyword="PATH_DATUM" type="string" maxLength="87" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INTERPOLATE_ORIGINAL" alignment="left">INTERPOLATE_ORIGINAL=</Label>
+    <Field keyword="INTERPOLATE_ORIGINAL" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INTERPOLATE_INVERSE" alignment="left">INTERPOLATE_INVERSE=</Label>
+    <Field keyword="INTERPOLATE_INVERSE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INTERPOLATION_TYPE" alignment="left">INTERPOLATION_TYPE  =</Label>
+    <Field keyword="INTERPOLATION_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VEL_INTERPOLATE" alignment="left">OPT_VEL_INTERPOLATE=</Label>
+    <Field keyword="OPT_VEL_INTERPOLATE" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INTERPOLATION_INPUT" alignment="left">INTERPOLATION_INPUT =</Label>
+    <Field keyword="INTERPOLATION_INPUT" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_VEL_INTERPOLATE" alignment="left">NUM_VEL_INTERPOLATE=</Label>
+    <Field keyword="NUM_VEL_INTERPOLATE" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INTERPOLATION_OUTPUT" alignment="left">INTERPOLATION_OUTPUT=</Label>
+    <Field keyword="INTERPOLATION_OUTPUT" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MAP_INTERPOLATE" alignment="left">OPT_MAP_INTERPOLATE=</Label>
+    <Field keyword="OPT_MAP_INTERPOLATE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OUTPUT_TYPE" alignment="left">OUTPUT_TYPE =</Label>
+    <Field keyword="OUTPUT_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INPUT_UNITS" alignment="left">INPUT_UNITS =</Label>
+    <Field keyword="INPUT_UNITS" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OUTPUT_UNITS" alignment="left">OUTPUT_UNITS=</Label>
+    <Field keyword="OUTPUT_UNITS" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_USE" alignment="left">TIM_USE =</Label>
+    <Field keyword="TIM_USE" type="string" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEP_USE" alignment="left">DEP_USE =</Label>
+    <Field keyword="DEP_USE" type="string" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_TOT" alignment="left">TIM_TOT =</Label>
+    <Field keyword="TIM_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEP_TOT" alignment="left">DEP_TOT =</Label>
+    <Field keyword="DEP_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INIT" alignment="left">TIM_INIT=</Label>
+    <Field keyword="TIM_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEP_INIT" alignment="left">DEP_INIT=</Label>
+    <Field keyword="DEP_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_LAST" alignment="left">TIM_LAST=</Label>
+    <Field keyword="TIM_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEP_LAST" alignment="left">DEP_LAST=</Label>
+    <Field keyword="DEP_LAST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INC" alignment="left">TIM_INC =</Label>
+    <Field keyword="TIM_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEP_INC" alignment="left">DEP_INC =</Label>
+    <Field keyword="DEP_INC" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_TIMETODEPTHCONVERSION" xPos="1" yPos="1" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_VEL" xPos="1" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VEL" xPos="11" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DATUM" xPos="24" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DATUM" xPos="36" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MEMORY_SIZE" xPos="49" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MEMORY_SIZE" xPos="61" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONST_VEL" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONST_VEL" xPos="11" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONST_DATUM" xPos="24" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONST_DATUM" xPos="36" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEPTH_SCALE" xPos="49" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEPTH_SCALE" xPos="61" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_VEL" xPos="1" yPos="5" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VEL" xPos="17" yPos="5" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="18" yPos="5" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_DATUM" xPos="1" yPos="6" xSize="18" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_DATUM" xPos="19" yPos="6" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_DATUM" xPos="20" yPos="6" xSize="87" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INTERPOLATE_ORIGINAL" xPos="1" yPos="8" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INTERPOLATE_ORIGINAL" xPos="22" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INTERPOLATE_INVERSE" xPos="32" yPos="8" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INTERPOLATE_INVERSE" xPos="52" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INTERPOLATION_TYPE" xPos="1" yPos="9" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INTERPOLATION_TYPE" xPos="22" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_VEL_INTERPOLATE" xPos="32" yPos="9" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VEL_INTERPOLATE" xPos="52" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INTERPOLATION_INPUT" xPos="1" yPos="10" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INTERPOLATION_INPUT" xPos="22" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_VEL_INTERPOLATE" xPos="32" yPos="10" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_VEL_INTERPOLATE" xPos="52" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INTERPOLATION_OUTPUT" xPos="1" yPos="11" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INTERPOLATION_OUTPUT" xPos="22" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MAP_INTERPOLATE" xPos="32" yPos="11" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MAP_INTERPOLATE" xPos="52" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OUTPUT_TYPE" xPos="1" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUTPUT_TYPE" xPos="14" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INPUT_UNITS" xPos="1" yPos="15" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INPUT_UNITS" xPos="14" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OUTPUT_UNITS" xPos="1" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUTPUT_UNITS" xPos="14" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TIM_USE" xPos="1" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_USE" xPos="10" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEP_USE" xPos="21" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEP_USE" xPos="30" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_TOT" xPos="1" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_TOT" xPos="10" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEP_TOT" xPos="21" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEP_TOT" xPos="30" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INIT" xPos="1" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INIT" xPos="10" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEP_INIT" xPos="21" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEP_INIT" xPos="30" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_LAST" xPos="1" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_LAST" xPos="10" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEP_LAST" xPos="21" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEP_LAST" xPos="30" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INC" xPos="1" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INC" xPos="10" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEP_INC" xPos="21" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEP_INC" xPos="30" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_VEL">
+      <Tip>Whether to use constant or spatialy varying velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OPT_VEL<br> Whether to use constant or spatialy varying velocity.</center></b>
+<pre> Default = PATH
+ Allowed = CONSTANT  Use a constant velocity value of CONST_VEL.
+ Allowed = PATH      Use a spatialy varying velocity defined by PATH_VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DATUM">
+      <Tip>Whether to use constant or spatialy varying datum.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OPT_DATUM<br> Whether to use constant or spatialy varying datum.</center></b>
+<pre> Default = PATH
+ Allowed = CONSTANT  Use a constant velocity value of CONST_VEL.
+ Allowed = PATH      Use a spatialy varying velocity defined by PATH_VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MEMORY_SIZE">
+      <Tip>How much memory to use for the map function, in words.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - MEMORY_SIZE<br> How much memory to use for the map function, in words.</center></b>
+<pre> Default = -1
+ Allowed = integer -1, &gt;0   -1 means hold the entire map function in memory.
+ tdc will hold at least two rows of x columns in memory. If the map is cached
+ on disk, efficiency will be better if the velocity model is in the same order
+ as the trace data being input to TDC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_VEL">
+      <Tip>Constant velocity to use if no velocity file is input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - CONST_VEL<br> Constant velocity to use if no velocity file is input.</center></b>
+<pre> Default = 2000
+ Allowed = real scalar
+ If PATH_VEL is not defined the depth at which time=0 is constant and
+ is CONST_VEL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONST_DATUM">
+      <Tip>Constant datum depth to use if no datum file is input.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - CONST_DATUM<br> Constant datum depth to use if no datum file is input.</center></b>
+<pre> Default = 0
+ Allowed = real scalar
+ If PATH_DATUM is not defined the depth at which time=0 is constant and
+ is CONST_DATUM.
+ If PATH_DATUM is defined the depth at which time=0 is spatialy varying
+ and is interpolated from the values in the PATH_DATUM file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEPTH_SCALE">
+      <Tip>Depth scaling factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - DEPTH_SCALE<br> Depth scaling factor.</center></b>
+<pre> Default = 1000
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VEL">
+      <Tip>Select velocity file path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - SELECT_PATH_VEL<br> Select velocity file path name.</center></b>
+<pre> Default = None
+ Allowed = Character
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL">
+      <Tip>velocity file path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PATH_VEL<br> velocity file path name.</center></b>
+<pre> Default = None
+ Allowed = Character
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_DATUM">
+      <Tip>Select datum file path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - SELECT_PATH_DATUM<br> Select datum file path name.</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ If PATH_DATUM is not defined the depth at which time=0 is constant and
+ is CONST_DATUM.
+ If PATH_DATUM is defined the depth at which time=0 is spatialy varying
+ and is interpolated from the values in the PATH_DATUM file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_DATUM">
+      <Tip>Datum file path name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PATH_DATUM<br> Datum file path name.</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ If PATH_DATUM is not defined the depth at which time=0 is constant and
+ is CONST_DATUM.
+ If PATH_DATUM is defined the depth at which time=0 is spatialy varying
+ and is interpolated from the values in the PATH_DATUM file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERPOLATE_ORIGINAL">
+      <Tip>How to interpolate the model coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - INTERPOLATE_ORIGINAL<br> How to interpolate the model coefficient.</center></b>
+<pre> Default = NO
+ Allowed = NO     - Interpolate the inverse of the model coefficient.
+ Allowed = YES    - Interpolate the model coefficient.
+ Use INTERPOLATE_ORIGINAL = NO  and INTERPOLATE_INVERSE = YES
+ when trying to output interval velocity.
+ Use INTERPOLATE_ORIGINAL = YES and INTERPOLATE_INVERSE = NO
+ when trying to output coefficients other than interval velocity.
+ This should only be done with INPUT_UNITS=DEPTH and OUTPUT_TYPE=VELOCITY</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERPOLATE_INVERSE">
+      <Tip>How to interpolate the model coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - INTERPOLATE_INVERSE<br> How to interpolate the model coefficient.</center></b>
+<pre> Default = NO
+ Allowed = NO     - Interpolate the inverse of the model coefficient.
+ Allowed = YES    - Interpolate the model coefficient.
+ Use INTERPOLATE_ORIGINAL = NO  and INTERPOLATE_INVERSE = YES
+ when trying to output interval velocity.
+ Use INTERPOLATE_ORIGINAL = YES and INTERPOLATE_INVERSE = NO
+ when trying to output coefficients other than interval velocity.
+ This should only be done with INPUT_UNITS=DEPTH and OUTPUT_TYPE=VELOCITY</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERPOLATION_TYPE">
+      <Tip>Type of input interpolation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - INTERPOLATION_TYPE<br> Type of input interpolation.</center></b>
+<pre> Default = FFT
+ Allowed = FFT    - The input trace is interpolated by an fft.
+ Allowed = LINEAR - The input trace is interpolated by linear interplation.
+ When OUTPUT_TYPE=VELOCITY, INTERPOLATION_TYPE=LINEAR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VEL_INTERPOLATE">
+      <Tip>Type of velocity interpolation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OPT_VEL_INTERPOLATE<br> Type of velocity interpolation.</center></b>
+<pre> Default = LIN_SLOWNESS
+ Allowed = LIN_SLOWNESS - interpolate linear slowness
+ Allowed = LIN_VELOCITY - interpolate linear velocity
+ Allowed = NODE_DOWN    - set the velocity below a node equal to that node.
+ Allowed = NODE_UP      - set the velocity above a node equal to that node.
+ 
+ The combination of OPT_VEL_INTERPOLATE and NUM_VEL_INTERPOLATE allows TDC
+ to assume different velocity variations between defined velocity
+ node locations.  This allows the user to correct for difference between
+ different imaging algorithms which treat velocity fields differently.
+ 
+ If NUM_VEL_INTERPOLATE &gt; 1 TDC will interpolate the input velocity field
+ to a grid that is NUM_VEL_INTERPOLATE times finer than the original
+ vertical grid.
+ 
+ The manner in which TDC does the interpolation is controled by parameter
+ OPT_VEL_INTERPOLATE.
+ 
+ if OPT_VEL_INTERPOLATE = LIN_SLOWNESS
+ TDC interpolates linear slowness between nodes this the historical behaviour
+ and should produce the same results regardless of the value of
+ NUM_VEL_INTERPOLATE
+ 
+ if OPT_VEL_INTERPOLATE = LIN_VELOCITY
+ TDC interpolates linear velocity between nodes this would emulate the
+ behavior of algorithms that assume velocity changes linearly
+ between velocity nodes.
+ 
+ if OPT_VEL_INTERPOLATE = NODE_DOWN
+ TDC sets the velocity at fine nodes interpolated between two coarse nodes
+ equal to the velocity of the upper node.
+ this should make the velocity look slower and move points at a given time
+ to smaller depths or move points at a given depth to a larger travel time.
+ 
+ if OPT_VEL_INTERPOLATE = NODE_UP
+ TDC sets the velocity at fine nodes interpolated between two coarse nodes
+ equal to the velocity of the lower node.
+ this should make the velocity look faster and move points at a given time
+ to larger depths or move points at a given depth to a smaller travel time.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERPOLATION_INPUT">
+      <Tip>The input trace is interpolated by INTERPOLATION_INPUT</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - INTERPOLATION_INPUT<br> The input trace is interpolated by INTERPOLATION_INPUT</center></b>
+<pre> Default = 1
+ Allowed = int&gt;=1
+ When OUTPUT_TYPE=VELOCITY, INTERPOLATION_INPUT=1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_VEL_INTERPOLATE">
+      <Tip>Order of velocity interpolation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - NUM_VEL_INTERPOLATE<br> Order of velocity interpolation.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ 
+ The combination of OPT_VEL_INTERPOLATE and NUM_VEL_INTERPOLATE allows TDC
+ to assume different velocity variations between defined velocity
+ node locations.  This allows the user to correct for difference between
+ different imaging algorithms which treat velocity fields differently.
+ 
+ If NUM_VEL_INTERPOLATE &gt; 1 TDC will interpolate the input velocity field
+ to a grid that is NUM_VEL_INTERPOLATE times finer than the original
+ vertical grid.
+ 
+ The manner in which TDC does the interpolation is controled by parameter
+ OPT_VEL_INTERPOLATE.
+ 
+ if OPT_VEL_INTERPOLATE = LIN_SLOWNESS
+ TDC interpolates linear slowness between nodes this the historical behaviour
+ and should produce the same results regardless of the value of
+ NUM_VEL_INTERPOLATE
+ 
+ if OPT_VEL_INTERPOLATE = LIN_VELOCITY
+ TDC interpolates linear velocity between nodes this would emulate the
+ behavior of algorithms that assume velocity changes linearly
+ between velocity nodes.
+ 
+ if OPT_VEL_INTERPOLATE = NODE_DOWN
+ TDC sets the velocity at fine nodes interpolated between two coarse nodes
+ equal to the velocity of the upper node.
+ this should make the velocity look slower and move points at a given time
+ to smaller depths or move points at a given depth to a larger travel time.
+ 
+ if OPT_VEL_INTERPOLATE = NODE_UP
+ TDC sets the velocity at fine nodes interpolated between two coarse nodes
+ equal to the velocity of the lower node.
+ this should make the velocity look faster and move points at a given time
+ to larger depths or move points at a given depth to a smaller travel time.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="INTERPOLATION_OUTPUT">
+      <Tip>Veritcal computational grid ration.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - INTERPOLATION_OUTPUT<br> Veritcal computational grid ration.</center></b>
+<pre> Default = 10
+ Allowed = real integer
+ TDC computes and saves a precomputed function on a
+ computational grid sampled on the same x,y grid as the input velocity field
+ and a vertical grid whose sample interval is:
+ TIM_INC  * INTERPOLATION_OUTPUT when OUTPUT_UNITS=TIME,
+ and
+ DEP_INC * INTERPOLATION_OUTPUT when OUTPUT_UNITS=DEPTH.,
+ Making INTERPOLATION_OUTPUT smaller will increase the accuracy of the time to
+ depth or depth to time transformation at the cost of greater cpu and memory
+ usage.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MAP_INTERPOLATE">
+      <Tip>Type of interpolation during map computation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OPT_MAP_INTERPOLATE<br> Type of interpolation during map computation.</center></b>
+<pre> Default = NEW
+ Allowed = NEW - Use new more efficient interpolation.
+ Allowed = OLD - Use original efficient interpolation.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_TYPE">
+      <Tip>Type of output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OUTPUT_TYPE<br> Type of output.</center></b>
+<pre> Default = DATA     - output converted input data trace
+ Allowed = VELOCITY - output velocity traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INPUT_UNITS">
+      <Tip>Input units, TIME or DEPTH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - INPUT_UNITS<br> Input units, TIME or DEPTH.</center></b>
+<pre> Default = TIME
+ Allowed = TIME   - input is in TIME  units, output is in DEPTH units.
+ Allowed = DEPTH  - input is in DEPTH units, output is in TIME  units.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OUTPUT_UNITS">
+      <Tip>Output units, TIME or DEPTH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OUTPUT_UNITS<br> Output units, TIME or DEPTH.</center></b>
+<pre> Default = DEPTH
+ Allowed = DEPTH - input is in TIME  units, output is in DEPTH units.
+ Allowed = TIME  - input is in DEPTH units, output is in TIME  units.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_USE">
+      <Tip>Time domain usage flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - TIM_USE<br> Time domain usage flag.</center></b>
+<pre> Default = INPUT
+ Allowed = INPUT, OUTPUT, BOTH, NOT_USED
+ Parameter TIM_USE indicates the type of use TDC will make of the TIME</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEP_USE">
+      <Tip>Depth domain usage flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - DEP_USE<br> Depth domain usage flag.</center></b>
+<pre> Default = OUTPUT
+ Allowed = INPUT, OUTPUT, BOTH, NOT_USED
+ Parameter DEP_USE indicates the type of use TDC will make of the DEPTH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_TOT">
+      <Tip>Number of time samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - TIM_TOT<br> Number of time samples.</center></b>
+<pre> Default = 1001
+ Allowed = int&gt;=0
+ Not used when OUTPUT_UNITS=DEPTH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEP_TOT">
+      <Tip>Number of depth samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - DEP_TOT<br> Number of depth samples.</center></b>
+<pre> Default = 1001
+ Allowed = int&gt;=0
+ Not used when OUTPUT_UNITS=TIME</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INIT">
+      <Tip>Minimum time value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - TIM_INIT<br> Minimum time value.</center></b>
+<pre> Default = 0
+ Allowed = real scalar
+ Not used when OUTPUT_UNITS=DEPTH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEP_INIT">
+      <Tip>Minimum depth value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - DEP_INIT<br> Minimum depth value.</center></b>
+<pre> Default = 0
+ Allowed = real scalar
+ Not used when OUTPUT_UNITS=TIME</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_LAST">
+      <Tip>Maximum time value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - TIM_LAST<br> Maximum time value.</center></b>
+<pre> Default = 4
+ Allowed = real scalar
+ Not used when OUTPUT_UNITS=DEPTH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEP_LAST">
+      <Tip>Maximum depth value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - DEP_LAST<br> Maximum depth value.</center></b>
+<pre> Default = 4000
+ Allowed = real scalar
+ Not used when OUTPUT_UNITS=TIME</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INC">
+      <Tip>Time sample increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - TIM_INC<br> Time sample increment.</center></b>
+<pre> Default = .004
+ Allowed = real scalar
+ Not used when OUTPUT_UNITS=DEPTH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEP_INC">
+      <Tip>Depth value increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - DEP_INC<br> Depth value increment.</center></b>
+<pre> Default = 4
+ Allowed = real scalar
+ Not used when OUTPUT_UNITS=TIME</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tdc - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="tdc">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : tdc
+ Category   : Transforms
+ Written    : 2000-09-19   by: Douglas Hanson
+ Revised    : 2006-12-11   by: Douglas Hanson Improve efficiency, parallel.
+ Maturity   : production
+ Purpose    : Time to Depth Conversion.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ TDC converts an input trace from time to depth or from depth to time
+ or generates velocity traces using an interval velocity model.
+ 
+ TDC has four different combinations of input and output controlled by
+ parameters OUTPUT_TYPE and INPUT_UNITS.
+ 
+ OUTPUT_TYPE controls whether TDC produces velocity traces at the input trace
+ locations or does a time to depth or depth to time transformation of the input
+ traces.
+ 
+ INPUT_UNITS indicates what vertical units the input traces are in, time or
+ depth.  Combined with OUTPUT_TYPE this defines the vertical units of the
+ output traces as well.
+ 
+ The four combinations of input and output are:
+ 
+ 1) OUTPUT_TYPE=VELOCITY and INPUT_UNITS=TIME  data(time ) -&gt; velocity(time )
+ 2) OUTPUT_TYPE=VELOCITY and INPUT_UNITS=DEPTH data(depth) -&gt; velocity(depth)
+ 3) OUTPUT_TYPE=DATA     and INPUT_UNITS=TIME  data(time ) -&gt; data(depth)
+ 4) OUTPUT_TYPE=DATA     and INPUT_UNITS=DEPTH data(depth) -&gt; data(time )
+ 
+ The combined values of OUTPUT_TYPE and INPUT_UNITS affect some of the
+ other input parameters that are sensitive and / or visible, that is parameters
+ the user can change and / or see.
+ 
+ Parameters, OUTPUT_UNITS, TIM_USE and DEP_USE are for information purposes
+ only and will always be insensitive or invisible.
+ 
+ Parameter OUTPUT_UNITS defines the type of vertical unit the output data is
+ in.  It can have values of TIME and DEPTH.
+ OUTPUT_UNITS is provided for information only, the user can not directly
+ change the value of OUTPUT_UNITS instead it will be determined by the combined
+ values of OUTPUT_TYPE and INPUT_UNITS.
+ 
+ Parameter TIM_USE indicates the type of use TDC will make of the TIME
+ input parameters: TIM_TOT, TIM_INIT, TIM_LAST and TIM_INC.  It can have
+ values of BOTH, INPUT, OUTPUT and NOT_USED.
+ TIM_USE is provided for information only, the user can not directly change
+ the value of TIM_USE instead it will be determined by the combined values of
+ OUTPUT_TYPE and INPUT_UNITS.
+ TIM_USE will always be insensitive, and will be invisible if the user chooses
+ to produce velocity traces in depth.
+ 
+ Parameter DEP_USE indicates the type of use TDC will make of the DEPTH
+ input parameters: DEP_TOT, DEP_INIT, DEP_LAST and DEP_INC.  It can have
+ values of BOTH, INPUT, OUTPUT and NOT_USED.
+ DEP_USE is provided for information only, the user can not directly change
+ the value of DEP_USE, instead it will be determined by the combined values
+ of OUTPUT_TYPE and INPUT_UNITS.
+ DEP_USE will always be insensitive, and will be invisible if the user
+ chooses to produce velocity traces in time.
+ 
+ The following notes detail the four different combinations of OUTPUTE_TYPE
+ and INPUT_UNITS.
+ 
+ The number of input  global samples will be refered to as  NDPT_INPUT
+ The input  global sample increment  will be refered to as    DT_INPUT
+ The input  global sample origin     will be refered to as TSTRT_INPUT
+ The number of output global samples will be refered to as  NDPT_OUTPUT
+ The output global sample increment  will be refered to as    DT_OUTPUT
+ The output global sample origin     will be refered to as TSTRT_OUTPUT
+ 
+ Also in all cases:
+ 
+ TIM_LAST   = (TIM_TOT  - 1) * TIM_INC  + TIM_INIT
+ DEP_LAST  = (DEP_TOT - 1) * DEP_INC + DEP_INIT
+ 
+ 1) OUTPUT_TYPE=VELOCITY and INPUT_UNITS=TIME
+ 
+ TDC prodcues a velocity trace in time at the input trace location.
+ Both the input and output traces are in time,
+ 
+ The input and output time parameters are defined by the input global time
+ values.  The depth parameters are not used and are invisible.
+ 
+  TIM_TOT =  NDPT_INPUT                 NDPT_OUTPUT =  TIM_TOT
+  TIM_INIT = TSTRT_INPUT                TSTRT_OUTPUT =  TIM_INIT
+  TIM_INC =    DT_INPUT                   DT_OUTPUT =  TIM_INC
+ 
+ OUTPUT_UNITS = TIME, TIM_USE = BOTH, DEP_USE = NOT_USED
+ 
+ 2) OUTPUT_TYPE=VELOCITY and INPUT_UNITS=DEPTH
+ 
+ TDC prodcues a velocity trace in depth at the input trace location.
+ Both the input and output traces are in depth.
+ 
+ The input and output depth parmeters are defined by the input global time
+ values and DEPTH_SCALE.  The time parameters are not used and are invisible.
+ 
+ DEP_TOT =  NDPT_INPUT                 NDPT_OUTPUT = DEP_TOT
+ DEP_INIT = TSTRT_INPUT * DEPTH_SCALE  TSTRT_OUTPUT = DEP_INIT / DEPTH_SCALE
+ DEP_INC =    DT_INPUT * DEPTH_SCALE     DT_OUTPUT = DEP_INC / DEPTH_SCALE
+ 
+ OUTPUT_UNITS = DEPTH, TIM_USE = NOT_USED, DEP_USE = BOTH
+ 
+ 3) OUTPUT_TYPE=DATA and INPUT_UNITS=TIME
+ 
+ TDC does a time to depth conversion of the input trace.
+ The input trace is in time and the output trace is in depth.
+ 
+ The input time parameters are defined by the input global time values and are
+ insensitive.
+ The output global parameters are defined by the output depth parameter values
+ scaled by 1. / DEPTH_SCALE.
+ 
+  TIM_TOT =  NDPT_INPUT                 NDPT_OUTPUT = DEP_TOT
+  TIM_INIT = TSTRT_INPUT                TSTRT_OUTPUT = DEP_INIT / DEPTH_SCALE
+  TIM_INC =    DT_INPUT                   DT_OUTPUT = DEP_INC / DEPTH_SCALE
+ 
+ OUTPUT_UNITS=DEPTH, TIM_USE=INPUT, DEP_USE=OUTPUT
+ 
+ 4) OUTPUT_TYPE=DATA and INPUT_UNITS=DEPTH
+ 
+ TDC does a depth to time conversion of the input trace.
+ The input trace is in depth and the output trace is in time.
+ 
+ The input depth parameters are defined by the input global time values !
+ scaled by DEPTH_SCALE and are insensitive.
+ The output global values are defined by the output time parameters,
+ 
+ DEP_TOT =  NDPT_INPUT                 NDPT_OUTPUT =  TIM_TOT
+ DEP_INIT = TSTRT_INPUT * DEPTH_SCALE  TSTRT_OUTPUT =  TIM_INIT
+ DEP_INC =    DT_INPUT * DEPTH_SCALE     DT_OUTPUT =  TIM_INC
+ 
+ OUTPUT_UNITS=TIME, TIM_USE=OUTPUT, DEP_USE=INPUT
+ 
+ If the user wants velocity traces on a uniform grid, synthetic traces can be
+ generated on that grid using process SPIKE and then TDC can be used to create
+ velocity traces for those synthetic input traces.
+ 
+ If the user selects OUTPUT_TYPE=DATA, TDC will interpolate the input trace
+ to a vertical grid INTERPOLATE_INPUT times finer than the input grid.
+ Increasing the value of INTERPOLATE_INPUT results in a more accurate mapping
+ of the input trace to the output trace.  If OUTPUT_TYPE=VELOCITY
+ INTERPOLATE_INPUT will be set to 1.
+ 
+ TDC conducts its computations on a vertical grid INTERPOLATE_OUTPUT times
+ coarser than the output grid.  Increasing INTERPOLATE_OUTPUT reduces memory
+ usage the accuracy of the input to output map.
+ 
+ When OUTPUT_TYPE=VELOCITY TDC interpolates the orignal input interval
+ velocity field to the same horizontal grid as the original velocity file and a
+ vertical grid INTERPOLATE_OUTPUT times coarser than the output vertical grid.
+ 
+ When OUTPUT_TYPE=DATA TDC saves the velocity filed on the orignal input
+ velocity grid.  TDC computes the time to depth or depth to time mapping
+ function on the same horizontal grid as the original velocity file and a
+ vertical grid INTERPOLATE_OUTPUT times coarser than the output vertical grid.
+ 
+ TDC reads the input velocity field and converts into either VZIN, if
+ OUTPUT_UNITS=DEPTH, or VTIN, if OUTPUT_UNITS=TIME, form using standard CPS
+ velocity routines.  The current version of these routines assume constant
+ velocity layers between velocity pick.  Hence these are not yet consistent
+ with the old CPS depth migration velocity filed manipulation assumption.
+ 
+ TDC computes the time to depth or depth to time transformation using a
+ spatialy varying zero time depth datum. Eventualy this datum may be entered
+ from a file if PATH_DATUM is defined or from a constant depth defined by
+ CONST_DATUM.
+ 
+ Currently this zero time depth datum surface datum is interpolated to the same
+ spatial grid as the velocity field.  Eventualy it will preserve the spatial
+ grid of the orignal dtaums urface.
+ 
+ Currently the CPS velocity reading and conversion routines assume that
+ vertical time is measured from zero depth. Hence TDC assumes that the velocity
+ field you input follows this same convention and corrects for non zero depth
+ datum useing the depth datum information.
+ 
+ TDC computes any lateral interpolations of the velocity or mapping fields
+ relative to the zero time surface.  This could be slightly different from an
+ interpolation from a zero depth surface.
+ 
+ To ensure you get the correct velocity field I suggest you put the input
+ velocity filed in the correct format, VZIN, if OUTPUT_UNITS=DEPTH, or VTIN,
+ if OUTPUT_UNITS=TIME, using RMOD.
+ 
+ All internal computations within TDC involving velocity assume a linear
+ slowness variation between velocity picks.  This will preserve vertical travel
+ time.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author         Description
+     ----        ------         -----------
+ 26. 2006-12-11  Douglas Hanson Improve efficiency, make parallel.
+                                Add OPT_VEL_INTERPOLATE.
+ 25. 2006-06-27  D. Glover      Added NULLIFY statements for Intel compiler.
+ 24. 2006-06-12  B. Menger      Removed Unused Variables.
+ 23  2005-02-03  R.S.Day        Initialize xyz_inp when opt_vel=CONST.
+ 22  2005-01-31  Douglas Hanson Add INTERPOLATE_ORIGINAL.
+ 21  2004-09-14  R.S.Day        Promoted to beta.
+ 20  2004-06-22  R.S.Day        Update for more interpolate module changes
+ 19  2004-06-10  R.S.Day        Update for interpolate module changes
+ 18  2004-03-15  R.S.Day        Issue run time warning if undersampled
+ 17  2004-03-04  R.S.Day        Zero data that is stretched beyond end of input
+ 16  2004-02-19  Douglas Hanson Reorganize code for efficiency.
+ 15  2004-02-16  Douglas Hanson Buffer map function with trbuf. Use buffered
+                                modgrid reads for the input model.
+ 14  2002-09-09  Douglas Hanson Set hd_lav header word. BR 843.
+ 13  2002-04-22  Douglas Hanson Adjust parameter sensitivity. BR 738.
+     2002-04-04  Douglas Hanson Add SELECT_PATH_VEL tip.
+ 12  2002-04-03  Douglas Hanson Add OPT_VEL and OPT_DATUM parameters.
+ 11  2001-12-14  Douglas Hanson Fix velocity output bug.
+ 10  2001-11-05  Douglas Hanson lengthen gui file name fields.
+  9  2001-10-30  Douglas Hanson Set datumgrid_read file_grid=.false.
+  8  2001-10-26  Karen Goodger  Change labels beginning with if to get around
+                                intel compiler bug.
+  7  2001-08-23  Douglas Hanson Add pathchoose.
+  6  2001-06-26  Douglas Hanson Use original velocity sampling.
+  5  2001-06-21  Douglas Hanson Use datumgrid.
+  4  2001-01-08  Douglas Hanson Add TIM_USE, DEP_USE defaults.
+  3  2001-01-04  Douglas Hanson Add skip_wrapup
+  2  2000-09-22  Douglas Hanson Add time and depth use flags.
+  1  2000-09-19  Douglas Hanson Original Version
+ 
+------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

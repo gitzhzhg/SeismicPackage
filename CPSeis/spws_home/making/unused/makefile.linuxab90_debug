@@ -1,0 +1,68 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##--------------------------- linuxab90_debug ------------------------------##
+##--------------------------- linuxab90_debug ------------------------------##
+##--------------------------- linuxab90_debug ------------------------------##
+
+# -m32 are for 64 bit boxes
+permitted_architectures = ix86-intel-linux
+permitted_hosts         = hoeplc06
+
+FC         = ab90_f90 -c -en -g -YDEALLOC=MINE          
+FC_O1      = ab90_f90 -c -en -g -YDEALLOC=MINE         
+FC_FLOATIO = ab90_f90 -c -en -g -YDEALLOC=MINE        
+FC_INTERPOLATE = ab90_f90 -c -en -g -YDEALLOC=MINE       
+FC_KMIG    = ab90_f90 -c -en -g -YDEALLOC=MINE       
+FC_PPIO    = ab90_f90 -c     -g -YDEALLOC=MINE       \
+                                -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_UNDER   = ab90_f90 -c     -g -YDEALLOC=MINE       \
+                                -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_LINK    = ab90_f90
+
+CC         = gcc -c -gdwarf -Wall -m32 -DLINUX -DLINUXA -D_REENTRANT \
+                                                   -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = gcc -c -gdwarf -Wall -m32 -DLINUX -DLINUXA -D_REENTRANT \
+                                                   -D_LARGEFILE_SOURCE \
+                                                   -D_FILE_OFFSET_BITS=64
+CC_LINK    = gcc -m32 -D_REENTRANT
+
+CXX        = g++ -c -gdwarf -Wall -m32 -DLINUX -DLINUXA  \
+                                                   -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = g++ -c -gdwarf -Wall -m32 -DLINUX -DLINUXA -D_REENTRANT \
+                                                   -D_LARGEFILE_SOURCE \
+                                                   -D_FILE_OFFSET_BITS=64
+CXX_LINK   = g++  -m32
+CXX_DEPEND = g++ -MM              -DLINUX -DLINUXA  \
+                                                   -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared
+
+MODEXT     = .mod
+MODFLAG    = -p
+
+FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran90/lib \
+             -lU77 -lfio -lf90math -lf77math -lV77 -lc
+GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+             -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+#GUI_LIBS    = /usr/X11R6/lib/libXm.a /usr/X11R6/lib/libXmu.a \
+#              -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+MATH_LIBS  = -lm -lpthread
+
+##### if -lc is present in MATH_LIBS, and if the main program is a c program
+##### linked using fortran, then a fortran open statement returns status 0
+##### even if an error occurs.
+
+#### if -lc is absent in FOR_LIBS and MATH_LIBS, then libCFE.so has unsatisfied
+#### externals stat, istat, and fstat.
+
+INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+#INCDIRS += /usr/include
+
+#OTHER_LIBS = -L/usr/lib/i386-redhat-linux7/lib -lc -L/usr/lib -lc_p \
+#             -L/usr/lib/gcc-lib/i386-redhat-linux7/2.96 -lgcc \
+#             -L/usr/lib/gcc-lib/i386-redhat-linux/3.2.3 -lsupc++
+
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm

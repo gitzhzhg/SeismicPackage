@@ -1,0 +1,1164 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="hsyn" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="HSYNPROCESS" title="HSYN Process" rows="24" columns="80">
+    <Label keyword="COMMENT_HORIZONTALLYLAYEREDSYNTH" alignment="center">Horizontally layered SYNthetic with AVO in X-T, TAU-P or ANGLE domain</Label>
+    <Label keyword="LABEL_OPT_DOMAIN" alignment="left">OPT_DOMAIN=</Label>
+    <Field keyword="OPT_DOMAIN" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MOVOUT" alignment="left">OPT_MOVOUT=</Label>
+    <Field keyword="OPT_MOVOUT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_GEOMDIV" alignment="left">OPT_GEOMDIV=</Label>
+    <Field keyword="OPT_GEOMDIV" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_LINE" alignment="left">HDR_LINE=</Label>
+    <Field keyword="HDR_LINE" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_INIT" alignment="left">LINE_INIT=</Label>
+    <Field keyword="LINE_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_INC" alignment="left">LINE_INC=</Label>
+    <Field keyword="LINE_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_TOT" alignment="left">LINE_TOT=</Label>
+    <Field keyword="LINE_TOT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CMP" alignment="left">HDR_CMP=</Label>
+    <Field keyword="HDR_CMP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMP_INIT" alignment="left">CMP_INIT=</Label>
+    <Field keyword="CMP_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMP_INC" alignment="left">CMP_INC=</Label>
+    <Field keyword="CMP_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CMP_TOT" alignment="left">CMP_TOT=</Label>
+    <Field keyword="CMP_TOT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC=</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT=</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANG_MIN" alignment="left">ANG_MIN=</Label>
+    <Field keyword="ANG_MIN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANG_MAX" alignment="left">ANG_MAX=</Label>
+    <Field keyword="ANG_MAX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_MIN" alignment="left">OFF_MIN=</Label>
+    <Field keyword="OFF_MIN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_MAX" alignment="left">OFF_MAX=</Label>
+    <Field keyword="OFF_MAX" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PEAK_FREQ" alignment="left">PEAK_FREQ=</Label>
+    <Field keyword="PEAK_FREQ" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MODEL_SOURCE" alignment="left">MODEL_SOURCE=</Label>
+    <Field keyword="MODEL_SOURCE" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PARAMETERSTOSPECIFYLAYER" alignment="center">Parameters to specify layered earth model if MODEL_SOURCE = FILE</Label>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_COLUMNS" alignment="left">NUM_COLUMNS=</Label>
+    <Field keyword="NUM_COLUMNS" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FIRSTLINE" alignment="left">FIRSTLINE=</Label>
+    <Field keyword="FIRSTLINE" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NILSTRING" alignment="left">NILSTRING=</Label>
+    <Field keyword="NILSTRING" type="string" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_COLUMN" alignment="left">TIME_COLUMN=</Label>
+    <Field keyword="TIME_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DENSITY_COLUMN" alignment="left">DENSITY_COLUMN=</Label>
+    <Field keyword="DENSITY_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWAVE_COLUMN" alignment="left">PWAVE_COLUMN=</Label>
+    <Field keyword="PWAVE_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SWAVE_COLUMN" alignment="left">SWAVE_COLUMN=</Label>
+    <Field keyword="SWAVE_COLUMN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_UNITS" alignment="left">TIME_UNITS=</Label>
+    <Field keyword="TIME_UNITS" type="comboBox" maxLength="14" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PWAVE_TYPE" alignment="left">PWAVE_TYPE=</Label>
+    <Field keyword="PWAVE_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SWAVE_TYPE" alignment="left">SWAVE_TYPE=</Label>
+    <Field keyword="SWAVE_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REF_COEFF" alignment="left">REF_COEFF=</Label>
+    <Field keyword="REF_COEFF" type="comboBox" maxLength="14" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_SMOOTH" alignment="left">LEN_SMOOTH=</Label>
+    <Field keyword="LEN_SMOOTH" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SECONDS" alignment="center">(seconds)</Label>
+    <Label keyword="COMMENT_IFMODEL_SOURCEMANUALPLEA" alignment="center">If MODEL_SOURCE = MANUAL, please go to the second screen</Label>
+    <Label keyword="COMMENT_MANUALMODELENTRYTOENTERY" alignment="center">(Manual Model Entry) to enter your layered earth model by hand.</Label>
+    <Layout>
+     <Constraints component="COMMENT_HORIZONTALLYLAYEREDSYNTH" xPos="4" yPos="1" xSize="69" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_DOMAIN" xPos="9" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DOMAIN" xPos="20" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_MOVOUT" xPos="30" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MOVOUT" xPos="41" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_GEOMDIV" xPos="51" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_GEOMDIV" xPos="63" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_LINE" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LINE" xPos="10" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INIT" xPos="20" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INIT" xPos="30" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INC" xPos="40" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INC" xPos="49" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_TOT" xPos="59" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_TOT" xPos="68" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CMP" xPos="1" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CMP" xPos="10" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMP_INIT" xPos="20" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMP_INIT" xPos="30" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMP_INC" xPos="40" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMP_INC" xPos="49" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CMP_TOT" xPos="59" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CMP_TOT" xPos="68" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="1" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="10" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="20" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="30" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="40" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="49" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="59" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="68" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG_MIN" xPos="1" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG_MIN" xPos="10" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG_MAX" xPos="20" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG_MAX" xPos="30" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MIN" xPos="40" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MIN" xPos="49" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MAX" xPos="59" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MAX" xPos="68" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PEAK_FREQ" xPos="14" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PEAK_FREQ" xPos="24" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MODEL_SOURCE" xPos="40" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODEL_SOURCE" xPos="53" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_PARAMETERSTOSPECIFYLAYER" xPos="7" yPos="13" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME" xPos="1" yPos="14" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="16" yPos="14" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="17" yPos="14" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="17" yPos="15" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_COLUMNS" xPos="1" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_COLUMNS" xPos="13" yPos="16" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FIRSTLINE" xPos="27" yPos="16" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FIRSTLINE" xPos="37" yPos="16" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NILSTRING" xPos="52" yPos="16" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NILSTRING" xPos="62" yPos="16" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_COLUMN" xPos="1" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_COLUMN" xPos="13" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DENSITY_COLUMN" xPos="20" yPos="17" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DENSITY_COLUMN" xPos="35" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PWAVE_COLUMN" xPos="42" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWAVE_COLUMN" xPos="55" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SWAVE_COLUMN" xPos="62" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SWAVE_COLUMN" xPos="75" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_UNITS" xPos="1" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_UNITS" xPos="12" yPos="18" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PWAVE_TYPE" xPos="33" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PWAVE_TYPE" xPos="44" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SWAVE_TYPE" xPos="57" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SWAVE_TYPE" xPos="68" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_REF_COEFF" xPos="11" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REF_COEFF" xPos="21" yPos="19" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_SMOOTH" xPos="38" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_SMOOTH" xPos="49" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SECONDS" xPos="60" yPos="19" xSize="9" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_IFMODEL_SOURCEMANUALPLEA" xPos="11" yPos="21" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_MANUALMODELENTRYTOENTERY" xPos="8" yPos="22" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_DOMAIN">
+      <Tip>Whether synthetics will be in X-T, TAU-P or ANGLE domain.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OPT_DOMAIN<br> Whether synthetics will be in X-T, TAU-P or ANGLE domain.</center></b>
+<pre> Default = X_T
+ Allowed = X_T    (Offset vs. Time)
+ Allowed = TAU_P  (Ray Parameter vs. Intercept Time)
+ Allowed = ANGLE  (Reflection Angle vs. Zero-Offset Time)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MOVOUT">
+      <Tip>Whether events will have exact, hyperbolic or no moveout.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OPT_MOVOUT<br> Whether events will have exact, hyperbolic or no moveout.</center></b>
+<pre> Default = EXACT
+ Allowed = EXACT  (Exact moveout for horizontally layered earth)
+ Allowed = HYPER  (Hyperbolic moveout based on RMS velocity)
+ Allowed = NONE   (No moveout - events will be perfectly flat)
+ 
+ If OPT_MOVOUT = EXACT, events will have exact, non-hyperbolic (ray-traced)
+ moveout according to your layered interval-velocity model. This option is
+ available when OPT_DOMAIN = X_T or TAU_P.
+ 
+ If OPT_MOVOUT = HYPER, events will have hyperbolic moveout according to
+ the RMS velocity corresponding to your layered interval-velocity. Such
+ moveout can be removed exactly by the NMO process, although you'd see NMO
+ stretch after applying NMO. The OPT_MOVOUT = HYPER option is available
+ only when OPT_DOMAIN = X_T.
+ 
+ If OPT_MOVOUT = NONE, events will be perfectly flat, as if ideal NMO
+ correction (without the usual NMO stretch) had been applied. The
+ OPT_MOVOUT = NONE option is available for all OPT_DOMAIN values (and
+ is, in fact, the ONLY available moveout option when OPT_DOMAIN = ANGLE).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_GEOMDIV">
+      <Tip>Type of geometric divergence to model if OPT_DOMAIN = X_T.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OPT_GEOMDIV<br> Type of geometric divergence to model if OPT_DOMAIN = X_T.</center></b>
+<pre> Default = NONE
+ Allowed = NONE  - No decay due to geometric spreading.
+ Allowed = POINT - Include point source (3-D) geometric spreading loss.
+ Allowed = LINE  - Include line source (2-D) geometric spreading loss.
+ If OPT_GEOMDIV = NONE, synthetics will not include any amplitude decay due
+ to geometric spreading.
+ 
+ If OPT_GEOMDIV = POINT, synthetics will include the correct geometric
+ spreading decay for a point-source in three dimensions, according to your
+ layered interval-velocity model. This is just (1/r) decay in the case of
+ constant velocity.
+ 
+ If OPT_GEOMDIV = LINE, synthetics will include the correct geometric
+ spreading decay for a point-source in two dimensions (equivalent to a
+ line-source in three dimensions when data is collected in a plane
+ perpendicular to that line-source). This is (1/SQRT(r)) decay in the
+ case of constant velocity. Synthetics generated this way may be useful
+ in testing algorithms based on a 2-D wave equation.
+ 
+ Active only if OPT_DOMAIN = X_T.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_LINE">
+      <Tip>Header word designating lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - HDR_LINE<br> Header word designating lines.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INIT">
+      <Tip>Initial value for line header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - LINE_INIT<br> Initial value for line header word.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INC">
+      <Tip>Increment for line header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - LINE_INC<br> Increment for line header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_TOT">
+      <Tip>Total number of line header word values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - LINE_TOT<br> Total number of line header word values.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CMP">
+      <Tip>Header word designating CMPs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - HDR_CMP<br> Header word designating CMPs.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMP_INIT">
+      <Tip>Initial value for CMP header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - CMP_INIT<br> Initial value for CMP header word.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMP_INC">
+      <Tip>Increment for CMP header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - CMP_INC<br> Increment for CMP header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CMP_TOT">
+      <Tip>Total number of CMP header word values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - CMP_TOT<br> Total number of CMP header word values.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word designating offsets, ray parameters or angles.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - HDR_OFF<br> Header word designating offsets, ray parameters or angles.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH
+ If OPT_DOMAIN = X_T, header word HDR_OFF will contain offsets in meters
+ or feet.
+ If OPT_DOMAIN = TAU_P, header word HDR_OFF will contain ray parameters in
+ MICROseconds per meter or foot.
+ If OPT_DOMAIN = ANGLE, header word HDR_OFF will contain angles in degrees.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>Initial value for offset, ray parameter or angle.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OFF_INIT<br> Initial value for offset, ray parameter or angle.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ If OPT_DOMAIN = X_T, then OFF_INIT is initial offset in meters or feet.
+ If OPT_DOMAIN = TAU_P, then OFF_INIT is the initial ray parameter in
+ MICROseconds per meter or foot.
+ If OPT_DOMAIN = ANGLE, then OFF_INIT is the initial angle in degrees.
+ 
+ It is legitimate to make OFF_INIT negative, if you wish, in order to
+ generate split-spread data with signed offsets.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Increment for offset, ray parameter or angle.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OFF_INC<br> Increment for offset, ray parameter or angle.</center></b>
+<pre> Default = 50.0
+ Allowed = real  (must be non-zero if OPT_DOMAIN = X_T)
+ If OPT_DOMAIN = X_T, then OFF_INC is offset increment in meters or feet.
+ If OPT_DOMAIN = TAU_P, then OFF_INC is the ray parameter increment in
+ MICROseconds per meter or foot.
+ If OPT_DOMAIN = ANGLE, then OFF_INC is the angle increment in degrees.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Total number of offsets, ray parameters or angles.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OFF_TOT<br> Total number of offsets, ray parameters or angles.</center></b>
+<pre> Default = 100
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_MIN">
+      <Tip>Minimum angle to include when OPT_DOMAIN = X_T or TAU_P.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - ANG_MIN<br> Minimum angle to include when OPT_DOMAIN = X_T or TAU_P.</center></b>
+<pre> Default = 0.0
+ Allowed = 85.0 &gt; real &gt;= 0.0
+ If OPT_DOMAIN = X_T or TAU_P, you can use ANG_MIN and ANG_MAX to limit your
+ synthetic to a specified range of reflection angles. Here, ANG_MIN specifies
+ the minimum angle, in degrees, to include in your x-t or tau-p synthetic.
+ 
+ Active only if OPT_DOMAIN = X_T or TAU_P.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_MAX">
+      <Tip>Maximum angle to include when OPT_DOMAIN = X_T or TAU_P.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - ANG_MAX<br> Maximum angle to include when OPT_DOMAIN = X_T or TAU_P.</center></b>
+<pre> Default = 85.0
+ Allowed = 85.0 &gt;= real &gt; ANG_MIN
+ If OPT_DOMAIN = X_T or TAU_P, you can use ANG_MIN and ANG_MAX to limit your
+ synthetic to a specified range of reflection angles. Here, ANG_MAX specifies
+ the maximum angle, in degrees, to include in your x-t or tau-p synthetic.
+ 
+ HSYN will not compute reflection amplitudes for angles greater than 85
+ degrees because the  C * sin(angle)^2 * tan(angle)^2  term in the Aki and
+ Richards formula blows up as the angle approaches 90 degrees.
+ 
+ Active only if OPT_DOMAIN = X_T or TAU_P.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MIN">
+      <Tip>Minimum offset to include when OPT_DOMAIN = TAU_P or ANGLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OFF_MIN<br> Minimum offset to include when OPT_DOMAIN = TAU_P or ANGLE.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ If OPT_DOMAIN = TAU_P or ANGLE, you can use OFF_MIN and OFF_MAX to show the
+ effect of a limited offset range in the original X_T domain. Here, OFF_MIN
+ specifies the minimum offset to include in your tau-p or angle synthetics.
+ 
+ If OFF_MIN = 0.0, arbitrarily small (absolute values of) offsets will be
+ allowed in the tau-p or angle synthetics.
+ 
+ Active only if OPT_DOMAIN = TAU_P or ANGLE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MAX">
+      <Tip>Maximum offset to include when OPT_DOMAIN = TAU_P or ANGLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OFF_MAX<br> Maximum offset to include when OPT_DOMAIN = TAU_P or ANGLE.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 or real &gt; OFF_MIN
+ If OPT_DOMAIN = TAU_P or ANGLE, you can use OFF_MIN and OFF_MAX to show the
+ effect of a limited offset range in the original X_T domain. Here, OFF_MAX
+ specifies the maximum offset to include in your tau-p or angle synthetics.
+ 
+ If OFF_MAX = 0.0, equivalent to setting it infinite, arbitrarily large
+ (absolute values of) offsets are allowed in the tau-p or angle synthetics.
+ 
+ Active only if OPT_DOMAIN = TAU_P or ANGLE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PEAK_FREQ">
+      <Tip>Peak frequency, in Hz, of Ricker wavelet for synthetic traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PEAK_FREQ<br> Peak frequency, in Hz, of Ricker wavelet for synthetic traces.</center></b>
+<pre> Default = 25.0
+ Allowed = real &gt;= 0.0
+ If PEAK_FREQ &gt; 0.0, this is the peak frequency, in Hz, of a Ricker wavelet.
+ These Ricker wavelets are generated on the fly for each event in each trace,
+ so they are centered exactly on calculated event times (which are generally
+ between trace samples). The resulting events follow smooth moveout curves.
+ 
+ If PEAK_FREQ = 0.0, the wavelets will be SPIKES placed at the trace samples
+ nearest the calculated event times. This allows the possibility of applying
+ a wavelet later, using GENFILT or other suitable process. Use of spike
+ wavelets is, however, best limited to cases where OPT_MOVOUT = NONE. If your
+ synthetics have moveout, rounding of spikes to trace sample times would
+ result in discontinuous moveout curves.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODEL_SOURCE">
+      <Tip>Whether layered model is read from a file or entered manually.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - MODEL_SOURCE<br> Whether layered model is read from a file or entered manually.</center></b>
+<pre> Default = MANUAL
+ Allowed = FILE
+ Allowed = MANUAL
+ If MODEL_SOURCE = FILE, enter your model file using the PATHNAME parameter
+ and specify related parameters. This must be an ASCII file containing
+ densities, P velocities/slownesses and S velocities/slownesses, from either
+ a well log or synthetic model, in the same format as input to the PSCOVAR
+ process.
+ 
+ If MODEL_SOURCE = MANUAL, click the Manual Model Entry tab to go the second
+ screen, and fill in the table to specify a model by traveltimes, interval (P)
+ velocities and A,B,C (AVO) coefficients.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+<pre>
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Input file containing layered earth model if MODEL_SOURCE = FILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PATHNAME<br> Input file containing layered earth model if MODEL_SOURCE = FILE.</center></b>
+<pre> Default = NONE
+ Allowed = valid file name.
+ 
+ If MODEL_SOURCE = FILE, you must specify an input file containing well log
+ data or a synthetic model. This must be an ASCII file containing four or more
+ columns of numbers (same format as read by process PSCOVAR). The 4 required
+ columns consist of Two-way traveltime, Density, P-wave velocity or slowness,
+ and S-wave velocity or slowness. The file may have additional columns which
+ HSYN will ignore (see NUM_COLUMNS parameter) and header information that HSYN
+ will ignore (see FIRSTLINE parameter).
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NUM_COLUMNS">
+      <Tip>Number of columns in the file specified by PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - NUM_COLUMNS<br> Number of columns in the file specified by PATHNAME.</center></b>
+<pre> Default = 4
+ Allowed = integer &gt;= 4.
+ 
+ NUM_COLUMNS is the total number of columns in your file. The file must have
+ at least four columns (Traveltime, Density, P-wave velocity or slowness, and
+ S-wave velocity or slowness). It may have additional columns, such as other
+ well logs: These will be ignored when generating the synthetic; however, you
+ must specify the total number of columns in order to enable HSYN to read the
+ file correctly.
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FIRSTLINE">
+      <Tip>Row on file to start reading.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - FIRSTLINE<br> Row on file to start reading.</center></b>
+<pre> Default = 1
+ Allowed = integer &gt;= 1
+ 
+ This parameter allows skipping header information, as may be present in an
+ LAS or similar format file, and you may also set FIRSTLINE to start reading
+ deeper in order to ignore bad values at the top of your logs.
+ 
+ Note: HSYN reads from line FIRSTLINE to the end of the file. If there are
+ bad values at the bottom of your logs that you want HSYN to ignore, remove
+ them by editing your file before running HSYN.
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NILSTRING">
+      <Tip>Symbol for nil value on file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - NILSTRING<br> Symbol for nil value on file.</center></b>
+<pre> Default = -999.2500
+ Allowed = any character string containing no blank characters.
+ 
+ WARNING: This is a CHARACTER STRING, not a number, so it must match the nil
+ string in your file EXACTLY (e.g., -999.2500 isn't the same as -999.25).
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_COLUMN">
+      <Tip>Column number containing (two-way) Traveltime values in file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - TIME_COLUMN<br> Column number containing (two-way) Traveltime values in file.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NUM_COLUMNS
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DENSITY_COLUMN">
+      <Tip>Column number containing Density values in file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - DENSITY_COLUMN<br> Column number containing Density values in file.</center></b>
+<pre> Default = 2
+ Allowed = 1 - NUM_COLUMNS
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWAVE_COLUMN">
+      <Tip>Column number in file containing P-Wave slowness or velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PWAVE_COLUMN<br> Column number in file containing P-Wave slowness or velocity.</center></b>
+<pre> Default = 3
+ Allowed = 1 - NUM_COLUMNS
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SWAVE_COLUMN">
+      <Tip>Column number in file containing S-Wave slowness or velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - SWAVE_COLUMN<br> Column number in file containing S-Wave slowness or velocity.</center></b>
+<pre> Default = 4
+ Allowed = 1 - NUM_COLUMNS
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_UNITS">
+      <Tip>Units of times in TIME_COLUMN on file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - TIME_UNITS<br> Units of times in TIME_COLUMN on file.</center></b>
+<pre> Default = MILLISECONDS
+ Allowed = MILLISECONDS or SECONDS
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PWAVE_TYPE">
+      <Tip>Whether P-Wave values in file are Slowness or Velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PWAVE_TYPE<br> Whether P-Wave values in file are Slowness or Velocity.</center></b>
+<pre> Default = SLOWNESS
+ Allowed = SLOWNESS or VELOCITY
+ 
+ P-Wave and S-Wave values may be either velocities in meters or feet per
+ second, or slownesses in MICROseconds per meter or foot. It is acceptable
+ for P-Wave values to be slowness while S-Wave values are velocity (or vice
+ versa) as long as both are in meters or both in feet.
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SWAVE_TYPE">
+      <Tip>Whether S-Wave values in file are Slowness or Velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - SWAVE_TYPE<br> Whether S-Wave values in file are Slowness or Velocity.</center></b>
+<pre> Default = SLOWNESS
+ Allowed = SLOWNESS or VELOCITY
+ 
+ P-Wave and S-Wave values may be either velocities in meters or feet per
+ second, or slownesses in MICROseconds per meter or foot. It is acceptable
+ for P-Wave values to be slowness while S-Wave values are velocity (or vice
+ versa) as long as both are in meters or both in feet.
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REF_COEFF">
+      <Tip>Whether to use Zoeppritz, Aki and Richards or Shuey approximation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - REF_COEFF<br> Whether to use Zoeppritz, Aki and Richards or Shuey approximation.</center></b>
+<pre> Default = AKI_RICHARDS
+ Allowed = ZOEPPRITZ, AKI_RICHARDS or SHUEY
+ Specifies whether reflection coefficients will be computed from densities
+ and velocities using the Zoeppritz equations, Aki &amp; Richards approximation,
+ or Shuey approximation.
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_SMOOTH">
+      <Tip>Length (in seconds) of smoother for raytrace velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - LEN_SMOOTH<br> Length (in seconds) of smoother for raytrace velocities.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ Length, in seconds, of running average smoother applied to log-derived Vp
+ values used for ray tracing. This is analogous to LEN_SMOOTH in AVAST, where
+ a smoothed velocity is usually used for the ray tracing to determine the
+ relationship between offsets and angles. In HSYN, the resulting smoothed
+ velocity is used ONLY for the raytrace calculations, while the original
+ (unsmoothed) Vp values are always used for calculating reflectivities.
+ If LEN_SMOOTH = 0.0, then no smoothing is done.
+ 
+ Active only if MODEL_SOURCE = FILE.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="MANUALMODELENTRY" title="Manual Model Entry" rows="24" columns="64">
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">If MODEL_SOURCE = MANUAL, please enter your layered earth</Label>
+    <Label keyword="COMMENT_MODELUSINGTHETABLEBELOW" alignment="center">model using the table below.</Label>
+    <ArraySet keyword="TIME_ARRAYSET" label="TIME      VEL_INT   A         B         C">
+     <Array keyword="TIME" type="float" maxLength="10 " columnName="TIME" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="VEL_INT" type="float" maxLength="10 " columnName="VEL_INT" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="A" type="float" maxLength="10 " columnName="A" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="B" type="float" maxLength="10 " columnName="B" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="C" type="float" maxLength="10 " columnName="C" editable="yes" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="EZGUI_COMMENT_1" xPos="5" yPos="1" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_MODELUSINGTHETABLEBELOW" xPos="19" yPos="2" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TIME_ARRAYSET" xPos="9" yPos="4" xSize="53" ySize="16" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TIME">
+      <Tip>Array of two-way vertical travel times for events (reflections).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - TIME<br> Array of two-way vertical travel times for events (reflections).</center></b>
+<pre> Default = -
+ Allowed = real linked array
+ 
+ These are the (zero-offset) times of the events (reflections) in your model.
+ Event times (in seconds) must be non-negative and in increasing order.
+ 
+ Normally, reflection events will have positive TIME values. If you include
+ an event at time zero, it will behave as a direct arrival. In this case,
+ VEL_INT(1) should be the same as VEL_INT(2); also, as AVO is not meaningful
+ for such an event (because the angle is always 90 degrees at all offsets),
+ its amplitude will be determined from only its A coefficient, ignoring its
+ B and C coefficients.
+ 
+ Active only if MODEL_SOURCE = MANUAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_INT">
+      <Tip>Interval velocity of layer immediately above specified TIME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - VEL_INT<br> Interval velocity of layer immediately above specified TIME.</center></b>
+<pre> Default = -
+ Allowed = real linked array
+ 
+ Use this array to enter a layered interval velocity model. On the row
+ containing the (i)th reflector, enter VEL_INT as the velocity of the
+ layer between the (i-1)th and (i)th reflectors.
+ 
+ For special case of the first row: If TIME(1) &gt; 0.0, then VEL_INT(1) is
+ interval velocity of the layer between TIME(1) and the surface.
+ If TIME(1) = 0.0, then VEL_INT(1) should be the same as VEL_INT(2).
+ 
+ Active only if MODEL_SOURCE = MANUAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="A">
+      <Tip>Zero-offset amplitude (AVA Intercept) of event at specified TIME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - A<br> Zero-offset amplitude (AVA Intercept) of event at specified TIME.</center></b>
+<pre> Default = -
+ Allowed = real linked array
+ Event amplitudes for non-zero offsets are determined by A, B and C as:
+   Amplitude  =  A  +  B * sin(angle)^2  +  C * sin(angle)^2 * tan(angle)^2.
+ where "angle" is the reflection angle (or, more precisely, the average of
+ reflection and refraction angles) at the specified event.
+ 
+ Active only if MODEL_SOURCE = MANUAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="B">
+      <Tip>AVA Gradient of the event at specified TIME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - B<br> AVA Gradient of the event at specified TIME.</center></b>
+<pre> Default = -
+ Allowed = real linked array
+ Event amplitudes for non-zero offsets are determined by A, B and C as:
+   Amplitude  =  A  +  B * sin(angle)^2  +  C * sin(angle)^2 * tan(angle)^2.
+ where "angle" is the reflection angle (or, more precisely, the average of
+ reflection and refraction angles) at the specified event.
+ 
+ Active only if MODEL_SOURCE = MANUAL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C">
+      <Tip>AVA coefficient C of the event at specified TIME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - C<br> AVA coefficient C of the event at specified TIME.</center></b>
+<pre> Default = -
+ Allowed = real linked array
+ Event amplitudes for non-zero offsets are determined by A, B and C as:
+   Amplitude  =  A  +  B * sin(angle)^2  +  C * sin(angle)^2 * tan(angle)^2.
+ where "angle" is the reflection angle (or, more precisely, the average of
+ reflection and refraction angles) at the specified event.
+ 
+ Active only if MODEL_SOURCE = MANUAL.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>hsyn - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="hsyn">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : HSYN       (Horizontally layered SYNthetic)
+ Category   : synthetics
+ Written    : 1989-04-15   by: Bob Baumel
+ Revised    : 2007-01-03   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Produce AVO synthetics in X-T, TAU-P or ANGLE domain.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ HSYN generates primaries-only, pre-critical synthetics with AVO for a
+ horizontally layered earth model, which can be specified in either of two
+ ways: by providing a file containing well log data (or a sparse synthetic
+ model), or by inputting a sparse synthetic model manually on screen. For file
+ input, the specified file must contain rock properties consisting of
+ Densities and P-wave and S-wave velocities or slownesses. HSYN can then
+ generate the synthetic with reflection coefficients computed using either
+ full Zoeppritz equations, Aki and Richards approximation, or Shuey
+ approximation. In the manual on-screen input mode, instead of specifying rock
+ properties, you specify A, B and C coefficients to use in the Aki and
+ Richards formula:
+ 
+  Amplitude  =  A  +  B * sin(angle)^2  +  C * sin(angle)^2 * tan(angle)^2,
+ 
+ which is the only available option for computing the reflection amplitudes in
+ this case, and you also specify interval velocities to use in moveout and
+ angle-offset calculations.
+ 
+ The generated synthetic may be in either the x-t, tau-p or angle domain.
+ When output is in tau-p or angle, you may also view the effect of limiting
+ your data to a specified offset range in the original x-t domain. Similarly,
+ when output is in x-t or tau-p, you may view the effect of limiting your
+ data to a specified angle range.
+ 
+ Several moveout options are available. For output in the x-t or tau-p
+ domain, the default is to use exact (non-hyperbolic) ray-traced moveout as
+ determined by your layered interval-velocity model. For output in x-t, you
+ may also select hyperbolic moveout calculated from the RMS velocity
+ corresponding to your specified interval velocity. For all output domains,
+ you may also suppress moveout entirely, thereby producing perfectly flat
+ events (When output is in the angle domain, you ALWAYS get flat events).
+ 
+ Geometric spreading loss can be modeled when output is in the x-t domain.
+ When calculating geometric divergence, you have the option to compute it for
+ either a point-source (3-D spreading) or line-source (2-D spreading). By
+ default, HSYN produces synthetics without geometric spreading decay.
+ 
+ Events may include a Ricker wavelet of specified peak frequency, or you may
+ model the events as spikes instead. Use of spike wavelets is, however, best
+ limited to cases where moveout has been suppressed (so the events are flat).
+ When synthetics include moveout, spike wavelets would result in discontinuous
+ moveout curves, due to rounding of spike locations to seismic time samples.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ Reading Input Model from a FILE
+ 
+ If MODEL_SOURCE = FILE, you must specify a columnar ASCII file, containing
+ well logs in LAS or similar format or perhaps a sparse synthetic model that
+ you build yourself. This file must include at least four columns of numbers,
+ containing the quantities:
+    Traveltime (two-way) in seconds or milliseconds,
+    Density,
+    P-wave slowness or velocity,
+    S-wave slowness or velocity.
+ These columns may appear in any order, and the file may include additional
+ columns (e.g., other well logs) which HSYN will ignore.
+ 
+ The FIRSTLINE parameter lets you start reading at any desired line in the
+ file, so you can ignore header information (as present in LAS or similar
+ format files) and you can also ignore bad values at the top of your logs.
+ HSYN reads from line FIRSTLINE to the end of the file. If there are bad
+ values at the bottom of your logs that you want HSYN to ignore, you should
+ remove them by editing your file prior to running HSYN.
+ 
+ Setting the NILSTRING parameter can be tricky, as it needs to match the nil
+ values in your file exactly as ASCII strings, not just numerically. For
+ example, -999.25 and -999.2500 are not the same string. Regardless of your
+ NILSTRING setting, HSYN assumes that traveltimes are always non-negative,
+ while Densities, P-wave and S-wave values are always positive; therefore,
+ any values in these columns that fail to satisfy these conditions are
+ interpreted as nils.
+ 
+ A traveltime column must be present so HSYN can place events at the correct
+ seismic trace times. Traveltimes need not be sampled uniformly (e.g., the
+ logs might still be sampled uniformly in depth), and may be sampled more
+ finely than the seismic time samples. When reading your file, HSYN resamples
+ logs to the seismic sample rate by binning log values into the intervals
+ between successive seismic trace samples and averaging all values that fall
+ into the same bin. (We place bins BETWEEN the seismic time samples, instead
+ of centering them on the seismic time samples, so we can calculate
+ reflectivities more accurately AT the seismic time samples.)
+ 
+ P-wave and S-wave values in the file may be either velocities or slownesses
+ but must be in CONSISTENT UNITS. If both are velocities (or both slownesses),
+ they should be in the SAME units. If one is a velocity and the other a
+ slowness, their units must match (e.g., velocity in meters per second and
+ slowness in microseconds per meter).
+ 
+ For raytrace calculations, HSYN uses the interval velocity defined by your
+ P-wave log, at all depth levels where the P-wave log is present (whether or
+ not the Density and S-wave logs are also present). If there are gaps in your
+ P-wave log, Vp values are linearly interpolated to fill those gaps. If your
+ P-wave log doesn't come all the way to the surface, your shallowest Vp value
+ is extended, as a constant velocity layer, up to the surface.
+ 
+ If you set LEN_SMOOTH &gt; 0.0, the interval velocities derived from your Vp log
+ are smoothed with a running average smoother. The resulting smoothed velocity
+ is used only for the raytrace calculations, while reflectivities are still
+ computed from your original UNSMOOTHED densities and velocities. This case
+ does, however, require some additional subtleties in angle calculation; see
+ discussion of "Reflection Angles" below.
+ 
+ Reflection amplitudes are calculated only in intervals where all three of the
+ logs (Density, P-wave and S-wave) are present. More precisely, reflections
+ are calculated only where there are pairs of adjacent levels (after binning
+ as explained above) where all three of these logs are present at both levels.
+ 
+ (Warning: If the log sampling is so coarse that pairs of adjacent seismic
+ bins are never both populated, HSYN will not calculate any reflections.)
+ 
+ If you wish to build the ASCII file for a synthetic model with coarsely
+ spaced interfaces that produce sharp reflections, then build each interface
+ by entering a PAIR of rows separated by one seismic sample interval (DT) to
+ produce the rock property contrasts at that interface. In particular, place
+ these rows 0.5*DT above and 0.5*DT below the time where you want the
+ reflection to appear. For example, if you wish to place reflections at
+ 1.500 and 1.700 seconds, and the sample interval in your job is 0.002 s,
+ enter rows describing rock properties at traveltimes 1.499, 1.501, 1.699 and
+ 1.701 seconds.
+ 
+ 
+ MANUAL On-screen Model Input
+ 
+ If MODEL_SOURCE = MANUAL, the model is entered manually in the table on the
+ second screen in the CFE module. Here, each row of the table denotes a
+ REFLECTOR, specified by its (zero-offset, two-way) traveltime and its (A,B,C)
+ AVO coefficients. The VEL_INT parameter specifies a (constant) interval
+ velocity for the layer ABOVE this reflector, to be used in HSYN's raytrace
+ calculations. Thus, VEL_INT denotes velocity between the specified reflector
+ and the reflector immediately above it (or in the case of your shallowest
+ reflector, between that reflector and the surface).
+ 
+ If you put a reflector at time zero, it will behave as a direct arrival, and
+ its VEL_INT value must match the VEL_INT of your second reflector (assuming
+ your model has a second reflector). An event at time zero is visible only if
+ OPT_DOMAIN = X_T, and its amplitude depends only on its A coefficient; i.e.,
+ its B and C coefficients are ignored.
+ 
+ 
+ Crossing Events
+ 
+ When events cross in output from HSYN, their amplitudes combine by linear
+ superposition, as they would in actual seismic data.
+ 
+ 
+ Hyperbolic approximation
+ 
+ When choosing OPT_MOVOUT = HYPER (available only when OPT_DOMAIN = X_T),
+ the hyperbolic approximation is used ONLY for locating the event times.
+ Calculation of angles (for use in Shuey approximation) as well as geometric
+ divergence calculations are both still done using exact ray-tracing
+ 
+ 
+ Reflection Angles
+ 
+ All "reflection angles" in HSYN, whether outputting synthetics directly in
+ the angle domain or limiting the angles of x-t and tau-p synthetics using the
+ ANG_MIN and ANG_MAX parameters, are not simply the incident angle at the
+ reflector, but are actually an AVERAGE of the incident and refracted angles.
+ Actually, to simplify calculations, we average the SINES of these angles
+ rather than the angles themselves. Thus, we take the relationship between
+ reflection angle and ray parameter to be:
+                         sin(angle)  =  p * vavg
+ where p is the ray parameter and vavg is the average interval velocity of
+ the layers immediately above and below the reflector (Note: This approach
+ is also used for ray-tracing in process AVAST).
+ 
+ While using this "averaged" angle to define the "reflection angles" of all
+ events, HSYN also keeps track of the individual incident and refracted angles
+ and makes sure that all calculated events are strictly pre-critical; i.e.,
+ that the incident and refracted angles are each real and less than 90
+ degrees. When computing reflection amplitudes with the Aki and Richards or
+ Shuey approximation, the "averaged" angle is used in the Aki and Richards or
+ Shuey equation. When computing reflectivities with full Zoeppritz equations,
+ the actual incident angle must be used in the calculation.
+ 
+ Setting LEN_SMOOTH &gt; 0 (when MODEL_SOURCE = FILE) adds another subtlety. In
+ this case, we keep track of both the original, finely detailed interval
+ velocities "vpfine" (after resampling to the seismic sample rate but before
+ smoothing), as well as smoothed velocities "vpsmooth". Ray tracing is done
+ using "vpsmooth" while reflectivities are calculated using "vpfine". This
+ requires precision as to how all angles are specified. We use the following
+ conventions: First, in all of the following, the ray parameter "p" is always
+ found by raytracing using the SMOOTHED velocity "vpsmooth". For specifying
+ angles of traces in the angle domain or limiting angles using the ANG_MIN
+ and ANG_MAX parameters, we define reflection angles by:
+                     sin(angle)  =  p * vpsmooth_avg
+ where vpsmooth_avg is the average of the vpsmooth values immediately above
+ and below the reflector. For checking that reflections are pre-critical and
+ for computing reflectivities using full Zoeppritz equations, we calculate
+ the incident and refracted angles by:
+                  sin(angle_incident)  =  p * vpfine_above
+                  sin(angle_refracted) =  p * vpfine_below
+ where vpfine_above and vpfine_below are the vpfine values immediately above
+ and below the reflector. For calculating reflectivities using the Aki and
+ Richards or Shuey approximation, we use the angle defined by:
+                      sin(angle)  =  p * vpfine_avg
+ where vpfine_avg is the average of the vpfine values immediately above and
+ below the reflector.
+ 
+ 
+ Limiting offsets in TAU-P or ANGLE synthetics
+ 
+ The OFF_MIN and OFF_MAX parameters can limit the offset range when output
+ is in the TAU-P or ANGLE domain. Setting OFF_MAX = 0 will allow arbitrarily
+ large offsets. Even when doing this, the maximum ray parameters or angles in
+ your tau-p or angle synthetics will be limited. This happens because HSYN
+ cannot ray-trace through layers where propagation would be evanescent; i.e.,
+ where the ray parameter (p) would exceed 1/VEL_INT or, equivalently, where
+ sin(angle) would be greater than 1.0 (In a full-wave synthetic, some energy
+ may "tunnel" through VERY THIN layers where propagation is evanescent; in a
+ ray-traced synthetic, NOTHING gets through layers where propagation is
+ evanescent).
+ 
+ 
+ Ricker wavelets
+ 
+ When specifying a Ricker wavelet (PEAK_FREQ &gt; 0.0), the wavelet is given by:
+               (1.0 - A*(T-T0)**2) * EXP(-0.5*A*(T-T0)**2)
+ where T = time, T0 = time at center of wavelet, and A is a constant given by:
+                     A = 2.0 * (PI * PEAK_FREQ)**2
+ This wavelet is normalized to unit amplitude at its center (T = T0).
+ 
+ If PEAK_FREQ = 0.0, the wavelet is a spike of unit amplitude, placed at the
+ time sample nearest the calculated event time. This gives you the option to
+ apply a wavelet later (if you wish) using GENFILT or other suitable process.
+ We suggest, however, that this method be used only when OPT_MOVOUT = NONE.
+ If you use spike wavelets when your synthetics include moveout, you'll get
+ discontinuous moveout curves, due to the rounding necessary to place the
+ spikes at seismic time samples.
+ 
+ 
+ Comparison with Angle Synthetics from PSCOVAR
+ 
+ HSYN and PSCOVAR can both read ASCII files of well log data and can both
+ generate synthetics in the angle domain and can both use the Aki &amp; Richards
+ approximation, so it may be of interest to compare them. To obtain comparable
+ results with HSYN and PSCOVAR, be sure to set LEN_SMOOTH = 0 in HSYN. There
+ may still be some very minor differences due to rounding effects.
+ Occasionally, due to rounding when resampling the well logs, a time shift of
+ at most one seismic sample can occur (particularly in jobs where the TSTRT
+ global is non-zero). In general, however, they should line up and match very
+ well, with one major exception: For events at large angles, an HSYN synthetic
+ may cut off at angles less than the maximum requested, while the PSCOVAR
+ result includes every requested angle (up to the limit of 85 degrees hard-
+ wired into both programs).
+ 
+ This difference occurs because HSYN always does ray tracing, based on an
+ interval velocity model, and will not model an event unless it is
+ pre-critical and reachable by rays traced from the surface. It can happen,
+ for example, that a high-velocity layer between the surface and a desired
+ reflector makes it impossible to reach the reflector at larger angles. HSYN
+ will not calculate such events. PSCOVAR does no such checking, but simply
+ calculates (Aki and Richards) reflection amplitudes for every reflector at
+ every requested angle.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+ 14. 2007-01-03  Stoeckley   Add call to pc_register_array_names for SeisSpace.
+ 13. 2006-04-20  Baumel      Add ability to smooth log-derived Vp for raytrace
+                             calculations (but still compute reflectivities
+                             from *unsmoothed* densities and velocities). Also
+                             add check to ignore log values with nonphysical
+                             Vs/Vp ratios when calculating reflectivities.
+ 12. 2006-04-11  Baumel      Add ability to read a layered earth model as
+                             Density, Vp, Vs from an ASCII file (e.g., well
+                             log file) and, in this case, provide choice of
+                             reflectivities by Zoeppritz, Aki and Richards or
+                             Shuey approximation. For manual on-screen model
+                             input, accept the three Aki and Richards AVO
+                             coefficients: A, B, C (not backward compatible
+                             with previous parameter names AMP and GRAD, now
+                             renamed A and B). Add ability to limit x-t and
+                             tau-p synthetics to a desired angle range. If
+                             outputting more than one gather, compute the
+                             gather only once and save in memory to output
+                             repeatedly.
+ 11. 2001-03-30  Baumel      Double precision much of calculation and add
+                             tests to avoid infinite loop in raytrace solver
+                             due to precision problem at very large offsets.
+ 10. 2001-03-13  Baumel      GUI change: Dynamically adjust options list for
+                             OPT_MOVOUT combo box based on OPT_DOMAIN setting
+                             (Required fix in CFE program to implement this).
+  9. 2001-03-12  Bob Baumel  Converted from old system (adding several options
+                             which were in private versions in my VAX account
+                             but never in the installed version on Cray).
+  8. 1998-11-13  Vunderink   Begin using the f90 compiler.
+  7. 1997-01-16  Baumel      Add GRAD parameter for simple AVO synthetics.
+  6. 1994-04-26  Baumel      Faster solver for plane-layer ray tracing.
+  5. 1994-01-26  Baumel      Fix bug involving small values of WVLT_SIZ;
+                             generate spike wavelet if WVLT_SIZ = 0.
+  4. 1990-10-22  Baumel      Avoid generating EXTREMELY TINY amplitudes.
+  3. 1990-04-26  Baumel      Generate multiple copies of gather.
+  2. 1989-04-24  Baumel      Add XMINP,XMAXP parameters.
+  1. 1989-04-15  Bob Baumel  Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

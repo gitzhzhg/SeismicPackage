@@ -1,0 +1,8 @@
+echo "ab6490_f90 -c -O2 -m32 -YDEALLOC=MINE -p /home/sps/beta/spsmodules/32linuxab90 JJJJJ.f90" >> $RSHCOMPILE
+echo "ab6490_f90 -m32 *.o -o JJJJJ.exe \\" >> $RSHCOMPILE
+echo "-L/home/sps/lib/32linuxab90 -lbeta -lfft -lfwcdbeta -lblzwbeta -ljosbeta -lpthread -lm -llmrk_stubs -lmpi_stubs \\" >> $RSHCOMPILE
+echo "-lrt -lpthread -ldl" >> $RSHCOMPILE
+chmod u+x $RSHCOMPILE
+sleep 10
+rsh hoeplx2275 $RSHCOMPILE
+sleep 10

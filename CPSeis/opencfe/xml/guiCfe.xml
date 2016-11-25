@@ -1,0 +1,1559 @@
+<!-- 2004-03-17  SMCook  Changed ICPS to 2 buttons - local & remote -->
+<!-- 2004-03-11  SMCook  Removed ICPS from file menu -->
+<!-- 2004-03-10  SMCook  Added icps button -->
+<!DOCTYPE Gui SYSTEM "gui.dtd" >
+<Gui> 
+  <Window keyword="CFEApplication" width="1024" height="700">
+    <HelpPanel keyword="HelpPanelKeyword" position="bottom"/>
+     <!-- MenuBar Specification -->
+     <MenuBar> 
+        <Menu label="File"> 
+          <Button keyword="WorkfileBuilder">Workfile Builder</Button> 
+          <Button keyword="MultiBuilder">Multi-Workfile Builder</Button> 
+          <Button keyword="Submit_Job">Submit Job</Button> 
+          <Button keyword="SessionLog">Session Log</Button> 
+          <Button keyword="BuildJobfile">Build Jobfile</Button> 
+          <Button keyword="BuildList">Build List</Button>
+          <Button keyword="Exit">Exit</Button> 
+        </Menu> 
+        <Menu label="Edit"> 
+          <Button keyword="EditWorkfile">Text Edit Workfile</Button> 
+          <Button keyword="EditJobfile">Text Edit Jobfile</Button> 
+          <Button keyword="EditFile">Text Editor</Button> 
+        </Menu> 
+        <Menu label="View"> 
+          <Button keyword="ViewWorkfile">View Workfile</Button> 
+          <Button keyword="ViewJobfile">View Jobfile</Button> 
+          <Button keyword="ViewReportfile">View Reportfile</Button> 
+          <Button keyword="ViewFile">View any text file</Button> 
+          <Button keyword="ViewCPSheaders">View CPS Header Definition</Button>
+        </Menu> 
+        <Menu label="Options"> 
+          <Button keyword="ChangeDirectory">Change Working Directory</Button> 
+          <Button keyword="ToolbarEditor">Toolbar Editor</Button> 
+          <Button keyword="UserPreferences">User Preferences</Button> 
+        </Menu> 
+        <Menu label="Tools"> 
+          <Button keyword="CIU">CPS Interactive Utilities (CIU)</Button> 
+          <Button keyword="XPBS">Batch Queue Status (XPBS)</Button> 
+          <Button keyword="XTPIOADMIN">Tape Admin Program (Xtpioadmin)</Button> 
+          <Button keyword="CBYT">Trace File Viewer (CBYT)</Button> 
+          <Button keyword="VA">Velocity Analysis (VA)</Button> 
+          <Button keyword="CSV">Cube Slice Viewer (CSV)</Button> 
+          <Button keyword="CFG">Cool Field Geometry (CFG)</Button> 
+          <Button keyword="JOBMON">JOBMON</Button> 
+        </Menu> 
+        <Menu label="Help"> 
+          <Button keyword="ApplicationHelp">Application Help</Button> 
+          <Button keyword="ApplicationVersion">Application Version</Button> 
+          <Button keyword="DOC">cpsDOC</Button> 
+        </Menu> 
+     </MenuBar>
+     <!-- ToolBar Specification -->
+     <Toolbar> 
+        <Button keyword="CIUTB">UTILS</Button> 
+        <Button keyword="DOCTB">DOC</Button> 
+        <Button keyword="ViewWorkfileTB">VWF</Button> 
+        <Button keyword="ViewJobfileTB">VJF</Button> 
+        <Button keyword="ViewReportfileTB">VRF</Button> 
+        <Button keyword="XPBSTB">XPBS</Button> 
+        <Button keyword="CBYTTB">CBYT</Button> 
+        <Button keyword="VATB">VA</Button> 
+        <Button keyword="JOBMONTB">JOBMON</Button> 
+        <Button keyword="ViewCPSheadersTB">HDRS</Button>
+        <Button keyword="BuildListTB">LIST</Button>
+     </Toolbar>
+     <CommandArea keyword="CommandArea"> 
+           <TopAreaComponent>
+            <Screen keyword="TOPSCREEN" title="TopScreen" rows="2"> 
+                <Field keyword="WorkingDir" type="string" editable="no" sensitive="no" maxLength="100"/>
+                <Layout>
+                    <Constraints component="WorkingDir" xPos="0" yPos="0" xSize="80" ySize="2" yStretch="true"/>
+                </Layout>
+                <HelpSection>
+      <Help component="WORKINGDIR">
+       <Tip>The node, userid and working directory for this cfe session.</Tip>
+       <Text><![CDATA[<html>
+<b><center>cfe - WORKINGDIR<br> The node, userid and working directory for this cfe session.</center></b>
+<pre> This is a view-only field.</pre></html>]]></Text>
+      </Help>
+                </HelpSection>
+            </Screen>
+        </TopAreaComponent>
+        <Screen keyword="WorkfileBuilderScreen" title="Workfile Builder" rows="26">
+         <PopupMenu keyword="PopupMenu"> 
+            <Button keyword="ProcessScreenMB3">Process Screen</Button> 
+            <Button keyword="CopyAllMB3">Copy All</Button> 
+            <Button keyword="AppendMB3">Append</Button> 
+            <Button keyword="DeleteMB3">Delete</Button> 
+            <Button keyword="ReplaceMB3">Replace</Button> 
+            <Button keyword="InsertAfterMB3">Insert After</Button> 
+            <Button keyword="InsertBlankMB3">Insert Blank</Button>
+            <Button keyword="ClearSelectionMB3">Clear Selections</Button>
+            <Button keyword="UndoMB3">Undo</Button> 
+            <Button keyword="ClearCurrentMB3">Clear Current Workfile</Button>
+            <Button keyword="ClearWorkfileBufferMB3">Clear Old Workfile Buffer</Button> 
+            <Button keyword="RemoveOldMB3">Remove Old Workfile from Buffer</Button> 
+            <Button keyword="ICPSLocalMB3">ICPS (local)</Button>
+            <Button keyword="ICPSRemoteMB3">ICPS (remote)</Button>
+            <Button keyword="BuildJobMB3">Build Job</Button> 
+            <Button keyword="SubmitJobMB3">Submit Job</Button> 
+            <Button keyword="SystemDefaultsMB3">System Defaults</Button> 
+            <Button keyword="ProjectDefaultsMB3">Project Defaults</Button> 
+            <Button keyword="UserDefaultsMB3">User Defaults</Button> 
+			<Button keyword="ShowSourceMB3">Show Source Code (includes documentation)</Button>
+         </PopupMenu> 
+          <Field keyword="ProcessDefaults" type="comboBox"/> 
+          <Button keyword="ProcessScreen">Process&#x000A;Screen</Button>
+          <Button keyword="CopyAll">Copy&#x000A;All</Button> 
+          <Button keyword="Append">Append</Button> 
+          <Button keyword="Delete">Delete</Button> 
+          <Button keyword="Replace">Replace</Button> 
+          <Button keyword="InsertAfter">Insert&#x000A;After</Button> 
+          <Button keyword="InsertBlank">Insert&#x000A;Blank</Button> 
+          <Button keyword="ClearSelection">Clear&#x000A;Selections</Button>
+          <Button keyword="Undo">Undo</Button> 
+          <Button keyword="ClearCurrent">Clear&#x000A;Workfile</Button> 
+          <Button keyword="ClearWorkfileBuffer">Clear Old&#x000A;Buffer</Button> 
+          <Button keyword="ICPSLocal">ICPS&#x000A;(local)</Button>
+          <Button keyword="ICPSRemote">ICPS&#x000A;(remote)</Button>
+          <Button keyword="BuildJob">Build Job</Button> 
+          <Button keyword="SubmitJob">Submit Job</Button> 
+
+          <Border keyword="Border1"/> 
+          <Button keyword="selectJob">Select Old Workfile...</Button>
+          <Button keyword="shiftOldLeft">&#x003C;&#x003C;</Button>
+          <Field keyword="oldJobName" type="string" maxLength="20"/>
+          <Button keyword="shiftOldRight">&#x003E;&#x003E;</Button>
+          <Field keyword="oldJobComment" type="string" editable="no" sensitive="no"
+            maxLength="100"/>
+          <Array keyword="oldProcessList" type="string" editable="no" maxLength="10" clickMode="immediate" columnName="Old Process"/> 
+          <Button keyword="selectCurrent">Select Current Workfile...</Button>
+          <Field keyword="currentJobName" type="string" maxLength="100"/>
+          <Array keyword="currentProcessList" type="string" maxLength="15" clickMode="immediate" columnName="Process List"/> 
+          <Label keyword="CPSprocessListLabel">CPS Processes</Label>
+          <Field keyword="processSubset" type="comboBox" />
+          <Array keyword="subsetProcessList" type="string" editable="no" maxLength="10" clickMode="immediate" columnName="Process"/> 
+          <Border keyword="Border2"/> 
+          <Border keyword="Border3"/> 
+          <Layout>
+            
+             <Constraints component="ProcessDefaults"     xPos="2" yPos="0" xSize="15"/>
+             <Constraints component="ProcessScreen"       xPos="2" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="CopyAll"             xPos="7" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="Append"              xPos="12" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="Delete"              xPos="17" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="Replace"             xPos="22" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="InsertAfter"         xPos="27" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="InsertBlank"         xPos="32" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="ClearSelection"      xPos="37" yPos="2" xSize="6" ySize="2"/>
+             <Constraints component="Undo"                xPos="43" yPos="2" xSize="4" ySize="2"/>
+             <Constraints component="ClearCurrent"        xPos="47" yPos="2" xSize="6" ySize="2"/>
+             <Constraints component="ClearWorkfileBuffer" xPos="53" yPos="2" xSize="6" ySize="2"/>
+             <Constraints component="ICPSLocal"           xPos="59" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="ICPSRemote"          xPos="64" yPos="2" xSize="5" ySize="2"/>
+             <Constraints component="BuildJob"            xPos="69" yPos="2" xSize="6" ySize="2"/>
+             <Constraints component="SubmitJob"           xPos="75" yPos="2" xSize="7" ySize="2"/>
+            
+             <Constraints component="Border1" xPos="2" yPos="5" xSize="24" ySize="18"/>
+             <Constraints component="selectJob" xPos="5" yPos="6" xSize="20"/>
+             <Constraints component="shiftOldLeft" xPos="5" yPos="7" xSize="3"/>
+             <Constraints component="oldJobName" xPos="8" yPos="7" xSize="14"/>
+             <Constraints component="shiftOldRight" xPos="22" yPos="7" xSize="3"/>
+             <Constraints component="oldJobComment" xPos="5" yPos="8" xSize="20"/>
+             <Constraints component="oldProcessList" xPos="5" yPos="9" xSize="20" ySize="12"/>
+
+             <Constraints component="Border2" xPos="30" yPos="5" xSize="24" ySize="18"/>
+             <Constraints component="selectCurrent" xPos="33" yPos="6" xSize="20"/>
+             <Constraints component="currentJobName" xPos="33" yPos="7" xSize="20"/>
+             <Constraints component="currentProcessList" xPos="33" yPos="9" xSize="20"
+              ySize="12"/>
+
+             <Constraints component="Border3" xPos="58" yPos="5" xSize="24" ySize="18"/>
+             <Constraints component="CPSprocessListLabel" xPos="61" yPos="6" xSize="20"/>
+             <Constraints component="processSubset" xPos="61" yPos="7" xSize="20"/>
+             <Constraints component="subsetProcessList" xPos="61" yPos="9" xSize="20" ySize="12"/>
+          </Layout>
+   <HelpSection>
+     <Help component="PROCESSDEFAULTS">
+      <Tip>Combo box to choose from options for process parameter defaults.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - PROCESSDEFAULTS<br> Combo box to choose from options for process parameter defaults.</center></b>
+<pre> Process parameter options are: System (those listed in CPS documentation),
+ Project and User.   Users may establish their own Project and User defaults.</pre></html>]]></Text>
+     </Help>
+     <Help component="PROCESSSCREEN">
+      <Tip>Pops up the parameter screen of the selected process</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - PROCESSSCREEN<br> Pops up the parameter screen of the selected process</center></b>
+<pre> To view/edit the parameters associated with a process, select the process.
+ Press the ProcessScreen button.  A new window with the parameters for the
+ process will appear.  If the process was in the current workfile scrollable
+ list, the parameters will be editable.  Otherwise, they are view only.</pre></html>]]></Text>
+     </Help>
+     <Help component="COPYALL">
+      <Tip>Button to copy the old workfile to the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - COPYALL<br> Button to copy the old workfile to the current workfile.</center></b>
+<pre> Project_Data and Job_Data from the old workfile are also copied to the
+ current workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="APPEND">
+      <Tip>Append selected processes to the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - APPEND<br> Append selected processes to the current workfile.</center></b>
+<pre> To append one or more processes the the current workfile, select the copy
+ select the copy range in any of the three scrollable lists.  Press the Append
+ button.  The selected processes will be appended to the current workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="DELETE">
+      <Tip>Delete highlighted processes in the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - DELETE<br> Delete highlighted processes in the current workfile.</center></b>
+<pre> To delete one or more processes from the current workfile, select a range of
+ processes in the current workfile.  Press the Delete button.  The selected
+ processes are deleted from the current workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="REPLACE">
+      <Tip>Replace process in the current workfile with the selected process.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - REPLACE<br> Replace process in the current workfile with the selected process.</center></b>
+<pre> To replace one or more processes in the current workfile, select the copy
+ range in any of the three scrollable list and the destrination range in the
+ current workfile.  Press the Replace button.  The destination range in the
+ current workfile will be replaced by the selected copy range.</pre></html>]]></Text>
+     </Help>
+     <Help component="INSERTAFTER">
+      <Tip>Insert processes after the highlighted process.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - INSERTAFTER<br> Insert processes after the highlighted process.</center></b>
+<pre> To insert one or more processes after a process in the current workfile,
+ select the copy range in any of the three scrollable lists and the destination
+ process in the current workfile.  Press the InsertAfter button.  The processes
+ in the copy range will be inserted after the destination process in the
+ current workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="INSERTBLANK">
+      <Tip>Insert blank row after the highlighted process.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - INSERTBLANK<br> Insert blank row after the highlighted process.</center></b>
+<pre> To insert a blank row after a process in the current workfile, select a
+ process in the current workfile.  Press the InsertBlank button.  A blank row
+ is inserted after the selected process in the current workfile.  You can then
+ type the name of a desired process on the row.</pre></html>]]></Text>
+     </Help>
+     <Help component="CLEARSELECTION">
+      <Tip>Button that clears all selections.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CLEARSELECTION<br> Button that clears all selections.</center></b>
+<pre> De-selects any green or red highlighted selection.</pre></html>]]></Text>
+     </Help>
+     <Help component="UNDO">
+      <Tip>Button that reverses the latest action.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - UNDO<br> Button that reverses the latest action.</center></b>
+<pre> To undo the last InsertAfter, Replace, Append, or Delete action on the current
+ workfile, press the Undo button.</pre></html>]]></Text>
+     </Help>
+     <Help component="CLEARCURRENT">
+      <Tip>Button that clears all entries in the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CLEARCURRENT<br> Button that clears all entries in the current workfile.</center></b>
+<pre> Pressing the ClearCurrent button clears the current workfile name and
+ process list so that you can start/load a new current workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="CLEARWORKFILEBUFFER">
+      <Tip>Button that clears all entries in the old workfile buffer.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CLEARWORKFILEBUFFER<br> Button that clears all entries in the old workfile buffer.</center></b>
+<pre> Each time an old workfile is displayed, it is added to the old workfiles
+ buffer.  Pressing the ClearWorkfileBuffer button clears the buffer.</pre></html>]]></Text>
+     </Help>
+     <Help component="BUILDJOB">
+      <Tip>Button that builds a jobfile from the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - BUILDJOB<br> Button that builds a jobfile from the current workfile.</center></b>
+<pre> The BuildJob button will build a jobfile from the current workfile.  Before
+ building the job, all process parameter traps are run to make sure the
+ jobfile would run if submitted.</pre></html>]]></Text>
+     </Help>
+     <Help component="SUBMITJOB">
+      <Tip>Button that submits the current jobfile to a batch queue.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SUBMITJOB<br> Button that submits the current jobfile to a batch queue.</center></b>
+<pre> The SubmitJob button will submit the jobfile associated with the current
+ workfile to the batch queue specified in the jobfile.  It will automatically
+ build the jobfile, prior to submission, if the user has not done so.  If you
+ use the SubmitJob button, you will not be able to specify job series, submit
+ date or submit time.</pre></html>]]></Text>
+     </Help>
+     <Help component="ICPSLocal">
+      <Tip>Button that fires up the current job using ICPS on the local machine.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - ICPSLocal<br> Button that fires up the current job using ICPS on the local machine.</center></b>
+<pre> The ICPS (local) button will run the current job in ICPS on the local machine.
+</pre></html>]]></Text>
+     </Help>
+     <Help component="ICPSRemote">
+      <Tip>Button that fires up the current job using ICPS on pre-designated nodes.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - ICPSRemote<br> Button that fires up the current job using ICPS on pre-designated nodes.</center></b>
+<pre> The ICPS (remote) button will run the current job in ICPS on pre-designated nodes.
+</pre></html>]]></Text>
+     </Help>
+     <Help component="SELECTJOB">
+      <Tip>This button accesses the Select Old Workfile dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SELECTJOB<br> This button accesses the Select Old Workfile dialog box.</center></b>
+<pre> Choose an old workfile via a file selection dialog.</pre></html>]]></Text>
+     </Help>
+     <Help component="SHIFTOLDLEFT">
+      <Tip>Button that displays the previous old workfile in the buffer.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SHIFTOLDLEFT<br> Button that displays the previous old workfile in the buffer.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="OLDJOBNAME">
+      <Tip>Name of selected old workfile.  Arrows scroll through buffer.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - OLDJOBNAME<br> Name of selected old workfile.  Arrows scroll through buffer.</center></b>
+<pre> Text field displaying name of the old workfile selected from the buffer of
+ all files that have been selected.  You can enter names directly in the text
+ field at the extreme right end.  Clearing the workfile that shows in the
+ field deletes it from the buffer.</pre></html>]]></Text>
+     </Help>
+     <Help component="SHIFTOLDRIGHT">
+      <Tip>Button that displays the next old workfile in the buffer.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SHIFTOLDRIGHT<br> Button that displays the next old workfile in the buffer.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="OLDJOBCOMMENT">
+      <Tip>Comment from the selected old workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - OLDJOBCOMMENT<br> Comment from the selected old workfile.</center></b>
+<pre> This is a view-only field.</pre></html>]]></Text>
+     </Help>
+     <Help component="OLDPROCESSLIST">
+      <Tip>List of processes in the selected old workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - OLDPROCESSLIST<br> List of processes in the selected old workfile.</center></b>
+<pre> This is a view-only list.</pre></html>]]></Text>
+     </Help>
+     <Help component="SELECTCURRENT">
+      <Tip>This button accesses the Select Current Workfile dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SELECTCURRENT<br> This button accesses the Select Current Workfile dialog box.</center></b>
+<pre> Choose an current workfile via a file selection dialog.</pre></html>]]></Text>
+     </Help>
+     <Help component="CURRENTJOBNAME">
+      <Tip>Name of the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CURRENTJOBNAME<br> Name of the current workfile.</center></b>
+<pre> Current Workfile Name must start with an alpha, consist solely of alphas,
+ numerics and underscores (_) and have no more than 15 characters.</pre></html>]]></Text>
+     </Help>
+     <Help component="CURRENTPROCESSLIST">
+      <Tip>List of processes in the current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CURRENTPROCESSLIST<br> List of processes in the current workfile.</center></b>
+<pre> PROJECT_DATA and JOB_DATA processes automatically appear when the name if the
+ current workfile is entered.  They must be the first two processes in every
+ workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="PROCESSSUBSET">
+      <Tip>Combo box for choosing subset of CPS processes to list.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - PROCESSSUBSET<br> Combo box for choosing subset of CPS processes to list.</center></b>
+<pre> Default = All_Processes
+ Allowed = All_Processes
+           amplitude_mod
+           diagnostics
+           filters
+           headers
+           inversion
+           io
+           migrations
+           miscellaneous
+           multi_component
+           plot
+           sorts
+           stacks
+           statics
+           synthetics
+           transforms
+           velocity_Analysis
+ 
+ Choose a category of CPS processes to view.</pre></html>]]></Text>
+     </Help>
+     <Help component="SUBSETPROCESSLIST">
+      <Tip>List of all CPS processes available (or a subset).</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SUBSETPROCESSLIST<br> List of all CPS processes available (or a subset).</center></b>
+<pre> List is a view only list.</pre></html>]]></Text>
+     </Help>
+   </HelpSection>
+    </Screen>
+
+    <Screen keyword="MultiBuilderScreen" title="Multi-Workfile Builder" rows="28" columns="80">
+      <Button keyword="Proceed2Parms">Process&#x000A;Screen</Button>
+      <Button keyword="PathParameters">All Path&#x000A;Parameters</Button>
+
+      <Button keyword="WriteReport">Write Report</Button>
+      <Button keyword="AllTraps">Run Traps</Button>
+      <Button keyword="WriteWorkfiles">Write&#x000A;Workfiles</Button>
+      <Button keyword="BuildJobs">Build Jobs</Button>
+      <Button keyword="SubmitJobs">Submit Jobs</Button>
+      <Button keyword="NewMWBSession">New MWB&#x000A;Session</Button>
+      <Button keyword="ClearListBuffer">Clear&#x000A;List Buffer</Button>
+
+      <Field keyword="WriteReportFlag" type="string" maxlength="2" editable="no"/>
+      <Field keyword="AllTrapsFlag" type="string" maxlength="2" editable="no"/>
+      <Field keyword="WriteWorkfilesFlag" type="string" maxlength="2" editable="no"/>
+      <Field keyword="BuildJobsFlag" type="string" maxlength="2" editable="no"/>
+
+      <Border keyword="Border1"/>
+      <Label keyword="TemplateLabel">Template Workfile</Label>
+      <Button keyword="selectTemplate">Select Template Workfile ...</Button>
+      <Field keyword="templateJobName" type="string" maxLength="20"/>
+      <Array keyword="templateProcessList" type="string" editable="no" maxLength="15" clickMode="immediate" columnName="Processes"/>
+
+      <Border keyword="Border2"/>
+      <Label keyword="WorkfilestoBuildLabel">Workfiles to Build</Label>
+      <Button keyword="MBincJobname">Increment Jobname ...</Button>
+      <Label keyword="totalToBuildLabel" alignment="right">Total to build =</Label>
+      <Field keyword="totalToBuild" type="int" maxLength="10"/>
+      <Array keyword="jobnameList" type="string" maxLength="15" columnName="Jobname List"/>
+
+      <Label keyword="ChangedParamsLabel" alignment="center">Changed Parameters</Label>
+      <ArraySet keyword="MWBArraySet" clickMode="immediate" label="Changed Parameters">
+        <Array type="string" keyword="MWBipn"     maxLength="3"  editable="no" columnName="IPN" />
+        <Array type="string" keyword="MWBprocess" maxLength="15" editable="no" columnName="Process" />
+        <Array type="string" keyword="MWBkeyword" maxLength="20" editable="no" columnName="Parameter" />
+      </ArraySet>
+      <Button keyword="MWBParmShow">Parameter&#x000A;Screen</Button>
+      <Button keyword="MWBParmDelete">Delete&#x000A;Change</Button>
+      <Button keyword="MWBParmClear">Delete All&#x000A;Changes</Button>
+      <Layout>
+       <Constraints component="Proceed2Parms"     xPos="2" yPos="1"   xSize="8" ySize="2"/>
+       <Constraints component="PathParameters"    xPos="2" yPos="3"   xSize="8" ySize="2"/>
+
+       <Constraints component="WriteReportFlag"       xPos="68" yPos="1"   xSize="2" ySize="2"/>
+       <Constraints component="AllTrapsFlag"          xPos="68" yPos="3"   xSize="2" ySize="2"/>
+       <Constraints component="WriteWorkfilesFlag"    xPos="68" yPos="5"   xSize="2" ySize="2"/>
+       <Constraints component="BuildJobsFlag"         xPos="68" yPos="7"   xSize="2" ySize="2"/>
+
+       <Constraints component="WriteReport"       xPos="70" yPos="1"   xSize="8" ySize="2"/>
+       <Constraints component="AllTraps"          xPos="70" yPos="3"   xSize="8" ySize="2"/>
+       <Constraints component="WriteWorkfiles"    xPos="70" yPos="5"   xSize="8" ySize="2"/>
+       <Constraints component="BuildJobs"         xPos="70" yPos="7"   xSize="8" ySize="2"/>
+       <Constraints component="SubmitJobs"        xPos="70" yPos="10"  xSize="8" ySize="2"/>
+       <Constraints component="NewMWBSession"     xPos="70" yPos="12"  xSize="8" ySize="2"/>
+       <Constraints component="ClearListBuffer"   xPos="70" yPos="14"  xSize="8" ySize="2"/>
+
+       <Constraints component="Border1"             xPos="12" yPos="1"  xSize="25" ySize="19"/>
+       <Constraints component="TemplateLabel"       xPos="15" yPos="2"  xSize="20"/>
+       <Constraints component="selectTemplate"      xPos="15" yPos="3"  xSize="20" ySize="2"/>
+       <Constraints component="templateJobName"     xPos="15" yPos="5"  xSize="20"/>
+       <Constraints component="templateProcessList" xPos="15" yPos="6"  xSize="20" ySize="13"/>
+
+       <Constraints component="Border2"               xPos="39" yPos="1" xSize="25" ySize="19"/>
+       <Constraints component="WorkfilestoBuildLabel" xPos="41" yPos="2" xSize="20"/>
+       <Constraints component="MBincJobname"          xPos="41" yPos="3" xSize="20" ySize="2"/>
+       <Constraints component="totalToBuildLabel"     xPos="41" yPos="5" xSize="10"/>
+       <Constraints component="totalToBuild"          xPos="52" yPos="5" xSize="5"/>
+       <Constraints component="jobnameList"           xPos="41" yPos="6" xSize="20" ySize="13"/>
+
+       <Constraints component="ChangedParamsLabel"  xPos="12"  yPos="21" xSize="52"/>
+       <Constraints component="MWBArraySet"         xPos="12"  yPos="22" xSize="52" ySize="6"/>
+       <Constraints component="MWBParmShow"         xPos="2"   yPos="22" xSize="8"  ySize="2"/>
+       <Constraints component="MWBParmDelete"       xPos="2"   yPos="24" xSize="8"  ySize="2"/>
+       <Constraints component="MWBParmClear"        xPos="2"   yPos="26" xSize="8"  ySize="2"/>
+      </Layout>
+      <HelpSection>
+     <Help component="PROCEED2PARMS">
+      <Tip>Pops up the parameter screen of the selected process.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - PROCEED2PARMS<br> Pops up the parameter screen of the selected process.</center></b>
+<pre> Pops up the parameter screen of the selected process so you can select a
+ parameter.  The Build Parameter Values screen allows you to vary the
+ parameter values.</pre></html>]]></Text>
+     </Help>
+     <Help component="PATHPARAMETERS">
+      <Tip>Button to copy all PATH parameters to the Changed Parameters list.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - PATHPARAMETERS<br>Button to copy all PATH parameters to the Changed Parameters list.</center></b>
+<pre> Pressing the All Path Parameters button loads all the pathname parameters in
+ the template workfile into the Changed Parameters scrollable list.</pre></html>]]></Text>
+     </Help>
+     <Help component="WRITEREPORTFLAG">
+      <Tip>Indicates whether the last MWB Report is up to date.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - WRITEREPORTFLAG<br> Indicates whether the last MWB Report is up to date.</center></b>
+<pre> An "X" is present if the latest MWB Report is consistent with the current
+ .mwb information (that is, is up to date).</pre></html>]]></Text>
+     </Help>
+     <Help component="ALLTRAPSFLAG">
+      <Tip>Indicates if traps have been run on the latest parameter values.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - ALLTRAPSFLAG<br> Indicates if traps have been run on the latest parameter values.</center></b>
+<pre> An "X" is present if traps have been run on the latest parameter values.</pre></html>]]></Text>
+     </Help>
+     <Help component="WRITEWORKFILESFLAG">
+      <Tip>Indicates whether latest workfiles are up to date.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - WRITEWORKFILESFLAG<br> Indicates whether latest workfiles are up to date.</center></b>
+<pre> An "X" is present if the latest workfiles are consistent with the current
+ .mwb information (that is, are up to date).</pre></html>]]></Text>
+     </Help>
+     <Help component="BUILDJOBSFLAG">
+      <Tip>Indicates whether latest jobs are up to date.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - BUILDJOBSFLAG<br> Indicates whether latest jobs are up to date.</center></b>
+<pre> An "X" is present if the latest jobs are consistent with the current .mwb
+ information (that is, are up to date).</pre></html>]]></Text>
+     </Help>
+     <Help component="WRITEREPORT">
+      <Tip>Button that writes an MWB Report file of all parameter changes.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - WRITEREPORT<br> Button that writes an MWB Report file of all parameter changes.</center></b>
+<pre> The MWB Report file sumarizes the parameter value changes in your multiple
+ workfiles.  This text file has the same name as your template workfile with a
+ .prn extension.  It is a space delimited file that Excel can conveniently
+ read and display.</pre></html>]]></Text>
+     </Help>
+     <Help component="ALLTRAPS">
+      <Tip>Button that runs parameter traps on all parameter values.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - ALLTRAPS<br> Button that runs parameter traps on all parameter values.</center></b>
+<pre> The Run Traps button runs parameter traps on all the parameter values in your
+ multiple workfiles.  This may be time consuming if you have many workfiles.</pre></html>]]></Text>
+     </Help>
+     <Help component="WRITEWORKFILES">
+      <Tip>Button that writes the workfiles with your parameter changes.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - WRITEWORKFILES<br> Button that writes the workfiles with your parameter changes.</center></b>
+<pre> Button that writes the workfiles using your specified jobnames and parameter
+ values.  (This information was stored in the .mwb file.)
+ 
+ Traps are run automatically if they have not have been run on the latest
+ parameter values.</pre></html>]]></Text>
+     </Help>
+     <Help component="BUILDJOBS">
+      <Tip>Button that builds the jobfiles from the current workfiles.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - BUILDJOBS<br> Button that builds the jobfiles from the current workfiles.</center></b>
+<pre> 
+ Traps are run automatically if they have not have been run on the latest
+ parameter values.  New workfiles are built automatically if existing ones are
+ not consistent with the current .mwb information.</pre></html>]]></Text>
+     </Help>
+     <Help component="SUBMITJOBS">
+      <Tip>Button that transfers the latest jobfiles to the Submit screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SUBMITJOBS<br> Button that transfers the latest jobfiles to the Submit screen.</center></b>
+<pre> Button that brings up the Select Jobs dialog box so you can transfer the
+ latest jobfiles to the Submit screen for submission to a batch queue.
+ 
+ Traps are run automatically if they have not have been run on the latest
+ parameter values.  New workfiles are built automatically if existing ones are
+ not consistent with the current .mwb information.  New jobs are built
+ automatically if existing ones are not consistent with the current .mwb
+ information.)</pre></html>]]></Text>
+     </Help>
+     <Help component="NEWMWBSESSION">
+      <Tip>Button that clears all MWB information except the template WF.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - NEWMWBSESSION<br> Button that clears all MWB information except the template WF.</center></b>
+<pre> Button that clears all information from the MWB screen except the template
+ workfile.</pre></html>]]></Text>
+     </Help>
+     <Help component="CLEARLISTBUFFER">
+      <Tip>Button that removes all lists from the list buffer.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CLEARLISTBUFFER<br> Button that removes all lists from the list buffer.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="SELECTTEMPLATE">
+      <Tip>Button that brings up the Select Template Workfile dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SELECTTEMPLATE<br> Button that brings up the Select Template Workfile dialog box.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="TEMPLATEJOBNAME">
+      <Tip>Text field showing name of selected template workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - TEMPLATEJOBNAME<br> Text field showing name of selected template workfile.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="TEMPLATEPROCESSLIST">
+      <Tip>Scrollable list of processes in the selected template workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - TEMPLATEPROCESSLIST<br> Scrollable list of processes in the selected template workfile.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="MBINCJOBNAME">
+      <Tip>Button that accesses the Build Jobnames screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MBINCJOBNAME<br> Button that accesses the Build Jobnames screen.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="TOTALTOBUILD">
+      <Tip>Text field showing the total number of new workfiles to build.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - TOTALTOBUILD<br> Text field showing the total number of new workfiles to build.</center></b>
+<pre> Enter the desired number of new workfiles to build.</pre></html>]]></Text>
+     </Help>
+     <Help component="JOBNAMELIST">
+      <Tip>List of jobnames for the new workfiles to build.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - JOBNAMELIST<br> List of jobnames for the new workfiles to build.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="MWBIPN">
+      <Tip>Process number (IPN) for the changed parameter.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MWBIPN<br> Process number (IPN) for the changed parameter.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="MWBPROCESS">
+      <Tip>Process name for the changed parameter.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MWBPROCESS<br> Process name for the changed parameter.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="MWBKEYWORD">
+      <Tip>Keyword for the changed parameter.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MWBKEYWORD<br> Keyword for the changed parameter.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="MWBPARMSHOW">
+      <Tip>Button that accesses the Build Parameter Values screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MWBPARMSHOW<br> Button that accesses the Build Parameter Values screen.</center></b>
+<pre> The Build Parameter Values screen allows you to specify how the parameter
+ values change.</pre></html>]]></Text>
+     </Help>
+     <Help component="MWBPARMDELETE">
+      <Tip>Button that deletes the highlighted parameter change.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MWBPARMDELETE<br> Button that deletes the highlighted parameter change.</center></b>
+<pre> Click on the desired parameter row in the Changed Parameters list and press
+ the Delete Changes button to delete that parameter from the Changed
+ Parameters list.</pre></html>]]></Text>
+     </Help>
+     <Help component="MWBPARMCLEAR">
+      <Tip>Button that deletes all parameters from Changed Parameters list.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MWBPARMCLEAR<br> Button that deletes all parameters from Changed Parameters list.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+      </HelpSection>
+    </Screen>
+
+      <Screen keyword="SubmitJobScreen" title="Submit Job">
+            <Button keyword="SJJobSelect">Jobname...</Button>
+            <Label keyword="SJSeriesLabel" alignment="right">Job Series Name =</Label>
+            <Field type="string" keyword="SJSeries" maxLength="10" />
+            <Button keyword="SJReloadSeries">Reload&#x000A;Series ...</Button>
+            <Label keyword="SJIndependentLabel" alignment="right">Independent Series ?</Label>
+            <Field keyword="SJIndependent" type="comboBox"/> 
+            <ArraySet keyword="SJArraySet" label="">
+                <Array type="string" keyword="SJJobs" maxLength="132" columnSize="40" columnName="Jobname" />
+                <Array type="string" keyword="SJCount" maxLength="12" columnName="Series Count" />
+                <Array type="string" keyword="SJNext" maxLength="11" columnName="Next Series" />
+            </ArraySet>
+            <Label keyword="SJDateLabel" alignment="right">Submit Date (YYYY-MM-DD)=</Label>
+            <Field keyword="SJDate" type="string" maxLength="10" />
+            <Label keyword="SJTimeLabel" alignment="right">Submit Time (HH:MM)=</Label>
+            <Field keyword="SJTime" type="string" maxLength="5" />
+            <Button keyword="SJSubmit">Submit</Button>
+            <Button keyword="SJClear">Clear&#x000A;Entries</Button>
+            <Button keyword="SJJobsList">Jobname&#x000A;List...</Button>
+            <Button keyword="SJCountList">Series Count&#x000A;List...</Button>
+            <Button keyword="SJNextList">Next Series&#x000A;List...</Button>
+            <Button keyword="SJUpdateSeries">Update&#x000A;Series</Button>
+            <Border keyword="Border7"/>
+            <Layout>
+                <Constraints component="SJJobsList" xPos="5" yPos="2" xSize="10" ySize="2" />        
+                <Constraints component="SJCountList" xPos="15" yPos="2" xSize="10" ySize="2" />        
+                <Constraints component="SJNextList" xPos="25" yPos="2" xSize="10" ySize="2" />        
+                <Constraints component="SJReloadSeries" xPos="35" yPos="2" xSize="10" ySize="2" />
+                <Constraints component="SJUpdateSeries" xPos="45" yPos="2" xSize="10" ySize="2" />        
+                <Constraints component="SJSeriesLabel" xPos="55" yPos="2" xSize="12" />
+                <Constraints component="SJSeries" xPos="68" yPos="2" xSize="10" />
+                <Constraints component="SJIndependentLabel" xPos="55" yPos="3" xSize="12" />
+                <Constraints component="SJIndependent" xPos="68" yPos="3" xSize="10" />
+                <Constraints component="SJJobSelect" xPos="5" yPos="5" xSize="10" />
+                <Constraints component="SJArraySet" xPos="5" yPos="6" xSize="73" ySize="10" />
+                <Constraints component="SJDateLabel" xPos="5" yPos="18" xSize="25" />
+                <Constraints component="SJDate" xPos="31" yPos="18" xSize="10" />
+                <Constraints component="SJTimeLabel" xPos="42" yPos="18" xSize="20" />
+                <Constraints component="SJTime" xPos="63" yPos="18" xSize="10" />
+                <Constraints component="Border7" xPos="2" yPos="1" xSize="79" ySize="19"/>
+                <Constraints component="SJSubmit" xPos="29" yPos="21" xSize="10" ySize="2" />
+                <Constraints component="SJClear" xPos="41" yPos="21" xSize="10" ySize="2" />
+            </Layout>
+   <HelpSection>
+     <Help component="SJSERIES">
+      <Tip>Job series name for the current list of jobs.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJSERIES<br> Job series name for the current list of jobs.</center></b>
+<pre> Default = -
+ Allowed = char 10
+ Job series name for those jobs you wish to execute in a secified sequence.
+ Entering a job series name is optional.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJRELOADSERIES">
+      <Tip>This button displays the old series file selection dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJRELOADSERIES<br>This button displays the old series file selection dialog box.</center></b>
+<pre> Choose an old series file via the file selection dialog.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJINDEPENDENT">
+      <Tip>Combo box to set series as dependent or independent.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJINDEPENDENT<br>Combo box to set series as dependent or independent.</center></b>
+<pre> Default = NO
+ Allowed = YES
+           NO
+ A dependent series requires that a job complete sucessfully before starting
+ the next job(s) in the series.  In a independent series, the next job(s) are
+ started even if the current job aborts.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJDATE">
+      <Tip>Starting date for the submitted job(s).</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJDATE<br> Starting date for the submitted job(s).</center></b>
+<pre> Default = current date
+ Allowed = MM_DD_YYYY</pre></html>]]></Text>
+     </Help>
+     <Help component="SJTIME">
+      <Tip>Starting time for the submitted job(s).</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJTIME<br> Starting time for the submitted job(s).</center></b>
+<pre> Default = current time
+ Allowed = HH_MM</pre></html>]]></Text>
+     </Help>
+     <Help component="SJJOBSELECT">
+      <Tip>JOBNAME dialog box allows selection of a workfile or jobfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJJOBSELECT<br> JOBNAME dialog box allows selection of a workfile or jobfile.</center></b>
+<pre> The JOBNAME dialog box allows the user to select workfiles or jobfiles to be
+ submitted.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJJOBSLIST">
+      <Tip>This button displays the jobname list file selection dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJJOBSLIST<br> This button displays the jobname list file selection dialog box.</center></b>
+<pre> The list file selection dialog box allows the user to select a list file containing workfile or
+jobfiles to be submitted.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJCOUNTLIST">
+      <Tip>This button displays the count list file selection dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJCOUNTLIST<br> This button displays the count list file selection dialog box.</center></b>
+<pre> The list file selection dialog box allows the user to select a list file containing the series
+count numbers the for jobs being submitted.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJNEXTLIST">
+      <Tip>This button displays the next list file selection dialog box.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJNEXTLIST<br> This button displays the next list file selection dialog box.</center></b>
+<pre> The list file selection dialog box allows the user to select a list file containing next 
+job series names the for jobs being submitted.  Entering a next job series names is optional.  </pre></html>]]></Text>
+     </Help>
+     <Help component="SJJOBS">
+      <Tip>List of workfiles or jobfiles to be submitted.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJJOBS<br> List of workfiles or jobfiles to be submitted.</center></b>
+<pre> Default = -
+ Allowed = char 15
+ Users may enter names directly in the list or use the dialog box.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJCOUNT">
+      <Tip>List of job series count numbers for jobs being submitted.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJCOUNT<br> List of job series count numbers for jobs being submitted.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0
+ A job series count number determines the execution sequence of jobs with the
+ same job series name.  A job with a job series count of 1 is the first to
+ execute in that job series.
+ 
+ Users must enter numbers directly in the list.  Entering a job series count
+ is optional.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJNEXT">
+      <Tip>List of next job series names.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJNEXT<br> List of next job series names.</center></b>
+<pre> Default = -
+ Allowed = char 10
+ List of names of job series to begin execution upon completion of the job
+ being submitted.
+ 
+ Users must enter names directly in the list.  Entering a next job series name
+ is optional.
+ 
+ Job series you wish to start with a Next Job Series listing should be
+ submitted in advance with the Submit Job screen with minimum Job Series Count
+ of 2.  It will not start until a job completes that listed it in the Next Job
+ Series list.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJSUBMIT">
+      <Tip>This button submits the listed jobs and clears the screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJSUBMIT<br> This button submits the listed jobs and clears the screen.</center></b>
+<pre> Default =
+ Allowed =
+ Jobs will be submitted only when list entries are complete.</pre></html>]]></Text>
+     </Help>
+     <Help component="SJCLEAR">
+      <Tip>This button clears all entries on the screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJCLEAR<br> This button clears all entries on the screen.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+     </Help>
+     <Help component="SJUPDATESERIES">
+      <Tip>This button updates the series file and clears the screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SJUPDATESERIES<br>This button updates the series file and clears the screen.</center></b>
+<pre> No jobs are submitted.  The series file is written as displayed.</pre></html>]]></Text>
+     </Help>
+   </HelpSection>
+
+        </Screen>
+        <Screen keyword="SessionLogScreen" title="Session Log">
+            <ArraySet keyword="SessionArraySet" label="">
+                <Array type="string" keyword="SLJobs" maxLength="15" columnName="Jobs" editable="no" />
+                <Array type="string" keyword="SLBuilt" maxLength="15" columnName="Built" editable="no" />
+                <Array type="string" keyword="SLSubmitted" maxLength="15" columnName="Submitted" editable="no" />
+                <Array type="string" keyword="SLSeries" maxLength="10" columnName="Series" editable="no" />
+                <Array type="string" keyword="SLCount" maxLength="10" columnName="Count" editable="no" />
+                <Array type="string" keyword="SLNext" maxLength="10" columnName="Next" editable="no" />
+            </ArraySet>
+        <Layout>
+                <Constraints component="SessionArraySet" xPos="0" yPos="1" xSize="80" ySize="20" xStretch="true" />
+        </Layout>
+   <HelpSection>
+     <Help component="SLJOBS">
+      <Tip>List of names of workfiles created in this session.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SLJOBS<br> List of names of workfiles created in this session.</center></b>
+<pre> List is view-only.</pre></html>]]></Text>
+     </Help>
+     <Help component="SLBUILT">
+      <Tip>List of times when each jobfile in this session was built.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SLBUILT<br> List of times when each jobfile in this session was built.</center></b>
+<pre> List is view-only.</pre></html>]]></Text>
+     </Help>
+     <Help component="SLSUBMITTED">
+      <Tip>List of times when each jobfile in this session was submitted.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SLSUBMITTED<br> List of times when each jobfile in this session was submitted.</center></b>
+<pre> List is view-only.</pre></html>]]></Text>
+     </Help>
+     <Help component="SLSERIES">
+      <Tip>List of job series names for each job submitted.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SLSERIES<br> List of job series names for each job submitted.</center></b>
+<pre> List is view-only.</pre></html>]]></Text>
+     </Help>
+     <Help component="SLCOUNT">
+      <Tip>List of job series count values for each job submitted.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SLCOUNT<br> List of job series count values for each job submitted.</center></b>
+<pre> List is view-only.</pre></html>]]></Text>
+     </Help>
+     <Help component="SLNEXT">
+      <Tip>List of next job series entries for each job submitted.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SLNEXT<br> List of next job series entries for each job submitted.</center></b>
+<pre> List is view-only.</pre></html>]]></Text>
+     </Help>
+   </HelpSection>
+
+        </Screen>
+     </CommandArea> 
+
+     <Help component="WORKFILEBUILDER">
+      <Tip>Make the Workfile Builder tabbed screen active.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - WORKFILEBUILDER<br> Make the Workfile Builder tabbed screen active.</center></b>
+<pre> Allows user to create and edit workfiles.</pre></html>]]></Text>
+     </Help>
+     <Help component="MULTIBUILDER">
+      <Tip>Make the Multi-Workfile Builder tabbed screen active.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - MULTIBUILDER<br> Make the Multi-Workfile Builder tabbed screen active.</center></b>
+<pre> Allows user to build and edit multiple workfiles, build jobfiles from
+ multiple workfiles and submit multiple jobs to a batch queue.</pre></html>]]></Text>
+     </Help>
+     <Help component="SUBMIT_JOB">
+      <Tip>Make the Submit Job tabbed screen active.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SUBMIT_JOB<br> Make the Submit Job tabbed screen active.</center></b>
+<pre> Allows user to submit workfiles and jobfiles.</pre></html>]]></Text>
+     </Help>
+     <Help component="SESSIONLOG">
+      <Tip>Make the Session Log tabbed screen active.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - SESSIONLOG<br> Make the Session Log tabbed screen active.</center></b>
+<pre> Displays daily jobs built and submitted information.</pre></html>]]></Text>
+     </Help>
+     <Help component="BUILDJOBFILE">
+      <Tip>Build jobfile from current workfile.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - BUILDJOBFILE<br> Build jobfile from current workfile.</center></b>
+<pre> Allows user to build a jobfile given a workfile name.</pre></html>]]></Text>
+     </Help>
+     <Help component="BuildList">
+      <Tip>Build a list file.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - BuildListTB<br> Build a list file.</center></b>
+<pre> Allows user to build a list file.  List files are text files with a single column of values.</pre></html>]]></Text>
+     </Help>
+     <Help component="EXIT">
+      <Tip>Exit CFE.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - EXIT<br> Exit CFE.</center></b>
+<pre> Exit the program.</pre></html>]]></Text>
+     </Help>
+     <Help component="EDITWORKFILE">
+      <Tip>Edit the current workfile with a text editor.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - EDITWORKFILE<br> Edit the current workfile with a text editor.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="EDITJOBFILE">
+      <Tip>Edit the current jobfile with a text editor.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - EDITJOBFILE<br> Edit the current jobfile with a text editor.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="EDITFILE">
+      <Tip>Edit any file (no default) with a text editor.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - EDITFILE<br> Edit any file (no default) with a text editor.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWWORKFILE">
+      <Tip>View the current workfile with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWWORKFILE<br> View the current workfile with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWJOBFILE">
+      <Tip>View the current jobfile with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWJOBFILE<br> View the current jobfile with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWREPORTFILE">
+      <Tip>View the current reportfile with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWREPORTFILE<br> View the current reportfile with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWFILE">
+      <Tip>View any file (no default) with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWFILE<br> View any file (no default) with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="ViewCPSheaders">
+      <Tip>Allows the user to view the CPS trace header definition.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - ViewCPSheaders<br> Allows the user to view the CPS trace header definition.</center></b>
+<pre> Displays the CPS trace header definition.</pre></html>]]></Text>
+     </Help>
+     <Help component="CHANGEDIRECTORY">
+      <Tip>Allows the user to access the Change Working Directory screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CHANGEDIRECTORY<br> Allows the user to access the Change Working Directory screen.</center></b>
+<pre> The working directory is where current workfiles are created and where
+ jobfiles are built.  The working directory defaults to the directory where cfe
+ was started.</pre></html>]]></Text>
+     </Help>
+     <Help component="TOOLBAREDITOR">
+      <Tip>Allows the user to access the Toolbar Editor screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - TOOLBAREDITOR<br> Allows the user to access the Toolbar Editor screen.</center></b>
+<pre> </pre></html>]]></Text>
+     </Help>
+     <Help component="USERPREFERENCES">
+      <Tip>Allows the user to access the User Preferences screen.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - USERPREFERENCES<br> Allows the user to access the User Preferences screen.</center></b>
+<pre> Users can select the preferred text editor and make other choices.</pre></html>]]></Text>
+     </Help>
+     <Help component="CIU">
+      <Tip>Allows the user to access the CPS interactive utilities program.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CIU<br> Allows the user to access the CPS interactive utilities program.</center></b>
+<pre> Starts the CIU application.</pre></html>]]></Text>
+     </Help>
+     <Help component="XPBS">
+      <Tip>Allows the user to access the XPBS batch queue status utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - XPBS<br> Allows the user to access the XPBS batch queue status utility.</center></b>
+<pre> Starts the XPBS application.</pre></html>]]></Text>
+     </Help>
+     <Help component="XTPIOADMIN">
+      <Tip>Allows the user to access the XTPIOADMIN tape admin utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - XTPIOADMIN<br> Allows the user to access the XTPIOADMIN tape admin utility.</center></b>
+<pre> Starts the XTPIOADMIN application.</pre></html>]]></Text>
+     </Help>
+     <Help component="CBYT">
+      <Tip>Allows the user to access the CBYT trace file viewing utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CBYT<br> Allows the user to access the CBYT trace file viewing utility.</center></b>
+<pre> Starts the CBYT application.</pre></html>]]></Text>
+     </Help>
+     <Help component="VA">
+      <Tip>Allows the user to access the VA velocity analysis utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VA<br> Allows the user to access the VA velocity analysis utility.</center></b>
+<pre> Starts the VA application.</pre></html>]]></Text>
+     </Help>
+     <Help component="CSV">
+      <Tip>Allows the user to access the CSV cube slice viewing utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CSV<br> Allows the user to access the CSV cube slice viewing utility.</center></b>
+<pre> Starts the CSV application.</pre></html>]]></Text>
+     </Help>
+     <Help component="CFG">
+      <Tip>Allows the user to access the CFG field geometry utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CFG<br> Allows the user to access the CFG field geometry utility.</center></b>
+<pre> Starts the CFG application.</pre></html>]]></Text>
+     </Help>
+     <Help component="JOBMON">
+      <Tip>Allows the user to access the JOBMON job monitoring utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - JOBMON<br> Allows the user to access the JOBMON job monitoring utility.</center></b>
+<pre> Starts the JOBMON application.</pre></html>]]></Text>
+     </Help>
+     <Help component="APPLICATIONHELP">
+      <Tip>Allows the user to access the pop-up Help Window.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - APPLICATIONHELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+     </Help>
+     <Help component="APPLICATIONVERSION">
+      <Tip>Displays the version number of the CFE executable.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - APPLICATIONVERSION<br> Displays the version number of the CFE executable.</center></b>
+<pre> Display the version of the CFE gui software.</pre></html>]]></Text>
+     </Help>
+     <Help component="DOC">
+      <Tip>Allows the user to access the cfeDOC (documentation) utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - DOC<br> Allows the user to access the cfeDOC (documentation) utility.</center></b>
+<pre> The cpsDOC utility is accessed via a Web browser.  This option will start
+ Netscape to access cpsDOC.</pre></html>]]></Text>
+     </Help>
+     <Help component="CIUTB">
+      <Tip>Allows the user to access the CPS interactive utilities program.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CIUTB<br> Allows the user to access the CPS interactive utilities program.</center></b>
+<pre> Starts the CIU application.</pre></html>]]></Text>
+     </Help>
+     <Help component="DOCTB">
+      <Tip>Allows the user to access the cpsDOC (documentation) utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - DOCTB<br> Allows the user to access the cpsDOC (documentation) utility.</center></b>
+<pre> The cpsDOC utility is accessed via a Web browser.  This option will start
+ Netscape to access cpsDOC.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWWORKFILETB">
+      <Tip>View the current workfile with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWWORKFILETB<br> View the current workfile with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWJOBFILETB">
+      <Tip>View the current jobfile with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWJOBFILETB<br> View the current jobfile with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="VIEWREPORTFILETB">
+      <Tip>View the current reportfile with a text editor in read-only mode.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VIEWREPORTFILETB<br> View the current reportfile with a text editor in read-only mode.</center></b>
+<pre> The text editor can be selected in User Preferences.</pre></html>]]></Text>
+     </Help>
+     <Help component="XPBSTB">
+      <Tip>Allows the user to access the XPBS batch queue status utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - XPBSTB<br> Allows the user to access the XPBS batch queue status utility.</center></b>
+<pre> Starts the XPBS application.</pre></html>]]></Text>
+     </Help>
+     <Help component="CBYTTB">
+      <Tip>Allows the user to access the CBYT trace file viewing utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - CBYTTB<br> Allows the user to access the CBYT trace file viewing utility.</center></b>
+<pre> Starts the CBYT application.</pre></html>]]></Text>
+     </Help>
+     <Help component="VATB">
+      <Tip>Allows the user to access the VA velocity analysis utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - VATB<br> Allows the user to access the VA velocity analysis utility.</center></b>
+<pre> Starts the VA application.</pre></html>]]></Text>
+     </Help>
+     <Help component="JOBMONTB">
+      <Tip>Allows the user to access the JOBMON job monitoring utility.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - JOBMONTB<br> Allows the user to access the JOBMON job monitoring utility.</center></b>
+<pre> Starts the JOBMON application.</pre></html>]]></Text>
+     </Help>
+     <Help component="BuildListTB">
+      <Tip>Build a list file.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - BuildListTB<br> Build a list file.</center></b>
+<pre> Allows user to build a list file.  List files are text files with a single column of values.</pre></html>]]></Text>
+     </Help>
+     <Help component="ViewCPSheadersTB">
+      <Tip>Allows the user to view the CPS trace header definition.</Tip>
+      <Text><![CDATA[<html>
+<b><center>cfe - ViewCPSheadersTB<br> Allows the user to view the CPS trace header definition.</center></b>
+<pre> Displays the CPS trace header definition.</pre></html>]]></Text>
+     </Help>
+  <Help component="CFEApplication">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ 
+                    WORKFILE_BUILDER tabbed screen
+                    ------------------------------
+  (Allows the user to build and edit workfiles, build jobfiles from workfiles
+   and submit jobs to a batch queue.)
+ 
+ 
+ Starting a New workfile
+ -----------------------
+ 
+ Enter the name of the new workfile in the Current Workfile Name text field and
+ return.  No extension is needed.  Workfile names must start with an
+ alphabetic, consist of alphabetics, numerics and underscores (_) and have no
+ more than 15 characters.
+ 
+ (Entering a name that is the same as an existing workfile will bring up the
+ processes in the existing file.  Any changes made will modify the existing
+ file.)
+ 
+ PROJECT_DATA and JOB_DATA processes automatically appear when the name of the
+ Current Workfile is entered.  Select one of these process names with mouse
+ button 1, press the ProcessScreen button and the parameter screens will
+ appear, allowing you to enter the necessary information.  The Help Line will
+ give you information about each parameter.
+ 
+ 
+ Selecting an Old Workfile
+ -------------------------
+ 
+ Processes may be added to the Current Workfile from either the CPS Processes
+ list or the Old Workfile list.  You may select an old workfile for display by
+ entering its name in the Old Workfile Name text field or by double clicking
+ on the Select Old Workfile button, which brings up the Old Workfile file
+ selection box.  In addition, the arrows allow you to cycle through a buffer
+ of all the files that have been selected.
+ 
+ 
+ Selecting Processes
+ -------------------
+ 
+ You can select one or more processes (a range) within one of the three
+ scrollable lists as follows.
+ 
+ Select a single process by clicking on the process name with mouse button 1.
+ 
+ Select a sequence of consecutive processes by clicking and dragging with
+ mouse button 1.
+ 
+ Select a sequence of non-consecutive processes by pressing the ctrl key and
+ clicking the process names with mouse button 1.
+ 
+ The first range selected will be the copy range; it will be highlighted green.
+ The second range selected will be the destination range; it will be
+ highlighted red.
+ 
+ Users will be able to select no more than two ranges and have them active at
+ the same time.  If two ranges are active, they may both be in the Current
+ Workfile List or one in the Current Workfile List and one in either the CPS
+ Processes List or the Old Workfile List.  In no case will two active ranges
+ overlap.
+ 
+ 
+ De-selecting Processes
+ ----------------------
+ 
+ If any one of the action buttons is pressed (Append, Insert After, Replace,
+ Insert Blank, Delete or Process Screen) the desired action is taken and then
+ the selected range or ranges are automatically de-selected.
+ 
+ Ranges can also be de-selected by pressing the Clear Selections button.
+ 
+ 
+ Conflicts Involving Selected Processes
+ --------------------------------------
+ 
+ Sometimes the range or ranges selected may not be consistent with a requested
+ action.  These rules govern such conflicts.
+ 
+ If a multiple-process range is selected when only a single selected process is
+ expected, the last process in the range will be used as the selected process.
+ 
+ If two ranges are selected when only one is expected, the first range selected
+ (the copy range) will be used as the selected range.
+ 
+ 
+ Adding Processes to the New Workfile
+ ------------------------------------
+ 
+ You can add processes to the new workfile in any of the following ways.
+ 
+   Copy All        To copy all the old workfile processes, press the Copy All
+                   button.  This causes all the processes in the selected old
+                   workfile to be copied over to the current workfile
+                   (including Project_Data and Job_Data entries).
+ 
+   Append          To append one or more processes to the current workfile,
+                   select the copy range in any of the three scrollable lists.
+                   Press the Append  button.  The selected processes will be
+                   appended to the current workfile.
+ 
+   Insert After    Select the copy range in any of the three scrollable lists
+                   and the destination process in the current workfile.  Press
+                   the Insert After button.  The processes in the copy range
+                   will be inserted after the destination process in the
+                   current workfile.
+ 
+   Replace         Select the copy range in any of the three scrollable lists
+                   and the destination range in the current workfile.  Press
+                   the Replace button.  The destination range in the current
+                   workfile will be replaced by the selected copy range..
+ 
+   Insert Blank    Select a process in the current workfile.  Press the
+                   Insert Blank button.  A blank field is inserted after the
+                   selected process in the current workfile.  You can then
+                   type in the desired process name.
+ 
+ 
+ Deleting Processes from the New Workfile
+ ----------------------------------------
+ 
+ Select a range of processes in the current workfile, then press the Delete
+ button.  The selected processes are deleted from the current workfile.
+ 
+ 
+ Editing Parameters of Processes in the New Workfile
+ ---------------------------------------------------
+ 
+ Select a process in any scrollable list and press the Process Screen button.
+ The parameter entry screen for that process pops up.  Such pop up parameter
+ screens are display-only if selected from the Old Workfile List or the CPS
+ Processes List.  You can then select defaults with the Defaults button and
+ enter or modify parameter values.  The Help Line will give you information
+  about each parameter.
+ 
+ Project_Data and Job_Data entries behave the same as process parameter screen
+ entries with regard to default selection and parameter entry and modification.
+ 
+ Within a parameter entry screen, normally you can visit parameter fields in
+ any order although it is usually a good idea to start from the top and work
+ toward the bottom of the screen.  Mouse button 1 activates a scalar field;
+ ctrl-I inserts a blank row after the current row in an array.
+ 
+ 
+ WARNING ON SETTING PROCESS PARAMETERS:
+ -------------------------------------
+ 
+ The preferred method of setting process parameters is to visit the parameter
+ entry screen and set parameter values for each process immediately after it
+ has been added to the current workfile.  It is also possible to add all the
+ processes to the workfile and then go through the processes sequentially
+ setting the parameters  this method may trigger error messages due to required
+ parameters that have not been set.  In any event it is a good idea to develop
+ the habit of always visiting the parameter screens the same way so you do not
+ inadvertently miss some.
+ 
+ 
+ Alternatives to Button Presses
+ ------------------------------
+ 
+ The mouse button 3 pop up window displays a menu that includes all the actions
+ of the buttons on the Workfile Builder Screen.  Choice of a menu option from
+ the mouse button 3 pop up window is equivalent to pressing the same button on
+ the Workfile Builder screen.
+
+ 
+ 
+-------------------------------------------------------------------------------
+
+                   MULTI-WORKFILE BUILDER tabbed screen
+                   ------------------------------------
+
+  (Allows the user to build and edit multiple workfiles, build jobfiles from
+  multiple workfiles and submit multiple jobs to a batch queue.)
+
+
+ Building multiple workfiles has four steps:
+
+     1.  Select the template workfile you wish to use.
+
+     2.  Enter the total number of workfiles to be built and generate names
+     for them.
+
+     3.  Determine which parameters will vary among the workfiles and generate
+     their values.
+
+     4.  Build the workfiles, build the jobfiles and submit your jobs.
+
+ To help guide you through this documentation, these four steps are marked
+ where appropriate.
+
+
+ Multiple Workfiles and Template Workfiles
+ -----------------------------------------
+
+ "Multiple Workfiles" all have the same processes in the same order as the
+ template workfile, but they have different jobnames and may have different
+ values of process parameters.
+
+ The "Template Workfile" is a pre-existing workfile that will be used as a
+ model for your multiple workfiles.  It is an ordinary workfile built with the
+ Workfile Builder tabbed screen (or the Multi-Workfile Builder tabbed screen).
+
+
+ Selecting Your Template Workfile  [STEP 1.]
+ --------------------------------
+
+ YOU MUST SELECT A TEMPLATE WORKFILE FIRST, BEFORE TAKING ANY OTHER ACTION ON
+ THE MULTI-WORKFILE BUILDER SCREEN.
+
+ Select the template workfile by pressing the Select Template Workfile button,
+ which brings up the Select Template Workfile dialog box.  Then select the
+ template workfile in the usual way.  Alternatively, you may select a template
+ workfile by entering its name in the Template Jobname text field.
+
+ Selecting a template workfile causes the template workfile process list to be
+ displayed in the Template Workfile scrollable list.
+
+ THE MULTI-WORKFILE BUILDER NEVER CHANGES THE TEMPLATE WORKFILE.
+
+
+ The .mwb File
+ -------------
+
+ For reasons of efficiency, the Multi-Workfile Builder does not build
+ workfiles on the fly but instead creates and uses a file with the same name
+ as the template workfile, but with a .mwb extension.  This file is written to
+ the current directory.  This .mwb file contains all the information that you
+ have entered into the Multi-Workfile Builder in a session for a particular
+ template workfile.
+
+ If you select a template workfile that already has a .mwb file associated
+ with it, the Multi-Workfile Builder will automatically load the information
+ from that .mwb file.  (If you want to start from scratch, just press the New
+ MWB Session button.)
+
+
+ Setting Names for Multiple Workfiles  [STEP 2.]
+ ------------------------------------
+
+ First enter the desired number of multiple workfiles in the Total to Build
+ text field just above the Workfiles to Build scrollable list.  Then press the
+ Increment Jobname button which brings up the Build Jobnames screen.
+
+
+ Setting Parameter Values for Multiple Workfiles  [STEP 3.]
+ -----------------------------------------------
+
+ Two methods are provided for specifying parameter values for multiple
+ workfiles:  a special method is provided for pathnames and another method is
+ provided for all other parameters.
+
+ Follow these steps to specify PATHNAME parameters for multiple workfiles.
+
+     1.  Press the All Path Parameters button.  This loads all the pathname
+     parameter information from the template workfile into the Changed
+     Parameters scrollable list at the bottom of the Multi-Workfile Builder
+     tabbed screen.  Note that there is one line for each parameter and that
+     the line also shows the appropriate IPN number, Process name and Keyword.
+
+     2.  Now identify the parameters you want to delete from the Changed
+     Parameters list.  (Parameters you delete from this list will have the SAME
+     value for all your multiple workfiles.)  Click on the row of a parameter
+     you want to delete and press the Delete Change button; this removes the
+     selected row from the Changed Parameters list.
+
+     You can delete all the rows from the Changed Parameters list by
+     pressing the Delete All Changes button.
+
+     3.  Clicking on a row and pressing the Parameter Screen button brings up
+     the Build Parameter Values screen, which allows you to specify parameter
+     values for the parameter whose row you highlighted.
+
+     (The Build Parameter Values screen is very similar to the Build Jobnames
+     screen and operates in a similar fashion.)
+
+     4.  Specify parameter values with the Build Parameter Values screen.
+
+
+ Follow these steps to specify other (non-pathname) parameters for multiple
+ workfiles.
+
+     1.  Click on a process in the Template Workfile list to highlight the
+     selected process.
+
+     2.  Pressing the Process Screen button brings up the Process Parameter
+     screen for the process you highlighted.
+
+     3.  Clicking on a parameter on the Process Parameter screen brings up the
+     Build Parameter Values screen, which allows you to specify parameter
+     values for the parameter you selected.
+
+     4.  Specify parameter values with the Build Parameter Values screen.
+     Pressing OK accepts these parameter values.
+
+
+ Submitting and Cleaning Up  [STEP 4.]
+ --------------------------
+
+ The last steps using the Multi-Workfile Builder screen consist of building
+ your multiple workfiles, submitting them and a few other details.  Here are
+ the possible actions.
+
+     Write        Press the Write Report button to write an MWB Report file
+     Report*      summarizing the parameter value changes in your multiple
+                  workfiles.  This text file has the same name as your
+                  template workfile with a .prn extension.  It is a space
+                  delimited file that Excel can conveniently read and display.
+
+     Run Traps*   Press the Run Traps button to run the parameter traps for
+                  your multiple workfiles.  This may be time consuming if
+                  there are many workfiles.
+
+     Write        Press the Write Workfiles button to generate the actual
+     Workfiles*   multiple workfiles from the information stored in the .mwb
+                  file for the current session.  (Traps are run automatically
+                  if they have not been run on the current .mwb information.)
+
+     Build Jobs*  Press the Build Jobs button to build jobs from the multiple
+                  workfiles.  (Traps are run automatically if they have not
+                  been run on the current .mwb information.  New workfiles are
+                  built automatically if existing ones are not consistent with
+                  the current .mwb information.)
+
+     Submit Jobs  Press the Submit Jobs button to bring up the Select Jobs
+                  dialog box to transfer jobs to the Submit Jobs tabbed screen.
+                  (Traps are run automatically if they have not been run on
+                  the current .mwb information.  New workfiles are built
+                  automatically if existing ones are not consistent with the
+                  current .mwb information.  New jobs are built automatically
+                  if existing ones are not consistent with the current .mwb
+                  information.)
+
+     New MWB      Press the New MWB Session button to clear all the
+     Session      information from the Multi-Workfile Builder screen except
+                  the template workfile.
+
+ The actions shown with an "*" above are marked with an "X" in the field to
+ the left of the button if the latest instance of that action is consistent
+ with the current .mwb information.  The "X" is removed if the latest instance
+ of the action is not consistent with the current .mwb information.
+
+
+ 
+-------------------------------------------------------------------------------
+ 
+                       SUBMIT_JOB tabbed screen
+                       ------------------------
+  (Allows the user to submit jobs to a batch queue and to specify job series
+   information about jobs being submitted.)
+ 
+ 
+ There are two methods of submitting your job:  using the Submit Job tabbed
+ screen and using the Submit Job button on the Workfile Builder tabbed screen.
+ 
+ 
+ Using the Submit Job tabbed Screen
+ ----------------------------------
+ 
+ 1.  Specify the desired job series name, if any, for the job(s) being
+     submitted by entering the desired name in the Job Series Name text field.
+ 
+ 2.  Enter one or more jobnames in the Jobname scrollable list using one of the
+     following methods.
+ 
+     A.  Accept the default, which is the most recently built job,
+ 
+     B.  Manually enter the jobnames in the scrollable list,
+ 
+     C.  Select a jobname from the Jobname file selection dialog box, or
+ 
+     D.  Press the Increment Jobname button to automatically fill the jobname
+         scrollable list.
+ 
+ (Users can specify names of workfiles for which no jobfiles yet exist.
+ In this case jobfiles will be built automatically prior to submission.)
+ 
+ 3.  Enter the job series count numbers in the Job Series Count text entry
+     field to specify the execution sequence for jobs with the same job series
+     name.  (This is necessary only if a job series name has been specified.)
+ 
+ 4.  Enter, in the Next Job Series text entry field, the name of another job
+     series to start on completion of the job being submitted.  (This is
+     optional.)
+ 
+ 5.  Enter, in the Queue text entry field, the name of a valid batch queue to
+     which the job will be submitted.  This entry will default to the setting
+     on the workfile or jobfile.
+ 
+ 6.  Optionally enter desired job start date and time in the Submit Date and
+     Submit Time text entry fields.  (These fields default to the current
+     date and time.)
+ 
+ 7.  Return to 1. and enter information for more jobs if desired.
+ 
+ 8.  Press the Submit button to submit jobs in the list and clear the Submit
+     Job screen or press the Clear button to clear the Submit Job screen only.
+ 
+ Visit the Session Log tabbed screen if you wish to check on workfiles or
+ jobfiles built and submitted in the current session.
+ 
+ 
+-------------------------------------------------------------------------------
+ 
+                       SESSION_LOG tabbed screen
+                       -------------------------
+  (Displays to the user session log information relating to the current CFE
+   session.)
+ 
+ 
+  Information shown is:
+ 
+       JOBS            Names of workfiles created in the current session,
+ 
+       BUILT           Time each jobfile was built,
+ 
+       SUBMITTED       Time each job was submitted, and
+ 
+       JOB_SERIES      Job series information on each job.
+ 
+ 
+ Information on each job is shown on one row of the scrollable lists.
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+  </Window> 
+</Gui> 

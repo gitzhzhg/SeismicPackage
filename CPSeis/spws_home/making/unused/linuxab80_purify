@@ -1,0 +1,52 @@
+#!/bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#*******                        COPYRIGHT NOTICE                         *******
+#******* CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCOPHILLIPS INC. *******
+#*******      PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK      *******
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T   
+#
+# Name   : linuxab80_purify
+# Written: 2005-05-04   by: Kruger Corn
+# Revised:              by: 
+# Purpose: Run purify with linuxab80.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                            DOCUMENTATION
+#
+# Patterned after Tom Stoeckley's sol62_purify.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY                
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2005-05-04  Corn       Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+s
+/apps/geophysics/bin/purify $* \
+   |& awk '{ if($5!="Dwarf" && $6!="Aranges"&& $0!="" && $3!="While" && $0!=".") \
+   { printf("%s\n", $0) } else { if($0==".") { printf(".") } } }'
+

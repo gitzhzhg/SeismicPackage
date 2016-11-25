@@ -1,0 +1,1614 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fxproject" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCREEN1" title="FXPROJECT" rows="29" columns="80">
+    <Button keyword="PLOT_INFO_1">PLOT_INFO_1</Button>
+    <Button keyword="GET_FILES">GET_FILES</Button>
+    <Button keyword="PUT_FILES">PUT_FILES</Button>
+    <Button keyword="RENAME_FILES">RENAME_FILES</Button>
+    <Button keyword="TASK_EXECUTE">TASK_EXECUTE</Button>
+    <Label keyword="LABEL_TASK_SELECT" alignment="left">TASK_SELECT=</Label>
+    <Field keyword="TASK_SELECT" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ADD_CARD_LEN" alignment="left">ADD_CARD_LEN=</Label>
+    <Field keyword="ADD_CARD_LEN" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STRING_OLD" alignment="left">STRING_OLD=</Label>
+    <Field keyword="STRING_OLD" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STRING_NEW" alignment="left">STRING_NEW=</Label>
+    <Field keyword="STRING_NEW" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_LIST_INFO">Select LIST_INFO</Button>
+    <Label keyword="EQLAB_LIST_INFO" alignment="left">=</Label>
+    <Field keyword="LIST_INFO" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SOURCE_GATHER" alignment="left">SOURCE_GATHER=</Label>
+    <Field keyword="SOURCE_GATHER" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RECEIVER_GATHER" alignment="left">RECEIVER_GATHER=</Label>
+    <Field keyword="RECEIVER_GATHER" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TOT_LINES" alignment="left">TOT_LINES=</Label>
+    <Field keyword="TOT_LINES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TOT_GATHERS" alignment="left">TOT_GATHERS=</Label>
+    <Field keyword="TOT_GATHERS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TOT_TRACES" alignment="left">TOT_TRACES=</Label>
+    <Field keyword="TOT_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_MIN_GATHERS" alignment="left">LINE_MIN_GATHERS=</Label>
+    <Field keyword="LINE_MIN_GATHERS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_GATHERS" alignment="left">MIN_GATHERS=</Label>
+    <Field keyword="MIN_GATHERS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_MAX_GATHERS" alignment="left">LINE_MAX_GATHERS=</Label>
+    <Field keyword="LINE_MAX_GATHERS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_GATHERS" alignment="left">MAX_GATHERS=</Label>
+    <Field keyword="MAX_GATHERS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_MIN_TRACES" alignment="left">LINE_MIN_TRACES=</Label>
+    <Field keyword="LINE_MIN_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GATHER_MIN_TRACES" alignment="left">GATHER_MIN_TRACES=</Label>
+    <Field keyword="GATHER_MIN_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_TRACES" alignment="left">MIN_TRACES=</Label>
+    <Field keyword="MIN_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_MAX_TRACES" alignment="left">LINE_MAX_TRACES=</Label>
+    <Field keyword="LINE_MAX_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GATHER_MAX_TRACES" alignment="left">GATHER_MAX_TRACES=</Label>
+    <Field keyword="GATHER_MAX_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_TRACES" alignment="left">MAX_TRACES=</Label>
+    <Field keyword="MAX_TRACES" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="LINE_INDEX_A_ARRAYSET" label="LINE_INDEX_A LINE_TITLE LINE_GATHERS LINE_TRACES">
+     <Array keyword="LINE_INDEX_A" type="int" maxLength="13 " columnName="LINE_INDEX_A" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="LINE_TITLE" type="string" maxLength="11 " columnName="LINE_TITLE" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="LINE_GATHERS" type="int" maxLength="13 " columnName="LINE_GATHERS" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="LINE_TRACES" type="int" maxLength="12 " columnName="LINE_TRACES" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <ArraySet keyword="LINE_INDEX_B_ARRAYSET" label="LINE_INDEX_B LINE_INFO">
+     <Array keyword="LINE_INDEX_B" type="int" maxLength="13 " columnName="LINE_INDEX_B" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="LINE_INFO" type="string" maxLength="91 " columnName="LINE_INFO" editable="yes" sensitive="yes" columnSize="91"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="PLOT_INFO_1" xPos="1" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="GET_FILES" xPos="16" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="PUT_FILES" xPos="29" yPos="1" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="RENAME_FILES" xPos="42" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TASK_EXECUTE" xPos="1" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TASK_SELECT" xPos="16" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK_SELECT" xPos="28" yPos="2" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ADD_CARD_LEN" xPos="1" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ADD_CARD_LEN" xPos="14" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_STRING_OLD" xPos="1" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STRING_OLD" xPos="12" yPos="6" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_STRING_NEW" xPos="1" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STRING_NEW" xPos="12" yPos="7" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_LIST_INFO" xPos="1" yPos="9" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_LIST_INFO" xPos="18" yPos="9" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LIST_INFO" xPos="19" yPos="9" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="1" yPos="11" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="7" yPos="11" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_Y" xPos="11" yPos="11" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="17" yPos="11" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SOURCE_GATHER" xPos="21" yPos="11" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SOURCE_GATHER" xPos="35" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RECEIVER_GATHER" xPos="41" yPos="11" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RECEIVER_GATHER" xPos="57" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TOT_LINES" xPos="1" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOT_LINES" xPos="11" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TOT_GATHERS" xPos="21" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOT_GATHERS" xPos="33" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TOT_TRACES" xPos="43" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOT_TRACES" xPos="54" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_MIN_GATHERS" xPos="1" yPos="13" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_MIN_GATHERS" xPos="18" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_GATHERS" xPos="28" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_GATHERS" xPos="40" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_MAX_GATHERS" xPos="1" yPos="14" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_MAX_GATHERS" xPos="18" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_GATHERS" xPos="28" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_GATHERS" xPos="40" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_MIN_TRACES" xPos="1" yPos="15" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_MIN_TRACES" xPos="17" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHER_MIN_TRACES" xPos="27" yPos="15" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GATHER_MIN_TRACES" xPos="45" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_TRACES" xPos="55" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_TRACES" xPos="66" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_MAX_TRACES" xPos="1" yPos="16" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_MAX_TRACES" xPos="17" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHER_MAX_TRACES" xPos="27" yPos="16" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GATHER_MAX_TRACES" xPos="45" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_TRACES" xPos="55" yPos="16" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_TRACES" xPos="66" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INDEX_A_ARRAYSET" xPos="1" yPos="18" xSize="52" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LINE_INDEX_B_ARRAYSET" xPos="1" yPos="24" xSize="107" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PLOT_INFO_1">
+      <Tip>Press button to plot info.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PLOT_INFO_1<br> Press button to plot info.</center></b>
+<pre> When the PLOT_INFO_1 button is pressed the info will be plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GET_FILES">
+      <Tip>Press button to get files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GET_FILES<br> Press button to get files.</center></b>
+<pre> When the GET_FILE button is pressed FXPROJECT will GET the files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PUT_FILES">
+      <Tip>Press button to get files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PUT_FILES<br> Press button to get files.</center></b>
+<pre> When the PUT_FILE button is pressed FXPROJECT will PUT the files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RENAME_FILES">
+      <Tip>Press button to rename files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - RENAME_FILES<br> Press button to rename files.</center></b>
+<pre> When the PUT_FILE button is pressed FXPROJECT will RENAME the files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK_EXECUTE">
+      <Tip>Press button to execute the selected task.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TASK_EXECUTE<br> Press button to execute the selected task.</center></b>
+<pre> When the TASK_EXECUTE button is pressed
+ the selected task will be executed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK_SELECT">
+      <Tip>Select the task to execute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TASK_SELECT<br> Select the task to execute.</center></b>
+<pre> Default = NONE
+ Allowed = NONE            Do nothing.
+ Allowed = RENAME_FILES    Change the file names.
+ Allowed = GET_FILES       GET LIST_INFO and INFO files.
+ Allowed = PUT_FILES       Put LIST_INFO and INFO files.
+ Allowed = PUT_FILES_3     Put LIST_INFO, INFO and XY_SOURCE files.
+ Allowed = GET_LIST_INFO   Get the list of INFO file names.
+ Allowed = PUT_LIST_INFO   Put the list of INFO file names.
+ Allowed = GET_INFO        Get the INFO files.
+ Allowed = PUT_INFO        Put the INFO files.
+ Allowed = PUT_XY_GATHER   Put the xy gather locations to an ascii file.
+ Allowed = PUT_XY_BOX      Put the xy tig range locations to an ascii file.
+ Allowed = COMBINE_INFO    Combine info files into a single info file.
+ Allowed = SEPARATE_INFO   Separate info files into multiple info files.
+ Allowed = SUBTRACT_INFO   Subtract one info from another.
+ Allowed = RENAME_INFO     Change the fxinfo names.
+ Allowed = PLOT_INFO       Plot info.
+ Allowed = PUT_GATHER_INFO Output info for gather traces.
+ IF task_select = RENAME_FILES    Change the file names.
+ Set STRING_OLD to the part of the LIST_INFO, PATH_INFO and PATH_XY_SOURCE
+ file names that should be altered to STING_NEW.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ADD_CARD_LEN">
+      <Tip>num of cards to add during card read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - ADD_CARD_LEN<br> num of cards to add during card read.</center></b>
+<pre> Default = 2000
+ Allowed = int  make this larger than the num of cards in info file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STRING_OLD">
+      <Tip>Change the STRING_OLD part of a character string to STRING_NEW.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - STRING_OLD<br> Change the STRING_OLD part of a character string to STRING_NEW.</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ Parameters STRING_OLD and STRING_NEW are used to change file names
+ in a systmeatic fashion so the user does not have to do every thing by hand.
+ When the user hits the RENAME_FILES button FXPROJECT will replace all
+ occurences of character string defined by STRING_OLD with the character
+ string defined by STRING_NEW in all Info file names in the array LINE_INFO
+ in the Info List file name, LIST_INFO, and in the output file name,
+ PATH_OUTPUT.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="STRING_NEW">
+      <Tip>Change the STRING_OLD part of a character string to STRING_NEW.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - STRING_NEW<br> Change the STRING_OLD part of a character string to STRING_NEW.</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ Parameters STRING_OLD and STRING_NEW are used to change file names
+ in a systmeatic fashion so the user does not have to do every thing by hand.
+ When the user hits the RENAME_FILES button FXPROJECT will replace all
+ occurences of character string defined by STRING_OLD with the character
+ string defined by STRING_NEW in all Info file names in the array LINE_INFO
+ and in the Info List file name, LIST_INFO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LIST_INFO">
+      <Tip>Select the FXINFO list work file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - SELECT_LIST_INFO<br> Select the FXINFO list work file name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="LIST_INFO">
+      <Tip>The FXINFO list work file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LIST_INFO<br> The FXINFO list work file name.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word indicating the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - HDR_X<br> Header word indicating the X direction.</center></b>
+<pre> Default = 7
+ Allowed = 1&lt;=int&lt;=64</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word indicating the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - HDR_Y<br> Header word indicating the Y direction.</center></b>
+<pre> Default = 7
+ Allowed = 1&lt;=int&lt;=64</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SOURCE_GATHER">
+      <Tip>Spurce gather flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - SOURCE_GATHER<br> Spurce gather flag.</center></b>
+<pre> Default = YES
+ Allowed = YES,NO
+ If SOURCE_GATHER=YES FXINFO will output info on shot gathers.
+ If SOURCE_GATHER=NO  FXINFO will output info on receiver gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RECEIVER_GATHER">
+      <Tip>Receiver gather flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - RECEIVER_GATHER<br> Receiver gather flag.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If RECEIVER_GATHER=NO  FXINFO will output info on shot gathers.
+ If RECEIVER_GATHER=YES FXINFO will output info on receiver gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOT_LINES">
+      <Tip>num of lines in data base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TOT_LINES<br> num of lines in data base.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOT_GATHERS">
+      <Tip>num of gathers in data base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TOT_GATHERS<br> num of gathers in data base.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOT_TRACES">
+      <Tip>num of lines in data base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TOT_TRACES<br> num of lines in data base.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_MIN_GATHERS">
+      <Tip>Line index containing the minimum num of gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_MIN_GATHERS<br> Line index containing the minimum num of gathers.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_GATHERS">
+      <Tip>The minimum num of gathers in any line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_GATHERS<br> The minimum num of gathers in any line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_MAX_GATHERS">
+      <Tip>Line index containing the maximum num of gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_MAX_GATHERS<br> Line index containing the maximum num of gathers.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_GATHERS">
+      <Tip>The maximum num of gathers in any line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_GATHERS<br> The maximum num of gathers in any line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_MIN_TRACES">
+      <Tip>Line index containing the shot with the minimum num of traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_MIN_TRACES<br> Line index containing the shot with the minimum num of traces.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_MIN_TRACES">
+      <Tip>Shot index containing the minimum num of traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GATHER_MIN_TRACES<br> Shot index containing the minimum num of traces.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_TRACES">
+      <Tip>The minimum num of traces in any gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_TRACES<br> The minimum num of traces in any gather.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_MAX_TRACES">
+      <Tip>Line index containing the shot with the maximum num of traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_MAX_TRACES<br> Line index containing the shot with the maximum num of traces.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_MAX_TRACES">
+      <Tip>Shot index containing the maximum num of traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GATHER_MAX_TRACES<br> Shot index containing the maximum num of traces.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_TRACES">
+      <Tip>The maximum num of traces in any gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_TRACES<br> The maximum num of traces in any gather.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INDEX_A">
+      <Tip>Line index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_INDEX_A<br> Line index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_TITLE">
+      <Tip>Line title string.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_TITLE<br> Line title string.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_GATHERS">
+      <Tip>num of gathers in each line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_GATHERS<br> num of gathers in each line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_TRACES">
+      <Tip>num of traces in each line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_TRACES<br> num of traces in each line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INDEX_B">
+      <Tip>Line index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_INDEX_B<br> Line index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INFO">
+      <Tip>FXINFO file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_INFO<br> FXINFO file names.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="INFO" rows="29" columns="80">
+    <Label keyword="LABEL_INFO_INDEX_1" alignment="left">INFO_INDEX_1=</Label>
+    <Field keyword="INFO_INDEX_1" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_INDEX_1" alignment="left">LINE_INDEX_1=</Label>
+    <Field keyword="LINE_INDEX_1" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_GATHERS_1" alignment="left">LINE_GATHERS_1=</Label>
+    <Field keyword="LINE_GATHERS_1" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_TRACES_1" alignment="left">LINE_TRACES_1=</Label>
+    <Field keyword="LINE_TRACES_1" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_TITLE_1" alignment="left">LINE_TITLE_1=</Label>
+    <Field keyword="LINE_TITLE_1" type="string" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_INFO_1" alignment="left">LINE_INFO_1=</Label>
+    <Field keyword="LINE_INFO_1" type="string" maxLength="81" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_TRACES_IN_GATHER" alignment="left">MIN_TRACES_IN_GATHER=</Label>
+    <Field keyword="MIN_TRACES_IN_GATHER" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_TRACES_IN_GATHER" alignment="left">MAX_TRACES_IN_GATHER=</Label>
+    <Field keyword="MAX_TRACES_IN_GATHER" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_GAT_X" alignment="left">MIN_GAT_X=</Label>
+    <Field keyword="MIN_GAT_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_GAT_X" alignment="left">MAX_GAT_X=</Label>
+    <Field keyword="MAX_GAT_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_TIG_X" alignment="left">MIN_TIG_X=</Label>
+    <Field keyword="MIN_TIG_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_TIG_X" alignment="left">MAX_TIG_X=</Label>
+    <Field keyword="MAX_TIG_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_GAT_Y" alignment="left">MIN_GAT_Y=</Label>
+    <Field keyword="MIN_GAT_Y" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_GAT_Y" alignment="left">MAX_GAT_Y=</Label>
+    <Field keyword="MAX_GAT_Y" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_TIG_Y" alignment="left">MIN_TIG_Y=</Label>
+    <Field keyword="MIN_TIG_Y" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_TIG_Y" alignment="left">MAX_TIG_Y=</Label>
+    <Field keyword="MAX_TIG_Y" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_ROW_NUM" alignment="left">INFO_ROW_NUM=</Label>
+    <Field keyword="INFO_ROW_NUM" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_ROW_MIN" alignment="left">INFO_ROW_MIN=</Label>
+    <Field keyword="INFO_ROW_MIN" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_ROW_MAX" alignment="left">INFO_ROW_MAX=</Label>
+    <Field keyword="INFO_ROW_MAX" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="INDEX_2A_ARRAYSET" label="INDEX_2A   INDEX_3    INDEX_4    INDEX_5    NUM_TR     FIRST_TR   LAST_TR">
+     <Array keyword="INDEX_2A" type="int" maxLength="11 " columnName="INDEX_2A" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="INDEX_3" type="int" maxLength="11 " columnName="INDEX_3" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="INDEX_4" type="int" maxLength="11 " columnName="INDEX_4" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="INDEX_5" type="int" maxLength="11 " columnName="INDEX_5" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="NUM_TR" type="int" maxLength="11 " columnName="NUM_TR" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="FIRST_TR" type="int" maxLength="11 " columnName="FIRST_TR" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="LAST_TR" type="int" maxLength="11 " columnName="LAST_TR" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <ArraySet keyword="INDEX_2B_ARRAYSET" label="INDEX_2B   GAT_X      GAT_Y      TIG_X_MIN  TIG_X_MAX  TIG_Y_MIN  TIG_Y_MAX">
+     <Array keyword="INDEX_2B" type="int" maxLength="11 " columnName="INDEX_2B" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="GAT_X" type="float" maxLength="11 " columnName="GAT_X" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="GAT_Y" type="float" maxLength="11 " columnName="GAT_Y" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="TIG_X_MIN" type="float" maxLength="11 " columnName="TIG_X_MIN" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="TIG_X_MAX" type="float" maxLength="11 " columnName="TIG_X_MAX" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="TIG_Y_MIN" type="float" maxLength="11 " columnName="TIG_Y_MIN" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="TIG_Y_MAX" type="float" maxLength="11 " columnName="TIG_Y_MAX" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <ArraySet keyword="INDEX_2C_ARRAYSET" label="INDEX_2C   GAT_DATE         GAT_TIME         GAT_JOB">
+     <Array keyword="INDEX_2C" type="int" maxLength="11 " columnName="INDEX_2C" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="GAT_DATE" type="string" maxLength="17 " columnName="GAT_DATE" editable="yes" sensitive="yes" columnSize="17"/>
+     <Array keyword="GAT_TIME" type="string" maxLength="17 " columnName="GAT_TIME" editable="yes" sensitive="yes" columnSize="17"/>
+     <Array keyword="GAT_JOB" type="string" maxLength="17 " columnName="GAT_JOB" editable="yes" sensitive="yes" columnSize="17"/>
+    </ArraySet>
+    <ArraySet keyword="INDEX_2D_ARRAYSET" label="INDEX_2D   GAT_PATH">
+     <Array keyword="INDEX_2D" type="int" maxLength="11 " columnName="INDEX_2D" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="GAT_PATH" type="string" maxLength="81 " columnName="GAT_PATH" editable="yes" sensitive="yes" columnSize="81"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_INFO_INDEX_1" xPos="1" yPos="1" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_INDEX_1" xPos="14" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INDEX_1" xPos="26" yPos="1" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INDEX_1" xPos="39" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_GATHERS_1" xPos="51" yPos="1" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_GATHERS_1" xPos="66" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_TRACES_1" xPos="80" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_TRACES_1" xPos="94" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_TITLE_1" xPos="1" yPos="2" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_TITLE_1" xPos="14" yPos="2" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INFO_1" xPos="1" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INFO_1" xPos="13" yPos="3" xSize="81" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_TRACES_IN_GATHER" xPos="1" yPos="5" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_TRACES_IN_GATHER" xPos="22" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_TRACES_IN_GATHER" xPos="35" yPos="5" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_TRACES_IN_GATHER" xPos="56" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_GAT_X" xPos="1" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_GAT_X" xPos="11" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_GAT_X" xPos="24" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_GAT_X" xPos="34" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_TIG_X" xPos="47" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_TIG_X" xPos="57" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_TIG_X" xPos="70" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_TIG_X" xPos="80" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_GAT_Y" xPos="1" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_GAT_Y" xPos="11" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_GAT_Y" xPos="24" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_GAT_Y" xPos="34" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_TIG_Y" xPos="47" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_TIG_Y" xPos="57" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_TIG_Y" xPos="70" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_TIG_Y" xPos="80" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_ROW_NUM" xPos="1" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_ROW_NUM" xPos="14" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_ROW_MIN" xPos="26" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_ROW_MIN" xPos="39" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_ROW_MAX" xPos="51" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_ROW_MAX" xPos="64" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INDEX_2A_ARRAYSET" xPos="1" yPos="10" xSize="80" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="INDEX_2B_ARRAYSET" xPos="1" yPos="15" xSize="80" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="INDEX_2C_ARRAYSET" xPos="1" yPos="20" xSize="65" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="INDEX_2D_ARRAYSET" xPos="1" yPos="25" xSize="95" ySize="4" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="INFO_INDEX_1">
+      <Tip>FXINFO index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_INDEX_1<br> FXINFO index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INDEX_1">
+      <Tip>Line index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_INDEX_1<br> Line index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_GATHERS_1">
+      <Tip>num of gathers in line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_GATHERS_1<br> num of gathers in line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_TRACES_1">
+      <Tip>num of traces in line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_TRACES_1<br> num of traces in line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_TITLE_1">
+      <Tip>Line title string.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_TITLE_1<br> Line title string.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INFO_1">
+      <Tip>FXINFO file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_INFO_1<br> FXINFO file name.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_TRACES_IN_GATHER">
+      <Tip>Maximum num of traces in any gather in this line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_TRACES_IN_GATHER<br> Maximum num of traces in any gather in this line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_TRACES_IN_GATHER">
+      <Tip>Maximum num of traces in any gather in this line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_TRACES_IN_GATHER<br> Maximum num of traces in any gather in this line.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_GAT_X">
+      <Tip>Min X gather position of any group. FXINFO file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_GAT_X<br> Min X gather position of any group. FXINFO file name.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_GAT_X">
+      <Tip>Max X gather position of any group.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_GAT_X<br> Max X gather position of any group.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_TIG_X">
+      <Tip>Min X TIG position of any gather. FXINFO file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_TIG_X<br> Min X TIG position of any gather. FXINFO file name.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_TIG_X">
+      <Tip>Max X TIG position of any gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_TIG_X<br> Max X TIG position of any gather.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_GAT_Y">
+      <Tip>Min Y gather position of any group.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_GAT_Y<br> Min Y gather position of any group.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_GAT_Y">
+      <Tip>Max Y source position of any gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_GAT_Y<br> Max Y source position of any gather.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_TIG_Y">
+      <Tip>Min Y TIG position of any gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_TIG_Y<br> Min Y TIG position of any gather.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_TIG_Y">
+      <Tip>Max Y TIG position of any gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_TIG_Y<br> Max Y TIG position of any gather.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_ROW_NUM">
+      <Tip>Maximum num of rows to display in FXINFO tables.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_ROW_NUM<br> Maximum num of rows to display in FXINFO tables.</center></b>
+<pre> Default = 100
+ Allowed = int
+ Decreasing this number will limit how many rows of FXINFO information
+ you can see, and speed up the frontend performance.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_ROW_MIN">
+      <Tip>First row of info to display in FXINFO tables.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_ROW_MIN<br> First row of info to display in FXINFO tables.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_ROW_MAX">
+      <Tip>Last row of info to display in FXINFO tables.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_ROW_MAX<br> Last row of info to display in FXINFO tables.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_2A">
+      <Tip>Shot index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_2A<br> Shot index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_3">
+      <Tip>Info file index 2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_3<br> Info file index 2.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_4">
+      <Tip>Info file index 5.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_4<br> Info file index 5.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_5">
+      <Tip>Info file index 5.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_5<br> Info file index 5.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR">
+      <Tip>num of traces in shot.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - NUM_TR<br> num of traces in shot.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FIRST_TR">
+      <Tip>First trace in shot. FXINFO file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - FIRST_TR<br> First trace in shot. FXINFO file name.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LAST_TR">
+      <Tip>Last trace in shot. FXINFO file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LAST_TR<br> Last trace in shot. FXINFO file name.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_2B">
+      <Tip>Shot index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_2B<br> Shot index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAT_X">
+      <Tip>Source X location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GAT_X<br> Source X location.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAT_Y">
+      <Tip>Source Y location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GAT_Y<br> Source Y location.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIG_X_MIN">
+      <Tip>Min TIG X location. FXINFO file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TIG_X_MIN<br> Min TIG X location. FXINFO file name.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIG_X_MAX">
+      <Tip>Max TIG X location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TIG_X_MAX<br> Max TIG X location.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIG_Y_MIN">
+      <Tip>Min TIG Y location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TIG_Y_MIN<br> Min TIG Y location.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIG_Y_MAX">
+      <Tip>Max TIG Y location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - TIG_Y_MAX<br> Max TIG Y location.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_2C">
+      <Tip>Shot index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_2C<br> Shot index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAT_DATE">
+      <Tip>Gather date.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GAT_DATE<br> Gather date.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAT_TIME">
+      <Tip>Gather time.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GAT_TIME<br> Gather time.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAT_JOB">
+      <Tip>Gather job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GAT_JOB<br> Gather job.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INDEX_2D">
+      <Tip>Shot index number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INDEX_2D<br> Shot index number.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAT_PATH">
+      <Tip>Gather trace file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GAT_PATH<br> Gather trace file name.</center></b>
+<pre> Default = NONE
+ Allowed = character</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN3" title="SORT_KEEP" rows="24" columns="80">
+    <Button keyword="PLOT_INFO_3">PLOT_INFO_3</Button>
+    <Button keyword="SORT_EXECUTE">SORT_EXECUTE</Button>
+    <Label keyword="LABEL_SORT_SELECT" alignment="left">SORT_SELECT=</Label>
+    <Field keyword="SORT_SELECT" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_SORT" alignment="left">INFO_SORT=</Label>
+    <Field keyword="INFO_SORT" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Button keyword="KEEP_EXECUTE">KEEP_EXECUTE</Button>
+    <Label keyword="LABEL_KEEP_SELECT" alignment="left">KEEP_SELECT=</Label>
+    <Field keyword="KEEP_SELECT" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_KEEP" alignment="left">INFO_KEEP=</Label>
+    <Field keyword="INFO_KEEP" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SORT_GROUP_SIZE" alignment="left">SORT_GROUP_SIZE=</Label>
+    <Field keyword="SORT_GROUP_SIZE" type="int" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_XY_SEPARATION" alignment="left">XY_SEPARATION=</Label>
+    <Field keyword="XY_SEPARATION" type="float" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_GATHERS" alignment="left">BIN_GATHERS=</Label>
+    <Field keyword="BIN_GATHERS" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_KEEP_MIN" alignment="left">KEEP_MIN=</Label>
+    <Field keyword="KEEP_MIN" type="float" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_KEEP_MAX" alignment="left">KEEP_MAX=</Label>
+    <Field keyword="KEEP_MAX" type="float" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_KEEP_SKIP" alignment="left">KEEP_SKIP=</Label>
+    <Field keyword="KEEP_SKIP" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_KEEP_BIN" alignment="left">KEEP_BIN=</Label>
+    <Field keyword="KEEP_BIN" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_KEEP_MIN" alignment="left">INFO_KEEP_MIN=</Label>
+    <Field keyword="INFO_KEEP_MIN" type="float" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_KEEP_MAX" alignment="left">INFO_KEEP_MAX=</Label>
+    <Field keyword="INFO_KEEP_MAX" type="float" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_KEEP_SKIP" alignment="left">INFO_KEEP_SKIP=</Label>
+    <Field keyword="INFO_KEEP_SKIP" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INFO_KEEP_BIN" alignment="left">INFO_KEEP_BIN=</Label>
+    <Field keyword="INFO_KEEP_BIN" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT  =</Label>
+    <Field keyword="X_TOT" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT  =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST  =</Label>
+    <Field keyword="X_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC  =</Label>
+    <Field keyword="X_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT  =</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT  =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST  =</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC  =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="PLOT_INFO_3" xPos="1" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SORT_EXECUTE" xPos="1" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SORT_SELECT" xPos="16" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SORT_SELECT" xPos="28" yPos="3" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INFO_SORT" xPos="45" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_SORT" xPos="55" yPos="3" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="KEEP_EXECUTE" xPos="1" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_KEEP_SELECT" xPos="16" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="KEEP_SELECT" xPos="28" yPos="4" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INFO_KEEP" xPos="45" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_KEEP" xPos="55" yPos="4" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SORT_GROUP_SIZE" xPos="1" yPos="6" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SORT_GROUP_SIZE" xPos="17" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_XY_SEPARATION" xPos="33" yPos="6" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XY_SEPARATION" xPos="47" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BIN_GATHERS" xPos="63" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_GATHERS" xPos="75" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_KEEP_MIN" xPos="1" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="KEEP_MIN" xPos="10" yPos="8" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_KEEP_MAX" xPos="26" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="KEEP_MAX" xPos="35" yPos="8" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_KEEP_SKIP" xPos="51" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="KEEP_SKIP" xPos="61" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_KEEP_BIN" xPos="72" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="KEEP_BIN" xPos="81" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INFO_KEEP_MIN" xPos="1" yPos="9" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_KEEP_MIN" xPos="15" yPos="9" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_KEEP_MAX" xPos="31" yPos="9" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_KEEP_MAX" xPos="45" yPos="9" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_KEEP_SKIP" xPos="61" yPos="9" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_KEEP_SKIP" xPos="76" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INFO_KEEP_BIN" xPos="87" yPos="9" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_KEEP_BIN" xPos="101" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_X_TOT" xPos="1" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="9" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="20" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="29" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="40" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="49" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="60" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="68" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="1" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="9" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="20" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="29" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="40" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="49" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="60" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="68" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PLOT_INFO_3">
+      <Tip>Press button to plot info.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PLOT_INFO_3<br> Press button to plot info.</center></b>
+<pre> When the PLOT_INFO_3 button is pressed the info will be plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_EXECUTE">
+      <Tip>Press button to execute the selected task.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - SORT_EXECUTE<br> Press button to execute the selected task.</center></b>
+<pre> When the SORT_EXECUTE button is pressed
+ the selected sort will be executed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_SELECT">
+      <Tip>Select the sort to execute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - SORT_SELECT<br> Select the sort to execute.</center></b>
+<pre> Default = NONE
+ Allowed = NONE              Do nothing.
+ Allowed = CURRENT_ORDER     Sort by current order.
+ Allowed = INVERSE_ORDER     Sort by inverse order.
+ Allowed = RANDOM            Sort by random order.
+ Allowed = FIRST_TRACE       Sort by first trace index.
+ Allowed = TRACES_IN_GATHER  Sort by num of ttaces in a gather.
+ Allowed = XY_SEPARATION     Sort by group x,y separation.
+ Allowed = XY_POSITION       Sort by x,y position.
+ Allowed = XY_POS_INFO       Sort by x,y position with list.
+ Allowed = GAT_TIG_SEP       Sort by gather tig separation.
+ Allowed = XY_BIN_LOC        Sort by gather bin location.
+ Allowed = INDEX_2           INDEX_2 index the global sort index
+ Allowed = INDEX_3           INDEX_3 index the global sort index
+ Allowed = INDEX_4           INDEX_4 index the local sort index
+ Allowed = INDEX_5           INDEX_5 index the local sort index
+ Allowed = X_GATHER          X source position.
+ Allowed = Y_GATHER          Y source position.
+ Allowed = PATH_NAME         Trace file name.
+ 
+ If SORT_SELECT = XY_POSITION
+ FXPROJECT sorts info cards to obtain an optimal ordering for a partial
+ shot profile migration.
+ 
+ The order gathers in the following manner:
+ 
+ The   sorted gather list is initialized to no points.
+ The unsorted gather list is initialized to contain all gathers.
+ 
+ The following 2 steps are iterated upon, selecting groups of SORT_GROUP_SIZE
+ from the unsorted gather list to the sorted gather list.
+ 
+ Step 1
+ The gather closest to the average of the unsorted gather X,Y
+ locations is selected as the next point in the sorted gather
+ list for the current sort group.
+ 
+ Step 2
+ The unsorted gather list is searched for the gather that is furthest
+ from any gather in the current groups sorted gather list.  This gather is
+ is moved from the unsorted gather list to the sorted gather list and
+ the process repeated until SORT_GROUP_SIZE gathers have been sorted.
+ 
+ Steps 1 and 2 are repeated until all unsorted gathers have been sorted.
+ 
+ If SORT_SELECT = XY_SEPARATION
+ FXPROJECT sorts info cards to place together gathers that are within a
+ distanceof XY_SEPARATION from one another. This might be used in
+ conjunction with FXSORT to combine shots that are very close to
+ one another.
+ 
+ If SORT_SELECT = XY_BIN_LOC
+ FXPROJECT sorts info cards according to the gather location within
+ bins defined by X_TOT, X_INIT, X_LAST, X_INC and
+                 Y_TOT, Y_INIT, Y_LAST, Y_INC
+ The index_2 value is set to the sequential bin index with
+ potential values from 1 to X_TOT*Y_TOT
+ The index_3 value is set to the sequential index of gathers within bins.
+ You can then sort on INDEX_3 to get all the first gathers in each bin
+ sorted together followed by all the second gathers and so on.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_SORT">
+      <Tip>Select the sort to execute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_SORT<br> Select the sort to execute.</center></b>
+<pre> Default = NONE
+ Allowed = NONE             Do nothing.
+ Allowed = CURRENT_ORDER    Sort by current order.
+ any of the values alloed for SORT_SELECT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_EXECUTE">
+      <Tip>Press button to select subcomponents of the fxinfo file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - KEEP_EXECUTE<br> Press button to select subcomponents of the fxinfo file.</center></b>
+<pre> When the KEEP_EXECUTE button is pressed
+ the selected selection process will be executed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_SELECT">
+      <Tip>Select the keep to execute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - KEEP_SELECT<br> Select the keep to execute.</center></b>
+<pre> Default = NONE
+ Allowed = NONE              Do nothing.
+ Allowed = INDEX_2           INDEX_2 index the global sort index
+ Allowed = INDEX_3           INDEX_3 index the global sort index
+ Allowed = INDEX_4           INDEX_4 index the local sort index
+ Allowed = INDEX_5           INDEX_5 index the local sort index
+ Allowed = X_GATHER          X source position.
+ Allowed = Y_GATHER          Y source position.
+ Allowed = TRACES_IN_GATHER  num of traces in the shot.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_KEEP">
+      <Tip>Select the info sort type.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_KEEP<br> Select the info sort type.</center></b>
+<pre> Default = NONE
+ Allowed = NONE              Do nothing.
+ Allowed = INDEX_2           INDEX_2 index the global sort index
+ Allowed = INDEX_3           INDEX_3 index the global sort index
+ Allowed = INDEX_4           INDEX_4 index the local sort index
+ Allowed = INDEX_5           INDEX_5 index the local sort index
+ Allowed = X_GATHER          X source position.
+ Allowed = Y_GATHER          Y source position.
+ Allowed = TRACES_IN_GATHER  num of traces in the shot.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SORT_GROUP_SIZE">
+      <Tip>Sort group size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - SORT_GROUP_SIZE<br> Sort group size.</center></b>
+<pre> Default = 2000
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XY_SEPARATION">
+      <Tip>SORT SEPARATION VALUE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - XY_SEPARATION<br> SORT SEPARATION VALUE.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_GATHERS">
+      <Tip>Bin gathers flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - BIN_GATHERS<br> Bin gathers flag.</center></b>
+<pre> Default = YES
+ Allowed = YES,NO
+ If BIN_GATHERS=YES FXINFO will bin gathers when doing xy sep sort.
+ If BIN_GATHERS=NO  FXINFO will not bin gathers when doing xy sep sort.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_MIN">
+      <Tip>Min keep value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - KEEP_MIN<br> Min keep value.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_MAX">
+      <Tip>MAX keep value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - KEEP_MAX<br> MAX keep value.</center></b>
+<pre> Default = 999999
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_SKIP">
+      <Tip>num of gathers to skip between groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - KEEP_SKIP<br> num of gathers to skip between groups.</center></b>
+<pre> Default = 999999999
+ Allowed = int&gt;=0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_BIN">
+      <Tip>Bin X,Y keep value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - KEEP_BIN<br> Bin X,Y keep value.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If KEEP_BIN=YES FXINFO will bin gather X,Y values during keep.
+ If KEEP_BIN=NO  FXINFO will not bin gather X,Y vlaues during keep.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_KEEP_MIN">
+      <Tip>Min info keep value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_KEEP_MIN<br> Min info keep value.</center></b>
+<pre> Default = 0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_KEEP_MAX">
+      <Tip>MAX info keep value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_KEEP_MAX<br> MAX info keep value.</center></b>
+<pre> Default = 999999
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_KEEP_SKIP">
+      <Tip>num of gathers to skip between info groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_KEEP_SKIP<br> num of gathers to skip between info groups.</center></b>
+<pre> Default = 999999999
+ Allowed = int&gt;=0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_KEEP_BIN">
+      <Tip>Bin X,Y keep value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - INFO_KEEP_BIN<br> Bin X,Y keep value.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If INFO_KEEP_BIN=YES FXINFO will bin gather X,Y values during keep.
+ If INFO_KEEP_BIN=NO  FXINFO will not bin gather X,Y vlaues during keep.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Number of image locations to migrate data to in the INL direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - X_TOT<br> Number of image locations to migrate data to in the INL direction.</center></b>
+<pre> Default = 101
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>First INL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - X_INIT<br> First INL image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by HDR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Last INL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - X_LAST<br> Last INL image location to migrate data to.</center></b>
+<pre> Default = 100
+ Allowed = real
+ Units are determined by HDR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>INL image location spacing to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - X_INC<br> INL image location spacing to migrate data to.</center></b>
+<pre> Default = 1
+ Allowed = real
+ Units are determined by HDR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Number of image locations to migrate data to in the CRL direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - Y_TOT<br> Number of image locations to migrate data to in the CRL direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>First CRL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - Y_INIT<br> First CRL image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by HDR_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Last CRL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - Y_LAST<br> Last CRL image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by HDR_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>CRL image location spacing to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - Y_INC<br> CRL image location spacing to migrate data to.</center></b>
+<pre> Default = 1
+ Allowed = real
+ Units are determined by HDR_Y.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN4" title="PLOT" rows="24" columns="80">
+    <Button keyword="PLOT_INFO_4">PLOT_INFO_4</Button>
+    <Label keyword="LABEL_PLOT_SELECT" alignment="left">PLOT_SELECT=</Label>
+    <Field keyword="PLOT_SELECT" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PLOT_FILE" alignment="left">PLOT_FILE =</Label>
+    <Field keyword="PLOT_FILE" type="string" maxLength="81" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PLOT_TITLE" alignment="left">PLOT_TITLE=</Label>
+    <Field keyword="PLOT_TITLE" type="string" maxLength="81" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_POINT_SIZE" alignment="left">POINT_SIZE=</Label>
+    <Field keyword="POINT_SIZE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_X_PLOT" alignment="left">MIN_X_PLOT=</Label>
+    <Field keyword="MIN_X_PLOT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_X_PLOT" alignment="left">MAX_X_PLOT=</Label>
+    <Field keyword="MAX_X_PLOT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MIN_Y_PLOT" alignment="left">MIN_Y_PLOT=</Label>
+    <Field keyword="MIN_Y_PLOT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_Y_PLOT" alignment="left">MAX_Y_PLOT=</Label>
+    <Field keyword="MAX_Y_PLOT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="MIN_X_BOX_ARRAYSET" label="MIN_X_BOX      MAX_X_BOX       MIN_Y_BOX       MAX_Y_BOX">
+     <Array keyword="MIN_X_BOX" type="float" maxLength="15 " columnName="MIN_X_BOX" editable="yes" sensitive="yes" columnSize="15"/>
+     <Array keyword="MAX_X_BOX" type="float" maxLength="16 " columnName="MAX_X_BOX" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="MIN_Y_BOX" type="float" maxLength="16 " columnName="MIN_Y_BOX" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="MAX_Y_BOX" type="float" maxLength="16 " columnName="MAX_Y_BOX" editable="yes" sensitive="yes" columnSize="16"/>
+    </ArraySet>
+    <Label keyword="LABEL_GATHER_INIT" alignment="left">GATHER_INIT=</Label>
+    <Field keyword="GATHER_INIT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GATHER_LAST" alignment="left">GATHER_LAST=</Label>
+    <Field keyword="GATHER_LAST" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GATHER_SKIP" alignment="left">GATHER_SKIP=</Label>
+    <Field keyword="GATHER_SKIP" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_INIT" alignment="left">LINE_INIT  =</Label>
+    <Field keyword="LINE_INIT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_LAST" alignment="left">LINE_LAST  =</Label>
+    <Field keyword="LINE_LAST" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_SKIP" alignment="left">LINE_SKIP  =</Label>
+    <Field keyword="LINE_SKIP" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GATHER_INDEX" alignment="left">GATHER_INDEX=</Label>
+    <Field keyword="GATHER_INDEX" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_OUTPUT">Select PATH_OUTPUT</Button>
+    <Label keyword="EQLAB_PATH_OUTPUT" alignment="left">=</Label>
+    <Field keyword="PATH_OUTPUT" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="PLOT_INFO_4" xPos="1" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PLOT_SELECT" xPos="15" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLOT_SELECT" xPos="27" yPos="1" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PLOT_FILE" xPos="1" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLOT_FILE" xPos="12" yPos="3" xSize="81" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PLOT_TITLE" xPos="1" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PLOT_TITLE" xPos="12" yPos="4" xSize="81" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_POINT_SIZE" xPos="1" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="POINT_SIZE" xPos="12" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_X_PLOT" xPos="1" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_X_PLOT" xPos="12" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_X_PLOT" xPos="28" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_X_PLOT" xPos="39" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MIN_Y_PLOT" xPos="1" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_Y_PLOT" xPos="12" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_Y_PLOT" xPos="28" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_Y_PLOT" xPos="39" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MIN_X_BOX_ARRAYSET" xPos="1" yPos="8" xSize="66" ySize="4" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_GATHER_INIT" xPos="1" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GATHER_INIT" xPos="13" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHER_LAST" xPos="27" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GATHER_LAST" xPos="39" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHER_SKIP" xPos="52" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GATHER_SKIP" xPos="64" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INIT" xPos="1" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INIT" xPos="13" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_LAST" xPos="27" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_LAST" xPos="39" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_SKIP" xPos="52" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_SKIP" xPos="64" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GATHER_INDEX" xPos="1" yPos="15" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GATHER_INDEX" xPos="14" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_OUTPUT" xPos="1" yPos="16" xSize="19" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_OUTPUT" xPos="20" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_OUTPUT" xPos="21" yPos="16" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PLOT_INFO_4">
+      <Tip>Press button to plot info.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PLOT_INFO_4<br> Press button to plot info.</center></b>
+<pre> When the PLOT_INFO_4 button is pressed the info will be plotted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT_SELECT">
+      <Tip>Select the plot type execute.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PLOT_SELECT<br> Select the plot type execute.</center></b>
+<pre> Default = NONE
+ Allowed = NONE            Do nothing.
+ Allowed = XY_GAT          Gather x,y locations.
+ Allowed = XY_BOX          Gather x,y boxs include tig locations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT_FILE">
+      <Tip>INFO plot file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PLOT_FILE<br> INFO plot file name.</center></b>
+<pre> Default = fxproject info plot file name
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT_TITLE">
+      <Tip>INFO plot title.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PLOT_TITLE<br> INFO plot title.</center></b>
+<pre> Default = fxproject info plot
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POINT_SIZE">
+      <Tip>INFO plot point size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - POINT_SIZE<br> INFO plot point size.</center></b>
+<pre> Default = .25
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_X_PLOT">
+      <Tip>INFO plot min X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_X_PLOT<br> INFO plot min X.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_X_PLOT">
+      <Tip>INFO plot max X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_X_PLOT<br> INFO plot max X.</center></b>
+<pre> Default = 1.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_Y_PLOT">
+      <Tip>INFO plot min Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_Y_PLOT<br> INFO plot min Y.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_Y_PLOT">
+      <Tip>INFO plot max Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_Y_PLOT<br> INFO plot max Y.</center></b>
+<pre> Default = 1.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_X_BOX">
+      <Tip>INFO plot box min X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_X_BOX<br> INFO plot box min X.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_X_BOX">
+      <Tip>INFO plot box max X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_X_BOX<br> INFO plot box max X.</center></b>
+<pre> Default = 1.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MIN_Y_BOX">
+      <Tip>INFO plot box min Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MIN_Y_BOX<br> INFO plot box min Y.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_Y_BOX">
+      <Tip>INFO plot box max Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - MAX_Y_BOX<br> INFO plot box max Y.</center></b>
+<pre> Default = 1.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_INIT">
+      <Tip>Min gather to plot total.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GATHER_INIT<br> Min gather to plot total.</center></b>
+<pre> Default = 1
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_LAST">
+      <Tip>Max gather to plot total.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GATHER_LAST<br> Max gather to plot total.</center></b>
+<pre> Default = 999999
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_SKIP">
+      <Tip>Skip gather to plot total.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GATHER_SKIP<br> Skip gather to plot total.</center></b>
+<pre> Default = 0
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INIT">
+      <Tip>First line for to apply task to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_INIT<br> First line for to apply task to.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_LAST">
+      <Tip>Last line for to apply task to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_LAST<br> Last line for to apply task to.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_SKIP">
+      <Tip>num of lines to skip between task applications.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - LINE_SKIP<br> num of lines to skip between task applications.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GATHER_INDEX">
+      <Tip>Maximum hsot index for output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - GATHER_INDEX<br> Maximum hsot index for output.</center></b>
+<pre> Default = 999999
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_OUTPUT">
+      <Tip>Select the auxiliary output file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - SELECT_PATH_OUTPUT<br> Select the auxiliary output file name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_OUTPUT">
+      <Tip>The auxiliary output file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PATH_OUTPUT<br> The auxiliary output file name.</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ This file is used for some auxiliary output
+ such as a list of gather x,y locations.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxproject - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fxproject">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : fxproject    ( FX PROJECT )
+ Category   : Migrations
+ Written    : 2002-04-18   by: Douglas Hanson
+ Revised    : 2006-04-25   by: Ioan Vlad  Remove unused variables.
+ Maturity   : production
+ Purpose    : Monitor and manage fxshot projects.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+     Date       Author         Description
+     ----       ------         -----------
+ 30  2006-04-25 Ioan Vlad      Remove unused variables.
+ 29  2005-06-21 Douglas Hanson Add PATH_NAME sort.
+ 28  2005-05-31 Douglas Hanson Add BOX plots.
+ 27  2005-05-12 Douglas Hanson Add XY_BIN_LOC sort.
+ 26  2005-03-24 Douglas Hanson Use plot2d.
+ 25  2005-01-31 Douglas Hanson Add SORT_GROUP_SIZE.
+ 24  2004-10-05 Douglas Hanson Fix string keep.
+ 23  2004-09-30 Douglas Hanson Add index keep, sort.
+ 22  2004-09-14 R.S.Day        Promoted to beta.
+ 21  2004-08-26 Douglas Hanson Add plot controls.
+ 20  2004-08-19 Douglas Hanson Use gather syntax.
+ 19  2004-08-10 Douglas Hanson Add xy_separation sort.
+ 18  2004-06-24 Douglas Hanson Improve card io.
+ 17  2004-04-22 Douglas Hanson Notation changes
+ 16  2004-01-21 Douglas Hanson New fxpar_create call.
+ 15  2002-10-21 Douglas Hanson Add subtract_info task.
+ 14  2002-10-17 Douglas Hanson Add plot_info task.
+ 13  2002-10-03 Douglas Hanson Add put_gather_info task.
+ 12  2002-10-01 Douglas Hanson Add combine info task.
+ 11  2002-09-26 Douglas Hanson Standardize pointer nulls.
+ 10  2002-09-24 Douglas Hanson Add traces_in_gather sort.
+  9  2002-09-20 Douglas Hanson Use new info structure.
+     2002-08-08 Douglas Hanson Add RECEIVER_GATHER.
+     2002-07-30 Douglas Hanson Add UPDATE_INFO option.
+  8  2002-07-22 Douglas Hanson Save sort and keep in fxinfo.
+  7  2002-07-18 Douglas Hanson Add keep function.
+  6  2002-07-12 Douglas Hanson Add sorting.
+  5  2002-05-29 Faqi Liu       Fix EZGUI warning
+  4  2002-05-22 Faqi Liu       Fix EZGUI warning
+  3  2002-05-21 Douglas Hanson Add min max info.
+  2  2002-05-09 Douglas Hanson Add INFO page.
+  1  2002-04-18 Douglas Hanson Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

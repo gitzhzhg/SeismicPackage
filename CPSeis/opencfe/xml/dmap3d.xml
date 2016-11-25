@@ -1,0 +1,656 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="dmap3d" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="DMAP3DPROCESS" title="DMAP3D Process" rows="24" columns="80">
+    <Label keyword="COMMENT_DATAMAPPINGIN3D" alignment="center">Data Mapping in 3D</Label>
+    <Label keyword="COMMENT_OUTPUTGEOMETRYSPECIFICAT" alignment="center">--- Output Geometry Specification ---</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_OUT_OFFSET" alignment="left">OUT_OFFSET=</Label>
+    <Field keyword="OUT_OFFSET" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OUT_AZIMUTH" alignment="left">OUT_AZIMUTH=</Label>
+    <Field keyword="OUT_AZIMUTH" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCALE_RMS" alignment="left">SCALE_RMS =</Label>
+    <Field keyword="SCALE_RMS" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_INC" alignment="left">WIN_INC    =</Label>
+    <Field keyword="WIN_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_E1INI" alignment="left">E1INI  =</Label>
+    <Field keyword="E1INI" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_E2INI" alignment="left">E2INI  =</Label>
+    <Field keyword="E2INI" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DE1" alignment="left">DE1    =</Label>
+    <Field keyword="DE1" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DE2" alignment="left">DE2    =</Label>
+    <Field keyword="DE2" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_E1_LAST" alignment="left">E1_LAST=</Label>
+    <Field keyword="E1_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_E2_LAST" alignment="left">E2_LAST=</Label>
+    <Field keyword="E2_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NE1" alignment="left">NE1    =</Label>
+    <Field keyword="NE1" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NE2" alignment="left">NE2    =</Label>
+    <Field keyword="NE2" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ALGORITHMCONTROLS" alignment="center">--- Algorithm Controls ---</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_VEL" alignment="left">VEL   =</Label>
+    <Field keyword="VEL" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MNTOD" alignment="left">MNTOD=</Label>
+    <Field keyword="MNTOD" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NTIM" alignment="left">NTIM =</Label>
+    <Field keyword="NTIM" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NNMAX" alignment="left">NNMAX=</Label>
+    <Field keyword="NNMAX" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TTRMAX" alignment="left">TTRMAX=</Label>
+    <Field keyword="TTRMAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LFMAX" alignment="left">LFMAX=</Label>
+    <Field keyword="LFMAX" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AFMAX" alignment="left">AFMAX=</Label>
+    <Field keyword="AFMAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VCMAX" alignment="left">VCMAX=</Label>
+    <Field keyword="VCMAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TPRANG" alignment="left">TPRANG=</Label>
+    <Field keyword="TPRANG" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ITMIN" alignment="left">ITMIN=</Label>
+    <Field keyword="ITMIN" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NSUBT" alignment="left">NSUBT=</Label>
+    <Field keyword="NSUBT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HMIN" alignment="left">HMIN =</Label>
+    <Field keyword="HMIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DATAMAPPINGIN3D" xPos="29" yPos="0" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUTGEOMETRYSPECIFICAT" xPos="19" yPos="3" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="2" yPos="4" xSize="75" ySize="11"/>
+     <Constraints component="LABEL_OUT_OFFSET" xPos="4" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUT_OFFSET" xPos="15" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OUT_AZIMUTH" xPos="28" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUT_AZIMUTH" xPos="40" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCALE_RMS" xPos="4" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCALE_RMS" xPos="15" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_INC" xPos="28" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_INC" xPos="40" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_E1INI" xPos="4" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="E1INI" xPos="12" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_E2INI" xPos="24" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="E2INI" xPos="32" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DE1" xPos="4" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DE1" xPos="12" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DE2" xPos="24" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DE2" xPos="32" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_E1_LAST" xPos="4" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="E1_LAST" xPos="12" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_E2_LAST" xPos="24" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="E2_LAST" xPos="32" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NE1" xPos="4" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NE1" xPos="12" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NE2" xPos="24" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NE2" xPos="32" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ALGORITHMCONTROLS" xPos="27" yPos="16" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="2" yPos="17" xSize="75" ySize="5"/>
+     <Constraints component="LABEL_VEL" xPos="4" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL" xPos="11" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MNTOD" xPos="23" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MNTOD" xPos="29" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NTIM" xPos="41" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NTIM" xPos="47" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NNMAX" xPos="59" yPos="18" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NNMAX" xPos="65" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TTRMAX" xPos="4" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TTRMAX" xPos="11" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LFMAX" xPos="23" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LFMAX" xPos="29" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AFMAX" xPos="41" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AFMAX" xPos="47" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VCMAX" xPos="59" yPos="19" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VCMAX" xPos="65" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TPRANG" xPos="4" yPos="20" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TPRANG" xPos="11" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ITMIN" xPos="23" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ITMIN" xPos="29" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NSUBT" xPos="41" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NSUBT" xPos="47" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HMIN" xPos="59" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HMIN" xPos="65" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OUT_OFFSET">
+      <Tip>Output offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - OUT_OFFSET<br> Output offset.</center></b>
+<pre> Default = 0.
+ Allowed = real &gt;= 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OUT_AZIMUTH">
+      <Tip>Output AZIMUTH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - OUT_AZIMUTH<br> Output AZIMUTH.</center></b>
+<pre> Default = 0.
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCALE_RMS">
+      <Tip>Apply RMS gain factor to the output trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - SCALE_RMS<br> Apply RMS gain factor to the output trace.</center></b>
+<pre> Default = NO
+ Allowed = CONSTANT (A constant gain for the entire output trace)
+ Allowed = VARYING  (Time-varying gains for the output trace)
+ 
+ A gain factor is computed from the median of all input traces
+ (RMS amplitudes within a window or entire trace) that contribute
+ to a output trace</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_INC">
+      <Tip>Time increment for time-varying gain window, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - WIN_INC<br> Time increment for time-varying gain window, in seconds.</center></b>
+<pre>  Default = WIN_LEN
+  Allowed = real&gt;=DT
+  Time increment for time-varying gain window, in seconds.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="E1INI">
+      <Tip>First output x-coordinate gather element location (Header 7).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - E1INI<br> First output x-coordinate gather element location (Header 7).</center></b>
+<pre> Default = 1.
+ Allowed = real
+ 
+First of two (x,y) coordinates.
+For common offset gathers, E1ini is the first midpoint to output</pre></head></html>]]></Text>
+     </Help>
+     <Help component="E2INI">
+      <Tip>First output y-coordinate gather element location (Header 8).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - E2INI<br> First output y-coordinate gather element location (Header 8).</center></b>
+<pre> Default = 1.
+ Allowed = real
+ 
+Second of two (x,y) coordinates.
+For common offset gathers, E2ini is the first midpoint to output</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DE1">
+      <Tip>Distance between output gather elements (traces) in direction 1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - DE1<br> Distance between output gather elements (traces) in direction 1.</center></b>
+<pre> Default = 1.
+ Allowed = real
+ 
+ On output, E1 = E1ini + DE1 * (ie - 1), ie = 1,...,NE1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DE2">
+      <Tip>Distance between output gather elements (traces) in direction 2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - DE2<br> Distance between output gather elements (traces) in direction 2.</center></b>
+<pre> Default = 1.
+ Allowed = real
+ 
+ On output, E2 = E2ini + DE2 * (ie - 1), ie = 1,...,NE2</pre></head></html>]]></Text>
+     </Help>
+     <Help component="E1_LAST">
+      <Tip>Last value of elements (traces) per output gather in direction 1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - E1_LAST<br> Last value of elements (traces) per output gather in direction 1.</center></b>
+<pre> Default = 1
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="E2_LAST">
+      <Tip>Last value of elements (traces) per output gather in direction 2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - E2_LAST<br> Last value of elements (traces) per output gather in direction 2.</center></b>
+<pre> Default = 1
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NE1">
+      <Tip>Number of elements (traces) per output gather in direction 1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - NE1<br> Number of elements (traces) per output gather in direction 1.</center></b>
+<pre> Default = 1
+ Allowed = Pos Int
+ 
+ On output, E1 = E1ini + DE1 * (ie - 1), ie = 1,...,NE1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NE2">
+      <Tip>Number of elements (traces) per output gather in direction 2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - NE2<br> Number of elements (traces) per output gather in direction 2.</center></b>
+<pre> Default = 1
+ Allowed = Pos Int
+ 
+ On output, E2 = E2ini + DE2 * (ie - 1), ie = 1,...,NE2</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL">
+      <Tip>Rms Velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - VEL<br> Rms Velocity.</center></b>
+<pre> Default = 5000.
+ Allowed = pos real
+ 
+ Even though data mapping is "velocity independent", velocity is in fact
+ needed to determine the physical limits of the gathering operation.
+ VEL should really be an array, but for now its just a constant.
+ 
+ VEL should have units of feet or meters per second, according the the
+ surveyed coordinates units.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MNTOD">
+      <Tip>Maximum number of input traces on disk within a subcube.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - MNTOD<br> Maximum number of input traces on disk within a subcube.</center></b>
+<pre> Default = 20000
+ Allowed = Pos Int
+ 
+ All the input traces which contribute to an output subcube must be
+ included. MNTOD should be set large enough to include all traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NTIM">
+      <Tip>Number of Traces In Memory.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - NTIM<br> Number of Traces In Memory.</center></b>
+<pre> Default = 10000
+ Allowed = int &gt; 0
+ Generally NTIM should be set large enough so that disk swapping is minimized,
+ but small enough to avoid restrictions on memory availability or cost.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NNMAX">
+      <Tip>Maximum number of neighbors per input trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - NNMAX<br> Maximum number of neighbors per input trace.</center></b>
+<pre> Default = 12
+ Allowed = Pos Int &gt;= 9
+ 
+ DMAP3D allocates an area to each input trace by finding it's natural neighbors
+ and forming a polygon from the perpendicular bisectors of the line to each
+ neighbor.  NNMAX is the maximum number of neighbors per input trace to store
+ in memory. For a regular 2D grid, NNMAX = 8 would do.  For irregular
+ geometries, a given trace could have many neighbors.  Limiting NNMAX too
+ small could cause the area allocated to a trace to be underestimated, which
+ in turn can affect output amplitudes.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TTRMAX">
+      <Tip>Maximum allowed traveltime ratio between input and output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - TTRMAX<br> Maximum allowed traveltime ratio between input and output traces.</center></b>
+<pre> Default = 3.
+ Allowed = &gt;= 1.
+ 
+ Puts an upper limit on the traveltime ratio, which is similar to a doppler
+ mute in NMO.  Making this too small could affect the fidelity of the output
+ especially at small times.  If too large, the program will do unnecessary
+ computation and could run into some numerical difficulties which might
+ affect quality.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LFMAX">
+      <Tip>Maximum inverse filter size.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - LFMAX<br> Maximum inverse filter size.</center></b>
+<pre> Default = 50
+ Allowed = Pos Int
+ 
+ Best not messed with.  Size of array to hold inverse filter.  The larger
+ the inverse filter, the longer it will take the program to apply it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AFMAX">
+      <Tip>Max allowed Amplitude ratio between input and reference traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - AFMAX<br> Max allowed Amplitude ratio between input and reference traces.</center></b>
+<pre> Default = 10000.
+ Allowed = &gt;= 1.
+ 
+ The amplitude ratio is one at normal incidence, and increases with angle of
+ incidence.  It can get very large at the edge of the mapping aperture.  For
+ infinitely dense sampling, that wouldn't matter, but it can lead to problems
+ in practice.  The reference trace is taken from the center of the output
+ grid and the amplitue of the output reference trace is the median mapping
+ amplitude of all traces contributing to this reference output trace.
+ This can be used to despike the amplitudes of the output data.
+ This parameter sets a limit on the ratio.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VCMAX">
+      <Tip>Maximum Voronoi Cell size relative to average spacings.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - VCMAX<br> Maximum Voronoi Cell size relative to average spacings.</center></b>
+<pre> Default = 5.
+ Allowed &gt;= 1.
+ 
+ DMAP3D allocates an area to each input trace by finding it's natural neighbors
+ and forming a polygon from the perpendicular bisectors of the line to each
+ neighbor.  This polygon is called a "Voronoi cell".  In sparsely sampled
+ regions or on the data boundary, the polygon may become large, or even
+ unclosed.  VCMAX sets the maximum size of a Voronoi cell relative to average
+ distances between neighbors.  Cells larger than this are truncated by adding
+ a "virtual neighbor" to the input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TPRANG">
+      <Tip>Puts a taper at the edge of the physical aperture.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - TPRANG<br> Puts a taper at the edge of the physical aperture.</center></b>
+<pre> Default = 60.
+ Allowed = pos real &lt; 90.
+ 
+ Angle of incidence at which to start tapering the input.  As with AFMAX,
+ this helps keep things reasonable at the edge of the physical aperture.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ITMIN">
+      <Tip>Minimum time sample to worry about.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - ITMIN<br> Minimum time sample to worry about.</center></b>
+<pre> Default = 10
+ Allowed = pos int &lt;= NDPT
+ 
+ It is most difficult to maintain good numerical quality at small times.
+ By making ITMIN larger, computation time is reduced.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NSUBT">
+      <Tip>Maximum number of subintervals to stack.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - NSUBT<br> Maximum number of subintervals to stack.</center></b>
+<pre> Default = 25
+ Allowed = pos int &gt;= 1
+ 
+ Every input trace represents a range of input values based on distance to
+ nearest neighbors. If the program decides to subdivide a trace interval
+ (effectively duplicating an input trace) it starts building a stack of
+ subintervals until it is satisfied with sampling accuracy in each.  NSUBT
+ is the maximum number of subintervals allowed in the stack, and places
+ a limit on the exuberance of the subdividing algorithm.  A smaller number
+ might in some instances reduce cost, while too small a number will reduce
+ accuracy.  Normally, the default should be fine.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HMIN">
+      <Tip>Minimum offset for offset mapping.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - HMIN<br> Minimum offset for offset mapping.</center></b>
+<pre> Default = max( X_GRID_DIST, Y_GRID_DIST)
+ Allowed = real &gt; 0
+ 
+ Minimum offset is used to prevent numerical stability in the mapping.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>dmap3d - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="dmap3d">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                          C P S   P R O C E S S
+ 
+ Name       : DMAP3D    Data Mapping in 3D
+ Category   : migrations
+ Written    : 1999-09-08   by: Bob Stolt
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Data Mapping of 3-D data.
+ Portability: No known limitations.
+ Parallel   : YES
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           GENERAL DESCRIPTION
+ 
+ DMAP3D is a generalized 3D data mapping algorithm that creates new data
+ gathers from old.  Data from one or more input trace gathers are mapped to
+ one or more output trace gathers where both input and output gathers are
+ two-dimensional arrays of traces extensive in the inline and the crossline
+ directions.
+ 
+ This program operates with a shift-sum operation similar to a DMO or
+ Kirchhoff prestack migration.  However, while most Conoco programs scatter
+ data from each input trace to all output traces, this program gathers data
+ from all input traces to each output trace.  Though theoretically equivalent,
+ this way allows amplitude weighting of the input traces according to distance
+ to nearest neighbors.
+ 
+ Before an output trace can be made, all contributing input traces must be in
+ memory.  The amount of memory allocated to the input traces is specified by
+ the user.
+ 
+ Data mapping algorithms tend to lose fidelity at small times and small offset
+ changes.  This algorithm incorporates some measures to maintain robustness
+ under most circumstances, and provides the user with some control over the
+ process.  The design philosophy is "do no evil" which, loosely interpreted,
+ means to preserve amplitude and waveform of flat events insofar as possible.
+ 
+ Data mapping may produce slightly different images depending on the number
+ of PE used in the job. The differences are mainly due to minor background
+ noise changes and do not change the signal continuity and usually limit
+ a few traces in the first three inlines
+ 
+ Input Modes
+ 
+ DMAP3D can operate in three input modes: common source, common receiver and
+ common offset, where the input mode name indicates the type of input trace
+ gather expected.  Each mode maps information from the input trace gathers to
+ output trace gathers that are created by the process.  Common source mode
+ maps existing sources to new sources, common receiver mode maps existing
+ receivers to new receivers, common offset mode maps existing offsets to new
+ offsets.  (DMAP3D cannot map existing midpoints to new midpoints.)
+ 
+ 
+ Output Modes
+ 
+ Output from DMAP3D consists only of new traces created by the data mapping
+ operation.  There are three output modes: common source, common receiver and
+ common offset, where the output mode name indicates the type of output trace
+ gather.  (The output mode need not be the same as the input mode.)
+ 
+ 
+ Specifying Output Gathers
+ 
+ Users define the output gathers with four coordinates.  Output trace
+ locations are specified by the coordinates E1 and E2.  The locations of the
+ element defining the gathers (source, receiver or offset depending on the
+ output mode) are specified by the coordinates G1 and G2.  Details are shown
+ in the table.
+ 
+ 
+    |   Output Mode   |  G Coordinates   |       E Coordinates        |
+    |-----------------------------------------------------------------|
+    |Common Source    |Source location   |Receiver - Source distance  |
+    |Common Receiver  |Receiver location |Source - Receiver distance  |
+    |Common Offset    |Half-offset       |Midpoint location           |
+    ------------------------------------------------------------------|
+ 
+ For example, in common offset output mode, the G coordinates are the
+ x-component and the y-component of half-offset and the E coordinates are the
+ x-component and the y-component of individual trace midpoint location.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Of the three input modes (common source, common receiver and common offset)
+ common offset mode is likely to be somewhat better behaved than the others
+ because its operator has a less radical shape.
+ 
+ Even though the algorithm attempts to preserve amplitudes, it is likely that
+ output traces generated by the mapping operation will have amplitudes
+ noticably different from nearby input traces.  Consequently it will usually
+ be desirable to use DMAP3D to map the entire desired dataset rather than using
+ some raw original traces and some mapped traces.
+ 
+ All parameters pertaining to distance should have values with units of the
+ surveyed coordinates (feet or meters).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 14. 2006-12-04  D. Glover    Added NULLIFY statements for Intel compiler
+                              Removed Unused Variables
+ 13. 2005-10-10  Goodger      Change intent(out) to intent(inout) for
+                              absoft 9.0 compiler.
+ 12. 2005-01-31  S.Chiu       Change document and modify subdivision of
+                              output grid.
+ 11. 2002-10-25  S.Chiu       Change AFMAX default to 10000.
+ 10. 2002-10-22  S.Chiu       Add time-varying scale option.
+  9. 2002-08-16  S.Chiu       Add RMS scale option.
+  8. 2002-08-12  S.Chiu       Fix parallel IO problem.
+  7. 2002-07-17  S.Chiu       Fix the subdivision of output grid.
+  6. 2002-07-16  S.Chiu       Modified front-end interface and debugged.
+  5. 2001-10-26  Goodger      Rename labels beginning with if to get around
+                              intel compiler bug.
+  4. 2001-07-13  Stolt        General algorithm tuning and debugging
+  3. 2001-03-30  Stoeckley    Slight modifications to conform with template.
+  2. 2000-12-31  Madiba       Modifications to interface with front end
+  1. 1999-08-24  Bob Stolt    Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

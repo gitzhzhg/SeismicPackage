@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fxdecon" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FXDECONPROCESS" title="FXDECON Process" rows="24" columns="80">
+    <Label keyword="COMMENT_FXTRACEINTERPOLATIONFORR" alignment="center">F-X trace interpolation for regularly sampled traces.</Label>
+    <Label keyword="LABEL_HDR_LINE" alignment="left">HDR_LINE=</Label>
+    <Field keyword="HDR_LINE" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_PTS" alignment="left">NUM_PTS=</Label>
+    <Field keyword="NUM_PTS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TR" alignment="left">NUM_TR=</Label>
+    <Field keyword="NUM_TR" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG=</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END=</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_KEEP_LO_FREQ_DATA" alignment="left">KEEP_LO_FREQ_DATA =</Label>
+    <Field keyword="KEEP_LO_FREQ_DATA" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_FXTRACEINTERPOLATIONFORR" xPos="8" yPos="1" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_LINE" xPos="1" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LINE" xPos="11" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_PTS" xPos="25" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_PTS" xPos="34" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR" xPos="49" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR" xPos="57" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="11" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_BEG" xPos="24" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="34" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="47" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="57" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_KEEP_LO_FREQ_DATA" xPos="1" yPos="7" xSize="19" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="KEEP_LO_FREQ_DATA" xPos="20" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_LINE">
+      <Tip>Header word defining input lines or other trace panels.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - HDR_LINE<br> Header word defining input lines or other trace panels.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH
+ HDR_LINE should be a different whole number for each distinct input line or
+ other trace panel.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_PTS">
+      <Tip>Number of points for the filter design.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - NUM_PTS<br> Number of points for the filter design.</center></b>
+<pre> Default = 5
+ Allowed = odd int, 3 - 29
+ Number of points for the prediction filter design.  Normally NUM_PTS should
+ be in the range of 3 - 11.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR">
+      <Tip>Number of traces for the prediction filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - NUM_TR<br> Number of traces for the prediction filter.</center></b>
+<pre> Default = 21
+ Allowed = int &gt; 6 - 200
+ NUM_TR is normally 3 or 4 times NUM_PTS, and the minimum is
+ NUM_TR must be &gt; 2 times NUM_PTS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length, in seconds, of the local time window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - WIN_LEN<br> Length, in seconds, of the local time window.</center></b>
+<pre> Default = 0.6
+ Allowed = real &gt; 0.0
+ Each trace group is broken into overlapping time windows of length WIN_LEN
+ seconds for F-X filtering.  It is not usually necessary to change the default.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_BEG">
+      <Tip>Minimum frequency for the F-X filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - FREQ_BEG<br> Minimum frequency for the F-X filter.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>Maximum frequency for the F-X filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - FREQ_END<br> Maximum frequency for the F-X filter.</center></b>
+<pre> Default = Nyquist
+ Allowed = Nyquist &gt;= real &gt; FREQ_BEG</pre></head></html>]]></Text>
+     </Help>
+     <Help component="KEEP_LO_FREQ_DATA">
+      <Tip>Keep original data from frquency 0 to FREQ_BEG-FREQ_INC</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - KEEP_LO_FREQ_DATA<br> Keep original data from frquency 0 to FREQ_BEG-FREQ_INC</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If KEEP_LO_FREQ_DATA = YES, then no FXdecon noise attenuation applies
+ to data from frquency 0 to FREQ_BEG-FREQ_INC. This helps to keep
+ the low-frequency fault plane reflections.
+ FREQ_INC = Nyquist frequency /(length of the FFT/2+1)
+ If KEEP_LO_FREQ_DATA = NO, then FXdecon noise attenuation applies
+ to data from frquency 0 to FREQ_BEG-FREQ_INC.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxdecon - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fxdecon">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FXDECON    (F-X Decon coherence enhancement)
+ Category   : filters
+ Written    : 2000-11-29   by: Stephen Chiu
+ Revised    : 2006-01-03   by: Stephen Chiu
+ Maturity   : production
+ Purpose    : 2D coherence enhancement by the F-X Deconvolution method.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ FXDECON coherence enhancement is done separately for each time window for
+ each input trace.  Time windows overlap by 50%.
+ 
+ Each trace subset of NUM_TR traces is Fourier transformed over time to form
+ the F-X window.  Then each frequency slice is autocorrelated and prediction
+ filters are derived.  These filters are applied to the frequency slice
+ in forward and backward prediction and the outputs averaged to give an output
+ slice of prediction signal (output with noise removed). This process is
+ repeated for each frequency independently, and the processed volume is
+ inverse Fourier transformed to give the output trace time window.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ FXDECON is a 2D process only.  For 3D work use FXYDECON.
+ 
+ 
+ Noise Attenuation and Parameter Choice
+ 
+ Generally, fewer points in the filter design produce more noise attenuation
+ and worse data fidelity, while more points in the filter design produce less
+ noise attenuation and better data fidelity.
+ 
+ Fewer traces in the filter design produce less noise attenuation, while more
+ traces in the filter design produce more noise attenuation.  (Avoid setting
+ the number of traces so large that curved events become smeared by the
+ linear prediction filter.)
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+ 5.  2006-01-03  S.Chiu      Fix problem when autocorrelation is zero
+ 4.  2004-02-05  S.Chiu      Fix problem when the number of traces in a CMP
+                             gather is less than NUM_TR.
+ 3.  2002-05-07  S.Chiu      Add option of KEEP_LO_FREQ_DATA.
+ 2.  2001-04-02  S.Chiu      Change wrapped_up to skip_wrapup.
+ 1.  2000-11-29  S.Chiu      Initial version
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

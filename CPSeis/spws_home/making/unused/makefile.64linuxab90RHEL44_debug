@@ -1,0 +1,73 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##----------------------- 64linuxab90RHEL44_debug ------------------------##
+##----------------------- 64linuxab90RHEL44_debug ------------------------##
+##----------------------- 64linuxab90RHEL44_debug ------------------------##
+
+
+permitted_architectures = ix86-intel-linux
+permitted_hosts         = hoeplc07
+
+JAVA_HOME = /apps/geophysics/jdk1.6.0_amd64
+
+FC         = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE
+FC_NOBOUNDS = $(FC)
+FC_AB90EP  = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE
+FC_O1      = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE
+FC_FLOATIO = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE
+FC_INTERPOLATE = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE
+FC_KMIG    = ab6490_f90 -c -en -g  -fpic -YDEALLOC=MINE
+FC_PPIO    = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+###  ppio_includes = -I$(SPSDIR)/lam-6.5.6.rhel36/include/cps
+ppio_includes = -I$(SPSDIR)/lam-6.5.6.rhel36/include
+
+FC_UNDER   = ab6490_f90 -c -en -g  -fpic -m64 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+FC_LINK    = ab6490_f90
+
+CC         = gcc -c -g -Wall -fpic -m64 -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = gcc -c -g -Wall -fpic -m64 -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = g++ -c -g -Wall -fpic -m64 -DLINUX -DLINUXA -fpic -D_REENTRANT \
+                                                -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+CC_LINK    = gcc
+
+CXX        = g++ -c     -Wall -DLINUX -DLINUXA -fpic  -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = g++ -c     -Wall -DLINUX -DLINUXA -fpic  -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+CXX_LINK   = g++
+CXX_DEPEND = g++ -MM          -DLINUX -DLINUXA -fpic -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared 
+
+MODEXT     = .mod
+MODFLAG    = -p
+
+FOR_LIBS   = /usr/lib64/libstdc++.so.5 \
+             -L/apps/compilers/absoft/ProFortran90/lib64 \
+              -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+
+GUI_LIBS   = /usr/X11R6/lib64/libXm.a \
+             /usr/X11R6/lib64/libXmu.a \
+             /usr/X11R6/lib64/libXp.a \
+             /usr/X11R6/lib64/libXext.a \
+             /usr/X11R6/lib64/libXt.a \
+             /usr/X11R6/lib64/libSM.a \
+             /usr/X11R6/lib64/libICE.a \
+             /usr/X11R6/lib64/libX11.a
+
+MATH_LIBS  = -lm -lpthread  
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/amd64 -L$(JAVA_HOME)/jre/lib/amd64/server \
+            -ljava -ljvm -lverify
+
+INCDIRS += /usr/include $(JAVA_HOME)/include $(JAVA_HOME)/include/linux \
+           /usr/include /usr/X11R6/include
+
+MAKE_ICPS = icps

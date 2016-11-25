@@ -1,0 +1,131 @@
+CPSEIS_HOME = /home/mengewm/workspace/cpseis
+SRCDIR = $(CPSEIS_HOME)/src/test
+LIBDIR = $(CPSEIS_HOME)/lib/linux64
+BINDIR = $(CPSEIS_HOME)/src/test/bin
+MODDIR = $(CPSEIS_HOME)/src/test
+CC = icc
+
+TEST1	=	$(BINDIR)/trcio_test1
+TEST2	=	$(BINDIR)/trcio_test2
+TEST3	=	$(BINDIR)/trcio_test3
+TEST4	=	$(BINDIR)/trcio_test4
+TEST5	=	$(BINDIR)/trcio_test5
+TEST6	=	$(BINDIR)/trcio_test6
+TEST7	=	$(BINDIR)/trcio_test7
+TEST8	=	$(BINDIR)/trcio_test8
+TEST9	=	$(BINDIR)/trcio_test9
+TEST10  =   $(BINDIR)/trcio_test10
+TEST11  =   $(BINDIR)/trcio_test11
+TEST12  =   $(BINDIR)/trcio_test12
+TEST13  =   $(BINDIR)/trcio_test13
+TEST14  =   $(BINDIR)/trcio_test14
+TEST15  =   $(BINDIR)/trcio_test15
+TEST16  =   $(BINDIR)/trcio_test16
+TEST17  =   $(BINDIR)/trcio_test17
+TEST18  =   $(BINDIR)/trcio_test18
+TEST19  =   $(BINDIR)/trcio_test19
+TEST20  =   $(BINDIR)/trcio_test20
+TEST21  =   $(BINDIR)/trcio_test21
+TESTSEQENTIAL =  $(BINDIR)/trcio_test_sequential
+TESTRANDOM    =  $(BINDIR)/trcio_test_random
+TESTMTIO      =  $(BINDIR)/trcio_test_mtio
+IOTEST  =   $(BINDIR)/iotest
+
+STATIC_EXT = .a
+SHARED_EXT = .so
+#--------------- Here is where you need to modify the make file to point to your fft library.
+FFTW_LDFLAGS =  /d/geoprog/u/mengewm/fftw/linux64/lib -lfftw -lrfftw
+MPI_LDFLAGS = /d/geoprog/u/mengewm/mpich/intel64/lib -lmpich
+
+# For Intel 64 bit version 10.1.012 (latest version here)
+F90 = ifort
+CC  = gcc
+STATIC_LINKER = ifort -static -static-intel -static-libgcc
+SHARED_LINKER = ifort -shared
+F90_LINK_DIR = $(IFORT_LINK_DIR)
+#
+FFLAGS = -g -fPIC -CB -I.. -I.
+CFLAGS = -g -fPIC -DLINUXI -DNEED_UNDERSCORE -D_REENTRANT -D_FILE_OFFSET_BITS=64 -I.
+
+TESTOBJS = 	trcio_test1.o trcio_test2.o trcio_test7.o trcio_test8.o trcio_test9.o \
+			trcio_test10.o trcio_test11.o trcio_test12.o trcio_test13.o trcio_test14.o \
+			trcio_test15.o trcio_test20.o trcio_test21.o trcio_test_mtio.o trcio_test_random.o \
+			trcio_test_sequential.o iotest.o
+
+#Linker flags
+LDFLAGS = -nofor_main -L../lib -L$(FFTW_LDFLAGS) -L$(F90_LINK_DIR) -lm -lpthread -L$(MPI_LDFLAGS)
+
+STATIC_LIBCPS = $(LIBDIR)/libcps$(STATIC_EXT)
+SHARED_LIBCPS = $(LIBDIR)/libcps$(SHARED_EXT)
+
+STATIC_LIBCGM = $(LIBDIR)/libcgm$(STATIC_EXT)
+SHARED_LIBCGM = $(LIBDIR)/libcgm$(SHARED_EXT)
+
+INSTALL_DIR = $(BINDIR)
+
+all :	trcio_test1 trcio_test2 trcio_test7 trcio_test8 trcio_test9 trcio_test10 trcio_test11 \
+		trcio_test12 trcio_test13 trcio_test14 trcio_test15 trcio_test20 trcio_test21 \
+		trcio_test_mtio trcio_test_random trcio_test_sequential iotest
+
+clean : 
+	rm -f *.o $(MODDIR)/*.mod $(BINDIR)/*
+
+include $(CPSEIS_HOME)/etc/makefile_cpseis.depend
+
+objs : $(OBJS)
+
+trcio_test1 : trcio_test1.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST1) trcio_test1.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test2 : trcio_test2.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST2) trcio_test2.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test7 : trcio_test7.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST7) trcio_test7.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test8 : trcio_test8.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST8) trcio_test8.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test9 : trcio_test9.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST9) trcio_test9.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test10 : trcio_test10.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST10) trcio_test10.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test11 : trcio_test11.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST11) trcio_test11.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test12 : trcio_test12.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST12) trcio_test12.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test13 : trcio_test13.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST13) trcio_test13.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test14 : trcio_test14.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST14) trcio_test14.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test15 : trcio_test15.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST15) trcio_test15.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test20 : trcio_test20.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST20) trcio_test20.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test21 : trcio_test21.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TEST21) trcio_test21.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test_mtio : trcio_test_mtio.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TESTMTIO) trcio_test_mtio.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test_random : trcio_test_random.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TESTRANDOM) trcio_test_random.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+trcio_test_sequential : trcio_test_sequential.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(TESTSEQENTIAL) trcio_test_sequential.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+iotest : iotest.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(IOTEST) iotest.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+
+$(TESTOBJS) : %.o : %.f90
+	$(F90) -c -o $@ $(FFLAGS) $<
+

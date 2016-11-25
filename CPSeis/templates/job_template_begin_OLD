@@ -1,0 +1,85 @@
+#PBS -S /bin/sh
+#PBS -N JJJJJ
+#PBS -q QQQQQ
+#PBS -l nodes=NNNNN:QQQQQ:ppn=2
+#PBS -r n
+#PBS -p  0
+unalias -a
+ulimit -c unlimited
+ulimit -s unlimited
+umask 002
+PATH=$PATH:/opt/SUNWspro/bin:/usr/app/vendors/sps/bin/ix86-intel-linux:/usr/app/bin:/usr/local/bin:/usr/ucb
+export PATH
+cps_config_file=/usr/app/vendors/sps/etc/cps_config.dat
+export cps_config_file
+cps_config_file_alpha=/usr/app/vendors/sps/etc/cps_config_alpha.dat
+export cps_config_file_alpha
+cps_config_file_beta=/usr/app/vendors/sps/etc/cps_config_beta.dat
+export cps_config_file_beta
+MPIHOME=/apps/compilers/intel/ict/3.0/ia32/mpi/3.0
+export MPIHOME
+OWHOME=/appl/ow
+export OWHOME
+PBS_REQID=`echo $PBS_JOBID | awk '{split(\$1,arr,".");print arr[1]}'`
+export PBS_REQID
+NCPUS=CCCCC
+export NCPUS
+USERNAME=`whoami`
+export USERNAME
+PID=$$
+export PID
+DISKNODELIST=/usr/app/vendors/sps/etc/.cfebld_disknodes
+ISDISKNODE=`grep $HOSTNAME $DISKNODELIST | wc -l`
+if [ $ISDISKNODE -lt 1 ] ; then
+NDISKNODES=`cat $DISKNODELIST | (read oneline; echo $oneline)`
+export NDISKNODES
+NODEINDEX=`expr $PID % $NDISKNODES + 2`
+export NODEINDEX
+DISKNODE=`cat $DISKNODELIST | (n=0; while [ "$n" -lt $NODEINDEX ]; do read oneline; n=\`expr $n + 1\`; done; echo $oneline)`
+else
+DISKNODE=$HOSTNAME
+fi
+export DISKNODE
+TMPDIR=/btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID
+export TMPDIR
+RSHCOMPILE=/btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID/JJJJJ.compile
+export RSHCOMPILE
+if [ -d /btmp/$DISKNODE/batchtmp/UUUUU ] ; then
+mkdir /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID 1>online 2>&1
+chmod 755 /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID 1>online 2>&1
+else
+mkdir /btmp/$DISKNODE/batchtmp/UUUUU 1>online 2>&1
+mkdir /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID 1>online 2>&1
+chmod 755 /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID 1>online 2>&1
+fi
+cd /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID
+if [ -d $HOME/cpsjobs ] ; then
+if [ `uname` = "SunOS" ] ; then
+LFLAG=-h
+else
+LFLAG=-L
+fi
+export LFLAG
+if [ $LFLAG $HOME/cpsjobs/JJJJJ_$PBS_REQID ]; then
+rm  $HOME/cpsjobs/JJJJJ_$PBS_REQID
+fi
+ln -s /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID $HOME/cpsjobs/JJJJJ_$PBS_REQID
+else
+mkdir $HOME/cpsjobs
+ln -s /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID $HOME/cpsjobs/JJJJJ_$PBS_REQID
+fi
+echo 'UUUUU hololw04 PPPPP/' > _netinfo
+cat >bscript << '/EOS'
+cat > JJJJJ.f90 << '/EOF'
+!                           Start of CPS program JJJJJ
+!                       ********** COPYRIGHT NOTICE ************
+!                       CONFIDENTIAL AND PROPRIETARY INFORMATION
+!                                OF CONOCOPHILLIPS INC.
+!                            PROTECTED BY THE COPYRIGHT LAW
+!                                AS AN UNPUBLISHED WORK
+! 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!! GLOBAL DATA MODULE !!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! 
+      module program_global_data

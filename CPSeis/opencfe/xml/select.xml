@@ -1,0 +1,790 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="select" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SELECTPROCESS" title="SELECT Process" rows="29" columns="80">
+    <Label keyword="COMMENT_SELECTTRACESTOKILLDELETE" alignment="center">Select traces to kill, delete, etc.</Label>
+    <Label keyword="LABEL_ACTION" alignment="left">ACTION=</Label>
+    <Field keyword="ACTION" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_METHOD_A" alignment="left">METHOD_A=</Label>
+    <Field keyword="METHOD_A" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_METHOD_B" alignment="left">METHOD_B=</Label>
+    <Field keyword="METHOD_B" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEL_A" alignment="left">HDR_SEL_A=</Label>
+    <Field keyword="HDR_SEL_A" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEL_B" alignment="left">HDR_SEL_B=</Label>
+    <Field keyword="HDR_SEL_B" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="ENTRIES_A_ARRAYSET" label="ENTRIES_A   COMMENT_A">
+     <Array keyword="ENTRIES_A" type="float" maxLength="12 " columnName="ENTRIES_A" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="COMMENT_A" type="string" maxLength="20 " columnName="COMMENT_A" editable="no" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <ArraySet keyword="ENTRIES_B_ARRAYSET" label="ENTRIES_B   COMMENT_B">
+     <Array keyword="ENTRIES_B" type="float" maxLength="12 " columnName="ENTRIES_B" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="COMMENT_B" type="string" maxLength="20 " columnName="COMMENT_B" editable="no" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Label keyword="LABEL_COMPLEMENT_A" alignment="left">COMPLEMENT_A=</Label>
+    <Field keyword="COMPLEMENT_A" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMPLEMENT_B" alignment="left">COMPLEMENT_B=</Label>
+    <Field keyword="COMPLEMENT_B" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER3"/>
+    <Border keyword="BORDER4"/>
+    <Label keyword="LABEL_METHOD_C" alignment="left">METHOD_C=</Label>
+    <Field keyword="METHOD_C" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_METHOD_D" alignment="left">METHOD_D=</Label>
+    <Field keyword="METHOD_D" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEL_C" alignment="left">HDR_SEL_C=</Label>
+    <Field keyword="HDR_SEL_C" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEL_D" alignment="left">HDR_SEL_D=</Label>
+    <Field keyword="HDR_SEL_D" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="ENTRIES_C_ARRAYSET" label="ENTRIES_C   COMMENT_C">
+     <Array keyword="ENTRIES_C" type="float" maxLength="12 " columnName="ENTRIES_C" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="COMMENT_C" type="string" maxLength="20 " columnName="COMMENT_C" editable="no" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <ArraySet keyword="ENTRIES_D_ARRAYSET" label="ENTRIES_D   COMMENT_D">
+     <Array keyword="ENTRIES_D" type="float" maxLength="12 " columnName="ENTRIES_D" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="COMMENT_D" type="string" maxLength="20 " columnName="COMMENT_D" editable="no" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Label keyword="LABEL_COMPLEMENT_C" alignment="left">COMPLEMENT_C=</Label>
+    <Field keyword="COMPLEMENT_C" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMPLEMENT_D" alignment="left">COMPLEMENT_D=</Label>
+    <Field keyword="COMPLEMENT_D" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMBINE" alignment="left">COMBINE=</Label>
+    <Field keyword="COMBINE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SELECTTRACESTOKILLDELETE" xPos="10" yPos="1" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ACTION" xPos="6" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ACTION" xPos="13" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="29" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="38" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="3" yPos="5" xSize="27" ySize="10"/>
+     <Constraints component="BORDER2" xPos="33" yPos="5" xSize="27" ySize="10"/>
+     <Constraints component="LABEL_METHOD_A" xPos="4" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD_A" xPos="13" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_METHOD_B" xPos="34" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD_B" xPos="43" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SEL_A" xPos="4" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEL_A" xPos="14" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEL_B" xPos="34" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEL_B" xPos="44" yPos="7" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ENTRIES_A_ARRAYSET" xPos="4" yPos="8" xSize="25" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="ENTRIES_B_ARRAYSET" xPos="34" yPos="8" xSize="25" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_COMPLEMENT_A" xPos="4" yPos="13" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMPLEMENT_A" xPos="17" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_COMPLEMENT_B" xPos="34" yPos="13" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMPLEMENT_B" xPos="47" yPos="13" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER3" xPos="3" yPos="17" xSize="27" ySize="10"/>
+     <Constraints component="BORDER4" xPos="33" yPos="17" xSize="27" ySize="10"/>
+     <Constraints component="LABEL_METHOD_C" xPos="4" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD_C" xPos="13" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_METHOD_D" xPos="34" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD_D" xPos="43" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SEL_C" xPos="4" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEL_C" xPos="14" yPos="19" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEL_D" xPos="34" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEL_D" xPos="44" yPos="19" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ENTRIES_C_ARRAYSET" xPos="4" yPos="20" xSize="25" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="ENTRIES_D_ARRAYSET" xPos="34" yPos="20" xSize="25" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_COMPLEMENT_C" xPos="4" yPos="25" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMPLEMENT_C" xPos="17" yPos="25" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_COMPLEMENT_D" xPos="34" yPos="25" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMPLEMENT_D" xPos="47" yPos="25" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_COMBINE" xPos="5" yPos="28" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMBINE" xPos="13" yPos="28" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="ACTION">
+      <Tip>Action to take on selected traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - ACTION<br> Action to take on selected traces.</center></b>
+<pre> Default = SAVE
+ Allowed = SAVE    (Selected traces are saved.)
+ Allowed = DELETE  (Selected traces are deleted.)
+ Allowed = FLAG    (Selected traces are flagged.)
+ Allowed = KILL    (Selected traces are killed.)
+ Allowed = RP      (Selected traces are polarity reversed.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word to use for flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - HDR_FLAG<br> Header word to use for flagged traces.</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH
+ SELECT will insert a flag in header word HDR_FLAG that can be recognized by
+ subsequent processes.  This allows conditional process execution without
+ deleting traces from the trace flow.  Operates only when ACTION = FLAG.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHOD_A">
+      <Tip>Method for mask "A" to use in selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - METHOD_A<br> Method for mask "A" to use in selecting traces.</center></b>
+<pre> Default = RANGES
+ Allowed = DISABLED (This mask is not used)
+ Allowed = RANGES  (Select traces by ranges of header value.)
+ Allowed = VALUES  (Select traces by specific values.)
+ Allowed = PATTERN (Select traces by bin pattern.)
+ Allowed = DO_SKIP (Select traces by do - skip method.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHOD_B">
+      <Tip>Method for mask "B" to use in selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - METHOD_B<br> Method for mask "B" to use in selecting traces.</center></b>
+<pre> Default = DISABLED
+ Allowed = DISABLED (This mask is not used)
+ Allowed = RANGES  (Select traces by ranges of header value.)
+ Allowed = VALUES  (Select traces by specific values.)
+ Allowed = PATTERN (Select traces by bin pattern.)
+ Allowed = DO_SKIP (Select traces by do - skip method.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEL_A">
+      <Tip>Header word for mask "A" to use in trace selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - HDR_SEL_A<br> Header word for mask "A" to use in trace selection.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEL_B">
+      <Tip>Header word for mask "B" to use in trace selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - HDR_SEL_B<br> Header word for mask "B" to use in trace selection.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ENTRIES_A">
+      <Tip>Array of values defining selection rules for mask "A".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - ENTRIES_A<br> Array of values defining selection rules for mask "A".</center></b>
+<pre> Default =  -
+ Allowed = double precision array
+ 
+ If METHOD = RANGES, the ENTRIES array consists of a sequence of start and end
+ values defining ranges. Traces will be selected if the values of header word
+ HDR_SEL fall within any specified range.  Range start and end values are
+ inclusive.  Up to 100 ranges are permitted.
+ 
+ If METHOD = VALUES, the ENTRIES array consists of a sequence of values.
+ Traces will be selected if the values of header word HDR_SEL equal the values
+ in the ENTRIES array.  (A tolerance is allowed of 1.0E-6 times the value in
+ the ENTRIES array.)  Up to 200 values are permitted.
+ 
+ If METHOD = PATTERN, the ENTRIES array consists of 5 values that specify a
+ bin pattern.  Traces will be selected if the values of header word HDR_SEL
+ fall within any bin.  Values in the ENTRIES array are:  center of first bin,
+ width of first bin, increment between bins, center of last bin and total
+ number of bins.
+ 
+ If METHOD = DO_SKIP, the ENTRIES array consists of four values: number of
+ traces to skip initially, number of traces to select at a time, number of
+ traces to skip at a time, and total number of traces to select.  (HDR_SEL is
+ unused when METHOD = DO_SKIP.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT_A">
+      <Tip>Comment only.  Brief description of associated ENTRIES_A usage.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMMENT_A<br> Comment only.  Brief description of associated ENTRIES_A usage.</center></b>
+<pre> Comment only.  Brief description of associated ENTRIES_A usage.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ENTRIES_B">
+      <Tip>Array of values defining selection rules for mask "B".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - ENTRIES_B<br> Array of values defining selection rules for mask "B".</center></b>
+<pre> Default =  -
+ Allowed = double precision array
+ If METHOD = RANGES, the ENTRIES array consists of a sequence of start and end
+ values defining ranges. Traces will be selected if the values of header word
+ HDR_SEL fall within any specified range.  Range start and end values are
+ inclusive.  Up to 100 ranges are permitted.
+ 
+ If METHOD = VALUES, the ENTRIES array consists of a sequence of values.
+ Traces will be selected if the values of header word HDR_SEL equal the values
+ in the ENTRIES array.  (A tolerance is allowed of 1.0E-6 times the value in
+ the ENTRIES array.)  Up to 200 values are permitted.
+ 
+ If METHOD = PATTERN, the ENTRIES array consists of 5 values that specify a
+ bin pattern.  Traces will be selected if the values of header word HDR_SEL
+ fall within any bin.  Values in the ENTRIES array are:  center of first bin,
+ width of first bin, increment between bins, center of last bin and total
+ number of bins.
+ 
+ If METHOD = DO_SKIP, the ENTRIES array consists of four values: number of
+ traces to skip initially, number of traces to select at a time, number of
+ traces to skip at a time, and total number of traces to select.  (HDR_SEL is
+ unused when METHOD = DO_SKIP.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT_B">
+      <Tip>Comment only.  Brief description of associated ENTRIES_B usage.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMMENT_B<br> Comment only.  Brief description of associated ENTRIES_B usage.</center></b>
+<pre> Comment only.  Brief description of associated ENTRIES_B usage.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMPLEMENT_A">
+      <Tip>Select traces according to the complement of the METHOD chosen?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMPLEMENT_A<br> Select traces according to the complement of the METHOD chosen?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If  COMPLEMENT = NO, then mask is criteria for traces being selected (the
+ default and usual choice).
+ 
+ If COMPLEMENT = YES, then mask is criteria for traces not being selected (that
+ is, use the method specified to define traces NOT selected and select all
+ others.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMPLEMENT_B">
+      <Tip>Select traces according to the complement of the METHOD chosen?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMPLEMENT_B<br> Select traces according to the complement of the METHOD chosen?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If  COMPLEMENT = NO, then mask is criteria for traces being selected (the
+ default and usual choice).
+ 
+ If COMPLEMENT = YES, then mask is criteria for traces not being selected (that
+ is, use the method specified to define traces NOT selected and select all
+ others.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHOD_C">
+      <Tip>Method for mask "C" to use in selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - METHOD_C<br> Method for mask "C" to use in selecting traces.</center></b>
+<pre> Default = DISABLED
+ Allowed = DISABLED (This mask is not used)
+ Allowed = RANGES  (Select traces by ranges of header value.)
+ Allowed = VALUES  (Select traces by specific values.)
+ Allowed = PATTERN (Select traces by bin pattern.)
+ Allowed = DO_SKIP (Select traces by do - skip method.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHOD_D">
+      <Tip>Method for mask "D" to use in selecting traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - METHOD_D<br> Method for mask "D" to use in selecting traces.</center></b>
+<pre> Default = DISABLED
+ Allowed = DISABLED (This mask is not used)
+ Allowed = RANGES  (Select traces by ranges of header value.)
+ Allowed = VALUES  (Select traces by specific values.)
+ Allowed = PATTERN (Select traces by bin pattern.)
+ Allowed = DO_SKIP (Select traces by do - skip method.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEL_C">
+      <Tip>Header word for mask "C" to use in trace selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - HDR_SEL_C<br> Header word for mask "C" to use in trace selection.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEL_D">
+      <Tip>Header word for mask "D" to use in trace selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - HDR_SEL_D<br> Header word for mask "D" to use in trace selection.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ENTRIES_C">
+      <Tip>Array of values defining selection rules for mask "C".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - ENTRIES_C<br> Array of values defining selection rules for mask "C".</center></b>
+<pre> Default =  -
+ Allowed = double precision array
+ If METHOD = RANGES, the ENTRIES array consists of a sequence of start and end
+ values defining ranges. Traces will be selected if the values of header word
+ HDR_SEL fall within any specified range.  Range start and end values are
+ inclusive.  Up to 100 ranges are permitted.
+ 
+ If METHOD = VALUES, the ENTRIES array consists of a sequence of values.
+ Traces will be selected if the values of header word HDR_SEL equal the values
+ in the ENTRIES array.  (A tolerance is allowed of 1.0E-6 times the value in
+ the ENTRIES array.)  Up to 200 values are permitted.
+ 
+ If METHOD = PATTERN, the ENTRIES array consists of 5 values that specify a
+ bin pattern.  Traces will be selected if the values of header word HDR_SEL
+ fall within any bin.  Values in the ENTRIES array are:  center of first bin,
+ width of first bin, increment between bins, center of last bin and total
+ number of bins.
+ 
+ If METHOD = DO_SKIP, the ENTRIES array consists of four values: number of
+ traces to skip initially, number of traces to select at a time, number of
+ traces to skip at a time, and total number of traces to select.  (HDR_SEL is
+ unused when METHOD = DO_SKIP.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT_C">
+      <Tip>Comment only.  Brief description of associated ENTRIES_C usage.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMMENT_C<br> Comment only.  Brief description of associated ENTRIES_C usage.</center></b>
+<pre> Comment only.  Brief description of associated ENTRIES_C usage.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ENTRIES_D">
+      <Tip>Array of values defining selection rules for mask "D".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - ENTRIES_D<br> Array of values defining selection rules for mask "D".</center></b>
+<pre> Default =  -
+ Allowed = double precision array
+ If METHOD = RANGES, the ENTRIES array consists of a sequence of start and end
+ values defining ranges. Traces will be selected if the values of header word
+ HDR_SEL fall within any specified range.  Range start and end values are
+ inclusive.  Up to 100 ranges are permitted.
+ 
+ If METHOD = VALUES, the ENTRIES array consists of a sequence of values.
+ Traces will be selected if the values of header word HDR_SEL equal the values
+ in the ENTRIES array.  (A tolerance is allowed of 1.0E-6 times the value in
+ the ENTRIES array.)  Up to 200 values are permitted.
+ 
+ If METHOD = PATTERN, the ENTRIES array consists of 5 values that specify a
+ bin pattern.  Traces will be selected if the values of header word HDR_SEL
+ fall within any bin.  Values in the ENTRIES array are:  center of first bin,
+ width of first bin, increment between bins, center of last bin and total
+ number of bins.
+ 
+ If METHOD = DO_SKIP, the ENTRIES array consists of four values: number of
+ traces to skip initially, number of traces to select at a time, number of
+ traces to skip at a time, and total number of traces to select.  (HDR_SEL is
+ unused when METHOD = DO_SKIP.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT_D">
+      <Tip>Comment only.  Brief description of associated ENTRIES_D usage.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMMENT_D<br> Comment only.  Brief description of associated ENTRIES_D usage.</center></b>
+<pre> Comment only.  Brief description of associated ENTRIES_D usage.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMPLEMENT_C">
+      <Tip>Select traces according to the complement of the METHOD chosen?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMPLEMENT_C<br> Select traces according to the complement of the METHOD chosen?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If  COMPLEMENT = NO, then mask is criteria for traces being selected (the
+ default and usual choice).
+ 
+ If COMPLEMENT = YES, then mask is criteria for traces not being selected (that
+ is, use the method specified to define traces NOT selected and select all
+ others.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMPLEMENT_D">
+      <Tip>Select traces according to the complement of the METHOD chosen?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMPLEMENT_D<br> Select traces according to the complement of the METHOD chosen?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If  COMPLEMENT = NO, then mask is criteria for traces being selected (the
+ default and usual choice).
+ 
+ If COMPLEMENT = YES, then mask is criteria for traces not being selected (that
+ is, use the method specified to define traces NOT selected and select all
+ others.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMBINE">
+      <Tip>Logic to use in combining mask selections (A, B, C, and D).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - COMBINE<br> Logic to use in combining mask selections (A, B, C, and D).</center></b>
+<pre> Default = MEETS_ALL
+ Allowed = MEETS_ALL  (Select traces meeting criteria of all masks uded.)
+ Allowed = MEETS_ANY  (Select traces meeting criteria of any mask used.)
+ Final trace selection is determined by combining up to four mask schemes (A,
+ B, C, and D).
+ 
+ If COMBINE = MEETS_ALL is chosen, those traces finally selected must meet the
+ criteria of all the masks used.  (Logical intersection.)
+ 
+ If COMBINE = MEETS_ANY is chosen, those traces finally selected must meet the
+ criterion of any of the masks used.  (Logical union.)
+ 
+ If only one mask was used (only "A"), then COMBINE has no effect.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>select - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="select">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SELECT
+ Category   : headers
+ Written    : 1988-07-08   by: Tom Stoeckley
+ Revised    : 2006-10-31   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Select traces to kill, delete, etc. by header word criteria.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ SELECT is an extremely flexible process that can save, delete, kill, flag or
+ reverse the polarity of selected traces.  Traces are selected through a
+ process that uses the set theory concepts of complement, intersection and
+ union.
+ 
+ 
+ Conditional Process Execution
+ 
+ SELECT can be used to produce conditional execution of processes within a
+ job by two methods.  (This is currently the only means of producing
+ conditional process execution within CPS.)
+ 
+ 1. Traces can be directly deleted from the flow by SELECT.
+ 
+ 2. Traces may be flagged and a subsequent process or processes can be made to
+ operate on flagged traces only.  Different instances of SELECT within a job
+ can establish independent trace flags by using different header words.
+ 
+ 
+ Trace Selection Logic
+ 
+ Traces are selected for one of the five ACTIONS (SAVE, DELETE, FLAG, KILL or
+ REVERSE POLARITY) in a two-step process.  In the first step traces are
+ selected by masks, each of which specifies a simple selection procedure.  Up
+ to four individual masks are allowed; they are labeled by letter as A, B, C
+ and D.
+ 
+ In the second step the final trace selection is made by combining the
+ individual selections made by the masks.  Those traces finally selected will
+ have been selected either by every mask used or by at least one of the masks
+ used.  The specified ACTION will be performed on those traces finally
+ selected.
+ 
+ 
+ Masks
+ 
+ In the first step each mask uses one of four selection METHODS (DO_SKIP,
+ PATTERN, RANGES or VALUES) to define selection rules (unless DISABLED).
+ (The DO_SKIP method is
+ based on sequential trace number; the others are based on the value of the
+ user-specified header word HDR_SEL.)  Masks have the additional flexibility
+ of allowing rules that define traces selected or traces not selected.  If
+ COMPLEMENT = NO, then the mask rules define those traces that are selected,
+ if COMPLEMENT = YES, then mask rules define those traces that are NOT
+ selected.
+ 
+ 
+ Final Trace Selection
+ 
+ Traces will be finally selected by the process if they are selected by
+ every mask (COMBINE = MEETS_ALL) or if they are selected by at least one
+ mask (COMBINE = MEETS_ANY).  The specified ACTION will be performed on those
+ traces finally selected.  Traces not finally selected by the process will
+ pass through unchanged.
+ 
+ 
+ Note on Set Theory Concepts
+ 
+ SELECT uses the set theory concepts of complement, intersection and union.
+ The COMBINE = MEETS_ALL final selection is the INTERSECTION of the mask
+ selections; the COMBINE = MEETS_ANY final selection is the UNION of the mask
+ selections.  Switching from a rule defining traces selected to a rule
+ defining traces not selected is taking the COMPLEMENT of the mask rule.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ If only one mask is specified (not DISABLED), COMBINE has no effect and
+ traces are selected according to the mask.
+ 
+ Consecutive SELECT Processes
+ 
+ Two or more consecutive SELECT processes in the same job, with the same action
+ chosen, function as though each process is a single (possibly complicated)
+ mask with traces being selected overall that are selected by EVERY individual
+ SELECT process.  They can also be thought of as not selecting traces overall
+ that are not selected by AT LEAST one individual SELECT process.
+ 
+ 
+ Tolerance in VALUES Mask
+ 
+ A tolerance is provided when METHOD = VALUES.  Values of header word HDR_SEL
+ need not exactly equal a value in ENTRIES to be selected.  If it is within
+ 1.0E-6 times the ENTRIES value it will be selected.
+ 
+ 
+ EXAMPLES:
+ 
+ 
+ 1.  METHOD_A = RANGES, HDR_SEL_A = 14, COMPLEMENT_A = NO, ENTRIES_A = (125,
+     135, 247, 248, 180, 180)
+       means that all traces whose header word 14 contains a value within the
+       ranges of 125-135, 247-248, or 180-180 will be selected by mask "A".
+       (Up to 100 pairs of number are allowed in ENTRIES.)
+ 
+     METHOD_A = RANGES, HDR_SEL_A = 14, COMPLEMENT_A = YES, ENTRIES_A = (125,
+     135, 247, 248, 180, 180)
+       means that all traces whose header word 14 does NOT contain a value
+       within the ranges of 125-135, 247-248, or 180-180 will be selected by
+       mask "A".  (Up to 100 pairs of number are allowed in ENTRIES.)
+ 
+ 2.  METHOD_B = VALUES, HDR_SEL_B = 11, COMPLEMENT_B = NO, ENTRIES_B = (0)
+       means that all traces whose header word 11 value is zero will be
+       selected by mask "B".  (Up to 200 values are allowed in ENTRIES.)
+ 
+     METHOD_B = VALUES, HDR_SEL_B = 11, COMPLEMENT_B = YES, ENTRIES_B = (0)
+       means that all traces whose header word 11 value is NOT zero will be
+       selected by mask "B".  (Up to 200 values are allowed in ENTRIES.)
+ 
+ 3.  METHOD_C = PATTERN, HDR_SEL_C = 4, COMPLEMENT_C = NO, ENTRIES_C = (27.7,
+     2.4, 10.0, 127.7, 11)
+       means that all traces whose header word 4 contains a value within the
+       ranges 26.5-28.9, 36.5-38.9, 46.5-48.9,... will be selected by mask "C".
+ 
+     METHOD_C = PATTERN, HDR_SEL_C = 4, COMPLEMENT_C = YES, ENTRIES_C = (27.7,
+     2.4, 10.0, 127.7, 11)
+       means that all traces whose header word 4 contains a value OUTSIDE the
+       ranges 26.5-28.9, 36.5-38.9, 46.5-48.9,... will be selected by mask "C".
+ 
+ 4.  METHOD_D = DO_SKIP, HDR_SEL_D = 4, COMPLEMENT_D = NO, ENTRIES_D = (12,
+     24, 41, 999)
+       means that all traces with sequential trace number within the ranges
+       13-36, 78-101, 143-166,... will be selected by mask "D".  (HDR_SEL is
+       unused when METHOD = DO_SKIP.)
+ 
+     METHOD_D = DO_SKIP, HDR_SEL_D = 4, COMPLEMENT_D = YES, ENTRIES_D = (12,
+     24, 41, 999)
+       means that all traces with sequential trace number OUTSIDE the ranges
+       13-36, 78-101, 143-166,... will be selected by mask "D".  (HDR_SEL is
+       unused when METHOD = DO_SKIP.)
+ 
+ 5.  A trace will be Saved, Deleted, Flagged, Killed or Polarity Reversed if:
+       ALL active masks select the trace and COMBINE = MEETS_ALL, or
+       ANY active mask selects the trace and COMBINE = MEETS_ANY.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 55. 2006-10-31 Stoeckley  Add calls to pc_register_array_names for SeisSpace.
+054. 2006-01-10  B. Menger   Removed Unused Variables.
+ 53. 2002-07-29 Stoeckley  Change PATTERN method to use the MTH module.
+ 52. 2002-04-15 Baumel     Fixed bug in input trace count for DO_SKIP when
+                           input traces arrive in groups.
+ 51. 2001-12-20 Selzler    Changed selection logic to use double precision.
+ 50. 2001-04-02 Selzler    Added error message if bin width &gt;= increment
+                           for the pattern method.
+ 49. 2001-01-02 Selzler    Improved ergonomics for RANGE ENTRIES.
+ 48. 2000-12-11 Selzler    Changed wrapup logic to use skip_wrapup
+ 47. 2000-11-14 Selzler    Fixed pattern prevent updates of increment
+ 46. 2000-11-01 Selzler    Fixed pattern avoid updates of increment
+ 45. 2000-10-05 Selzler    Fixed gui def for new ezgui conventions.
+ 44. 2000-09-27 Selzler    Corrected bug in select_mask and DO_SKIP
+ 43. 2000-08-16 Selzler    Fixed problems with values near zero
+ 42. 2000-07-07 Selzler    Fixed problems found by CPS Fortran Code Review.
+ 41. 2000-05-11 Selzler    Corrected header mute when killing traces
+ 40. 2000-04-25 Selzler    Corrected bug in delete logic.
+ 39. 2000-04-20 Selzler    Corrected bug in select logic.
+ 38. 2000-04-17 Selzler    Changed EVERY and AT_LEAST to MEETS_ALL/ANY.
+ 37. 2000-03-30 Selzler    Added SAVE to list of supported actions
+ 36. 2000-03-27 Selzler    Improved comments displayed in GUI
+ 35. 2000-03-13 Selzler    Corrected bugs in complement logic.
+ 34. 2000-03-10 Selzler    Corrected bugs in GUI interface
+ 33. 2000-02-24 Selzler    Improved GUI interface
+ 32. 2000-02-21 Selzler    Corrected bug in PATTERN increment validation
+ 31. 2000-02-18 Selzler    Improved messages for GUI
+ 30. 2000-02-16 Selzler    Enhanced GUI with ENTRIES comments
+ 29. 2000-02-11 Selzler    Updated documentation for _B, _C, _D
+ 28. 2000-02-10 Selzler    Corrected bug in wrapup logic
+ 27. 2000-02-09 Selzler    synchronized source with CIB's latest newdoc.
+ 26. 2000-02-08 Selzler    improved gui support
+ 25. 2000-02-07 Selzler    improved gui support
+ 24. 2000-02-04 Selzler    Corrected bug in combo box option count
+ 23. 2000-02-02 Selzler    Added support for GUI and general cleanup
+ 22. 2000-01-19 Selzler    Corrected various bugs
+ 21. 1999-12-16 Selzler    Debugged do-skip loop processing
+ 20. 1999-11-23 Selzler    Incorporated pattern_verify into pattern primitive
+ 19. 1999-11-19 Selzler    Added RCS "Id" strings to tag executeable
+ 18. 1999-09-13 Selzler    Updated skip_wrapup and print_lun usage
+ 17. 1999-08-23 Selzler    change headers to double precision
+ 16. 1999-08-05 Selzler    Conversion to fortran 90 compiler.
+                           Fix bugs when killing traces and setting hd(64)
+ 15. 1998-11-10 Goodger    Begin using the f90 compiler.
+ 14. 1992-04-02 Troutt     Set HW64=NDPT+1 for killed traces.
+ 13. 1992-01-22 Troutt     Fix to update header word #1 on output.
+ 12. 1990-11-08 Stoeckley  Fix bug which occurs when selecting by an
+                           overlapping pattern.
+ 11. 1990-06-22 Stoeckley  Allow pairs of values to be in either order.
+ 10. 1989-10-25 Troutt     Set mute index (HW2) to NDPT+1 for traces
+                           killed.
+ 9.  1989-08-02 Lorimor    Revised SLOP value to 1.0E-06.
+ 8.  1989-07-18 Lorimor    Added SLOP variable when selecting by VALUE.
+ 7.  1989-05-30 Lorimor    Increase arrays to allow more select values.
+ 6.  1989-05-19 Howard     Fix bug in KILL and REVPOL.
+ 5.  1989-05-10 Stoeckley  Change ACTION parameters to improve clarity,
+                           remove calls to CLEAR,MOVHAT,REVPOL, redo
+                           screen layout, and add use of ISAVE and KSAVE.
+ 4.  1989-04-17 Adams      Add Forward,Reverse, to Offset selection.
+ 3.  1989-03-22 Lorimor    Add REVPOL option and DOSKIP option.
+                           Redo screen layout.
+ 2.  1989-02-22 Lorimor    Change parameter HFN to NHF, changed BEGINNING
+                           of bin to CENTER of bin in PATTERN card.
+ 1.  1988-10-24 Lorimor    NWIH and LTR conversion.
+                           Add KILL and FLAG options.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,190 @@
+#!/bin/bash
+# June 22, 2009 wmm-This script runs the front-end GUI (opencfe) for cpseis.
+#                   This version uses gfortran64
+# ----------------- Put definitions for the following in your .bashrc file or your system-wide .bashrc:
+#                   HOSTNAME (machine's host name)
+#                   HOME (user's home directory)
+#                   MACHINE (from uname -m)
+#                   CPSEIS_ARCH
+#                   CPSEIS_INSTALL_DIR
+# ----------------- Set CPSEIS_INSTALL_DIR to your installation directory. 
+#                   tar -xvfz cpseis.tgz from /home/Desktop/username puts it where I have shown below.
+
+#--- put in .bashrc: export CPSEIS_INSTALL_DIR=/home/Desktop/username/cpseis
+
+# ----------------- Set CPSEIS_ARCH to point to the 64 bit gfortran build
+#--- put in .cshrc : export CPSEIS_ARCH=gfortran64
+#export CPSEIS_ARCH=gfortran64
+# ----------------- This script sets up all sorts of variables that the CPS system uses.
+#                   Customize this for your site.
+#---
+if [ ! -d $HOME/.cpseis/opencfe-logs ] ; then
+	echo "making ~/.cpseis/opencfe-logs directory"
+	mkdir -p $HOME/.cpseis/opencfe-logs
+fi
+if [ ! -d $HOME/.cpseis/opencfe-logs ] ; then
+	echo "Unable to create log file directory ~/.cpseis/opencfe-logs. Exiting."
+	exit 1
+fi
+LOGFILE="$HOME/.cpseis/opencfe-logs/"$USER"-"$HOST"-"$(date | sed 's/ /_/g')".log"
+touch $LOGFILE
+if [ "$1" = "-debug" ] ; then
+	DEBUG="TRUE"
+else
+	DEBUG="FALSE"
+fi
+if [ -z $SPS_ENVIRONMENT ] ; then
+	echo "No SPS_ENVIRONMENT set up" >>$LOGFILE
+	. ${CPSEIS_INSTALL_DIR}/etc/setup_cpseis_environment.sh >>$LOGFILE
+else
+	echo "SPS_ENVIRONMENT already set up -- make sure it is correct." >>$LOGFILE
+fi
+
+if [ ! -d $HOME/cpsdata ] ; then
+        mkdir -p $HOME/cpsdata
+fi
+
+if [ ! -d $HOME/cpstemp ] ; then
+        mkdir -p $HOME/cpstemp
+fi
+
+
+
+# ----------------- Now to business.  Point to our client software and shared libraries.
+export CLIENT_HOME=${CPSEIS_INSTALL_DIR}/opencfe
+export CFESHARED=${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/lib/libcps.so
+
+# ----------------- The GUI uses the xerces XML parser.  Apache licensed this for open source use.
+#                   It also uses the jsdk http libraries in the build process.
+export CLASSPATH=${CLIENT_HOME}/jars/opencfe.jar:${CLIENT_HOME}/jars/xercesImpl.jar:${CLIENT_HOME}/jars/resolver.jar:${CLIENT_HOME}/jars/serializer.jar
+
+# ----------------- This points to the fortran link libraries from Intel (included with permission).
+#export MPICH_LIBS=${HOME}/thirdparty/lib
+export LD_LIBRARY_PATH=${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/lib:${LD_LIBRARY_PATH}
+echo "LD_LIBRARY_PATH = "$LD_LIBRARY_PATH >>$LOGFILE
+#echo "LD_LIBRARY_PATH = "$LD_LIBRARY_PATH 
+
+# ----------------- Set up the path for executables.
+export PATH=${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin:${PATH}
+echo "PATH            = "$PATH >>$LOGFILE
+if [ "`which lfd`" != "${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin/lfd" ] ; then
+	echo "lfd found at: "$(which lfd) >>$LOGFILE 2>&1
+	echo "Incorrect installation: Make sure you have binary directories set up in ${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin." | tee -a $LOGFILE
+	exit 1
+fi
+
+
+# ----------------- I currently have this set to use a 64 bit java 1.6.04 for AMD
+#                   Point this to your java installation         
+export JAVA_HOME=${JAVA_DIRECTORY}
+
+# ----------------- Did not check on these parameters.  Historically used.
+export JAVA_OPTS="-ms64m -mx64m -ss256k -Djava.util.prefs.syncInterval=2000000"
+export JAVA=$JAVA_HOME/bin/java
+
+# ----------------- This class contains the main method for the GUI
+export APP=com.conoco.cfe.client.application.DirectApplication
+
+# ----------------- Display license agreement.
+awk < ${CLIENT_HOME}/etc/license.txt '{
+	if (! index($1,"license>")) {
+		print $0;
+	}
+}' >.$$_license_splash
+trap "rm -f .$$_license_splash;exit 1" 1 2 3 6 9 11 12 15
+echo "Opencfe Log: $LOGFILE" >>.$$_license_splash
+echo "The run logs for each icps run will be in your local directory." >>.$$_license_splash
+
+xterm -T "CPSeis License" -geom 110x24 -e "cat .$$_license_splash;sleep 5;rm .$$license_splash" &
+
+export HERE=`pwd`
+echo "Working directory is "$HERE >>$LOGFILE
+# ----------------- The GUI is directed by a DTD and some XML preferences files.
+#                   They both are included below as "where" files in the script.
+export PREFSFILE=${HERE}/prefs.xml
+export PREFSFILE_DIRECT=${HERE}/prefs.xml.direct.file
+echo "Using preferences from "$PREFSFILE >>$LOGFILE
+
+cat >$PREFSFILE  <<EOF
+<?xml version="1.0"?>
+<!DOCTYPE Preferences SYSTEM "file://${CPSEIS_INSTALL_DIR}/opencfe/etc/preferences.dtd">
+<Preferences>
+	<XMLDocPath>file://${CLIENT_HOME}/xml/</XMLDocPath>
+	<BackEndLibPath>${CFESHARED}</BackEndLibPath>
+	<HelpMode value="mouse"/>
+	<WithConsole value="no"/>
+	<DefaultLabelFont name="SansSerif" size="14" />
+	<DefaultFieldFont name="SansSerif" style="bold" size="14" />
+	<DefaultArrayFont name="SansSerif" size="14" />
+</Preferences>
+EOF
+cat >$PREFSFILE_DIRECT <<EOF
+<?xml version="1.0"?>
+<!DOCTYPE Preferences SYSTEM "file://${CPSEIS_INSTALL_DIR}/opencfe/etc/preferences.dtd">
+<Preferences>
+	<XMLDocPath>file://${CPSEIS_INSTALL_DIR}/opencfe/xml/</XMLDocPath>
+	<BackEndLibPath>${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/lib/libopencfe.so</BackEndLibPath>
+	<HelpMode value="mouse"/>
+	<WithConsole value="no"/>
+	<DefaultLabelFont name="SansSerif" size="14" />
+	<DefaultFieldFont name="SansSerif" style="bold" size="14" />
+	<DefaultArrayFont name="SansSerif" size="14" />
+</Preferences>
+EOF
+
+echo " " >>$LOGFILE
+echo "Using Java Virtual Machine  = "$JAVA -version >>$LOGFILE
+
+# ----------------- This starts up the lock file daemon for the user.
+#                   The site could have one running for all users, and it can run on
+#                   another computer, but... this is how I test the infrastructure.
+
+# ----------------- If one is running, don't start another.
+if [ "`which refreshlock`" != "${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin/refreshlock" ] ;  then
+	echo "refreshlock found at: $(which refreshlock)" >>$LOGFILE 2>&1
+	echo "Incorrect installation: Make sure you have binary directories set up in ${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin." | tee -a $LOGFILE
+	exit 1
+fi
+
+if [ `ps aux | grep refreshlock | grep -v grep | wc | awk '{print $1}'` != 1 ] ; then
+	(refreshlock -t 1 -f  ${CPSEIS_INSTALL_DIR}/log/cps_lockfile.dat:2 -m 3 -c | tee $LOGFILE) & 
+	export STARTED_LOCK_DAEMON=true
+	sleep 2
+else
+	echo "Lock daemon already running." >>$LOGFILE
+	export STARTED_LOCK_DAEMON=false
+	echo `ps aux | grep refreshlock | grep -v grep` >>$LOGFILE
+fi
+
+echo " " >>$LOGFILE
+# ----------------- This lists the locks currently in the lockfile.
+#unset SPS_ENVIRONMENT
+#echo "INSTALLATION DIRECTORY = ${CPSEIS_INSTALL_DIR}"
+
+${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin/lfd  >>$LOGFILE
+
+# ----------------- This tests the icps run time. --------------------------
+if [ "`which icps`" != "${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin/icps" ] ;  then
+	echo "icps found at: "$(which icps) >>$LOGFILE 2>&1
+	echo "Incorrect installation: Make sure you have binary directories set up in ${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin." | tee -a $LOGFILE
+	exit 1
+fi
+
+#--- run the job
+if [ "$DEBUG" = "TRUE" ] ; then
+	echo $LD_LIBRARY_PATH
+	echo $JAVA $JAVA_OPTS $APP file://$PREFSFILE 2>&1 | tee -a $LOGFILE 
+	$JAVA $JAVA_OPTS $APP file://$PREFSFILE 2>&1 | tee -a $LOGFILE
+else
+	$JAVA $JAVA_OPTS $APP file://$PREFSFILE >>$LOGFILE 2>&1
+fi
+sleep 1
+echo " " >>$LOGFILE
+rm -f fort.1  fort* $PREFSFILE $PREFSFILE_DIRECT
+if [ "$STARTED_LOCK_DAEMON" = "true" ] ;  then
+	#------------ This kills the user's lockfile daemon
+	sleep 2
+	zap refreshlock >>$LOGFILE
+fi
+rm -f .$$_license_splash
+echo "Exit OpenCFE"

@@ -1,0 +1,104 @@
+           rcs_issues         UPDATE OPTION A         2004-05-21
+
+------------------------------------------------------------------------------
+To create new ~spws source files (working in my own directory):
+
+myself: (C1) Create and test my new source files.
+myself: (C2) Verify that source files of the same name are not in ~spws.
+spws:   (C3) Copy my new files from my directory to the ~spws directory.
+
+spws:   (C4) Check the new files into RCS, and then check them out again
+             read-only (unlocked) as follows:
+
+               ci  -d  -u  -m'log message'  filename   (or use wildcard)
+------------------------------------------------------------------------------
+To update ~spws source files (working in my own directory):
+
+myself: (U1) Copy the ~spws source files to my directory.
+myself: (U2) Do a chmod u+w on my copies of the files so I can edit them.
+myself: (U3) Update and test my copies of the files in my directory.
+
+myself: (U4) Do a diff between my new copies and the ~spws copies to make
+             sure the changes are only my own.  If there are any changes
+             not my own, incorporate the changes in my new copies, then
+             retest, then do a diff again.
+
+spws:   (U5) Check out read-write (locked) copies from RCS (overwriting the
+             read-only copies) as follows:
+
+               co  -l  filename    (or use wildcard)
+
+             Note that this step is dangerous because some overwritten files
+             might be more recent updates than the latest versions in RCS.
+             Therefore step (U4) must precede this step rather than follow it.
+
+spws:   (U6) Copy my updated files from my directory to the ~spws directory
+             (overwriting the read-write copies just checked out).
+
+spws:   (U7) Check the updated files into RCS, and then check them out
+             again as read-only (unlocked) as follows:
+
+               ci  -u  -m'log message'  filename   (or use wildcard)
+------------------------------------------------------------------------------
+To update ~spws source files (working directly in ~spws):
+
+spws:   (D1) Check out read-write (locked) copies from RCS (overwriting the
+             read-only copies) as follows:
+
+               co  -l  filenames    (or use wildcard)
+
+             Note that this step is dangerous because some overwritten files
+             might be more recent updates than the latest versions in RCS.
+             Therefore, if any potentially overwritten files are read-write,
+             the safe thing to do is to move them to temporary names before
+             this step, and then move them back afterwards.
+
+spws:   (D2) Update and test these copies of the files in the ~spws directory.
+
+spws:   (D3) Check the updated files into RCS, and then check them out again
+             as read-only (unlocked) as follows:
+
+               ci  -u  -m'log message'  filename   (or use wildcard)
+------------------------------------------------------------------------------
+
+           rcs_issues         UPDATE OPTION B         2004-05-21
+
+------------------------------------------------------------------------------
+To create new ~spws source files (working in my own directory):
+
+myself: (C1) Create and test my new source files.
+myself: (C2) Verify that source files of the same name are not in ~spws.
+spws:   (C3) Copy my new files from my directory to the ~spws directory.
+
+spws:   (C4) Check the new files into RCS, and then check them out again
+             as read-write (locked) as follows:
+
+               ci  -d  -l  -m'log message'  filenames   (or use wildcard)
+------------------------------------------------------------------------------
+To update ~spws source files (working in my own directory):
+
+myself: (U1) Copy the ~spws source files to my directory.
+myself: (U2) Update and test my copies of the files in my directory.
+
+myself: (U3) Do a diff between my new copies and the ~spws copies to make
+             sure the changes are only my own.  If there are any changes
+             not my own, incorporate the changes in my new copies, then
+             retest, then do a diff again.
+
+spws:   (U4) Copy my updated files from my directory to the ~spws directory
+             (overwriting the read-write copies that were already there).
+
+spws:   (U5) Check the updated files into RCS, and then check them out
+             again as read-write (locked) as follows:
+
+               ci  -l  -m'log message'  filenames   (or use wildcard)
+------------------------------------------------------------------------------
+To update ~spws source files (working directly in ~spws):
+
+spws:   (D1) Update and test any files in the ~spws directory.
+
+spws:   (D2) Check the updated files into RCS, and then check them out again
+             as read-write (locked) as follows:
+
+               ci  -l  -m'log message'  filenames   (or use wildcard)
+------------------------------------------------------------------------------

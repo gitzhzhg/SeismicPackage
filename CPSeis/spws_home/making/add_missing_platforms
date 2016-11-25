@@ -1,0 +1,53 @@
+#! /bin/csh -f
+
+# add_missing_platforms
+#
+# $Id: add_missing_platforms,v 1.2 2004/03/04 14:07:43 wjdone Exp $
+#
+# run this script to create any missing platforms in all ~spws directories.
+#
+# simply type this:
+#                     add_missing_platforms
+# to create a platform-dependent subdirectory everywhere one is missing,
+# plus the necessary makefile links.
+#
+# the nightly_nodes_and_platforms file is used to get a list of all
+# required platforms.
+#
+# the environment variable SPWSMAKEDIR is used to point to the directory
+# containing the nightly_nodes_and_platforms file.
+#
+# the environment variable SPWSDIR is used to point to the ~spws directory.
+
+#-------------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo SPWSMAKEDIR not set
+     exit
+endif
+
+if(! -f $SPWSMAKEDIR/nightly_nodes_and_platforms) then
+     echo missing nightly_nodes_and_platforms file.
+     exit
+endif
+
+#-------------------------------------------------------------------------------
+
+set platnodes = `cat $SPWSMAKEDIR/nightly_nodes_and_platforms`
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+   echo ""
+   echo "adding platform    $platnode:e          where it is missing"
+   echo ""
+   add_new_platform $platnode:e
+end
+
+#-------------------------------------------------------------------------------
+

@@ -1,0 +1,46 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                             print_variable
+#-------------------------------------------------------------------------------
+#                              DESCRIPTION
+#
+# This script provides a convenient way to print a variable which contains
+# multiple space-delimited components in a readable manner, with each component
+# on a separate line.
+#
+# To call this script, simply run the following:
+#
+#                         print_path  NAME VARIABLE NUMBER
+#
+# where   NAME   is the name of the variable to print.
+# where VARIABLE is the value of the variable to print.
+# where  NUMBER  is the maximum number of components to print (optional).
+#-------------------------------------------------------------------------------
+
+if ($1 == "") exit
+ 
+set name   =  $1
+set value  = "$2"
+set number =  $3
+
+if ("$value" == "") then
+  echo $name ========
+  exit
+endif
+ 
+set kount = 0
+
+foreach component ($value)
+  if ("$component" == "") exit
+  if ($kount == $number) then
+     echo $name \(+more\)
+     break
+  endif
+  @ kount = $kount + 1
+  echo $name \($kount\) ======== $component
+end
+
+#-------------------------------- end -------------------------------------##
+#-------------------------------- end -------------------------------------##
+#-------------------------------- end -------------------------------------##
+

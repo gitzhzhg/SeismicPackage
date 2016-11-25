@@ -1,0 +1,1082 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ranline" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="RANLINEPROCESS" title="RANLINE Process" rows="24" columns="80">
+    <Label keyword="COMMENT_DTRACEINTERPOLATIONTORAN" alignment="center">3D trace interpolation to random lines</Label>
+    <Label keyword="LABEL_NUM_TRACES" alignment="left">NUM_TRACES=</Label>
+    <Field keyword="NUM_TRACES" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXINPUTTRACESTOUSEALTOG" alignment="left">Max # input traces to use altogether.</Label>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN   =</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SEMBLANCEWINDOWLENGTHFOR" alignment="left">Semblance window length for dip search (seconds).</Label>
+    <Label keyword="LABEL_MAX_SEARCH" alignment="left">MAX_SEARCH=</Label>
+    <Field keyword="MAX_SEARCH" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMTRACESTOUSEFORDIP" alignment="left">Maximum # traces to use for dip search.</Label>
+    <Label keyword="LABEL_MAX_INTERP" alignment="left">MAX_INTERP=</Label>
+    <Field keyword="MAX_INTERP" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMTRACESTOINTERPOLA" alignment="left">Maximum # traces to interpolate or mix.</Label>
+    <Label keyword="LABEL_FRACMIX" alignment="left">FRACMIX   =</Label>
+    <Field keyword="FRACMIX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FRACTIONALMIXPERFORMED0T" alignment="left">Fractional mix performed (0 to 1.414).</Label>
+    <Label keyword="LABEL_FEET_OUT" alignment="left">FEET_OUT  =</Label>
+    <Field keyword="FEET_OUT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTTRACESPACINGALONGR" alignment="left">Output trace spacing along random lines (feet or meters).</Label>
+    <Border keyword="BORDER1"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X    =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y    =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORD" alignment="left">Header word.</Label>
+    <Label keyword="LABEL_DIP_MAX_X" alignment="left">DIP_MAX_X=</Label>
+    <Field keyword="DIP_MAX_X" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_MAX_Y" alignment="left">DIP_MAX_Y=</Label>
+    <Field keyword="DIP_MAX_Y" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMDIPMSUNITHWDVALUE" alignment="left">Maximum dip (ms / unit hwd value).</Label>
+    <Label keyword="LABEL_DIP_INC_X" alignment="left">dip_inc_x=</Label>
+    <Field keyword="DIP_INC_X" type="string" maxLength="8" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_INC_Y" alignment="left">dip_inc_y=</Label>
+    <Field keyword="DIP_INC_Y" type="string" maxLength="8" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_DIPINCREMENTMSUNITHWDVAL" alignment="left">Dip increment (ms / unit hwd value).</Label>
+    <Label keyword="LABEL_NXDIPS" alignment="left">nxdips   =</Label>
+    <Field keyword="NXDIPS" type="string" maxLength="8" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NYDIPS" alignment="left">nydips   =</Label>
+    <Field keyword="NYDIPS" type="string" maxLength="8" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TOTALNUMBEROFDIPS" alignment="left">Total number of dips.</Label>
+    <Label keyword="LABEL_SEARCH_X" alignment="left">SEARCH_X =</Label>
+    <Field keyword="SEARCH_X" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEARCH_Y" alignment="left">SEARCH_Y =</Label>
+    <Field keyword="SEARCH_Y" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMSEARCHDISTANCEHWD" alignment="left">Maximum search distance (hwd units).</Label>
+    <Label keyword="LABEL_FEET_X" alignment="left">FEET_X   =</Label>
+    <Field keyword="FEET_X" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FEET_Y" alignment="left">FEET_Y   =</Label>
+    <Field keyword="FEET_Y" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_UNITSIZEOFHWDVALUEFEETOR" alignment="left">Unit size of hwd value (feet or meters).</Label>
+    <Field keyword="COORDS_INFO" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="MESSAGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_DTRACEINTERPOLATIONTORAN" xPos="19" yPos="1" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TRACES" xPos="1" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TRACES" xPos="12" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXINPUTTRACESTOUSEALTOG" xPos="21" yPos="3" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="1" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="12" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SEMBLANCEWINDOWLENGTHFOR" xPos="21" yPos="4" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_SEARCH" xPos="1" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_SEARCH" xPos="12" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMTRACESTOUSEFORDIP" xPos="21" yPos="5" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_INTERP" xPos="1" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_INTERP" xPos="12" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMTRACESTOINTERPOLA" xPos="21" yPos="6" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FRACMIX" xPos="1" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FRACMIX" xPos="12" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FRACTIONALMIXPERFORMED0T" xPos="21" yPos="7" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FEET_OUT" xPos="1" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FEET_OUT" xPos="12" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUTTRACESPACINGALONGR" xPos="21" yPos="8" xSize="57" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="10" xSize="20" ySize="8"/>
+     <Constraints component="BORDER2" xPos="22" yPos="10" xSize="20" ySize="8"/>
+     <Constraints component="LABEL_HDR_X" xPos="2" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="12" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="23" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="33" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORD" xPos="43" yPos="11" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DIP_MAX_X" xPos="2" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_MAX_X" xPos="12" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_MAX_Y" xPos="23" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_MAX_Y" xPos="33" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMDIPMSUNITHWDVALUE" xPos="43" yPos="12" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_X" xPos="2" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_X" xPos="12" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_Y" xPos="23" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_Y" xPos="33" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_DIPINCREMENTMSUNITHWDVAL" xPos="43" yPos="13" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NXDIPS" xPos="2" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NXDIPS" xPos="12" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NYDIPS" xPos="23" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NYDIPS" xPos="33" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TOTALNUMBEROFDIPS" xPos="43" yPos="14" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SEARCH_X" xPos="2" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEARCH_X" xPos="12" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEARCH_Y" xPos="23" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEARCH_Y" xPos="33" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMSEARCHDISTANCEHWD" xPos="43" yPos="15" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FEET_X" xPos="2" yPos="16" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FEET_X" xPos="12" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FEET_Y" xPos="23" yPos="16" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FEET_Y" xPos="33" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_UNITSIZEOFHWDVALUEFEETOR" xPos="43" yPos="16" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COORDS_INFO" xPos="1" yPos="19" xSize="79" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MESSAGE" xPos="1" yPos="21" xSize="79" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="NUM_TRACES">
+      <Tip>Total number of input traces to be used.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - NUM_TRACES<br> Total number of input traces to be used.</center></b>
+<pre> Default = 99999
+ Allowed = int &gt; 0
+ 
+ This is the total number of input traces that will be used for generating
+ the output traces.  It usually will be much smaller than the number of
+ input traces.  This number can be approximate since it is used only for
+ reserving disk space.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the time window, in sec, for the semblance calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - WIN_LEN<br> Length of the time window, in sec, for the semblance calculation.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ 
+ WIN_LEN is used for dip search calculations prior to generating mixed traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_SEARCH">
+      <Tip>Maximum number of traces to use for dip search.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - MAX_SEARCH<br> Maximum number of traces to use for dip search.</center></b>
+<pre> Default = 8
+ Allowed = int &gt;= MAX_INTERP
+ 
+ Maximum number of traces to use for dip searching for a given output
+ trace.  If DIP_MAX_X and DIP_MAX_Y are both zero, no dip search and
+ adjustment will be done.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_INTERP">
+      <Tip>Maximum number of traces to use for interpolating.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - MAX_INTERP<br> Maximum number of traces to use for interpolating.</center></b>
+<pre> Default = 4
+ Allowed = int &gt;= 1
+ 
+ Maximum number of traces to use to interpolate a given output trace.
+ If MAX_INTERP = 1, the nearest trace to the trace output location will
+ be used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FRACMIX">
+      <Tip>Fractional mix performed during interpolation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - FRACMIX<br> Fractional mix performed during interpolation.</center></b>
+<pre> Default = 0.0
+ Allowed = real 0.0 to 1.414
+ 
+ The value 0 means a minimum amount of mixing is done, with all weights
+ inversely proportional to distance from the trace output location,
+ defined as SQRT([DX/SEARCH_X]**2+[DY/SEARCH_Y]**2).  This is
+ appropriate for straight interpolation.
+ 
+ The value 1.414 or larger means all traces used for interpolation will
+ be weighted equally, regardless of their distances from the interpolated
+ trace output location.  This would be a strong mix (equal-weight stack
+ along dips) rather than an interpolation.
+ 
+ For example, FRACMIX=0.3 means that all traces within distance 0.3 will
+ have a weight corresponding to distance 0.3 (rather than a larger weight).
+ This would be appropriate if you want to do some mixing while
+ interpolating, so that an individual trace that may happen to lie at the
+ trace output location will not get all the weight.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FEET_OUT">
+      <Tip>Output trace spacing along random lines in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - FEET_OUT<br> Output trace spacing along random lines in feet or meters.</center></b>
+<pre> Default = nil
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word containing the X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - HDR_X<br> Header word containing the X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word containing the Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - HDR_Y<br> Header word containing the Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MAX_X">
+      <Tip>Maximum dip in X direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - DIP_MAX_X<br> Maximum dip in X direction to use in the dip search calculation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ Dips are in ms/trace in the X direction.
+ 
+ A total of (2*DIP_X/DIP_INC_X + 1) dips are tested in the X direction,
+ from -DIP_MAX_X to +DIP_MAX_X.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MAX_Y">
+      <Tip>Maximum dip in Y direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - DIP_MAX_Y<br> Maximum dip in Y direction to use in the dip search calculation.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ Dips are in ms/trace in the Y direction.
+ 
+ A total of (2*DIP_X/DIP_INC_Y + 1) dips are tested in the Y direction,
+ from -DIP_MAX_Y to +DIP_MAX_Y.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_X">
+      <Tip>Dip increment in X direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - DIP_INC_X<br> Dip increment in X direction to use in the dip search calculation.</center></b>
+<pre>
+ Dip increments are in ms/trace in the X direction.
+ 
+ A total of (2*DIP_X/DIP_INC_X + 1) dips are tested in the X direction,
+ from -DIP_MAX_X to +DIP_MAX_X.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.
+ 
+ This value is calculated from the Nyquist frequency and the SEARCH_X
+ parameter to keep from aliasing the dip search on the farthest traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_Y">
+      <Tip>Dip increment in Y direction to use in the dip search calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - DIP_INC_Y<br> Dip increment in Y direction to use in the dip search calculation.</center></b>
+<pre>
+ Dip increments are in ms/trace in the Y direction.
+ 
+ A total of (2*DIP_X/DIP_INC_Y + 1) dips are tested in the Y direction,
+ from -DIP_MAX_Y to +DIP_MAX_Y.
+ 
+ Computer time is roughly proportional to the number of dips tested in the
+ X direction times the number of dips tested in the Y direction.
+ 
+ This value is calculated from the Nyquist frequency and the SEARCH_Y
+ parameter to keep from aliasing the dip search on the farthest traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NXDIPS">
+      <Tip>Total number of dips to be tested in X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - NXDIPS<br> Total number of dips to be tested in X direction.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="NYDIPS">
+      <Tip>Total number of dips to be tested in Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - NYDIPS<br> Total number of dips to be tested in Y direction.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SEARCH_X">
+      <Tip>Maximum X search distance of useable trace from output location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SEARCH_X<br> Maximum X search distance of useable trace from output location.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ This is in units of the X header word values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEARCH_Y">
+      <Tip>Maximum Y search distance of useable trace from output location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SEARCH_Y<br> Maximum Y search distance of useable trace from output location.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ This is in units of the Y header word values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FEET_X">
+      <Tip>Unit size of the X header word values in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - FEET_X<br> Unit size of the X header word values in feet or meters.</center></b>
+<pre> Default = nil
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FEET_Y">
+      <Tip>Unit size of the Y header word values in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - FEET_Y<br> Unit size of the Y header word values in feet or meters.</center></b>
+<pre> Default = nil
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COORDS_INFO">
+      <Tip>Status of the specified random line coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - COORDS_INFO<br> Status of the specified random line coordinates.</center></b>
+<pre>
+ This information summarizes the status of the random line coordinates
+ whech are specified on the "Random Line Coordinates" screen.  That screen
+ should be visited to insure that the specified coordinates are correct,
+ or that the status of the file which specifies the coordinates is acceptable.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MESSAGE">
+      <Tip>Message regarding number of requested diagnostic files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - MESSAGE<br> Message regarding number of requested diagnostic files.</center></b>
+<pre>
+ This information refers to the diagnostic files requested on the
+ "Diagnostic Output Files" screen.  That screen should be visited
+ to insure that the requests are correct and the status of each
+ requested file is acceptable.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DIAGNOSTICOUTPUTFILES" title="Diagnostic Output Files" rows="28" columns="80">
+    <Label keyword="LABEL_BASENAME" alignment="left">BASENAME   =</Label>
+    <Field keyword="BASENAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="SAVE_MEDGE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MEDGE" alignment="left">PATH_MEDGE =</Label>
+    <Field keyword="PATH_MEDGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MEDGE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_SEDGE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SEDGE" alignment="left">PATH_SEDGE =</Label>
+    <Field keyword="PATH_SEDGE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_SEDGE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_MIXED" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIXED" alignment="left">PATH_MIXED =</Label>
+    <Field keyword="PATH_MIXED" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MIXED_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_SEMB" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_SEMB" alignment="left">path_semb  =</Label>
+    <Field keyword="PATH_SEMB" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_SEMB_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_XDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_XDIP" alignment="left">path_xdip  =</Label>
+    <Field keyword="PATH_XDIP" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_XDIP_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_YDIP" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_YDIP" alignment="left">path_ydip  =</Label>
+    <Field keyword="PATH_YDIP" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_YDIP_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_ORIG" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_ORIG" alignment="left">path_orig  =</Label>
+    <Field keyword="PATH_ORIG" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_LARGEFILE" alignment="center">(large file)</Label>
+    <Field keyword="PATH_ORIG_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_FLAT" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_FLAT" alignment="left">path_flat  =</Label>
+    <Field keyword="PATH_FLAT" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">(large file)</Label>
+    <Field keyword="PATH_FLAT_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Field keyword="SAVE_MIDDLE" type="comboButton" maxLength="3" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_MIDDLE" alignment="left">path_middle=</Label>
+    <Field keyword="PATH_MIDDLE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATH_MIDDLE_INFO" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_BASENAME" xPos="7" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BASENAME" xPos="19" yPos="0" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SAVE_MEDGE" xPos="1" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MEDGE" xPos="7" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MEDGE" xPos="19" yPos="2" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MEDGE_INFO" xPos="19" yPos="3" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_SEDGE" xPos="1" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEDGE" xPos="7" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEDGE" xPos="19" yPos="5" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SEDGE_INFO" xPos="19" yPos="6" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_MIXED" xPos="1" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MIXED" xPos="7" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIXED" xPos="19" yPos="8" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MIXED_INFO" xPos="19" yPos="9" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_SEMB" xPos="1" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEMB" xPos="7" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEMB" xPos="19" yPos="11" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SEMB_INFO" xPos="19" yPos="12" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_XDIP" xPos="1" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_XDIP" xPos="7" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_XDIP" xPos="19" yPos="14" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_XDIP_INFO" xPos="19" yPos="15" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_YDIP" xPos="1" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_YDIP" xPos="7" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_YDIP" xPos="19" yPos="17" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_YDIP_INFO" xPos="19" yPos="18" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_ORIG" xPos="1" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_ORIG" xPos="7" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_ORIG" xPos="19" yPos="20" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_LARGEFILE" xPos="4" yPos="21" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_ORIG_INFO" xPos="19" yPos="21" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_FLAT" xPos="1" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_FLAT" xPos="7" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_FLAT" xPos="19" yPos="23" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="4" yPos="24" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_FLAT_INFO" xPos="19" yPos="24" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_MIDDLE" xPos="1" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_MIDDLE" xPos="7" yPos="26" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_MIDDLE" xPos="19" yPos="26" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_MIDDLE_INFO" xPos="19" yPos="27" xSize="64" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="BASENAME">
+      <Tip>Base name for pathnames for diagnostic trace output files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - BASENAME<br> Base name for pathnames for diagnostic trace output files.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ This basename is used to create path names for files which will contain
+ diagnostic traces.  This basename must not include a filename extension.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_MEDGE">
+      <Tip>Whether to save edge detection traces to PATH_MEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_MEDGE<br> Whether to save edge detection traces to PATH_MEDGE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MEDGE">
+      <Tip>Pathname for Meek edge detection traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_MEDGE<br> Pathname for Meek edge detection traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One edge detection trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MEDGE_INFO">
+      <Tip>Status of PATH_MEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_MEDGE_INFO<br> Status of PATH_MEDGE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_SEDGE">
+      <Tip>Whether to save edge detection traces to PATH_SEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_SEDGE<br> Whether to save edge detection traces to PATH_SEDGE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEDGE">
+      <Tip>Pathname for semblance edge detection traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_SEDGE<br> Pathname for semblance edge detection traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One edge detection trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEDGE_INFO">
+      <Tip>Status of PATH_SEDGE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_SEDGE_INFO<br> Status of PATH_SEDGE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_MIXED">
+      <Tip>Whether to save mixed traces to PATH_MIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_MIXED<br> Whether to save mixed traces to PATH_MIXED.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIXED">
+      <Tip>Pathname for mixed traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_MIXED<br> Pathname for mixed traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One mixed trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ These traces are calculated from moving gathers centered on each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIXED_INFO">
+      <Tip>Status of PATH_MIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_MIXED_INFO<br> Status of PATH_MIXED.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_SEMB">
+      <Tip>Whether to save semblance traces to PATH_SEMB.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_SEMB<br> Whether to save semblance traces to PATH_SEMB.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEMB">
+      <Tip>Pathname for diagnostic traces of semblance values found.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_SEMB<br> Pathname for diagnostic traces of semblance values found.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One semblance trace will be output to the file for each trace processed.
+ Semblances are between zero and one.
+ The file will be an 8-bit file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEMB_INFO">
+      <Tip>Status of PATH_SEMB.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_SEMB_INFO<br> Status of PATH_SEMB.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_XDIP">
+      <Tip>Whether to save dip traces to PATH_XDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_XDIP<br> Whether to save dip traces to PATH_XDIP.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_XDIP">
+      <Tip>Pathname for diagnostic traces of dips found in the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_XDIP<br> Pathname for diagnostic traces of dips found in the X direction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One dip trace will be output to the file for each trace processed.
+ Dips are in milliseconds per trace.
+ The file will be an 8-bit file.
+ 
+ The traces will be dead if dip searches are not done in the X direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_XDIP_INFO">
+      <Tip>Status of PATH_XDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_XDIP_INFO<br> Status of PATH_XDIP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_YDIP">
+      <Tip>Whether to save dip traces to PATH_YDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_YDIP<br> Whether to save dip traces to PATH_YDIP.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_YDIP">
+      <Tip>Pathname for diagnostic traces of dips found in the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_YDIP<br> Pathname for diagnostic traces of dips found in the Y direction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One dip trace will be output to the file for each trace processed.
+ Dips are in milliseconds per trace.
+ The file will be an 8-bit file.
+ 
+ The traces will be dead if dip searches are not done in the Y direction.
+ (This is the case for the 2D SDIP process.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_YDIP_INFO">
+      <Tip>Status of PATH_YDIP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_YDIP_INFO<br> Status of PATH_YDIP.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_ORIG">
+      <Tip>Whether to save original moving gathers to PATH_ORIG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_ORIG<br> Whether to save original moving gathers to PATH_ORIG.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ORIG">
+      <Tip>Pathname for diagnostic traces of original gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_ORIG<br> Pathname for diagnostic traces of original gathers.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These are the original moving gathers used for doing the dip search.
+ One moving gather will be output to the file for each trace processed.
+ Each moving gather contains all of the traces used to do a dip search
+ for each trace processed.  Each moving gather will contain
+ (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces.
+ 
+ This file can be very large.
+ The file will be an 8-bit file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_ORIG_INFO">
+      <Tip>Status of PATH_ORIG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_ORIG_INFO<br> Status of PATH_ORIG.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_FLAT">
+      <Tip>Whether to save flattened moving gathers to PATH_FLAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_FLAT<br> Whether to save flattened moving gathers to PATH_FLAT.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_FLAT">
+      <Tip>Pathname for diagnostic traces of flattened gathers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_FLAT<br> Pathname for diagnostic traces of flattened gathers.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These are the moving gathers as they have been flattened using the results
+ of the dip search.  One moving gather will be output to the file for each
+ trace processed.  Each moving gather contains all of the traces used to do
+ a dip search for each trace processed.  Each moving gather will contain
+ (2*NUM_TR_DIP_X + 1) times (2*NUM_TR_DIP_Y + 1) traces.
+ 
+ This file can be very large.
+ The file will be an 8-bit file.
+ 
+ The traces will be same as original gathers if dip searches are not done.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_FLAT_INFO">
+      <Tip>Status of PATH_FLAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_FLAT_INFO<br> Status of PATH_FLAT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SAVE_MIDDLE">
+      <Tip>Whether to save middle traces to PATH_MIDDLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SAVE_MIDDLE<br> Whether to save middle traces to PATH_MIDDLE.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIDDLE">
+      <Tip>Pathname for middle trace of each moving gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_MIDDLE<br> Pathname for middle trace of each moving gather.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ One trace will be output to the file for each trace processed.
+ The file will be an 8-bit file.
+ 
+ Each trace output will be the trace from the moving gather which is the
+ closest to the output trace location.  Therefore each trace should be the
+ same as an original input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_MIDDLE_INFO">
+      <Tip>Status of PATH_MIDDLE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATH_MIDDLE_INFO<br> Status of PATH_MIDDLE.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="RANDOMLINECOORDINATES" title="Random Line Coordinates" rows="24" columns="80">
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="66" editable="no" sensitive="yes"/>
+    <ArraySet keyword="X_COORD_ARRAYSET" label="X_COORD    Y_COORD">
+     <Array keyword="X_COORD" type="float" maxLength="11 " columnName="X_COORD" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="Y_COORD" type="float" maxLength="11 " columnName="Y_COORD" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Label keyword="COMMENT_INUNITSOFHEADERWORDVALUE" alignment="center">(in units of header word values)</Label>
+    <Button keyword="PLOT">Plot</Button>
+    <Button keyword="REPLOT">Replot</Button>
+    <Layout>
+     <Constraints component="SELECT_PATHNAME" xPos="1" yPos="1" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="16" yPos="1" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="17" yPos="1" xSize="66" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="17" yPos="2" xSize="66" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_COORD_ARRAYSET" xPos="18" yPos="4" xSize="25" ySize="13" xStretch="true" yStretch="true"/>
+     <Constraints component="COMMENT_INUNITSOFHEADERWORDVALUE" xPos="41" yPos="4" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PLOT" xPos="53" yPos="10" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="REPLOT" xPos="52" yPos="12" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Name of file containing X and Y coordinates along random lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATHNAME<br> Name of file containing X and Y coordinates along random lines.</center></b>
+<pre> Default = NONE
+ Allowed = valid input file
+ 
+ If this file is specified, X and Y coordinates will be read from the
+ file instead of using the values in arrays X_COORD and Y_COORD.
+ 
+ This file must be a CPS self defining file (or a foreign file) containing
+ at least two columns of numbers, with X coordinates in the first column
+ and Y coordinates in the second column, residing in the first section
+ on the file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="X_COORD">
+      <Tip>List of X coordinates along random lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - X_COORD<br> List of X coordinates along random lines.</center></b>
+<pre> Default = none
+ Allowed = real
+ 
+ X_COORD and Y_COORD are the X and Y coordinates of interpolated random
+ lines through 3-D data.  The random lines are connected or separate line
+ segments.  All units are the same as the units in HDR_X and HDR_Y.
+ If (Xi,Yi) = (0,0), that point is not used, and the previous and following
+ line segments are not connected.
+ 
+ For example, given  X_COORD = X1,X2,X3,0,X5,X6
+                and  Y_COORD = Y1,Y2,Y3,0,Y5,Y6 :
+         (X1,Y1) = beginning of first straight line segment.
+         (X2,Y2) = end of first line segment and beginning of second.
+         (X3,Y3) = end of second line segment.
+         (X5,Y5) = beginning of third line segment.
+         (X6,Y6) = end of third line segment.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_COORD">
+      <Tip>List of Y coordinates along random lines.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - Y_COORD<br> List of Y coordinates along random lines.</center></b>
+<pre> Default = none
+ Allowed = real
+ 
+ X_COORD and Y_COORD are the X and Y coordinates of interpolated random
+ lines through 3-D data.  The random lines are connected or separate line
+ segments.  All units are the same as the units in HDR_X and HDR_Y.
+ If (Xi,Yi) = (0,0), that point is not used, and the previous and following
+ line segments are not connected.
+ 
+ For example, given  X_COORD = X1,X2,X3,0,X5,X6
+                and  Y_COORD = Y1,Y2,Y3,0,Y5,Y6 :
+         (X1,Y1) = beginning of first straight line segment.
+         (X2,Y2) = end of first line segment and beginning of second.
+         (X3,Y3) = end of second line segment.
+         (X5,Y5) = beginning of third line segment.
+         (X6,Y6) = end of third line segment.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PLOT">
+      <Tip>Press this button to plot the coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PLOT<br> Press this button to plot the coordinates.</center></b>
+<pre>
+ This button will pop up a gnuplot plot of the (X_COORD,Y_COORD) coordinates
+ of the random lines.  To update this plot after changing these coordinates,
+ you can simply press the REPLOT button.  To delete this plot and open up
+ a new plot, simply press this PLOT button again.  To pop down the plot,
+ simply choose Close on the window manager pulldown menu (upper left corner
+ of the Gnuplot popup).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLOT">
+      <Tip>Press this button to plot the coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - REPLOT<br> Press this button to plot the coordinates.</center></b>
+<pre>
+ This button will replot the (X_COORD,Y_COORD) coordinates using the same
+ gnuplot plot previously used (or a new one if none is currently open).
+ To update this plot after changing these coordinates, you can simply press
+ this REPLOT button again.  To delete this plot and open up a new plot,
+ simply press the PLOT button.  To pop down the plot, simply choose Close
+ on the window manager pulldown (upper left corner of the Gnuplot popup).</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ranline - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ranline">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : RANLINE                    (random line)
+ Category   : miscellaneous
+ Written    : 1989-08-17   by: Tom Stoeckley
+ Revised    : 2006-12-04   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Trace interpolation from random 3D locations to a random line.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process can be used to select interpolated random lines out of 3-D
+ data sets, with optional X-Y dip search.  This process generates diagonal
+ lines (or connected or disconnected straight or bent line segments), with
+ evenly spaced traces along the lines.  Each output trace is interpolated
+ from neighboring traces within a bin rectangle centered at the output trace
+ location.  Dip searches are performed in the (X,Y) directions.
+ 
+ This process is intended to operate on stacked or migrated data.  Although
+ such data is usually arranged on a regular grid, this process has no such
+ requirement.
+ 
+ This process uses the SDIPUTIL primitive to do the dip search and
+ calculate the output traces.
+ 
+ This process contains a subset of the capabilities of the old TERP process.
+ 
+-------------------------------------------------------------------------------
+                         DETAILS OF OPERATION
+ 
+ 1. Within each window, the MAX_SEARCH nearest traces within distances
+    SEARCH_X and SEARCH_Y of the output trace location are used to
+    perform a semblance dip search to determine which dip has the maximum
+    semblance.  Up to a maximum of (2*DIP_MAX_X + 1) times (2*DIP_MAX_Y + 1)
+    dips are tested.  The dip with the maximum semblance is referred to as
+    the dominant dip.  Each window length is WIN_LEN seconds long, and the
+    windows move down the trace one sample at a time.
+ 
+ 2. For each window, the MAX_INTERP nearest traces within distances
+    SEARCH_X and SEARCH_Y of the output trace location are weighted
+    as described in ADVICE FOR USERS below and summed along the dominant
+    dip to form an interpolated trace.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+  1. Parameter FRACMIX specifies the fractional mix performed during
+     interpolation.
+ 
+     FRACMIX=0 means a minimum amount of mixing is done, with all weights
+     inversely proportional to "distance" from the trace output location,
+     defined as SQRT([DX/SEARCH_X]**2 + [DY/SEARCH_Y]**2).  This is
+     appropriate for straight interpolation.
+ 
+     In the above definition for "distance", (DX,DY) is the (X,Y) distance
+     of an individual trace from the trace output location, and
+     (SEARCH_X,SEARCH_Y) is the maximum (X,Y) distance a trace can
+     be from the trace output location to be used for dip search,
+     interpolation, or mixing.
+ 
+     FRACMIX=1.414 or larger means all traces used for interpolation
+     will be weighted equally, regardless of their distances from the
+     interpolated trace output location.  This would be a strong mix
+     (equal-weight stack along dips) rather than an interpolation.
+ 
+     For example, FRACMIX=0.3 means that all traces within "distance"
+     0.3 (as defined above) will have a weight corresponding to
+     distance 0.3 (rather than a larger weight for shorter distance).
+     This would be appropriate if you want to do some mixing while
+     interpolating, so that an individual trace that may happen to
+     lie at the trace output location will not get all the weight.
+ 
+  2. Traces will contribute to a bin (i.e. used for dip search,
+     interpolation, or mixing) only if they fall within distance
+     (SEARCH_X,SEARCH_Y) from the trace output location.  A trace can
+     contribute to more than one bin (i.e. the bins can overlap).
+     However, MAX_SEARCH and MAX_INTERP limit the number of traces that
+     can contribute to a bin by deleting excess traces that are
+     the farthest from the trace output location.
+ 
+  3. Arrays X_COORD and Y_COORD specify the (X,Y) coordinates of
+     interpolated random lines through 3-D data.  The random lines are
+     connected or separate line segments.  All units are the
+     same as the units in HDR_X and HDR_Y.  if (Xi,Yi)=(0,0), that
+     point is not used, and the previous and following line segments
+     are not connected.
+ 
+     For example, given  X_COORD = X1,X2,X3,0,X5,X6
+                    and  Y_COORD = Y1,Y2,Y3,0,Y5,Y6 :
+        (X1,Y1) = beginning of first straight line segment.
+        (X2,Y2) = end of first line segment and beginning of second.
+        (X3,Y3) = end of second line segment.
+        (X5,Y5) = beginning of third line segment.
+        (X6,Y6) = end of third line segment.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 14. 2006-12-04  Stoeckley  Replace pc_register_tab_group w HelpSection line.
+ 13. 2006-08-24  D. Glover  Added NULLIFY statements for Intel compiler.
+ 12. 2006-06-20  Stoeckley  Add pc_register_tab_group for SeisSpace.
+ 11. 2002-09-11  Stoeckley  Add help for PLOT pushbutton; also allow optional
+                             reuse of the same gnuplot for subsequent plots
+                             rather than closing the old and and opening a
+                             new gnuplot; move most of the gnuplot logic
+                             to the new primitive GPLOT.
+ 10. 2002-09-06  Stoeckley  Add gnuplot capability to front end.
+  9. 2002-08-26  Stoeckley  Improve error printouts; add warnings for
+                             parameters which appear to be incorrect.
+  8. 2002-08-05  Stoeckley  Converted from the TERP process in the old system;
+                             previous history refers to the TERP process.
+  7. 1999-02-22  Goodger    Begin using the fortran90 compiler.
+  6. 1993-09-20  Stoeckley  Change FILE to type integer to match IBLK.
+  5. 1992-02-26  Peterson   New option to input SEGX and SEGY values from
+                             a file.
+  4. 1992-01-08  Peterson   Transfer FEET(3) array through TERPBEG and
+                             ENTRY TERPCC2 calling sequence for METHOD=
+                             CLOD.  New cft couldn't find FEET(3).
+  3. 1989-06-02  Stoeckley  Change TERPFAST to version which will not
+                             abort due to faulty compiler optimization,
+                             and add alternate error return to a few
+                             routines.
+  2. 1989-06-21  Stoeckley  Change parameter GATHER to parameter OUTPUT,
+                             with new option OUTPUT=SELECT.
+  1. 1989-08-17  Stoeckley  Fix bug in parameter FRACMIX, and fix an
+                             incorrect print statement.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

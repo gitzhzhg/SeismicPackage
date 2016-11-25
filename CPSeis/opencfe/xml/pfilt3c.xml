@@ -1,0 +1,668 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="pfilt3c" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="PFILT3CPROCESS" title="pfilt3c Process" rows="30" columns="80">
+    <Label keyword="COMMENT_POLARIZATIONFILTERONMCOR" alignment="center">Polarization filter on MC or localized K-L filter on P-wave data</Label>
+    <Label keyword="LABEL_NCHAN" alignment="left">NCHAN=</Label>
+    <Field keyword="NCHAN" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DATA" alignment="left">OPT_DATA=</Label>
+    <Field keyword="OPT_DATA" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_ECOMP" alignment="left">NUM_ECOMP=</Label>
+    <Field keyword="NUM_ECOMP" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MUTE" alignment="left">OPT_MUTE=</Label>
+    <Field keyword="OPT_MUTE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_BEG" alignment="left">VEL_BEG=</Label>
+    <Field keyword="VEL_BEG" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_END" alignment="left">VEL_END=</Label>
+    <Field keyword="VEL_END" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_INC" alignment="left">WIN_INC=</Label>
+    <Field keyword="WIN_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MWIN_NOISE" alignment="left">MWIN_NOISE=</Label>
+    <Field keyword="MWIN_NOISE" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MINOFF" alignment="left">MINOFF=</Label>
+    <Field keyword="MINOFF" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXOFF" alignment="left">MAXOFF=</Label>
+    <Field keyword="MAXOFF" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXSHFT" alignment="left">MAXSHFT=</Label>
+    <Field keyword="MAXSHFT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_THRESH" alignment="left">OPT_THRESH=</Label>
+    <Field keyword="OPT_THRESH" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_THRESH" alignment="left">THRESH=</Label>
+    <Field keyword="THRESH" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NPT_SMOOTH" alignment="left">NPT_SMOOTH=</Label>
+    <Field keyword="NPT_SMOOTH" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_GROUNDROLLFILTERINGOPTIO" alignment="center">Groundroll Filtering Option</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_GFILTER_TYPE" alignment="left">GFILTER_TYPE=</Label>
+    <Field keyword="GFILTER_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GFREQ_LOW_NONE" alignment="left">GFREQ_LOW_NONE=</Label>
+    <Field keyword="GFREQ_LOW_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GFREQ_LOW_FULL" alignment="left">GFREQ_LOW_FULL=</Label>
+    <Field keyword="GFREQ_LOW_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GFREQ_HIGH_FULL" alignment="left">GFREQ_HIGH_FULL=</Label>
+    <Field keyword="GFREQ_HIGH_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GFREQ_HIGH_NONE" alignment="left">GFREQ_HIGH_NONE=</Label>
+    <Field keyword="GFREQ_HIGH_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SIGNALFILTERINGOPTION" alignment="center">Signal Filtering Option</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_SFILTER_TYPE" alignment="left">SFILTER_TYPE=</Label>
+    <Field keyword="SFILTER_TYPE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SFREQ_LOW_NONE" alignment="left">SFREQ_LOW_NONE=</Label>
+    <Field keyword="SFREQ_LOW_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SFREQ_LOW_FULL" alignment="left">SFREQ_LOW_FULL=</Label>
+    <Field keyword="SFREQ_LOW_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SFREQ_HIGH_FULL" alignment="left">SFREQ_HIGH_FULL=</Label>
+    <Field keyword="SFREQ_HIGH_FULL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SFREQ_HIGH_NONE" alignment="left">SFREQ_HIGH_NONE=</Label>
+    <Field keyword="SFREQ_HIGH_NONE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MATCHFILTERINGOPTION" alignment="center">Match Filtering Option</Label>
+    <Border keyword="BORDER3"/>
+    <Label keyword="LABEL_LEN_FILT" alignment="left">LEN_FILT=</Label>
+    <Field keyword="LEN_FILT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD=</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_POLARIZATIONFILTERONMCOR" xPos="4" yPos="1" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NCHAN" xPos="4" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NCHAN" xPos="13" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_DATA" xPos="26" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DATA" xPos="35" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_ECOMP" xPos="52" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ECOMP" xPos="62" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MUTE" xPos="4" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MUTE" xPos="13" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VEL_BEG" xPos="4" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_BEG" xPos="12" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_END" xPos="27" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_END" xPos="35" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="51" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="62" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="4" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="12" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_INC" xPos="27" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_INC" xPos="35" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MWIN_NOISE" xPos="51" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MWIN_NOISE" xPos="62" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MINOFF" xPos="4" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MINOFF" xPos="12" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXOFF" xPos="27" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAXOFF" xPos="35" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXSHFT" xPos="51" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAXSHFT" xPos="62" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_THRESH" xPos="4" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_THRESH" xPos="15" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_THRESH" xPos="27" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="THRESH" xPos="35" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NPT_SMOOTH" xPos="51" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NPT_SMOOTH" xPos="62" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_GROUNDROLLFILTERINGOPTIO" xPos="18" yPos="12" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="13" xSize="63" ySize="5"/>
+     <Constraints component="LABEL_GFILTER_TYPE" xPos="3" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GFILTER_TYPE" xPos="16" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_GFREQ_LOW_NONE" xPos="3" yPos="15" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GFREQ_LOW_NONE" xPos="19" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GFREQ_LOW_FULL" xPos="34" yPos="15" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GFREQ_LOW_FULL" xPos="50" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GFREQ_HIGH_FULL" xPos="3" yPos="16" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GFREQ_HIGH_FULL" xPos="19" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GFREQ_HIGH_NONE" xPos="34" yPos="16" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GFREQ_HIGH_NONE" xPos="50" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SIGNALFILTERINGOPTION" xPos="18" yPos="19" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="20" xSize="63" ySize="5"/>
+     <Constraints component="LABEL_SFILTER_TYPE" xPos="3" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SFILTER_TYPE" xPos="16" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SFREQ_LOW_NONE" xPos="3" yPos="22" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SFREQ_LOW_NONE" xPos="19" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SFREQ_LOW_FULL" xPos="34" yPos="22" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SFREQ_LOW_FULL" xPos="50" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SFREQ_HIGH_FULL" xPos="3" yPos="23" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SFREQ_HIGH_FULL" xPos="19" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SFREQ_HIGH_NONE" xPos="34" yPos="23" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SFREQ_HIGH_NONE" xPos="50" yPos="23" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MATCHFILTERINGOPTION" xPos="18" yPos="26" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="27" xSize="61" ySize="3"/>
+     <Constraints component="LABEL_LEN_FILT" xPos="3" yPos="28" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_FILT" xPos="12" yPos="28" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="31" yPos="28" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="41" yPos="28" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="NCHAN">
+      <Tip>Number of multi-component data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - NCHAN<br> Number of multi-component data.</center></b>
+<pre> Default = 3
+ Allowed = 1 to 5</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DATA">
+      <Tip>Whether to use MC data, or use P-wave data only.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - OPT_DATA<br> Whether to use MC data, or use P-wave data only.</center></b>
+<pre> Default = MCOMP
+ Allowed = P_only
+ If OPT_DATA = MCOMP, use multi-component data.
+ If OPT_DATA = P_only, use P-wave data only.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ECOMP">
+      <Tip>Number of energy components to construct noise model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - NUM_ECOMP<br> Number of energy components to construct noise model.</center></b>
+<pre> Default = 2
+ Allowed = 1 to NCHAN
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MUTE">
+      <Tip>Whether use velocity, or MUTE to define starting window of noise.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - OPT_MUTE<br> Whether use velocity, or MUTE to define starting window of noise.</center></b>
+<pre> Default = VEL_BEG
+ Allowed = VEL_BOTH
+ Allowed = MUTE
+ If OPT_MUTE = VEL_BEG, use vel_beg to compute starting window.
+ If OPT_MUTE = VEL_BOTH, use vel_beg and vel_end to compute
+               starting and ending windows.
+ If OPT_MUTE = MUTE, use mute time as the starting window.
+ VEL_BEG is the velocity of the coherent noise for starting window.
+ VEL_END is the velocity of the coherent noise for ending window.
+ VEL_BEG must be greater than VEL_END.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_BEG">
+      <Tip>Velocity that defines starting window of groundroll/noise.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - VEL_BEG<br> Velocity that defines starting window of groundroll/noise.</center></b>
+<pre> Default =  1000 m/s
+ Allowed = real&gt; 0.0
+ 
+ Start time = (offset / VEL_BEG) + TIM_ADD.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_END">
+      <Tip>Velocity that defines ending window of groundroll/noise.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - VEL_END<br> Velocity that defines ending window of groundroll/noise.</center></b>
+<pre> Default =  700 m/s
+ Allowed = real&gt; 0.0
+ 
+ Start time = (offset / VEL_END) + TIM_ADD.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Additional time to start the window of noise in sec.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - TIM_ADD<br> Additional time to start the window of noise in sec.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ 
+ Start time = (offset / VEL_BEG) + TIM_ADD.
+ End time   = (offset / VEL_END) + TIM_ADD.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the noise window to be filtered in sec.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - WIN_LEN<br> Length of the noise window to be filtered in sec.</center></b>
+<pre> Default = 2.0
+ Allowed = real
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_INC">
+      <Tip>Increment of noise window in sec.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - WIN_INC<br> Increment of noise window in sec.</center></b>
+<pre> Default = 0.3
+ Allowed &gt; 0
+ The window has 50% overlapped in time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MWIN_NOISE">
+      <Tip>Minimum length of noise model in sec.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - MWIN_NOISE<br> Minimum length of noise model in sec.</center></b>
+<pre> Default = 0.10
+ Allowed &gt; = 0
+ If the computed noise model in a given window is less than MWIN_NOISE,
+ this portion of the noise model is ignored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MINOFF">
+      <Tip>Minimum offset to compute noise model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - MINOFF<br> Minimum offset to compute noise model.</center></b>
+<pre> Default = 0
+ Allowed real
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAXOFF">
+      <Tip>Maximum offset to compute noise model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - MAXOFF<br> Maximum offset to compute noise model.</center></b>
+<pre> Default = 1000
+ Allowed &gt; = MINOFF</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAXSHFT">
+      <Tip>Maximum statics shift in sec.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - MAXSHFT<br> Maximum statics shift in sec.</center></b>
+<pre> Default = 0.05
+ Allowed &lt; = WIN_INC/4
+ Maximum statics shift is used internally to align the coherent noise.
+ The output data has no statics shift applied.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_THRESH">
+      <Tip>Whether use SIG_REF, or MEDIAN to threshod noise model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - OPT_THRESH<br> Whether use SIG_REF, or MEDIAN to threshod noise model.</center></b>
+<pre> Default = MEDIAN
+ Allowed = SIG_REF
+ If OPT_THRESH = MEDIAN, use median amplitude of data as reference.
+ If OPT_THRESH = SIG_REF, use computed signals as reference.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="THRESH">
+      <Tip>Multiple of median or N/S value to trigger as coherent noise.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - THRESH<br> Multiple of median or N/S value to trigger as coherent noise.</center></b>
+<pre> Default = 3.0
+ Allowed = real &gt;= 0.0
+ For the SIG_REF option, the data sample is considered to be noise if the
+ noise to signal ratio equals or exceeds THRESH.
+ For the MEDIAN option, the data sample is considered to be noise if the
+ absolute amplitude equals or exceeds THRESH times the median absolute value
+ of the samples within the window of WIN_LEN.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="NPT_SMOOTH">
+      <Tip>The number of points to smooth amplitude envelope.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - NPT_SMOOTH<br> The number of points to smooth amplitude envelope.</center></b>
+<pre> Default = 7
+ Allowed &lt;= 1/4 of WIN_INC in sample
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="GFILTER_TYPE">
+      <Tip>Type of trapezoid gfreq_uency filter to apply (if any).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - GFILTER_TYPE<br> Type of trapezoid gfreq_uency filter to apply (if any).</center></b>
+<pre> Default = ALLPASS
+ Allowed = ALLPASS     (Pass all frequencies from 0.0 to Nyquist)
+ Allowed = BANDPASS    (Pass frequencies from low taper to high taper)
+ Allowed = LOWPASS     (Pass frequencies from 0.0 to high taper)
+ Allowed = HIGHPASS    (Pass frequencies from low taper to Nyquist)
+ Allowed = BANDREJECT  (Reject frequencies from low taper to high taper)
+ 
+ In the GFILTER_TYPE descriptions below, frequency parameters are listed in
+ the required order, from low frequency to high frequency.
+ 
+ If GFILTER_TYPE=ALLPASS, then pass all frequencies from 0.0 frequency to
+ Nyquist (Specification of GFREQ_LOW_NONE, GFREQ_LOW_FULL, GFREQ_HIGH_FULL, and
+ GFREQ_HIGH_NONE parameters irrelevant in this case).
+ 
+ If GFILTER_TYPE=BANDPASS, then reject between 0.0 frequency and GFREQ_LOW_NONE,
+ pass between GFREQ_LOW_FULL and GFREQ_HIGH_FULL, reject between GFREQ_HIGH_NONE
+ and Nyquist, with linear tapers between the pass and reject regions.
+ 
+ If GFILTER_TYPE=LOWPASS, then pass between 0.0 frequency and GFREQ_HIGH_FULL,
+ reject between GFREQ_HIGH_NONE and Nyquist, with a linear taper between pass
+ and reject regions (Specification of GFREQ_LOW_NONE and GFREQ_LOW_FULL
+ parameters irrelevant in this case).
+ 
+ If GFILTER_TYPE=HIGHPASS, then reject between 0.0 frequency and GFREQ_LOW_NONE,
+ pass between GFREQ_LOW_FULL and Nyquist, with a linear taper between pass and
+ reject regions (Specification of GFREQ_HIGH_FULL and GFREQ_HIGH_NONE parameters
+ irrelevant in this case).
+ 
+ If GFILTER_TYPE=BANDREJECT (also known as a "NOTCH" filter), then pass
+ between 0.0 frequency and GFREQ_LOW_NONE, reject between GFREQ_LOW_FULL and
+ GFREQ_HIGH_FULL, pass between GFREQ_HIGH_NONE and Nyquist, with linear tapers
+ between the pass and reject regions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GFREQ_LOW_NONE">
+      <Tip>Frequency where low frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - GFREQ_LOW_NONE<br> Frequency where low frequency taper passes nothing.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the FILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GFREQ_LOW_FULL">
+      <Tip>Frequency where low frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - GFREQ_LOW_FULL<br> Frequency where low frequency taper passes full amplitude.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the GFILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GFREQ_HIGH_FULL">
+      <Tip>Frequency where high frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - GFREQ_HIGH_FULL<br> Frequency where high frequency taper passes full amplitude.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the GFILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GFREQ_HIGH_NONE">
+      <Tip>Frequency where high frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - GFREQ_HIGH_NONE<br> Frequency where high frequency taper passes nothing.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the GFILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SFILTER_TYPE">
+      <Tip>Type of trapezoid gfreq_uency filter to apply (if any).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - SFILTER_TYPE<br> Type of trapezoid gfreq_uency filter to apply (if any).</center></b>
+<pre> Default = ALLPASS
+ Allowed = ALLPASS     (Pass all frequencies from 0.0 to Nyquist)
+ Allowed = BANDPASS    (Pass frequencies from low taper to high taper)
+ Allowed = LOWPASS     (Pass frequencies from 0.0 to high taper)
+ Allowed = HIGHPASS    (Pass frequencies from low taper to Nyquist)
+ Allowed = BANDREJECT  (Reject frequencies from low taper to high taper)
+ 
+ In the SFILTER_TYPE descriptions below, frequency parameters are listed in
+ the required order, from low frequency to high frequency.
+ 
+ If SFILTER_TYPE=ALLPASS, then pass all frequencies from 0.0 frequency to
+ Nyquist (Specification of SFREQ_LOW_NONE, SFREQ_LOW_FULL, SFREQ_HIGH_FULL, and
+ SFREQ_HIGH_NONE parameters irrelevant in this case).
+ 
+ If SFILTER_TYPE=BANDPASS, then reject between 0.0 frequency and SFREQ_LOW_NONE,
+ pass between SFREQ_LOW_FULL and SFREQ_HIGH_FULL, reject between SFREQ_HIGH_NONE
+ and Nyquist, with linear tapers between the pass and reject regions.
+ 
+ If SFILTER_TYPE=LOWPASS, then pass between 0.0 frequency and SFREQ_HIGH_FULL,
+ reject between SFREQ_HIGH_NONE and Nyquist, with a linear taper between pass
+ and reject regions (Specification of SFREQ_LOW_NONE and SFREQ_LOW_FULL
+ parameters irrelevant in this case).
+ 
+ If SFILTER_TYPE=HIGHPASS, then reject between 0.0 frequency and SFREQ_LOW_NONE,
+ pass between SFREQ_LOW_FULL and Nyquist, with a linear taper between pass and
+ reject regions (Specification of SFREQ_HIGH_FULL and SFREQ_HIGH_NONE parameters
+ irrelevant in this case).
+ 
+ If SFILTER_TYPE=BANDREJECT (also known as a "NOTCH" filter), then pass
+ between 0.0 frequency and SFREQ_LOW_NONE, reject between SFREQ_LOW_FULL and
+ SFREQ_HIGH_FULL, pass between SFREQ_HIGH_NONE and Nyquist, with linear tapers
+ between the pass and reject regions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SFREQ_LOW_NONE">
+      <Tip>Frequency where low frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - SFREQ_LOW_NONE<br> Frequency where low frequency taper passes nothing.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the FILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SFREQ_LOW_FULL">
+      <Tip>Frequency where low frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - SFREQ_LOW_FULL<br> Frequency where low frequency taper passes full amplitude.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the SFILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SFREQ_HIGH_FULL">
+      <Tip>Frequency where high frequency taper passes full amplitude.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - SFREQ_HIGH_FULL<br> Frequency where high frequency taper passes full amplitude.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the SFILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SFREQ_HIGH_NONE">
+      <Tip>Frequency where high frequency taper passes nothing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - SFREQ_HIGH_NONE<br> Frequency where high frequency taper passes nothing.</center></b>
+<pre> Default =  -
+ Allowed = Nyquist&gt;=real&gt;=0.0
+ For more information, see help for the SFILTER_TYPE parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_FILT">
+      <Tip>Number of points for the match filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - LEN_FILT<br> Number of points for the match filter.</center></b>
+<pre> Default = 5
+ Allowed = int &gt;= 0
+ It is usually between 3 to 9 points. If the filter length is too long,
+ the match filter may remove the primary events as well as noise.
+ If LEN_FILT = 0, No match filter applied</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - DIAG_LOAD<br> Diagonal load, in percent.</center></b>
+<pre> Default = 3
+ Allowed = real&gt;=0.0
+ Diagonal load helps to stablize the match filter.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>pfilt3c - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="pfilt3c">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : PFILT3C
+ Category   : filters
+ Written    : 2006-10-31   by: Stephen Chiu
+ Revised    : 2007-01-03   by: Stephen Chiu
+ Maturity   : production
+ Purpose    : Polarization filter on MC/localized K-L filter on P data
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ The polarization filter is a time-variant adaptive filter designed to remove
+ coherent noise such as groundroll and reverberation on the multi-component
+ (2C/3C/4C) data.  Analytic signals are first computed by combining input
+ data and input data after Hilbert transform. The starting window of the
+ noise model is either based on the user-defined mute or noise velocity.
+ A complex SVD first transforms the data into complex eigen space.
+ In general, the groundroll is a dispersive signal with approximately
+ elliptical particle motion, thus the groundroll energy typically concentrates
+ on the first two largest eigenvalues and eigenvectors. The groundroll noise
+ model can be constructed from the first two largest eigenvalues and
+ eigenvectors. The noise model is then adaptively subtracted from
+ the input data. This polarization filter can be extended to P-wave data.
+ For the P-wave data case, three adjacent traces can be used to simulate
+ a MC data set.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ For multi-component case, input data consists of a gather of traces in a
+ single receiver station. For example of a 3C recording, the input gather
+ consists of 3 traces, one P-wave trace and 2 shear-wave traces. The P-wave
+ trace should be the first trace and followed by shear-wave traces within
+ the gather. The BUNCH process can be used to combine 3C traces into a gather.
+ 
+ For P-wave data, the input data consists of a gather with a number
+ (usually 3) of adjacent traces. For the 3D data, it is recommended
+ to perform noise attenuation on the receiver-line domain and the entire
+ 3D volume is processed through receiver line by receiver line.
+ At the end of each receiver line, it may not have enough traces to form a
+ complete gather. For example, we define a complete gather to have 3 traces
+ and may have 1 or 2 traces at the end of the receiver line, the program
+ automatically accounts for this case. The BUNCH process can be used to
+ combine a number of adjacent traces into a gather with HONOR_HDR = yes,
+ and HDR_TO_HONOR = receiver line number.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+      Date         Author    Description
+      ----         ------    -----------
+ 1.  2007-01-03   S.Chiu     Created original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

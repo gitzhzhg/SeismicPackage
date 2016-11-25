@@ -1,0 +1,56 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                              print_path
+#-------------------------------------------------------------------------------
+#                              DESCRIPTION
+#
+# This script provides a convenient way to print a path-type environment variable
+# in a readable manner, with each component of the path on a separate line.
+#
+# To call this script, simply run the following:
+#
+#                         print_path  NAME NUMBER
+#
+# where   NAME   is the name of the path-type environment variable to print.
+# where  NUMBER  is the maximum number of components to print (optional).
+#
+# Examples of path-type environment variables are these:
+#
+#      PATH   MANPATH   LD_LIBRARY_PATH   XFILESEARCHPATH   CLASSPATH
+#-------------------------------------------------------------------------------
+
+if ($1 == "") exit
+ 
+set name   = $1
+set number = $2
+set value  = `printenv $name`
+
+if ($value == "") then
+  echo $name ========
+  exit
+endif
+ 
+set components = "$value"
+set kount      = 0
+
+while (true != false)
+  set keep = "$components"
+  set components = "$components:s/:/ /"
+  if("$keep" == "$components") break
+end
+
+foreach component ($components)
+  if($component == "") exit
+  if ($kount == $number) then
+     echo $name \(+more\)
+     break
+  endif
+  @ kount = $kount + 1
+  echo $name \($kount\) ======== $component
+end
+
+
+#-------------------------------- end -------------------------------------##
+#-------------------------------- end -------------------------------------##
+#-------------------------------- end -------------------------------------##
+

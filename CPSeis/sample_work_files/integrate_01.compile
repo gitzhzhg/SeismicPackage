@@ -1,0 +1,10 @@
+#!/bin/sh -x
+set -x 
+unalias -a 
+. ~/.bashrc 2> /dev/null 
+cd /apps/fusiongeo/cpseis/sample_work_files
+ifort -g -O2 -o integrate_01.exe \
+-I/homes/3DGeo/bmenger/cpseis/platforms/x86_64_intel91_lam integrate_01.f90 \
+-L/homes/3DGeo/bmenger/cpseis/platforms/x86_64_intel91_lam/lib -lcps \
+-L/apps/fusiongeo/thirdparty/fftw-2.1.5/platforms/x86_64_intel91/lib -lfftw -lrfftw \
+-L/apps/fusiongeo/thirdparty/lam-7.0.6/platforms/x86_64_intel91/lib -lmpi -llam -llamf77mpi -lutil -lpthread -lm 

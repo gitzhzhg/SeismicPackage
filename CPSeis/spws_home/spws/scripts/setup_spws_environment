@@ -1,0 +1,59 @@
+#! /bin/csh -f
+
+
+##------------------- set general environment variables --------------------##
+##------------------- set general environment variables --------------------##
+##------------------- set general environment variables --------------------##
+
+setenv SPWSDIR            ${CPSEIS_INSTALL_DIR}/spws_home
+setenv SPWSINSTALLDIR     $SPWSDIR
+setenv XAPPLRESDIR        $HOME/app-defaults
+#source                    /apps/cop/bin/copenviron.csh
+
+if ($?HOST == 0) then
+  setenv HOST `uname -n`
+endif
+
+#setenv JAVA_HOME ${SPWSDIR}/java/${ARCHITECTURE}/jdk6
+
+##------------------- set configuration files ---------------------##
+##------------------- set configuration files ---------------------##
+##------------------- set configuration files ---------------------##
+
+setenv cps_config_file ${SPWSINSTALLDIR}/etc/cps_config.dat
+
+if ($?JSCFG == 0) then
+  setenv JSCFG ${SPWSINSTALLDIR}/config/jsconfig.dat
+endif
+
+
+#------------------------ reset paths -----------------------------##
+#------------------------ reset paths -----------------------------##
+#------------------------ reset paths -----------------------------##
+
+unsetenv LD_LIBRARY_PATH
+source ${SPWSINSTALLDIR}/scripts/spws_lib_path
+unsetenv CLASSPATH
+source ${SPWSINSTALLDIR}/scripts/spws_class_path
+unsetenv PATH
+setenv PATH /usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/sbin:/apps/cop/bin
+setenv PATH $SPWSINSTALLDIR/bin/${ARCHITECTURE}:$PATH
+setenv PATH $SPWSINSTALLDIR/bin:$PATH 
+
+
+##------------- add to xfilesearchpath environment variable ----------------##
+##------------- add to xfilesearchpath environment variable ----------------##
+##------------- add to xfilesearchpath environment variable ----------------##
+
+if ($?XFILESEARCHPATH == 0) then
+  setenv XFILESEARCHPATH \
+    /usr/X11R6/lib/X11/%T/%N%S:/usr/lib/X11/%T/%N%S:$SPWSINSTALLDIR/app-defaults/%N
+else
+  setenv XFILESEARCHPATH \
+    $SPWSINSTALLDIR/app-defaults/%N:$XFILESEARCHPATH
+endif
+
+
+#-------------------------------- end -------------------------------------##
+#-------------------------------- end -------------------------------------##
+#-------------------------------- end -------------------------------------##

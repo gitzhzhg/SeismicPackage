@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="synbp" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SYNBPPROCESS" title="SYNBP Process" rows="24" columns="80">
+    <Label keyword="COMMENT_SYNTHETICSFORBROADCASTPA" alignment="center">Synthetics for Broadcast Pattern testing</Label>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INC" alignment="left">TIM_INC=</Label>
+    <Field keyword="TIM_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PEAK_FREQ" alignment="left">PEAK_FREQ=</Label>
+    <Field keyword="PEAK_FREQ" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="MP_X_GRID_ARRAYSET" label="MP_X_GRID    MP_Y_GRID    OFFSET       AZIMUTH">
+     <Array keyword="MP_X_GRID" type="float" maxLength="13 " columnName="MP_X_GRID" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="MP_Y_GRID" type="float" maxLength="13 " columnName="MP_Y_GRID" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="OFFSET" type="float" maxLength="13 " columnName="OFFSET" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="AZIMUTH" type="float" maxLength="12 " columnName="AZIMUTH" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_SYNTHETICSFORBROADCASTPA" xPos="10" yPos="1" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="3" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="15" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INC" xPos="3" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INC" xPos="15" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="3" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="15" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PEAK_FREQ" xPos="3" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PEAK_FREQ" xPos="15" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MP_X_GRID_ARRAYSET" xPos="3" yPos="8" xSize="54" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TIM_BEG">
+      <Tip>Time, in seconds, for the first unit amplitude spike on traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - TIM_BEG<br> Time, in seconds, for the first unit amplitude spike on traces.</center></b>
+<pre> Default = TSTRT
+ Allowed = real
+ Time, in seconds, for the first unit amplitude spike on output traces.
+ Spikes on output traces are of unit amplitude and have alternating polarity.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INC">
+      <Tip>Spacing, in seconds, between unit amplitude spikes on traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - TIM_INC<br> Spacing, in seconds, between unit amplitude spikes on traces.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ Spacing, in seconds, between unit amplitude spikes on output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Time, in seconds, for the last unit amplitude spike on traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - TIM_END<br> Time, in seconds, for the last unit amplitude spike on traces.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TSTRT
+ Time, in seconds, for the last unit amplitude spike on output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PEAK_FREQ">
+      <Tip>Peak frequency in Hz of for the Ricker wavelet.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - PEAK_FREQ<br> Peak frequency in Hz of for the Ricker wavelet.</center></b>
+<pre> Default = 45
+ Allowed = real &gt;= 0.0
+ If PEAK_FREQ &gt; 0.0, then it is used as a parameter in calculating a Ricker
+ wavelet that will be applied to the output traces.  [More documentation on
+ the Ricker wavelet is found in the GENFILT process.]
+ 
+ If PEAK_FREQ = 0.0, then no wavelet will be applied to the output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MP_X_GRID">
+      <Tip>Midpoint x-grid value for output traces (header word 7 value).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - MP_X_GRID<br> Midpoint x-grid value for output traces (header word 7 value).</center></b>
+<pre> Default = -
+ Allowed = real (linked array, 50)
+ Linked array of midpoint x-grid values for output traces (header word 7
+ values).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MP_Y_GRID">
+      <Tip>Midpoint y-grid value for output traces (header word 8 value).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - MP_Y_GRID<br> Midpoint y-grid value for output traces (header word 8 value).</center></b>
+<pre> Default = -
+ Allowed = real (linked array, 50)
+ Linked array of midpoint y-grid values for output traces (header word 8
+ values).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFFSET">
+      <Tip>Linked array of offset values for output traces, in feet or meters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - OFFSET<br> Linked array of offset values for output traces, in feet or meters.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0 (linked array, 50)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AZIMUTH">
+      <Tip>Linked array of azimuth values for output traces, in degrees.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - AZIMUTH<br> Linked array of azimuth values for output traces, in degrees.</center></b>
+<pre> Default = -
+ Allowed = real (linked array, 50)
+ Azimuth value is the angle measured clockwise (looking down) from north to the
+ direction from source to receiver, in degrees.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>synbp - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="synbp">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SYNBP   (Synthetics for Broadcast Pattern testing)
+ Category   : synthetics
+ Written    : 2001-02-14   by: Stephen Chiu
+ Revised    : 2007-01-03   by: Bill Menger
+ Maturity   : production
+ Purpose    : Generate synthetic traces for broadcast pattern testing.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ SYNBP creates synthetic traces to use as input to Kirchhoff migration
+ routines for broadcast pattern testing.  For each output trace, the user must
+ specify the midpoint grid coordinates (header words 7 and 8), the offset and
+ the azimuth.  From the user specified parameter values and the grid global,
+ the process calculates grid and surveyed coordinate values for source,
+ midpoint and receiver and sets the header words appropriately.
+ 
+ Sample values for output traces are zero except for unit amplitude spikes that
+ alternate in polarity.  Spikes start at time TIM_BEG seconds, end at time
+ TIM_END seconds and are spaced TIM_INC seconds apart.
+ 
+ The PEAK_FREQ is used to calculate a Ricker wavelet which is applied to the
+ output traces.  If PEAK_FREQ = 0.0, then no wavelet is applied to the
+ output traces.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+ 7.  2007-01-03  B. Menger   Correct center of spike by one sample down, fix the
+                             error correction for front end using traps, correctly
+                             handle traces that start before time = 0.0.
+ 6.  2006-09-11  Stoeckley   Add call to pc_register_array_names for SeisSpace.
+ 5.  2006-01-10  B. Menger   Removed Unused Variables.
+ 4.  2002-07-10  S.Chiu      Remove EZGUI warning
+ 3.  2002-07-01  S.Chiu      Set unused headers to zero
+ 2.  2002-03-04  S.Chiu      Set Need_label = .true.
+ 1.  2001-02-14  S.Chiu      Original Version
+ 
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

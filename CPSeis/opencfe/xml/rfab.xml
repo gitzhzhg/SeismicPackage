@@ -1,0 +1,333 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="rfab" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="RFABPROCESS" title="RFAB Process" rows="24" columns="80">
+    <Label keyword="COMMENT_RESIDUALPHASEBALANCE" alignment="center">Residual Phase Balance</Label>
+    <Label keyword="COMMENT_BALANCEEVENTPHASESINCMPG" alignment="center">Balance event phases in CMP gathers</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE =</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_WAVELETS" alignment="left">NUM_WAVELETS =</Label>
+    <Field keyword="NUM_WAVELETS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_WAVELET" alignment="left">LEN_WAVELET =</Label>
+    <Field keyword="LEN_WAVELET" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_RESIDUALPHASEBALANCE" xPos="28" yPos="1" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BALANCEEVENTPHASESINCMPG" xPos="23" yPos="2" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="28" yPos="4" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="43" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_WAVELETS" xPos="28" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_WAVELETS" xPos="43" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_WAVELET" xPos="28" yPos="8" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_WAVELET" xPos="43" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Option of type of trace(s) to output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - MODE<br> Option of type of trace(s) to output.</center></b>
+<pre> Default = PHOPT
+ Allowed = PHOPT     (Output phase optimized CMP gathers.)
+ Allowed = STACK     (Output estimated stacked trace, one for each CMP.)
+ Allowed = MODEL     (Output modeled CMP gathers.  The model CMP gathers are
+                     created by convolving the estimated wavelet for each
+                     offset with the stacked trace.)
+ Allowed = WAVELETS  (Output estimated wavelets - vary with time and offset.)
+ Allowed = RESID     (Output the input CMP minus the modeled CMP gathers.)
+ Allowed = EVENTS    (Output estimated stacked trace repeated over offset.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_WAVELETS">
+      <Tip>Number of wavelets to model per trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - NUM_WAVELETS<br> Number of wavelets to model per trace.</center></b>
+<pre> Default = nint(2.0 * trace_length)
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_WAVELET">
+      <Tip>Length of wavelets, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - LEN_WAVELET<br> Length of wavelets, in seconds.</center></b>
+<pre> Default = 0.10
+ Allowed = real &gt; 0
+ LEN_WAVELET must be a whole number multiple of DT.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rfab - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="rfab">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : RFAB   (Residual Phase Balance)
+ Category   : filters
+ Written    : 1990-05-31   by: Bill Harlan
+ Revised    : 2006-06-12   by: B. Menger
+ Maturity   : production
+ Purpose    : Balance event phases in CMP gathers.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ RFAB will adjust the phases of events locally in order to optimize the
+ coherence of flattened events in the CMP gather.
+ 
+   1.  Data are modeled with flat events and with convolutional wavelets that
+   change over both offset and time.   The data are modeled with the transform
+ 
+          data(x,t) = (sum over t') stack(t') wavelet(t - t', t', x).
+ 
+   Parameter defaults are set so that wavelets are allowed to change slowly
+   over the second dimension, t'.
+ 
+   2.  The estimated wavelets are used to deconvolve the original data and
+   encourage flat moveout.  The wavelets and flat events are estimated by
+   least-squares inversion.  Deconvolving the original data optimizes its
+   phase.
+ 
+ 
+ Mode of Operation
+ 
+ RFAB can operate in six different modes.
+ 
+   PHBAL     (Output phase optimized CMP gathers.)
+ 
+   STACK     (Output estimated stacked trace, one stacked trace for each CMP.)
+ 
+   EVENTS    (Output estimated stacked trace repeated over offset.)
+ 
+   MODEL     (Output modeled CMP gathers.  The model CMP gathers are created
+             by convolving the estimated wavelet for each offset with the
+             stacked trace.)
+ 
+   WAVELETS  (Output estimated wavelets that vary with time and offset.)
+ 
+   RESID     (Output the input CMP gathers minus the modeled CMP gathers.)
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Input Traces
+ 
+ RFAB requires input traces to be gathered into CMP gathers with NMO
+ correction applied.
+ 
+ 
+ Run-time
+ 
+ RFAB is very CPU intensive.  Run-time may be reduced by limiting the time
+ range of the input data and/or by reducing the number of wavelets.
+ 
+ 
+ Setting NUM_WAVELETS
+ 
+ For the same input trace length, a larger value of NUM_WAVELETS will increase
+ output event coherence and a decrease in the value of NUM_WAVELETS will
+ decrease output event coherence.  Wavelets are allowed to vary slowly in time
+ with this variation determined by the input trace length and the value of
+ NUM_WAVELETS.  The default value of NUM_WAVELETS is equivalent to one wavelet
+ for each 0.5 second of trace length.  This is usually an appropriate trial
+ value for testing.
+ 
+ 
+ Data Integrity
+ 
+ RFAB is intended to increase event continuity within output CMP gathers.
+ Depending on the parameterization, coherence enhancement may be excessive.
+ Always compare the RFAB output with the input CMP gathers to insure that data
+ integrity has not be compromised.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 17. 2006-06-12  B. Menger    Removed Unused Variables.
+ 16. 2005-01-17  B Lucas      Fixed problem so that defaults still appear
+                              if GATHER is not in the process list.
+ 15. 2004-03-03  R Selzler    Fixed fix for 1 trace CMP input.
+ 14. 2004-02-11  R Selzler    Fixed problem with 1 trace CMP input.
+ 13. 2002-08-26  Goodger      Change default on NUM_WAVELETS parameter.
+                              Add pcps control cards for parallel processing.
+ 12. 2001-01-29  Chiu         Fix mismatch between old and new CPS.
+ 11. 2000-12-08  Stoeckley    Change wrapup flag.
+ 10. 2000-09-22  Coleman      Convert to new system.
+  9. 1999-02-22  Goodger      Begin using the fortran90 compiler.
+  8. 1994-06-29  Harlan       Ignore bottom mute of 0, uninitialized.
+  7. 1994-04-29  Harlan       Add bottom mutes.
+  6. 1993-02-12  Harlan       Fix RFABCOMP for bottom zero padding.
+  5. 1992-11-16  Harlan       Minor adjustment of previous change.
+  4. 1992-11-06  Harlan       Change spacing of wavelets for IDO=3.
+  3. 1992-10-26  Harlan       Add automatic remuting of all possible outputs.
+  2. 1990-11-09  Ball         CFT77 change  IWRK was INTEGER &amp; POINTER
+  1. 1990-05-31  Harlan       ORIGINAL VERSION
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

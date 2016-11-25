@@ -1,0 +1,356 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+#   Name   : compare
+#   Written: 2004-04-23   by: Tom Stoeckley
+#   Revised: 2004-04-23   by: Tom Stoeckley
+#   Purpose: Compare local SPWS files with CPS files to look for differences.
+#
+#------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#------------------------------------------------------------------------------
+#                            DOCUMENTATION
+#
+# This script compares local ~spws files with those in ~sps directories and
+# lists the results.  The intention is to make it easy for an SPWS developer
+# to see what ~spws files might be duplicated in ~sps, and whether they match.
+#
+# To run this script, simply type the word compare on the command line,
+# optionally followed by one of these code words:
+#
+#   code "all"      prints a line for each file.
+#   code "matching" prints a line for each matching file only.
+#   code "missing"  prints a line for each missing file only.
+#   code "diff"     prints a line for each non-matching file only.
+#   code "mgdiff"   prints a line for each non-matching file only.
+#   code "xdiff"    prints a line for each non-matching file only.
+#   code "default"  prints a line for each non-matching file only.
+#   code "reverse"  prints a line for each non-matching file in reverse order.
+#   code "multiple" prints a line for each file found more than once.
+#   code "help"     prints help.
+#
+# The user can then do a diff or xdiff to see the details of files which
+# differ.  This can be done simply by triple-clicking on a listed line and
+# then button-2-clicking in another xterm.
+#
+# This script should be run in the ~spws directory containing source code
+# to compare with CPS code.
+#
+# This script makes the following temporary files which it then deletes:
+#   aa_tempfile  (list of source files in ~sps, ~spws, and local directory)
+#   bb_tempfile  (list of source files in ~sps, ~spws, and local directory)
+#     (these file alternate as some entries are deleted with grep -v)
+#
+#-------------------------------------------------------------------------------
+#                          INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#       ARCHITECTURE        (compute node architecture)
+#       SPSDIR              (location of the ~sps home directory)
+#       SPSINSTALLDIR       (location of the ~sps install directory)
+#       SPWSINSTALLDIR      (location of the ~spws install directory)
+#
+# This script needs the following executable in ~stoectr:
+#
+#       ~stoectr/making/$ARCHITECTURE/sps_comparisons
+#
+#------------------------------------------------------------------------------
+#                              DETAILS
+#
+# The CPS directories which are searched depend on the name of the
+# local directory in which this script is executed:
+#
+# For any current working directory:
+#
+#      $SPSDIR/templates/               (all files)
+#
+#      $SPSDIR/alpha/include/           (extensions .h and .hh)
+#      $SPSDIR/alpha/primitives/*/      (extensions .f90 .c and .cc)
+#      $SPSDIR/alpha/processes/*/       (extensions .f90 .c and .cc)
+#
+#      $SPSDIR/beta/include/            (extensions .h and .hh)
+#      $SPSDIR/beta/primitives/*/       (extensions .f90 .c and .cc)
+#      $SPSDIR/beta/processes/*/        (extensions .f90 .c and .cc)
+#      $SPSDIR/beta/programs/*/         (extensions .f90 .c and .cc)
+#      $SPSDIR/beta/scripts/            (all files)
+#
+#      $SPSDIR/production/include/      (extensions .h and .hh)
+#      $SPSDIR/production/primitives/*/ (extensions .f90 .c and .cc)
+#      $SPSDIR/production/processes/*/  (extensions .f90 .c and .cc)
+#      $SPSDIR/production/programs/*/   (extensions .f90 .c and .cc)
+#      $SPSDIR/production/scripts/      (all files)
+#
+# For current working directory "making":
+#
+#      $SPSDIR/etc/                     (all files)
+#      $SPSINSTALLDIR/scripts/          (all files)
+#
+# For current working directory "app-defaults":
+#
+#      $SPWSINSTALLDIR/app-defaults/    (all files)
+#
+#------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#       Date      Author     Description
+#       ----      ------     -----------
+# 1.   2004-04-23 Stoeckley  Made from a similar script in ~stoectr/making.
+#
+#------------------------------------------------------------------------------
+#</history_doc>
+
+
+##--------------------- verify environment variables ------------------------##
+##--------------------- verify environment variables ------------------------##
+##--------------------- verify environment variables ------------------------##
+
+
+if($?ARCHITECTURE == 0 || $ARCHITECTURE == "") then
+     echo environment variable ARCHITECTURE not set
+     exit
+endif
+
+if($?SPSDIR == 0 || $SPSDIR == "") then
+     echo environment variable SPSDIR not set
+     exit
+endif
+
+if($?SPSINSTALLDIR == 0 || $SPSINSTALLDIR == "") then
+     echo environment variable SPSINSTALLDIR not set
+     exit
+endif
+
+
+##------------------------ print variables -------------------------------##
+##------------------------ print variables -------------------------------##
+##------------------------ print variables -------------------------------##
+
+
+echo " "
+echo ARCHITECTURE ======= $ARCHITECTURE
+echo SPSDIR ============= $SPSDIR
+echo SPSINSTALLDIR ====== $SPSINSTALLDIR
+echo " "
+
+
+##---------------------- save command line argument -------------------------##
+##---------------------- save command line argument -------------------------##
+##---------------------- save command line argument -------------------------##
+
+#   code "all"      prints a line for each file.
+#   code "matching" prints a line for each matching file only.
+#   code "missing"  prints a line for each missing file only.
+#   code "diff"     prints a line for each non-matching file only.
+#   code "mgdiff"   prints a line for each non-matching file only.
+#   code "xdiff"    prints a line for each non-matching file only.
+#   code "default"  prints a line for each non-matching file only.
+#   code "multiple" prints a line for each file found more than once.
+#   code "help"     prints help.
+
+#if       ($1 == "all") then
+#     set code = "all"
+#else if  ($1 == "matching") then
+#     set code = "matching"
+#else if  ($1 == "missing") then
+#     set code = "missing"
+#else if  ($1 == "diff") then
+#     set code = "diff"
+#else if  ($1 == "mgdiff") then
+#     set code = "mgdiff"
+#else if  ($1 == "xdiff") then
+#     set code = "xdiff"
+#else if  ($1 == "multiple") then
+#     set code = "multiple"
+#else if  ($1 == "") then
+#     set code = "diff"
+#else
+#     set code = "help"
+#endif
+
+if ($1 == "") then
+     set code = "default"
+else
+     set code = $1
+endif
+
+echo $code  >  aa_tempfile
+
+
+##---------------- save list of CPS scripts and makefiles -----------------##
+##---------------- save list of CPS scripts and makefiles -----------------##
+##---------------- save list of CPS scripts and makefiles -----------------##
+
+
+if ($cwd:t == "making") then
+
+  echo "--> getting list of source files in $SPSINSTALLDIR/scripts  ..."
+  ls $SPSINSTALLDIR/scripts/*           >> aa_tempfile
+
+  echo "--> getting list of source files in $SPSDIR/etc  ..."
+  ls $SPSDIR/etc/*                      >> aa_tempfile
+
+endif
+
+
+##----------- save list of installed SPWS app-defaults files ---------------##
+##----------- save list of installed SPWS app-defaults files ---------------##
+##----------- save list of installed SPWS app-defaults files ---------------##
+
+
+if ($cwd:t == "app-defaults") then
+
+  echo "--> getting list of source files in $SPWSINSTALLDIR/app-defaults  ..."
+  ls $SPWSINSTALLDIR/app-defaults/*            >> aa_tempfile
+
+endif
+
+
+##------------------------- save list of CPS files --------------------------##
+##------------------------- save list of CPS files --------------------------##
+##------------------------- save list of CPS files --------------------------##
+
+
+  echo "--> getting list of source files in $SPSDIR/templates  ..."
+  ls $SPSDIR/templates/*             >> aa_tempfile
+
+  echo "--> getting list of source files in $SPSDIR/alpha  ..."
+  ls $SPSDIR/alpha/include/*.h        >> aa_tempfile
+  ls $SPSDIR/alpha/include/*.hh       >> aa_tempfile
+  ls $SPSDIR/alpha/primitives/*/*.c   >> aa_tempfile
+  ls $SPSDIR/alpha/primitives/*/*.cc  >> aa_tempfile
+  ls $SPSDIR/alpha/primitives/*/*.f90 >> aa_tempfile
+  ls $SPSDIR/alpha/processes/*/*.c    >> aa_tempfile
+  ls $SPSDIR/alpha/processes/*/*.cc   >> aa_tempfile
+  ls $SPSDIR/alpha/processes/*/*.f90  >> aa_tempfile
+
+  echo "--> getting list of source files in $SPSDIR/beta  ..."
+  ls $SPSDIR/beta/include/*.h        >> aa_tempfile
+  ls $SPSDIR/beta/include/*.hh       >> aa_tempfile
+  ls $SPSDIR/beta/primitives/*/*.c   >> aa_tempfile
+  ls $SPSDIR/beta/primitives/*/*.cc  >> aa_tempfile
+  ls $SPSDIR/beta/primitives/*/*.f90 >> aa_tempfile
+  ls $SPSDIR/beta/processes/*/*.c    >> aa_tempfile
+  ls $SPSDIR/beta/processes/*/*.cc   >> aa_tempfile
+  ls $SPSDIR/beta/processes/*/*.f90  >> aa_tempfile
+  ls $SPSDIR/beta/scripts/*          >> aa_tempfile
+
+  echo "--> getting list of source files in $SPSDIR/production  ..."
+  ls $SPSDIR/production/include/*.h        >> aa_tempfile
+  ls $SPSDIR/production/include/*.hh       >> aa_tempfile
+  ls $SPSDIR/production/primitives/*/*.c   >> aa_tempfile
+  ls $SPSDIR/production/primitives/*/*.cc  >> aa_tempfile
+  ls $SPSDIR/production/primitives/*/*.f90 >> aa_tempfile
+  ls $SPSDIR/production/processes/*/*.c    >> aa_tempfile
+  ls $SPSDIR/production/processes/*/*.cc   >> aa_tempfile
+  ls $SPSDIR/production/processes/*/*.f90  >> aa_tempfile
+  ls $SPSDIR/production/scripts/*          >> aa_tempfile
+
+  echo "--> getting list of source files in $SPSDIR/*/programs  ..."
+  ls $SPSDIR/beta/programs/*/*.c     >> aa_tempfile
+  ls $SPSDIR/beta/programs/*/*.cc    >> aa_tempfile
+  ls $SPSDIR/beta/programs/*/*.f90   >> aa_tempfile
+  ls $SPSDIR/production/programs/*/*.c     >> aa_tempfile
+  ls $SPSDIR/production/programs/*/*.cc    >> aa_tempfile
+  ls $SPSDIR/production/programs/*/*.f90   >> aa_tempfile
+
+
+##----------------- save flag marking start of local files -----------------##
+##----------------- save flag marking start of local files -----------------##
+##----------------- save flag marking start of local files -----------------##
+
+
+echo starting_local_files          >> aa_tempfile
+
+
+##------------------------ save list of local files -------------------------##
+##------------------------ save list of local files -------------------------##
+##------------------------ save list of local files -------------------------##
+
+
+if ($cwd:t == "making") then
+
+  echo "--> getting list of all files in local making directory  ..."
+  \ls -F                           >> aa_tempfile
+
+else if ($cwd:t == "app-defaults") then
+
+  echo "--> getting list of all files in local app-defaults directory  ..."
+  \ls -F                           >> aa_tempfile
+
+else
+
+  echo "--> getting list of source files in local directory  ..."
+  ls *.h                           >> aa_tempfile
+  ls *.hh                          >> aa_tempfile
+  ls *.c                           >> aa_tempfile
+  ls *.cc                          >> aa_tempfile
+  ls *.f                           >> aa_tempfile
+  ls *.f90                         >> aa_tempfile
+
+endif
+
+
+##------------------ remove various files from list -----------------------##
+##------------------ remove various files from list -----------------------##
+##------------------ remove various files from list -----------------------##
+
+          # aa_tempfile and bb_tempfile are repeatedly swapped.
+
+echo '--> removing files containing _tempfile  ...'
+grep -v _tempfile < aa_tempfile > bb_tempfile
+
+echo '--> removing files containing /save/     ...'
+grep -v /save/ < bb_tempfile > aa_tempfile
+
+echo '--> removing files containing /obsolete  ...'
+grep -v /obsolete < aa_tempfile > bb_tempfile
+
+
+##---------------- compare local SPWS files and CPS files ------------------##
+##---------------- compare local SPWS files and CPS files ------------------##
+##---------------- compare local SPWS files and CPS files ------------------##
+
+ # need to use aa_tempfile or bb_tempfile, whichever was last modified above.
+
+echo '--> doing comparisons between local SPWS files and CPS files  ...'
+
+~stoectr/making/$ARCHITECTURE/sps_comparisons < bb_tempfile
+
+
+##----------------------- finish up and return ------------------------------##
+##----------------------- finish up and return ------------------------------##
+##----------------------- finish up and return ------------------------------##
+
+
+\rm -f aa_tempfile bb_tempfile
+
+echo '--> finished'
+
+
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+

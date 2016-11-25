@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fkfilt" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FKFILTPROCESS" title="FKFILT Process" rows="20" columns="78">
+    <Label keyword="COMMENT_FKFILTERPROCESS" alignment="center">F-K Filter Process</Label>
+    <Label keyword="COMMENT_PERFORM2DFKFILTERINGOFTR" alignment="center">Perform 2D F-K filtering of trace gathers or sections.</Label>
+    <Label keyword="LABEL_TYPE_FILT" alignment="left">TYPE_FILT=</Label>
+    <Field keyword="TYPE_FILT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PANEL" alignment="left">HDR_PANEL~=</Label>
+    <Field keyword="HDR_PANEL" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PANEL_INIT" alignment="left">PANEL_INIT=</Label>
+    <Field keyword="PANEL_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_TR_IN" alignment="left">NUM_TR_IN=</Label>
+    <Field keyword="NUM_TR_IN" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PANEL_INC" alignment="left">PANEL_INC~=</Label>
+    <Field keyword="PANEL_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <ArraySet keyword="COORDINATES_ARRAYSET" label="COORDINATES  FACTORS">
+     <Array keyword="COORDINATES" type="float" maxLength="13 " columnName="COORDINATES" editable="yes" sensitive="yes" columnSize="13"/>
+     <Array keyword="FACTORS" type="float" maxLength="13 " columnName="FACTORS" editable="yes" sensitive="yes" columnSize="13"/>
+    </ArraySet>
+    <Label keyword="LABEL_XFORM_VERT_SIZE" alignment="left">XFORM_VERT_SIZE=</Label>
+    <Field keyword="XFORM_VERT_SIZE" type="int" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_XFORM_HOR_SIZE" alignment="left">XFORM_HOR_SIZE~=</Label>
+    <Field keyword="XFORM_HOR_SIZE" type="int" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_COORD_UNITS" alignment="left">COORD_UNITS=</Label>
+    <Field keyword="COORD_UNITS" type="string" maxLength="64" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_FKFILTERPROCESS" xPos="31" yPos="0" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_PERFORM2DFKFILTERINGOFTR" xPos="13" yPos="1" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TYPE_FILT" xPos="8" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_FILT" xPos="18" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_PANEL" xPos="33" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PANEL" xPos="45" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PANEL_INIT" xPos="33" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PANEL_INIT" xPos="45" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_TR_IN" xPos="8" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_TR_IN" xPos="18" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PANEL_INC" xPos="33" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PANEL_INC" xPos="45" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="4" yPos="7" xSize="36" ySize="8"/>
+     <Constraints component="COORDINATES_ARRAYSET" xPos="7" yPos="8" xSize="29" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_XFORM_VERT_SIZE" xPos="44" yPos="9" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XFORM_VERT_SIZE" xPos="60" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_XFORM_HOR_SIZE" xPos="44" yPos="10" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XFORM_HOR_SIZE" xPos="60" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COORD_UNITS" xPos="4" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COORD_UNITS" xPos="16" yPos="16" xSize="55" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TYPE_FILT">
+      <Tip>Whether to use dip, wavenumber or demultiple F-K filtering.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - TYPE_FILT<br> Whether to use dip, wavenumber or demultiple F-K filtering.</center></b>
+<pre> Default = DIP
+ Allowed = DIP    (F-K dip filtering)
+ Allowed = WAVE   (F-K wavenumber filtering)
+ Allowed = DEMULT (F-K demultiple filtering)
+ F-K dip filtering is a filter that varies with dip only.
+ 
+ F-K wavenumber filtering is a filter that varies with wavenumber only and is
+ constant over frequency.
+ 
+ F-K demultiple filtering is a special filter used with NMO to perform F-K
+ demultiple filtering.  (See NMO for further documentation.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PANEL">
+      <Tip>Header word used to define input trace groups to be filtered.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - HDR_PANEL<br> Header word used to define input trace groups to be filtered.</center></b>
+<pre> Default = 3
+ Allowed = 1 - NWIH
+ Normally header word 3 should be used for trace gathers and header word 8 for
+ stacked or migrated sections.
+ 
+ The value in header word HDR_PANEL must translate to a different bin
+ for each group of traces that are filtered together.
+ This normally means the header word will be constant within such a group.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PANEL_INIT">
+      <Tip>First value of HDR_PANEL for input trace groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PANEL_INIT<br> First value of HDR_PANEL for input trace groups.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ Values of the HDR_PANEL header word will not be processed if less than
+ PANEL_INIT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR_IN">
+      <Tip>Maximum number of traces in any group to be filtered at once.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - NUM_TR_IN<br> Maximum number of traces in any group to be filtered at once.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0
+ NUM_TR is for memory management only.  It is not used to define trace groups.
+ If greater than the actual maximum, fft computations may be wasted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PANEL_INC">
+      <Tip>Increment between HDR_PANEL values for input trace groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PANEL_INC<br> Increment between HDR_PANEL values for input trace groups.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COORDINATES">
+      <Tip>Array of coordinates for specifying filter (linked with FACTORS).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - COORDINATES<br> Array of coordinates for specifying filter (linked with FACTORS).</center></b>
+<pre> Default = -
+ Allowed = real array (linked)
+ 
+ If TYPE_FILT = DIP, then units of COORDINATES are seconds/trace.
+ 
+ If TYPE_FILT = WAVE, then COORDINATES entries are wavenumbers as labeled by
+ trace count, ie., -num_fft/2 to +num_fft/2, with zero indicating the center
+ of the F-K plane (where num_fft == XFORM_HOR_SIZE).
+ 
+ If TYPE_FILT = DEMULT, then no COORDINATES entries are required or allowed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FACTORS">
+      <Tip>Array of factors for specifying filter (linked with COORDINATES).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - FACTORS<br> Array of factors for specifying filter (linked with COORDINATES).</center></b>
+<pre> Default = -
+ Allowed = real array (linked)
+ Entries in FACTORS are multiplicative filter factors applied at the
+ associated COORDINATES value.  Factor values are linearly interpolated
+ between adjacent coordinate-factor pairs.  Factor values are extrapolated as
+ a constant from the first and last FACTORS entries to the beginning and
+ ending of the natural range of COORDINATES, respectively.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XFORM_VERT_SIZE">
+      <Tip>Vertical extent of the transform region.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - XFORM_VERT_SIZE<br> Vertical extent of the transform region.</center></b>
+<pre> Default = -
+ Allowed = integer
+ 
+ FFT size of the time dimension, along the trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XFORM_HOR_SIZE">
+      <Tip>Horizontal extent of the transform region.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - XFORM_HOR_SIZE<br> Horizontal extent of the transform region.</center></b>
+<pre> Default = -
+ Allowed = integer
+ 
+ FFT Size of the X dimension, across traces in a panel</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COORD_UNITS">
+      <Tip>Units associated with coordinate values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - COORD_UNITS<br> Units associated with coordinate values.</center></b>
+<pre> Default = -
+ Allowed = seconds/trace
+ Allowed = fft bin number
+ 
+ Units associated with coordinate values.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fkfilt - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fkfilt">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FKFILT    (F-K Filter)
+ Category   : filters
+ Written    : 1989-05-05   by: John Reed
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Perform 2D F-K filtering of trace gathers or sections.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ FKFILT provides 2D F-K filtering for gathers and for stacked or migrated
+ sections.  Three types of filter are available:
+ 
+     1. Regular dip (pie-slice) filtering,
+ 
+     2. Wavenumber filtering (the filter can change in the wavenumber
+     direction but is constant over frequency), and
+ 
+     3. A special option to set defaults for F-K demultiple filtering.
+     (F-K demultiple filtering is a special filter used with NMO.  See NMO for
+     further documentation.)
+ 
+ FKFILT also has an option to filter only a convex quadrilateral subset within
+ the input trace group.  This option should be used when noise is localized
+ and it is undesirable to filter the entire trace group.
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Dip Convention for FKFILT
+ 
+ A positive dip in F-K space corresponds to an event in X-T space whose time
+ increases with increasing value of header word 1.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 23. 2006-09-11 Stoeckley  Add call to pc_register_array_names for SeisSpace.
+022. 2006-01-10  B. Menger   Removed Unused Variables.
+ 21. 2001-10-11 SMCook     Minor gui_def section changes due to CFE update.
+ 20. 2001-06-11 Selzler    Corrected dip_factor computation.
+ 19. 2001-04-27 Selzler    Reconverted to new CPS.
+ 18. 2001-03-30 Brad Kruse Correct filter inversion error.  DEMULT mode now
+                           seems to be correct.
+ 17. 2001-03-27 Brad Kruse Correct error in handling traces when the
+                           panel is disregarded (&lt; PANEL_INIT).
+ 16. 2001-03-21 Brad Kruse Convert to new CPS.  Remove PART or SUBSET mode.
+ 15. 1998-11-10 Vunderink  Begin using the f90 compiler.
+ 14. 1997-03-19 Vunderink  Increased memory used by X2KCC and T2FRC
+                           primitives
+ 13. 1997-01-16 Vunderink  Changed SUBSET from a data region bounded by 3
+                           lines to a data region bounded by a convex
+                           quadrilateral.
+ 12. 1992-03-19 Troutt     Add tail mute restore (call MUTEHW).  The mute
+                           restoration here reapplies a 60-mil taper_tim.
+                           This code has been changed to match MUTE's
+                           algorithm.
+ 11. 1990-04-25 Howard     Make compatible with STRIN change.
+ 10. 1990-04-03 Troutt     Correct process name in controlled abort at 1999
+                           (previously said "FKAP").
+ 9.  1989-12-13 Troutt     Add report of number of groups processed at
+                           NTR=0 time. Also fix formatted writes of TMAX
+                           and FMAX for DCODE.
+ 8.  1989-10-05 Troutt     Set linked array counter NFLT to 0 before call
+                           to DCODE so "left over" values won't get used.
+ 7.  1989-09-13 Troutt     Changed logic to use STORAGE for working trace
+                           (and header)arrays instead of using the 2ndary
+                           arrays in the FKF call.  The 2ndary arrays
+                           were renamed to HDR2 and TR2 and are used to
+                           output 1 trace at a time via an internal call
+                           to GATHR.  All of the main logic for the old
+                           2ndary arrays (HDR1, TR1) remains intact,
+                           except that they now reside in storage via
+                           pointers.
+ 6.  1989-08-18 Troutt     Fixed calculations to include TSTRT.
+ 5.  1989-06-01 Reed       Fixed second bug in merge logic
+ 4.  1980-05-31 Reed       Fixed a bug in merging logic
+ 3.  1989-05-26 Reed       Modified for far-near subset filters
+ 2.  1989-05-23 Reed       Running correctly on test profiles.
+ 1.  1989-05-05 Reed       Started modifying FKAP code.
+ 
+------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

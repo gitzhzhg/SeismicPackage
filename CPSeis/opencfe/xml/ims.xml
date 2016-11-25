@@ -1,0 +1,1344 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ims" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="IMSPROCESS" title="IMS Process" rows="24" columns="80">
+    <Label keyword="COMMENT_ITERATEDSTATICESTIMATION" alignment="center">Iterated Static Estimation and Surface Consistent Solution</Label>
+    <Label keyword="COMMENT_INPUTANDOUTPUTTRACESPECI" alignment="center">Input and Output Trace Specifications</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEAD_END" alignment="left">DEAD_END=</Label>
+    <Field keyword="DEAD_END" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INPUTANDOUTPUTSTATICFILE" alignment="center">Input and Output Static File Specifications</Label>
+    <Border keyword="BORDER2"/>
+    <Label keyword="COMMENT_SOURCEFILE" alignment="left">Source file:</Label>
+    <Label keyword="LABEL_HDR_SRC" alignment="left">HDR_SRC=</Label>
+    <Field keyword="HDR_SRC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SX" alignment="left">HDR_SX=</Label>
+    <Field keyword="HDR_SX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SY" alignment="left">HDR_SY=</Label>
+    <Field keyword="HDR_SY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_RECEIVERFILE" alignment="left">Receiver file:</Label>
+    <Label keyword="LABEL_HDR_REC" alignment="left">HDR_REC=</Label>
+    <Field keyword="HDR_REC" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RX" alignment="left">HDR_RX=</Label>
+    <Field keyword="HDR_RX" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_RY" alignment="left">HDR_RY=</Label>
+    <Field keyword="HDR_RY" type="string" maxLength="2" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_SRC">Select PATH_SRC</Button>
+    <Label keyword="EQLAB_PATH_SRC" alignment="left">=</Label>
+    <Field keyword="PATH_SRC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_SRC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_REC">Select PATH_REC</Button>
+    <Label keyword="EQLAB_PATH_REC" alignment="left">=</Label>
+    <Field keyword="PATH_REC" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_REC_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_CORR_FILES" alignment="left">CORR_FILES=</Label>
+    <Field keyword="CORR_FILES" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_CORR" alignment="left">LEN_CORR=</Label>
+    <Field keyword="LEN_CORR" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MS" alignment="center">ms</Label>
+    <Label keyword="LABEL_NO_DEAD" alignment="left">NO_DEAD=</Label>
+    <Field keyword="NO_DEAD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_STATICCALCULATIONPARAMET" alignment="center">Static Calculation Parameters</Label>
+    <Border keyword="BORDER3"/>
+    <Label keyword="LABEL_NUM_ITER" alignment="left">NUM_ITER  =</Label>
+    <Field keyword="NUM_ITER" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CC" alignment="left">HDR_CC  =</Label>
+    <Field keyword="HDR_CC" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REPLACE" alignment="left">REPLACE =</Label>
+    <Field keyword="REPLACE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_STATIC" alignment="left">MAX_STATIC=</Label>
+    <Field keyword="MAX_STATIC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">ms</Label>
+    <Label keyword="LABEL_CC_MIN" alignment="left">CC_MIN  =</Label>
+    <Field keyword="CC_MIN" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USE_CMP" alignment="left">USE_CMP =</Label>
+    <Field keyword="USE_CMP" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONVERGE" alignment="left">CONVERGE  =</Label>
+    <Field keyword="CONVERGE" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_2" alignment="center">ms</Label>
+    <Label keyword="LABEL_NUM_IRLS" alignment="left">NUM_IRLS=</Label>
+    <Field keyword="NUM_IRLS" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USE_RNMO" alignment="left">USE_RNMO=</Label>
+    <Field keyword="USE_RNMO" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_ITERATEDSTATICESTIMATION" xPos="7" yPos="0" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_INPUTANDOUTPUTTRACESPECI" xPos="18" yPos="2" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="3" xSize="76" ySize="3"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="21" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="30" yPos="4" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEAD_END" xPos="40" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEAD_END" xPos="49" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INPUTANDOUTPUTSTATICFILE" xPos="15" yPos="7" xSize="43" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="8" xSize="76" ySize="9"/>
+     <Constraints component="COMMENT_SOURCEFILE" xPos="3" yPos="9" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SRC" xPos="19" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SRC" xPos="27" yPos="9" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SX" xPos="38" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SX" xPos="45" yPos="9" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SY" xPos="49" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SY" xPos="56" yPos="9" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_RECEIVERFILE" xPos="3" yPos="10" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_REC" xPos="19" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_REC" xPos="27" yPos="10" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_RX" xPos="38" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RX" xPos="45" yPos="10" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_RY" xPos="49" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_RY" xPos="56" yPos="10" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_SRC" xPos="3" yPos="11" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_SRC" xPos="18" yPos="11" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SRC" xPos="19" yPos="11" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_SRC_INFO" xPos="19" yPos="12" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_REC" xPos="3" yPos="13" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_REC" xPos="18" yPos="13" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_REC" xPos="19" yPos="13" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_REC_INFO" xPos="19" yPos="14" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CORR_FILES" xPos="19" yPos="15" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CORR_FILES" xPos="30" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_CORR" xPos="38" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_CORR" xPos="47" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MS" xPos="55" yPos="15" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NO_DEAD" xPos="60" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NO_DEAD" xPos="68" yPos="15" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_STATICCALCULATIONPARAMET" xPos="21" yPos="18" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="19" xSize="76" ySize="5"/>
+     <Constraints component="LABEL_NUM_ITER" xPos="7" yPos="20" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ITER" xPos="18" yPos="20" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CC" xPos="34" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CC" xPos="43" yPos="20" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REPLACE" xPos="56" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE" xPos="65" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MAX_STATIC" xPos="7" yPos="21" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_STATIC" xPos="18" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="25" yPos="21" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CC_MIN" xPos="34" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CC_MIN" xPos="43" yPos="21" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_USE_CMP" xPos="56" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USE_CMP" xPos="65" yPos="21" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CONVERGE" xPos="7" yPos="22" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONVERGE" xPos="18" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="25" yPos="22" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NUM_IRLS" xPos="34" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_IRLS" xPos="43" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_USE_RNMO" xPos="56" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USE_RNMO" xPos="65" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are used for the statics solution.
+ Otherwise, only traces with a flag set in header word HDR_FLAG are used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEAD_END">
+      <Tip>Whether to stop before outputting any traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - DEAD_END<br> Whether to stop before outputting any traces.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ 
+ If this parameter is YES, this will be a dead-end process which does not
+ output any traces, but the job uses fewer resources and runs faster.
+ 
+ If this parameter is NO, all input traces will have the newly-derived
+ static shift applied and will be output, in the same order they were
+ received.
+ 
+ Static files and correlation files will always be written, regardless of the
+ value of DEAD_END.
+ 
+ Stopping before outputting any traces reduces the required temporary disk
+ space by a factor of at least 5, and more commonly by about 10 on average.
+ The disk savings are more significant when trace correlation windows are
+ small.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SRC">
+      <Tip>Header word(s) to use to identify source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_SRC<br> Header word(s) to use to identify source locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (source sequential ground position - header word  46)
+ Allowed = GROUP (original source group number      - header word   9)
+ Allowed = LNSP  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = GRID  (source grid coordinates           - header words 33 and 34)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ GROUP coordinates:
+  The original source group number should generally be used for 2D and 3D
+  surveys if a source occupies the same location more than once.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Grid coordinates are not allowed for the SISC process.
+ 
+ Sequential ground position coordinates should not be used for the SISC
+ process for 3D surveys because there is no way to identify separate lines,
+ which must be integrated independently.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SX">
+      <Tip>First header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_SX<br> First header word to use for designating source locations.</center></b>
+<pre> Default = 46
+ Allowed = 46  (source sequential ground position - header word  46)
+ Allowed = 9   (original source group number      - header word   9)
+ Allowed = 29  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 33  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SY">
+      <Tip>Second header word to use for designating source locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_SY<br> Second header word to use for designating source locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (source sequential ground position - header word  46)
+ Allowed = 0   (original source group number      - header word   9)
+ Allowed = 26  (source shotpoint and line number  - header words 29 and 26)
+ Allowed = 34  (source grid coordinates           - header words 33 and 34)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_REC">
+      <Tip>Header word(s) to use to identify receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_REC<br> Header word(s) to use to identify receiver locations.</center></b>
+<pre> Default = SEQU
+ Allowed = SEQU  (receiver sequential ground position - header word  47)
+ Allowed = LNSP  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = GRID  (receiver grid coordinates           - header words 35 and 36)
+ 
+ SEQU coordinates:
+  Normally, if sequential ground position header words have been set in the
+  input dataset, the sequential ground position is a good choice for source
+  and receiver coordinates in 2D and 3D surveys.
+ 
+ LNSP coordinates:
+  Line number and shotpoint header words are generally good choices in 3D
+  surveys.
+ 
+ GRID coordinates:
+  Grid coordinates are less desirable than line number and shotpoint for
+  the following reasons:
+   1. Grid coordinates may not be densely populated, making internal
+       calculations slower, disk use higher, and static and correlation
+       files much larger.
+   2. Statics are calculated only at regular grid intersections.  If
+       sources and receivers are not always located exactly on the
+       intersections then applying the statics files will probably produce
+       somewhat inaccurate results.
+ 
+ Grid coordinates are not allowed for the SISC process.
+ 
+ Sequential ground position coordinates should not be used for the SISC
+ process for 3D surveys because there is no way to identify separate lines,
+ which must be integrated independently.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RX">
+      <Tip>First header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_RX<br> First header word to use for designating receiver locations.</center></b>
+<pre> Default = 47
+ Allowed = 47  (receiver sequential ground position - header word  47)
+ Allowed = 28  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 35  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_RY">
+      <Tip>Second header word to use for designating receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_RY<br> Second header word to use for designating receiver locations.</center></b>
+<pre> Default = 0
+ Allowed = 0   (receiver sequential ground position - header word  47)
+ Allowed = 27  (receiver shotpoint and line number  - header words 28 and 27)
+ Allowed = 36  (receiver grid coordinates           - header words 35 and 36)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_SRC">
+      <Tip>Choose PATH_SRC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - SELECT_PATH_SRC<br> Choose PATH_SRC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC">
+      <Tip>Pathname for the file which will contain source statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_SRC<br> Pathname for the file which will contain source statics.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_SRC = NONE, then no source statics will be calculated.
+ PATH_SRC and PATH_REC cannot both be set to NONE.
+ Static files will will have an extension named after the static process.
+ 
+ For the SISC process, a static increment file with the extension .inc is
+ also saved.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.  The iteration count will
+ be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SRC_INFO">
+      <Tip>Status of PATH_SRC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_SRC_INFO<br> Status of PATH_SRC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_REC">
+      <Tip>Choose PATH_REC using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - SELECT_PATH_REC<br> Choose PATH_REC using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_REC">
+      <Tip>Pathname for the file which will contain receiver statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_REC<br> Pathname for the file which will contain receiver statics.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If PATH_REC = NONE, then no receiver statics will be calculated.
+ PATH_SRC and PATH_REC cannot both be set to NONE.
+ Static files will will have an extension named after the static process.
+ 
+ For the SISC process, a static increment file with the extension .inc is
+ also saved.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.  The iteration count will
+ be included in the file history cards.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_REC_INFO">
+      <Tip>Status of PATH_REC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_REC_INFO<br> Status of PATH_REC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="CORR_FILES">
+      <Tip>Type of static correlation files to save.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - CORR_FILES<br> Type of static correlation files to save.</center></b>
+<pre> Default = TRC8
+ Allowed = TRC8 (save TRCIO byte files with the extension .trc8)
+ Allowed = NONE (do not save correlation files)
+ 
+ The names of the static correlation files will be the same as PATH_SRC and
+ PATH_REC except for the extension.
+ 
+ Choice NONE is not allowed for the FISH and SISC processes.
+ 
+ If there are multiple iterations, files are saved after each iteration,
+ overwriting the previous contents of the file.
+ 
+ A CBYT option allows the correlation files to be plotted and edited easily.
+ This option automatically updates the statics files based on correlation
+ edits.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_CORR">
+      <Tip>Length of each side of the correlation function (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - LEN_CORR<br> Length of each side of the correlation function (milliseconds).</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt;= MAX_STATIC.
+ 
+ The plotted correlations will be twice this length (since both sides are
+ plotted.)
+ 
+ This value, plus the number of iterations, determines the length of the
+ correlation traces output to byte files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NO_DEAD">
+      <Tip>Whether to omit dead traces from the output correlation files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - NO_DEAD<br> Whether to omit dead traces from the output correlation files.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ Setting NO_DEAD = YES may be desirable if the correlation files are very
+ large and consist mostly of dead traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ITER">
+      <Tip>Number of iterations to do to solve the statics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - NUM_ITER<br> Number of iterations to do to solve the statics.</center></b>
+<pre> Default =  6
+ Allowed =  int &gt;= 1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CC">
+      <Tip>Header word used to store the trace's correlation coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_CC<br> Header word used to store the trace's correlation coefficient.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ HDR_CC is the header word used to store the trace's correlation coefficient
+ on the last iteration.
+ 
+ If HDR_CC = 0, then do not store the correlation coefficient.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLACE">
+      <Tip>Replace the stacked trace with the base trace?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - REPLACE<br> Replace the stacked trace with the base trace?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ Whether to replace the stacked trace with the corresponding base trace for
+ forming subsequent base traces?
+ (This has no effect if the base traces are being read from a file.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_STATIC">
+      <Tip>Maximum static shift (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - MAX_STATIC<br> Maximum static shift (milliseconds).</center></b>
+<pre> Default = 40.0
+ Allowed = real &gt; 0.0
+ 
+ This is the maximum static that is solved for in any one iteration.
+ The final static (accumulated over all iterations) could exceed this
+ value for a few ground positions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CC_MIN">
+      <Tip>Minimum correlation coefficient to use for any trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - CC_MIN<br> Minimum correlation coefficient to use for any trace.</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 &lt;= real &lt; 1.0
+ 
+ If the correlation coefficient for an individual correlation is less than
+ CC_MIN, then the static pick from that correlation will not be used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_CMP">
+      <Tip>Whether to use a CMP static term in the Gauss-Seidel solution.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - USE_CMP<br> Whether to use a CMP static term in the Gauss-Seidel solution.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ IMS can include a separate CMP static term in the Gauss-Seidel iterations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONVERGE">
+      <Tip>Convergence criterion (milliseconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - CONVERGE<br> Convergence criterion (milliseconds).</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= 0.0
+ 
+ Iterations are terminated when the maximum absolute change in any static
+ value is less than CONVERGE.  The number of iterations will not exceed
+ NUM_ITER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_IRLS">
+      <Tip>Number of Iteratively Reweighted Least Squares solutions.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - NUM_IRLS<br> Number of Iteratively Reweighted Least Squares solutions.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0
+ 
+ The additional IRLS solutions eliminate outlying static shifts and produce a
+ solution that approaches the median fit to the observed shifts.  The total
+ number of Gauss-Seidel iterations used is NUM_ITER * (NUM_IRLS + 1).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_RNMO">
+      <Tip>Whether to use a residual NMO term in the Gauss-Seidel solution.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - USE_RNMO<br> Whether to use a residual NMO term in the Gauss-Seidel solution.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ IMS can include a separate residual NMO term in the Gauss-Seidel iterations.
+ This term varies with offset only.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="Base Trace Specifications" rows="24" columns="80">
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG=</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END=</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_METHOD" alignment="left">METHOD=</Label>
+    <Field keyword="METHOD" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MSCTFB" alignment="left">MSCTFB=</Label>
+    <Field keyword="MSCTFB" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER4"/>
+    <Border keyword="BORDER5"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT=</Label>
+    <Field keyword="X_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT=</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC=</Label>
+    <Field keyword="X_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC=</Label>
+    <Field keyword="Y_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_X" alignment="left">BINS_X=</Label>
+    <Field keyword="BINS_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_Y" alignment="left">BINS_Y=</Label>
+    <Field keyword="BINS_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GAP_X" alignment="left">GAP_X=</Label>
+    <Field keyword="GAP_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GAP_Y" alignment="left">GAP_Y=</Label>
+    <Field keyword="GAP_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_X" alignment="left">DIP_X=</Label>
+    <Field keyword="DIP_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_Y" alignment="left">DIP_Y=</Label>
+    <Field keyword="DIP_Y" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_INIT_X" alignment="left">BINS_INIT_X=</Label>
+    <Field keyword="BINS_INIT_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_INIT_Y" alignment="left">BINS_INIT_Y=</Label>
+    <Field keyword="BINS_INIT_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_INC_X" alignment="left">DIP_INC_X=</Label>
+    <Field keyword="DIP_INC_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_INC_Y" alignment="left">DIP_INC_Y=</Label>
+    <Field keyword="DIP_INC_Y" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_BASE_IN">Select PATH_BASE_IN</Button>
+    <Label keyword="EQLAB_PATH_BASE_IN" alignment="left">=</Label>
+    <Field keyword="PATH_BASE_IN" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_BASE_IN_INFO" type="string" maxLength="74" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_BASE_OUT">Select PATH_BASE_OUT</Button>
+    <Label keyword="EQLAB_PATH_BASE_OUT" alignment="left">=</Label>
+    <Field keyword="PATH_BASE_OUT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_BASE_OUT_INFO" type="string" maxLength="74" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_FREQ_BEG" xPos="31" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="40" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="53" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="62" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_METHOD" xPos="4" yPos="1" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD" xPos="11" yPos="1" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MSCTFB" xPos="31" yPos="1" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSCTFB" xPos="38" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="53" yPos="1" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="61" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER4" xPos="4" yPos="3" xSize="30" ySize="10"/>
+     <Constraints component="BORDER5" xPos="36" yPos="3" xSize="31" ySize="10"/>
+     <Constraints component="LABEL_HDR_X" xPos="7" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="19" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="39" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="51" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="7" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="19" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="39" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="51" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="7" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="19" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="39" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="51" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_X" xPos="7" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_X" xPos="19" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_Y" xPos="39" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_Y" xPos="51" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GAP_X" xPos="7" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GAP_X" xPos="19" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GAP_Y" xPos="39" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GAP_Y" xPos="51" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_X" xPos="7" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_X" xPos="19" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_Y" xPos="39" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_Y" xPos="51" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_INIT_X" xPos="7" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_INIT_X" xPos="19" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_INIT_Y" xPos="39" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_INIT_Y" xPos="51" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_X" xPos="7" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_X" xPos="19" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_Y" xPos="39" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_Y" xPos="51" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_BASE_IN" xPos="1" yPos="14" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_BASE_IN" xPos="21" yPos="14" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_BASE_IN" xPos="22" yPos="14" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_BASE_IN_INFO" xPos="19" yPos="15" xSize="74" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_BASE_OUT" xPos="1" yPos="16" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_BASE_OUT" xPos="21" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_BASE_OUT" xPos="22" yPos="16" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_BASE_OUT_INFO" xPos="19" yPos="17" xSize="74" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FREQ_BEG">
+      <Tip>Lowest frequency to use for computing correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - FREQ_BEG<br> Lowest frequency to use for computing correlations.</center></b>
+<pre> Default = 5
+ Allowed = real &gt; 0
+ 
+ Bandpass filter is applied only to the base trace being correlated with.
+ Output traces are not bandpass filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>Highest frequency to use for computing correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - FREQ_END<br> Highest frequency to use for computing correlations.</center></b>
+<pre> Default = 0.5*Nyquist
+ Allowed = FREQ_BEG &lt; real &lt; Nyquist
+ 
+ Bandpass filter is applied only to the base trace being correlated with.
+ Output traces are not bandpass filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHOD">
+      <Tip>Method for building the base trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - METHOD<br> Method for building the base trace.</center></b>
+<pre> Default = CORR
+ Allowed = CORR  (Correlate and shift stacked trace windows to form base)
+ Allowed = SDIP  (Do semblance-based dip stack to form base)
+ Allowed = FILE  (Use base traces from TROT file specified by PATH_BASE_IN)
+ Allowed = FILE_THEN_CORR  (Use base traces from TROT file, then CORR method)
+ Allowed = FILE_THEN_SDIP  (Use base traces from TROT file, then SDIP method)
+ 
+ For the IMS process:
+   Method FILE is NOT an allowed option.
+   For method FILE_THEN_CORR, the base traces from the TROT file are used
+    for the first iteration, and method CORR is used to create base traces for
+    the rest of the iterations.
+   For method FILE_THEN_SDIP, the base traces from the TROT file are used
+    for the first iteration, and method SDIP is used to create base traces for
+    the rest of the iterations.
+ 
+ For the RTC process:
+   Methods FILE_THEN_CORR and FILE_THEN_SDIP are NOT allowed options.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSCTFB">
+      <Tip>Maximum Shift in the Central Trace used to Form the Base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - MSCTFB<br> Maximum Shift in the Central Trace used to Form the Base.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ Maximum Shift, in ms, in the Central Trace used to Form the Base.
+ MSCTFB cannot exceed MAX_STATIC.
+ Used for METHOD = CORR and FILE_THEN_CORR only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the semblance window in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_LEN<br> Length of the semblance window in seconds.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ 
+ Used for METHOD = SDIP and FILE_THEN_SDIP only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word designating CMP X grid coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_X<br> Header word designating CMP X grid coordinates.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word designating CMP Y grid coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HDR_Y<br> Header word designating CMP Y grid coordinates.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>Value of header word HDR_X for the center of any CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - X_INIT<br> Value of header word HDR_X for the center of any CMP.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Value of header word HDR_Y for the center of any CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - Y_INIT<br> Value of header word HDR_Y for the center of any CMP.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ For 2D data, this number is normally irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment of header word HDR_X between CMPs (X grid bin width).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - X_INC<br>Increment of header word HDR_X between CMPs (X grid bin width).</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment of header word HDR_Y between CMPs (Y grid bin width).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - Y_INC<br>Increment of header word HDR_Y between CMPs (Y grid bin width).</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ 
+ For 2D data, this number is normally irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_X">
+      <Tip>Number of CMPs to stack in the X grid direction to form base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - BINS_X<br> Number of CMPs to stack in the X grid direction to form base.</center></b>
+<pre> Default = 5
+ Allowed = odd int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_Y">
+      <Tip>Number of CMPs to stack in the Y grid direction to form base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - BINS_Y<br> Number of CMPs to stack in the Y grid direction to form base.</center></b>
+<pre> Default = 1
+ Allowed = odd int &gt; 0
+ 
+ For 2D data, this number should be zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAP_X">
+      <Tip>Number of CMPs to leave as a gap in the X grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - GAP_X<br> Number of CMPs to leave as a gap in the X grid direction.</center></b>
+<pre> Default = 0
+ Allowed = 0 or odd int &gt; 0
+ 
+ Number of CMPs in the X grid direction to leave as a gap in the center of
+  the group of CMPs used for the base trace.
+ GAP_X must be less than BINS_X.
+ Not used if METHOD = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAP_Y">
+      <Tip>Number of CMPs to leave as a gap in the Y grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - GAP_Y<br> Number of CMPs to leave as a gap in the Y grid direction.</center></b>
+<pre> Default = 0
+ Allowed = 0 or odd int &gt; 0
+ 
+ Number of CMPs in the Y grid direction to leave as a gap in the center of
+  the group of CMPs used for the base trace.
+ GAP_Y must be less than BINS_Y.
+ Not used if METHOD = FILE.
+ For 2D data, this number should be zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_X">
+      <Tip>Maximum dip in X grid direction for traces used to form the base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - DIP_X<br> Maximum dip in X grid direction for traces used to form the base.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ Maximum dip in X grid direction, in ms/trace, for traces used to form the
+ base.  Non-zero values allow larger shifts for more distant traces and can
+ help compensate for dips.
+ Not used if METHOD = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_Y">
+      <Tip>Maximum dip in Y grid direction for traces used to form the base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - DIP_Y<br> Maximum dip in Y grid direction for traces used to form the base.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ Maximum dip in Y grid direction, in ms/trace, for traces used to form the
+ base.  Non-zero values allow larger shifts for more distant traces and can
+ help compensate for dips.
+ Not used if METHOD = FILE.
+ For 2D data, this number should be zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_INIT_X">
+      <Tip>Number of CMPs in the X grid direction to use for an initial base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - BINS_INIT_X<br> Number of CMPs in the X grid direction to use for an initial base.</center></b>
+<pre> Default = 1
+ Allowed = odd int &gt; 0
+ 
+ BINS_INIT_X must not exceed BINS_X.
+ Used for METHOD = CORR and FILE_THEN_CORR only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_INIT_Y">
+      <Tip>Number CMPs in the Y grid direction to use for an initial base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - BINS_INIT_Y<br> Number CMPs in the Y grid direction to use for an initial base.</center></b>
+<pre> Default = 1
+ Allowed = odd int &gt; 0
+ 
+ BINS_INIT_Y must not exceed BINS_Y.
+ Used for METHOD = CORR and FILE_THEN_CORR only.
+ For 2D data, this number should be one.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_X">
+      <Tip>CMP X grid dip increment in milliseconds/trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - DIP_INC_X<br> CMP X grid dip increment in milliseconds/trace.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0
+ 
+ Used for METHOD = SDIP and FILE_THEN_SDIP only.
+ If DIP_X is zero, this number is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_Y">
+      <Tip>CMP Y grid dip increment in milliseconds/trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - DIP_INC_Y<br> CMP Y grid dip increment in milliseconds/trace.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0
+ 
+ Used for METHOD = SDIP and FILE_THEN_SDIP only.
+ If DIP_Y is zero, this number is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_BASE_IN">
+      <Tip>Choose PATH_BASE_IN using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - SELECT_PATH_BASE_IN<br> Choose PATH_BASE_IN using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_IN">
+      <Tip>Pathname for input TROT file containing base traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_BASE_IN<br> Pathname for input TROT file containing base traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ Used for METHOD = FILE and FILE_THEN_CORR and FILE_THEN_SDIP only.
+ 
+ For the RTC process:
+   If METHOD = FILE, use base traces from the file PATH_BASE_IN.
+   Otherwise create base traces using the other specified parameters.
+ 
+ For the IMS process:
+   If METHOD = FILE_THEN_CORR or FILE_THEN_SDIP, use this file only for the
+    first iteration.
+   Otherwise create base traces using the other specified parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_IN_INFO">
+      <Tip>Status of PATH_BASE_IN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_BASE_IN_INFO<br> Status of PATH_BASE_IN.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_BASE_OUT">
+      <Tip>Choose PATH_BASE_OUT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - SELECT_PATH_BASE_OUT<br> Choose PATH_BASE_OUT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_OUT">
+      <Tip>Pathname for output TROT file containing base traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_BASE_OUT<br> Pathname for output TROT file containing base traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ Base traces are written to the file PATH_BASE_OUT unless the parameter
+ PATH_BASE_OUT = NONE.  The base traces are output regardless of the
+ specified METHOD (with restrictions specified below).
+ 
+ For the RTC process:
+   If METHOD = FILE, base traces are not output because they would be
+    identical to the input base traces.
+ 
+ For the IMS process:
+   Base traces are written after each iteration, overwriting the previous
+    contents of the file.
+   If METHOD = FILE_THEN_CORR or FILE_THEN_SDIP, base traces are not output
+    after the first iteration because they would be identical to the input
+    base traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_OUT_INFO">
+      <Tip>Status of PATH_BASE_OUT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PATH_BASE_OUT_INFO<br> Status of PATH_BASE_OUT.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN3" title="Correlation Window Specifications" rows="24" columns="80">
+    <Label keyword="LABEL_WIN_OPT" alignment="left">WIN_OPT=</Label>
+    <Field keyword="WIN_OPT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_ADD" alignment="left">WIN_TIM_ADD=</Label>
+    <Field keyword="WIN_TIM_ADD" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_LEN" alignment="left">WIN_TIM_LEN=</Label>
+    <Field keyword="WIN_TIM_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="WIN_COOR_X_ARRAYSET" label="WIN_COOR_XWIN_COOR_YWIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="WIN_COOR_X" type="float" maxLength="10 " columnName="WIN_COOR_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_COOR_Y" type="float" maxLength="10 " columnName="WIN_COOR_Y" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_OPT" xPos="5" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_OPT" xPos="13" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_TIM_ADD" xPos="20" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_ADD" xPos="32" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_TIM_LEN" xPos="42" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_LEN" xPos="54" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="15" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="20" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="30" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X_ARRAYSET" xPos="8" yPos="4" xSize="45" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_OPT">
+      <Tip>Method to use for specifying trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_OPT<br> Method to use for specifying trace windows.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE   (window defined by time measure from mute)
+ Allowed = GRID   (window varies laterally, or same window everywhere)
+ 
+ Segments of the input traces used in this process are defined by these
+ windows.
+ 
+ Option GRID specifies the trace windows by linked arrays of window top and
+ window bottom values which may vary lateraly (spatially) over arbitrarily
+ chosen coordinates.
+ 
+ Option MUTE specifies the trace windows by specifying the time from the
+ mute time to the top of the window, and the length of the window.
+ 
+ Some processes might disable the MUTE option if it is not appropriate
+ for that process.  In this case, the GRID option will be the default
+ and only option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_ADD">
+      <Tip>Time at top of window = mute time + WIN_TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_TIM_ADD<br> Time at top of window = mute time + WIN_TIM_ADD.</center></b>
+<pre> Default = 0.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_TIM_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_TIM_LEN<br> Time at bottom of window = time at top of window + WIN_TIM_LEN.</center></b>
+<pre> Default = 1.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) (one window).
+ Allowed = any number of values &gt;= top of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) (one window).
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ims - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ims">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : IMS      (Iterative CMP Residual Statics)
+ Category   : statics
+ Written    : 1988-08-18   by: Greg Lazear
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Iterated 2D and 3D surface consistent residual statics process.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+  Purpose:       This is a residual static program designed to
+                 derive surface consistent static files from
+                 2D and 3D reflection data.
+ 
+  Method:        IMS is an automated base trace oriented statics process.
+                 Many options are provided for building the base trace,
+                 which is formed by compositing a number of CMP stacked
+                 traces centered on the trace in question.  Within the
+                 industry, processes similar to IMS are often called
+                 "automatic statics".  In contrast to FISH, this process
+                 obtains and picks an individual correlation for each
+                 trace, and then solves the statics by Gauss-Seidel
+                 iterations.
+ 
+  Editing:       This process outputs stacked correlation files in
+                 addition to the statics files.  The correlation files
+                 can be viewed in CBYT in order to help edit the statics
+                 files.  The statics files can also be edited in ISEP
+                 or MSEPITA.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ IMS Operation Summary:
+ 
+   1. Using one of the options, build the base trace centered on the CMP
+      containing the trace in question.
+ 
+   2. Correlate the trace with the base trace, pick the correlation and store
+      the shift value.
+ 
+   3. Repeat steps 1 and 2 for all the pre-stack traces.
+ 
+   4. Decompose the stored static shift values into a surface consistent form
+      by using a Gauss-Seidel iteration scheme.  Setting NUM_IRLS &gt; 0
+      eliminates outlying values, producing a more stable solution.
+ 
+   5. Repeat steps 1 - 4 after applying the calculated shifts.  The base
+      trace should improve with each solution.  4 to 6 iterations are
+      generally used.
+ 
+ 
+ Advantages of IMS:
+ 
+   1. IMS gives very accurate results.
+ 
+   2. The IMS surface consistent decomposition procedure provides more
+      properly surface consistent results than does SISC or FISH.
+ 
+   3. Because IMS is automated, it requires no user intervention once
+      parameters are chosen.
+ 
+   4. IMS provides many options for building the base trace.
+ 
+ 
+ Disadvantages of IMS:
+ 
+   1. IMS works well only on data with small statics remaining.
+ 
+   2. IMS requires fairly good data for reliable operation.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+045. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+044. 2006-01-10  B. Menger  Removed Unused Variables.
+ 43. 2003-06-16  Stoeckley  Rearrange subroutine argument declarations to
+                             remove compiler warning.
+ 42. 2001-10-18  Stoeckley  Add file selection boxes and file status messages.
+ 41. 2001-01-15  Stoeckley  Change wrapup flag.
+ 40. 2000-10-09  Stoeckley  Add missing required documentation section.
+ 39. 2000-08-21  Stoeckley  Converted from old system.
+ 38. 1998-12-15  Vunderink  Begin using the f90 compiler.
+ 37. 1996-09-26  Vunderink  Added RLSTAPE and removed DTSAV keywords.
+ 36. 1996-05-28  Vunderink  Added BYTSAV keyword.
+ 35. 1995-02-22  Troutt     Change defaults (&amp; DOC) to 2.0 for DELTAX and
+                             DELTAY.  Also document that they must be &gt;0.
+ 34. 1994-04-20  Troutt     Correct mispelled variable (NGPX--&gt;NSGPX) in
+                             function ISTATS.  Bug caused improper indexing
+                             of source static arrays when MODE=SSR and
+                             SGP=GRID.
+ 33. 1994-03-03  Troutt     Correct DOC only (for RGP).
+ 32. 1994-03-01  Troutt     Add new parameters DTSAV, STOP, EVERY.
+                             Add a comment to static files indicating the
+                             number of iterations completed.  Assign a new
+                             file (LLFILE) to source static file (no longer
+                             reuse redundancy file).
+                             Also fix bug relating to CMP binning: if XGV1
+                             was input as a value greater than 1st bin
+                             center, negative bin#s resulted and INDEX was
+                             not properly built for sorting the traces.
+                             The statics were computed properly, but the
+                             output traces were not properly sorted.  This
+                             bug would not likely have affected 2D data.
+ 31. 1994-02-11  Troutt     Add error checks for HPALLOC calls.
+ 30. 1992-12-15  Troutt     Abort with message if #TRJ exceeded.
+ 29. 1992-02-21  Troutt     Add handling of tail mute header word 64. Add
+                             call to MUTEHW.
+ 28. 1992-02-07  Troutt     Fix rare problem where base trace is dead
+                             within correlation window but input trace
+                             is not (window for input trace is larger by
+                             2*MXSH).
+ 27. 1991-09-18  Troutt     Delete DTROT files upon completion in order
+                             to save disk space.
+ 26. 1991-09-09  Troutt     Fix call to FILTERG for bandpass filter of
+                             stacked trace ("-1" for #pts in SCTR).
+ 25. 1991-06-20  Troutt     UNICOS fix: Close LFILE before using it for
+                             static file "FILS" so as to avoid conflict due
+                             to its usage as an unformatted redundancy file.
+ 24. 1990-12-07  Peterson   Correct error return argument on calls to
+                             CALL CLOSFIL (ARG1,ARG2,*error return address).
+ 23. 1990-11-07  Ball       Change CARDS from 100 to 200 like NCODE
+ 22. 1990-10-23  Peterson   Include error and abort arguments on calls to
+                             HPALLOC.
+ 21. 1989-02-16  Lazear     Moved bandpass filter to stack traces instead
+                             of base traces.
+ 20. 1989-01-25  Lazear     Fix bug in base trace save by putting the
+                             parameter KSAVE in common.
+ 19. 1989-12-13  Lazear     Move setup of base trace files after index
+                             sort,and fix dynamic allocation of excess
+                             scratch mem.  Save static files before trace
+                             output.
+ 18. 1989-09-19  Lazear     remove restriction on windows due to max.shift
+ 17. 1989-08-01  Lazear     Add option for shift header word (SHDR)
+ 16. 1989-07-20  Lazear     Move conversion of MXSH to sec. after NCODE
+ 15. 1989-05-26  Lazear     Add CMP grid definition parameters
+ 14. 1989-05-05  Lazear     Add base trace file I/O.
+ 13. 1989-05-02  Lazear     Install code for CCHDR and new base forming
+                             routines.
+ 12. 1989-04-26  Lazear     Add METHOD=SDIP,#XICB,#YICB,#XGAP,#YGAP,DELTAX
+                             DELTAY,TSLC parameters, and change GP header
+                             specification.
+ 11. 1989-03-21  Lazear     Add IRLS solution.
+ 10. 1989-03-17  Lazear     Keep track of GP increments.
+  9. 1989-03-15  Lazear     Correct bug in solution I/O
+  8. 1989-01-23  Lazear     Modify for new DTREAD and DTWRITE calls.
+  7. 1988-11-30  Lazear     Add CMP and Residual NMO terms to Gauss-Siedel
+                             solution, and apply running average removal
+                             filter to static soultions after each IMS
+                             iteration.
+  6. 1988-11-14  Lazear     Removed grid-GP calculation,put in static file
+                             creation calls.
+  5. 1988-10-20  Lazear     Rewritten for better handling of 3D and to
+                             allow data in any order.
+  4. 1988-10-05  Lazear     Converted to new CPS call sequence and globals
+  3. 1988-08-26  Lazear     Change to single trace buffer and eliminate
+                             one trace write to disk.
+  2. 1988-08-25  Lazear     Added #TRJ parameter for disk file size, and
+                             add cumulative static arrays CSTATS and CSTATR
+  1. 1988-08-18  Lazear     Original Version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

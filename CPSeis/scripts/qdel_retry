@@ -1,0 +1,87 @@
+#!/bin/sh
+#<CPS_v1 type="AUXILIARY_FILE" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : qdel_retry
+# Category   : stand-alone
+# Written    : 2002-06-21   by: Donna K. Vunderink
+# Revised    : 2002-06-24   by: Donna K. Vunderink
+# Maturity   : production
+# Purpose    : Shell script to retry the qdel command in case of a failure
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This script is used to to retry the qdel command in case of a failure.
+#
+# Usage:
+#       qdel_retry paramters
+#
+# where
+#       paramters  =  qdel parameters
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  2. 2002-06-24  Vunderink  Quit trying if status is 153 Unknown Job Id
+#  1. 2002-06-21  Vunderink  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+# RCS Id : $Id: qdel_retry,v 1.2 2002/06/24 12:02:44 Vunderink prod sps $
+
+
+if [ $# = 0 ]
+then
+echo "Usage: qdel_retry parameters"
+exit 1
+fi
+
+number=0
+number_to_sleep=10
+while [ "$number" -lt 600 ]
+do
+  qdel $*
+  status=$?
+  echo $status
+  if [ $status = 0 -o $status = 153 ]
+     then
+       break
+  fi
+  number=`expr $number + 10`
+  sleep $number_to_sleep
+  number_to_sleep=20
+done
+if [ $status = 1 ]
+then
+exit 1
+fi
+

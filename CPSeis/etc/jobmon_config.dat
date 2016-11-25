@@ -1,0 +1,47 @@
+/* ******************* JOBMON Configuration File***********************************
+                         production version
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                             REVISION HISTORY
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+! 8.  2007-11-08  Goodger    Change lm05 to lm11.  Remove hilo.
+! 7.  2007-08-28  Goodger    Path changes from Mark Wardrop for lmstats and
+!                            netstats.
+! 6.  2004-08-24  SMCook     Removed commands made obsolete by now having Java
+!                             handle lmstats and netstats parsing.
+! 5.  2003-12-01  SMCook     Added jobmon_lmstats_paths & jobmon_netstats_paths,
+!                             and redefined their associated commands to drop
+!                             paths as arguments (reconstructed within jobmon).
+! 4.  2003-11-05  SMCook     Corrected disk_net command path (it's a script).
+! 3.  2003-10-22  SMCook     Changed lmstats and disk_net command paths.
+!                            Added pbs nodes hoeplm05 and hilo001.
+!                            Added tape node hoepodi90.
+! 2.  2003-09-05  SMCook     Added ps and kmig variables.
+! 1.  2003-05-15  SMCook     Took jobmon parameters out of cps_config file and
+!                             started this file instead.  Jobmon code is not
+!                             typically updated in concert with the rest of CPS,
+!                             so this approach facilitates more timely updates
+!                             and less risk in general.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+******************************************************************************** */
+
+jobmon_help                = /usr/app/vendors/sps/web/WEB-INF/classes/com/conoco/jobmon/HelpOverview.html
+jobmon_pbs_queue_names     = A B B1000 B1260 B1390 B1530 P S T
+jobmon_pbs_nodes           = hoeplm11
+jobmon_lmstats_nodes       = hoeplm01
+jobmon_netstats_nodes      = hoeplm02
+jobmon_castats_nodes       = hoeplm02
+jobmon_tdstats_nodes       = hoepodi74 hoepodi90
+jobmon_ibmstats_nodes      = hoepodi74 hoepodi90
+jobmon_lmstats_paths       = "/usr/mdstats/hoeplm01rd/uptime"
+jobmon_netstats_paths      = "/usr/mdstats/hoeplm01rd/netstat"
+jobmon_cmd_tdstats_linux   = /usr/app/vendors/sps/bin/ix86-intel-linux/tpiostat
+jobmon_cmd_tdstats_sol     = /usr/app/vendors/sps/bin/sparc-sun-solaris/tpiostat
+jobmon_cmd_ibmstats_sol    = /usr/app/vendors/sps/bin/sparc-sun-solaris/ibmview
+jobmon_cmd_ps              = "/usr/app/vendors/sps/scripts/job_ps /usr/mdstats/hoeplm01rd/ps"

@@ -1,0 +1,112 @@
+#!/bin/sh
+#<CPS_v1 type="AUXILIARY_FILE"/>
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : xongp
+# Category   : stand-alone
+# Written    : 2004-03-10   by: SMCook
+# Revised    : 2004-03-17   by: SMCook
+# Maturity   : beta
+# Purpose    : Script for executing command with xon (e.g. icps)
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This script executes a command using 'xon' either on the local host or on a
+#  'randomly' selected 'gp' node.
+#
+# Usage: xongp -r "command in quotes"
+#                ...or...
+#        xongp -l "command in quotes"
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#      Date        Author     Description
+#      ----        ------     -----------
+# 2.   2004-03-17  SMCook     Now must specify -r or -l (remote or local).
+# 1.   2004-03-10  SMCook     Initial version.
+# -----------------------------------------------------------------------------
+#</history_doc>
+
+# RCS Id : $Id: xongp,v 1.2 2004/03/18 12:46:50 SMCook prod sps $
+LOCAL=""
+while getopts rl: arg
+do
+    case $arg in
+        r)  LOCAL="FALSE";;
+        l)  LOCAL="TRUE";;
+    esac
+done
+
+if [ "$LOCAL" = "" ]; then
+  echo You must specify -l or -r
+  exit
+fi
+
+shift
+
+
+PID=$$
+NUM_NODES=10
+NODEINDEX=`expr $PID % $NUM_NODES`
+case $NODEINDEX in
+  # put your remote host names here if you want to randomly spread the load between several machines
+  0) XON_HOST=h01.weinmangeoscience.com;;
+  1) XON_HOST=h02.weinmangeoscience.com;;
+  2) XON_HOST=h03.weinmangeoscience.com;;
+  3) XON_HOST=h04.weinmangeoscience.com;;
+  4) XON_HOST=h05.weinmangeoscience.com;;
+  5) XON_HOST=h06.weinmangeoscience.com;;
+  6) XON_HOST=h07.weinmangeoscience.com;;
+  7) XON_HOST=h08.weinmangeoscience.com;;
+  8) XON_HOST=h09.weinmangeoscience.com;;
+  9) XON_HOST=h10.weinmangeoscience.com;;
+esac
+if [ "$LOCAL" = "TRUE" ]; then
+	if [ -z $HOSTNAME ] ; then
+		echo "xongp: must define environment variable HOSTNAME"
+		echo Press ENTER to continue...
+		read answer
+		exit 1
+	fi
+	XON_HOST=$HOSTNAME
+else
+	if [ "$XON_HOST" = "remote_host" ] ; then
+		echo "xongp: no remote host defined, using local host"
+		XON_HOST=$HOSTNAME
+	fi
+fi
+#echo XON_HOST=$XON_HOST ARGS=$*
+#xon $XON_HOST -debug $2
+cmd=$*
+if [ "$XON_HOST" == "$HOSTNAME" ] ; then
+        sh -c "$*"
+else
+        xon $XON_HOST -debug $*
+fi
+
+echo Press ENTER to continue...
+read answer

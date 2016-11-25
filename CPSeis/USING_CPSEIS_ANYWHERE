@@ -1,0 +1,144 @@
+                 USING CPSEIS ANYWHERE                    9 june 2010
+
+----------------------------- INTRODUCTION TO CPSEIS -----------------------------
+----------------------------- INTRODUCTION TO CPSEIS -----------------------------
+----------------------------- INTRODUCTION TO CPSEIS -----------------------------
+
+The CPSeis processing system, which is now open sourced, was called "CPS" at Conoco,
+where it was developed.  CPSeis was remodeled in 1999-2000 to have processing
+modules written in Fortran90 as objects which can be used in any environment.
+This was a deliberate design concept - to be able to use the CPSeis modules anywhere.
+
+Parameters and other informational variables are passed to and from the processing
+module using a Fortran90 module called the "parameter cache".  Seismic traces
+for processing are passed to the module through a subroutine argument list.
+Since CPSeis modules are objects and not executables, they can be used inside
+any program, and no pipes or sockets are needed to supply them with traces.
+
+CPSeis modules (and the parameter cache) also have wrappers which allow them
+to appear as C++ or java classes.  Therefore, CPSeis modules can be used inside
+any C++ or java or Fortran90 program, which can be any processing system or
+any other executable.
+
+----------------------------- COMPONENTS OF CPSEIS -----------------------------
+----------------------------- COMPONENTS OF CPSEIS -----------------------------
+----------------------------- COMPONENTS OF CPSEIS -----------------------------
+
+The CPSeis processing system consists of several components:
+
+ (1) The CPSeis modules themselves, plus the parameter cache and many
+     reusable "primitives" which they can call to do work, such as
+     trace I/O, velocity and static file I/O, and Fourier transforms.
+
+ (2) The "CFE" java frontend for building and submitting processing jobs,
+     which can run on a single node or a cluster.
+
+ (3) The "ICPS" standalone program for running processing jobs on a single node.
+
+ (4) Several Motif X-windows programs such as CBYT (trace viewing and picking),
+     VA (velocity analysis), CFG (field geometry), CSV (cube slice viewer),
+     and MSEPITA (static file editing program).
+
+ (5) Several additional small programs for various purposes.
+
+------------------------------ LOCATION OF CPSEIS ------------------------------
+------------------------------ LOCATION OF CPSEIS ------------------------------
+------------------------------ LOCATION OF CPSEIS ------------------------------
+
+All CPSeis source and object code, including libraries and java classes,
+can be found in a directory tree identified with the environment variable
+CPSEIS_INSTALL_DIR or CPSEIS_HOME.  The platform is identified using the
+environment variable CPSEIS_ARCH.  Some additional libraries which might
+be needed can be found using the environment variables FFTW_DIR and LAM_DIR.
+
+At xxxxxx these environment variables are normally set as follows:
+
+  CPSEIS_INSTALL_DIR    =  /apps/yyyyyy/cpseis
+  CPSEIS_HOME           =  /apps/yyyyyy/cpseis
+  FFTW_DIR              =  /apps/yyyyyy/GPTools/Linux-x86_64/fftw/2.1.5
+  LAM_DIR               =  /apps/yyyyyy/GPTools/Linux-x86_64/lam-7.0.6.2
+  CPSEIS_ARCH           =  x86_64_intel91_lam
+
+The CLASSPATH environment variable must include the following path:
+
+  $CPSEIS_HOME/wrappers/classes
+
+The LD_LIBRARY_PATH environment variable must include to the following paths:
+
+  $CPSEIS_HOME/platforms/$CPSEIS_ARCH/lib
+  $CPSEIS_HOME/wrappers/platforms/$CPSEIS_ARCH/lib
+  $FFTW_DIR/lib                   (if needed)
+  $LAM_DIR/lib                    (if needed)
+
+-------------------- HOW TO USE CPSEIS MODULES IN A PROGRAM --------------------
+-------------------- HOW TO USE CPSEIS MODULES IN A PROGRAM --------------------
+-------------------- HOW TO USE CPSEIS MODULES IN A PROGRAM --------------------
+
+The documentation here provides the information necessary to use CPSeis
+processing modules and primitives in any program.
+
+Link to the following libraries (or the corresponding .so libraries):
+
+  $CPSEIS_HOME/wrappers/platforms/$CPSEIS_ARCH/lib/liborg_cpseis_wrappers_library.a
+  $CPSEIS_HOME/wrappers/platforms/$CPSEIS_ARCH/lib/liborg_cpseis_util_library.a
+  $CPSEIS_HOME/platforms/$CPSEIS_ARCH/lib/libcps.a
+
+You might also need some of these libraries:
+
+  -L$FFTW_DIR/lib -lfftw -lrfftw
+  -L$LAM_DIR/lib -llamf77mpi -llammpi++ -lmpi -llam
+  -L$JAVA_HOME/jre/lib/amd64 -L$JAVA_HOME/jre/lib/amd64/server -ljava -ljvm -lverify
+
+Include the following header file directories in your C++ compiler command:
+
+  -I$CPSEIS_HOME/wrappers/src/org/cpseis/wrappers
+  -I$CPSEIS_HOME/wrappers/src/org/cpseis/util
+  -I$CPSEIS_HOME/src
+  -I$LAM_DIR/include                   (if needed)
+  -I$JAVA_HOME/include                 (if needed)
+  -I$JAVA_HOME/include/linux           (if needed)
+
+Include the following module directory in your Fortran90 compiler command:
+
+  -I$CPSEIS_HOME/platforms/$CPSEIS_ARCH
+
+Include the following header files in your C++ code:
+
+  CpseisXxxx.hh                   (where Xxxx is the CPSeis processing module name)
+  CpseisBase.hh                   (module base class if needed)
+  PCW.hh                          (parameter cache)
+  GTW.hh                          (grid transform if needed)
+
+Import the following classes in your java code:
+
+  org.cpseis.wrappers.CpseisXxxx  (where Xxxx is the CPSeis processing module name)
+  org.cpseis.util.CpseisBase      (module base class if needed)
+  org.cpseis.util.PC              (parameter cache)
+  org.cpseis.util.GridTransform   (grid transform if needed)
+
+Use the following modules in your Fortran90 code:
+
+  xxxx_module                     (where xxxx is the CPSeis processing module name)
+  pc_module                       (parameter cache)
+  grid_module                     (grid transform if needed)
+
+You can look at the following programs to see an example of how to call a CPSeis
+processing module:
+
+  $CPSEIS_HOME/wrappers/src/org/cpseis/examples/TestProgram.cc
+  $CPSEIS_HOME/wrappers/src/org/cpseis/examples/TestProgram.java
+  $CPSEIS_HOME/wrappers/src/org/cpseis/examples/TestFortran.f90
+
+You will note that you need to put globals and module parameters into the parameter
+cache before calling the module's update routine.  You can find what the module
+parameters are for any module by looking at the documentation in the Fortran90
+module file, which can be found in $CPSEIS_HOME/src/.  In C++, the module parameters
+are put in using the function PCW::put, and the global parameters using PCW::putGlobal.
+In java, the corresponding functions are PC.put and PC.putGlobal.  In Fortran90,
+the corresponding functions are pc_put and pc_put_global.  The parameter keywords
+are case-insensitive strings.
+
+-------------------------------------- END --------------------------------------
+-------------------------------------- END --------------------------------------
+-------------------------------------- END --------------------------------------
+

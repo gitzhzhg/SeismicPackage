@@ -1,0 +1,39 @@
+Compiling INT code with jdk1.6
+
+.  Compiling on node lc03
+
+.  Copied the jdk15 directory to jdk16
+
+.  Edit makefile
+   .  Change 15 to 16
+
+.  gmake clean
+
+.  gmake
+
+.  copy new jar file to .../int/jars directory as conocobeta.jar
+
+.  Have the cfebeta script point to the new conocobeta.jar (CLIENT_HOME)
+   Have cfebeta script point to new jdk (JAVA_HOME)
+
+.  Make a new libConocoPhase2.so ??
+     cfebeta came up with old one, but should make
+     makefile in .../int/src/beta/jdk14/com/conoco/cfe/server/messaging/JNILibrary
+     save library in .../int/lib/jdk16/ix86-intel-linux/beta
+
+.  Make the xml14j.jar file
+       did not
+       cfebeta runs with the old jar file but should try and make it on lc01
+#       make in .../int/xml-parser/xml4j_2_0_13/build
+#          There are several korn shell scripts
+#          Set terminal to ksh
+#            edit setupEnvVars.ksh script
+#                change root dir, jdk
+#            . setupEnvVars.ksh   (dot is like source in csh)
+#            compileAllSources.ksh
+       Put into eclipse using script eclipseXmpP on machine lc03
+       Used JDK /apps/geophysics/jdk1.6.0_04
+       Manually made the jar file
+          cd .../int/xml-parser/xml4j_2_0_13/class
+          jar cf xml14j.jar com org
+       install in .../int/jars

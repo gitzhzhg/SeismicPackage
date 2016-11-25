@@ -1,0 +1,1064 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : makefile.cfecustom
+# Category   : stand-alone
+# Written    : 2000-03-17   by: Donna K. Vunderink
+# Revised    : 2008-11-06   by: Karen Goodger
+# Maturity   : beta
+# Purpose    : Include makefile for a quick custom CFE build.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# Used to build a custom CFE library, to compile only custom code on all
+# betalib platforms, and to extract xml from custom code.
+#
+# Requires the following variables to be set by the master makefile:
+#
+#       SRCDIR   = source code directory
+#       INCDIR   = include file directory
+#       LIBDIR   = library directory
+#       MODDIR   = Fortran 90 module file directory
+#       OBJDIR   = object code directory
+#       XMLDIR   = xml file directory
+#       MATURITY = alpha or beta or production
+#       EXCLUDE  = list of source files to exclude from use (optional)
+#       NEED_MPI = whether mpi libraries are needed (yes or no) (default no).
+#  NEED_LANDMARK = whether landmark libraries needed (yes or no) (default no).
+#
+# Allows the following additional variables to be set by the master makefile
+# if you have main programs (including small test programs) to be built in
+# addition to (or instead of) cfecustom:
+#
+#       TARGET_PROGRAMS = list of main programs created by the makefile.
+#       PREFIX          = filename prefix for all source code main programs.
+#
+#       ||  For example, if you set the above variables as follows:
+#       ||        TARGET_PROGRAMS = aaaa bbbb
+#       ||        PREFIX = test_
+#       ||  and if you have the following source files which are main
+#       ||  programs (contain "program" if fortran and "main" if C):
+#       ||        aaaa.f90   bbbb.c   test_xyz.f90   test_abc.c
+#       ||  then the following executables will be built:
+#       ||        aaaa       bbbb     test_xyz       test_abc
+#
+# Requires the following files to be included in the master makefile:
+#
+#       include $(CFECUSTOMDIR)/makefile.cfecustom
+#       -include $(SRCDIR)/makefile.depend
+#
+# The custom code is compiled against against prodlib or betalib or alphalib,
+# depending on the MATURITY variable.  The normal choice for MATURITY is
+# usually beta.
+#
+# This makefile automatically detects and compiles all custom source code
+# in the source code directory.  If this directory contains any source code
+# which should not be used, the filename should be changed to not end in
+# the extension .f or .f90 or .c or .cc (perhaps by adding a suffix such as
+# _notuse or _previous to the filename).  Alternatively, the files to be
+# excluded can be listed in the EXCLUDE variable.
+#
+# Typing "gmake depend" will create an include file called makefile.depend
+# which will contain all required dependencies, including fortran, C, C++,
+# and xml dependencies.  You should type "gmake depend" whenever you make
+# any source code modifications, additions, or deletions which might change
+# the required dependencies.
+#
+# This include file causes gmake to stop with an error message if an error
+# is detected.
+#
+#-------------------------------------------------------------------------------
+#                                  USAGE
+#
+# You must type the following in a platform-specific directory:
+#
+#                            gmake [target]
+#
+# where the optional target name is one of the following choices:
+#
+#     (none)   - compile and build libCFE.so library and icps and extract xml.
+#     all      - compile and build libCFE.so library and icps and extract xml.
+#     program  - compile and build main programs (including test programs).
+#     programs - compile and build main programs (including test programs).
+#     clean    - remove all .o and .mod (module) files.
+#     compile  - only compile your code.
+#  customClean - clean platform directory.
+#     custom   - clean platform directory, compile your code and
+#                 build file source.compile.
+#     lib      - build libCFE.so library.
+#     xmlClean - clean XML only.
+#     xml      - extract XML only.
+#     xmlln    - build symbolic links for custom xml.
+#     depend   - build superproc/superwrap files and makefile.depend.
+#     help     - list the allowed targets and other information.
+#     list     - list some of the macros used and created in this makefile.
+#  makeallOnce - do depend, xmlln, and xml.
+#  makeallMany - do custom and lib.
+#     total    - do makeallOnce and makeallMany.
+#
+#  (or target name can be any specified object file or program such as icps)
+#
+# Note: makeallOnce includes all platform-independent targets
+#                     (which need to be executed on any one platform only).
+# Note: makeallMany includes all platform-specific targets
+#                     (which need to be executed on every platform).
+#
+#-------------------------------------------------------------------------------
+#                                 EXAMPLE
+#
+# Here is an example master makefile:
+#
+#       SRCDIR   = $(HOME)/version4
+#       INCDIR   = $(HOME)/version4
+#       LIBDIR   = $(HOME)/version4/$(PLATFORM)
+#       MODDIR   = $(HOME)/version4/$(PLATFORM)
+#       OBJDIR   = $(HOME)/version4/$(PLATFORM)
+#       XMLDIR   = $(HOME)/cfe/version4
+#       MATURITY = beta
+#
+#       TARGET_PROGRAMS = icps  xptest
+#       PREFIX          = test_
+#       EXCLUDE         = junk.f90  aaaa.c
+#
+#       include ${CFECUSTOMDIR}/makefile.cfecustom
+#
+#       -include ${SRCDIR}/makefile.depend
+#
+#-------------------------------------------------------------------------------
+#                           INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#       SPSDIR               Absolute path to ~sps home directory.
+#       CFECUSTOMDIR         Location of cfecustom makefiles.
+#       CFECUSTOMSCRIPTS     Location of cfecustom scripts.
+#       CFECUSTOMPROGRAMS    Location of cfecustom programs.
+#
+# The following makefile variable must be set:
+#
+#       MATURITY             Set to alpha or beta or production.
+#
+# The following scripts and include files are used:
+#
+#       $(SRCDIR)/makefile.depend
+#       $(CFECUSTOMDIR)/makefile.platforms
+#       $(CFECUSTOMSCRIPTS)/run_ezgui
+#       $(CFECUSTOMSCRIPTS)/copy_from_sps
+#       $(CFECUSTOMSCRIPTS)/make_superproc
+#       $(CFECUSTOMSCRIPTS)/make_dependencies
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+# 54. 2008-11-06  Goodger    Add JAVA_HOME to list target. Add JAVA_LIBS to 
+#                            TARGET_PROGRAMS.
+# 53. 2008-09-09  Goodger    Comment out where I was getting makefile.platforms
+#                            from the current directory and uncomment correct
+#                            statement.
+# 52. 2008-09-08  Goodger    Add target NO_ICPS.  A variable MAKE_ICPS will
+#                            be set in makefile.platforms.  For most 
+#                            platforms it will be set to icps.  On platforms
+#                            where icps does not run properly, it will be set
+#                            to NO_ICPS.  A message will be printed that icps
+#                            is not available for that platform.
+# 51. 2006-10-27  Goodger    Add libraries to link for making icps.
+# 50. 2006-09-07  Goodger    Uncomment INTDIR.
+# 49. 2006-08-24  Goodger    Add FC_O1 due to problems with the 64linuxp60
+#                            platform.
+# 48. 2006-08-22  Goodger    Added JAVA_HOME.
+# 47. 2006-03-20  Goodger    Added OTHER_LIBS to link.
+# 46. 2005-08-25  Stoeckley  Add ~sps/maturity/primitives/auto to INCDIRS.
+# 45. 2004-10-14  Stoeckley  Add variables NEED_MPI and NEED_LANDMARK and
+#                             FC_UNDER; change the "all" target to make xml
+#                             first instead of last (to make it easier to
+#                             notice undefined externals).
+# 44. 2004-07-29  Stoeckley  Remove XMLDIR from -I directives for ezgui (was
+#                             a mistake); add all ~sps primitive source code
+#                             directories to -I directives for ezgui.
+# 43. 2004-05-20  Stoeckley  Add purify target; fix XML2DIR variable to be
+#                             correct when MATURITY is not beta; add XMLDIR
+#                             to -I directives for ezgui.
+# 42. 2003-11-07  Stoeckley  Add directive -DPLATFORM to cfeutil_crou compile.
+# 41. 2003-11-04  Stoeckley  Build superproc/superwrap files instead of super;
+#                             remove variable IS_PG_COMPILER; remove target
+#                             pgln; improve robustness of the xml target.
+# 40. 2003-09-16  Goodger    Change CFEtest to CFEbeta.
+# 39. 2003-08-19  Stoeckley  Exclude certain files from being included on
+#                             the source.compile file; add int_api.f90 to the
+#                             files being copied from the system.
+# 38. 2003-08-18  Stoeckley  Add macros TARGET_PROGRAMS and PREFIX and EXCLUDE;
+#                             add targets program and programs; remove
+#                             non-standard locations for CFE code since such
+#                             code is now included in betalib etcetera; build
+#                             super.f90 from scratch; add maturity/custom
+#                             argument to run_ezgui.
+# 37. 2003-06-19  Stoeckley  Minor changes to allow cfe code changes to easily
+#                              be tested.
+# 36. 2003-06-10  Stoeckley  Add macro I/O comments for makefile.platforms.
+# 35. 2003-05-20  Stoeckley  Change to include the new file makefile.platforms;
+#                              remove targets "mkpcl", "starting", "finished";
+#                              fix "gmake total" so that the dependences are
+#                              updated before the compilations.
+# 34. 2003-03-21  Stoeckley  Fix the super.f90 circular dependency problem.
+# 33. 2003-03-18  Stoeckley  Change to put XML files into XMLDIR instead of
+#                              local directory; add targets "depend", "list",
+#                              "starting", "makeallOnce", "makeallMany",
+#                              "total", and "help"; add check for
+#                              unsatisfied externals when libCFE.so is made;
+#                              fix bug with the "lib" target; add code to
+#                              automatically create the OBJS variable; change
+#                              name from Makefile.quick to makefile.cfecustom.
+# 32. 2002-10-22  Vunderink  New linuxp compiler needs space in -module option.
+# 31. 2002-08-09  Vunderink  Added sol70_debug platform and fixed linuxi and
+#                              linuxi_debug compiler options.
+# 30. 2002-05-15  Vunderink  Make gui.dtd link and set XMLDIR group to spsc.
+# 29. 2002-05-07  Vunderink  Added linuxab75 and linuxab75_debug platforms, and
+#                              cfe_debug target.
+# 28. 2002-04-11  Vunderink  Fixed kdmig and ktmig compiles.
+# 27. 2002-03-13  Vunderink  Added MATURITY parameter for selecting between
+#                              production, beta and alpha.  Default is beta.
+# 25. 2002-01-21  Vunderink  Added -cpu:p6 to linux_new compiles and -lpthread
+#                              to links.
+# 24. 2002-01-08  Vunderink  Added new buildlist tool objs to link
+# 23. 2002-01-03  Vunderink  Updated all linux C compile options
+# 22. 2001-12-07  Vunderink  Updated compiler options on linux_new
+# 21. 2001-11-08  Vunderink  Added linuxi_debug platform.
+# 20. 2001-11-05  Vunderink  Added linux_new and linuxi platforms, added -O3
+#                              to C compiles and added -g to sol_new compiles.
+# 19. 2001-09-28  Vunderink  Removed old intelsol and sol_sn03 platforms and
+#                              added -g to sol_debug compiles except for those
+#                              using kmig.
+# 18. 2001-09-24  Vunderink  Added linux_debug and changed sol_opt to sol_debug
+# 17. 2001-09-08  Vunderink  Added custom and xmlln targets
+# 16. 2001-07-17  Vunderink  Removed mpi_stubs.o, added libmpi_stubs.a and
+#                              added liblmrk_stubs.a
+# 15. 2001-06-20  Vunderink  Added sol_new platform
+# 14. 2001-06-12  Vunderink  Removed filebox.o and filebox_crou.o
+# 13. 2001-06-05  Vunderink  Added finished target, removed XMLDIR variable
+#                              and added PCPS compile flags
+# 12. 2001-03-22  Vunderink  Added mpi_stubs.o
+# 11. 2001-01-29  Vunderink  Added compression libraries
+# 10. 2001-01-10  Vunderink  Added platforms sol_opt, sol_sn03 and intelsol
+#  9. 2000-11-13  Vunderink  Updated compiler flags
+#  8. 2000-10-31  Goodger    Added library posix4 to sol
+#  7. 2000-10-30  Goodger    Took -g off sol fflags
+#  6. 2000-07-31  Vunderink  Added xnet library to Solaris link
+#  5. 2000-07-19  Vunderink  Added pgln target to create module links
+#  4. 2000-06-05  Vunderink  Added multi-platform support
+#  3. 2000-04-12  Vunderink  Added include directory on ezgui
+#  2. 2000-03-24  Vunderink  Added suffix rules and xml support
+#  1. 2000-03-17  Vunderink  First version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-----------------------------------------------------------------------------
+# RCS Id : $Id: makefile.cfecustom,v 1.52 2008/09/08 20:39:33 Goodger prod sps $
+#-----------------------------------------------------------------------------
+
+
+##--------------------------- makefile.platforms --------------------------##
+##--------------------------- makefile.platforms --------------------------##
+##--------------------------- makefile.platforms --------------------------##
+
+
+DIRECTIVES = CUSTOM
+
+## Input variables:
+##
+##    INCDIRS        List of directories where include files can be found.
+##    MODDIRS        List of directories where module files can be found.
+##    DIRECTIVES     List of -D directives to define for C and C++ compilers.
+##    MATURITY       Maturity of the ~sps library to link to.
+##    NEED_MPI       Whether mpi libraries needed (yes or no) (default no).
+##    NEED_LANDMARK  Whether landmark libs needed (yes or no) (default no).
+
+include $(CFECUSTOMDIR)/makefile.platforms
+##include ../makefile.platforms
+
+## Output variables:
+##
+##    PLATFORM          Platform-specific directory in which gmake was typed.
+##    PARENT            Directory just above the platform-specific directory.
+##
+##    FC                Fortran compiler with flags.
+##    FC_FLOATIO        Fortran compiler with flags for FLOATIO.
+##    FC_KMIG           Fortran compiler with flags for KMIG.
+##    FC_PPIO           Fortran compiler with flags for PPIO.
+##    FC_UNDER    Fortran compiler with flags for Absoft lower case underscore.
+##    FC_LINK           Fortran linker with flags.
+##
+##    CC                C compiler with flags.
+##    CC_LINK           C linker with flags.
+##
+##    CXX               C++ compiler with flags.
+##    CXX_DEPEND        C++ compiler with flags for generating dependencies.
+##    CXX_LINK          C++ linker with flags.
+##
+##    PURE_LINK         Purify linker with flags.
+##    AR_LINK           Archive library (.a) maker with flags.
+##    SO_LINK           Shared library (.so) maker with flags.
+##
+##    MODEXT            Fortran90 module file extension (with period).
+##    MODFLAG           Fortran90 compiler flag for module directories.
+##
+##    SPS_LIBS          Low level ~sps libraries.
+##    FOR_LIBS          Fortran libraries (needed if using C or C++ linker).
+##    GUI_LIBS          X/Motif libraries (needed for most ~spws programs).
+##    MATH_LIBS         Math and miscellaneous libraries.
+##    CPSLIB            The ~sps library (of requested maturity) to link to.
+##
+## Notes:
+##
+##    PLATFORM will not contain the full path.
+##    PARENT   will not contain the full path.
+##    SPS_LIBS will not include prodlib or betalib or alphalib.
+##    CPSLIB will be the absolute path to prodlib or betalib or alphalib.
+
+SO_LIBRARIES = $(CPSLIB) ${SPS_LIBS} ${FOR_LIBS} ${MATH_LIBS}
+FC_LIBRARIES = $(CPSLIB) ${SPS_LIBS} ${MATH_LIBS}
+
+
+##---------------------------- initialization ------------------------------##
+##---------------------------- initialization ------------------------------##
+##---------------------------- initialization ------------------------------##
+
+
+SHELL     = /bin/sh
+INTDIR    = /usr/app/vendors/int
+
+INC_PROD  = ${SPSDIR}/production/include $(SPSDIR)/production/primitives/auto
+INC_BETA  = ${SPSDIR}/beta/include  $(SPSDIR)/production/primitives/auto $(INC_PROD)
+INC_ALPHA = ${SPSDIR}/alpha/include $(SPSDIR)/production/primitives/auto $(INC_BETA)
+
+MOD_PROD  = ${SPSDIR}/production/modules/${PLATFORM}
+MOD_BETA  = ${SPSDIR}/beta/modules/${PLATFORM}
+MOD_ALPHA = ${SPSDIR}/alpha/modules/${PLATFORM}
+
+
+##------------------ get architecture-dependent variables ------------------##
+##------------------ get architecture-dependent variables ------------------##
+##------------------ get architecture-dependent variables ------------------##
+
+
+ifeq ($(ARCHITECTURE), sparc-sun-solaris)
+###  INC_INT = $(JAVA_HOME)/src/native/sol $(JAVA_HOME)/include 
+  INC_INT = $(JAVA_HOME)/include $(JAVA_HOME)/include/solaris 
+  JAVA_HOME = /home/sps/sol/jdk
+  SET_OBJ = $(INTDIR)/src/native/sol/set.o
+endif
+
+ifeq ($(ARCHITECTURE), ix86-intel-linux)
+  JAVA_HOME = /home/sps/java/linux/jdk
+  INC_INT = $(JAVA_HOME)/include $(JAVA_HOME)/include/linux
+  SET_OBJ = $(INTDIR)/src/native/linux/set.o
+endif
+
+
+##------------------- get maturity-dependent variables ---------------------##
+##------------------- get maturity-dependent variables ---------------------##
+##------------------- get maturity-dependent variables ---------------------##
+
+
+ifeq ($(MATURITY), production)
+  MODDIRS_BATCH =                    . ${MOD_PROD}
+  MODDIRS_CFE   = $(MODDIR)            ${MOD_PROD}
+  INCDIRS_BATCH = $(INCDIR)            ${INC_PROD}
+  INCDIRS_CFE   = $(INCDIR)            ${INC_PROD} $(INC_INT)
+  XML2DIR       = $(INTDIR)/Conoco/xml
+endif
+
+ifeq ($(MATURITY), beta)
+  MODDIRS_BATCH =                    . ${MOD_BETA}
+  MODDIRS_CFE   = $(MODDIR)            ${MOD_BETA}
+  INCDIRS_BATCH = $(INCDIR)            ${INC_BETA} 
+  INCDIRS_CFE   = $(INCDIR)            ${INC_BETA} $(INC_INT)
+  XML2DIR       = $(INTDIR)/Conoco/xml/CFEbeta
+endif
+
+ifeq ($(MATURITY), alpha)
+  MODDIRS_BATCH =                    . ${MOD_ALPHA}
+  MODDIRS_CFE   = $(MODDIR)            ${MOD_ALPHA}
+  INCDIRS_BATCH = $(INCDIR)            ${INC_ALPHA} 
+  INCDIRS_CFE   = $(INCDIR)            ${INC_ALPHA} $(INC_INT)
+  XML2DIR       = $(INTDIR)/Conoco/xml/CFEalpha
+endif
+
+
+##---------------- get separate batch and cfecustom variables --------------##
+##---------------- get separate batch and cfecustom variables --------------##
+##---------------- get separate batch and cfecustom variables --------------##
+
+
+batch_includes     = $(patsubst %, -I%,         $(INCDIRS_BATCH))
+batch_modules      = $(patsubst %, $(MODFLAG)%, $(MODDIRS_BATCH))
+
+cfecustom_includes = $(patsubst %, -I%,         $(INCDIRS_CFE))
+cfecustom_modules  = $(patsubst %, $(MODFLAG)%, $(MODDIRS_CFE))
+
+BATCH_FC             = $(FC)         $(batch_modules)
+BATCH_FC_O1          = $(FC_O1)      $(batch_modules)
+BATCH_FC_FLOATIO     = $(FC_FLOATIO) $(batch_modules)
+BATCH_FC_KMIG        = $(FC_KMIG)    $(batch_modules)
+BATCH_FC_PPIO        = $(FC_PPIO)    $(batch_modules) $(ppio_includes)
+BATCH_FC_UNDER       = $(FC_UNDER)   $(batch_modules)
+BATCH_CC             = $(CC)         $(batch_includes)
+BATCH_CXX            = $(CXX)        $(batch_includes)
+
+CFECUSTOM_FC         = $(FC)         $(cfecustom_modules)
+CFECUSTOM_FC_O1      = $(FC_O1)      $(cfecustom_modules)
+CFECUSTOM_FC_FLOATIO = $(FC_FLOATIO) $(cfecustom_modules)
+CFECUSTOM_FC_KMIG    = $(FC_KMIG)    $(cfecustom_modules)
+CFECUSTOM_FC_PPIO    = $(FC_PPIO)    $(cfecustom_modules) $(ppio_includes)
+CFECUSTOM_FC_UNDER   = $(FC_UNDER)   $(cfecustom_modules)
+CFECUSTOM_CC         = $(CC)         $(cfecustom_includes)
+CFECUSTOM_CXX        = $(CXX)        $(cfecustom_includes)
+CFECUSTOM_CXX_DEPEND = $(CXX_DEPEND) $(cfecustom_includes)
+
+# ppio_includes is an undocumented internal variable in makefile.platforms.
+
+
+##-------------------- get miscellaneous variables -------------------------##
+##-------------------- get miscellaneous variables -------------------------##
+##-------------------- get miscellaneous variables -------------------------##
+
+
+ifneq ($(strip $(PREFIX)),)
+  target_programs := $(notdir $(wildcard $(SRCDIR)/$(PREFIX)*.f90) \
+                              $(wildcard $(SRCDIR)/$(PREFIX)*.f  ) \
+                              $(wildcard $(SRCDIR)/$(PREFIX)*.c  ) \
+                              $(wildcard $(SRCDIR)/$(PREFIX)*.cc ))
+  target_programs := $(basename $(target_programs))
+  TARGET_PROGRAMS := $(TARGET_PROGRAMS) $(target_programs)
+endif
+
+ifeq ($(strip $(SRCS)),)
+  SRCS := $(notdir $(wildcard $(SRCDIR)/*.f90)  \
+                   $(wildcard $(SRCDIR)/*.f  )  \
+                   $(wildcard $(SRCDIR)/*.c  )  \
+                   $(wildcard $(SRCDIR)/*.cc ))
+endif
+
+ifneq ($(strip $(TARGET_PROGRAMS)),)
+  templist1 := $(addsuffix .f90, $(TARGET_PROGRAMS))
+  templist2 := $(addsuffix .f,   $(TARGET_PROGRAMS))
+  templist3 := $(addsuffix .c,   $(TARGET_PROGRAMS))
+  templist4 := $(addsuffix .cc,  $(TARGET_PROGRAMS))
+  templist  := $(templist1) $(templist2) $(templist3) $(templist4)
+  SRCS      := $(filter-out $(templist), $(SRCS))
+endif
+
+ifneq ($(strip $(EXCLUDE)),)
+  TARGET_PROGRAMS := $(filter-out $(basename $(EXCLUDE)), $(TARGET_PROGRAMS))
+  SRCS            := $(filter-out $(EXCLUDE), $(SRCS))
+endif
+
+ifeq ($(strip $(OBJS)),)
+  OBJS := $(addsuffix .o, $(basename $(SRCS)))
+endif
+
+XMLS           = ${OBJS:.o=.xml}
+PGMODS         = $(patsubst %.o,%_module.mod,${OBJS})
+F90S_IN_SRCDIR = $(addsuffix _module.mod, $(basename $(notdir $(shell echo ${SRCDIR}/*.f90))))
+make_compile   = no
+
+LIB = ${LIBDIR}/libCFE.so
+
+SRCDIRS_ALPHA = $(wildcard $(SPSDIR)/alpha/primitives/*)
+SRCDIRS_BETA  = $(wildcard $(SPSDIR)/beta/primitives/*)
+SRCDIRS_PROD  = $(wildcard $(SPSDIR)/production/primitives/*)
+
+ifeq ($(MATURITY),alpha)
+SRCDIRS = $(SRCDIRS_ALPHA) $(SRCDIRS_BETA) $(SRCDIRS_PROD)
+endif
+
+ifeq ($(MATURITY),beta)
+SRCDIRS = $(SRCDIRS_BETA) $(SRCDIRS_PROD)
+endif
+
+ifeq ($(MATURITY),production)
+SRCDIRS = $(SRCDIRS_PROD)
+endif
+
+SRCINCS = $(patsubst %, -I%, $(SRCDIRS))
+
+
+##------------------------------ vpath -------------------------------------##
+##------------------------------ vpath -------------------------------------##
+##------------------------------ vpath -------------------------------------##
+
+
+vpath
+vpath %.f90       $(SRCDIR)
+vpath %.cc        $(SRCDIR)
+vpath %.c         $(SRCDIR)
+vpath %.h         $(SRCDIR) $(INCDIRS_CFE)
+vpath %.hh        $(SRCDIR)
+vpath %.o         $(OBJDIR)
+vpath %$(MODEXT)  $(OBJDIR) $(MODDIRS_CFE)
+vpath %.xml       $(XMLDIR)
+
+
+##----------------------------- commands -----------------------------------##
+##----------------------------- commands -----------------------------------##
+##----------------------------- commands -----------------------------------##
+
+
+.SUFFIXES:
+.SUFFIXES: .f90 .c .cc .o .xml
+.PHONY: clean compile custom customClean lib xml xmlClean xmlln depend makeallOnce makeallMany help list program programs total
+
+
+##  The target (TARGET_PROGRAMS) links icps
+##  MAKE_ICPS will be set to icps if a valid icps platform
+##     otherwise it is set to NO_ICPS
+
+all:      xml ${LIB} ${MAKE_ICPS}
+lib:      ${LIB}
+program:  $(TARGET_PROGRAMS)
+programs: $(TARGET_PROGRAMS)
+
+total: makeallOnce
+	$(MAKE) makeallMany
+
+makeallOnce: depend xmlln xml
+makeallMany: custom lib
+
+${LIB}: ${OBJS}
+	@echo " "
+	@echo "--------------------------------------------------------"
+	@echo making $(LIB)
+	@echo "--------------------------------------------------------"
+	${SO_LINK} -o ${LIB} $^ ${SO_LIBRARIES} $(JAVA_LIBS)
+	@chgrp spsc $(LIB)
+	@echo " "
+	ldd -r ${LIB}
+	@echo " "
+	@echo LD_LIBRARY_PATH = $(LD_LIBRARY_PATH)
+	@echo "--------------------------------------------------------"
+	@echo "finished making $(LIB)"
+	@echo "--------------------------------------------------------"
+	@echo " "
+
+$(TARGET_PROGRAMS): %: %.o $(OBJS)
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "making program $@"
+	@echo "-------------------------------------------------------"
+	$(FC_LINK) -o $@ $@.o $(OBJS) $(OTHER_LIBS) $(FC_LIBRARIES) ${MATH_LIBS} ${JAVA_LIBS}
+	@echo " "
+	ldd -r $@
+	@echo "-------------------------------------------------------"
+	@echo "finished making program $@"
+	@echo "-------------------------------------------------------"
+	@echo ""
+
+NO_ICPS:
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo " icps is NOT available on $(PLATFORM)"
+	@echo " Use platform linuxab90 if you need icps"
+	@echo "-------------------------------------------------------"
+	@echo " "
+
+%.pure : %.o $(OBJS_AND_LIBS)
+ifeq ($(PURE_LINK), @echo "purify not available for this platform.")
+	@echo "purify not available for platform $(PLATFORM)."
+else
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "making purified program $@"
+	@echo "-------------------------------------------------------"
+	$(PURE_LINK) -o $@ $^   $(OBJS) $(SO_LIBRARIES)
+	@echo "-------------------------------------------------------"
+	@echo "finished making purified program $@"
+	@echo "-------------------------------------------------------"
+	@echo ""
+endif
+
+cfe_debug: cfe_debug.o
+	@echo ""
+	${CC_LINK} -o cfe_debug cfe_debug.o ${SET_OBJ} -ldl
+
+compile: ${OBJS}
+	@echo "--------------------------------------------------------"
+	@echo finished compiling source code
+	@echo "--------------------------------------------------------"
+	@echo " "
+
+custom: make_compile = yes
+custom: customClean ${OBJS}
+
+customClean:
+	@echo "rm source.compile *.o *${MODEXT}"
+	@-\rm source.compile *.o *${MODEXT}
+
+clean:
+	@echo " "
+	@echo "--------------------------------------------------------"
+	@echo cleaning platform-specific directory
+	@echo "--------------------------------------------------------"
+	@echo "rm *.o *${MODEXT}"
+	@-\rm *.o *${MODEXT}
+
+depend:
+	@-cd $(SRCDIR); if [ -f      super.f90 ]; then \rm      super.f90; fi
+	@-cd $(SRCDIR); if [ -f super_frou.f90 ]; then \rm super_frou.f90; fi
+# remove obsolete local source code above.
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "building superproc and superwrap source files"
+	@echo "--------------------------------------------------------"
+	@cd $(SRCDIR); $(CFECUSTOMSCRIPTS)/make_superproc $(MATURITY)
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "copying required source code from the system"
+	@echo "--------------------------------------------------------"
+	@cd $(SRCDIR); \
+	 $(CFECUSTOMSCRIPTS)/copy_from_sps $(MATURITY) cfeutil_crou.c newer
+	@cd $(SRCDIR); \
+	 $(CFECUSTOMSCRIPTS)/copy_from_sps $(MATURITY) int_api.f90 newer
+	@cd $(SRCDIR); \
+	 $(CFECUSTOMSCRIPTS)/copy_from_sps $(MATURITY) icps.c newer
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo making makefile.depend
+	@echo "--------------------------------------------------------"
+	@cd $(SRCDIR); \
+	      $(CFECUSTOMSCRIPTS)/make_dependencies "$(CFECUSTOM_CXX_DEPEND)"
+	@echo ""
+
+
+##------------------------------ xml commands -------------------------------##
+##------------------------------ xml commands -------------------------------##
+##------------------------------ xml commands -------------------------------##
+
+
+xml: ${XMLS}
+	@if [ ! -f ${XMLDIR}/gui.dtd ] ; then \
+	echo "ln -s $(INTDIR)/Conoco/xml/gui.dtd ${XMLDIR}/gui.dtd"; \
+	ln -s $(INTDIR)/Conoco/xml/gui.dtd ${XMLDIR}/gui.dtd; \
+	fi
+	@chgrp spsc ${XMLDIR}
+	@echo " "
+
+xmlClean:
+	@echo " "
+	@echo "--------------------------------------------------------"
+	@echo removing xml files
+	@echo "--------------------------------------------------------"
+	@echo "rm $(XMLDIR)/*.xml"
+	@-\rm $(XMLDIR)/*.xml
+
+xmlln: xmlClean ${XMLS}
+	@echo " "
+	@echo "--------------------------------------------------------"
+	@echo "creating symbolic links to system xml files"
+	@echo "--------------------------------------------------------"
+	@for FILE in ${XML2DIR}/*.xml ; do \
+	  BASE=`expr "$$FILE" : '.*/\([^\/]*\)'` ; \
+	  if [ -f "$$BASE" ] ; then \
+	    continue; \
+	  fi; \
+	  ln -s $$FILE $(XMLDIR) ; \
+	done;
+	@echo "--------------------------------------------------------"
+	@echo "finished creating xml symbolic links `date`"
+	@echo "--------------------------------------------------------"
+	@echo " "
+
+
+##---------------------- specific compile commands -----------------------##
+##---------------------- specific compile commands -----------------------##
+##---------------------- specific compile commands -----------------------##
+
+
+floatio.o: floatio.f90
+	@echo ""
+	${CFECUSTOM_FC_FLOATIO} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC_FLOATIO} $<" >> source.compile; \
+	fi
+
+fxex.o: fxex.f90
+	@echo ""
+	${CFECUSTOM_FC_O1} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC_O1} $<" >> source.compile; \
+	fi
+
+kmig.o: kmig.f90
+	@echo ""
+	${CFECUSTOM_FC_KMIG} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC_KMIG} $<" >> source.compile; \
+	fi
+
+kdmig.o: kdmig.f90
+	@echo ""
+	${CFECUSTOM_FC_KMIG} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC_KMIG} $<" >> source.compile; \
+	fi
+
+ktmig.o: ktmig.f90
+	@echo ""
+	${CFECUSTOM_FC_KMIG} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC_KMIG} $<" >> source.compile; \
+	fi
+
+ppio.o: ppio.f90
+	@echo ""
+	${CFECUSTOM_FC_PPIO} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC_PPIO}  $<" >> source.compile; \
+	fi
+
+
+##--------- compile commands for code not needed in source.compile ----------##
+##--------- compile commands for code not needed in source.compile ----------##
+##--------- compile commands for code not needed in source.compile ----------##
+
+
+superproc_crou.o: superproc_crou.c
+	@echo ""
+	${CFECUSTOM_CC} $<
+
+superproc_frou.o: superproc_frou.f90
+	@echo ""
+	${CFECUSTOM_FC} $<
+
+superproc.o: superproc.f90
+	@echo ""
+	${CFECUSTOM_FC} $<
+
+engine.o: engine.f90
+	@echo ""
+	${CFECUSTOM_FC} $<
+
+process.o: process.f90
+	@echo ""
+	${CFECUSTOM_FC} $<
+
+%_superwrap.o: %_superwrap.f90
+	@echo ""
+	${CFECUSTOM_FC} $<
+
+superwrap.o: superwrap.c
+	@echo ""
+	${CFECUSTOM_CC} $<
+
+int_api.o: int_api.f90
+	@echo ""
+	${CFECUSTOM_FC} $<
+
+cfeutil_crou.o: cfeutil_crou.c
+	@echo ""
+	${CFECUSTOM_CC} $< -DPLATFORM='"$(OBJDIR)"'
+
+
+##-------------------------- general compile commands -----------------------##
+##-------------------------- general compile commands -----------------------##
+##-------------------------- general compile commands -----------------------##
+
+
+.f90.o:
+	@echo ""
+	${CFECUSTOM_FC} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_FC} $<" >> source.compile; \
+	fi
+
+.c.o:
+	@echo ""
+	${CFECUSTOM_CC} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_CC} $<" >> source.compile; \
+	fi
+
+.cc.o:
+	@echo ""
+	${CFECUSTOM_CXX} $<
+	@if [ "${make_compile}" = "yes" ] ; then \
+	  echo "${BATCH_CXX} $<" >> source.compile; \
+	fi
+
+.f90.xml:
+	@$(CFECUSTOMSCRIPTS)/run_ezgui $< junkxml.xml -custom -I${SRCDIR} \
+                                                                ${SRCINCS}
+	@-if [ -f junkxml.xml ] ; then \
+	  if [ -f $(XMLDIR)/$*.xml ] ; then \
+	    \rm $(XMLDIR)/$*.xml; \
+	  fi; \
+	  \mv junkxml.xml $(XMLDIR)/$*.xml; \
+	fi
+
+.c.xml:
+	@$(CFECUSTOMSCRIPTS)/run_ezgui $< junkxml.xml -custom -I${SRCDIR} \
+                                                                ${SRCINCS}
+	@-if [ -f junkxml.xml ] ; then \
+	  if [ -f $(XMLDIR)/$*.xml ] ; then \
+	    \rm $(XMLDIR)/$*.xml; \
+	  fi; \
+	  \mv junkxml.xml $(XMLDIR)/$*.xml; \
+	fi
+
+.cc.xml:
+	@$(CFECUSTOMSCRIPTS)/run_ezgui $< junkxml.xml -custom -I${SRCDIR} \
+                                                                ${SRCINCS}
+	@-if [ -f junkxml.xml ] ; then \
+	  if [ -f $(XMLDIR)/$*.xml ] ; then \
+	    \rm $(XMLDIR)/$*.xml; \
+	  fi; \
+	  \mv junkxml.xml $(XMLDIR)/$*.xml; \
+	fi
+
+%_module.mod:
+	@for FILE in ${F90S_IN_SRCDIR} ; do \
+		if [ $$FILE = $@ ] ; \
+		then \
+			echo "Touching file $@"; \
+			touch $@; \
+			break; \
+		fi; \
+	done
+
+
+##--------------------------- help command ---------------------------------##
+##--------------------------- help command ---------------------------------##
+##--------------------------- help command ---------------------------------##
+
+
+help:
+	@echo ""
+	@echo You must type the following in a platform-specific directory:
+	@echo ""
+	@echo gmake ================ build libCFE.so and icps and xml.
+	@echo gmake all ============ build libCFE.so and icps and xml.
+	@echo gmake program ======== build main programs.
+	@echo gmake programs ======= build main programs.
+	@echo gmake clean ========== remove all .o and $(MODEXT) files.
+	@echo gmake compile ======== only compile your code.
+	@echo gmake customClean ==== clean platform directory.
+	@echo gmake custom ========= clean platform directory, compile your
+	@echo ========================= code, and build file source.compile.
+	@echo gmake lib ============ build libCFE.so library.
+	@echo gmake xmlClean ======= clean XML only.
+	@echo gmake xml ============ extract XML only.
+	@echo gmake xmlln ========== build symbolic links for custom xml.
+	@echo gmake depend ========= build superproc files and makefile.depend.
+	@echo gmake total ========== do everything listed above.
+	@echo gmake help =========== print this help information.
+	@echo gmake list =========== list macros used/created in this makefile.
+	@echo ""
+
+
+##-------------------------- list command ----------------------------------##
+##-------------------------- list command ----------------------------------##
+##-------------------------- list command ----------------------------------##
+
+
+list:
+	@echo "-----------------------------------------------------"
+	@echo "  environment variables:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo SPSDIR ================= $(SPSDIR)
+	@echo CFECUSTOMDIR =========== $(CFECUSTOMDIR)
+	@echo CFECUSTOMSCRIPTS ======= $(CFECUSTOMSCRIPTS)
+	@echo CFECUSTOMPROGRAMS ====== $(CFECUSTOMPROGRAMS)
+	@echo ARCHITECTURE =========== $(ARCHITECTURE)
+	@echo HOST =================== $(HOST)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  user specified variables:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo SRCDIR ================= $(SRCDIR)
+	@echo INCDIR ================= $(INCDIR)
+	@echo LIBDIR ================= $(LIBDIR)
+	@echo MODDIR ================= $(MODDIR)
+	@echo OBJDIR ================= $(OBJDIR)
+	@echo XMLDIR ================= $(XMLDIR)
+	@echo MATURITY =============== $(MATURITY)
+	@echo TARGET_PROGRAMS ======== $(TARGET_PROGRAMS)
+	@echo PREFIX ================= $(PREFIX)
+	@echo EXCLUDE ================ $(EXCLUDE)
+	@echo NEED_MPI =============== $(NEED_MPI)
+	@echo NEED_LANDMARK ========== $(NEED_LANDMARK)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  variables input to makefile.platforms:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo INCDIRS ================ $(INCDIRS)
+	@echo MODDIRS ================ $(MODDIRS)
+	@echo DIRECTIVES ============= $(DIRECTIVES)
+	@echo MATURITY =============== $(MATURITY)
+	@echo NEED_MPI =============== $(NEED_MPI)
+	@echo NEED_LANDMARK ========== $(NEED_LANDMARK)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  variables output from makefile.platforms:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo PLATFORM =============== $(PLATFORM)
+	@echo PARENT ================= $(PARENT)
+	@echo ""
+	@echo FC ===================== $(FC)
+	@echo FC_FLOATIO ============= $(FC_FLOATIO)
+	@echo FC_KMIG ================ $(FC_KMIG)
+	@echo FC_PPIO ================ $(FC_PPIO)
+	@echo FC_UNDER =============== $(FC_UNDER)
+	@echo FC_LINK ================ $(FC_LINK)
+	@echo ""
+	@echo CC ===================== $(CC)
+	@echo CC_LINK ================ $(CC_LINK)
+	@echo ""
+	@echo CXX ==================== $(CXX)
+	@echo CXX_DEPEND ============= $(CXX_DEPEND)
+	@echo CXX_LINK =============== $(CXX_LINK)
+	@echo ""
+	@echo PURE_LINK ============== $(PURE_LINK)
+	@echo AR_LINK ================ $(AR_LINK)
+	@echo SO_LINK ================ $(SO_LINK)
+	@echo ""
+	@echo MODEXT ================= $(MODEXT)
+	@echo MODFLAG ================ $(MODFLAG)
+	@echo ""
+	@echo SPS_LIBS =============== $(SPS_LIBS)
+	@echo FOR_LIBS =============== $(FOR_LIBS)
+	@echo GUI_LIBS =============== $(GUI_LIBS)
+	@echo MATH_LIBS ============== $(MATH_LIBS)
+	@echo FC_LIBRARIES============ $(FC_LIBRARIES)
+	@echo OTHER_LIBS ============= $(OTHER_LIBS)
+	@echo CPSLIB ================= $(CPSLIB)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  internal variables:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo CFECUSTOM_FC =========== $(CFECUSTOM_FC)
+	@echo CFECUSTOM_FC_FLOATIO === $(CFECUSTOM_FC_FLOATIO)
+	@echo CFECUSTOM_FC_KMIG ====== $(CFECUSTOM_FC_KMIG)
+	@echo CFECUSTOM_FC_PPIO ====== $(CFECUSTOM_FC_PPIO)
+	@echo CFECUSTOM_FC_UNDER ===== $(CFECUSTOM_FC_UNDER)
+	@echo CFECUSTOM_CC =========== $(CFECUSTOM_CC)
+	@echo CFECUSTOM_CXX ========== $(CFECUSTOM_CXX)
+	@echo CFECUSTOM_CXX_DEPEND === $(CFECUSTOM_CXX_DEPEND)
+	@echo ""
+	@echo BATCH_FC =============== $(BATCH_FC)
+	@echo BATCH_FC_O1 ============ $(BATCH_FC_O1)
+	@echo BATCH_FC_FLOATIO ======= $(BATCH_FC_FLOATIO)
+	@echo BATCH_FC_KMIG ========== $(BATCH_FC_KMIG)
+	@echo BATCH_FC_PPIO ========== $(BATCH_FC_PPIO)
+	@echo BATCH_FC_UNDER ========= $(BATCH_FC_UNDER)
+	@echo BATCH_CC =============== $(BATCH_CC)
+	@echo BATCH_CXX ============== $(BATCH_CXX)
+	@echo ""
+	@echo SHELL ================== $(SHELL)
+	@echo INTDIR ================= $(INTDIR)
+	@echo XML2DIR ================ $(XML2DIR)
+	@echo ""
+	@echo INC_PROD =============== $(INC_PROD)
+	@echo INC_BETA =============== $(INC_BETA)
+	@echo INC_ALPHA ============== $(INC_ALPHA)
+	@echo ""
+	@echo MOD_PROD =============== $(MOD_PROD)
+	@echo MOD_BETA =============== $(MOD_BETA)
+	@echo MOD_ALPHA ============== $(MOD_ALPHA)
+	@echo ""
+	@echo SO_LIBRARIES =========== $(SO_LIBRARIES)
+	@echo OTHER_LIBS   =========== $(OTHER_LIBS)
+	@echo JAVA_LIBS ============== $(JAVA_LIBS)
+	@echo ""
+	@echo MODDIRS_BATCH ========== $(MODDIRS_BATCH)
+	@echo MODDIRS_CFE ============ $(MODDIRS_CFE)
+	@echo ""
+	@echo INCDIRS_BATCH ========== $(INCDIRS_BATCH)
+	@echo INCDIRS_CFE ============ $(INCDIRS_CFE)
+	@echo ""
+	@echo batch_includes ========= $(batch_includes)
+	@echo batch_modules ========== $(batch_modules)
+	@echo SRCS =================== $(SRCS)
+	@echo ""
+	@echo OBJS =================== $(OBJS)
+	@echo ""
+	@echo XMLS =================== $(XMLS)
+	@echo ""
+	@echo PGMODS ================= $(PGMODS)
+	@echo ""
+	@echo F90S_IN_SRCDIR ========= $(F90S_IN_SRCDIR)
+	@echo ""
+	@echo make_compile =========== $(make_compile)
+	@echo ""
+	@echo INC_INT ================ $(INC_INT)
+	@echo SET_OBJ ================ $(SET_OBJ)
+	@echo ""
+	@echo LIB ==================== $(LIB)
+	@echo ""
+	@echo SRCDIRS ================ $(SRCDIRS)
+	@echo ""
+	@echo SRCINCS ================ $(SRCINCS)
+	@echo ""
+	@echo JAVA_HOME ============== $(JAVA_HOME)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  end of list"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	
+
+
+##------------ print warning if makefile.depend is missing -----------------##
+##------------ print warning if makefile.depend is missing -----------------##
+##------------ print warning if makefile.depend is missing -----------------##
+
+
+ifneq ($(notdir $(wildcard $(SRCDIR)/makefile.depend)), makefile.depend)
+  $(warning ----------------------------------------)
+  $(warning Warning: no makefile.depend found...    )
+  $(warning ----------------------------------------)
+  $(warning You should run "gmake depend"           )
+  $(warning in any platform-specific directory.     )
+  $(warning ----------------------------------------)
+  $(warning You should also run "gmake depend" again)
+  $(warning whenever you make source code changes   )
+  $(warning which might change some dependencies.   )
+  $(warning ----------------------------------------)
+endif
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

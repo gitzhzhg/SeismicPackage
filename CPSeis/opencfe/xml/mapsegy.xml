@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="mapsegy" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN01" title="SCREEN01" rows="1" columns="1" minCellWidth="8" minCellHeight="12">
+    <Label keyword="COMMENT_" alignment="center">-------------------------------------------------------------------</Label>
+    <Label keyword="LABEL_MOD_SEGY" alignment="left">MOD_SEGY =</Label>
+    <Field keyword="MOD_SEGY" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="SBYTE_ARRAYSET" label="SBYTE BYTES CPS_HDR MTYPE">
+     <Array keyword="SBYTE" type="int" maxLength="6  " columnName="SBYTE" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="BYTES" type="int" maxLength="6  " columnName="BYTES" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="CPS_HDR" type="int" maxLength="8  " columnName="CPS_HDR" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="MTYPE" type="string" maxLength="5  " columnName="MTYPE" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">-------------------------------------------------------------------</Label>
+    <Layout>
+     <Constraints component="COMMENT_" xPos="1" yPos="0" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MOD_SEGY" xPos="21" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MOD_SEGY" xPos="32" yPos="1" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SBYTE_ARRAYSET" xPos="22" yPos="3" xSize="28" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="1" yPos="8" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MOD_SEGY">
+      <Tip>Type of segy mapping.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mapsegy - MOD_SEGY<br> Type of segy mapping.</center></b>
+<pre> Default = LANDMARK
+ Allowed = STAN      (Standard SEGY to CPS mapping.
+ Allowed = LANDMARK
+ Allowed = GEODEPTH
+ Allowed = JASON
+ Allowed = HAMPSON-RUSSELL-2D
+ Allowed = HAMPSON-RUSSELL-3D
+ Allowed = USER      (User specified mapping)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SBYTE">
+      <Tip>Starting byte of the SEGY header to be moved.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mapsegy - SBYTE<br> Starting byte of the SEGY header to be moved.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BYTES">
+      <Tip>Number of bytes to be moved to a CPS header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mapsegy - BYTES<br> Number of bytes to be moved to a CPS header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CPS_HDR">
+      <Tip>CPS header word to receive the SEGY header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mapsegy - CPS_HDR<br> CPS header word to receive the SEGY header.</center></b>
+<pre> Default = -
+ Allowed = 1 to NWIH (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MTYPE">
+      <Tip>Treat Segy header word as I(integer), or F(floating point).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mapsegy - MTYPE<br> Treat Segy header word as I(integer), or F(floating point).</center></b>
+<pre> Default = -
+ Allowed = char(8) (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+  </CommandArea>
+  <Help component="mapsegy">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R I M I T I V E
+ 
+ Name       : MAPSEGY
+ Category   : io
+ Written    : 2001-03-19   by: Karen Goodger
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Map segy header words to cps header words.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ This primitive is to be used by process modules which need to may segy
+ header words to cps header words, such as trin and ttrin.  A default
+ header mapping is provided for Landmark, Geodepth, Jason, and Hampson-
+ Russell formats.  The user can alter this mapping if necessary as well
+ as provide the entire mapping structure.
+ 
+ This primitive uses the parameter cache to read and write the parameters
+ it needs, to report error messages, etc.
+ 
+ To use this primitive from a process module named xxxx:
+ 
+    (1) mapsegy_create     should be called from xxxx_create.
+    (2) mapsegy_initialize should be called from xxxx_initialize.
+    (3) mapsegy_update     should be called from xxxx_update.
+    (4) mapsegy            should be called from xxxx.
+    (5) mapsegy_delete     should be called from xxxx_delete.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ The GUI_DEF section for a process which uses this primitive should contain
+ an INCLUDE line which says to include the GUI_DEF section of this primitive.
+ The HELPSECTION for the parameters in this primitive will also be made
+ available to the process when this is done.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+  7. 2006-09-11  Stoeckley    Replace pc_register_tab_group w HelpSection line.
+  6. 2006-06-20  Stoeckley    Add pc_register_tab_group for SeisSpace.
+  5. 2006-06-01  Stoeckley    Add pc_register_array_names for SeisSpace.
+  4. 2006-05-25  Bill Menger  Modify default to LANDMARK instead of STAN.
+  3. 2004-01-21  K. Goodger   Make variable object private to avoid naming
+                              conflicts.
+  2. 2001-06-18  K. Goodger   Split hampson-russell segy mapping into 2d and
+                              3d.  PRODUCTION.
+  1. 2001-04-30  K. Goodger   Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

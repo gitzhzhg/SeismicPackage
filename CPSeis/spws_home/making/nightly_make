@@ -1,0 +1,358 @@
+#!/bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : nightly_make
+# Category   : stand-alone
+# Written    : 2003-02-18   by: Tom Stoeckley
+# Revised    : 2003-02-18   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script to make ~spws libraries on all platforms
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is a utility to make ~spws libraries on all platforms.
+# 
+# You must type the following (or use a cron job) in any directory:
+#
+#                 nightly_make <target>
+#
+# where the optional target is any target in makefile.spws.
+#
+# This script redirects all gmake output to the following files:
+#
+#                 logfile.today          (in $SPWSDIR/making/$platform)
+#                 logfile.yesterday      (in $SPWSDIR/making/$platform)
+#                 logfile.status         (in $SPWSDIR/making/$platform)
+#                 logfile.depend         (in $SPWSDIR/making)
+#
+# This script also sends mail messages if an error occurs.
+#
+#-------------------------------------------------------------------------------
+#                         HOW TO RUN A CRON JOB
+#
+# To run this script with a cron job:
+#
+#     (1) Make sure there is a .forward file in the ~spws home directory
+#         containing email addresses of those who wish to get emails
+#         containing the output from the cron job.
+#
+#     (2) At the command line type:    crontab -e
+#
+#     (3) In the vi edit window that pops up type:
+#           0 22 * * 1-5 /home/spws/making/nightly_make
+#         This will run the cron job at 22:00 Monday-Friday nights.
+#         (Absolute path must be specified for the above file name and
+#         all files referred to in the script.)
+#
+#     (4) To list the crontab file:      crontab -l
+#     (5) To remove the crontab file:    crontab -r
+#
+# To keep from having multiple cron jobs on different machines and by
+# different users, it is important that the cron jobs be set up only by
+# one user and on only one machine (this script will rsh to all required
+# machines).  Therefore, we have adopted the following conventions:
+#
+#     (1) The user must be spws.
+#     (2) The machine must be hoeplc01.
+#
+# Note: an alternative of the above command could be this one:
+#           0 22 * * 1-5 rsh hoeplc01 ~spws/making/nightly_make
+# This would cause the .cshrc file to be executed before this script.
+#
+#-------------------------------------------------------------------------------
+#                             TARGETS MADE   
+#
+# If the optional target argument is specified and is one of the "depend"
+# targets, this script performs the following operation (in the background)
+# on the node which is listed first in the nightly_nodes_and_platforms file:
+#
+#                 gmake <target>
+#
+# If the optional target argument is specified and is NOT one of the "depend"
+# targets, this script performs the following operation (in the background)
+# on every node/platform which is listed in the nightly_nodes_and_platforms
+# file:
+#
+#                 gmake -k <target>
+#
+# If the optional target argument is not specified, this script performs the
+# following operations:
+#
+#  (1) This script first performs the following operations (in the foreground)
+#      on the node which is listed first in the nightly_nodes_and_platforms
+#      file:
+#
+#                 gmake depend
+#
+#  (2) Then this script performs the following operations (in the background)
+#      on every node/platform which is listed in the nightly_nodes_and_platforms
+#      file:
+#
+#                 gmake -k
+#
+# You can edit the nightly_nodes_and_platforms file to change the node which
+# is listed first, or to change the platforms to compile on, or to change the
+# nodes used to compile the platforms.
+#
+# The command line option -k insures that gmake will attempt to continue
+# compilations even if a compilation fails.
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#                SPWSMAKEDIR   (set to ~spws/making if not set)
+#                SPWSDIR       (set to ~spws if not set)
+#                USER          (must be spws)
+#
+# The following file must exist:
+#
+#                $SPWSMAKEDIR/nightly_nodes_and_platforms
+#
+# A makefile (or link) must exist in the source code directory.
+# A makefile link must exist in each platform-specific directory.
+#
+# Note: The environment variables SPWSMAKEDIR and SPWSDIR are set in this
+# script if not found because cron jobs do not execute the .cshrc file.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2003-02-18  Stoeckley  Initial version, patterned after its predecessor,
+#                             also named nightly_make, and after Makeall (now
+#                             cfecustom.makeall).
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: nightly_make,v 1.1 2004/03/04 13:42:59 wjdone Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSDIR == 0) then
+     echo environment variable SPWSDIR not set.
+     setenv SPWSDIR ~spws
+     echo environment variable SPWSDIR set to $SPWSDIR.
+else if($SPWSDIR == "") then
+     echo environment variable SPWSDIR not set.
+     setenv SPWSDIR ~spws
+     echo environment variable SPWSDIR set to $SPWSDIR.
+endif
+
+if($?SPWSMAKEDIR == 0) then
+     echo environment variable SPWSMAKEDIR not set.
+     setenv SPWSMAKEDIR ~spws/making
+     echo environment variable SPWSMAKEDIR set to $SPWSMAKEDIR.
+else if($SPWSMAKEDIR == "") then
+     echo environment variable SPWSMAKEDIR not set.
+     setenv SPWSMAKEDIR ~spws/making
+     echo environment variable SPWSMAKEDIR set to $SPWSMAKEDIR.
+endif
+
+if($?USER == 0) then
+     echo environment variable USER must be spws.
+     exit
+else if($USER != "spws") then
+     echo environment variable USER must be spws.
+     exit
+endif
+
+
+##----------------------- verify post mortum script -----------------------##
+##----------------------- verify post mortum script -----------------------##
+##----------------------- verify post mortum script -----------------------##
+
+
+if(! -f $SPWSMAKEDIR/nightly_post_mortum) then
+     echo missing $SPWSMAKEDIR/nightly_post_mortum script.
+     exit
+endif
+
+
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+
+
+if(! -f $SPWSMAKEDIR/nightly_nodes_and_platforms) then
+     echo missing nightly_nodes_and_platforms file.
+     exit
+endif
+
+
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+
+
+set logfile_status    = logfile.status
+set logfile_today     = logfile.today
+set logfile_yesterday = logfile.yesterday
+set logfile_depend    = logfile.depend
+set platnodes         = `cat $SPWSMAKEDIR/nightly_nodes_and_platforms`
+set making            = $SPWSDIR/making
+set target            = $1
+
+if($target == "") then
+   set all_platforms = true
+else if($target == depend     || $target == depend_util || \
+        $target == depend_oop || $target == depend_programs) then
+   set all_platforms = false
+else
+   set all_platforms = true
+endif
+
+
+##------------------------ print variables -------------------------------##
+##------------------------ print variables -------------------------------##
+##------------------------ print variables -------------------------------##
+
+
+echo " "
+echo USER ================= $USER
+echo HOST ================= $HOST
+echo SPWSDIR ============== $SPWSDIR
+echo SPWSMAKEDIR ========== $SPWSMAKEDIR
+echo logfile_status ======= $logfile_status
+echo logfile_today ======== $logfile_today
+echo logfile_yesterday ==== $logfile_yesterday
+echo logfile_depend ======= $logfile_depend
+echo making =============== $making
+echo target =============== $target
+echo " "
+uname -a
+echo " "
+echo "nightly make started:  `date`"
+echo " "
+
+
+##------------------ move or remove old log files --------------------------##
+##------------------ move or remove old log files --------------------------##
+##------------------ move or remove old log files --------------------------##
+
+
+\rm $making/$logfile_depend       >& /dev/null
+\rm $making/*/$logfile_status     >& /dev/null
+\rm $making/*/$logfile_yesterday  >& /dev/null
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set platform = $making/$platnode:e
+
+   if(-f $platform/$logfile_today) then
+     \mv $platform/$logfile_today $platform/$logfile_yesterday
+   endif
+end
+
+
+##-------------------- list the platforms to make --------------------------##
+##-------------------- list the platforms to make --------------------------##
+##-------------------- list the platforms to make --------------------------##
+
+
+if($target == "") then
+   set first_time = true
+else
+   set first_time = false
+endif
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set node     = $platnode:r
+   set platform = $making/$platnode:e
+
+   if($first_time == true) then
+     echo "using node  $node  to create $logfile_depend in  $making"
+     set first_time = false
+   endif
+
+   echo "using node  $node  to create $logfile_today in  $platform"
+   echo "nightly_make will use $platnode:e" > $platform/$logfile_status
+
+   if($all_platforms == false) break
+end
+echo " "
+
+
+##------------------------ do the makes ------------------------------------##
+##------------------------ do the makes ------------------------------------##
+##------------------------ do the makes ------------------------------------##
+
+
+if($target == "") then
+   set first_time = true
+else
+   set first_time = false
+endif
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set node      = $platnode:r
+   set platform  = $making/$platnode:e
+
+   echo "nightly_make started  $platnode:e" > $platform/$logfile_status
+
+   set command1 = "cd $platform"
+   set command2 = "$SPWSMAKEDIR/nightly_post_mortum pre"
+   set command3 = "gmake depend     >>& $making/$logfile_depend"
+   set command4 = "gmake -k $target >>& $platform/$logfile_today"
+   set command5 = "$SPWSMAKEDIR/nightly_post_mortum"
+
+   if($first_time == true) then
+     rsh $node "$command1; $command3"
+     rsh $node "$command1; $command2; $command4; $command5" &
+     set first_time = false
+   else
+     rsh $node "$command1; $command2; $command4; $command5" &
+   endif
+
+   if($all_platforms == false) break
+end
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

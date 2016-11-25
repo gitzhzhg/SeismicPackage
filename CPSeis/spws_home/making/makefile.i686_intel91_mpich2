@@ -1,0 +1,53 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##-------------------------- i686_intel91_mpich2 -------------------------------##
+##-------------------------- i686_intel91_mpich2 -------------------------------##
+##-------------------------- i686_intel91_mpich2 -------------------------------##
+
+permitted_architectures =  i686
+permitted_hosts          = juju
+
+FC         = mpif90 -c -g 
+FC_AB90EP  = mpif90 -c -g 
+FC_O1      = mpif90 -c -g 
+FC_FLOATIO = mpif90 -c -g 
+FC_INTERPOLATE  = mpif90 -c -g 
+FC_KMIG    = mpif90 -c -g 
+FC_PPIO    = mpif90 -c -g 
+FC_UNDER   = mpif90 -c -g 
+FC_LINK    = mpif90 -nofor_main -g
+
+### mpicc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+CC         = mpicc -c -g  -Wall -DLINUX -DLINUXI -D_REENTRANT -D_FILE_OFFSET_BITS=64 
+CC_LINK    = mpicc
+
+CXX        = g++ -c -g  -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+CXX_LINK   = mpif90 -nofor_main -g
+CXX_DEPEND = g++ -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared -g
+
+MODEXT     = .mod
+MODFLAG    = -I
+FOR_LIBS   = /usr/lib/libstdc++.so.5
+# /usr/lib/gcc-lib/x86_64-redhat-linux/3.3.4/libstdc++.a
+# /usr/lib/gcc-lib/x86_64-redhat-linux/3.2.3/libstdc++.a \
+
+GUI_LIBS    = /usr/X11R6/lib/libXm.a \
+              /usr/X11R6/lib/libXmu.a \
+              /usr/X11R6/lib/libXp.a \
+              /usr/X11R6/lib/libXext.a \
+              /usr/X11R6/lib/libXt.a \
+              /usr/X11R6/lib/libSM.a \
+              /usr/X11R6/lib/libICE.a \
+              /usr/X11R6/lib/libX11.a
+
+#MATH_LIBS  = /usr/lib/libm.a \
+#             /usr/lib/libpthread.a \
+#             /usr/lib/libc.a
+MATH_LIBS = /usr/lib/libm.a -lpthread -lc
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386 -lverify -ljava -L$(JAVA_HOME)/jre/lib/i386/client -ljvm 
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += $(JAVA_HOME)/include $(JAVA_HOME)/include/linux /usr/include /usr/X11R6/include

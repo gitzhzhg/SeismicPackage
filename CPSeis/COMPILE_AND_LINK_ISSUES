@@ -1,0 +1,52 @@
+          COMPILE_AND_LINK_ISSUES  in  CPSEIS_HOME         2010 march 30
+
+This file contains information on compile and link issues for cpseis (and
+particularly spws) on the following machines in different locations:
+               fusbc006   achilles   helios02   modi
+
+XDrawRectangle is no longer unsatisfied for msepita.  The fix was to add the
+X/Motif libraries to the link statement a second time.  Another solution is
+to make the loader search circularly through the libraries using the -( and -)
+options.
+
+Cbyt and the other spws motif programs (except msepita) which aborted
+immediately on fusbc006 no longer abort immediately.  The fix was to replace
+g++ with icpc.  The g++ compiler was in the makefile for the spws programs in
+the svn repository by mistake instead of the Intel icpc compiler.  On fusbc006,
+the g++ compiler is version 4, whereas g++ on the other machines was version 3.
+Apparently there is a problem with g++ version 4 which does not exist for either
+icpc or g++ version 3.
+
+Unfortunately, it was later determined that cbyt aborts on fusbc006 when
+drawing the annotation axes after reading in a trace file.  Therefore we went
+back to using g++ instead of icpc.  This works for cbyt on every machine except
+fusbc006, because of the g++ version 4 problem mentioned above.  Therefore, the
+workaround is to copy the cbyt executable from modi to fusbc006 and to use that
+executable instead of the one compiled on fusbc006.
+
+It has been discovered that va misbehaves on (probably) all platforms by
+saving a zero-length velocity file.  The backup velocity workfiles are saved
+correctly.  This problem has not yet been investigated.
+
+The spws motif programs cfg and msepita appear to work correctly wherever they
+have been tried.
+
+I suspect that the problems with the spws programs is a "long" versus "int"
+incompatibility on 64-bit machines.  These programs were written and run on
+32-bit machines for 15-20 years without any problem.  I did verify that the
+cbyt annotation axes problem does indeed appear to be such an incompatibility,
+but attempts to fix this problem only delayed the abort to a later part of the
+code.
+
+00000000011111111112222222222333333333344444444445555555555666666666677777777778
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+                   ifort icc  icpc        uname -a            svn   g++  centos
+                   ----- ---- ---- ------------------------- ----- ----- ------
+boulder   fusbc006 10.1  10.1 10.1 2.6.18-128.1.6.el5 #1 SMP works 4.1.2  5.3
+woodlands achilles 10.0   --   --  2.6.9-55.0.9.ELsmp #1 SMP works 3.4.6  4.5
+woodlands helios    --    --   --  2.6.9-55.ELsmp     #1 SMP  old  3.4.6  4.5
+woodlands helios02 10.0  10.0 10.0 2.6.9-78.ELsmp     #1 SMP works 3.4.6  4.7
+parkrow   modi     10.0  10.0 10.0 2.6.9-78.0.13.EL   #1      old  3.4.6  4.7
+parkrow   bellum   10.0  10.0 10.0 2.6.18-128.el5     #1 SMP works 4.1.2  5.3
+

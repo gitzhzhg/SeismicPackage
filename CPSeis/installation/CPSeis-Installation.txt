@@ -1,0 +1,30 @@
+Steps for installing the spws programs that come with CPSeis.
+This included cbyt/va/cfg/csv and a few others.  Also applies to geopress.
+You already have a cpseis installation directory:
+CPSEIS_INSTALL_DIR=/somelocation/cpseis and you already have a
+definition of the cpseis architecture for this build:
+CPSEIS_ARCH=x86_64_intel91_lam (machine-arch)_(compiler)_(mpi-type)
+
+1)  cd ${CPSEIS_INSTALL_DIR}/spws_home/making
+2)  create makefile.${CPSEIS_ARCH} if it does not exist, by copying some other makefile.some_architecture
+3)  Edit this file to include your compiler options, your include directories, etc.
+4)  edit nightly_nodes_and_platforms to include your node that you will compile on and your ${CPSEIS_ARCH} (add a line with:
+node_name.architecture)
+5)  Add 4 lines to makefile.platforms that test if PLATFORM is equal to your CPSEIS_ARCH (there are numerous examples in the file, just copy them) and modify it to call your makefile.$CPSEIS_ARCH that you created in step 2 above.
+6)  run the program "./add_new_platform ${CPSEIS_ARCH}"
+7)  cd $CPSEIS_ARCH (from the making directory which you haven't left)
+8)  If on ubuntu 8.04 be sure to install libmotif-dev (open motif) and to modify the include directories to find the X11 includes.  The location may be underneath /home/usr/... instead of the more typical /usr/X11:
+	sudo apt-get libmotif-dev install
+9)  Also ensure you have the latest gcc, g++, gfortran.
+10) I assume you have already installed cpseis or you wouldn't have even had the spws_home directory mentioned in step 1.
+11) now try the make:
+make util
+make oop
+make programs
+... some programs won't make, so you might have to do:
+make -k programs
+12)  Now see if cbyt, va, cfg, csv exist in your bin directory along with the cpseis programs:
+(look in $CPSEIS_INSTALL_DIR/platforms/$CPSEIS_ARCH/bin)
+
+rinse
+repeat

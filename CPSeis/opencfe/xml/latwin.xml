@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="latwin" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN01" title="SCREEN01" rows="1" columns="1" minCellWidth="8" minCellHeight="12">
+    <Label keyword="LABEL_WIN_OPT" alignment="left">WIN_OPT=</Label>
+    <Field keyword="WIN_OPT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_ADD" alignment="left">WIN_TIM_ADD=</Label>
+    <Field keyword="WIN_TIM_ADD" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_LEN" alignment="left">WIN_TIM_LEN=</Label>
+    <Field keyword="WIN_TIM_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="WIN_COOR_X_ARRAYSET" label="WIN_COOR_XWIN_COOR_YWIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="WIN_COOR_X" type="float" maxLength="10 " columnName="WIN_COOR_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_COOR_Y" type="float" maxLength="10 " columnName="WIN_COOR_Y" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_OPT" xPos="5" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_OPT" xPos="13" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_TIM_ADD" xPos="20" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_ADD" xPos="32" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_TIM_LEN" xPos="42" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_LEN" xPos="54" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="15" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="20" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="30" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X_ARRAYSET" xPos="8" yPos="4" xSize="45" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_OPT">
+      <Tip>Method to use for specifying trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_OPT<br> Method to use for specifying trace windows.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE   (window defined by time measure from mute)
+ Allowed = GRID   (window varies laterally, or same window everywhere)
+ 
+ Segments of the input traces used in this process are defined by these
+ windows.
+ 
+ Option GRID specifies the trace windows by linked arrays of window top and
+ window bottom values which may vary lateraly (spatially) over arbitrarily
+ chosen coordinates.
+ 
+ Option MUTE specifies the trace windows by specifying the time from the
+ mute time to the top of the window, and the length of the window.
+ 
+ Some processes might disable the MUTE option if it is not appropriate
+ for that process.  In this case, the GRID option will be the default
+ and only option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_ADD">
+      <Tip>Time at top of window = mute time + WIN_TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_TIM_ADD<br> Time at top of window = mute time + WIN_TIM_ADD.</center></b>
+<pre> Default = 0.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_TIM_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_TIM_LEN<br> Time at bottom of window = time at top of window + WIN_TIM_LEN.</center></b>
+<pre> Default = 1.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) (one window).
+ Allowed = any number of values &gt;= top of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>latwin - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) (one window).
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+  </CommandArea>
+  <Help component="latwin">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R I M I T I V E
+ 
+ Name       : LATWIN
+ Category   : math
+ Written    : 2000-01-18   by: Tom Stoeckley
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Manager of laterally-varying trace windows for process modules.
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ This primitive is to be used by process modules which need trace windows
+ which vary with lateral location (specified by a pair of coordinates) or
+ with mute time.  This primitive owns and manages all parameters needed for
+ this functionality, and also manages the interpolation and other calculations
+ required to return the appropriate window for a given trace.
+ 
+ This primitive uses the parameter cache to read and write the parameters
+ it needs, to report error messages, etc.
+ 
+ To use this primitive from a process module named xxxx:
+ 
+    (1) latwin_create     should be called from xxxx_create.
+    (2) latwin_initialize should be called from xxxx_initialize.
+    (3) latwin_update     should be called from xxxx_update.
+    (4) latwin_get_window should be called from xxxx.
+    (5) latwin_delete     should be called from xxxx_delete.
+ 
+ The purpose of this primitive is to encapsulate a standard method of
+ specifying trace windows for uniformity for the user, to encapsulate
+ the code dealing with these trace windows, and to encapsulate the screen
+ layout and context-sensitive help so that they need not be repeated in
+ the individual processes.  Any changes to this primitive can be made
+ without affecting the processes which use it.
+ 
+ Currently this primitive works with only a single laterally-varying
+ window.  It is recognized that there is a need to support multiple windows.
+ This support will be provided when it is needed either in this primitive
+ or in other similar primitives.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ The GUI_DEF section for a process which uses this primitive should contain
+ an INCLUDE line which says to include the GUI_DEF section of this primitive.
+ The HELPSECTION for the parameters in this primitive will also be made
+ available to the process when this is done.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 16. 2006-09-11  Stoeckley    Replace pc_register_tab_group w HelpSection line.
+ 15. 2006-06-20  Stoeckley    Add pc_register_tab_group to improve SeisSpace
+                               menu.
+ 14. 2006-06-05  Stoeckley    Add pc_register_array_names to improve SeisSpace
+                               menu.
+ 13. 2005-01-31  Stoeckley    Move some print statements in latwin_update
+                               into an if block where they will not abort.
+ 12. 2000-09-27  Stoeckley    Add documentation to the HelpSection for 2D data.
+ 11. 2000-08-22  Stoeckley    Make MUTE option fields invisible when disabled.
+ 10. 2000-08-01  Stoeckley    Change coordinate parameter names to use X and Y
+                               instead of A and B.
+  9. 2000-05-26  Stoeckley    Add ability to disable the MUTE option.
+  8. 2000-04-25  Stoeckley    Improve trapping logic and screen layout.
+  7. 2000-04-07  Stoeckley    Remove &lt;NS&gt; line in GUI definition section so
+                               that the GUI info will not go to a separate
+                               tabbed screen.
+  6. 2000-04-06  Stoeckley    Improve printouts to identify this primitive.
+  5. 2000-03-31  Stoeckley    Fix GUI definition section.
+  4. 2000-03-09  Stoeckley    Add call to pc_put_sensitive_arrayset_flag.
+  3. 2000-02-15  Stoeckley    Fix bug in setting arrays insensitive.
+  2. 2000-02-04  Stoeckley    Fix bug in arguments for minval and maxval.
+  1. 2000-01-18  Stoeckley    Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

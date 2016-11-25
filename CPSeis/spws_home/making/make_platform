@@ -1,0 +1,257 @@
+#!/bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : make_platform
+# Category   : stand-alone
+# Written    : 2003-02-18   by: Tom Stoeckley
+# Revised    : 2003-02-18   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script to make ~spws libraries on one specified platform.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is a utility to make ~spws libraries on one specified platform.
+# 
+# You must type the following in any directory:
+#
+#                 make_platform  <platform>  <target>
+#
+# where the required <platform> is a supported platform, and
+# where the optional <target> is any target in makefile.spws.
+#
+# If <platform> is omitted, help is printed.
+# If <platform> is "all", all supported platforms are made.
+# If <target> is omitted, all oop and util targets are made.
+#
+# This script can be executed on any node, regardless of the specified
+# platform, since rsh is used.
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#                SPWSMAKEDIR
+#                SPWSDIR
+#
+# The following file must exist:
+#
+#                $SPWSMAKEDIR/nightly_nodes_and_platforms
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2003-02-18  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: make_platform,v 1.1 2004/03/04 13:30:51 wjdone Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo environment variable SPWSDIR not set.
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo environment variable SPWSMAKEDIR not set.
+     exit
+endif
+
+
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+##----------------------- verify input file -------------------------------##
+
+
+if(! -f $SPWSMAKEDIR/nightly_nodes_and_platforms) then
+     echo missing nightly_nodes_and_platforms file.
+     exit
+endif
+
+
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+##-------------------- define internal variables ---------------------------##
+
+
+set platnodes         = `cat $SPWSMAKEDIR/nightly_nodes_and_platforms`
+set making            = $SPWSDIR/making
+set platform          = $1
+set target            = $2
+set whoops            = true
+set deliminator1      = '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+set deliminator2      = '****************************************'
+
+
+##------------------------- print help -----------------------------------##
+##------------------------- print help -----------------------------------##
+##------------------------- print help -----------------------------------##
+
+
+if($platform == "") then
+     echo ''
+     echo '-------------------------------------------------------------'
+     echo ' This script is a utility to make ~spws libraries'
+     echo ' on one specified platform.'
+     echo ' '
+     echo ' You must type the following in any directory:'
+     echo ''
+     echo '         make_platform <platform> <target>'
+     echo ''
+     echo ' where the required <platform> is a supported platform, and'
+     echo ' where the optional <target> is any target in makefile.spws.'
+     echo ''
+     echo ' If <platform> is omitted, help is printed.'
+     echo ' If <platform> is "all", all supported platforms are made.'
+     echo ' If <target> is omitted, all oop and util targets are made.'
+     echo ''
+     echo ' This script can be executed on any node, regardless of the'
+     echo ' specified platform, since rsh is used.'
+     echo ''
+     echo ' Supported platforms are listed in the following file:'
+     echo ''
+     echo '        $SPWSMAKEDIR/nightly_nodes_and_platforms'
+     echo '-------------------------------------------------------------'
+     echo ''
+     exit
+endif
+
+
+##----------------------- verify valid platform ---------------------------##
+##----------------------- verify valid platform ---------------------------##
+##----------------------- verify valid platform ---------------------------##
+
+
+#if($platform != "all") then
+#working here................
+#working here................
+#working here................
+#working here................
+#foreach platnode ($platnodes)
+#   echo "$platnode" | grep '#' > /dev/null && continue
+#   if($platnode == "") continue
+#
+#   set node      = $platnode:r
+#   set platpath  = $making/$platnode:e
+#
+#   if($platform != "all") then
+#      if($platnode:e != $platform) continue
+#   endif
+#
+#endif
+
+
+##------------------------ do the make ------------------------------------##
+##------------------------ do the make ------------------------------------##
+##------------------------ do the make ------------------------------------##
+
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set node      = $platnode:r
+   set platpath  = $making/$platnode:e
+
+   if($platform != "all") then
+      if($platnode:e != $platform) continue
+   endif
+
+   set command1 = "cd $platpath"
+   set command2 = "gmake $target"
+
+   if($target == "") then
+      set msg = "making platform $platnode:e  (all oop and util targets)"
+   else
+      set msg = "making platform $platnode:e  (target $target)"
+   endif
+
+   echo ""
+   echo "$deliminator1$deliminator1"
+   echo "$msg  on node $node"
+   echo "$deliminator1$deliminator1"
+   echo ""
+
+   rsh $node "$command1; $command2"
+
+   echo ""
+   echo "$deliminator2$deliminator2"
+   echo "finished $msg  on node $node"
+   echo "$deliminator2$deliminator2"
+   echo ""
+
+   set whoops = false
+
+   if($target == depend) exit
+   if($platform != "all") exit
+end
+
+
+##----------------------------- error message -----------------------------##
+##----------------------------- error message -----------------------------##
+##----------------------------- error message -----------------------------##
+
+
+if($whoops == false) exit
+
+echo ""
+echo "invalid platform $platform"
+echo ""
+echo "valid platforms and nodes are these:"
+echo ""
+
+foreach platnode ($platnodes)
+   echo "$platnode" | grep '#' > /dev/null && continue
+   if($platnode == "") continue
+
+   set node      = $platnode:r
+   set platpath  = $making/$platnode:e
+
+   echo "platform $platnode:e            on node $node"
+end
+
+echo ""
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

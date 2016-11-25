@@ -1,0 +1,1069 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ttrot" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TTROTPROCESS" title="TTROT Process" rows="32" columns="80">
+    <Label keyword="COMMENT_WRITETRACEDATATOMAGNETIC" alignment="center">Write trace data to magnetic tape.</Label>
+    <Label keyword="COMMENT_INCLUDESTHEFORMERSEGYAND" alignment="center">(Includes the former SEGY and TCAT processes)</Label>
+    <Label keyword="LABEL_COMMENT" alignment="left">COMMENT=</Label>
+    <Field keyword="COMMENT" type="string" maxLength="120" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FORMAT" alignment="left">FORMAT  =</Label>
+    <Field keyword="FORMAT" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MEDIA" alignment="left">MEDIA   =</Label>
+    <Field keyword="MEDIA" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HISTORY" alignment="left">HISTORY=</Label>
+    <Field keyword="HISTORY" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TYPE_OUT" alignment="left">TYPE_OUT=</Label>
+    <Field keyword="TYPE_OUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MOD_SEGY" alignment="left">MOD_SEGY=</Label>
+    <Field keyword="MOD_SEGY" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PACK_HDR" alignment="left">PACK_HDR=</Label>
+    <Field keyword="PACK_HDR" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RETENTION" alignment="left">RETENTION=</Label>
+    <Field keyword="RETENTION" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USERID" alignment="left">USERID=</Label>
+    <Field keyword="USERID" type="string" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PROJECT" alignment="left">PROJECT=</Label>
+    <Field keyword="PROJECT" type="string" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SUB_PROJECT" alignment="left">SUB_PROJECT=</Label>
+    <Field keyword="SUB_PROJECT" type="string" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TASK" alignment="left">TASK=</Label>
+    <Field keyword="TASK" type="string" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEFAULTS" alignment="left">DEFAULTS=</Label>
+    <Field keyword="DEFAULTS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FILL_ROWS" alignment="left">FILL_ROWS=</Label>
+    <Field keyword="FILL_ROWS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_ROWS" alignment="left">NUM_ROWS=</Label>
+    <Field keyword="NUM_ROWS" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TAPE_HOST" alignment="left">TAPE_HOST=</Label>
+    <Field keyword="TAPE_HOST" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="VOLUME_ARRAYSET" label="VOLUME                                          NUM_TR">
+     <Array keyword="VOLUME" type="string" maxLength="48 " columnName="VOLUME" editable="yes" sensitive="yes" columnSize="48"/>
+     <Array keyword="NUM_TR" type="int" maxLength="8  " columnName="NUM_TR" editable="yes" sensitive="yes" columnSize="8"/>
+    </ArraySet>
+    <Label keyword="LABEL_PATH_SEGY" alignment="left">PATH_SEGY=</Label>
+    <Field keyword="PATH_SEGY" type="string" maxLength="80" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG  =</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SUM1" alignment="left">HDR_SUM1=</Label>
+    <Field keyword="HDR_SUM1" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SUM2" alignment="left">HDR_SUM2=</Label>
+    <Field keyword="HDR_SUM2" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SWITCH" alignment="left">HDR_SWITCH=</Label>
+    <Field keyword="HDR_SWITCH" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BEG_INIT" alignment="left">BEG_INIT=</Label>
+    <Field keyword="BEG_INIT" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BEG_INC" alignment="left">BEG_INC~=</Label>
+    <Field keyword="BEG_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="SBYTE_ARRAYSET" label="SBYTE BYTES CPS_HDR WTYPE">
+     <Array keyword="SBYTE" type="int" maxLength="6  " columnName="SBYTE" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="BYTES" type="int" maxLength="6  " columnName="BYTES" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="CPS_HDR" type="int" maxLength="8  " columnName="CPS_HDR" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="WTYPE" type="string" maxLength="5  " columnName="WTYPE" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_WRITETRACEDATATOMAGNETIC" xPos="17" yPos="0" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_INCLUDESTHEFORMERSEGYAND" xPos="12" yPos="1" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COMMENT" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT" xPos="9" yPos="3" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FORMAT" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FORMAT" xPos="10" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MEDIA" xPos="22" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MEDIA" xPos="31" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HISTORY" xPos="39" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HISTORY" xPos="47" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TYPE_OUT" xPos="1" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_OUT" xPos="10" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MOD_SEGY" xPos="22" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MOD_SEGY" xPos="31" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PACK_HDR" xPos="39" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PACK_HDR" xPos="48" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RETENTION" xPos="56" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RETENTION" xPos="66" yPos="7" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_USERID" xPos="1" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USERID" xPos="8" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PROJECT" xPos="17" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PROJECT" xPos="25" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SUB_PROJECT" xPos="36" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SUB_PROJECT" xPos="48" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TASK" xPos="59" yPos="9" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TASK" xPos="64" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEFAULTS" xPos="1" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEFAULTS" xPos="10" yPos="11" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FILL_ROWS" xPos="18" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILL_ROWS" xPos="28" yPos="11" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_ROWS" xPos="37" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_ROWS" xPos="46" yPos="11" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TAPE_HOST" xPos="52" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TAPE_HOST" xPos="62" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="VOLUME_ARRAYSET" xPos="1" yPos="14" xSize="59" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_PATH_SEGY" xPos="1" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_SEGY" xPos="11" yPos="20" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="1" yPos="23" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="12" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SUM1" xPos="22" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SUM1" xPos="31" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SUM2" xPos="41" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SUM2" xPos="50" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SWITCH" xPos="1" yPos="25" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SWITCH" xPos="12" yPos="25" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BEG_INIT" xPos="22" yPos="25" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BEG_INIT" xPos="31" yPos="25" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BEG_INC" xPos="41" yPos="25" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BEG_INC" xPos="50" yPos="25" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SBYTE_ARRAYSET" xPos="3" yPos="27" xSize="28" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="COMMENT">
+      <Tip>Comment to operator regarding tape selection or disposition.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - COMMENT<br> Comment to operator regarding tape selection or disposition.</center></b>
+<pre> Default = BLANK
+ Allowed = char (120)
+ Normally COMMENT will be instructions regarding selection of tapes to be
+ written on and/or instructions for handling of tapes once written.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FORMAT">
+      <Tip>Format of the tapes being written.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - FORMAT<br> Format of the tapes being written.</center></b>
+<pre> Default = CPS
+ Allowed = CPS   (CPS tape with one trace per write)
+ Allowed = BLK   (CPS tape with one block per write - faster)
+ Allowed = SEGY
+ BLK format writes multiple traces per record - faster and less reliable.
+ CPS format writes one trace per record - slower and more reliable.
+ FORMAT=BLK is less reliable since one read error will destroy several
+ traces rather than just one.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MEDIA">
+      <Tip>Media type of the output tapes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - MEDIA<br> Media type of the output tapes.</center></b>
+<pre> Default = 3590HD
+ Allowed = 3590HD   (Magstar cartridge high density)
+ Allowed = 3590     (Magstar cartridges )
+ Allowed = 3480
+ Allowed = 8mm
+ Allowed = DLT
+ Allowed = 3420  (9-track round media)
+ Allowed = NR3590 (non robot 3590 )
+ Allowed = LTO
+ Only 3590 is currently valid.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HISTORY">
+      <Tip>How to control transfer of processing history.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HISTORY<br> How to control transfer of processing history.</center></b>
+<pre> Default = MODEL   (Save a set of histories that model job processing)
+ Allowed = ALL     (Write all old histories.)
+ Allowed = CURRENT (Write current history only.)
+ Allowed = NONE    (Do not write any history.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TYPE_OUT">
+      <Tip>Whether tape written will be SCR or PS.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - TYPE_OUT<br> Whether tape written will be SCR or PS.</center></b>
+<pre> Default = SCR
+ Allowed = SCR
+ Allowed = PS
+ Allowed = PS_VMOD
+ 
+       If TYPE_OUT = SCR, traces
+       are written to scratch tapes.  These tapes are entered into the
+       Conoco General Tape Library Database System and are stored indefinitely.
+ 
+       If TYPE_OUT = PS, traces (and optionally other processing information)
+       are written to new tapes.  These tapes are entered into the
+       Conoco General Tape Library Database System and are stored indefinitely.
+ 
+       If TYPE_OUT = PS_VMOD, new tapes are used.  The data saved are velocity
+       models prepared by the PGPS program. The PATH_PS parameter is
+       required, and the list must contain .hgrid and .modgrid files only.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="MOD_SEGY">
+      <Tip>Whether to modify default mapping of CPS headers to SEGY headers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - MOD_SEGY<br> Whether to modify default mapping of CPS headers to SEGY headers.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If MOD_SEGY = YES, parameters for specifying the CPS to SEGY header mapping
+ are activated.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PACK_HDR">
+      <Tip>Pack or dont pack headers saved to CPS or BLK tape formats.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PACK_HDR<br> Pack or dont pack headers saved to CPS or BLK tape formats.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ If PACK_HDR = YES, headers are saved as 32 bit IEEE words
+ If PACK_HDR = NO,  headers are saved as 64 bit IEEE words</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RETENTION">
+      <Tip>Time, in days, to retain PDN.(future use)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - RETENTION<br> Time, in days, to retain PDN.(future use)</center></b>
+<pre> Default = 180
+ Allowed = int, 1 - 365</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USERID">
+      <Tip>Userid for PDN.  Second element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - USERID<br> Userid for PDN.  Second element of PDN descriptor array.</center></b>
+<pre> Default = current userid
+ Allowed = any valid userid (char 8)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROJECT">
+      <Tip>Project name for PDN.  Third element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROJECT<br> Project name for PDN.  Third element of PDN descriptor array.</center></b>
+<pre> Default = value of PROJECT parameter in PROJ_DATA
+ Allowed = char (10)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SUB_PROJECT">
+      <Tip>Sub-project name for PDN.  Fourth element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - SUB_PROJECT<br> Sub-project name for PDN.  Fourth element of PDN descriptor array.</center></b>
+<pre> Default = BLANK
+ Allowed = char (10)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TASK">
+      <Tip>Task name for PDN.  Fifth element of PDN descriptor array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - TASK<br> Task name for PDN.  Fifth element of PDN descriptor array.</center></b>
+<pre> Default = BLANK or permsave
+ Allowed = char (10)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEFAULTS">
+      <Tip>Whether to default PDN or VOLUME to system or old workfile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - DEFAULTS<br> Whether to default PDN or VOLUME to system or old workfile.</center></b>
+<pre> Default = SYS
+ Allowed = SYS  (Set PDN or VOLUME defaults to system values.)
+ Allowed = OLD  (Set PDN or VOLUME defaults to old workfile values.)
+ System defaults are:
+       MED echoes the value of the MEDIA parameter.
+       USERID defaults to the current userid.
+       PROJECT defaults to the value of the PROJECT parameter in PROJECT_DATA.
+       SUB_PROJECT defaults to JOB_DATA Sub-Project Name.
+       TASK defaults to BLANK or permsave.
+       COUNTER defaults to 1.
+       FORMAT defaults to FORMAT, cps, segy, or blk.
+ 
+ DEFAULTS is a front-end only parameter and operates only when editing old
+ workfiles.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILL_ROWS">
+      <Tip>Whether to fill in PDN or VOLUME array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - FILL_ROWS<br> Whether to fill in PDN or VOLUME array.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ FILL_ROWS is a toggle for automatic filling in of the PDN or VOLUME
+ arrays based on the entry in the first row.  Values of the first 5 PDN
+ elements are repeated and COUNTER is incremented by 1 for each row.  The
+ alpha part of VOLUME repeats and the numeric part is incremented by 1 for each
+ row.
+ 
+ FILL_ROWS is a front-end only parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_ROWS">
+      <Tip>Number of PDN or VOLUME array rows to fill.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - NUM_ROWS<br> Number of PDN or VOLUME array rows to fill.</center></b>
+<pre> Default = 1
+ Allowed = 1 - 100
+ NUM_ROWS determines the number of array rows to be filled by the
+ FILL_ROWS parameter.  NUM_ROWS is a front-end only parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TAPE_HOST">
+      <Tip>User can choose a specific tape host.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - TAPE_HOST<br>  User can choose a specific tape host.</center></b>
+<pre> Default = odi90
+ Allowed = odi90
+ Allowed = odi74
+ Allowed = odi91
+ Allowed = hoeplgp01
+ Allowed = hnomega1  (goodgkp only)
+ Allowed = jaws
+ User can choose a specific tape host</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VOLUME">
+      <Tip>A volser or PDN of a tape to be written.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - VOLUME<br> A volser or PDN of a tape to be written.</center></b>
+<pre> Default = blank
+ Allowed = char(48)  (array)
+ VOLUME less than 7 characters is interpreted as a specific volser.
+ VOLUME names over 6 characters will be treated as a permanent data set
+ name, i.e. a PDN. If VOLUME exists in the catalogue it will be overwritten.
+ If it is not in the catalogue scratch tapes will be used and catalogued.
+ A maximum of 50 tapes will be catalogued under one volume name. The
+ hdr_switch or hdr_flag can be used to control volser changes when writing
+ to PDNs.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_TR">
+      <Tip>Maximum number of traces to write to a volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - NUM_TR<br> Maximum number of traces to write to a volume.</center></b>
+<pre> Default = 99999999
+ Allowed = int&gt;1 (array)
+ TTROT will write no more than NUM_TR traces to a PDN or user-specified tape.
+ Once TTROT has written NUM_TR traces to a PDN or user-specified tape and
+ there are more traces to be written, it will call for the next PDN or user-
+ specified tape (if no more PDNs or user-specified tapes are listed, TTROT
+ will wrapup and become a transparent process). To control reel changes when
+ writing to a PDN, one must use the hdr_switch or hdr_flag variables.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_SEGY">
+      <Tip>Pathame of text file used to supply the 3200 byte SEGY header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PATH_SEGY<br> Pathame of text file used to supply the 3200 byte SEGY header.</center></b>
+<pre> Default = blank
+ Allowed = char
+ This file must consist of exactly 40 lines with no more than 80 characters
+ each.  If no file is specified, a default empty SEGY header will be supplied.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_FLAG = 0, then all traces are written to tape.  Otherwise, only traces
+ with a flag set in header word HDR_FLAG are written to tape.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SUM1">
+      <Tip>Print headsum of HDR_SUM1 for each PDN or tape volume output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HDR_SUM1<br> Print headsum of HDR_SUM1 for each PDN or tape volume output.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_SUM1 = 0, then do not print a headsum.
+ If HDR_SUM1 &gt; 0, then print in the .rpt file the minimum and maximum values
+ of HDR_SUM1 for each PDN or tape volume output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SUM2">
+      <Tip>Print headsum of HDR_SUM2 for each PDN or tape volume output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HDR_SUM2<br> Print headsum of HDR_SUM2 for each PDN or tape volume output.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_SUM1 = 0, then do not print a headsum of HDR_SUM2.
+ If HDR_SUM2 &gt; 0, then print in the .rpt file the minimum and maximum values
+ of HDR_SUM2 for each PDN or tape volume output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SWITCH">
+      <Tip>Header word used to control automatic output switching.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HDR_SWITCH<br> Header word used to control automatic output switching.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_SWITCH = 0, then output switching is controlled by NUM_TR only.
+ 
+ If HDR_SWITCH &gt; 0, then output switching is controlled by the value of
+ HDR_SWITCH and NUM_TR is ignored.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BEG_INIT">
+      <Tip>Value of header word HDR_SWITCH to start first PDN or volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - BEG_INIT<br> Value of header word HDR_SWITCH to start first PDN or volume.</center></b>
+<pre> Default = 1
+ Allowed = real
+ BEG_INIT should be set to the value of HDR_SWITCH of the first trace to be
+ output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BEG_INC">
+      <Tip>Increment between values of header word HDR_SWITCH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - BEG_INC<br> Increment between values of header word HDR_SWITCH.</center></b>
+<pre> Default = 1
+ Allowed = real
+ A new output PDN or volume is started whenever
+ 
+    HDR_SWITCH = BEG_INIT + n * BEG_INC,  where n is 1, 2, 3, ...
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="SBYTE">
+      <Tip>Starting byte of the SEGY header to receive CPS header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - SBYTE<br> Starting byte of the SEGY header to receive CPS header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BYTES">
+      <Tip>Number of bytes to use for the CPS header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - BYTES<br> Number of bytes to use for the CPS header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CPS_HDR">
+      <Tip>CPS header word to be moved.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - CPS_HDR<br> CPS header word to be moved.</center></b>
+<pre> Default = -
+ Allowed = 1 - NWIH (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WTYPE">
+      <Tip>Treat Segy header word as I(integer), or F(floating poit).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - WTYPE<br> Treat Segy header word as I(integer), or F(floating poit).</center></b>
+<pre> Default = -
+ Allowed = char(8) (linked array)
+ Active if MOD_SEGY = YES.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="PERMSAVE" title="Permsave" rows="24" columns="80">
+    <Label keyword="COMMENT_PERMSAVEPARAMETERS" alignment="center">Permsave Parameters</Label>
+    <Label keyword="LABEL_PATH_PS" alignment="left">PATH_PS=</Label>
+    <Field keyword="PATH_PS" type="string" maxLength="80" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_TR" alignment="left">MAX_TR =</Label>
+    <Field keyword="MAX_TR" type="int" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LABEL_TYPE" alignment="left">LABEL_TYPE=</Label>
+    <Field keyword="LABEL_TYPE" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_QUAD" alignment="left">QUAD=</Label>
+    <Field keyword="QUAD" type="string" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COUNTRY" alignment="left">COUNTRY=</Label>
+    <Field keyword="COUNTRY" type="string" maxLength="20" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIR" alignment="left">DIR=</Label>
+    <Field keyword="DIR" type="string" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PROJECT_NAME" alignment="left">PROJECT_NAME=</Label>
+    <Field keyword="PROJECT_NAME" type="string" maxLength="20" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_LINE" alignment="left">HDR_LINE=</Label>
+    <Field keyword="HDR_LINE" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CONTRACTOR" alignment="left">CONTRACTOR=</Label>
+    <Field keyword="CONTRACTOR" type="string" maxLength="20" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SHOT" alignment="left">HDR_SHOT=</Label>
+    <Field keyword="HDR_SHOT" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PROCESSES" alignment="left">PROCESSES=</Label>
+    <Field keyword="PROCESSES" type="string" maxLength="20" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMMENT_LABEL" alignment="left">COMMENT_LABEL=</Label>
+    <Field keyword="COMMENT_LABEL" type="string" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_NAMES" alignment="left">LINE_NAMES=</Label>
+    <Field keyword="LINE_NAMES" type="string" maxLength="20" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SHOTPOINTS" alignment="left">SHOTPOINTS=</Label>
+    <Field keyword="SHOTPOINTS" type="string" maxLength="20" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PERMSAVEPARAMETERS" xPos="17" yPos="1" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_PS" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_PS" xPos="9" yPos="3" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_TR" xPos="1" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_TR" xPos="9" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LABEL_TYPE" xPos="4" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TYPE" xPos="15" yPos="7" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_QUAD" xPos="10" yPos="9" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="QUAD" xPos="15" yPos="9" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COUNTRY" xPos="41" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COUNTRY" xPos="49" yPos="9" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIR" xPos="11" yPos="11" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIR" xPos="15" yPos="11" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PROJECT_NAME" xPos="36" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PROJECT_NAME" xPos="49" yPos="11" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_LINE" xPos="6" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_LINE" xPos="15" yPos="13" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONTRACTOR" xPos="38" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONTRACTOR" xPos="49" yPos="13" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SHOT" xPos="6" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SHOT" xPos="15" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PROCESSES" xPos="39" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PROCESSES" xPos="49" yPos="15" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COMMENT_LABEL" xPos="1" yPos="17" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_LABEL" xPos="15" yPos="17" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_NAMES" xPos="38" yPos="17" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_NAMES" xPos="49" yPos="17" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SHOTPOINTS" xPos="38" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHOTPOINTS" xPos="49" yPos="19" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PATH_PS">
+      <Tip>Pathname of file listing processing information to be saved.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PATH_PS<br> Pathname of file listing processing information to be saved.</center></b>
+<pre> Default = permsave.list
+ Allowed = char
+ A file of file names that are to be saved as processing records.
+ All files listed must be ascii files. Processing records are added
+ to the history file on a tape. They are distinguished from true history
+ records by a PR=CON string at the start of a processing record.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_TR">
+      <Tip>Maximum number of traces per tape on the permsave pdn.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - MAX_TR<br> Maximum number of traces per tape on the permsave pdn.</center></b>
+<pre> Default = 0
+ Allowed = 0 to max traces a tape will hold
+ If zero, ttrot will output the maximum number of traces a tape will hold on
+ each tape in the pdn.  The TTROT front end calculates the maximum number of
+ traces a tape will hold and informs the user during the front end session.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LABEL_TYPE">
+      <Tip>Whether label is domestic or international format.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - LABEL_TYPE<br> Whether label is domestic or international format.</center></b>
+<pre> Default = INTERNATIONAL
+ Allowed = INTERNATIONAL, DOMESTIC</pre></head></html>]]></Text>
+     </Help>
+     <Help component="QUAD">
+      <Tip>Quadrangle field to identify output tape.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - QUAD<br> Quadrangle field to identify output tape.</center></b>
+<pre> Default = -
+ Allowed = char (20)
+ Active if LABEL_TYPE = DOMESTIC</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COUNTRY">
+      <Tip>Country field to identify output tape.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - COUNTRY<br> Country field to identify output tape.</center></b>
+<pre> Default = -
+ Allowed = char (20)
+ Active if LABEL_TYPE = INTERNATIONAL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIR">
+      <Tip>Direction of line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - DIR<br> Direction of line.</center></b>
+<pre> Default = -
+ Allowed = char (4)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROJECT_NAME">
+      <Tip>Project field to identify output tape.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROJECT_NAME<br> Project field to identify output tape.</center></b>
+<pre> Default = Project_Data information
+ Allowed = char (20)
+ The typical entry is the current project name, but any identification text
+ is allowed.
+ Active if LABEL_TYPE = INTERNATIONAL</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_LINE">
+      <Tip>Header word to identify line number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HDR_LINE<br> Header word to identify line number.</center></b>
+<pre> Default = 38
+ Allowed = 0 - NWIH
+ If zero, must fill out LINE_NAMES</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CONTRACTOR">
+      <Tip>Contractor who shot the data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - CONTRACTOR<br> Contractor who shot the data.</center></b>
+<pre> Default = -
+ Allowed = char (20)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SHOT">
+      <Tip>Header word to identify shot numbers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HDR_SHOT<br> Header word to identify shot numbers.</center></b>
+<pre> Default = 37
+ Allowed = 0 - NWIH
+ If zero, must fill out SHOTPOINTS</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PROCESSES">
+      <Tip>Processes field to identify output tape.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROCESSES<br> Processes field to identify output tape.</center></b>
+<pre> Default = -
+ Allowed = char (20)
+ The typical entry is one or more CPS process names, but any identification
+ text is allowed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT_LABEL">
+      <Tip>Comment for tape label.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - COMMENT_LABEL<br> Comment for tape label.</center></b>
+<pre> Default = -
+ Allowed = char (16)
+ Any text information as a comment.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_NAMES">
+      <Tip>Name of lines on tape.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - LINE_NAMES<br> Name of lines on tape.</center></b>
+<pre> Default = -
+ Allowed = char (20)
+ Active if HDR_LINE = 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHOTPOINTS">
+      <Tip>Shot point ranges on tape.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - SHOTPOINTS<br> Shot point ranges on tape.</center></b>
+<pre> Default = -
+ Allowed = char (20)
+ Active if HDR_SHOT = 0.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ttrot - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ttrot">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TTROT
+ Category   : io
+ Written    : 2000-07-28   by: RSDay
+ Revised    : 2006-11-27   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Write trace data to magnetic tape.
+ Portability: Limited to Unix OS
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ Type of Output
+ 
+ Output options are:  SCR OR PS.
+ 
+       IF TYPE_OUT = SCR, traces are written to scratch tapes.
+ 
+       If TYPE_OUT = PS, traces (and optionally other processing information)
+       are written to new tapes.  These tapes are entered into the
+       Conoco General Tape Library Database System and are stored indefinitely.
+ 
+ 
+ PDN Descriptor
+ 
+ PDNs are tape datasets consisting of one or more physical tapes identified by
+ a single name, the PDN Descriptor.  PDNs are managed by the Computer
+ Operations Tape Database.  The PDN Descriptor consists of 7 elements,
+ described as follows,
+ 
+   PDN Descriptor = MED.USERID.PROJECT.SUB_PROJECT.TASK.FORMAT.COUNTER
+ 
+       MED  is the tape medium the PDN is written on (3590, 8mm, etc.).  It is
+       a display-only parameter that echoes the value of the MEDIA parameter.
+ 
+       USERID is any valid userid and defaults to the current userid.
+ 
+       PROJECT  defaults to the value of the PROJECT parameter in PROJECT_DATA.
+ 
+       SUB_PROJECT  can be used to designate a sub-category of the project,
+       such as "decon" or "dmo" or a range of inlines.  It defaults to the
+       Sub-Project Name from JOB_DATA.
+ 
+       TASK  can be used to designate a part of the sub-project, such as
+       "mute_test".  It defaults to blank.  If TYP_OUT=PS, TASK defaults to
+       permsave.
+ 
+       COUNTER  is a numeric counter, starting with 1 and incrementing by 1 for
+       subsequent PDNs with otherwise identical PDN Descriptors.
+ 
+       FORMAT defaults from the format parameter, CPS, SEGY, or BLK.
+ 
+ 
+ 
+ Permanent Save
+ 
+ The permanent save option is made available when TYPE_OUT=PS.
+ When PATH_PS = filename, a file containing processing information can be
+ written on the permanent save tape in addition to trace data. (The permsave
+ program is available that creates a permsave.list file containing a list of
+ filenames to be written on the permanent save tape.)
+ New tapes will be selected for the permsave job.
+ A label file for the permanent save tape is created and sent to your
+ current directory.  The name of the file will be jobname.label.  If the
+ file already exists, ttrot will append new information to the file.  This
+ file can be edited with a text editor if necessary. It should be sent to the
+ tape librarians who will need to add the rack and slot numbers before
+ printing the label.
+ TYPE_OUT=PS_VMOD is a special permsave option for saving velocity models.
+ The grid files must first be converted to trace files using the PGPS program.
+ The PATH_PS parameter is required and the list must contain .hgrid and
+ .modgrid files only.  No label files is written for this option.
+ 
+ 
+ 
+ Monitoring Outputs
+ 
+ TTROT always prints a list of PDN descriptors or tape volumes for the outputs
+ of that TTROT process.  TTROT also can list the minimum and maximum values of
+ HDR_SUM1 and HDR_SUM2 for each PDN or tape volume output.
+ 
+ 
+ Output Switching Control
+ 
+ NUM_TR specifies the maximum number of traces to write to a PDN or user-
+ specified tape.  However, output switching can also be controlled by the
+ Output Switching by Header Word parameters.  If header word switching is
+ enabled, TTROT ignores NUM_TR.
+ 
+ 
+ Tape Format
+ 
+ Traces are written out in 32 bit IBM floating point format.  Header words are
+ placed at the head of the trace. The first file on each tape is a processing
+ history file.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ PDN Defaults When Editing Old Workfiles
+ 
+ When editing an old workfile, the DEFAULTS parameter allows users to select
+ either system default values (SYS) or default values from the old workfile
+ (OLD).  DEFAULTS is a front-end only parameter.
+ 
+ 
+ Filling in Rows of PDN or VOLUME Arrays Automatically
+ 
+ The FILL_ROWS parameter is a toggle for automatic filling of the PDN or
+ VOLUME arrays based on the entry in the first row.  Values of the first 5 PDN
+ elements are repeated and COUNTER is incremented by 1 for each row.  The
+ alpha part of VOLUME is repeated and the numeric part is incremented by 1 for
+ each row.  FILL_ROWS is a front-end only parameter.
+ 
+ 
+ SEGY Header Word Mapping
+ 
+ Parameters are provided that allow for customized mapping of CPS header words
+ onto SEGY tapes.  Normally these will not be required and the default will
+ suffice.  The default is applied first and only the headers specified in the
+ custom mapping will be changed.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 67. 2006-11-27  Stoeckley    Replace pc_register_tab_group w HelpSection line;
+                               fix a HelpSection error to fix a SeisSpace gui
+                               problem.
+ 66. 2006-08-24  D. Glover    Added NULLIFY statements for Intel compiler.
+ 65. 2006-06-20  Stoeckley    Add pc_register_tab_group for SeisSpace.
+ 64. 2006-06-06  Stoeckley    Add pc_register_array_names for SeisSpace.
+ 63. 2006-01-10  B. Menger    Removed Unused Variables.
+ 62. 2005-05-17  Goodger      Add host odi91 and media 3592.
+ 61. 2005-03-01  Goodger      Replace transfer function with cmem_cpy_c.
+ 60. 2004-08-10  Goodger      Attempt a forced unload after a failure to load
+                              problem.  Get location from config file.
+ 59. 2004-03-15  Goodger      Add tape_host hnomega1 for testing.  Set media
+                              to NR3590 if tape_host is jaws or hnomega1.
+                              Check that volume is 6 char or less if jaws or
+                              hnomega1.
+ 58. 2004-01-19  Goodger      Change tape_host in Alaska from mink to jaws.
+ 57. 2003-12-19  Goodger      Insure tape_host is hoeplgp01 for meda type LTO.
+ 56. 2003-12-05  Goodger      Do not allow blanks in VOLUME, or any volume
+                              field.
+ 55. 2003-11-20  Goodger      Change media default to 3590HD. Increase number
+                              of traces per tape calculation from 90 to 95
+                              percent tape capacity. Change tape_host default
+                              to odi90.
+ 54. 2003-10-20  Goodger      Add media type 3590HD and insure that it is
+                              part of the pdn.  Set tape host to odi90 if
+                              3590HD and to host odi74 if 3590.  Increase
+                              the number of traces allowed per tape for 3590HD.
+ 53. 2003-10-15  Goodger      Do not rewrite a scratch tape if it is already
+                              catalogued, even if the userid is the same as
+                              that in the catalog.
+ 52. 2003-10-10  Goodger      Write out control card tapequeue which will be
+                              read by the job builder.  This change
+                              corresponds to buildjob.f90 revision 129.
+ 51. 2003-10-07  Goodger      Use NINT function when calculating integer
+                              sample rate which goes into the SEGY 400 byte
+                              header.  This resolves a floating point
+                              arithmetic problem.
+ 50. 2003-10-06  Goodger      Do not write a tape label on SEGY tapes.
+ 49. 2003-09-29  RSDay        Changed close proceedure .
+ 48. 2003-08-05  Goodger      Insure tape_host default is odi74.
+ 47. 2003-07-30  RSDay        Added tape_host gui component for odi74 and
+                              odi90 access. Added ttrot_get_hosts.
+ 46. 2003-04-01  RSDay        Check for catalogued scratch real on open
+ 45. 2003-03-12  RSDay        Added asynchronous writes for TPR output format
+ 44. 2003-02-14  RSDay        TPR format had a problem when headers were not
+                              packed. f90 transfer replaced by txfr function.
+ 43. 2003-02-12  RSDay        Fixed logic of max_per_vol. The pc_get of the
+                              media parameter needed to be before the calc.
+ 42. 2003-02-11  RSDay        Added LTO, 3480, and NR3590 media types.Added
+                              output format type=TPR which writes an integer
+                              multiple number of output traces to a tape
+                              record for CPS tapes. Max TPR buffer size
+                              used is 41600 bytes(A UDP socket limitation).
+                              Increased max_per_vol when media=LTO.
+ 41. 2002-10-10  Ed Schmauch  Remove Ponca City specific configuration info.
+                              Rely on tapecnfg.h.
+ 40. 2002-09-25  Ed Schmauch  Allow upper case if volume is typed in.
+ 39. 2002-09-25  Ed Schmauch  Added ttrot_fill_rows_trap and ttrot_userid_trap.
+ 38. 2002-08-26  K. Goodger   Clear PS fields when TYPE_OUT is changed from
+                              PS to SCR.
+ 37. 2002-08-12  K. Goodger   Change default for NUM_TR parameter to 99999999.
+ 36. 2002-07-30  K. Goodger   Add TYPE_OUT=PS_VMOD to Permsave velocity model
+                              files.
+                              Remove TIM_MAX parameter.  Data will be output
+                              according to globals.
+ 35. 2002-04-18  K. Goodger   Insure header mapping array turned off if
+                              mod_segy is NO. Move tests on sbyte
+                              arrayset to arrayset traps.
+ 34. 2002-02-04  K. Goodger   Correct problem in routine wrprec. The number of
+                              cards calculated in a processing record was 1 too
+                              many, thereby adding a card of garbage to the
+                              record.  Fix warnings generated by intel
+                              compiler.
+ 33. 2001-10-18  Ed Schmauch  Use tcatclient module for all tapecat
+                              communication.
+ 32. 2001-09-14  Ed Schmauch  Fixed bug which caused trace to be lost if output
+                              tape had less capacity than expected.  Allowed
+                              writing to unlabeled tapes.
+                              The above bug was fixed by changing error checks
+                              on tpioclnt_write from &lt; 0 to &lt;= 0.  Write
+                              returns 0 if you try to write past the end of
+                              tape and &lt; 0 if you try to write again.
+                              Note that continuing after a tpioclnt_write
+                              returns a 0 by going to the next tape is only
+                              handled for CPS and SEGY tapes; not for BLK.
+ 31. 2001-08-31  Goodger      Move fill_rows parameter to top of pc_gets.
+ 30. 2001-08-30  Goodger      Front end pdn changes.
+ 29. 2001-08-03  Goodger      Replace history module with manhist module.
+ 28. 2001-07-10  Goodger      Fix problem with overflowing history buffer.
+ 27. 2001-07-10  Ed Schmauch  Argument list to tcclient_recv changed. PROD.
+ 26. 2001-05-14  Goodger      Multiple reel permsave.
+ 25. 2001-03-22  RSDay        uncatalogued PDN will default to NSCR reels if
+                              path_ps is set. Perm save records to reel 1 of N
+ 24. 2001-03-08  RSDay        History=NONE was bypassing EOF write.
+                              Eliminated spurious permsave writes.
+ 23. 2001-03-06  Goodger      Add label information for permsave tapes.
+ 22. 2001-02-23  Goodger      Eliminate step of reading path_ps file names
+                              at setup time.
+ 21. 2001-02-16  Goodger      Use the pathcheck primitive for path_ps.
+ 20. 2001-02-15  Goodger      Force the segy header file written to tape to
+                              be 80 characters by 40 lines.
+                              Use the pathcheck primitive on path_segy.
+ 19. 2001-02-15  RSDay        Increased allowed size of process record
+                              path names to 80. NSCR recognized as a new
+                              scratch tape. Increased process record
+                              limit to 5000 files from 500 files.
+ 18. 2001-02-01  RSDay        More print on write errors. Stops SCR from
+                              being catalogued.
+ 17. 2001-01-29  RSDay        Fixed problem with premature closing of tapecat
+                              conection in wrapup. Added DLT support in
+                              ttrot_open.
+ 16. 2001-01-10  RSDay        Moved call to tcclient_halt to fix problem of
+                              crashing tapecat server
+ 15. 2000-12-12  RSDay        Added ttrot_mvdata to overcome an ABSOFT bug
+                              that affected data move between two real arrays
+                              This is similar to a ttrin bug reported earlier.
+                              one of the arrays is an equivalence?
+ 14. 2000-12-11  RSDay        SEGY output was not writing 3200 &amp; 400 byte
+                              records for non-labeled tapes(in ttrot_open)
+ 13. 2000-12-08  RSDay        Activated path_segy segy ebcidic header option
+ 12. 2000-11-21  RSDay        Fixed permanent save problems with subroutine
+                              ttrot_get_prfile. Increased allowed length of
+                              perm save files to 80 characters.
+ 11. 2000-10-19  RSDay        mod_segy not forced by gui to yes when nummap &gt;0
+                              eliminated transfer function call for
+                              segy header mapping(absoft bug).
+                              Non labeled reels are no longer a fatal error.
+ 10. 2000-10-11  RSDay        Eliminated backspace on write error.
+                              ttrot_pak_hdtr decrements vscnt,nseqo,volcnt
+                              when there is a write error. Added a variable,
+                              max_per_vol which limits how many traces can
+                              be output to 1 volser.
+  9. 2000-10-06  RSDay        Renamed FILL to FILL_ROWS, and moved location
+                              of some gui fields. Desensitized DEFAULT.
+  8. 2000-10-02  RSDay        Fixed multi-volume tape handling. Added a
+                              back space on write error at end of tape.
+                              Fixed a trace bulk shift error for new
+                              cps tapes that packed headers(dt*64).
+  7. 2000-09-27  RSDay        Corrected nsout to round to nearset int.
+                              Cures a sample round off problem with TIM_MAX.
+  6. 2000-09-20  RSDay        Corrected logic in ttrot_next_vol so that
+                              volcnt is reset when it exceeds num_tr. Was
+                              causing too many reel changes with writes to
+                              a PDN. Also put some logic in place to force
+                              a reel change when a write error occurs.
+                              Previously this was always fatal.
+  5. 2000-08-31  RSDay        Replaced tapeio_* calls by the tpioclnt layer.
+                              TTROT now auto detects the host it is
+                              running on and calls tpioclnt_open accordingly.
+  4. 2000-08-23  RSDay        Increased the size of volume field in the GUI.
+                              Fixed a bug in ttrot_getpdn. Eliminated the
+                              redundant internal array pdn. Added userid
+                              checking of catalogued volumes. Increased default
+                              value of num_tr to 9999999. jobname variable
+                              increased to 16 bytes.
+                              Added commented lines for future socket io calls.
+  3. 2000-08-21  RSDay        Improved the behavior of the auto FILL option
+                              for pdn names by rearranging some parameter cache
+                              calls in the update function. Increased job_name
+                              variable to 16 characters. Changed a pc_error
+                              call to pc_info for non catalogued pdns.
+  2. 2000-08-01  RSDay        Arguments of tapeio primitives changed to be
+                              consistent with pfio interface.
+  1. 2000-07-28  RSDay        Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

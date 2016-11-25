@@ -1,0 +1,548 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="shft" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SHFTPROCESS" title="SHFT Process" rows="28" columns="80">
+    <Label keyword="COMMENT_SHFTTRACESHIFT" alignment="center">SHFT (trace shift)</Label>
+    <Label keyword="COMMENT_APPLYSTATICSHIFTTOTRACES" alignment="center">Apply static shift to traces.</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG =</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDDENOTINGFLAGGE" alignment="left">&lt;- Header word denoting flagged traces.</Label>
+    <Label keyword="LABEL_OPT_MODE" alignment="left">OPT_MODE =</Label>
+    <Field keyword="OPT_MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TYPEOFSTATICSHIFTTOAPPLY" alignment="left">&lt;- Type of static shift to apply.</Label>
+    <Label keyword="LABEL_POLARITY" alignment="left">POLARITY =</Label>
+    <Field keyword="POLARITY" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WHETHERTOADDORSUBTRACTTH" alignment="left">&lt;- Whether to add or subtract the static correction.</Label>
+    <Label keyword="LABEL_HDR_STAT" alignment="left">HDR_STAT =</Label>
+    <Field keyword="HDR_STAT" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDCONTAININGSTAT" alignment="left">&lt;- Header word containing static value to apply.</Label>
+    <Label keyword="LABEL_SHFT_BULK" alignment="left">SHFT_BULK=</Label>
+    <Field keyword="SHFT_BULK" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BULKSHIFTINMSFOROPT_MODE" alignment="left">&lt;- Bulk shift (in ms) for OPT_MODE = BULK, GUN, or SL.</Label>
+    <Field keyword="SAMPLE_SPACING" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_CURRENTDTSAMPLESPACINGIN" alignment="left">&lt;- Current DT Sample Spacing (in ms).</Label>
+    <Field keyword="SAMPLE_SHIFT" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_CURRENTBULKSHIFTINSAMPLE" alignment="left">&lt;- Current Bulk Shift in Samples.</Label>
+    <Label keyword="COMMENT_FIRSTSTATICFILE" alignment="left">First Static File:</Label>
+    <Button keyword="SELECT_PATHNAME_1">Select PATHNAME_1</Button>
+    <Label keyword="EQLAB_PATHNAME_1" alignment="left">=</Label>
+    <Field keyword="PATHNAME_1" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_1_INFO" type="string" maxLength="73" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_APPLY_1" alignment="left">APPLY_1 =</Label>
+    <Field keyword="APPLY_1" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OVERRIDEFIRSTSTATICFILED" alignment="left">&lt;- Override First Static File default.</Label>
+    <Label keyword="COMMENT_OPTIONALSECONDSTATICFILE" alignment="left">Optional Second Static File:</Label>
+    <Button keyword="SELECT_PATHNAME_2">Select PATHNAME_2</Button>
+    <Label keyword="EQLAB_PATHNAME_2" alignment="left">=</Label>
+    <Field keyword="PATHNAME_2" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_2_INFO" type="string" maxLength="73" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_APPLY_2" alignment="left">APPLY_2 =</Label>
+    <Field keyword="APPLY_2" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OVERRIDEOPTIONALSECONDST" alignment="left">&lt;- Override Optional Second Static File default.</Label>
+    <Label keyword="COMMENT_HISTORYCOMMENT" alignment="left">History Comment:</Label>
+    <Label keyword="LABEL_COMMENT" alignment="left">COMMENT=</Label>
+    <Field keyword="COMMENT" type="string" maxLength="80" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SHFTTRACESHIFT" xPos="30" yPos="0" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLYSTATICSHIFTTOTRACES" xPos="25" yPos="1" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="1" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="11" yPos="3" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDDENOTINGFLAGGE" xPos="21" yPos="3" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_MODE" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MODE" xPos="11" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_TYPEOFSTATICSHIFTTOAPPLY" xPos="21" yPos="4" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_POLARITY" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="POLARITY" xPos="11" yPos="5" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_WHETHERTOADDORSUBTRACTTH" xPos="21" yPos="5" xSize="52" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_STAT" xPos="1" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_STAT" xPos="11" yPos="6" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDCONTAININGSTAT" xPos="21" yPos="6" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SHFT_BULK" xPos="1" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SHFT_BULK" xPos="11" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BULKSHIFTINMSFOROPT_MODE" xPos="21" yPos="7" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SAMPLE_SPACING" xPos="9" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_CURRENTDTSAMPLESPACINGIN" xPos="20" yPos="9" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SAMPLE_SHIFT" xPos="9" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_CURRENTBULKSHIFTINSAMPLE" xPos="20" yPos="10" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_FIRSTSTATICFILE" xPos="1" yPos="12" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_1" xPos="1" yPos="13" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_1" xPos="18" yPos="13" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_1" xPos="19" yPos="13" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_1_INFO" xPos="19" yPos="14" xSize="73" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_APPLY_1" xPos="1" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="APPLY_1" xPos="10" yPos="16" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OVERRIDEFIRSTSTATICFILED" xPos="16" yPos="16" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OPTIONALSECONDSTATICFILE" xPos="1" yPos="18" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_2" xPos="1" yPos="19" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_2" xPos="18" yPos="19" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_2" xPos="19" yPos="19" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_2_INFO" xPos="19" yPos="20" xSize="73" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_APPLY_2" xPos="1" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="APPLY_2" xPos="10" yPos="22" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OVERRIDEOPTIONALSECONDST" xPos="16" yPos="22" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_HISTORYCOMMENT" xPos="1" yPos="24" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COMMENT" xPos="1" yPos="25" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT" xPos="9" yPos="25" xSize="74" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 1 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are shifted.  Otherwise, only traces with
+ a flag set in header word HDR_FLAG are shifted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MODE">
+      <Tip>Option of what type of static shift to apply.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - OPT_MODE<br> Option of what type of static shift to apply.</center></b>
+<pre> Default = FILES
+ Allowed = BULK    (Bulk shift - same shift for all traces.)
+ Allowed = FILES   (Apply shifts from one or two static files.)
+ Allowed = GUN     (Gun delay correction, a bulk shift.)
+ Allowed = HEAD    (Apply static value in a given header word.)
+ Allowed = PRE     (Pre-NMO datum shift in header word 39.)
+ Allowed = POST    (Post-NMO datum shift in header word 40.)
+ Allowed = RPRE    (Pre-NMO refraction, or other, static in HDR 56.)
+ Allowed = RPOST   (Post-NMO refraction, or other, static in HDR 57.)
+ Allowed = SL      (Sea level correction, a bulk shift.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POLARITY">
+      <Tip>Option to Add the static correction, or Subtract the correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - POLARITY<br>Option to Add the static correction, or Subtract the correction.</center></b>
+<pre> Default = ADD
+ Allowed = ADD  (Add the static correction)
+ Allowed = SUB  (Subtract the static correction)
+ 
+ Specify whether to invert the direction of the correction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_STAT">
+      <Tip>Header word containing static value to apply.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - HDR_STAT<br> Header word containing static value to apply.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ HDR_STAT is active only if OPT_MODE = HEAD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SHFT_BULK">
+      <Tip>Amount of bulk shift static to apply, in ms.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - SHFT_BULK<br> Amount of bulk shift static to apply, in ms.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ 
+ SHFT_BULK is active only if OPT_MODE = BULK, GUN or SL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAMPLE_SPACING">
+      <Tip>Current DT Sample spacing (in ms).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - SAMPLE_SPACING<br> Current DT Sample spacing (in ms).</center></b>
+<pre> Allowed = real
+ 
+ SAMPLE_SPACING is an information-only field.  The value is calculated by
+ multiplying the global sample spacing (DT, in seconds) by 1000.0.  The
+ result is displayed as the sample spacing, in milliseconds.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAMPLE_SHIFT">
+      <Tip>Current Bulk Shift in Samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - SAMPLE_SHIFT<br> Current Bulk Shift in Samples.</center></b>
+<pre> Allowed = real
+ 
+ SAMPLE_SHIFT is only active if OPT_MODE = BULK, SL, or GUN.
+ 
+ SAMPLE_SHIFT is an information-only field.  The value is calculated by
+ dividing the bulk shift value (SHFT_BULK) by the global parameter DT, and
+ multiplying the result by 1000.0.  The sign is negated if POLARITY = SUB.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_1">
+      <Tip>Choose PATHNAME_1 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - SELECT_PATHNAME_1<br> Choose PATHNAME_1 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_1">
+      <Tip>Pathname of static file containing static values to apply.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PATHNAME_1<br> Pathname of static file containing static values to apply.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ PATHNAME_1 is only active if OPT_MODE = FILES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_1_INFO">
+      <Tip>Status of PATHNAME_1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PATHNAME_1_INFO<br> Status of PATHNAME_1.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="APPLY_1">
+      <Tip>Method for applying the file specified by PATHNAME_1.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - APPLY_1<br> Method for applying the file specified by PATHNAME_1.</center></b>
+<pre> Default =  -
+ Allowed = REC  (Apply static as a receiver static.)
+ Allowed = SRC  (Apply static as a source static.)
+ Allowed = SER  (Apply static as a source=receiver static.)
+ Allowed = RTC  (Apply static as an RTC static.)
+ 
+ Normally APPLY_1 should be left blank, allowing static files to be applied in
+ the same manner as they were created.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_2">
+      <Tip>Choose PATHNAME_2 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - SELECT_PATHNAME_2<br> Choose PATHNAME_2 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_2">
+      <Tip>Pathname of second static file containing static values to apply.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PATHNAME_2<br> Pathname of second static file containing static values to apply.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ PATHNAME_2 is only active if OPT_MODE = FILES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_2_INFO">
+      <Tip>Status of PATHNAME_2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PATHNAME_2_INFO<br> Status of PATHNAME_2.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="APPLY_2">
+      <Tip>Method for applying the file specified by PATHNAME_2.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - APPLY_2<br> Method for applying the file specified by PATHNAME_2.</center></b>
+<pre> Default =  -
+ Allowed = REC  (Apply static as a receiver static.)
+ Allowed = SRC  (Apply static as a source static.)
+ Allowed = SER  (Apply static as a source=receiver static.)
+ 
+ Normally APPLY_2 should be left blank, allowing static files to be applied in
+ the same manner as they were created.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COMMENT">
+      <Tip>Optional one line comment for history file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - COMMENT<br> Optional one line comment for history file.</center></b>
+<pre> Default = NONE
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>shft - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="shft">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SHFT  (SHiFT traces by static)
+ Category   : statics
+ Written    : 1988-11-23   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Apply static shift to traces.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ SHFT is a process for applying static shifts to traces.  Typically the static
+ values are obtained from statics files which contain a record of the header
+ words that were used for generating them.
+ 
+ Typical Statics Header Words
+ ----------------------------
+ The following header words are the ones most commonly used in source and
+ receiver statics.
+ 
+      GROUP    statics:    9
+      SOURCE   statics:    33, or 33 &amp; 34, or 46
+      RECEIVER statics:    35, or 35 &amp; 36, or 47
+ 
+ SOURCE=RECEIVER statics files use both source and receiver header words.
+ (GROUP statics are statics based on original shot profile number rather than
+ source ground position.)
+ 
+ Self-Describing Statics Files
+ -----------------------------
+ Since statics files contain a record of the header words used in generating
+ them, SHFT will apply these statics files properly by using the header words
+ recorded in the files.  Only if statics files are to be applied using header
+ words other than those used to generate the files should APPLY_1 and APPLY_2
+ be set. APPLY_1 and APPLY_2 supercede the header words recorded in the files.
+ Normally they should be left blank.
+ 
+ If and only if the file is a SOURCE or RECEIVER or SOURCE=RECEIVER file,
+ APPLY_1 or APPLY_2 can be specified to apply the file differently.  If
+ APPLY_1 or APPLY_2 = R, S or SER, the file will be applied as
+ a RECEIVER file, a SOURCE file or a SOURCE=RECEIVER file.
+ 
+ Cumulative Static Header Words
+ ------------------------------
+ The cumulative static header words are updated by SHFT as follows.
+ 
+ OPT_MODE = PRE or POST           cumulative datum      static header word 41
+ OPT_MODE = RPRE or RPOST         cumulative refraction static header word 42
+ OPT_MODE = FILES with type DATUM cumulative datum      static header word 41
+ OPT_MODE = FILES with type REFR  cumulative refraction static header word 42
+ OPT_MODE = FILES with type RESID cumulative residual   static header word 43
+ OPT_MODE = anything else         nothing
+ 
+ Interpolation and Extrapolation
+ -------------------------------
+ When static files are applied by SHFT, the static will be linearly
+ interpolated in case a trace has a ground position that falls between two
+ adjacent ground positions in the file.  Also, the static will be extrapolated
+ with the first or last value in case a trace has a ground position preceding
+ the first ground position in the file, or following the last ground position
+ in the file.  Nils in a static file are used as if they are zero (literally
+ -1.E-30 ms).
+ 
+ RTC Files
+ ---------
+ If PATHNAME_1 refers to an RTC file, you must set APPLY_1 = RTC.  At present,
+ the following restrictions apply to the application of an RTC file:  (1) The
+ traces must be the same traces that were passed  to RTC when RTC generated
+ the file.  (2) The traces must be in the same order as they were when RTC
+ generated the file.  (3) If RTC was run in a multi-window mode, the average
+ static derived for the trace will be applied to the entire trace.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+031. 2006-10-16 D. Glover  Added NULLIFY statements for Intel compiler.
+030. 2006-01-10 B. Menger  Removed Unused Variables.
+ 29. 2002-05-06 Vunderink  Added parallel control parameters
+ 28. 2002-02-14 Stoeckley  Remove an unnecessary error box popup.
+ 27. 2002-02-04 Stoeckley  Fix documentation and display error regarding
+                            header words 56 and 57 for OPT_MODE = RPOST.
+ 26. 2001-10-18 Stoeckley  Add file selection boxes and file status messages.
+ 25. 2001-02-13 Brad Kruse Change name for wrapup flag to SKIP_WRAPUP for
+                            clarity, and slightly change how it is used.
+ 24. 2000-10-05 Brad Kruse Request: Add 'HelpSection' entries for readonly
+                            parameters SAMPLE_SPACING and SAMPLE_SHIFT.
+ 23. 2000-07-13 Brad Kruse Request: Lengthen STATIC FILE field.  Correct
+                           unpaired 'execute_only' tag.
+ 22. 2000-06-27 Brad Kruse Bug: Missing obj%shift_factor caused MUTEHW to
+                            record incorrect mute words.  Shift in ms. is
+                            now converted to samples for call to MUTEHW.
+                            Changed gui-only parameters SAMPLE_SPACING and
+                            SAMPLE_SHIFT to only write to the GUI, and not
+                            the job file.
+ 21. 2000-06-13 Brad Kruse Review team comment 'GUI element line up can
+                           be improved'.
+ 20. 2000-05-23 Kruse      Correct SAMPLE_SPACING info field, to eliminate
+                           crashing for sub-millisecond shifts.
+ 19. 2000-04-19 Kruse      Rearrange writing SAMPLE_SPACING info field to
+                           avoid failing on Pacific Group/Linux compiler.
+ 18. 2000-04-05 Kruse      Change filename check to use PATHCHECK_EMPTY.
+ 17. 2000-04-04 Kruse      Add RCS ID.
+ 16. 2000-03-24 Kruse      Fixed bugs.  Polarity switch was set incorrectly.
+ 15. 2000-03-10 Kruse      Change to use STATIO and STATUTIL instead of
+                            STATICS_UTIL (by Stoeckley).  Change parameter
+                            SUB to POLARITY, per CIB.
+                            Add combo boxes where needed.  Add LAV update.
+                            Place EZGUI layout in the header.
+ 14. 1999-11-29 Dorman     Insert "use statcc_module" statement into
+                           module shft_module.
+ 13. 1999-09-23 Dorman     Convert to new CPS standards and Fortran 90
+ 12. 1998-11-11 Goodger    Begin using fortran90 compiler.
+ 11. 1992-02-18 Troutt     Add mute header word adjustment for HW64 (add
+                           call to MUTEHW)
+ 10. 1990-10-23 Peterson   Include error and abort arguments on calls to
+                           HPALLOC and HPDEALLC.
+ 9.  1990-10-12 Stoeckley  Fix READ format for RTC files to overcome
+                           read error when offset is too large.
+ 8.  1990-05-25 Stoeckley  Replace code by calls to STATUTIL routines.
+ 7.  1989-08-25 Stoeckley  Add application of RTC files, and add SAVE
+                           statement to get around compiler bug.
+ 6.  1989-07-24 Stoeckley  Add COMMENT parameter.
+ 5.  1989-05-15 Stoeckley  Add notes to documentation and change use of
+                           the FLAGWORD parameter.
+ 4.  1989-05-01 Stoeckley  Fix bug in SHFTSET.
+ 3.  1989-03-21 Stoeckley  Fix bug when applying static files, add mute
+                           header word adjustment, and add options RPRE
+                           and RPOST.
+ 2.  1989-01-26 Stoeckley  Fix documentation for FLAGWORD, and add
+                           interpolation between static file values.
+ 1.  1988-11-23 Stoeckley  Original Version
+ 
+------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,599 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="tslc" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TSLCPROCESS" title="TSLC Process" rows="26" columns="80">
+    <Label keyword="COMMENT_CREATESLICESTHROUGHHEADE" alignment="center">Create slices through headers and or samples from a 3D volume.</Label>
+    <Label keyword="LABEL_OPT_OUT" alignment="left">OPT_OUT=</Label>
+    <Field keyword="OPT_OUT" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_OUT">Select PATH_OUT</Button>
+    <Label keyword="EQLAB_PATH_OUT" alignment="left">=</Label>
+    <Field keyword="PATH_OUT" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_OUT_INFO" type="string" maxLength="70" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT=</Label>
+    <Field keyword="X_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC=</Label>
+    <Field keyword="X_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST=</Label>
+    <Field keyword="X_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT =</Label>
+    <Field keyword="X_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT=</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC=</Label>
+    <Field keyword="Y_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST=</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT=</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ORIENT_X" alignment="left">ORIENT_X=</Label>
+    <Field keyword="ORIENT_X" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ORIENT_Y" alignment="left">ORIENT_Y=</Label>
+    <Field keyword="ORIENT_Y" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Array keyword="HEADERS" type="int" maxLength="9" columnName="HEADERS" editable="yes" sensitive="yes"/>
+    <Array keyword="TIMES" type="float" maxLength="12" columnName="TIMES" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_INIT" alignment="left">TIME_INIT=</Label>
+    <Field keyword="TIME_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_INC" alignment="left">TIME_INC=</Label>
+    <Field keyword="TIME_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_LAST" alignment="left">TIME_LAST=</Label>
+    <Field keyword="TIME_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_TOT" alignment="left">TIME_TOT=</Label>
+    <Field keyword="TIME_TOT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SAMP_INT_OUT" alignment="left">SAMP_INT_OUT=</Label>
+    <Field keyword="SAMP_INT_OUT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCALE" alignment="left">SCALE=</Label>
+    <Field keyword="SCALE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_CREATESLICESTHROUGHHEADE" xPos="1" yPos="1" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_OUT" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUT" xPos="9" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="23" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="32" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_OUT" xPos="1" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_OUT" xPos="16" yPos="5" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_OUT" xPos="17" yPos="5" xSize="70" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_OUT_INFO" xPos="17" yPos="6" xSize="70" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="1" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="8" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="1" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="8" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="22" yPos="9" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="28" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="42" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="49" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="63" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="70" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="1" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="8" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="1" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="8" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="22" yPos="12" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="28" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="42" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="49" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="63" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="70" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ORIENT_X" xPos="1" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ORIENT_X" xPos="10" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ORIENT_Y" xPos="20" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ORIENT_Y" xPos="29" yPos="14" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="HEADERS" xPos="14" yPos="16" xSize="12" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="TIMES" xPos="37" yPos="16" xSize="15" ySize="6" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_TIME_INIT" xPos="1" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_INIT" xPos="11" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_INC" xPos="23" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_INC" xPos="32" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_LAST" xPos="44" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_LAST" xPos="54" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_TOT" xPos="66" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_TOT" xPos="75" yPos="23" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SAMP_INT_OUT" xPos="1" yPos="25" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAMP_INT_OUT" xPos="14" yPos="25" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCALE" xPos="30" yPos="25" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCALE" xPos="36" yPos="25" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_OUT">
+      <Tip>Option whether slice traces are written to a file or passed out.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - OPT_OUT<br> Option whether slice traces are written to a file or passed out.</center></b>
+<pre> Default = TRACE
+ Allowed = TRACE
+ Allowed = FILE
+ Allowed = BOTH
+ If OPT_OUT = TRACE then slice traces are output in the trace output stream.
+ 
+ If OPT_OUT = FILE then slice traces are written to a designated file
+ and input traces pass through unchanged.
+ 
+ If OPT_OUT = BOTH then slice traces are written to a designated file AND are
+ output in the trace output stream.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_FLAG = 0, then all traces are sliced.  Otherwise, only traces with
+ a non-zero value in header word HDR_FLAG are sliced.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_OUT">
+      <Tip>Choose PATH_OUT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - SELECT_PATH_OUT<br> Choose PATH_OUT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_OUT">
+      <Tip>Pathname for the output slice file if OPT_OUT = FILE or BOTH.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PATH_OUT<br> Pathname for the output slice file if OPT_OUT = FILE or BOTH.</center></b>
+<pre> Default = NONE
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_OUT_INFO">
+      <Tip>Status of PATH_OUT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PATH_OUT_INFO<br> Status of PATH_OUT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word for X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - HDR_X<br> Header word for X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>Initial value of X coordinate for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - X_INIT<br> Initial value of X coordinate for time-slice image.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment for X coordinate for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - X_INC<br> Increment for X coordinate for time-slice image.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Last value of X coordinate for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - X_LAST<br> Last value of X coordinate for time-slice image.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;=X_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Total number of X coordinate values for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - X_TOT<br> Total number of X coordinate values for time-slice image.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word for Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - HDR_Y<br> Header word for Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Initial value of Y coordinate for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - Y_INIT<br> Initial value of Y coordinate for time-slice image.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment for Y coordinate for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - Y_INC<br> Increment for Y coordinate for time-slice image.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Last value of Y coordinate for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - Y_LAST<br> Last value of Y coordinate for time-slice image.</center></b>
+<pre> Default = 1.0
+ Allowed = real&gt;=Y_INIT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Total number of Y coordinate values for time-slice image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - Y_TOT<br> Total number of Y coordinate values for time-slice image.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ORIENT_X">
+      <Tip>Desired orientation of positive X coordinate axis.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - ORIENT_X<br> Desired orientation of positive X coordinate axis.</center></b>
+<pre> Default = UP
+ Allowed = UP
+ Allowed = DOWN
+ Allowed = RIGHT
+ Allowed = LEFT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ORIENT_Y">
+      <Tip>Desired orientation of positive Y coordinate axis.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - ORIENT_Y<br> Desired orientation of positive Y coordinate axis.</center></b>
+<pre> Default = RIGHT
+ Allowed = UP
+ Allowed = DOWN
+ Allowed = RIGHT
+ Allowed = LEFT
+ If ORIENT_X = UP or DOWN then ORIENT_Y can only be RIGHT or LEFT.
+ 
+ If ORIENT_X = RIGHT or LEFT then ORIENT_Y can only be UP or DOWN .</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HEADERS">
+      <Tip>Array of header words for which "header-slices" are desired.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - HEADERS<br> Array of header words for which "header-slices" are desired.</center></b>
+<pre> Default =  -
+ Allowed = int array (100 elements max)
+ Array of header word numbers (1 - NWIH) for which "header-slices" are desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIMES">
+      <Tip>Array of times for which time-slices are desired.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - TIMES<br> Array of times for which time-slices are desired.</center></b>
+<pre> Default =  -
+ Allowed = real array (0 through 100 - TIME_TOT)
+ All TIMES must be within the time range of input trace samples.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_INIT">
+      <Tip>Time for first time slice (regular interval), in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - TIME_INIT<br> Time for first time slice (regular interval), in seconds.</center></b>
+<pre> Default = TSTRT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_INC">
+      <Tip>Increment between regular time slice times, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - TIME_INC<br> Increment between regular time slice times, in seconds.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_LAST">
+      <Tip>Time for last regular time slice, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - TIME_LAST<br> Time for last regular time slice, in seconds.</center></b>
+<pre> Default = NONE
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_TOT">
+      <Tip>Total number of regular time slices.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - TIME_TOT<br> Total number of regular time slices.</center></b>
+<pre> Default = 0
+ Allowed = int (0 through 100 - TIMES-element-size)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAMP_INT_OUT">
+      <Tip>Sample interval of output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - SAMP_INT_OUT<br> Sample interval of output traces.</center></b>
+<pre> Default = absolute value of output sample rate
+ Allowed = real&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCALE">
+      <Tip>Desired scale for time-slice plots, in bins per vertical inch.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - SCALE<br> Desired scale for time-slice plots, in bins per vertical inch.</center></b>
+<pre> Default = 10.0
+ Allowed = real&gt;0
+ Value of SCALE is used only for plotting hints that are printed in the .RPT
+ file.  The hints include how many "Inches per second" are required to
+ achieve the "SCALE" number of bins per vertical inch.
+ Note: temporal sample rate here corresponds to X or Y spatial sample rate.
+ The number of "Traces per inch" required to maintain the physical aspect
+ ratio is also printed.  If these plotting parameters are used, then
+ a circle in map view should remain round and not eliptical.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tslc - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="tslc">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TSLC    (Time-SLiCe)
+ Category   : sorts
+ Written    : 1989-10-20   by: Greg Lazear
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Create time-slice and header-slice traces from a 3D volume.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ TSLC outputs "header-slices" before time-slices.   Header-slices and
+ time-slices are each output in the order of entry in the HEADERS array,
+ the TIMES array and regular TIME_xxx intervals.
+ Header word 30 identifies the output slice (header word number or
+ time of slice).
+ 
+ Orientation of the output time-slice plots is determined by the ORIENT
+ parameters.  (Users should follow the plotting hints for COLR parameters that
+ are printed in .RPT file.)
+ 
+ Traces may be input in any order.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+ Slice traces may be output either to a file, the trace output stream or both.
+ 
+     If OPT_OUT = TRACE then slice traces are output in the trace output
+     stream.
+ 
+     If OPT_OUT = FILE then slice traces are written to a designated file
+     and input traces pass through unchanged.
+ 
+     If OPT_OUT = BOTH then slice traces are written to a designated file AND
+     are output in the trace output stream.
+ 
+ 
+ If time slices on a regular time interval are desired, the regular time
+ interval parameters may be used.  Times specified by these parameters are
+ IN ADDITION to those specified by the TIMES array.
+ 
+ TSLC may change global values for NDPT, DT and/or TSTRT.
+ Globals are changed when TSLC is added to the processing flow.
+ They may also be changed when certain TSLC parameters are changed
+ such as OPT_OUT, X_TOT, Y_TOT, ORIENT_X and ORIENT_Y.
+ 
+ IF GLOBALS ARE CHANGED, THEN SUBSEQUENT TROT AND TTROT DEFAULT VALUES
+ FOR TIM_BEG AND TIM_END MAY NEED TO BE ADJUSTED.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+032. 2006-10-16 D. Glover  Added NULLIFY statements for Intel compiler.
+031. 2006-01-10 B. Menger  Removed Unused Variables.
+ 30. 2002-09-11 Goodger    Use mth module for binning.
+ 29. 2002-08-01 Stoeckley  Use the PATHCHOOSE primitive for the PATH_OUT param.
+ 28. 2002-04-15 Selzler    Set scratch header 30 to header number or
+                           time of slice being output.
+ 27. 2001-11-16 Selzler    Changed GUI layout per user request.
+ 26. 2001-10-18 Selzler    Added HDR_FLAG parameter to select sliced traces,
+                           increased PATH_OUT to 128 character max,
+                           increased max output header count from 10 to 100.
+ 25. 2001-09-28 Selzler    Corrected problem with SCALE and warning message.
+ 24. 2001-08-17 Selzler    Clarified phrasing for one message.
+ 23. 2001-07-12 Selzler    Correct problems with global usage.
+ 22. 2001-06-20 Selzler    Correct tr/out_buf sharing bug.
+ 21. 2001-05-17 Selzler    Added warning when globals are changed.
+ 20. 2001-04-04 Selzler    Fixed bug in FILE output and global setup
+ 19. 2001-03-14 Selzler    Added OPT_OUT and regular TIME_xxx intervals.
+ 18. 2000-12-11 Selzler    Changed wrapup logic to use skip_wrapup
+ 17. 2000-11-29 Selzler    If times entry is nil, squeeze it out of table
+ 16. 2000-09-07 Selzler    Changed suggested scale factor for plots.
+ 15. 2000-08-15 Selzler    Changed keywords to coordinate based standard.
+                           Added INVERT_PLOT feature.
+ 14. 2000-07-07 Selzler    Fixed problems found by CPS Fortran Code Review.
+ 13. 2000-05-11 Selzler    Inserted EZGUI layout and fixed GUI support
+ 12. 2000-05-10 Selzler    Fixed problems in the GUI support
+ 11. 2000-02-02 Selzler    Added support for GUI and general cleanup
+ 10. 1999-10-27 Selzler    Added RCS "Id" strings to tag executeable
+ 9.  1999-09-21 Selzler    added ORIENT_X and ORIENT_Y functionality.
+                           This required a total rewrite of the code.
+ 8.  1999-09-13 Selzler    Conversion to f90
+ 7.  1998-12-01 Goodger    Begin using the fortran90 compiler.
+ 6.  1998-08-12 Corn       Heretofore, the sample rate coming out of the
+                           process (SROUT) was arbitrarily set to 0.01.
+                           Now it can be set by the SROUT paramenter.
+                           This should give the user more control over
+                           display size and labelling.
+                           Defaults are determined as:
+                           If 1 &lt;= INCY &lt; 100 then SROUT = INCY / 100.
+                           If 100 &lt;= INCY &lt; 10000 then SROUT=INCY/10000.
+                           otherwise SROUT = 0.01.
+ 5.  1997-03-11 Corn       The parameters HWX, HWY, INCX, and INCY were
+                           added.  The parameters MINXB, MINYB, MAXXB,
+                           and MAXYB were made to be real instead of
+                           integer.  The # of samples was redefined NYB =
+                           (MAXYB-MINYB+INCY)/INCY and the # of traces
+                           was redefined NXB = (MAXXB-MINXB+INCX)/INCX.
+                           In the past INCY was always 1.0.  Now if INCY
+                           is not 1.0, expect the time scale to reflect
+                           that. Heretofore times entered were treated as
+                           offsets from TSTRT.  Now times are treated as
+                           absolute times.  All times must fall within
+                           the given trace time window.
+ 4.  1992-09-18 Peterson   Fix bugs due to splicing because of too small
+                           MEMSIZE. 1. DO 60 loop would store values in
+                           BUF(IADR) even with a bad IADR calculation.
+                           2. Number of traces in a time slice was wrong.
+ 3.  1991-01-30 Stoeckley  Change TSTRT calculation to improve Y bin
+                           labelling; change to use headers 7 and 8
+                           for bin values (rather than 17 and 18 and
+                           rotation matrix); add to documentation; and
+                           add printout of new global values.
+ 2.  1990-08-16 Lazear     Fix bug in TSTRT calculation and integer the
+                           HEADERS array.
+ 1.  1989-10-20 Lazear     Original version converted from CONSEIS
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

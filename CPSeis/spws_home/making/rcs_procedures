@@ -1,0 +1,177 @@
+
+         RCS_PROCEDURES           SUMMARY                 2004-06-01
+
+------------------------------------------------------------------------------
+
+This is a working document.
+The contents of this document need to be decided by all of us.
+This is only my attempt to get things started so I will know how to do things.
+
+------------------------------------------------------------------------------
+
+To install an ~spws program or script:
+
+       Run the following script on a node which supports RCS:
+
+             install_spws_program_everywhere  <program>
+             install_spws_script_everywhere   <script>
+
+       The first script calls tag_rcs_files_everywhere.
+       The second script tags the RCS file of the script.
+       See the file installation_procedures for details.
+
+------------------------------------------------------------------------------
+
+Scripts available:
+
+       check_rcs_files_everywhere                   <option>
+       check_rcs_files                 <directory>  <option>
+
+       checkin_rcs_files_everywhere                 <option>
+       checkin_rcs_files               <directory>  <option>
+
+       checkout_rcs_files_everywhere                <tag>
+       checkout_rcs_files              <directory>  <tag>
+
+       tag_rcs_files_everywhere                     <tag>
+       tag_rcs_files                   <directory>  <tag>
+
+Log files created in ~spws/making:
+
+       logfile.check_rcs_files      (created by check_rcs_files_everywhere)
+       logfile.checkin_rcs_files    (created by checkin_rcs_files_everywhere)
+       logfile.checkout_rcs_files   (created by checkout_rcs_files_everywhere)
+       logfile.tag_rcs_files        (created by tag_rcs_files_everywhere)
+
+------------------------------------------------------------------------------
+       RCS_PROCEDURES          CHECK FILES              2004-06-01
+------------------------------------------------------------------------------
+# Run this script to check the RCS files in all of the ~spws directories:
+#
+#                    check_rcs_files_everywhere  option
+#
+# where  <option>  (optional) specifies which files should be listed.
+#
+#     option   files listed
+#     ------   ------------
+#       -1     not checked in or not checked out.
+#       -2     not checked in, not checked out, or not matching.
+#       -3     not checked in, not checked out, matching, or not matching.
+#
+# Option -2 is used for any other option (or unspecified option).
+#
+# This script verifies that all checked-out files are the same as the latest
+# versions of files in the RCS directories.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+
+------------------------------------------------------------------------------
+# Run this script to check the RCS files in the specified ~spws directory:
+#
+#               check_rcs_files  <directory>  <option>
+#
+# where <directory> is the desired RCS directory (full path).
+# where <option> = -1 lists files which are not checked in or not checked out.
+# where <option> = -2 also lists files which are not matching (default).
+# where <option> = -3 also lists files which are matching or not matching.
+#
+# This script verifies that all checked-out files in <directory> are the same
+# as the latest versions of files in the RCS directory below <directory>.
+
+------------------------------------------------------------------------------
+       RCS_PROCEDURES          TAG FILES                2004-06-01
+------------------------------------------------------------------------------
+# Run this script to tag the RCS files in all of the ~spws directories:
+#
+#                    tag_rcs_files_everywhere  tag
+#
+# where <tag> specifies the tag to be used.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+
+------------------------------------------------------------------------------
+# Run this script to tag the RCS files in the specified ~spws directory:
+#
+#               tag_rcs_files  <directory>  <tag>
+#
+# where <directory> is the desired RCS directory (full path).
+# where <tag>       specifies the tag to be used.
+
+------------------------------------------------------------------------------
+       RCS_PROCEDURES          CHECK IN FILES           2004-06-01
+------------------------------------------------------------------------------
+# Run this script to check in the RCS files in all of the ~spws directories:
+#
+#                  checkin_rcs_files_everywhere  <option>
+#
+# where <option> = -1 lists files for which action is taken.
+# where <option> = -2 lists files for which action is taken (default).
+# where <option> = -3 lists all files.
+#
+# This script makes sure that all checked-in RCS files in <directory> are
+# up to date.  The following actions are performed:
+#
+#  (1) If a file has never been checked in, it is checked in, and then checked
+#      out as read-only.
+#
+#  (2) If a file is different from the checked-in file, it is checked in,
+#      and then checked out as read-only.
+#
+#  (3) If a file is not checked out, it is checked out as read-only.
+#
+#  (4) If a file is the same as the checked-in file, nothing is done if the
+#      file is read-only.  If it is read-write, it is changed to read-only.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+
+------------------------------------------------------------------------------
+# Run this script to check in the RCS files in the specified ~spws directory:
+#
+#               checkin_rcs_files  <directory>  <option>
+#
+# where <directory> is the desired RCS directory (full path).
+# where <option> = -1 lists files for which action is taken.
+# where <option> = -2 lists files for which action is taken (default).
+# where <option> = -3 lists all files.
+#
+# This script makes sure that all checked-in RCS files in <directory> are
+# up to date.  The following actions are performed:
+#
+#  (1) If a file has never been checked in, it is checked in, and then checked
+#      out as read-only.
+#
+#  (2) If a file is different from the checked-in file, it is checked in,
+#      and then checked out as read-only.
+#
+#  (3) If a file is not checked out, it is checked out as read-only.
+#
+#  (4) If a file is the same as the checked-in file, nothing is done if the
+#      file is read-only.  If it is read-write, it is changed to read-only.
+------------------------------------------------------------------------------
+       RCS_PROCEDURES         CHECK OUT FILES           2004-06-01
+------------------------------------------------------------------------------
+# Run this script to check out the RCS files in all of the ~spws directories:
+#
+#                    checkout_rcs_files_everywhere  tag
+#
+# where <tag> specifies the tag to be used.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+
+------------------------------------------------------------------------------
+# Run this script to check out the RCS files in the specified ~spws directory:
+#
+#               checkout_rcs_files  <directory>  <tag>
+#
+# where <tag> specifies the tag to be used.
+
+------------------------------------------------------------------------------
+

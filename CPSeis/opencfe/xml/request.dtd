@@ -1,0 +1,234 @@
+<!-- request.dtd  -->
+
+<!-- The client message element. -->
+
+<!ELEMENT Message ( Request )>
+
+<!-- The client request element. A request element can have only one -->
+<!-- message at a time. -->
+
+<!ELEMENT Request ( InitializeApp  | TerminateApp |
+    ButtonPress    | ItemSelected  | DoubleClick | KeyPress |
+    LeaveArray     | LeaveArraySet | LeaveScreen | EnterWindow | 
+    CloseWindow    | InsertElement | RemoveElement | TogglePress | 
+    ModifyField    | ModifyArrayElement | ItemClicked | BackEndLibPath |
+    RefreshProcess | RefreshApp | Reset | ArrayNames | EnterScreen | PasteElements)>
+
+<!--
+  - Initialize the application. The server is expected to send what is necessary
+  - to get the client up and running.
+  -->
+  
+<!ELEMENT InitializeApp EMPTY>
+
+<!--
+  - Terminate the application.  This message is a request to the server
+  - that the terminate.  Ther server indicates that
+  - the client can (and must) terminate by passing back a TERMINATE_APP
+  - message.
+  -->
+  
+<!ELEMENT TerminateApp EMPTY>
+
+<!--
+  - Indicates that a Button, Mouse button has been activated
+  - or double-click on a list
+  -->
+  
+<!ELEMENT ButtonPress EMPTY>
+<!ATTLIST ButtonPress windowId NMTOKEN #REQUIRED
+					  keyword   NMTOKEN #REQUIRED >
+
+<!--
+  - Indicates that a Key Press has been activated
+  -->
+  
+<!ELEMENT KeyPress EMPTY>
+<!ATTLIST KeyPress windowId NMTOKEN #REQUIRED
+		   keyword   NMTOKEN #REQUIRED 
+		   value     NMTOKEN #REQUIRED >
+
+<!--
+  - Indicates that a Toggle button has been pressed
+  -->
+  
+<!ELEMENT TogglePress EMPTY>
+<!ATTLIST TogglePress windowId NMTOKEN #REQUIRED
+		   keyword   NMTOKEN #REQUIRED 
+		   value     NMTOKEN #REQUIRED >
+
+<!--
+  - Indicates that a element should be inserted
+  -->
+  
+<!ELEMENT InsertElement EMPTY>
+<!ATTLIST InsertElement windowId NMTOKEN #REQUIRED
+		   keyword   NMTOKEN #REQUIRED 
+		   value     NMTOKEN #REQUIRED >
+
+<!--
+  - Indicates that an element should be deleted
+  -->
+  
+<!ELEMENT RemoveElement EMPTY>
+<!ATTLIST RemoveElement windowId NMTOKEN #REQUIRED
+		   keyword   NMTOKEN #REQUIRED 
+		   value     NMTOKEN #REQUIRED >
+
+<!--
+  - Indicates that a selection has occurred.
+  - elements contain the selected row numbers
+  - startElement contains the number of selected rows
+  -->
+  
+<!ELEMENT ItemSelected EMPTY>
+<!ATTLIST ItemSelected windowId NMTOKEN  #REQUIRED
+			   keyword   NMTOKEN  #REQUIRED
+			   elements  NMTOKENS #REQUIRED
+			   startElement NMTOKEN #REQUIRED>
+  
+<!ELEMENT DoubleClick EMPTY>
+<!ATTLIST DoubleClick windowId NMTOKEN  #REQUIRED
+			   keyword   NMTOKEN  #REQUIRED
+			   elements  NMTOKENS #REQUIRED
+			   startElement NMTOKEN #REQUIRED>
+			   
+<!--
+  - Indicates that elements need to be pasted in an array/arrayset
+  - component.
+  -->
+  
+<!ELEMENT PasteElements EMPTY>
+<!ATTLIST PasteElements windowId NMTOKEN  #REQUIRED
+			   keyword   NMTOKEN  #REQUIRED
+			   elements  NMTOKENS #REQUIRED
+			   startElement NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that a double click selection has occurred.
+  -->
+  
+<!ELEMENT ItemClicked EMPTY>
+<!ATTLIST ItemClicked windowId NMTOKEN  #REQUIRED
+					keyword   NMTOKEN  #REQUIRED
+					value  CDATA #REQUIRED>
+
+
+<!--
+  - Indicates that the client requests to leave an array.  This message
+  - should be sent only by the client.  The server should respond
+  - with a JUMP_xxxx message.
+  -->
+  
+<!ELEMENT LeaveArray EMPTY>
+<!ATTLIST LeaveArray windowId NMTOKEN #REQUIRED
+                     keyword   NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client requests to leave an array set.  This
+  - message should be sent only by the client.  The server should 
+  - respond with a JUMP_xxxx message.
+  -->
+  
+<!ELEMENT LeaveArraySet EMPTY>
+<!ATTLIST LeaveArraySet windowId NMTOKEN #REQUIRED
+                        keyword   NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client requests to leave a screen.  This message
+  - should be sent only by the client.  The server should respond
+  - with a JUMP_xxxx message.
+  -->
+  
+<!ELEMENT LeaveScreen EMPTY>
+<!ATTLIST LeaveScreen windowId NMTOKEN #REQUIRED
+                      keyword   NMTOKEN #REQUIRED>
+                      
+
+<!--
+  - Indicates that the client has changed focus. At the moment we could
+  - generate this event for all possible focus types, but probably implementing
+  - it for only window activation is more reasonable.
+  -->
+<!ELEMENT EnterWindow EMPTY>
+<!ATTLIST EnterWindow windowId NMTOKEN #REQUIRED
+                keyword   NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that the client has changed focus. At the moment we could
+  - generate this event for all possible focus types, but probably implementing
+  - it for only window activation is more reasonable.
+  -->
+<!ELEMENT CloseWindow EMPTY>
+<!ATTLIST CloseWindow windowId NMTOKEN #REQUIRED
+                keyword   NMTOKEN #REQUIRED>
+
+
+<!--
+  - Indicates that elements from an array are modified.  This message
+  - can be sent from either the client or the server.  If sent from the
+  - client, the message is treated as a request.  If the server rejects
+  - the request, the server should transmit a MODIFY_ELEMENTS message 
+  - indicating the new values for the array elements.
+  -->
+<!ELEMENT ModifyArrayElement EMPTY>
+<!ATTLIST ModifyArrayElement windowId    NMTOKEN  #REQUIRED
+                         	 keyword      NMTOKEN  #REQUIRED
+                         	 value	NMTOKEN  #REQUIRED
+                         	 startElement NMTOKEN  #REQUIRED>
+
+
+<!--
+  - Indicates that the value for a field is modified.  This message
+  - can be sent from either the client or the server.  If sent from the
+  - client, the message is treated as a request.  If the server rejects
+  - the request, the server should transmit a MODIFY_FIELD message 
+  - indicating the new value of the field.
+  -->
+<!ELEMENT ModifyField EMPTY>
+<!ATTLIST ModifyField windowId NMTOKEN #REQUIRED
+                      keyword   NMTOKEN #REQUIRED
+                      value     CDATA   #REQUIRED>
+
+<!--
+  - Re-send the application defaults and XML descriptions for the 
+  - processes & job files.  
+  -->
+<!ELEMENT RefreshApp EMPTY>
+
+<!--
+  - Refresh all variables within a process.  
+  -->
+<!ELEMENT RefreshProcess EMPTY>
+<!ATTLIST RefreshProcess windowId NMTOKEN #REQUIRED>
+
+<!-- 
+  - Resets the variables in the specified window.
+  -->
+<!ELEMENT Reset EMPTY>
+<!ATTLIST Reset windowId NMTOKEN #REQUIRED>
+
+<!-- 
+  - Message for sending the names of array components constructed by the
+  - client.
+  -->
+<!ELEMENT ArrayNames EMPTY>
+<!ATTLIST ArrayNames 	windowId NMTOKEN #REQUIRED
+						value CDATA #REQUIRED>
+
+<!-- 
+  - Message for sending the backend library path to the server.
+  -->
+<!ELEMENT BackEndLibPath EMPTY>
+<!ATTLIST BackEndLibPath value CDATA #REQUIRED>
+
+<!-- 
+  - Message for enter screen.
+  -->
+<!ELEMENT EnterScreen EMPTY>
+<!ATTLIST EnterScreen windowId NMTOKEN #REQUIRED
+                      keyword   NMTOKEN #REQUIRED>

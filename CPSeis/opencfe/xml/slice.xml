@@ -1,0 +1,522 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="slice" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SLICEPROCESS" title="SLICE Process" rows="28" columns="80">
+    <Label keyword="COMMENT_SLICETHROUGHHEADERSORTIM" alignment="center">SLICE through headers or time values Process</Label>
+    <Label keyword="COMMENT_CHARACTERIZETRACESFALLIN" alignment="center">Characterize traces falling into each bin of a 2D bin array.</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X  =</Label>
+    <Field keyword="HDR_X" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y  =</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC  =</Label>
+    <Field keyword="X_INC" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC  =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST =</Label>
+    <Field keyword="X_LAST" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST =</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT  =</Label>
+    <Field keyword="X_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT  =</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BN" alignment="left">BINS   =</Label>
+    <Field keyword="BIN_COUNT" type="int" maxLength="8" editable="no" sensitive="no"/>
+    <Label keyword="LABEL_SN" alignment="left">/</Label>
+    <Field keyword="STORE_COUNT" type="int" maxLength="9" editable="no" sensitive="no"/>
+    <ArraySet keyword="HEADERS_ARRAYSET" label="HEADERS METHOD">
+     <Array keyword="HEADERS" type="int" maxLength="4  " columnName="HEADERS" editable="yes" sensitive="yes" columnSize="4"/>
+     <Array keyword="HEADERS_METHOD" type="string" maxLength="7  " columnName="METHOD" editable="yes" sensitive="yes" columnSize="7"/>
+    </ArraySet>
+    <ArraySet keyword="TIMES_ARRAYSET" label="TIMES   METHOD">
+     <Array keyword="TIMES" type="float" maxLength="8  " columnName="TIMES" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="TIMES_METHOD" type="string" maxLength="8  " columnName="METHOD" editable="yes" sensitive="yes" columnSize="7"/>
+    </ArraySet>
+    <Label keyword="COMMENT_METHODS" alignment="center">METHODS</Label>
+    <Label keyword="COMMENT_A" alignment="center">a.</Label>
+    <Label keyword="COMMENT_AAVERAGE" alignment="center">a) Average</Label>
+    <Label keyword="COMMENT_B" alignment="center">b.</Label>
+    <Label keyword="COMMENT_XMAXIMUM" alignment="center">x) Maximum</Label>
+    <Label keyword="COMMENT_C" alignment="center">c.</Label>
+    <Label keyword="COMMENT_NMINIMUM" alignment="center">n) Minimum</Label>
+    <Label keyword="COMMENT_D" alignment="center">d.</Label>
+    <Label keyword="COMMENT_RRANGE" alignment="center">r) Range</Label>
+    <Label keyword="COMMENT_E" alignment="center">e.</Label>
+    <Label keyword="COMMENT_SSUM" alignment="center">s) Sum</Label>
+    <Label keyword="COMMENT_OUTPUTFILE" alignment="center">Output file:</Label>
+    <Label keyword="LABEL_PATHNAME" alignment="left">PATHNAME =</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTFILEDATALINEFORMAT" alignment="center">Output file data line format:</Label>
+    <Label keyword="LABEL_BIN_DATA_FORMAT" alignment="left">BIN_DATA_FORMAT =</Label>
+    <Field keyword="BIN_DATA_FORMAT" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SLICETHROUGHHEADERSORTIM" xPos="18" yPos="1" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_CHARACTERIZETRACESFALLIN" xPos="10" yPos="2" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="4" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="13" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="4" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="13" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="31" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="40" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="4" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="13" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="31" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="40" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="4" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="13" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="31" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="40" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="4" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="13" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="31" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="40" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_TOT" xPos="4" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="13" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="31" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="40" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BN" xPos="4" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_COUNT" xPos="13" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SN" xPos="22" yPos="12" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STORE_COUNT" xPos="24" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HEADERS_ARRAYSET" xPos="4" yPos="14" xSize="18" ySize="7" xStretch="true" yStretch="true"/>
+     <Constraints component="TIMES_ARRAYSET" xPos="31" yPos="14" xSize="18" ySize="7" xStretch="true" yStretch="true"/>
+     <Constraints component="COMMENT_METHODS" xPos="61" yPos="14" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_A" xPos="57" yPos="15" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_AAVERAGE" xPos="61" yPos="15" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_B" xPos="57" yPos="16" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_XMAXIMUM" xPos="61" yPos="16" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_C" xPos="57" yPos="17" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NMINIMUM" xPos="61" yPos="17" xSize="10" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_D" xPos="57" yPos="18" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_RRANGE" xPos="61" yPos="18" xSize="8" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_E" xPos="57" yPos="19" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_SSUM" xPos="61" yPos="19" xSize="6" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUTFILE" xPos="4" yPos="22" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME" xPos="4" yPos="23" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="15" yPos="23" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_OUTPUTFILEDATALINEFORMAT" xPos="4" yPos="25" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_BIN_DATA_FORMAT" xPos="4" yPos="26" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_DATA_FORMAT" xPos="22" yPos="26" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_FLAG = 0, then all traces are used by SLICE.  Otherwise, only traces
+ with a flag set in header word HDR_FLAG are used by SLICE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word defining x coordinate for bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - HDR_X<br> Header word defining x coordinate for bins.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word defining y coordinate for bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - HDR_Y<br> Header word defining y coordinate for bins.</center></b>
+<pre> Default = 8
+ Allowed = 0 - NWIH
+ Set HDR_Y = 0 for 2D work.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>Value of HDR_X for the first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - X_INIT<br> Value of HDR_X for the first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Value of HDR_Y for the first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - Y_INIT<br> Value of HDR_Y for the first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment of HDR_X between bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - X_INC<br> Increment of HDR_X between bins.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment of HDR_Y between bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - Y_INC<br> Increment of HDR_Y between bins.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Value of HDR_X for the last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - X_LAST<br> Value of HDR_X for the last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Value of HDR_Y for the last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - Y_LAST<br> Value of HDR_Y for the last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Total number of bins in the x-direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - X_TOT<br> Total number of bins in the x-direction.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Total number of bins in the y-direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - Y_TOT<br> Total number of bins in the y-direction.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_COUNT">
+      <Tip>Total number of bins in the x-y grid.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - BIN_COUNT<br> Total number of bins in the x-y grid.</center></b>
+<pre> Default = -
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STORE_COUNT">
+      <Tip>Total number of values stored for the x-y grid.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - STORE_COUNT<br> Total number of values stored for the x-y grid.</center></b>
+<pre> Default = -
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HEADERS">
+      <Tip>Array of header words whose values will be measured.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - HEADERS<br> Array of header words whose values will be measured.</center></b>
+<pre> Default = -
+ Allowed = 1 - NWIH (linked array 100)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HEADERS_METHOD">
+      <Tip>Type of measurement to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - HEADERS_METHOD<br> Type of measurement to use.</center></b>
+<pre> Default = RANGE
+ Allowed = AVERAGE   (Average of values encountered in bin.)
+ Allowed = MAXIMUM   (Maximum of values encountered in bin.)
+ Allowed = MINIMUM   (Minimum of values encountered in bin.)
+ Allowed = RANGE     (Maximum and minimum of values encountered in bin.)
+ Allowed = SUM       (Sum of values encountered in bin.)
+ 
+ HEADERS_METHOD entries are linked to corresponding entries
+ of the HEADERS list.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIMES">
+      <Tip>Array of times for trace samples to be measured.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - TIMES<br> Array of times for trace samples to be measured.</center></b>
+<pre> Default = -
+ Allowed = real (linked array 100)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIMES_METHOD">
+      <Tip>Type of measurement to use.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - TIMES_METHOD<br> Type of measurement to use.</center></b>
+<pre> Default = RANGE
+ Allowed = AVERAGE   (Average of values encountered in bin.)
+ Allowed = MAXIMUM   (Maximum of values encountered in bin.)
+ Allowed = MINIMUM   (Minimum of values encountered in bin.)
+ Allowed = RANGE     (Maximum and minimum of values encountered in bin.)
+ Allowed = SUM       (Sum of values encountered in bin.)
+ 
+ TIMES_METHOD entries are linked to corresponding entries in the TIMES list.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Pathname for the columnar, space delimited, ASCII output file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - PATHNAME<br> Pathname for the columnar, space delimited, ASCII output file.</center></b>
+<pre> Default = -
+ Allowed = char
+ Each row in the output ASCII file corresponds to an occupied bin.  The first
+ two columns identify the bin (HDR_X and HDR_Y values).  The third column is
+ the count of traces in the bin.  These three columns are followed by one
+ column for each requested measurement (two columns for RANGE).  The ASCII
+ file can contain up to 43 space delimited columns.  Entries in the ASCII
+ file are made only for occupied bins; no entries are made in the ASCII file
+ for unoccupied bins.
+ 
+ See the BIN_DATA_FORMAT field for information about the alternate, verbose
+ listing of bin data -- FORMATTED.  The one line per bin format described
+ above is the UNFORMATTED option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_DATA_FORMAT">
+      <Tip>Print style of output data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - BIN_DATA_FORMAT<br> Print style of output data.</center></b>
+<pre> Default = UNFORMATTED
+ Allowed = FORMATTED
+ Allowed = UNFORMATTED
+ 
+ The output file consists of a header, detailing the
+ date run, the job name, and selected parameters, and a list
+ of data gathered.
+ 
+ UNFORMATTED -- listing is one bin per line, with each line
+                starting with the bin X and Y coordinates,
+                followed by the count of traces found in
+                that bin, followed by data collected.
+                Header values collected follow the x-y-count
+                columns, then the trace time data.
+ FORMATTED   -- The same data is listed, in the same order,
+                as for the UNFORMATTED listing.
+                The X-Y-Count columns are printed on the first
+                line for the bin, followed by the remaining data.
+                Each collected value is printed indented,
+                one value per line.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slice - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="slice">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SLICE  (SLICE through headers or time values)
+ Category   : miscellaneous
+ Written    : 1995-04-10   by: Scott Michell
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Characterize traces falling into each bin of a 2D bin array.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ SLICE sets up a 2D array of bins, usually defined by header words 7 and 8,
+ makes a measurement on the traces that fall into each bin and separately
+ reports the measurement on each bin in a columnar ASCII file.  The
+ measurements available are: maximum value, minimum value, average value, sum
+ of values and count of traces falling into the bin.  Each SLICE process can
+ make as many as 100 measurements on trace samples and/or 100 header word
+ values.
+ 
+ Each row in the output ASCII file corresponds to an occupied bin.  The first
+ two columns identify the bin (HDR_X and HDR_Y values) and are followed by one
+ column for each requested measurement.  The ASCII file can contain up to 12
+ space delimited columns.  Entries in the ASCII file are made only for
+ occupied bins; no entries are made in the ASCII file for unoccupied bins.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+016. 2006-10-16  D. Glover    Added NULLIFY statements for Intel compiler.
+ 15. 2006-01-10  B. Menger    Removed Unused Variables.
+ 14. 2004-01-07  K. Goodger   Use memman primitive for memory management.
+ 13. 2002-09-16  K. Goodger   Use mth module for binning.
+ 12. 2002-03-19  R. Selzler   Eliminate cio and simply use Fortran write,
+                              to avoid issues with cio extents.
+ 11. 2001-08-30  K. Goodger   Increase extent size on cio file to maximum.
+ 10. 2001-02-19  Brad Kruse   Report #293, Make METHOD easier to fill in,
+                              change PATHNAME error to occur only when leaving
+                              screen "SLICE".
+ 9. 2001-01-23   Brad Kruse   Conversion to new CPS
+ 8. 1998-11-03   Goodger    Change pogun to po4001 in slice_crou.c
+ 7. 1998-11-11   Goodger    Begin using fortran90 compiler.
+ 6. 1996-03-01   Michell    Fix _netinfo format change in slice_dispose
+                            Add support for rcp (see rcpxfr2) see notes
+                            Fix MAX bug for all negative inputs
+                            Modified slice_dispose
+ 5. 1995-10-02   Michell    Fix indexing to make sure that only traces
+                            that fall within the grid definition are
+                            used.
+ 4. 1995-09-25   Troutt     Initialize NARRAY=0 before call to DCODE.
+ 3. 1995-08-14   Michell    Fix index check so values less than the grid
+                            definition are properly excluded.
+ 2. 1995-04-13   Michell    Fix slice_po.  Remove some Debug statements.
+ 1. 1995-04-10   Michell    Original Version
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

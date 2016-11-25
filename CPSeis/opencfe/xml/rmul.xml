@@ -1,0 +1,688 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="rmul" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="RMULPROCESS" title="RMUL Process" rows="28" columns="80">
+    <Label keyword="COMMENT_REMOVEMULTIPLESBYPARABOL" alignment="center">Remove Multiples by Parabolic Radon Modeling and Subtraction</Label>
+    <Label keyword="COMMENT_NOTEALLTIMEPARAMETERSARE" alignment="center">Note: All time parameters are specified in SECONDS</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_RMO_PRI_MIN" alignment="left">RMO_PRI_MIN =</Label>
+    <Field keyword="RMO_PRI_MIN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RMO_PRI_MAX" alignment="left">RMO_PRI_MAX =</Label>
+    <Field keyword="RMO_PRI_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RMO_MUL_MIN" alignment="left">RMO_MUL_MIN =</Label>
+    <Field keyword="RMO_MUL_MIN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RMO_MUL_MAX" alignment="left">RMO_MUL_MAX =</Label>
+    <Field keyword="RMO_MUL_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCAN_INC" alignment="left">SCAN_INC=</Label>
+    <Field keyword="SCAN_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_MUTE" alignment="left">TIM_MUTE=</Label>
+    <Field keyword="TIM_MUTE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG=</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END=</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_RMUL" alignment="left">OPT_RMUL=</Label>
+    <Field keyword="OPT_RMUL" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OPER" alignment="left">OPT_OPER=</Label>
+    <Field keyword="OPT_OPER" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUTPUT" alignment="left">OPT_OUTPUT=</Label>
+    <Field keyword="OPT_OUTPUT" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PMUTE" alignment="left">HDR_PMUTE=</Label>
+    <Field keyword="HDR_PMUTE" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD=</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_BEG_FCTR" alignment="left">WIN_BEG_FCTR=</Label>
+    <Field keyword="WIN_BEG_FCTR" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_BEG_ADD" alignment="left">WIN_BEG_ADD =</Label>
+    <Field keyword="WIN_BEG_ADD" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_END" alignment="left">WIN_END=</Label>
+    <Field keyword="WIN_END" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_POINT_SOURCE" alignment="left">POINT_SOURCE=</Label>
+    <Field keyword="POINT_SOURCE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_BAL" alignment="left">FREQ_BAL=</Label>
+    <Field keyword="FREQ_BAL" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ZREF" alignment="left">ZREF=</Label>
+    <Field keyword="ZREF" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_FILE_HEAD">Select FILE_HEAD</Button>
+    <Label keyword="EQLAB_FILE_HEAD" alignment="left">=</Label>
+    <Field keyword="FILE_HEAD" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="FILE_HEAD_INFO" type="string" maxLength="70" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_FILE_TAIL">Select FILE_TAIL</Button>
+    <Label keyword="EQLAB_FILE_TAIL" alignment="left">=</Label>
+    <Field keyword="FILE_TAIL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="FILE_TAIL_INFO" type="string" maxLength="70" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_REMOVEMULTIPLESBYPARABOL" xPos="2" yPos="0" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NOTEALLTIMEPARAMETERSARE" xPos="7" yPos="2" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="5" yPos="3" xSize="56" ySize="15"/>
+     <Constraints component="LABEL_RMO_PRI_MIN" xPos="7" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_PRI_MIN" xPos="20" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RMO_PRI_MAX" xPos="34" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_PRI_MAX" xPos="47" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RMO_MUL_MIN" xPos="7" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_MUL_MIN" xPos="20" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RMO_MUL_MAX" xPos="34" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RMO_MUL_MAX" xPos="47" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCAN_INC" xPos="7" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCAN_INC" xPos="20" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_MUTE" xPos="34" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_MUTE" xPos="47" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_BEG" xPos="7" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="20" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="34" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="47" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_RMUL" xPos="7" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_RMUL" xPos="20" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OPER" xPos="34" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OPER" xPos="47" yPos="12" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OUTPUT" xPos="7" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUTPUT" xPos="20" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_PMUTE" xPos="34" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PMUTE" xPos="47" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="7" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="20" yPos="16" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_BEG_FCTR" xPos="2" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_BEG_FCTR" xPos="15" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_BEG_ADD" xPos="27" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_BEG_ADD" xPos="40" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_END" xPos="53" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_END" xPos="61" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_POINT_SOURCE" xPos="2" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="POINT_SOURCE" xPos="15" yPos="21" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FREQ_BAL" xPos="27" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BAL" xPos="40" yPos="21" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ZREF" xPos="53" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ZREF" xPos="61" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_FILE_HEAD" xPos="0" yPos="23" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_FILE_HEAD" xPos="16" yPos="23" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILE_HEAD" xPos="17" yPos="23" xSize="59" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="FILE_HEAD_INFO" xPos="16" yPos="24" xSize="70" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_FILE_TAIL" xPos="0" yPos="26" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_FILE_TAIL" xPos="16" yPos="26" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILE_TAIL" xPos="17" yPos="26" xSize="59" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="FILE_TAIL_INFO" xPos="16" yPos="27" xSize="70" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="RMO_PRI_MIN">
+      <Tip>Minimum residual moveout at the far offset for primary events.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - RMO_PRI_MIN<br> Minimum residual moveout at the far offset for primary events.</center></b>
+<pre> Default = -0.050
+ Allowed = real
+ Events will be identified as primaries whose residual moveout, in seconds, at
+ the far offset lies between RMO_PRI_MIN and RMO_PRI_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_PRI_MAX">
+      <Tip>Maximum residual moveout at the far offset for primary events.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - RMO_PRI_MAX<br> Maximum residual moveout at the far offset for primary events.</center></b>
+<pre> Default = 0.040
+ Allowed = real
+ Events will be identified as primaries whose residual moveout, in seconds, at
+ the far offset lies between RMO_PRI_MIN and RMO_PRI_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_MUL_MIN">
+      <Tip>Minimum residual moveout at the far offset for multiple events.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - RMO_MUL_MIN<br> Minimum residual moveout at the far offset for multiple events.</center></b>
+<pre> Default = 0.060
+ Allowed = real
+ Events will be identified as multiples whose residual moveout, in seconds,
+ at the far offset lies between RMO_MUL_MIN and RMO_MUL_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RMO_MUL_MAX">
+      <Tip>Maximum residual moveout at the far offset for multiple events.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - RMO_MUL_MAX<br> Maximum residual moveout at the far offset for multiple events.</center></b>
+<pre> Default = 0.400
+ Allowed = real
+ Events will be identified as multiples whose residual moveout, in seconds, at
+ the far offset lies between RMO_MUL_MIN and RMO_MUL_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCAN_INC">
+      <Tip>Time increment, at the far offset, for scanning the CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - SCAN_INC<br> Time increment, at the far offset, for scanning the CMP.</center></b>
+<pre> Default = 0.020
+ Allowed = real
+ Time increment, in seconds, at the far offset, for CMP scans within the
+ parabolic, linear, or hyperbolic RADON transform.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_MUTE">
+      <Tip>Zero-offset time of the multiple with the greatest moveout.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - TIM_MUTE<br> Zero-offset time of the multiple with the greatest moveout.</center></b>
+<pre> Default = end of trace
+ Allowed = real
+ The approximate greatest zero-offset time at which multiples with the
+ greatest residual moveout are present. The parabolic, linear, or
+ hyperbolic transform will be muted to exclude unnecessarily large
+ moveouts in later events.
+ 
+ If TIM_MUTE = end of trace, no such mute is applied. This is the most
+ conservative value of TIM_MUTE to use.
+ 
+ Omitting TIM_MUTE is equivalent to setting TIM_MUTE = end of trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_BEG">
+      <Tip>Minimum frequency to model and subtract from data, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FREQ_BEG<br> Minimum frequency to model and subtract from data, in Hz.</center></b>
+<pre> Default = 8
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>Maximum frequency to model and subtract from data, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FREQ_END<br> Maximum frequency to model and subtract from data, in Hz.</center></b>
+<pre> Default = 0.75 * Nyquist
+ Allowed = Nyquist &gt; real &gt; FREQ_BEG</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_RMUL">
+      <Tip>Type of operation for the mute process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - OPT_RMUL<br> Type of operation for the mute process.</center></b>
+<pre> Default = RADON
+ Allowed = RADON       Radon transform.
+ Allowed = HR_RADON    High-resolution Radon transform.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OPER">
+      <Tip>Type of operation for the Radon transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - OPT_OPER<br> Type of operation for the Radon transform.</center></b>
+<pre> Default = PARABOLIC
+ Allowed = PARABOLIC    Parabolic transform.
+ Allowed = LINEAR       Linear transform.
+ Allowed = HYPERBOLIC   Hyperbolic transform.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUTPUT">
+      <Tip>Type of operation for the mute process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - OPT_OUTPUT<br> Type of operation for the mute process.</center></b>
+<pre> Default = RMUL
+ Allowed = RMUL           Multiple/noise attenuation.
+ Allowed = TAU-P          Forward Tau-P transform.
+ Allowed = MODEL          Output by Radon modelling with mute applied.
+ Allowed = TAUP_MUTE      Tau-P section with mute applied.
+ Allowed = FOR_INV_TAUP   Perform a forward and inverse transform.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PMUTE">
+      <Tip>Header word deSIGNAting P values in mute file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - HDR_PMUTE<br> Header word deSIGNAting P values in mute file.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - DIAG_LOAD<br> Diagonal load, in percent.</center></b>
+<pre> Default = 5.0
+ Allowed = real&gt;=0.0
+ If the OPT_OUTPUT is in TAU-P domain, it generally needs to
+ use a much higher DIAG_LOAD to produce a better TAU-P output
+ for picking.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_BEG_FCTR">
+      <Tip>Factor to multiply head mute time for top of demultiple window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - WIN_BEG_FCTR<br> Factor to multiply head mute time for top of demultiple window.</center></b>
+<pre> Default = 2.0
+ Allowed = real &gt;= 0.0
+ Factor to multiply head mute time (referenced to zero time) for top of
+ demultiple window.  (Head mute time refers to the lowest offset live trace in
+ the gather.)  Top of the multiple modeling window, in seconds, is given by:
+ 
+    top_of_window = WIN_BEG_FCTR * (head_mute_time) + WIN_BEG_ADD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_BEG_ADD">
+      <Tip>Additional time, in seconds, for top of demultiple window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - WIN_BEG_ADD<br> Additional time, in seconds, for top of demultiple window.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ Top of the multiple modeling window, in seconds, is given by:
+ 
+    top_of_window = WIN_BEG_FCTR * (head_mute_time) + WIN_BEG_ADD.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_END">
+      <Tip>Constant time, in seconds, for the bottom of the window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - WIN_END<br> Constant time, in seconds, for the bottom of the window.</center></b>
+<pre> Default = end of trace
+ Allowed = TSTRT &lt; real =&lt; end of trace
+ Constant time, in seconds, for the bottom of the multiple modeling window.
+ Normally this should be set to the end of the trace.
+ 
+ Omitting WIN_END is equivalent to setting WIN_END = end of trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="POINT_SOURCE">
+      <Tip>Point source correction for linear TAUP only.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - POINT_SOURCE<br> Point source correction for linear TAUP only.</center></b>
+<pre> Default = No
+ Allowed = Yes/No</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_BAL">
+      <Tip>Frequency balance for linear TAUP only.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FREQ_BAL<br> Frequency balance for linear TAUP only.</center></b>
+<pre> Default = No
+ Allowed = Yes/No</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ZREF">
+      <Tip>Depth reference for Hyperbolic transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - ZREF<br> Depth reference for Hyperbolic transform.</center></b>
+<pre> Default =
+ Allowed = real&gt; 0.0
+ ZREF is usually chosen as the maximum offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_FILE_HEAD">
+      <Tip>Choose FILE_HEAD using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - SELECT_FILE_HEAD<br> Choose FILE_HEAD using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="FILE_HEAD">
+      <Tip>FILE_HEAD for the mute file to be used to remove primary.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FILE_HEAD<br> FILE_HEAD for the mute file to be used to remove primary.</center></b>
+<pre> Default = NONE
+ Allowed = char*60</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILE_HEAD_INFO">
+      <Tip>Status of FILE_HEAD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FILE_HEAD_INFO<br> Status of FILE_HEAD.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_FILE_TAIL">
+      <Tip>Choose FILE_TAIL using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - SELECT_FILE_TAIL<br> Choose FILE_TAIL using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="FILE_TAIL">
+      <Tip>FILE_TAIL for the mute file to be used to remove multiple.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FILE_TAIL<br> FILE_TAIL for the mute file to be used to remove multiple.</center></b>
+<pre> Default = NONE
+ Allowed = char*60</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILE_TAIL_INFO">
+      <Tip>Status of FILE_TAIL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - FILE_TAIL_INFO<br> Status of FILE_TAIL.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rmul - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="rmul">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : RMUL
+ Category   : filters
+ Written    : 1989-12-06   by: Bill Harlan
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Remove multiples by RADON modeling and subtraction.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           GENERAL DESCRIPTION
+ 
+ 
+ RMUL removes multiple events from CMP gathers through use of parabolic,
+ linear, or hyperbolic RADON transforms to model multiples and subtract them
+ from the original data.  RMUL operation follows these steps.
+ 
+       1.  Transform CMP gather to parabolic, linear, or hyperbolic RADON
+           space.
+ 
+       2.  Identify events with residual moveout in CMPs between RMO_PRI_MIN
+           and RMO_PRI_MAX as primaries and mute (zero) them in the transformed
+           data.  (This protects the primaries.)
+ 
+       3.  Identify events with residual moveout in CMPs between RMO_MUL_MIN
+           and RMO_MUL_MAX as multiples and mute out everything else from
+           parabolic, linear, or hyperbolic RADON space. (Taper the mute from
+           0.0 at RMO_PRI_MAX to 1.0 at RMO_MUL_MIN.)
+ 
+       4.  Transform the energy that is identified as multiple energy back
+           from parabolic, linear, or hyperbolic RADON space and subtract it
+           from the original CMP gather.
+ 
+ The parabolic, linear, or hyperbolic RADON transform is optimized by
+ least-squares to accurately model the phases and amplitudes of multiples in
+ noisy data with limited or irregularly sampled offsets.  CPS process LSSS
+ performs forward and inverse parabolic stacks independently.
+ 
+ 
+ Parabolic and hyperbolic Scans
+ 
+ RMUL assumes that events on input CMPs, with primary velocity NMO correction
+ applied, have a sufficiently small residual moveout that they have an
+ approximately parabolic or hyperbolic contour.  Thus, if primaries and
+ multiples have non-overlapping residual moveout on CMPs (and reasonably
+ uniform amplitude and phase), then RMUL can perform a RADON transform and
+ be able to separate primaries from multiples in parabolic or hyperbolic
+ RADON space.
+ 
+ 
+ Linear Scans
+ 
+ The linear Radon does not require the input CMPs to have primary velocity
+ NMO correction applied.
+ 
+ The high-resolution Radon transform follows the sparseness constraints of
+ Sacchi and Ulrych's paper (1995). This implementation uses a frequency
+ independent sparseness constraints which is an average of Sacchi's frequency
+ dependent Radon solution over a frequency range. Within this frequency
+ range, the signals should have the highest amplitudes. The advantage
+ of using the average of the sparseness contraints can focus and preserve
+ the transform amplitude better than the original Sacchi's approach, but it
+ adds more computational time to precompute the average of the
+ sparseness constraints.
+ 
+ Sacchi, M.D. and Ulrych, T. J. 1995, High-resolution velocity gathers and
+ offset space reconstruction, Geophysics, 60, 4, 1169-1117.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Identifying Primaries And Multiples
+ 
+ Determine the range of residual moveout of primaries at the largest offset
+ trace.  Specify these moveouts with RMO_PRI_MIN and RMO_PRI_MAX, in seconds.
+ Negative values mean that the overcorrected events curve upwards. Determine
+ the range of residual moveout of multiples at the largest offset trace and
+ specify these moveouts with RMO_MUL_MIN and RMO_MUL_MAX, in seconds.
+ Multiples usually have positive residual moveouts, but they can also be
+ negative.
+ 
+ RMO_MUL_MAX should be set as large as necessary to model all multiple events,
+ but no larger than necessary to avoid modeling and subtracting background
+ noise.
+ 
+ 
+ RMUL/MDIP
+ 
+ When removing multiples with large residual moveout, better results at lower
+ cost is often obtained by applying MDIP, a RADON dip filter, to the far
+ offsets and RMUL to the near.  Usually MDIP is applied before RMUL and a
+ 5 - 10 trace overlap is used.  this method may be advisable when multiple
+ residual moveout approaches 1.0 second or more.
+ 
+ 
+ Aliased Energy
+ 
+ The description of the operation of RMUL above assumes that events are not
+ aliased.  However, dipping events on CMPs often are aliased (and multiples
+ with large residual moveout often have a considerable aliased component).
+ Since the aliased part of an event has a different dip from the non-aliased
+ part, RMUL's separation of primaries from multiples probably will not be
+ valid for aliased energy.  Indeed aliased multiple energy may even be
+ identified as primary energy.
+ 
+ The only truly satisfactory solution to this problem is to remove as much
+ aliased energy as possible from the CMPs prior to performing RMUL.  Trace
+ interpolation is usually the best method.
+ 
+ 
+ Demultiple Time Window
+ 
+ Multiples are modeled only within the demultiple time window. The top of the
+ window is given, in seconds, by:
+ 
+      top_of_window = WIN_BEG_FCTR * (head_mute_time) + WIN_BEG_ADD,
+ 
+ where WIN_BEG_FCTR is the factor multiplying the head mute time (referenced
+ to zero time) and WIN_BEG_ADD is an additional time.  (Head mute time refers
+ to the lowest offset live trace in the gather.)  This allows flexibility
+ in specifying the top of the window.
+ 
+ A constant bottom of window time is specified by WIN_END.
+ 
+ The input P value (residual moveout/slowness) is in second. However,
+ the output P value (in header word 6) is in millisecond.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 37  2006-12-04  D. Glover    Added NULLIFY statements for Intel compiler.
+ 36  2005-11-29  D. Glover    Changed arrays c_dta and c_mdl to be allocatable
+                              rather than automatic. This moves the arrays from
+                              the stack to the heap to avoid SIGSEGV aborts.
+                              Removed unreferenced vars reported by linuxab90
+ 35  2005-01-17  S Chiu       Add a new high-resolution option. Remove the
+                              offset and fold taper options. Change FFT
+                              length to mixed radix of 2, 3, and 5 instead
+                              of power of 2.
+ 34  2003-09-22  Goodger      Remove declaration of Dot Product, as this is
+                              a fortran intrinsic.  Problem caught by
+                              portland compiler.
+ 33  2003-07-29  S Chiu       Add a new hyperbolic option and forward-inverse
+                              transform. Improve front end.
+ 32  2003-05-19  S Chiu       Change DIAG_LOAD in TAU-P option to reflect the
+                              actual DIAG_LOAD instead of DIAG_LOAD*100
+ 31  2003-04-30  S Chiu       Add new option NEAR_MUL_WT, change DIAG_LOAD
+                              to 5, and change the name MULTIPLE option to
+                              TAUP_INV
+ 30  2003-04-10  S Chiu       Change the default HDR_PMUTE to 6
+ 29  2003-04-03  S Chiu       Incorporate APSE linear Taup-P. Replace
+                              conjugate gradient solver with Levinson
+                              algorithm.
+ 28  2003-02-27  S Chiu       Add new functions to output Tau-P section
+                              and accept multiple picks in mute file.
+ 27  2001-12-26  CC Burch     Change to BUNCH_TRACE_GROUPS
+ 26  2001-02-15  Baumel       Modify PCPS_ALT_RECEIVE_MODE value.
+ 25  2001-01-08  Baumel       Add PCPS (Parallel CPS) control statements.
+ 24  2000-12-07  Baumel       Change wrapped_up flag to skip_wrapup.
+ 23  2000-09-27  Baumel       Remove tab characters from doc (no code change).
+ 22  2000-06-27  Baumel       Eliminate non-robust global usage in initialize.
+ 21  2000-05-25  Baumel       New parameters for defining modeling window (no
+                              longer uses LATWIN); remove HDR_OFF parameter.
+ 20  2000-05-11  Baumel       Tweak appearance of GUI screen.
+ 19  2000-05-11  Baumel       Include GUI_DEF in source file; improve scratch
+                              and storage estimates; fix comments in code;
+                              also fix one potentially serious error [variable
+                              DTA had been declared with wrong intent in
+                              subroutine RMUL_TRANSFORM_TO_PSTK].
+ 18  2000-02-24  Baumel       Model and process only LIVE traces, and base
+                              windowing on the LIVE trace with smallest offset
+                              (but still include dead traces when determining
+                              the gather's maximum offset).
+ 17  2000-02-08  Baumel       Base windowing on trace with minimum offset,
+                              which isn't necessarily first trace; also some
+                              front-end related cleanup.
+ 16  2000-02-04  Bob Baumel   Rework to make algorithm work correctly.
+ 15  2000-01-18  Brad Kruse   Converted from old system.
+ 14  1998-03-04  Vunderink    Fixed ncode format for opt=2.
+ 13  1998-01-12  Vunderink    Fixed opt=1 and added cpu timer.
+ 12  1997-01-20  Vunderink    Added options 1 and 2 for determining tmin.
+ 11  1995-04-17  Troutt       Move getp call ahead of ntrmax check to make
+                                sure it uses current ntrmax.
+ 10  1994-06-29  Harlan       Ignore bottom mute of 0 (uninitialized).
+  9  1993-04-29  Harlan       Add bottom mutes.
+  8  1993-02-12  Harlan       Allow more variable trace length in rmulcomp.
+  7  1992-04-06  Harlan       Fix bug sometimes affecting first 8 traces.
+  6  1991-05-15  Hanson       Improved rmulxval &amp; rmulmaxx, reduce time 30%
+  5  1991-05-08  Hanson       Use cray fourier transforms for 2x speedup.
+  4  1991-04-24  Harlan       Add extra error checking on n and ntrmax.
+                                clean up complex arithmetic in rmulfssd.
+  3  1991-04-05  Harlan       Fix bug in rmulmaxx for negative offsets.
+  2  1990-11-08  Harlan       Re-mute; allow multiples w-neg movout
+  1  1989-12-06  Bill Harlan  Original version
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

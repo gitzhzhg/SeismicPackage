@@ -1,0 +1,29 @@
+#This file tells the I/O package (in pfio.c and bfio.c) where to find servers with file systems on them
+#for you to use for seismic data.  The PROJECT field will RESTRICT that server to only be available for
+#projects with that EXACT name.  The PROJECT is specified in the first process within each flow, called
+#PROJECT_DATA.
+# Here is how files are worked:
+# example: User says output file is /home/username/cpsdata/myfile.lbo
+#          The system will put a link at that location pointing to the first extent of the file, which
+#          will be found on a random server from the below list.  The file extent size is 250MM bytes
+#          (that is exactly 250,000,000 bytes, not 250Mbytes!) This is a default size and can be 
+#          modified by the user.  The next extent will be (by design) on the same server until there is
+#          no more room, at which time another server is chosen.  In the user's home "cpsdata" subdirectory
+#          (s)he will find one file for each extent, for example:
+#          myfile.lbo (extent 0)
+#          myfile.lbo.0001 (extent 1)
+#          myfile.lbo.0002 (extent 2) etc.  Each of these "files" is a soft link to the actual location
+#          on the servers.
+# MAKE SURE these BASE DIRECTORIES EXIST!
+#
+#Node    MinMbytes DiskName       BaseDirectory PROJECT (project is optional)
+#localhost 1000    /tmp/localhost	/tmp/localhost/scratch/
+#localhost 20000   /panfs/vol1		/panfs/vol1/scratch/
+#localhost 20000   /panfs/vol4 		/panfs/vol4/scratch/
+# (the next line allows cpseis to limit that server to ONLY accept files for PROJECT1 as defined
+#  by PROJECT_DATA in each job.)
+#otherhost	2000		/ptmp/otherhost/scratch/	PROJECT1
+#yourhost	2000		/ptmp/yourhost/scratch/
+#h00	5000		/proj/4000	/proj/4000/ptmp/scratch/
+#localhost 1000 /ptmp /ptmp/localhost/scratch/
+LOCALHOST 1000 CPSDATA_DISK CPSDATA_DIR

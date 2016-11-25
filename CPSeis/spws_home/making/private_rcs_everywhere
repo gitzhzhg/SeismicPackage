@@ -1,0 +1,88 @@
+#! /bin/csh -f
+
+# private_rcs_everywhere
+#
+# $Id: private_rcs_everywhere,v 1.1 2004/05/25 22:01:40 spws Exp spws $
+#
+# This script is a private helper script for RCS-related scripts which
+# wish to run a script in each RCS directory.
+#
+# Simply execute this in the calling script:
+#
+#              private_rcs_everywhere  <script>  <option>
+#
+# where  <script>  specifies the script to be run (no path).
+# where  <option>  specifies which files should be listed.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+#
+# The environment variables SPWSDIR and SPWSMAKEDIR must be set.
+
+#-------------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo SPWSMAKEDIR not set
+     exit
+endif
+
+set script = $1
+set option = $2
+
+if($script == "") then
+     echo first argument (script) not set in private_rcs_everywhere
+     exit
+endif
+
+set workhorse = $SPWSMAKEDIR/$script
+set logfile   = $SPWSMAKEDIR/logfile.$script
+
+if ($USER != spws) then
+    set logfile = ~/$logfile:t
+endif
+
+if (-e $logfile) then
+    \rm $logfile
+endif
+
+echo ""                                         >  $logfile
+echo "@@@@@@@@@@@@@@@ $logfile @@@@@@@@@@@@@@@" >> $logfile
+echo ""                                         >> $logfile
+
+echo ""
+echo "putting output into $logfile"
+echo ""
+
+#-------------------------------------------------------------------------------
+
+$workhorse $SPWSDIR/RCS               $option | tee -a $logfile
+$workhorse $SPWSDIR/app-defaults/RCS  $option | tee -a $logfile
+$workhorse $SPWSDIR/making/RCS        $option | tee -a $logfile
+$workhorse $SPWSDIR/include/RCS       $option | tee -a $logfile
+
+foreach directory ($SPWSDIR/include/*/RCS)
+    $workhorse $directory $option | tee -a $logfile
+end
+
+foreach directory ($SPWSDIR/util/*/RCS)
+    $workhorse $directory $option | tee -a $logfile
+end
+
+foreach directory ($SPWSDIR/oop/*/RCS)
+    $workhorse $directory $option | tee -a $logfile
+end
+
+foreach directory ($SPWSDIR/programs/*/RCS)
+    $workhorse $directory $option | tee -a $logfile
+end
+
+echo ""
+
+#-------------------------------------------------------------------------------
+

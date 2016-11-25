@@ -1,0 +1,1994 @@
+!!!
+!!!                        Process Module Template
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!! 30. 2002-11-08  Burch      Added PC_GET_LUN back for use with PCPS.
+!!!                            Changed to use memman with error checking.
+!!! 29. 2002-10-24  Stoeckley  Remove references to LUN and PC_GET_LUN().
+!!! 28. 2002-10-23  Stoeckley  Minor documentation and ident string changes.
+!!! 27. 2002-06-06  Stoeckley  Remove execute_only tags; improve the
+!!!                             recommendations for linked arrays and options;
+!!!                             make additional minor improvements for EZCPS;
+!!!                             remove unnecessary IMPLICIT NONE and RETURN
+!!!                             statements.
+!!! 26. 2002-05-16  CCBurch    Modify to use with the new EZCPS program.
+!!!                 Stoeckley   Also (by Stoeckley) remove all references
+!!!                             to the old Cray processing system and improve
+!!!                             a few instructions.
+!!! 25. 2001-12-21  Stoeckley  Add suggestions as to how to use a "highlevel"
+!!!                             primitive with this process module.
+!!! 24. 2001-11-08  Stoeckley  Add documentation for parallel processes.
+!!! 23. 2001-10-22  Stoeckley  Add printout of process parameters for
+!!!                             internally called processes; add advice
+!!!                             concerning the RCS ident string; augment the
+!!!                             code check-in instructions.
+!!! 22. 2001-03-06  Stoeckley  Minor documentation and typo fixes.
+!!! 21. 2000-11-30  Stoeckley  Change name of wrapup flag to SKIP_WRAPUP for
+!!!                             clarity, and slightly change how it is used.
+!!! 20. 2000-09-20  Stoeckley  Add documentation in the gui_def and help
+!!!                             sections for display-only parameters.
+!!! 19. 2000-08-24  Stoeckley  Provide information stating that every
+!!!                             documentation section is required; fix the
+!!!                             RCS ident string line so that it is less
+!!!                             likely to exceed 80 characters.
+!!! 18. 2000-08-09  Stoeckley  Add documentation for making parameters
+!!!                             invisible in the GUI.
+!!! 17. 2000-06-16  Stoeckley  Modify the recommendations regarding getting
+!!!                             globals and putting option menus to reflect
+!!!                             new capabilities in the parameter cache.
+!!! 16. 2000-05-15  Stoeckley  Add references to PC_PUT_MINSIZE... and
+!!!                             PC_REGISTER_ARRAY_NAMES routines.
+!!! 15. 2000-03-16  Stoeckley  Add examples of calls to the MEM primitive;
+!!!                             add warning about nil parameter values; add
+!!!                             additional screen layout and context help
+!!!                             information and examples to work with Chuck
+!!!                             C. Burch's code which automatically extracts
+!!!                             this information and creates XML files.
+!!! 14. 2000-01-28  Stoeckley  Add new documentation section about warnings
+!!!                             and responsibilities; add additional wrapup
+!!!                             instructions; improve the documentation on
+!!!                             traps; add an interface block section;
+!!!                             move location of pc_put_options_field and
+!!!                             delete pc_put_options_array because of GUI
+!!!                             limitations; expand globals section to include
+!!!                             project data and job data parameters used;
+!!!                             expand specific calling characteristics section
+!!!                             to include control parameter information.
+!!! 13. 1999-11-11  Stoeckley  Add ident string for RCS and make minor
+!!!                             correction in instructions.  Also replace
+!!!                             "pointer" with "intent" attributes for most
+!!!                             OBJ arguments.  Also improve recommendations
+!!!                             for dealing with linked arrays.
+!!! 12. 1999-09-20  Stoeckley  Remove documentation for pc_value_changed and
+!!!                             pc_get_old_value since this functionality
+!!!                             is deficient and redundant.
+!!! 11. 1999-09-13  Stoeckley  Clarify the info on printing to LUN.
+!!! 10. 1999-09-10  Stoeckley  Remove some documentation tags and add
+!!!                             reference to other files.
+!!!  9. 1999-09-03  Stoeckley  Remove information about calling gather
+!!!                             internally; add GATHERED global; add
+!!!                             WRAPPED_UP structure variable; improve
+!!!                             wrapup procedures and documentation; change
+!!!                             named constants for actions in array element
+!!!                             traps.
+!!!  8. 1999-08-24  Stoeckley  Change type of header words to double precision;
+!!!                             add word "private" to data structure; change
+!!!                             example of calling a process internally.
+!!!  7. 1999-08-12  Stoeckley  Add stat=ier to array allocate statements;
+!!!                             add definition of globals and control params.
+!!!  6. 1999-08-10  Stoeckley  Change type of header words to real(kind=HDRW);
+!!!                             replace pc_reset by other calls; add provision
+!!!                             for both one and two sets of traces and
+!!!                             headers; replace pc_testing_advised and
+!!!                             pc_keyword_present by pc_value_changed; remove
+!!!                             min/max arguments in pc_get calls; slight
+!!!                             changes for calling a process internally;
+!!!                             add end trap; improve documentation.
+!!!  5. 1999-07-20  Stoeckley  Added documentation clarification in the
+!!!                             xxxx_initialize subroutine; change order of
+!!!                             pc_get and pc_get_global.
+!!!  5. 1999-07-15  Selzler    Standard dates, "opt" flag, avoid "index".
+!!!  4. 1999-06-28  Goodger    Removed some of the options.
+!!!  3. 1999-06-21  Vunderink  Inserted xxxx_initialize, removed xxxx_pass,
+!!!                             corrected documentation of some parameter cache
+!!!                             routines, and added !!! to some blank lines.
+!!!  2. 1999-06-17  Goodger    Slight reordering, add tags for all doc sections.
+!!!  1. 1999-06-14  Stoeckley  Initial version.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         GENERAL INFORMATION
+!!!
+!!! This template for process modules constitutes part of the standards
+!!! for writing process modules for the Conoco Processing System.  This
+!!! template, including the instructions and comments within this template,
+!!! is to be used for creating process modules.
+!!!
+!!! All of the instructions, comments, and sample code in this template are
+!!! commented out with three exclamation points to allow new code to be
+!!! inserted and tested without having to delete this information first.
+!!!
+!!! The program EZCPS can be used to generate a specific template for you
+!!! containing the process parameters (and associated code) for a specific
+!!! process.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         SUPPORTING DOCUMENTS
+!!!
+!!! (1) Documentation accessed by the CPSDOC program.
+!!! (2) Templates for processes and primitives            (in ~sps/templates).
+!!! (3) Coding Standards for Mixing Programming Languages (in ~sps/templates).
+!!! (4) Detailed Fortran Coding Standards                 (in ~sps/templates).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       INITIAL STEPS TO PERFORM
+!!!
+!!! (1) Copy this template to a new file with the name "xxxx.f90" where
+!!!     "xxxx" is the name of your process module.
+!!!
+!!! (2) Make the following replacements in this template wherever they occur:
+!!!     Replace  xxxx or XXXX  with the process name.
+!!!     Replace  DDDD-DD-DD    with the current check-in date (year-month-day).
+!!!     Replace      NNNN      with your name.
+!!!
+!!! (3) Insert your process-specific code (including documentation) into this
+!!!     template at locations where instructions are found.  Sample code
+!!!     in these locations illustrates what your code should look like.
+!!!     Referring to the three mockups listed above might help to further
+!!!     clarify the steps to be taken.  Make sure all inserted code conforms
+!!!     to the appropriate standards, including naming conventions.
+!!!
+!!! (4) Delete all instructions, comments, and sample code (lines beginning
+!!!     with !!!) in this file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       CODE CHECK-IN INSTRUCTIONS
+!!!
+!!! (1) Test the code thoroughly until you believe that it is ready
+!!!     for BETA TESTING if it is to be placed into betalib, or ALPHA
+!!!     TESTING if it is to be placed into alphalib.
+!!!
+!!! (2) Make sure the code compiles and works on all available compilers.
+!!!
+!!! (3) Make sure the GUI works by running EZGUI or checking it in a
+!!!     custom version of CFE.
+!!!
+!!! (4) Set the Revised field (in the brief doc) to current check-in date
+!!!     and author.
+!!!
+!!! (5) Make sure a new entry has been added to the revision history, and
+!!!     set this entry to the current check-in date.
+!!!
+!!! (6) Check the code using the checkc script.
+!!!
+!!! (7) Check in the new code before 3:00 p.m.
+!!!
+!!! (8) If this code is to be included by a user as a custom compile in
+!!!     a CPS job, you should make sure that the RCS ident string includes
+!!!     the file name, revision date, author, and maturity (custom) to
+!!!     insure that the correct information is displayed in the report file.
+!!!     
+!!!-----------------------------------------------------------------------------
+!!!                    WARNINGS AND RESPONSIBILITIES
+!!!
+!!! (1) Do not call the parameter cache from trace processing or wrapup
+!!!     or delete subroutines, except for the routines listed here, because
+!!!     these are the only routines likely to be used by a process to get
+!!!     valid information or do something useful during trace processing:
+!!!          PC_PRINT    PC_INFO       PC_GET_PDATA   PC_ALLOC_PDATA
+!!!          PC_ERROR    PC_WARNING    PC_GET_JDATA   PC_ALLOC_JDATA
+!!!     But please note the following points:
+!!!     (a) The message-reporting routines are likely to do nothing useful
+!!!          except print the message.
+!!!     (b) Calling PC_ERROR is not a substitute for setting NTR = FATAL_ERROR
+!!!          during trace processing.
+!!!     (c) For efficincy's sake, it is usually better to get from the
+!!!          parameter cache what you need at update time and store it in
+!!!          your own data structure for use at trace processing time instead
+!!!          of calling the above routines during trace processing.
+!!!     (d) Efficiency is not an issue at update or wrapup or delete time.
+!!!
+!!! (2) Do not delete from the process module portions of unneeded code or
+!!!     documentation sections in the template, because this would complicate
+!!!     the task of making future modifications which would require this code
+!!!     or documentation.  Examples are the wrapup flag, the object pointer
+!!!     used for traps, and empty code and documentation sections which might
+!!!     be used later.
+!!!
+!!! (3) The following rules must be followed for the header words of all
+!!!     traces output by a process module:
+!!!
+!!!     (a) All header words: Process modules which create traces are
+!!!         responsible for setting all trace header words.
+!!!
+!!!     (b) Header words 1, 3, and 4: Process modules are responsible for
+!!!         setting header word 1 (the sequential trace header word) if the
+!!!         process changes the sequence of traces, and header words 3 and 4
+!!!         (current group and count within the group) if the traces are
+!!!         sorted or re-binned.
+!!!
+!!!     (c) Header word 25: Process modules are responsible for setting
+!!!         this LAV header word (Largest Absolute Value) when changing the
+!!!         amplitude values of a trace.  The LAV primitive should be used
+!!!         when appropriate.  This header word must be zero for dead traces,
+!!!         and must be used (instead of the mute header words) when testing
+!!!         for a dead trace.
+!!!
+!!!     (d) Header words 2 and 64: Process modules are responsible for setting
+!!!         or adjusting these mute header words when creating, shifting,
+!!!         resampling, extending, truncating, muting, killing, or unkilling
+!!!         a trace.  The MUTEHW primitive should be used when appropriate.
+!!!         These header words must always lie in the range (1,NDPT) whether
+!!!         the trace is live or dead, and header word 2 must not exceed
+!!!         header word 64.
+!!!
+!!!     (e) User defined header words: Process modules must not use or reset
+!!!         these unless they are specified by user-defined parameters.
+!!!
+!!!     (f) Scratch header words: Process modules are free to use these for
+!!!         their own purposes, but must not rely on any previously-set values.
+!!!
+!!! (4) Some primitives are helpers for process modules for maintaining or
+!!!     verifying certain process parameters which are used in many different
+!!!     process modules.  These primitives enforce agreed-upon standards and
+!!!     encapsulate common code related to these parameters.  Some of these
+!!!     primitives even contain the screen layout and context-sensitive help
+!!!     associated with the parameters so that the process module may not
+!!!     even need to know what the parameters are or whether they are changed.
+!!!     These primitives should be used whenever they are applicable.
+!!!
+!!! (5) If a process module contains code which could be encapsulated in
+!!!     a primitive because of its general re-usable nature, the developer
+!!!     of the process module should first determine whether a usable
+!!!     primitive already exists which might fill the bill or be modifiable
+!!!     to fill the bill.  If so, that primitive should be used.  If no such
+!!!     primitive exists, an existing primitive should be expanded, or a new
+!!!     primitive written, after consultation with other persons with
+!!!     appropriate expertise or authority.  The goal is to minimize
+!!!     duplication of code and to encapsulate code which enforces standards
+!!!     or contains complex algorithms or other complications.
+!!!
+!!! (6) Always print to the logical unit number returned by pc_get_lun()
+!!!     rather than to standard out or unit 6.  After xxxx_create is called,
+!!!     the variable lunprint can be used as logical unit to print to.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!             USING A HIGHLEVEL PRIMITIVE WITH THIS PROCESS
+!!!
+!!! One way to write a process module is to use a highlevel primitive which
+!!! contains all of the functionality of the process.  The process therefore
+!!! becomes simply only a wrapper around the primitive.
+!!!
+!!! Although process modules are designed to be independent and ignorent of
+!!! their environment by the use of the parameter cache, a highlevel primitive
+!!! could even more isolated by not requiring the parameter cache and not
+!!! containing the gui_def and HelpSection which provide information for
+!!! the GUI front end of the processing system.  Such a highlevel primitive
+!!! might be the more convenient forum for developing code which may be
+!!! used in many environments or shared with people outside of Conoco.
+!!!
+!!! A typical highlevel primitive (named hhhh) may be a creatable/deletable
+!!! object which contains the following public subroutines called from the
+!!! process module:
+!!!
+!!!  called from xxxx_create:     hhhh_create     (obj%hhhh)
+!!!  called from xxxx_initialize: hhhh_initialize (obj%hhhh)
+!!!  called from xxxx_update:     hhhh_verify     (obj%hhhh,err,msg,parameters)
+!!!  called from xxxx_update:     hhhh_prepare    (obj%hhhh,err,msg)
+!!!  called from xxxx:            hhhh_execute    (obj%hhhh,ntr,hd,tr)
+!!!  called from xxxx_wrapup:     hhhh_wrapup     (obj%hhhh)
+!!!  called from xxxx_delete:     hhhh_delete     (obj%hhhh)
+!!!
+!!! The above highlevel primitive would have its own data structure, and would
+!!! have the same lifetime as its enveloping process.  The process parameters
+!!! would generally be duplicated in the primitive.  The hhhh_verify routine
+!!! (called between the pc_get and the pc_put sections) would verify and save
+!!! the parameter values for its use later, and would set the error and message
+!!! arguments as appropriate.  The hhhh_prepare routine (called after the call
+!!! to pc_do_not_process_traces) would do any required preparations prior to
+!!! processing traces.  If hhhh_initialize or hhhh_prepare or hhhh_wrapup are
+!!! not needed, they can be omitted.
+!!!
+!!! Many variations of the above are possible.  For example, the process module
+!!! could do the initializations and verifications, and the primitive module
+!!! could be created only when preparing to process traces:
+!!!
+!!!  called from xxxx_update:      hhhh_create  (obj%hhhh,err,msg,parameters)
+!!!  called from xxxx:             hhhh_execute (obj%hhhh,ntr,hd,tr)
+!!!  called from xxxx_wrapup:      hhhh_delete  (obj%hhhh)
+!!!
+!!! Or the primitive could be a module containing only one public routine,
+!!! without being creatable/deletable and without a data structure:
+!!!
+!!!  called from xxxx:       hhhh (parameters,ntr,hd,tr)
+!!!
+!!!-----------------------------------------------------------------------------
+!!!
+!!!
+!<CPS_v1 type="PROCESS"/>
+!!------------------------------- xxxx.f90 ---------------------------------!!
+!!------------------------------- xxxx.f90 ---------------------------------!!
+!!------------------------------- xxxx.f90 ---------------------------------!!
+
+! --> Edit the line below as appropriate:
+
+        ! other files are:  xxxx_crou.c  xxxx_frou.f90  xxxx.h
+
+!!! --> Delete from the above list any other files which do NOT exist.
+!!! --> There must NOT be an xxxx.c file.
+!!! --> Omit the above line if there are no other files.
+!!!
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                         C P S   P R O C E S S             
+!
+! Name       : XXXX
+! Category   : --> Insert process category, e.g. statics, migrations, filter.
+! Written    : DDDD-DD-DD   by: NNNN
+! Revised    : DDDD-DD-DD   by: NNNN
+! Maturity   : beta
+! Purpose    : --> Insert description for single-line context-sensitive help.
+! Portability: No known limitations. --> Change if needed.
+! Parallel   : No. --> Insert Yes or No, or Yes with additional information.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Choose the category from this list of subdirectories:
+!!!
+!!!   amplitude_mod    inversion           plot          transforms
+!!!   diagnostics      io                  sorts         velocity_analysis
+!!!   filters          migrations          stacks
+!!!   headers          miscellaneous       statics
+!!!                    multi_component     synthetics
+!!!
+!!!  --> All items in this section should be restricted to a single line.
+!!! 
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                          GENERAL DESCRIPTION              
+!
+! --> Insert description information here.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Description of this particular algorithm, how it differs from other
+!!!  --> algorithms for the general problem and when you may want to use it.
+!!!  --> Include information on whether the process is appropriate for 2D
+!!!  --> and/or 3D work.
+!!!
+!-------------------------------------------------------------------------------
+!</descript_doc>
+
+
+!<advice_doc>
+!-------------------------------------------------------------------------------
+!                          ADVICE FOR USERS                 
+!
+! --> Insert advice to the user here.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!! 
+!!!  --> Enter here more lengthy or more detailed advice than is appropriate
+!!!  --> for the multi-line help for individual parameters.
+!!!
+!-------------------------------------------------------------------------------
+!</advice_doc>
+
+
+!<trace_in_doc>
+!-------------------------------------------------------------------------------
+!                        TRACE INPUT REQUIREMENTS           
+!
+! --> Insert trace input requirements here.
+!
+!!! Process is a single-trace/multiple-trace/all-trace (loop-splitting) process.
+!!!
+!!! This process requires traces to be input one at a time.
+!!! This process requires traces to be input in gathers.
+!!!
+!!! Process requires traces to be input in _____ sort order.
+!!!
+!!! No special requirements.
+!!!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Omit or modify the inappropriate lines above.
+!!!
+!!!  --> Also you can add appropriate new information here,
+!!!  --> such as gain requirements, sort order requirements,
+!!!  --> gather requirement details, etc.
+!!!
+!!!  --> If some of this information depends on process parameters,
+!!!  --> it should be so stated here, and reference should be made
+!!!  --> to the relevant documentation below.
+!!!
+!-------------------------------------------------------------------------------
+!</trace_in_doc>
+
+
+!<trace_out_doc>
+!-------------------------------------------------------------------------------
+!                      TRACE OUTPUT CHARACTERISTICS         
+!
+! --> Insert how this process affects output traces.
+! 
+!!! This process does not output any traces.
+!!!
+!!! This process alters / does not alter input traces.
+!!! This process outputs the same traces as it receives (possibly altered).
+!!!
+!!! This process outputs one trace at a time.
+!!! This process outputs trace gathers.
+!!! This process outputs traces with same gather status as the input traces.
+!!!
+!!! This is a trace-supplying process.
+!!!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Omit or modify the inappropriate lines above.
+!!!  --> Also you can add appropriate new information here.
+!!!
+!!!  --> If some of this information depends on process parameters,
+!!!  --> it should be so stated here, and reference should be made
+!!!  --> to the relevant documentation below.
+!!!
+!-------------------------------------------------------------------------------
+!</trace_out_doc>
+
+
+!<global_doc>
+!-------------------------------------------------------------------------------
+!       PROJECT DATA, JOB DATA, AND GLOBAL PARAMETERS USED OR CHANGED      
+!
+! --> Insert globals that this process uses or changes:
+!
+! Name      Description                             Action taken
+! ----      -----------                             ------------
+! NUMTR     max number of traces input/output       --> specify action taken.
+! GATHERED  whether traces are a legitimate gather  --> specify action taken.
+! NWIH      number of words in trace header         --> specify action taken.
+! NDPT      number of sample values in trace        --> specify action taken.
+! TSTRT     starting time on trace                  --> specify action taken.
+! DT        trace sample interval                   --> specify action taken.
+! GRID      grid transformation structure           --> specify action taken.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> List here any globals used or changed by this process.
+!!!  --> The action taken can simply be a word or phrase such as "changed"
+!!!  -->   or "used but not changed" or some other details.
+!!!  --> Omit or modify the inappropriate lines above, or add any required
+!!!  -->   globals (or project data or job data parameters) not listed above.
+!!!  --> Note that project data and job data parameters must not be changed.
+!!!  --> All currently-defined globals of normal use are listed above,
+!!!  -->   but there is no attempt to list any project data or job data
+!!!  -->   parameters, since most of these are seldom needed by a process.
+!!!
+!!!  --> Warning: Trace-supplying processes must set the NUMTR and GATHERED
+!!!  --> globals.
+!!!
+!-------------------------------------------------------------------------------
+!</global_doc>
+
+
+!<header_word_doc>
+!-------------------------------------------------------------------------------
+!                    TRACE HEADER WORDS USED OR CHANGED     
+!
+! --> Insert header words used or changed by this process:
+!
+! Hwd#    Description                Action taken
+! ----    -----------                ------------
+!!! 1       Sequential Trace Count     Renumbered.
+!!! NHF     User-defined header word   Reset to 1 or 0 (trace flag).
+!!! 3       Current gather             Used to group traces into gathers.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> List here any header words used or changed by this process.
+!!!  --> Indicate the ones which are changed, with details.
+!!!  --> If a header word is given by a process parameter, specify that
+!!!  -->   parameter name rather than a header word number.
+!!!  --> A few examples are shown above.
+!!!
+!!!  --> In this template, we could list all of the header words and their
+!!!  --> desriptions here, with instructions to omit or modify the
+!!!  --> irrelevant ones, or add any new ones not listed.
+!
+!-------------------------------------------------------------------------------
+!</header_word_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                             REVISION HISTORY                
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. DDDD-DD-DD  NNNN       Initial version.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Copy any old revision history to this location if it exists,
+!!!  --> and renumber as necessary.
+!!!
+!!!  --> The revision history should be listed in descending order, with
+!!!  --> the most recent revision at the top.
+!!!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<portability_doc>
+!-------------------------------------------------------------------------------
+!                         PORTABILITY LIMITATIONS           
+!
+! No known limitations.  --> Change to add any platform dependencies.
+!
+!!! This process requires 8-byte (64-bit) word sizes.
+!!! This process packs and unpacks values in 8-byte words.
+!!! This process contains the following platform-dependent code...
+!!!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!! 
+!!!  --> Omit or modify the inappropriate lines above.
+!!!  --> Also you can add additional portability details here.
+!!!
+!-------------------------------------------------------------------------------
+!</portability_doc>
+
+
+!<compile_doc>
+!-------------------------------------------------------------------------------
+!                     SPECIAL COMPILING REQUIREMENTS        
+!
+! No special requirements.  --> Change if any special compiler/linking required.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!! 
+!!!  --> Omit or modify the line above if it is inappropriate.
+!!!  --> Description of any special compiler or linking requirements
+!!!  --> or restrictions.
+!!!
+!-------------------------------------------------------------------------------
+!</compile_doc>
+
+
+!<calling_doc>
+!-------------------------------------------------------------------------------
+!                    SPECIFIC CALLING CHARACTERISTICS       
+!
+! --> Default values are shown below - edit as needed:
+!
+! Control
+! Parameter     Value
+! Name          Reported   Description
+! ---------     --------   -----------
+! NTAPES           0       number of magnetic tapes needed.
+! NEED_REQUEST   false     whether this process ever needs to request traces.
+! NEED_LABEL     false     whether this process needs a label.     
+! TWOSETS        false     whether this process needs two trace/header arrays.
+! NSCRATCH         0       amount of temporary memory needed.       
+! NSTORE           0       amount of permanent memory needed.      
+! IFTD           false     whether this process frees tape drives. 
+! NDISK            0       disk space needed (megabytes) if large. 
+! SETUP_ONLY     false     whether this process is setup-only.    
+! PARALLEL_SAFE  false     whether this process can be in a parallelized loop.
+!!!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Modify the reported values above as necessary.  Default values are
+!!!  --> shown.  Since NTAPES, NSTORE, NSCRATCH, and NDISK may be complex
+!!!  --> calculations depending on input parameters, it is sufficient to
+!!!  --> show them as simply ">0" or "varies" or some other reasonable
+!!!  --> word in such cases, with additional explanations here if necessary.
+!!!  --> If any of the other reported values change depending on input
+!!!  --> parameters, the reported values should be "varies" or "see note 1"
+!!!  --> or similar, and an explanation should be provided here.
+!
+! --> Edit the following lines as needed:
+!
+! Upon input, NTR must have one of these values:
+!  NTR >= 1              means to process the input traces.
+!  NTR == NO_MORE_TRACES means there are no more input traces.
+!  NTR == NEED_TRACES    means someone else needs more traces.
+!
+! Upon output, NTR will have one of these values:
+!  NTR >= 1              if this process is outputting traces.
+!  NTR == NO_MORE_TRACES if there are no more traces to output.
+!  NTR == FATAL_ERROR    if this process has a fatal error.
+!  NTR == NEED_TRACES    if this process needs more traces.
+!
+!!!  --> If this is a trace-supplying process:
+!!!  -->   Must have NEED_REQUEST set to false and NEED_LABEL set to true.
+!!!  -->   Delete the input NTR >= 1 line above.
+!!!  -->   Delete the input NTR == NO_MORE_TRACES line above.
+!!!  -->   Delete the output NTR == NEED_TRACES line above.
+!!!
+!!!  --> If this process does not output traces:
+!!!  -->   Delete the output NTR >= 1 line above.
+!!!
+!!!  --> If this process has NEED_LABEL set to false:
+!!!  -->   Delete the input NTR == NEED_TRACES line above.
+!!!
+!!!  --> If this process has NEED_REQUEST set to false:
+!!!  -->   Delete the output NTR == NEED_TRACES line above.
+!!!
+!!!  --> If this process has SETUP_ONLY set to true:
+!!!  -->   Delete the entire section on input and output NTR above.
+!!!
+!!!  --> If any of the control parameters vary which impact the section on
+!!!  --> input and output NTR above, further explanations should be provided
+!!!  --> as necessary.
+!!!
+!-------------------------------------------------------------------------------
+!</calling_doc>
+
+
+!<int_calling_doc>
+!-------------------------------------------------------------------------------
+!                   ALTERNATE INTERNAL CALLING METHODS     
+!
+!  None provided.  --> Change if this statement is inappropriate.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!! 
+!!!  --> Omit or modify the line above if it is inappropriate.
+!!!
+!!!  If alternate subroutines are provided for use when calling this
+!!!  process internally, or from outside of a processing system, they
+!!!  should be documented here.  This may include an alternate CREATE
+!!!  subroutine which accepts required globals and optional process
+!!!  parameters and does not use the parameter cache.
+!!!
+!!!  Alternate subroutines are recommended for processes which are often
+!!!  called in alternate ways as indicated above.  But perhaps a better
+!!!  alternative is to convert the main part of the process into a primitive
+!!!  which does not use the parameter cache.  This primitive could be a
+!!!  creatable/deletable object, or could receive all information (e.g.
+!!!  parameters and traces) through the argument list of its trace processing
+!!!  subroutine.  Such a primitive can then be called from this process.
+!!!
+!-------------------------------------------------------------------------------
+!</int_calling_doc>
+
+
+!<algorithm_doc>
+!-------------------------------------------------------------------------------
+!                  ALGORITHM DESCRIPTION FOR DEVELOPERS    
+!
+! --> Insert description of algorithms used.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!! 
+!!!  --> Description of this particular algorithm, related theory and
+!!!  --> relevant references.
+!!!
+!-------------------------------------------------------------------------------
+!</algorithm_doc>
+
+
+!<programming_doc>
+!-------------------------------------------------------------------------------
+!                           PROGRAMMING NOTES              
+!
+! --> Insert any useful programming notes here.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!! 
+!!!  --> Enter here more lengthy or more detailed information which may be
+!!!  --> required.
+!!!
+!-------------------------------------------------------------------------------
+!</programming_doc>
+
+
+!-------------------------------------------------------------------------------
+!<gui_def>
+!!!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Screen layout information for the GUI goes in this section.
+!!!  --> Here is an example of the format to be used, with a few
+!!!  --> incomplete explanations below.
+!!!
+!!!  --> The SCREEN LAYOUT and CONTEXT SENSITIVE HELP from another Fortran-90
+!!!  --> source file (e.g. a primitive which encapsulates parameters used
+!!!  --> by several processes) can be included by adding a line like this
+!!!  --> at the appropriate location within this screen layout where you
+!!!  --> want the included screen layout to reside:
+!!!  -->                    <include yyyy.f90>
+!!!
+!
+! --> Insert your GUI layout here.
+! --> (EZCPS will insert your GUI layout here for you)
+!!!
+!!! --> Here is an example:
+!!! --> (Only one exclamation point should start each line)
+!!!
+!!!<NS XXXX Process/NC=80>
+!!!Select PATHNAME[PATHNAME]`QSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+!!!             [PATHNAME_INFO]`XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+!!!
+!!!               PUSH_ME `P          NDPT~~=~`XXXXXX
+!!!
+!!!          Comments can be placed anywhere like this comment.
+!!!
+!!!      ACTION=~~~`CCCCC           HDR_FLAG=~~~`II
+!!!
+!!!   `-----------------------   `-----------------------     XCOORDS
+!!!    METHOD_A~=`CCCCCC          METHOD_B~=`CCCCCC           `FFFFFFFFF
+!!!    HDR_SEL_A=`II              HDR_SEL_B=`II               `FFFFFFFFF
+!!!    ENTRIES_ACOMMENT_A         ENTRIES_BCOMMENT_B          `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    `FFFFFFFF`XXXXXXXXX        `FFFFFFFF`XXXXXXXXX         `FFFFFFFFF
+!!!    COMPLEMENT_A=`CC           COMPLEMENT_B=`CC            `FFFFFFFFF
+!!!   `-----------------------   `-----------------------     `FFFFFFFFF
+!!!
+!!!          [COMMENT]XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+!!!
+!!!<PARMS PATHNAME[/ML=128/XST]>
+!!!<PARMS ENTRIES_A_ARRAYSET[/XST/YST]>
+!!!<PARMS ENTRIES_B_ARRAYSET[/XST/YST]>
+!!!<PARMS COMMENT_A[/ML=20/XST]>
+!!!<PARMS COMMENT_B[/ML=20/XST]>
+!!!<PARMS ZZZZZZ[/NULL]>
+!!!
+!!!
+!!! --> Here is some useful information (although not complete):
+!!!
+!!! -->          integer text fields are represented by `IIIIII
+!!! -->   floating point text fields are represented by `FFFFFF
+!!! --> character string text fields are represented by `SSSSSS
+!!! -->    informational text fields are represented by `XXXXXX (any data type)
+!!! -->             combo box fields are represented by `CCCCCC (any data type)
+!!! -->          a box around an area is represented by `------
+!!!
+!!! --> The number of characters in a field is the above count including `.
+!!! --> A scalar keyword is followed by an equal sign and the field.
+!!! --> An array keyword is above a column of fields, aligned to begin above `.
+!!! --> A pushbutton is represented by a keyword plus a space plus `P.
+!!! --> Spaces before and after the equal sign must be represented by ~~~.
+!!! --> Linked arrays butt up against each other.
+!!! --> /NC specifies the width of the dialog box in characters (should be 80).
+!!! --> /ML specifies the max number of characters to allow if > field length.
+!!! --> /ML=128/XST should be specified for path names.
+!!! --> /XST/YST should be specified for each set of linked arrays.
+!!! --> /XST should be specified when ML is specified.
+!!!
+!!! --> If a parameter in the HelpSection is not to be displayed in this
+!!! --> section, a line like this should be included in this section:
+!!! -->                    <PARMS ZZZZZZ [/NULL]>
+!!!
+!!! --> If an informational field is not to show its keyword, the keyword
+!!! --> can be enclosed in square brackets and the equal sign can be omitted.
+!
+!</gui_def>
+!-------------------------------------------------------------------------------
+
+
+!-------------------------------------------------------------------------------
+!<HelpSection>
+!!!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!! 
+!!!  --> Context-sensitive help for the GUI and for the DOC program
+!!!  --> goes in this section.  Two different formats are supported,
+!!!  --> either of which can be used.  Both formats are shown for
+!!!  --> keywords KEYWORD1 and KEYWORD2.  Every parameter in the gui_def
+!!!  --> section must have an entry in this section.  Each parameter must
+!!!  --> have a <tip>, a Default line, and one or more Allowed lines,
+!!!  --> followed optionally (but usually) by additional information.
+!!!
+!!!  --> NOTE: For display-only parameters (i.e. informational fields
+!!!  --> designated with XXXXXXX in the gui_def section), the keyword line
+!!!  --> below should look like this:
+!!!  -->    <Help KEYWORD="keyword1" TYPE="DISPLAY_ONLY">
+!!!  --> and the Default and Allowed lines are optional and not usually needed.
+!!!
+!
+! --> Insert your context sensitive help here.
+! --> (EZCPS will insert customized skeleton help for you)
+!
+!!! --> Here are some examples:
+!!! --> (Only one exclamation point should start each line)
+!!!
+!!!<Help KEYWORD="keyword1">
+!!!<Tip> Here is the one-line context-sensitive help for this parameter. </Tip>
+!!! Default = dddddddd   ! this can be a default value or a short phrase.
+!!! Allowed = pppppppp   ! this can be a range of values or a short phrase.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached. 
+!!!</Help>
+!!!
+!!!
+!!!<Help KEYWORD="keyword2">
+!!!<Tip> Here is the one-line context-sensitive help for this parameter. </Tip>
+!!! Default = dddddddd   ! this is the default value from a list of options.
+!!! Allowed = ppppppp1   Short description for option 1.
+!!! Allowed = ppppppp2   Short description for option 2.
+!!! Allowed = ppppppp3   Short description for option 3.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached. 
+!!! is reached.  
+!!!</Help>
+!!!
+!!!
+!!!<help keyword1> Here is the one-line context-sensitive help for this param.
+!!! Default = dddddddd   ! this can be a default value or a short phrase.
+!!! Allowed = pppppppp   ! this can be a range of values or a short phrase.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached. 
+!!!
+!!!
+!!!<help keyword2> Here is the one-line context-sensitive help for this param.
+!!! Default = dddddddd   ! this is the default value from a list of options.
+!!! Allowed = ppppppp1   Short description for option 1.
+!!! Allowed = ppppppp2   Short description for option 2.
+!!! Allowed = ppppppp3   Short description for option 3.
+!!!
+!!! Continuing here is more multi-line context-sensitive help, which can take
+!!! as many lines as necessary, with possible blank lines, and will continue
+!!! until the end of this section is reached. 
+!!! is reached.  
+!!!
+!</HelpSection>
+!-------------------------------------------------------------------------------
+
+
+
+!!--------------------------- start of module ------------------------------!!
+!!--------------------------- start of module ------------------------------!!
+!!--------------------------- start of module ------------------------------!!
+
+
+      module xxxx_module
+      use pc_module
+      use named_constants_module
+      use memman_module
+      use grid_module            ! if you need the grid transformation.
+      use pathchoose_module      ! if you use file name parameters.
+      use pathcheck_module       ! if you use file name parameters.
+!!!   use test1_module           ! example if calling test1 process internally.
+
+! --> Insert here any other modules used by this process.
+
+      implicit none
+      private
+      public :: xxxx_create
+      public :: xxxx_initialize
+      public :: xxxx_update
+      public :: xxxx_delete
+      public :: xxxx            ! main trace processing routine.
+      public :: xxxx_wrapup
+
+      character(len=100),public,save :: XXXX_IDENT = &
+'$Id: process_module_template,v 1.30 2002/11/08 14:46:20 Burch custom sps $'
+
+!!!
+!!! The above XXXX_IDENT variable is reset by RCS to contain information
+!!! useful for determining the exact version of source code used to create
+!!! object code, executables, and core dumps for debugging purposes.
+
+!!---------------------- parameter structure -------------------------------!!
+!!---------------------- parameter structure -------------------------------!!
+!!---------------------- parameter structure -------------------------------!!
+
+!!!
+!!! Build your data structure here.  This data structure should include
+!!! the process parameters, plus all dependent variables required during
+!!! the execution phase.  In addition, this data structure must include
+!!! any globals needed during the execution phase (processing traces).
+!!! If this process changes any globals, and both the old and new values
+!!! are needed during execution, both the old and new values must be saved
+!!! in this data structure.
+!!!
+!!!
+!!!   integer,parameter :: maxfold = 50
+
+      type,public :: xxxx_struct              
+ 
+        private
+        logical                    :: skip_wrapup      ! wrapup flag.
+
+! --> Below are commonly used globals - edit or remove as appropriate:
+
+        integer                    :: ipn      ! process number.
+        integer                    :: numtr    ! max number of input traces.
+        logical                    :: gathered ! whether properly gathered.
+        integer                    :: nwih     ! number of header words.
+        integer                    :: ndpt     ! number of trace samples.
+        real                       :: tstrt    ! time of 1st trace sample (sec).
+        real                       :: dt       ! trace sample interval (sec).
+        type(grid_struct)          :: grid     ! grid transform.
+
+! --> Insert your process parameters here.
+! --> (EZCPS will do this for you)
+
+!!!     integer                    :: ngathers,nfold   ! process parameters.
+!!!     real                       :: array1(maxfold)  ! process parameters.
+!!!     character(len=8)           :: mode             ! process parameters.
+!!!
+! --> Insert any other needed variables or pointers here.
+!!!
+!!!     integer                    :: igather          ! dependent variables.
+!!!     double precision  ,pointer :: hdup(:,:)        ! dependent variables.
+!!!     real              ,pointer :: tdup(:,:)        ! dependent variables.
+!!!     type(test1_struct),pointer :: test1            ! dependent variables.
+
+      end type xxxx_struct
+
+
+!!---------------------------- interfaces ---------------------------------!!
+!!---------------------------- interfaces ---------------------------------!!
+!!---------------------------- interfaces ---------------------------------!!
+
+
+! --> Include any required interfaces here.
+!!!
+!!!   interface xxxx_abcd
+!!!        module procedure xxxx_abcd1
+!!!        module procedure xxxx_abcd2
+!!!   end interface
+
+
+!!--------------------------------- data -----------------------------------!!
+!!--------------------------------- data -----------------------------------!!
+!!--------------------------------- data -----------------------------------!!
+
+      integer                  ,save :: lunprint  ! unit number for printing.
+      type(xxxx_struct),pointer,save :: object    ! needed for traps.
+
+! --> Insert here any data declarations needed by this process.
+
+      contains
+
+
+!!----------------------------- create -------------------------------------!!
+!!----------------------------- create -------------------------------------!!
+!!----------------------------- create -------------------------------------!!
+
+
+      subroutine xxxx_create (obj)
+      type(xxxx_struct),pointer :: obj       ! arguments
+      integer                   :: ierr      ! for error checking
+
+      lunprint = pc_get_lun()
+      allocate (obj, stat=ierr)
+      if (ierr /= 0) call pc_error ("Unable to allocate obj in xxxx_create")
+
+! --> Insert code to nullify process parameter pointers in the OBJ structure.
+! --> (EZCPS will do this for you)
+
+! --> Nullify any additional pointers in the OBJ data structure here.
+!!!
+!!! Nullify ALL POINTERS in your parameter structure as follows:
+!!!   memman_nullify should be used for all pointers to arrays and 
+!!!   nullify should be used for pointers to the data structures
+!!!   of internally called processes.
+!!!
+!!!   call memman_nullify  (obj%hdup, "hdup")  ! must be done for all pointers.
+!!!   call memman_nullify  (obj%tdup, "tdup")  ! must be done for all pointers.
+!!!   nullify              (obj%test1)         ! must be done for all pointers.
+!!!
+!!! Warning: Nullified or deallocated pointers should never be passed to
+!!! routines which receive the arrays without the pointer attribute, even
+!!! if the arrays are not referenced when nullified or deallocated.  To
+!!! protect ourself, one safeguard is always to allocate at least one
+!!! array element even when none are needed.  Any pointer parameter
+!!! allocated by memman_allocate or pc_alloc will always be allocated to 
+!!! a size of at least one.
+
+      call xxxx_initialize (obj)
+      end subroutine xxxx_create
+
+
+!!------------------------------- delete -----------------------------------!!
+!!------------------------------- delete -----------------------------------!!
+!!------------------------------- delete -----------------------------------!!
+
+
+      subroutine xxxx_delete (obj)
+      type(xxxx_struct),pointer :: obj       ! arguments
+      integer                   :: ierr      ! for error checking
+
+      call xxxx_wrapup (obj)
+
+! --> Insert code to free process parameter pointers in the OBJ structure.
+! --> (EZCPS will do this for you)
+
+! --> Deallocate any additional pointers in the OBJ data structure here.
+!!!
+!!! Make sure ALL POINTERS in your parameter structure are deallocated
+!!! as follows:
+!!!
+!!!   if (associated(obj%hdup )) call memman_free  (obj%hdup)
+!!!   if (associated(obj%tdup )) call memman_free  (obj%tdup)
+!!!   if (associated(obj%test1)) call test1_delete (obj%test1)
+!!!
+
+      deallocate(obj, stat=ierr)
+      if (ierr /= 0) call pc_warning ("error deallocating obj in xxxx_delete")
+      end subroutine xxxx_delete
+
+
+!!----------------------------- initialize ---------------------------------!!
+!!----------------------------- initialize ---------------------------------!!
+!!----------------------------- initialize ---------------------------------!!
+
+
+      subroutine xxxx_initialize (obj)
+      type(xxxx_struct),intent(inout) :: obj       ! arguments
+
+! --> Insert code to initialize process parameters in the OBJ data structure.
+! --> (EZCPS will insert customized skeleton code for you)
+!!!
+!!! Initialize ALL NON-POINTER VARIABLES in your parameter structure
+!!! as follows:
+!!!
+!!!   obj%mode     = 'GENERATE'
+!!!   obj%ngathers = 100
+!!!   obj%nfold    = 10
+!!!   obj%array1   = 0.0
+!!!   obj%nwih     = 0   ! will have to test later to make sure has been reset.
+!!!   obj%ndpt     = 0   ! will have to test later to make sure has been reset.
+!!!   obj%igather  = 0
+!!!
+!!! Global parameters do not have to be initialized here because PC_GET_GLOBAL
+!!! will always return a good value even if the global is not present in the
+!!! parameter cache or has a bad value.  A fatal error message will be
+!!! automatically generated by PC_GET_GLOBAL under these circumstances.
+!!!
+!!! If a process parameter has a default which is calculated from a global
+!!! parameter, it can be set from the parameter cache, as in this example which
+!!! presets the top of a static correlation window to the top of the trace:
+!!!
+!!!   call pc_get_global ('tstrt', obj%twin)
+!!!
+!!! If any parameters (e.g. globals) are obtained from the parameter cache
+!!! in this INITIALIZE routine, they must still be obtained (again) in the
+!!! UPDATE routine because they could change since this INITIALIZE routine
+!!! was last called.
+
+      call xxxx_update (obj)
+      end subroutine xxxx_initialize
+
+
+!!------------------------- start of update --------------------------------!!
+!!------------------------- start of update --------------------------------!!
+!!------------------------- start of update --------------------------------!!
+
+
+      subroutine xxxx_update (obj)
+      type(xxxx_struct),intent(inout),target :: obj             ! arguments
+
+! --> Insert code to declare all required local variables.
+
+!!!   integer     :: i, j, ierr                                 ! local
+!!!   logical     :: ngathers_sensitive, array_sensitive        ! local
+!!!   logical     :: need_label, need_request, twosets, iftd    ! local
+!!!   integer     :: ntapes, nscratch, nstore, ndisk            ! local
+!!!
+      object => obj               ! needed for traps.
+      obj%skip_wrapup = .true.    ! needed for the wrapup routine.
+
+
+!!------------------------- read parameters --------------------------------!!
+!!------------------------- read parameters --------------------------------!!
+!!------------------------- read parameters --------------------------------!!
+
+
+! --> Insert any calls to PC_REGISTER_ARRAY_NAMES here.
+! --> (EZCPS will do this for you)
+
+! --> Delete any of the globals below that are not needed:
+
+      obj%ipn = pc_get_ipn()
+   
+      call pc_get_global ('numtr'   , obj%numtr)
+      call pc_get_global ('gathered', obj%gathered)
+      call pc_get_global ('nwih'    , obj%nwih)
+      call pc_get_global ('ndpt'    , obj%ndpt)
+      call pc_get_global ('tstrt'   , obj%tstrt)
+      call pc_get_global ('dt'      , obj%dt)  
+      call pc_get_global ('grid'    , obj%grid)
+
+! --> Insert code to read process parameters here.
+! --> (EZCPS will do this for you)
+!!!
+!!! Sample code:
+!!!
+!!!   call pc_register_array_names ('abc_arrayset', (/'ABC','DEF','GHI'/))
+!!!
+!!!                 keyword     parameter              trap (optional)
+!!!                   |            |                     |
+!!!   call pc_get  ('mode'    , obj%mode,              xxxx_mode_trap)
+!!!   call pc_get  ('ngathers', obj%ngathers)
+!!!   call pc_get  ('array1'  , obj%array1, obj%nfold, xxxx_array1_element_trap)
+!!!   call pc_alloc('array1'  , obj%array1, obj%nfold, xxxx_array1_element_trap)
+!!!
+!!!
+!!!   call pc_call_array_trap    ('array1'      , xxxx_array1_trap)
+!!!   call pc_call_arrayset_trap ('abc_arrayset', xxxx_abc_arrayset_trap)
+!!!   call pc_call_screen_trap   ('screen1'     , xxxx_screen1_trap)
+!!!   call pc_call_end_trap                      (xxxx_end_trap)
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! GLOBAL PARAMETERS:
+!!!
+!!! Only the globals which are required by this process need be obtained.
+!!!
+!!! Note: The PC_GET_GLOBAL routines will always return a good value even
+!!!       if the global is not present in the parameter cache or has a bad
+!!!       value.  A fatal error message will be automatically generated by
+!!!       PC_GET_GLOBAL under these circumstances.  If you do not want a
+!!!       fatal error message, you can call PC_GLOBAL_KEYWORD_PRESENT to
+!!!       test for the presence of the global before calling PC_GET_GLOBAL.
+!!!
+!!! Note: NUMTR is the maximum number of traces that will be input at any one
+!!!       time.  If this is 0, we are at the top of a new processing loop,
+!!!       or the previous process does not pass out traces.  If this is 1,
+!!!       traces will be received one at a time.  If this is >1, traces will
+!!!       be received a gather at a time, where the gathers might or might
+!!!       not be legitimate functional gathers with a common value of header
+!!!       word 3.  -->  If this process requires traces to be received one
+!!!       at a time and they are not, PC_ERROR should be called with a message
+!!!       telling the user to insert an UNGATHER process before this process.
+!!!       But for efficiency purposes, this should not be done simply to
+!!!       avoid using a DO loop to process each trace received.
+!!!
+!!! Note: GATHERED is a logical flag indicating whether traces are properly
+!!!       gathered.  If this is true, traces will be received a gather at
+!!!       a time, where the gathers are legitimate functional gathers with
+!!!       a common value of header word 3.  If this is false, traces will
+!!!       be received one at a time, or in gathers which are not legitimate
+!!!       functional gathers.  -->  If this process requires traces to be
+!!!       received in legitimate functional gathers and they are not, PC_ERROR
+!!!       should be called with a message telling the user to insert a GATHER
+!!!       process before this process.  This message can be customized as
+!!!       necessary to inform the user of any special restrictions or
+!!!       requirements the gather must have.
+!!!
+!!! Note: GRID is a data structure containing the grid transform parameters.
+!!!       This data structure resides within a module which also contains
+!!!       subroutines for CMP gridding, coordinate transformations, and
+!!!       accessing the individual transformation variables.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! TRAPS:
+!!!
+!!! The array trap keyword is the keyword for an individual array which is
+!!! not linked to any other arrays.  The arrayset trap keyword is specified
+!!! in the layout documentation for each set of linked arrays.  The screen
+!!! trap keyword is specified in the layout documentation for each screen.
+!!!
+!!! PC_GET   routines should be called AFTER the PC_GET_GLOBAL calls.
+!!! PC_ALLOC routines should be called AFTER the PC_GET_GLOBAL calls.
+!!! Array       traps should be called AFTER the PC_GET calls.
+!!! Arrayset    traps should be called AFTER the array traps are called.
+!!! Screen      traps should be called AFTER the arrayset traps are called.
+!!! End         traps should be called AFTER the screen traps are called.
+!!!
+!!! See the information in the section for traps (below) for detailed
+!!! information on when traps are called and a description of update states
+!!! which influence when traps are called.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! LINKED ARRAYS:
+!!!
+!!! Registering names of arrays in an arrayset:
+!!!
+!!!   The names of all the arrays in a set of linked arrays can optionally
+!!!   be registered with the parameter cache in order to allow the parameter
+!!!   cache to do some work for you.  This will simplify the recommendations
+!!!   described below for sets of linked arrays.  You also must register
+!!!   the names if you will be calling the PC_PUT_MINSIZE_ARRAYSET or
+!!!   PC_PUT_MAXSIZE_ARRAYSET subroutines described later.
+!!!
+!!! Special recommendations for sets of linked arrays:
+!!!
+!!!   A set of linked arrays must have the same length for every array in
+!!!   the set.  This means that only one length variable needs to reside
+!!!   in the OBJ data structure for the entire set.  However, it is important
+!!!   to insure that nobody is trying to set the arrays to different lengths
+!!!   (e.g. by hand-editing the job file or by forgetting to tell the GUI
+!!!   that the arrays are linked).  This will be taken care of automatically
+!!!   if you register the array names with the parameter cache.  The following
+!!!   example illustrates the recommended procedure for the three linked
+!!!   arrays A1,A2,A3 with length N:
+!!!
+!!!        call pc_register_array_names ('a1_arrayset', (/'A1', 'A2', 'A3'/))
+!!!
+!!!        call pc_alloc ('a1' ,obj%a1 ,obj%n)
+!!!        call pc_alloc ('a2' ,obj%a2 ,obj%n)
+!!!        call pc_alloc ('a3' ,obj%a3 ,obj%n)
+!!!
+
+
+!!-------------------------- verify parameters -----------------------------!!
+!!-------------------------- verify parameters -----------------------------!!
+!!-------------------------- verify parameters -----------------------------!!
+
+
+! --> Insert code to verify process parameters here (and/or in traps).
+!!!
+!!! Here you should place code for verifying and/or adjusting all process
+!!! parameters which were input above.  Any verification code residing in
+!!! traps specified above need not be repeated here.  Any verification code
+!!! not residing in traps, or code which should be executed even if the
+!!! relevant traps are not called, should be put here.  It should not be
+!!! necessary to duplicate any code here which resides in any traps.
+!!!
+!!! Testing of process parameters can be done in this error unconditionally,
+!!! or conditionally based on the returned value of functions listed below,
+!!! depending on whether the testing is time-consuming.  For example, testing
+!!! and/or adjusting a parameter for validity might be trivial, but a file
+!!! should probably be opened and read only when the file name is actually
+!!! changed.
+!!!
+!!! If traps are fully utilized, it may not be necessary to place any
+!!! process parameter verification code here because the parameter cache
+!!! is designed to call all traps at appropriate times to enable all
+!!! testing to be performed there.
+!!!
+!!! Warning regarding nil values:
+!!! Blank fields in a GUI are interpreted as nil numeric values (INIL, FNIL,
+!!! DNIL, and LNIL in the named constants module).  Under some circumstances,
+!!! it may be desirable to test process parameters for nil values.  When a
+!!! row is inserted into an array (or a set of linked arrays) in a GUI, that
+!!! array element value will normally be a nil unless the user previously
+!!! deleted a row, in which case the value will be the previously-deleted
+!!! value.  If you want the user to input the entire row of nils before
+!!! going to another row or leaving the arrays, you can call the appropriate
+!!! PC_JUMP routine from the array element trap to jump to the current row
+!!! (i.e. stay in the current row).  Or you can test for nils later, such as
+!!! in an array trap or an arrayset trap.
+!!!
+!!!
+!!!-------Verification of global, project data, and job data parameters:
+!!!
+!!! Here you should also place code for verifying that any project data
+!!! or job data parameters you need are appropriately set, and taking
+!!! appropriate action if they are not.
+!!!
+!!! Project data and job data parameters (if needed) should be initialized
+!!! to some invalid default in the INITIALIZE subroutine in this module,
+!!! in case the caller of this module (the caller might NOT be the processing
+!!! system) forgot to put them into the parameter cache.  A fatal error message
+!!! can be generated if necessary if the default value does not change.
+!!!
+!!! Global parameters do not have to be verified here because PC_GET_GLOBAL
+!!! will always return a good value even if the global is not present in the
+!!! parameter cache or has a bad value.  A fatal error message will be
+!!! automatically generated by PC_GET_GLOBAL under these circumstances.
+!!!
+!!!
+!!!-------Providing error, warning, and information messages:
+!!!
+!!! If an error occurs here (or in a trap), or you want to provide a warning
+!!! or informational message, you should call one of the following routines:
+!!!
+!!!     call pc_error   ('MODE must be GENERATE or MODIFY.')
+!!!     call pc_warning ('Paramater ABCD is outside of the normal range.')
+!!!     call pc_info    ('You are being very brave using such big parameters!')
+!!!
+!!! The parameter cache will store up all messages provided to it, for later
+!!! retrieval by the processing system or by any calling program.  An error
+!!! flag will be set by PC_ERROR.  On the front-end, these messages will be
+!!! sent to a GUI for display (and they might also go to a log file or to the
+!!! terminal screen if requested).  On the back-end, these messages will
+!!! simply be printed in a report file along with other printouts.
+!!!
+!!! Note: On the back-end, PC_ERROR and PC_WARNING print to standard out,
+!!! whereas PC_INFO prints to the LUNPRINT unit number which might be discarded
+!!! on worker CPUs in a parallel job.
+!!!
+!!!-------Printing information:
+!!!
+!!! Any information can be printed by calling PC_PRINT, or by printing to
+!!! the logical unit number LUNPRINT which is returned by PC_GET_LUN in the
+!!! XXXX_CREATE routine.  No such messages will be retained by the parameter
+!!! cache or go to a GUI.  LUNPRINT will always be a valid unit number. 
+!!! On the back end, the prints will go to the report file, except possibly
+!!! on worker CPUs in parallel jobs, where the prints might be disregarded.
+!!! On the front end, the prints might go to the terminal screen or a log
+!!! file or be disregarded.
+!!!
+!!! Examples:
+!!!
+!!!     call pc_print ('print this stuff')        ! wherever you want to print.
+!!! or:
+!!!     write (pc_get_lun(),*) 'print this stuff' ! wherever you want to print.
+!!! or:
+!!!     write (lunprint,*) 'print this stuff'     ! wherever you want to print.
+!!!
+!!! Note: Error and warning messages should preferably be printed directly to
+!!! standard out (unit 6 or with a print statement) instead of using LUNPRINT.
+!!! This distinction is normally important only in parallel jobs where a worker
+!!! CPU wants to print an error or warning message because in this case
+!!! printing to LUNPRINT might be disregarded.
+!!!
+!!!-------Executing code conditionally:
+!!!
+!!! If you need to execute some code conditionally, you can do so based on
+!!! the returned logical or integer (named-constant) values of the following
+!!! functions.  These functions are documented in PC (the parameter cache)
+!!! and are listed here for convenience.  The PC documentation should be
+!!! consulted for details.
+!!!
+!!!   pc_update_error()          ! True if an error has occurred in this
+!!!                              ! process (in a call to PC_GET... or by
+!!!                              ! a call to PC_ERROR).
+!!!
+!!!   pc_previous_error()        ! True if an error has occurred in this
+!!!                              ! process, or in any previous processes
+!!!                              ! in the process flow.
+!!!
+!!!   pc_get_update_state()      ! Returns PC_FRONTEND or PC_GUI or
+!!!                              ! PC_BACKEND or PC_EXECUTE.
+!!!
+!!!   pc_do_not_process_traces() ! True if the update state is not PC_BACKEND or
+!!!                              ! PC_EXECUTE, or if any errors have occurred.
+!!!
+!!!   pc_pressed (keyword)       ! True if the pushbutton was pressed.
+!!!
+!!! The following logical functions return true if the specified trap would
+!!! be called if it were passed to a PC_GET or PC_ALLOC or PC_CALL routine.
+!!! These functions can be used as an alternative to traps for conditional
+!!! parameter verification.
+!!!
+!!!   pc_verify_scalar   (keyword)                    ! scalar trap
+!!!   pc_verify_element  (keyword, indx, action)      ! array element trap
+!!!   pc_verify_array    (keyword)                    ! array trap
+!!!   pc_verify_arrayset (keyword)                    ! arrayset trap
+!!!   pc_verify_screen   (keyword)                    ! screen trap
+!!!   pc_verify_end      ()                           ! end trap
+!!!
+!!! INDX is a Fortran-style index (=1 for the first array element).
+!!! ACTION is PC_INSERT or PC_REMOVE or PC_MODIFY.
+!!! INDX refers to the array element inserted or removed or modified.
+!!! If PC_VERIFY_ELEMENT returns false, it sets INDX=0 and ACTION=PC_NOACTION.
+
+
+!!------------------------- call processes internally ----------------------!!
+!!------------------------- call processes internally ----------------------!!
+!!------------------------- call processes internally ----------------------!!
+
+
+! --> Insert code to call internal processes to verify process parameters.
+!!!
+!!! Processes can be called internally from this location if you want the
+!!! internally called process to validate the parameters you pass to it,
+!!! so that error messages will be passed to the user.  This is particularly
+!!! helpful for macros or any other calling process whose parameters are
+!!! simply passed to the internally called process.
+!!!
+!!! Alternatively, you can call processes internally from any location.
+!!!
+!!! Sample code:
+!!!
+!!!   call pc_clear
+!!!
+!!!   call pc_print (' ')
+!!!   call pc_print ('XXXX: internally calling process TEST1:')
+!!!
+!!!   call pc_put_global  ('keyword', value)    ! example.
+!!!   call pc_put_global  ('keyword', value)    ! example.
+!!!   call pc_put_process ('keyword', value)    ! example.
+!!!   call pc_put_process ('keyword', value)    ! example.
+!!!
+!!!   if (associated(obj%test1)) then
+!!!        call test1_update (obj%test1)
+!!!   else
+!!!        call test1_create (obj%test1)
+!!!   end if
+!!!
+!!!   call pc_print_process_cards
+!!!   call pc_print (' ')
+!!!
+!!!   test1_nstore   = 0     ! just in case test1_update does not set this.
+!!!   test1_nscratch = 0     ! just in case test1_update does not set this.
+!!!   call pc_get_control ("nstore"  , test1_nstore)    ! to add to yours.
+!!!   call pc_get_control ("nscratch", test1_nscratch)  ! to add to yours.
+!!!
+!!!   call pc_restore
+
+
+!!----------------------- write parameters ---------------------------------!!
+!!----------------------- write parameters ---------------------------------!!
+!!----------------------- write parameters ---------------------------------!!
+
+
+! --> Insert any calls to PC_PUT_OPTIONS_FIELD here.
+! --> (EZCPS will insert customized skeleton code for you)
+
+! --> Delete any of the globals below that have not changed:
+
+      call pc_put_global ('numtr'   , obj%numtr)
+      call pc_put_global ('gathered', obj%gathered)
+      call pc_put_global ('nwih'    , obj%nwih)
+      call pc_put_global ('ndpt'    , obj%ndpt)
+      call pc_put_global ('tstrt'   , obj%tstrt)
+      call pc_put_global ('dt'      , obj%dt) 
+      call pc_put_global ('grid'    , obj%grid)
+
+! --> Insert code here to write process parameters.
+! --> (EZCPS will do this for you)
+
+! --> Change the control defaults below as appropriate:
+
+      call pc_put_control ('ntapes'       , 0)
+      call pc_put_control ('need_request' , .false.)
+      call pc_put_control ('need_label'   , .false.)
+      call pc_put_control ('twosets'      , .false.)
+      call pc_put_control ('nscratch'     , 0)
+      call pc_put_control ('nstore'       , 0)
+      call pc_put_control ('iftd'         , .false.)
+      call pc_put_control ('ndisk'        , 0)
+      call pc_put_control ('setup_only'   , .false.)
+      call pc_put_control ('parallel_safe', .false.)
+
+! --> Add here any other parameter cache calls such as to set sensitivities.
+!!!
+!!! Sample code:
+!!!
+!!!   call pc_put_options_field ('mode', (/'GENERATE','MODIFY  '/))
+!!!
+!!!   call pc_put  ('mode'    ,obj%mode,              nchar)
+!!!   call pc_put  ('ngathers',obj%ngathers,          nchar)
+!!!   call pc_put  ('array1'  ,obj%array1, obj%nfold, nchar, ndec)
+!!!                                                     |     |
+!!!                                                    opt   opt
+!!!
+!!!   abc_arrayset_sense   = (obj%mode == 'GENERATE')        ! default .true.
+!!!
+!!!   call pc_put_sensitive_field_flag    ('ngathers'    , (obj%mode=='MODIFY')
+!!!   call pc_put_sensitive_array_flag    ('abc_arrayset', abc_arrayset_sense)
+!!!   call pc_put_sensitive_arrayset_flag ('aaaaa'       , aaaaa_sensitive)
+!!!   call pc_put_sensitive_screen_flag   ('bbbbb'       , bbbbb_sensitive)
+!!!
+!!!   call pc_put_visible_flag            ('bbbbb'       , (abc > efg))
+!!!
+!!!   call pc_put_minsize_array           ('aaaaa'       , minsize)
+!!!   call pc_put_minsize_arrayset        ('abc_arrayset', minsize)
+!!!   call pc_put_maxsize_array           ('aaaaa'       , maxsize)
+!!!   call pc_put_maxsize_arrayset        ('abc_arrayset', maxsize)
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! GLOBAL PARAMETERS:
+!!!
+!!! Report any globals which you changed by calling PC_PUT_GLOBAL as shown
+!!! above.  Only values which have changed need be reported.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! PROCESS PARAMETERS:
+!!!
+!!! Report all of your process parameters by calling PC_PUT as shown above.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! CONTROL PARAMETERS:
+!!!
+!!! Calculate and report control variables by calling PC_PUT_CONTROL as
+!!! shown above.  Control variables might be needed by a processing system
+!!! or anyone who is using this process module.  Only those values which
+!!! differ from defaults need to be reported.  On the back-end, most of
+!!! these control variables will be ignored. Their meanings are as follows:
+!!!
+!!!   ntapes         number of magnetic tape drives needed by this process.
+!!!   need_request   whether this process might need to request more traces
+!!!                    before passing any out.
+!!!   need_label     whether this process needs a label.
+!!!   twosets        whether this process wants two sets of traces and headers
+!!!                    in the argument list of its main trace processing
+!!!                    subroutine.
+!!!   nscratch       approximate number of words of temporary memory needed.
+!!!   nstore         approximate number of words of permanent memory needed.
+!!!   iftd           whether this process frees tape drives.
+!!!   ndisk          approx amount of disk space needed (megabytes) if large.
+!!!   setup_only     whether this process is setup-only (no trace processing).
+!!!   parallel_safe  whether this process can be put in a parallelized loop.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! SENSITIVITY FLAGS:
+!!!
+!!! Calculate and report GUI "sensitivity" flags by calling one of the
+!!! PC_PUT_SENSITIVE_..._FLAG routines as shown above.  Only those values
+!!! which vary (depending on the value of other parameters), need to be
+!!! reported.  By default, all fields are sensitive, except informational
+!!! fields which are always insensitive.  On the back-end, these "sensitivity"
+!!! flags will be ignored.
+!!!
+!!! Sensitivity flag == .true.  means the GUI field is sensitive (active).
+!!! Sensitivity flag == .false. means the GUI field is inactive and grayed out.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! VISIBILITY FLAGS:
+!!!
+!!! Calculate and report GUI "visibility" flags by calling PC_PUT_VISIBLE_FLAG
+!!! as shown above.  By default, all fields are visible.  Only those values
+!!! which vary, or differ from defaults, need be reported.  On the back-end,
+!!! these "visibility" flags will be ignored.  Unlike the "sensitivity" flags,
+!!! the "visibility" flags are reported with the same subroutine call
+!!! regardless of whether the keyword is a scalar, array, arrayset, or screen.
+!!!
+!!! Visibility flag == .true.  means the GUI field is visible.
+!!! Visibility flag == .false. means the GUI field is invisible.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! MINIMUM AND MAXIMUM ARRAY PARAMETER SIZES:
+!!!
+!!! The minimum and and maximum number of array elements can be restricted
+!!! by calling the routines with the MINSIZE and MAXSIZE arguments.  If
+!!! MINSIZE is not reported, it is considered zero.  If MAXSIZE is not
+!!! reported, it is considered infinite.  These arguments restrict what happens
+!!! when interacting with the GUI, but have no effect otherwise.  Any change
+!!! made by the user in the GUI will not change the array lengths to go outside
+!!! of the specified bounds.  If the array length is less than MAXSIZE, there
+!!! will be a blank row appended in the GUI, and it will be possible to insert
+!!! a row.  If the array length is greater than MINSIZE, it will be possible to
+!!! delete a row.
+!!!
+!!! For example:
+!!!  (1) If you must have at least one array element, set MINSIZE to one.
+!!!  (2) If your array has a hard-wired length, set MAXSIZE to this length.
+!!!  (3) If the user is not allowed to insert or delete, set both MINSIZE and
+!!!       MAXSIZE to the current array length.
+!!!
+!!! In all cases, the currently reported array length should not be less than
+!!! the reported MINSIZE or greater than the reported MAXSIZE.
+!!!
+!!! For linked arrays, you can call the MINSIZE and/or MAXSIZE routines for
+!!! each array, or make a single call for the entire set of linked arrays.
+!!! In the latter case, you must also have previously called the subroutine
+!!! PC_REGISTER_ARRAY_NAMES for this arrayset.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! OPTION LISTS:
+!!!
+!!! Option lists can be specified for parameters with a specific set of
+!!! allowed values so that a GUI can let the user select from the list.
+!!!
+!!! Report any option lists you might have by calling PC_PUT_OPTIONS_FIELD
+!!! as shown above.  On the back-end, these option lists will be ignored.
+!!! These calls must precede the other PC_PUT calls.
+!!!
+!!! It is not necessary to call PC_PUT_OPTIONS_FIELD for logical variables
+!!! because this is done automatically by the corresponding PC_PUT routine.
+!!! In such a case there are always exactly two options (true and false)
+!!! which show up as YES or NO in the GUI.
+
+
+!!----------------------- prepare for execution ----------------------------!!
+!!----------------------- prepare for execution ----------------------------!!
+!!----------------------- prepare for execution ----------------------------!!
+
+
+! --> Insert code to initialize variables for execution or deallocate arrays
+! --> which will be reallocated below.
+!!!
+!!! Conditionally deallocate all dependent arrays (i.e. arrays needed for
+!!! trace processing but not update) (this does not include process parameter
+!!! arrays) like this:
+!!!
+!!!   if (associated(obj%hdup)) call memman_deallocate (obj%hdup)
+!!!   if (associated(obj%tdup)) call memman_deallocate (obj%tdup)
+!!!
+!!! Initialize all variables (except allocated arrays) needed for execution
+!!! like this:
+!!!
+!!!   obj%igather = 0
+
+      if (pc_do_not_process_traces()) return
+
+      obj%skip_wrapup = .false.     ! to run wrapup code after processing.
+
+! --> Insert code to allocate needed permanent memory.
+!!!
+!!! Allocate your permanent memory like this:
+!!! Be sure to test the returned status and register an error message if not 0.
+!!!
+!!!   call memman_allocate(obj%hdup,obj%nfold,obj%nwih, ierr)
+!!!   if (ierr /= 0) call pc_error  &
+!!!           ('error allocating HDUP to',obj%nfold*obj%nwih,'array elements')
+!!!
+!!!   call memman_allocate(obj%tdup,obj%nfold,obj%ndpt, ierr)
+!!!   if (ierr /= 0) call pc_error  &
+!!!           ('error allocating TDUP to',obj%nfold*obj%ndpt,'array elements')
+!!!
+
+      if (pc_do_not_process_traces()) return   ! in case of allocation errors.
+
+! --> Insert code to initialize anything needed for actual execution of process.
+!!!
+!!! Then put any additional code needed before starting execution here.
+!!! This could be code to open files, initialize allocated arrays, etc.
+
+
+!!------------------------- finish update ----------------------------------!!
+!!------------------------- finish update ----------------------------------!!
+!!------------------------- finish update ----------------------------------!!
+
+
+      end subroutine xxxx_update
+
+
+!!------------------------------- traps ------------------------------------!!
+!!------------------------------- traps ------------------------------------!!
+!!------------------------------- traps ------------------------------------!!
+
+
+! --> Insert code for parameter traps here.
+! --> (EZCPS with the -t option will insert skeleton code for you)
+!!!
+!!! You should call PC_ERROR   to register an error message.
+!!! You should call PC_WARNING to register a warning message.
+!!! You should call PC_INFO    to register an informational message.
+!!! You can call a PC_JUMP routine to force a GUI to jump to a different
+!!!   field or remain in the current field.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!!   subroutine xxxx_mode_trap (keyword)              ! scalar trap.
+!!!   character(len=*),intent(in) :: keyword           ! arguments
+!!!
+!!!   if (object%mode /= 'GENERATE' .and. object%mode /= 'MODIFY') then
+!!!        call pc_error      ('MODE must be GENERATE or MODIFY.')
+!!!        call pc_jump_field (keyword)
+!!!   end if
+!!!   end subroutine xxxx_mode_trap
+!!!
+!!!
+!!!   subroutine xxxx_array1_trap (keyword)            ! array trap.
+!!!   character(len=*),intent(in) :: keyword           ! arguments
+!!!   integer                     :: j                 ! local
+!!!
+!!!   if (object%mode == 'MODIFY' .and. object%nfold == 0) then
+!!!        call pc_error('There must be at least one ARRAY1 value.')
+!!!   end if
+!!!   do j = 1,object%nfold
+!!!        if (object%array1(j) <= 0.0) then
+!!!            call pc_error ('All ARRAY1 elements must be > zero.')
+!!!        end if
+!!!   end do
+!!!   end subroutine xxxx_array1_trap
+!!!
+!!!
+!!!   subroutine xxxx_array1_element_trap (keyword,indx,action)
+!!!                                                    ! array element trap.
+!!!   character(len=*),intent(in) :: keyword           ! arguments
+!!!   integer         ,intent(in) :: indx              ! arguments
+!!!   integer         ,intent(in) :: action            ! arguments
+!!!    ! INDX is a Fortran-style index (=1 for the first array element).
+!!!    ! ACTION is PC_INSERT or PC_REMOVE or PC_MODIFY.
+!!!    ! INDX refers to the array element inserted or removed or modified.
+!!!
+!!!   if (object%mode == 'MODIFY' .and. object%array1(indx) <= 0.0) then
+!!!        call pc_error ('All ARRAY1 elements must be > zero.')
+!!!   end if
+!!!   end subroutine xxxx_array1_element_trap
+!!!
+!!!
+!!!   subroutine xxxx_abc_arrayset_trap (keyword)      ! arrayset trap.
+!!!   character(len=*),intent(in) :: keyword           ! arguments
+!!!
+!!!   !!! for illustration only - no code here.
+!!!   end subroutine xxxx_abc_arrayset_trap
+!!!
+!!!
+!!!   subroutine xxxx_screen1_trap (keyword)           ! screen trap.
+!!!   character(len=*),intent(in) :: keyword           ! arguments
+!!!
+!!!   !!! for illustration only - no code here.
+!!!   end subroutine xxxx_screen1_trap
+!!!
+!!!
+!!!   subroutine xxxx_ngathers_trap (keyword)          ! scalar trap.
+!!!   character(len=*),intent(in) :: keyword           ! arguments
+!!!
+!!!   if (object%mode == 'MODIFY') then
+!!!        if (object%ngathers == 2*(object%ngathers/2) .or.  &
+!!!            object%ngathers <= 0) then
+!!!             call pc_error ('NGATHERS must be > zero and odd.')
+!!!        end if
+!!!   end if
+!!!   end subroutine xxxx_ngathers_trap
+!!!
+!!!
+!!!   subroutine xxxx_end_trap                         ! end trap.
+!!!
+!!!   !!! for illustration only - no code here.
+!!!   end subroutine xxxx_end_trap
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! Traps are called at these times:
+!!!
+!!!   Pushbutton traps:
+!!!     (1) Whenever the pushbutton is pressed in a GUI.
+!!!     (2) Never called at any other time.
+!!!
+!!!   Scalar traps:
+!!!     (1) Whenever the scalar value is successfully modified in a GUI.
+!!!     (2) Always called when this is not a GUI update.
+!!!
+!!!   Array element traps:
+!!!     (1) Whenever the array is successfully modified in a GUI
+!!!          by inserting, removing, or changing a single array element.
+!!!     (2) Never called at any other time.
+!!!     (3) At a minimum, the specified array element should be verified in
+!!!          this trap.
+!!!
+!!!   Array traps:
+!!!     (1) When leaving the array field in the GUI, as long as the array is
+!!!          not part of a set of linked arrays.
+!!!     (2) An arrayset trap should be used instead of an array trap for an 
+!!!          array which is part of a linked array set.
+!!!     (3) Always called when this is not a GUI update.
+!!!     (4) It is guaranteed that an array trap will always be eventually
+!!!          called after one or more calls to the corresponding array
+!!!          element trap.
+!!!     (5) The entire array should be verified in this trap.
+!!!
+!!!   Arrayset traps:
+!!!     (1) When leaving the arrayset field (set of linked arrays) in the GUI.
+!!!     (2) An array trap should be used instead of an arrayset trap for a 
+!!!          single array which is not part of a linked array set. 
+!!!     (3) Always called when this is not a GUI update.
+!!!     (4) It is guaranteed that an arrayset trap will always be eventually
+!!!          called after one or more calls to the corresponding array
+!!!          element traps.
+!!!     (5) The entire set of linked arrays should be verified in this trap.
+!!!     (6) The keyword for a set of linked arrays is the keyword for the first
+!!!          array in the set (leftmost in the GUI), with the suffix "_arrayset"
+!!!          appended.
+!!!
+!!!   Screen traps:
+!!!     (1) When leaving the screen in the GUI.
+!!!     (2) Always called when this is not a GUI update.
+!!!     (3) Any variables on this screen, or interactions between such
+!!!          variables, which have not been verified in the preceding traps
+!!!          should be verified here.
+!!!     (4) The keyword for a screen is the word "screen1" for the first
+!!!          screen in the GUI for this process, with the digit incremented
+!!!          by 1 for each additional screen.
+!!!
+!!!   End traps:
+!!!     (1) Never called when this is a GUI update.
+!!!     (2) Always called when this is not a GUI update.
+!!!     (3) An end trap can be used for general or time-consuming verifications
+!!!          which cannot be performed in other traps but need to be performed
+!!!          before process parameters are saved (e.g. by a front-end) or used
+!!!          to process traces (e.g. on the back-end).
+!!!
+!!! GUI updates can generate a call to any trap except an end trap.
+!!!
+!!! Frontend and backend updates always generate a call to all types of traps
+!!! except never to array element traps and pushbutton traps.
+!!!
+!!!                           +++++++++++++++++++
+!!!
+!!! Description of update states:
+!!!
+!!! GUI updates:
+!!!   GUI updates occur whenever a single scalar parameter or a single array
+!!!   element is modified interactively in a GUI, or when some other GUI action
+!!!   occurs such as pressing a button or leaving a screen.  This can happen
+!!!   repeatedly in the frontend of a processing system, or from any other
+!!!   program which does multiple updates.  A sequence of GUI updates must
+!!!   always be eventually followed by a frontend (or possibly a backend)
+!!!   update.
+!!!
+!!! Frontend updates:
+!!!   Frontend updates are all non-GUI updates in the interactive frontend of
+!!!   a processing system, or in any other program which does multiple updates
+!!!   and does not immediately proceed to process traces.  Frontend updates
+!!!   may occur with or without any changes to one or more (or all) parameters.
+!!!   For example, a frontend update might occur whenever a workfile is created
+!!!   or updated, or when a process module is inserted into the job flow, or
+!!!   when a dialog box for a process module is popped down.
+!!!
+!!! Backend updates:
+!!!   A backend update must be the last (or only) update which occurs just
+!!!   before trace processing starts.  Therefore a single backend update is
+!!!   normally the only update in a batch processing job or in a program outside
+!!!   of a processing system, but may follow several GUI and/or frontend updates
+!!!   in an interactive processing system or any other interactive program.
+
+
+!!--------------------------- main execution -------------------------------!!
+!!--------------------------- main execution -------------------------------!!
+!!--------------------------- main execution -------------------------------!!
+
+!!!
+!!! Upon input, NTR will have one of these values:
+!!!   NTR >= 1              means to process the input traces.
+!!!   NTR == NO_MORE_TRACES means there are no more imput traces.
+!!!   NTR == NEED_TRACES    means someone from below needs more traces.
+!!!   NTR == NEED_TRACES    might mean this is a trace-supplying process.
+!!!   NTR == NEED_TRACES    will not occur unless this process has a label.
+!!!
+!!! Upon output, NTR must have one of these values:
+!!!   NTR >= 1              if you are outputting traces.
+!!!   NTR == NO_MORE_TRACES if there are no more traces to output.
+!!!   NTR == FATAL_ERROR    if you have a fatal error.
+!!!   NTR == NEED_TRACES    if you need another trace before passing any out.
+!!!   NTR == NEED_TRACES    must not occur unless you specified that you
+!!!                           might need to request more traces.
+
+      subroutine xxxx (obj,ntr,hd,tr)
+      type(xxxx_struct),intent(inout) :: obj                    ! arguments
+      integer          ,intent(inout) :: ntr                    ! arguments
+      double precision ,intent(inout) :: hd(:,:)                ! arguments
+      real             ,intent(inout) :: tr(:,:)                ! arguments
+!!!   real                            :: scr(obj%ndpt)          ! local
+
+! --> Insert declarations of local variables.
+
+! --> Insert code for processing logic.
+
+!!! The following conditional call to the WRAPUP routine should be made
+!!! before returning from this subroutine:
+!!!
+!!!   if (ntr == NO_MORE_TRACES .or. ntr == FATAL_ERROR) then
+!!!        call xxxx_wrapup (obj)
+!!!   end if
+!!!
+      end subroutine xxxx
+
+!!!
+!!! If you need two sets of trace and header arrays, you should replace
+!!! the above subroutine by the following code:
+!!!  
+!!!       subroutine xxxx (obj,ntr,hdi,tri,hdo,tro)
+!!!       type(xxxx_struct),intent(inout) :: obj               ! arguments
+!!!       integer          ,intent(inout) :: ntr               ! arguments
+!!!       double precision ,intent(in)    :: hdi(:,:)          ! arguments
+!!!       real             ,intent(in)    :: tri(:,:)          ! arguments
+!!!       double precision ,intent(out)   :: hdo(:,:)          ! arguments
+!!!       real             ,intent(out)   :: tro(:,:)          ! arguments
+!!!  
+!!! ! --> Insert declarations of local variables.
+!!!  
+!!! ! --> Insert code for processing logic.
+!!!  
+!!!       end subroutine xxxx
+!!!
+!!! If you sometimes need one set of traces and headers, and sometimes
+!!! two sets (specified by sometimes reporting the control parameter
+!!! TWOSETS as false and sometimes true), you can write both types of
+!!! subroutines with different names and put them in an interface block.
+!!!
+!!!                            ++++++++++++
+!!!
+!!! The HD and TR arguments are being passed as "assumed shape" arrays.
+!!! The shape of an array is defined as the number of elements in each
+!!! dimension.  An assumed shape array is an array argument whose shape
+!!! is automatically known inside the subroutine even though the dimensions
+!!! are not passed as arguments.
+!!!
+!!! For arrays with these actual dimensions:
+!!!
+!!!              hd(lhd,ntrmax),tr(ltr,ntrmax)
+!!!
+!!! If you need access to these dimensions (a very unlikely situation),
+!!! you can get them using the Fortran-90 SIZE function as follows:
+!!!
+!!!             lhd    = size(hd,1)   ! first  dimension of HD.
+!!!             ltr    = size(tr,1)   ! first  dimension of TR.
+!!!             ntrmax = size(hd,2)   ! second dimension of HD.
+!!!             ntrmax = size(tr,2)   ! second dimension of TR.
+!!!
+!!!                            ++++++++++++
+!!!
+!!! The one local variable example SCR above illustrates the use of
+!!! automatic arrays.  Automatic arrays should be used whenever possible
+!!! for temporary storage, rather than allocating them at setup and keeping
+!!! their pointers in your parameter data structure.  Some compilers may
+!!! put automatic arrays on the stack, while others may allocate them from
+!!! the heap.  If an automatic array is so extremely large that it might
+!!! cause a stack overflow, it can be allocated and deallocated within
+!!! this subroutine instead.
+!!!
+
+!!------------------------------- wrapup -----------------------------------!!
+!!------------------------------- wrapup -----------------------------------!!
+!!------------------------------- wrapup -----------------------------------!!
+
+
+      subroutine xxxx_wrapup (obj)
+      type(xxxx_struct),intent(inout) :: obj       ! arguments
+
+      if (obj%skip_wrapup) return
+      obj%skip_wrapup = .true.
+
+! --> Insert any required wrapup code here, including wrapups of
+! --> internally-called processes.
+
+!!!   if (associated(obj%test1)) call test1_wrapup (obj%test1)
+!!!
+      end subroutine xxxx_wrapup
+
+!!! All processes must wrap up appropriately after processing traces.
+!!! Some processes might not have anything to do.  Other processes might
+!!! want to save files or print summary information.  Appropriate wrapup
+!!! procedures should be taken when trace processing has terminated
+!!! successfully or unsuccessfully.
+!!!
+!!! The code in this subroutine must function correctly even if trace
+!!! processing never began.  In spite of the <execute> flags in this
+!!! template, there is no guarantee that this wrapup routine will not
+!!! get called from the front end.
+!!!
+!!! Even if this routine is empty, this routine should be called from the
+!!! main trace processing routine before returning NTR == NO_MORE_TRACES
+!!! or NTR == FATAL_ERROR, and from the DELETE routine.
+!!!
+!!! This routine is called from the back-end after some process (including
+!!! possibly this one) has reported an error before all traces have been
+!!! processed.
+!!!
+!!! This routine should be called from any other calling program (e.g.
+!!! another process module or an interactive program) if processing is
+!!! prematurely terminated for any reason.
+!!!
+!!! This routine is also called from the DELETE routine to make sure the
+!!! wrapup is completed.  Therefore, if this object is to be deleted right
+!!! after the wrapup is completed, the call to the WRAPUP routine is not
+!!! necessary.
+!!!
+!!! By testing the SKIP_WRAPUP structure variable, this wrapup routine is
+!!! able to handle the following situations:
+!!!
+!!!  (1) This routine does not repeat any wrapup previously done in case
+!!!      it is called more than once.
+!!!
+!!!  (2) This routine does not do any wrapup if this process never prepared
+!!!      to process traces in the first place.
+!!!
+
+!!----------------------------- end of module ------------------------------!!
+!!----------------------------- end of module ------------------------------!!
+!!----------------------------- end of module ------------------------------!!
+
+
+      end module xxxx_module
+
+
+!!--------------------------------- end ------------------------------------!!
+!!--------------------------------- end ------------------------------------!!
+!!--------------------------------- end ------------------------------------!!
+

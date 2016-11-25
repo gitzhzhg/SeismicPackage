@@ -1,0 +1,755 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fgd" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FGDPROCESS" title="FGD Process" rows="24" columns="80">
+    <Label keyword="COMMENT_CREATETRACEHEADERSFROMFI" alignment="center">Create Trace Headers from Field Geometry Data</Label>
+    <Label keyword="LABEL_OPT_HDR" alignment="left">OPT_HDR    =</Label>
+    <Field keyword="OPT_HDR" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OPTIONFORATTACHINGHEADER" alignment="left">(option for attaching headers to traces)</Label>
+    <Label keyword="LABEL_TR_SKIP" alignment="left">TR_SKIP    =</Label>
+    <Field keyword="TR_SKIP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_NUMBEROFTRACEHEADERSTOSK" alignment="left">(number of trace headers to skip)</Label>
+    <Label keyword="LABEL_VE" alignment="left">VE         =</Label>
+    <Field keyword="VE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ELEVATIONVELOCITY" alignment="left">(elevation velocity)</Label>
+    <Field keyword="VE_ON_FILE" type="string" maxLength="36" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_DATUM" alignment="left">DATUM      =</Label>
+    <Field keyword="DATUM" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_REFERENCEELEVATION" alignment="left">(reference elevation)</Label>
+    <Field keyword="DATUM_ON_FILE" type="string" maxLength="36" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_FIXED_DIST" alignment="left">FIXED_DIST =</Label>
+    <Field keyword="FIXED_DIST" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FIXED_DIST_ON_FILE" alignment="left">(fixed inline distance)</Label>
+    <Field keyword="FIXED_DIST_ON_FILE" type="string" maxLength="36" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME=</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="65" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_TABLES" alignment="center">Tables:</Label>
+    <Label keyword="LABEL_OPT_TABLES" alignment="left">OPT_TABLES   =</Label>
+    <Field keyword="OPT_TABLES" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OPTIONFORPRINTINGTABLES" alignment="left">(option for printing tables)</Label>
+    <Label keyword="COMMENT_CHARTS" alignment="center">Charts:</Label>
+    <Label keyword="LABEL_OPT_CHART" alignment="left">OPT_CHART    =</Label>
+    <Field keyword="OPT_CHART" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TYPESOFCHARTSTOPRINT" alignment="left">(types of charts to print)</Label>
+    <Label keyword="LABEL_SPACING" alignment="left">SPACING      =</Label>
+    <Field keyword="SPACING" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SPACINGBETWEENSHOTPROFIL" alignment="left">(spacing between shot profiles on charts)</Label>
+    <Label keyword="LABEL_DEVICE" alignment="left">DEVICE       =</Label>
+    <Field keyword="DEVICE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_DEVICEFORPRINTINGCHARTS" alignment="left">(device for printing charts)</Label>
+    <Label keyword="LABEL_SURVEY_UNITS" alignment="left">SURVEY_UNITS =</Label>
+    <Field keyword="SURVEY_UNITS" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_UNITSFORCHARTDISTANCES" alignment="left">(units for chart distances)</Label>
+    <Label keyword="COMMENT_HEADERDUMP" alignment="center">Header dump:</Label>
+    <Label keyword="LABEL_SKIP_INIT" alignment="left">SKIP_INIT =</Label>
+    <Field keyword="SKIP_INIT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_DUMP" alignment="left">NUM_DUMP =</Label>
+    <Field keyword="NUM_DUMP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_SKIP" alignment="left">NUM_SKIP  =</Label>
+    <Field keyword="NUM_SKIP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TOT_DUMP" alignment="left">TOT_DUMP =</Label>
+    <Field keyword="TOT_DUMP" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_CREATETRACEHEADERSFROMFI" xPos="17" yPos="0" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_HDR" xPos="1" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_HDR" xPos="13" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OPTIONFORATTACHINGHEADER" xPos="23" yPos="2" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TR_SKIP" xPos="1" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_SKIP" xPos="13" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_NUMBEROFTRACEHEADERSTOSK" xPos="23" yPos="3" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VE" xPos="1" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VE" xPos="13" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ELEVATIONVELOCITY" xPos="23" yPos="4" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VE_ON_FILE" xPos="47" yPos="4" xSize="36" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DATUM" xPos="1" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DATUM" xPos="13" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_REFERENCEELEVATION" xPos="23" yPos="5" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="DATUM_ON_FILE" xPos="47" yPos="5" xSize="36" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FIXED_DIST" xPos="1" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FIXED_DIST" xPos="13" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FIXED_DIST_ON_FILE" xPos="23" yPos="6" xSize="24" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FIXED_DIST_ON_FILE" xPos="47" yPos="6" xSize="36" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME" xPos="1" yPos="8" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="17" yPos="8" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="18" yPos="8" xSize="65" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="18" yPos="9" xSize="65" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TABLES" xPos="1" yPos="11" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_TABLES" xPos="10" yPos="11" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TABLES" xPos="24" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OPTIONFORPRINTINGTABLES" xPos="34" yPos="11" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_CHARTS" xPos="1" yPos="13" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_CHART" xPos="10" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_CHART" xPos="24" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_TYPESOFCHARTSTOPRINT" xPos="34" yPos="13" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SPACING" xPos="10" yPos="14" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SPACING" xPos="24" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SPACINGBETWEENSHOTPROFIL" xPos="34" yPos="14" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DEVICE" xPos="10" yPos="15" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEVICE" xPos="24" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_DEVICEFORPRINTINGCHARTS" xPos="34" yPos="15" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SURVEY_UNITS" xPos="10" yPos="16" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SURVEY_UNITS" xPos="24" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_UNITSFORCHARTDISTANCES" xPos="34" yPos="16" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERDUMP" xPos="1" yPos="18" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SKIP_INIT" xPos="15" yPos="18" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SKIP_INIT" xPos="26" yPos="18" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_DUMP" xPos="39" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_DUMP" xPos="49" yPos="18" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_SKIP" xPos="15" yPos="19" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_SKIP" xPos="26" yPos="19" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TOT_DUMP" xPos="39" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TOT_DUMP" xPos="49" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_HDR">
+      <Tip>Option for attaching headers to traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - OPT_HDR<br> Option for attaching headers to traces.</center></b>
+<pre> Default = ATTACH
+ Allowed = ATTACH  (Attach headers.)
+ Allowed = SETUP   (Setup only - don't attach headers.)
+ Allowed = SYN     (Generate synthetic traces only.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_SKIP">
+      <Tip>Number of trace headers to skip from beginning of dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - TR_SKIP<br> Number of trace headers to skip from beginning of dataset.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0
+ FGD will assume TR_SKIP traces have been deleted from the beginning of the
+ dataset and will begin writing headers with the header appropriate for the
+ TR_SKIP + 1st trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VE">
+      <Tip>Velocity for datum correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - VE<br> Velocity for datum correction.</center></b>
+<pre> Default = 8000
+ Allowed = real &gt; 0.0
+ VE is the velocity used in the datum correction which may be either an
+ elevation correction or an up-hole correction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VE_ON_FILE">
+      <Tip>Value of VE on the specified field geometry file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - VE_ON_FILE<br> Value of VE on the specified field geometry file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="DATUM">
+      <Tip>DATUM elevation (reference elevation for datum correction).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - DATUM<br> DATUM elevation (reference elevation for datum correction).</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DATUM_ON_FILE">
+      <Tip>Value of DATUM on the specified field geometry file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - DATUM_ON_FILE<br> Value of DATUM on the specified field geometry file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="FIXED_DIST">
+      <Tip>Uniform inline distance to establish between flag locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - FIXED_DIST<br> Uniform inline distance to establish between flag locations.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ IF FIXED_DIST is non-zero, then the inline distance between flag locations is
+ regularized to the absolute value of FIXED_DIST.  Normally FIXED_DIST is set
+ to the nominal flag interval for the survey.
+ 
+ FIXED_DIST also acts as a flag for other regularization as detailed in
+ the General Description.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FIXED_DIST_ON_FILE">
+      <Tip>Value of FIXED_DIST on the specified field geometry file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - FIXED_DIST_ON_FILE<br> Value of FIXED_DIST on the specified field geometry file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Pathname for the .jd file written by CFG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PATHNAME<br> Pathname for the .jd file written by CFG.</center></b>
+<pre> Default = from job_data
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OPT_TABLES">
+      <Tip>Option for printing tables.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - OPT_TABLES<br> Option for printing tables.</center></b>
+<pre> Default = NONE
+ Allowed = NONE   (Print only a few lines from each table.)
+ Allowed = LD     (Print LD table.)
+ Allowed = RPZ    (Print RP, PP, ZT tables.)
+ Allowed = LRPZ   (Print LD, RP, PP, ZT tables.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_CHART">
+      <Tip>Option for printing stacking or ground position chart.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - OPT_CHART<br> Option for printing stacking or ground position chart.</center></b>
+<pre> Default = STACK
+ Allowed = STACK  (Print stacking chart.)
+ Allowed = GP     (Print ground position chart.)
+ Allowed = BOTH   (Print stacking and ground position charts.)
+ Allowed = NONE   (Print no chart.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SPACING">
+      <Tip>Use single or double spacing between shot profiles on charts.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - SPACING<br> Use single or double spacing between shot profiles on charts.</center></b>
+<pre> Default = SINGLE
+ Allowed = SINGLE (Less wrap-around, harder to read.)
+ Allowed = DOUBLE (More wrap-around, easier to read.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEVICE">
+      <Tip>Device on which to put the charts (printer or plotter).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - DEVICE<br> Device on which to put the charts (printer or plotter).</center></b>
+<pre> Default = PRINTER
+ Allowed = PRINTER or OPS or CONP
+ Currently only the PRINTER choice is available.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SURVEY_UNITS">
+      <Tip>Units (feet or meters) used in the surveyed coordinate system.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - SURVEY_UNITS<br> Units (feet or meters) used in the surveyed coordinate system.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SKIP_INIT">
+      <Tip>Number of traces to skip initially for the header dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - SKIP_INIT<br> Number of traces to skip initially for the header dump.</center></b>
+<pre> Default = 0
+ Allowed = int&gt;=0
+ First header printed will be for trace number SKIP_INIT + 1.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DUMP">
+      <Tip>Number of trace headers to print at a time for the header dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - NUM_DUMP<br> Number of trace headers to print at a time for the header dump.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SKIP">
+      <Tip>Number of trace headers to skip at a time for the header dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - NUM_SKIP<br> Number of trace headers to skip at a time for the header dump.</center></b>
+<pre> Default = 0
+ Allowed = int&gt;=0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TOT_DUMP">
+      <Tip>Total number of trace headers to print.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - TOT_DUMP<br> Total number of trace headers to print.</center></b>
+<pre> Default = 100
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fgd - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fgd">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FGD
+ Category   : headers
+ Written    : 1990-05-16   by: Tom Stoeckley
+ Revised    : 2007-01-03   by: D. Glover
+ Maturity   : production
+ Purpose    : Apply header information from a .jd file built by CFG, print
+              stacking and ground position charts and dump trace headers.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ FGD attaches CPS headers to traces based on the .jd file built by CFG; it will
+ also print stacking and ground position charts and dump trace headers.
+ 
+ 
+                               Headers
+ 
+ When attaching headers, FGD sets all header words EXCEPT for the user-defined
+ headers 48-55 (which are always left unchanged), and headers 2, 25, and 64
+ (which are changed only if the trace is killed in CFG).  The meaning of the
+ header words set by FGD is shown in the header word format list below.
+ 
+ Header words 17-19 and 37 may have special meaning that depends on the value
+ of FIXED_DIST.
+ 
+ Scratch header words (30-32, 58-62) are reserved for use within CPS processes.
+ If you want to retain any of these values permanently, you must use SETWORD
+ just after FGD to move them into user-specified header words (48-55 and &gt;64).
+ 
+ 
+                              Definitions
+ 
+ SEQUENTIAL GROUND POSITION - This is the number of the LD card in CFG.  If
+ FIXED_DIST is positive, this is set differently, as described below.
+ 
+ INLINE DISTANCE - The distance to each flag, measured along the (possibly
+ crooked) line from the first flag on the line.  If FIXED_DIST is not zero,
+ this inline distance is altered as described below.
+ 
+ NEAREST CMP quantity - The quantity corresponds to a point on the (possibly
+ crooked) line closest to the true midpoint, which may not actually fall on
+ the line.
+ 
+ CENTER CMP quantity - The quantity corresponds to a point halfway between the
+ source and receiver as measured along the (possibly crooked) line.  The
+ location of this point is specified by the average of the source and receiver
+ inline distances.
+ 
+ 
+                   Regularized Coordinate Description
+ 
+ For 2D processing it is customary to use a regularized description of flag
+ positions rather than their actual surveyed values.  To use a regularized
+ description, set FIXED_DIST to a non-zero value; details are explained below.
+ 
+ For 3D processing the actual surveyed values are normally used rather than a
+ regularized description.  To use the actual surveyed values set FIXED_DIST to
+ zero.
+ 
+ FIXED_DIST is the regularized (uniform) inline distance between flag
+ locations.  If FIXED_DIST is non-zero, an artificial regularized coordinate
+ description is imposed on each line as follows:
+ 
+    (1) The actual inline distance to each flag is replaced by a regularized
+    value, such that the distance from flag to flag is made equal to the
+    absolute value of FIXED_DIST.
+ 
+    (2) If there is more than one line, the inline coordinates of all flags
+    on all lines are set to values that will match up the shotpoints of all
+    the lines, such that the minimum inline coordinate will be zero.  This
+    will give sensible results only if the shotpoint increment is the same
+    for all lines.
+ 
+    (3) If FIXED_DIST&gt;0, header word 17 is replaced by the (now fixed)
+    "center" CMP inline distance, and header word 18 is set to 0.
+ 
+    (4) If FIXED_DIST&gt;0, the "nearest" CMP shotpoint and elevation are
+    replaced by the "center" CMP shotpoint and elevation.
+ 
+    (5) If FIXED_DIST&gt;0, the sequential ground position is set so that
+    matching shotpoints on different lines will have the same value.  This
+    will work correctly only if the LD card shotpoint increment is the same
+    for all lines, and matches the smallest ground position spacing for the
+    data set.
+ 
+ 
+                          Large inline Skids
+ 
+ If a source or receiver has a large inline skid, it is moved automatically to
+ a neighboring shotpoint in order to minimize this skid.  This allows the
+ trace to fall into the middle of the correct CMP bin when a fixed inline
+ distance is requested.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+                          Charts for 3D Surveys
+ 
+ Stacking charts and ground position charts find extensive use in 2D
+ processing.  However in 3D work they quickly become too complicated to be
+ interpreted if many lines are put on one chart.  Therefore for 3D processing
+ it is recommended to use one line (or at most two or three) for each stacking
+ or ground position chart.
+ 
+ 
+                           Ground Position Chart
+ 
+ If a ground position chart is requested, it will be built using header words
+ 46 and 47 (sequential ground positions).  If this is a 3-D data set, you will
+ get all seismic lines on the same chart, each following the previous, since
+ the sequential ground positions change from one line to another.
+ 
+ Additional flexibility in producing ground position charts is available if
+ you follow FGD with CHART instead of asking FGD to produce a chart.
+ 
+ 
+                              Stacking Chart
+ 
+ If a STACKING CHART is requested, it will be built using header word 7 only,
+ with the assumption that bin centers are integer values and bin spacing = 1.
+ 
+ Normally stacking charts are not produced for 3D surveys.
+ If you get a stacking chart for a 3-D data set, all of the lines will be
+ superimposed on the chart, based on the values of header word 7 (the
+ crossline coordinate is not used).  This may be what you want for swath lines
+ (2 or 3 closely spaced parallel lines that will be stacked together), but not
+ for full 3-D surveys.
+ 
+ Additional flexibility in producing stacking charts is available if you
+ follow FGD with CHART instead of asking FGD to produce a chart.
+ 
+ 
+                          Using CHART with FGD
+ 
+ If you wish to build your own stacking or ground position charts instead of
+ using the charts generated in FGD, you can do one of the following:
+ 
+     1.  Use OPT_HDR = SETUP in FGD, and follow process FGD with one or more
+         CHART processes (MODE = FGD).
+ 
+     2.  Use OPT_HDR = SYN in FGD, and follow process FGD with one or more
+         CHART processes (MODE = HEADERS).
+ 
+ Method 2. is more efficient if you are using more than one CHART in a job,
+ since trace headers need to be calculated only once.
+ 
+-------------------------------------------------------------------------------
+           LIST OF ALL HEADER WORDS AND HOW THEY ARE SET BY FGD
+       [items in square brackets are the values when FIXED_DIST &gt; 0]
+ 
+ header word and type  description and value set
+ --------------------  -------------------------
+    1      normal      trace sequence number.
+    2      normal      head mute index (UNCHANGED).
+    3      normal      current gather number = header 9.
+    4      normal      trace number within current gather = header 10.
+    5      normal      fold of stack = 1.
+    6      normal      offset (in surveyed coordinates).
+   7,8     normal      CMP grid coordinates (from 17,18 using grid transform).
+    9      normal      original shot profile number.
+   10      normal      trace number within original shot profile.
+  11,12    normal      source surveyed easting and northing coordinates.
+   13      normal      source elevation.
+  14,15    normal      receiver surveyed easting and northing coordinates.
+   16      normal      receiver elevation.
+   17      normal      CMP surveyed easting [or center CMP inline distance].
+   18      normal      CMP surveyed northing [or 0].
+   19      normal      nearest [or center] CMP elevation.
+   20      normal      source hole depth.
+   21      normal      receiver hole depth = 0.
+  22,23    normal      source and receiver component numbers = 0.
+   24      normal      panel number = 0.
+   25      normal      largest absolute value (UNCHANGED, or 0 if killed).
+   26      normal      source line number.
+   27      normal      receiver line number.
+   28      normal      receiver shotpoint.
+   29      normal      source shotpoint.
+   30      scratch     nearest CMP inline distance.
+   31      scratch     center  CMP inline distance.
+   32      scratch     1 (last trace in group) or 2 (last trace) or 0.
+  33,34    normal      source grid coords (from 11,12 using grid transform).
+  35,36    normal      receiver grid coords (from 14,15 using grid transform).
+   37      normal      nearest [or center] CMP shotpoint.
+   38      normal      CMP line number (average of source and receiver).
+   39      normal      pre-NMO datum shift = 0.
+   40      normal      post-NMO datum shift = total datum shift.
+ 41,42,43  normal      cumulative datum, refraction, residual static = 0.
+   44      normal      source uphole time.
+   45      normal      receiver uphole time = 0.
+  46,47    normal      source and receiver sequential ground positions.
+  48-55  user defined  (UNCHANGED).
+  56,57    normal      pre-NMO and post-NMO refraction shift = 0.
+  58,59    scratch     CMP surveyed easting and northing coordinates.
+  60,61    scratch     source and receiver inline distance.
+   62      scratch     trace count including skipped and missing traces.
+   63      normal      GVS modifier = 0.
+   64      normal      tail mute index (UNCHANGED).
+ past 64 user defined  (UNCHANGED).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author    Description
+     ----        ------    -----------
+ 50. 2007-01-03  D. Glover Added NULLIFY statements for Intel compiler.
+ 49. 2006-06-13 Stoeckley  Always read JD file on backend even if the filename
+                            has not changed; needed for SeisSpace.
+048. 2006-01-10  B. Menger   Removed Unused Variables.
+ 47. 2001-12-10 Stoeckley  Add additional error printouts; fix longstanding
+                            (but apparently rarely encountered) receiver
+                            pattern card bug in GEOMDATA.
+ 46. 2001-10-23 Stoeckley  Omit scanning the JD file in CFE to save time.
+ 45. 2001-10-18 Stoeckley  Make VE, DATUM, and FIXED_DIST fields always
+                            sensitive so they can be changed from values on
+                            the JD file; add button and status for pathname.
+ 44. 2001-02-13 Stoeckley  Change wrapup flag.
+ 43. 2000-11-27 Stoeckley  Add ability to read history cards from JD file.
+ 42. 2000-10-13 Stoeckley  Add missing context-sensitive help.
+ 41. 2000-10-06 Stoeckley  Add missing required documentation sections.
+ 40. 2000-08-07 Stoeckley  Fix bug in fudge factor for the number of CMPs to
+                            pass to CHART (parameter LEN_LAST) to reduce the
+                            possibility of truncating the stacking chart.
+ 39. 2000-05-17 Stoeckley  Fix bug where no traces were output for mode SYN.
+ 38. 2000-05-11 Stoeckley  Implement printing options for tables.
+ 37. 2000-05-02 Stoeckley  Fix bug which did not allow getting charts and
+                            header dumps at setup.
+ 36. 2000-04-28 Stoeckley  Fix error in getting SURVEY_UNITS.
+ 35. 2000-04-07 Stoeckley  Change ' to ` in GUI definition section.
+ 34. 2000-04-06 Stoeckley  Fix problems in GUI definition section.
+ 33. 2000-03-22 Stoeckley  Converted from old system.
+ 32. 1998-12-08 Goodger    Begin using the f90 compiler.
+ 31. 1997-01-09 Stoeckley  Change format for pattern number on RP cards.
+ 30. 1996-04-24 Stoeckley  Add subroutine FGDCHECK which calls several
+                           new functions residing on new C-language
+                           file FGD_CROU to read values from optional
+                           cards on JD file, and to abort if values
+                           existing on the file do not match the globals
+                           (grid transform), or VE, REF, and FIXED_DIST.
+ 29. 1996-04-04 Stoeckley  Add subroutine FGDOPT to read (and ignore)
+                           optional cards from JD file.
+ 28. 1996-01-05 Stoeckley  Modified algorithm in FGDLDF for calculating
+                           skidded coordinates.
+ 27. 1995-10-31 Stoeckley  Changed formats for reading RP and ZT cards.
+ 26. 1993-06-16 Troutt     Added ENTRY FGDNGRP in FGDPP as a convenience
+                           routine for other processes to call and get
+                           the number of groups defined by the PP cards.
+ 25. 1993-05-18 K. Goodger Documentation change on DEV parameter.
+ 24. 1993-04-28 Troutt     Changed calculation of LDS and LDR in FGDPP.
+                           This hopefully fixes the problem with missing
+                           traces on an internal stacking chart due to
+                           decrementing receivers on RP cards.  In these
+                           cases, X1 was too small for CHART.
+ 23. 1993-01.29 Troutt     Increase field size for STRT and NSKP from 6
+                           to 8 digits so that user can "jump around" in
+                           large 3D survey (Format 3000 in FGDC1 allows
+                           passing these large value to TDMP).  The CFE
+                           was changed for these 2 fields, as well as for
+                           NLAB (no changes needed here for NLAB).
+                           Also increase sequential trace number field in
+                           internal TDMP's from 6 to 7 columns (decreased
+                           header 32 from 3 to 2).
+ 22. 1993-01-07 Troutt     Add shotpoint number to error message in entry
+                           FGDINDEX.
+ 21. 1992-03-23 Troutt     Implement tail mute header (HW64).  Handle
+                           like head mute (HW2) -- pass the input value
+                           except for synthetic generation or killed
+                           traces.
+ 20. 1991-11-11 K. Goodger When two Shot points are found to be coinci-
+                           dent, print out the shot point, line, and X,Y
+                           locations.
+ 19. 1991-10-28 K. Goodger Put DEV parameter in common block to be passed
+                           to CHART program. Needed when CHART is run
+                           as an independent process.
+ 18. 1991-05-21 K. Goodger Change cray flag check from eq 1 to ne 0 for
+                           change 16.
+ 17. 1991-04-16 K. Goodger Add OPS plotter option.
+ 16. 1991-02-26 Goodger    Change file name from zero fill to blank fill
+                           for UNICOS.
+ 15. 1991-02-25 Goodger    Add parameter DEV to pass to CHART routine.
+ 14. 1991-02-01 Stoeckley  Improve method of calculating first CMP
+                           location for stacking chart, for marine data.
+ 13. 1991-01-31 Stoeckley  Change method of calculating inline distance
+                           and ground position; add receiver skids to
+                           POST static calculation.
+ 12. 1990-11-30 Stoeckley  Modify the method of handling SKIP and DUP
+                           irregularities described on RP cards.
+ 11. 1990-11-19 Stoeckley  Fix bug with NLAB parameter; allow HOLD=999
+                           to hold source skid for infinite number of
+                           sources; add MISSING code to ZT cards.
+ 10. 1990-11-09 Stoeckley  Further changes regarding excessive inline
+                           skids, and CMP bin centers and bin spacings.
+                           Also changed the definition of inline distance
+                           for 3-D data.
+  9. 1990-11-06 Stoeckley  Add parameter SPACING.  Also adjust source and
+                           receiver shotpoint for excessive inline skid.
+                           Also add subroutine FGDBSMT to change the way
+                           CMP bin centers and bin spacings are
+                           determined for the stacking chart.
+  8. 1990-10-12 Stoeckley  Allow stacking chart to plot negative grid#'s.
+  7. 1990-08-24 Stoeckley  Add calls to PUTG and GETG (needed when
+                           program acts as synthetic trace generator).
+                           Change to always print a few cards even when
+                           not requested.  Add some print messages.
+  6. 1990-08-24 Stoeckley  Change interpolation method for XSD,YSD,ELSD
+                           on LD cards.
+  5. 1990-07-09 Stoeckley  Change to MODE=HEADERS2 for calls to CHART.
+  4. 1990-07-06 Stoeckley  Add OPTION=8, add more documentation, get
+                           around a bug caused by a compiler error,
+                           make some changes to some header words,
+                           and modify the calls to CHART.
+  3. 1990-06-27 Stoeckley  Add flag for last trace in group.
+  2. 1990-06-26 Stoeckley  Add parameter BCHART, remove parameter HEAD,
+                           and change parameter DIST to FIXED_DIST.  Also
+                           modify the way FIXED_DIST works, and put charts
+                           and header dumps into subroutine FGDC1.
+                           Also add fourth ZT card option.  Also fix
+                           bug regarding use of fixed inline distance.
+  1. 1990-05-16 Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

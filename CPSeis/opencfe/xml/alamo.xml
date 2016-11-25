@@ -1,0 +1,724 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="alamo" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MAIN_MENU" title="Main_Menu" rows="31" columns="80">
+    <Label keyword="COMMENT_CPS_ALAMOANALYSISOFLONGA" alignment="center">CPS_ALAMO - Analysis of Long Array Moveout</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_BEGINNINGTIMEFORANALYSIS" alignment="right">Beginning Time for Analysis</Label>
+    <Label keyword="LABEL_S_TIME" alignment="left">S_TIME=</Label>
+    <Field keyword="S_TIME" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ENDINGTIMEFORANALYSIS" alignment="right">Ending Time for Analysis</Label>
+    <Label keyword="LABEL_E_TIME" alignment="left">E_TIME=</Label>
+    <Field keyword="E_TIME" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WINDOWLENGTHFORANALYSIS" alignment="right">Window Length for Analysis</Label>
+    <Label keyword="LABEL_L_WIN" alignment="left">L_WIN=</Label>
+    <Field keyword="L_WIN" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_WINDOWINCREMENTFORANALYS" alignment="right">Window increment for Analysis</Label>
+    <Label keyword="LABEL_I_WIN" alignment="left">I_WIN=</Label>
+    <Field keyword="I_WIN" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TAPERLENGTHSEC" alignment="right">Taper Length (sec)</Label>
+    <Label keyword="LABEL_L_TAPER" alignment="left">L_TAPER=</Label>
+    <Field keyword="L_TAPER" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMSTRETCHALLOWED" alignment="right">Maximum Stretch (%) Allowed</Label>
+    <Label keyword="LABEL_STR_MAX" alignment="left">STR_MAX=</Label>
+    <Field keyword="STR_MAX" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MINIMUMETA" alignment="right">Minimum ETA</Label>
+    <Label keyword="LABEL_ETA_MIN" alignment="left">ETA_MIN=</Label>
+    <Field keyword="ETA_MIN" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMETA" alignment="right">Maximum ETA</Label>
+    <Label keyword="LABEL_ETA_MAX" alignment="left">ETA_MAX=</Label>
+    <Field keyword="ETA_MAX" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ETAINCREMENT" alignment="right">ETA Increment</Label>
+    <Label keyword="LABEL_ETA_INC" alignment="left">ETA_INC=</Label>
+    <Field keyword="ETA_INC" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="COMMENT_SELECTTHEVELOCITYINPUTOP" alignment="right">Select the Velocity Input Option</Label>
+    <Label keyword="LABEL_VELOPT" alignment="left">VELOPT=</Label>
+    <Field keyword="VELOPT" type="comboBox" maxLength="22" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_VELOCITYFILE" alignment="right">Velocity file</Label>
+    <Button keyword="SELECT_VELNAME">Select VELNAME</Button>
+    <Label keyword="EQLAB_VELNAME" alignment="left">=</Label>
+    <Field keyword="VELNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="VELNAME_INFO" type="string" maxLength="53" editable="no" sensitive="yes"/>
+    <Border keyword="BORDER3"/>
+    <Label keyword="COMMENT_SELECTTHEETAOUTPUTFILEOP" alignment="right">Select the ETA Output File Option</Label>
+    <Label keyword="LABEL_ETAOPT" alignment="left">ETAOPT=</Label>
+    <Field keyword="ETAOPT" type="comboBox" maxLength="22" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ETAFILE" alignment="right">ETA File</Label>
+    <Button keyword="SELECT_ETANAME">Select ETANAME</Button>
+    <Label keyword="EQLAB_ETANAME" alignment="left">=</Label>
+    <Field keyword="ETANAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="ETANAME_INFO" type="string" maxLength="53" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_USESEMBLANCESTOEDITTHEFI" alignment="right">Use Semblances to edit the field</Label>
+    <Label keyword="LABEL_EDITO" alignment="left">EDITO=</Label>
+    <Field keyword="EDITO" type="comboBox" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXIMUMINTERPOLATIONLENG" alignment="right">Maximum Interpolation Length (sec)</Label>
+    <Label keyword="LABEL_RI_MAX" alignment="left">RI_MAX=</Label>
+    <Field keyword="RI_MAX" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_EXTRAPOLATIONTYPEBEGINNI" alignment="right">Extrapolation Type (Beginning/Ending)</Label>
+    <Label keyword="LABEL_EXTRP" alignment="left">EXTRP=</Label>
+    <Field keyword="EXTRP" type="comboBox" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SEMBLANCETHRESHOLDVALUE" alignment="right">Semblance (%) Threshold Value</Label>
+    <Label keyword="LABEL_SMB_MIN" alignment="left">SMB_MIN=</Label>
+    <Field keyword="SMB_MIN" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_EXPONENTTOAPPLYTOSEMBLAN" alignment="right">Exponent to Apply to Semblance Ratio</Label>
+    <Label keyword="LABEL_SMB_EXP" alignment="left">SMB_EXP=</Label>
+    <Field keyword="SMB_EXP" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SMOOTHINGFILTERTOEDITETA" alignment="right">Smoothing filter to edit Eta field type</Label>
+    <Label keyword="LABEL_MFLTO" alignment="left">MFLTO=</Label>
+    <Field keyword="MFLTO" type="comboBox" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MEDIANORMEANFILTERLENGTH" alignment="right">Median or Mean filter length(sec)</Label>
+    <Label keyword="LABEL_FLEN" alignment="left">FLEN=</Label>
+    <Field keyword="FLEN" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_CPS_ALAMOANALYSISOFLONGA" xPos="23" yPos="0" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="0" yPos="1" xSize="75" ySize="11"/>
+     <Constraints component="COMMENT_BEGINNINGTIMEFORANALYSIS" xPos="12" yPos="2" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_S_TIME" xPos="42" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="S_TIME" xPos="49" yPos="2" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ENDINGTIMEFORANALYSIS" xPos="15" yPos="3" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_E_TIME" xPos="42" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="E_TIME" xPos="49" yPos="3" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_WINDOWLENGTHFORANALYSIS" xPos="13" yPos="4" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_L_WIN" xPos="43" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="L_WIN" xPos="49" yPos="4" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_WINDOWINCREMENTFORANALYS" xPos="10" yPos="5" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_I_WIN" xPos="43" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="I_WIN" xPos="49" yPos="5" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TAPERLENGTHSEC" xPos="21" yPos="6" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_L_TAPER" xPos="41" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="L_TAPER" xPos="49" yPos="6" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMSTRETCHALLOWED" xPos="12" yPos="7" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_STR_MAX" xPos="41" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STR_MAX" xPos="49" yPos="7" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MINIMUMETA" xPos="28" yPos="8" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ETA_MIN" xPos="41" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ETA_MIN" xPos="49" yPos="8" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXIMUMETA" xPos="28" yPos="9" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ETA_MAX" xPos="41" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ETA_MAX" xPos="49" yPos="9" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ETAINCREMENT" xPos="26" yPos="10" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ETA_INC" xPos="41" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ETA_INC" xPos="49" yPos="10" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="0" yPos="12" xSize="75" ySize="6"/>
+     <Constraints component="COMMENT_SELECTTHEVELOCITYINPUTOP" xPos="7" yPos="13" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VELOPT" xPos="42" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELOPT" xPos="49" yPos="13" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_VELOCITYFILE" xPos="26" yPos="14" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_VELNAME" xPos="0" yPos="15" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_VELNAME" xPos="14" yPos="15" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELNAME" xPos="15" yPos="15" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VELNAME_INFO" xPos="9" yPos="16" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="0" yPos="18" xSize="75" ySize="13"/>
+     <Constraints component="COMMENT_SELECTTHEETAOUTPUTFILEOP" xPos="6" yPos="19" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ETAOPT" xPos="42" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ETAOPT" xPos="49" yPos="19" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_ETAFILE" xPos="31" yPos="20" xSize="8" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_ETANAME" xPos="0" yPos="21" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_ETANAME" xPos="14" yPos="21" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ETANAME" xPos="15" yPos="21" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="ETANAME_INFO" xPos="9" yPos="22" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_USESEMBLANCESTOEDITTHEFI" xPos="7" yPos="23" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_EDITO" xPos="43" yPos="23" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EDITO" xPos="49" yPos="23" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_MAXIMUMINTERPOLATIONLENG" xPos="5" yPos="24" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RI_MAX" xPos="42" yPos="24" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RI_MAX" xPos="49" yPos="24" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_EXTRAPOLATIONTYPEBEGINNI" xPos="2" yPos="25" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_EXTRP" xPos="43" yPos="25" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EXTRP" xPos="49" yPos="25" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_SEMBLANCETHRESHOLDVALUE" xPos="10" yPos="26" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMB_MIN" xPos="41" yPos="26" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMB_MIN" xPos="49" yPos="26" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_EXPONENTTOAPPLYTOSEMBLAN" xPos="3" yPos="27" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMB_EXP" xPos="41" yPos="27" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMB_EXP" xPos="49" yPos="27" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SMOOTHINGFILTERTOEDITETA" xPos="0" yPos="28" xSize="39" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MFLTO" xPos="43" yPos="28" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MFLTO" xPos="49" yPos="28" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_MEDIANORMEANFILTERLENGTH" xPos="6" yPos="29" xSize="33" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FLEN" xPos="44" yPos="29" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FLEN" xPos="49" yPos="29" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="S_TIME">
+      <Tip>--&gt; Choose start time (sec)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - S_TIME<br> --&gt; Choose start time (sec)</center></b>
+<pre> Default = --&gt; 0.2
+ Allowed = --&gt; A Real value
+ --&gt; Beginning time for analyis (sec)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="E_TIME">
+      <Tip>--&gt;Choose end time (sec)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - E_TIME<br> --&gt;Choose end time (sec)</center></b>
+<pre> Default = --&gt; 3.0
+ Allowed = --&gt; A Real value
+ --&gt; Ending time for analyis (sec)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="L_WIN">
+      <Tip>--&gt;Choose analysis gate length (sec)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - L_WIN<br> --&gt;Choose analysis gate length (sec)</center></b>
+<pre> Default = --&gt; 0.08
+ Allowed = --&gt; A Real value
+ --&gt; Window length for analysis (sec)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="I_WIN">
+      <Tip>--&gt;Choose analysis start time increment (sec)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - I_WIN<br> --&gt;Choose analysis start time increment (sec)</center></b>
+<pre> Default = --&gt; 0.02
+ Allowed = --&gt; A Real value
+ --&gt; Window increment for analysis (sec)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="L_TAPER">
+      <Tip>--&gt;Choose Taper length to apply on analysis window (sec)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - L_TAPER<br> --&gt;Choose Taper length to apply on analysis window (sec)</center></b>
+<pre> Default = --&gt; 0.012
+ Allowed = --&gt; A Real value
+ --&gt; Taper length (sec)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STR_MAX">
+      <Tip>--&gt; Maximum stretch (%) allowed</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - STR_MAX<br> --&gt; Maximum stretch (%) allowed</center></b>
+<pre> Default = --&gt; 80.0
+ Allowed = --&gt; A Real value
+ --&gt; Maximum stretch (%) allowed</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ETA_MIN">
+      <Tip>--&gt;Choose minimum anellipticity parameter eta (decimal)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - ETA_MIN<br> --&gt;Choose minimum anellipticity parameter eta (decimal)</center></b>
+<pre> Default = --&gt; 0.0
+ Allowed = --&gt; A Real value
+ --&gt; Minimum eta (decimal)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ETA_MAX">
+      <Tip>--&gt;Choose maximum anellipticity parameter eta (decimal)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - ETA_MAX<br> --&gt;Choose maximum anellipticity parameter eta (decimal)</center></b>
+<pre> Default = --&gt; 0.2
+ Allowed = --&gt; A Real value
+ --&gt; Maximum eta (decimal)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ETA_INC">
+      <Tip>--&gt;Choose increment in parameter eta (decimal)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - ETA_INC<br> --&gt;Choose increment in parameter eta (decimal)</center></b>
+<pre> Default = --&gt; 0.005
+ Allowed = --&gt; A Real value
+ --&gt; Eta increment (decimal)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VELOPT">
+      <Tip>--&gt;Choose a Velocity Option. Select a CPS velocity file or a trace</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - VELOPT<br> --&gt;Choose a Velocity Option. Select a CPS velocity file or a trace</center></b>
+<pre> Default = --&gt; Velocity trace input
+ Allowed = --&gt; CPS Velocity file
+ Allowed = --&gt; Velocity trace input
+ Allowed = --&gt; Velocity trace file
+ --&gt; CPS velocity file -- Select a CPS velocity file
+ --&gt; Velocity trace input -- A velocity trace follows the input seismic data
+ --&gt; Velocity trace file -- Select a trace file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_VELNAME">
+      <Tip>--&gt; Use the file selection dialog to choose a Velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SELECT_VELNAME<br> --&gt; Use the file selection dialog to choose a Velocity file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="VELNAME">
+      <Tip>--&gt; Use the file selection dialog to choose a velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - VELNAME<br> --&gt; Use the file selection dialog to choose a velocity file.</center></b>
+<pre> Default = --&gt; NONE
+ Allowed = --&gt; A file name
+ --&gt; SELECT a velocity file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VELNAME_INFO">
+      <Tip>--&gt; Status of the velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - VELNAME_INFO<br> --&gt; Status of the velocity file.</center></b>
+<pre> Default = --&gt; NONE
+ Allowed = --&gt; Status information
+ --&gt; Velocity file status information</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ETAOPT">
+      <Tip>--&gt;Select the ETA output file option</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - ETAOPT<br> --&gt;Select the ETA output file option</center></b>
+<pre> Default = --&gt; ETA trace data
+ Allowed = --&gt; ETA trace data
+ Allowed = --&gt; ETA file
+ --&gt; ETA trace data -- Output ETA trace data
+ --&gt; ETA file -- Select an output ETA file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_ETANAME">
+      <Tip>--&gt; Use the file selection dialog to choose a ETA file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SELECT_ETANAME<br> --&gt; Use the file selection dialog to choose a ETA file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ETANAME">
+      <Tip>--&gt; Use the file selection dialog to choose a ETA file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - ETANAME<br> --&gt; Use the file selection dialog to choose a ETA file.</center></b>
+<pre> Default = --&gt; NONE
+ Allowed = --&gt; A file name
+ --&gt; Eta file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ETANAME_INFO">
+      <Tip>--&gt; Status of the ETA file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - ETANAME_INFO<br> --&gt; Status of the ETA file.</center></b>
+<pre> Default = --&gt; NONE
+ Allowed = --&gt; Status information
+ --&gt; Eta file status information</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EDITO">
+      <Tip>--&gt;Choose the type of eta field editing</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - EDITO<br> --&gt;Choose the type of eta field editing</center></b>
+<pre> Default = --&gt; Semblance weighting
+ Allowed = --&gt; Interpolation
+ Allowed = --&gt; Semblance weighting
+ Allowed = --&gt; Zero edit
+ Allowed = --&gt; No Editing
+ --&gt; Interpolation -- Edit values by Interpolating
+ --&gt; Semblance weighting -- Edit values using semblance weighting
+ --&gt; Zero edit -- Eta values not satisfying the semblance threshold are
+     set to a small value
+ --&gt; No Editing -- Do not use semblances to edit eta fields</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RI_MAX">
+      <Tip>--&gt;Determine the maximum length to perform an interpolation</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - RI_MAX<br> --&gt;Determine the maximum length to perform an interpolation</center></b>
+<pre> Default = --&gt; 0.2
+ Allowed = --&gt; A Real value
+ --&gt; Maximum Interpolation length (sec)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EXTRP">
+      <Tip>--&gt;Choose the type of extrapolation at the beginning and ending</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - EXTRP<br> --&gt;Choose the type of extrapolation at the beginning and ending</center></b>
+<pre> Default = --&gt; Semblance weighting
+ Allowed = --&gt; Semblance weighting
+ Allowed = --&gt; Zero edit
+ --&gt; Type of extrapolation at the beginning and ending</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMB_MIN">
+      <Tip>--&gt; Choose minimum semblance threshold value in percent</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SMB_MIN<br> --&gt; Choose minimum semblance threshold value in percent</center></b>
+<pre> Default = --&gt; 15.0
+ Allowed = --&gt; A Real value
+ --&gt; Semblance (%) threshold value</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMB_EXP">
+      <Tip>--&gt;Choose a semblance exponenent used to edit eta values</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SMB_EXP<br> --&gt;Choose a semblance exponenent used to edit eta values</center></b>
+<pre> Default = --&gt; 2.0
+ Allowed = --&gt; A Real value
+ --&gt; Exponent to apply to semblance ratio</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MFLTO">
+      <Tip>--&gt;Choose when to perform a median or mean smoothing filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - MFLTO<br> --&gt;Choose when to perform a median or mean smoothing filter.</center></b>
+<pre> Default = --&gt; Mean after
+ Allowed = --&gt; No filter
+ Allowed = --&gt; Median before
+ Allowed = --&gt; Median after
+ Allowed = --&gt; Mean before
+ Allowed = --&gt; Mean after
+ --&gt; No filter -- Do not apply a median or mean smoothing filter to the data
+ --&gt; Median before -- Apply median filter before the eta field edit
+ --&gt; Median after -- Apply median filter after the eta field edit
+ --&gt; Mean before -- Apply mean filter before the eta field edit
+ --&gt; Mean after -- Apply mean filter after the eta field edit</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FLEN">
+      <Tip>--&gt;Choose the median or mean filter length (sec)</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - FLEN<br> --&gt;Choose the median or mean filter length (sec)</center></b>
+<pre> Default = --&gt; 0.08
+ Allowed = --&gt; A Real value
+ --&gt; Median or mean filter length (sec)</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="DIAGNOSTIC_OUTPUTS" title="Diagnostic_Outputs" rows="24" columns="80">
+    <Label keyword="COMMENT_ADDITIONALOUTPUTOPTIONS" alignment="right">Additional Output Options</Label>
+    <Label keyword="LABEL_AOUTO" alignment="left">AOUTO=</Label>
+    <Field keyword="AOUTO" type="comboBox" maxLength="22" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTVELOCITYTRACES" alignment="right">Output Velocity Traces?</Label>
+    <Label keyword="COMMENT_VTOPT" alignment="left">VTOPT=</Label>
+    <Field keyword="VTOPT" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Border keyword="BORDER4"/>
+    <Label keyword="COMMENT_SELECTTHEOUTPUTSEMBLANCE" alignment="right">Select the Output Semblance Option</Label>
+    <Label keyword="LABEL_SIGOPT" alignment="left">SIGOPT=</Label>
+    <Field keyword="SIGOPT" type="comboBox" maxLength="22" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OUTPUTSEMBLANCEFILE" alignment="right">Output Semblance File</Label>
+    <Button keyword="SELECT_SIGNAME">Select SIGNAME</Button>
+    <Label keyword="EQLAB_SIGNAME" alignment="left">=</Label>
+    <Field keyword="SIGNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="SIGNAME_INFO" type="string" maxLength="53" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_ADDITIONALOUTPUTOPTIONS" xPos="14" yPos="0" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_AOUTO" xPos="43" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AOUTO" xPos="49" yPos="0" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTVELOCITYTRACES" xPos="16" yPos="1" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_VTOPT" xPos="43" yPos="1" xSize="6" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VTOPT" xPos="49" yPos="1" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER4" xPos="0" yPos="2" xSize="75" ySize="6"/>
+     <Constraints component="COMMENT_SELECTTHEOUTPUTSEMBLANCE" xPos="5" yPos="3" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SIGOPT" xPos="42" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SIGOPT" xPos="49" yPos="3" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_OUTPUTSEMBLANCEFILE" xPos="18" yPos="4" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_SIGNAME" xPos="0" yPos="5" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_SIGNAME" xPos="14" yPos="5" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SIGNAME" xPos="15" yPos="5" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SIGNAME_INFO" xPos="9" yPos="6" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="AOUTO">
+      <Tip>--&gt;Choose an additional output option</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - AOUTO<br> --&gt;Choose an additional output option</center></b>
+<pre> Default = --&gt; No added outputs
+ Allowed = --&gt; No added outputs
+ Allowed = --&gt; Semblance analysis
+ Allowed = --&gt; Seismic traces
+ --&gt; No added outputs -- No additional output traces wanted
+ --&gt; Semblance analysis -- Output Comprehensive SEMBLANCE Analysis traces
+ --&gt; Seismic traces -- Output seismic traces</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VTOPT">
+      <Tip>--&gt;If 'Yes', the velocity trace data will be outputted.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - VTOPT<br> --&gt;If 'Yes', the velocity trace data will be outputted.</center></b>
+<pre> Default = --&gt; NO
+ Allowed = --&gt; YES
+ Allowed = --&gt; NO
+ --&gt; Output velocity traces?</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SIGOPT">
+      <Tip>--&gt;Choose an output SEMBLANCE file Option</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SIGOPT<br> --&gt;Choose an output SEMBLANCE file Option</center></b>
+<pre> Default = --&gt; No SEMBLANCE output
+ Allowed = --&gt; No SEMBLANCE output
+ Allowed = --&gt; SEMBLANCE trace data
+ Allowed = --&gt; SEMBLANCE file
+ --&gt; No SEMBLANCE output -- Do not output SEMBLANCE data
+ --&gt; SEMBLANCE trace data -- Output SEMBLANCE trace data
+ --&gt; SEMBLANCE file -- Select an output SEMBLANCE file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_SIGNAME">
+      <Tip>--&gt; Use the file selection dialog to choose a SEMBLANCE file. Choose OUTPUT_</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SELECT_SIGNAME<br> --&gt; Use the file selection dialog to choose a SEMBLANCE file. Choose OUTPUT_</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SIGNAME">
+      <Tip>--&gt; Use the file selection dialog to choose a SEMBLANCE file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SIGNAME<br> --&gt; Use the file selection dialog to choose a SEMBLANCE file.</center></b>
+<pre> Default = --&gt; NONE
+ Allowed = --&gt; A File Name
+ --&gt; Output SEMBLANCE file</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SIGNAME_INFO">
+      <Tip>--&gt; Status of the Semblance file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - SIGNAME_INFO<br> --&gt; Status of the Semblance file.</center></b>
+<pre> Default = --&gt; NONE
+ Allowed = --&gt; Status information
+ --&gt; Semblance file status information</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>alamo - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="alamo">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : ALAMO
+ Category   : velocity_analysis
+ Written    : 2003-04-22   by: Michael Ried
+ Revised    : 2006-11-14   by: D. Glover
+ Maturity   : production
+ Purpose    : Analysis of Long array moveout
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ For layered media characterized by large vertical velocity gradients and/or
+ velocity anisotropy, the moveout on reflected events may deviate from the
+ hyperbolic assumption.  In order to "flatten" events in such media, the
+ deviations from hyperbolic moveout need to be calculated.  ALAMO uses a
+ simple fourth order (3-Term) formula to characterize these deviations.
+ 
+  T**2 = T0**2 + (X/Vnmo)**2 - 2*ETA*(1/T0**2)*(X/Vnmo)**4
+ 
+ After ALAMO is used to automatically calculate the ETA field, then 3-Term
+ Moveout can be used to apply the velocity and ETA fields to the seismic
+ data in order to flatten the events.
+ 
+ ALAMO calculates an ETA volume by scanning a range of ETA values and then
+ picking the ETA value with the largest semblance.  The picked ETA volume
+ varies as a function of location and time.
+ 
+ The following traces are output from ALAMO:
+   1. ETA traces   ( Header 49 = 70 )
+ 
+ The above traces are output from ALAMO for each input CDP gather.
+ 
+ See the ADVICE FOR USERS section for a sample work flow.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ The input seismic data to ALAMO should NOT have moveout applied.  The input
+ velocity field should be derived from a velocity analysis performed on the
+ relatively short offset portion (where the deviations from hyperbolic moveout
+ are relatively small) of the CDP gathers.  This input velocity field will
+ normally be the smoothed version of the velocities that were computed using
+ the AVOVIT process.
+ 
+ Like AVOVIT, ALAMO is a 2D algorithm and a semblance based approach.
+ It operates, in the case of 3D data, on a single inline at a time.
+ Because of this, there is the possibility of creating crossline "jitter"
+ in the resulting ETA field.  Since ALAMO outputs a ETA function at each
+ CDP location, high frequency variations in the ETA field can even occur in
+ the inline direction depending on parameter selection and data quality.
+ 
+ Because of these inherent problems, it is highly recommended to apply some
+ amount of smoothing to the output ETA traces before they are used to help
+ flatten CDP gathers.
+ 
+ In addition, application of a very mild smoothing filter (in space and/or
+ time) to the ETA field may improve moveout results and will reduce the
+ stretching and compression of the seismic wavelet on the far offsets.  The
+ MIX process can be used to accomplish this smoothing.
+ 
+ Sample ALAMO work flow
+ 
+ TRIN - Input prestack CDP gathers with NO normal moveout correction applied.
+ Data conditioning processes can be applied here if necessary.
+ GATHER
+ ALAMO
+ SELECT - Select ETA traces for output (HW 49 = 70)
+ TROT
+ 
+ A window length of 80 ms is a reasonable starting point.  You don't want the
+ window to be so small that too few events are included within the window.
+ The algorithm does track event curvature.  Like AVOVIT, ALAMO uses a constant
+ window length for all times.  An 80 ms window length may be fine at shallower
+ times, but may be ridiculous at 6 seconds.  Set your window start and end
+ times appropriately.
+ 
+ There are different types of weighting that can be done within ALAMO to edit
+ the ETA field.  The defaults are a reasonable starting point.
+ However, one should always output an ETA field with no editing applied for
+ comparison.  Note that this editing should not be a substitute for
+ smoothing the ETA field.  A sample flow to smooth the ETA field is simply
+ 
+ TRIN - ETA traces from ALAMO
+ MIX
+ TROT - Output smoothed ETA traces
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author        Description
+     ----        ------        -----------
+  5. 2006-11-14  D. Glover     Added NULLIFY statements for Intel compiler.
+  4. 2006-01-17  B. Menger     Removed Unused Variables.
+  3. 2005-01-31  Michael Ried  New changes to ALAMO:
+                               -Allowed for parrellel processors
+                               -It calls velterp/rantfile to get velocity data
+                               -Seperated screen parameters not used much
+                               -Changed parameter units ms-&gt;sec
+                               -Updated documentation
+                               -Set new default values for screen parameters
+  2. 2003-09-03  Michael Ried  New changes to ALAMO:
+                               -Looks for .vel velocity files
+                               -Eliminated the ETA output gather option
+                               -Headers are defaulted to trace headers
+  1. 2003-04-22  Michael Ried  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

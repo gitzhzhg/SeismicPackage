@@ -1,0 +1,324 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="avopcomp" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="AVOPCOMPPROCESS" title="avopcomp Process" rows="24" columns="80">
+    <Label keyword="COMMENT_AVOPRINCIPALCOMPONENTS" alignment="center">AVO Principal Components</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_OUTPUTTHEROTATIONANGLES" alignment="right">Output the rotation angles?</Label>
+    <Label keyword="COMMENT_COMP_OUT" alignment="left">COMP_OUT=</Label>
+    <Field keyword="COMP_OUT" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_THRESHOLDOFSPHERICITY" alignment="right">Threshold of sphericity</Label>
+    <Label keyword="LABEL_THRSHOLD" alignment="left">THRSHOLD=</Label>
+    <Field keyword="THRSHOLD" type="float" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HASNMOBEENAPPLIEDTOTHETR" alignment="right">Has NMO been applied to the traces</Label>
+    <Label keyword="COMMENT_NMO_APPL" alignment="left">NMO_APPL=</Label>
+    <Field keyword="NMO_APPL" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AVOPRINCIPALCOMPONENTS" xPos="26" yPos="0" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="0" yPos="1" xSize="75" ySize="5"/>
+     <Constraints component="COMMENT_OUTPUTTHEROTATIONANGLES" xPos="12" yPos="2" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_COMP_OUT" xPos="41" yPos="2" xSize="9" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMP_OUT" xPos="50" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_THRESHOLDOFSPHERICITY" xPos="16" yPos="3" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_THRSHOLD" xPos="41" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="THRSHOLD" xPos="50" yPos="3" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HASNMOBEENAPPLIEDTOTHETR" xPos="5" yPos="4" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NMO_APPL" xPos="41" yPos="4" xSize="9" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="NMO_APPL" xPos="50" yPos="4" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="COMP_OUT">
+      <Tip>--&gt;Choose whether to output the rotation angles?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - COMP_OUT<br> --&gt;Choose whether to output the rotation angles?</center></b>
+<pre> Default = --&gt; YES
+ Allowed = --&gt; YES
+ Allowed = --&gt; NO
+ --&gt; If 'Yes', the rotation angles will be outputted</pre></head></html>]]></Text>
+     </Help>
+     <Help component="THRSHOLD">
+      <Tip>--&gt; Enter the threshold of sphericity</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - THRSHOLD<br> --&gt; Enter the threshold of sphericity</center></b>
+<pre> Default = --&gt; 0.1
+ Allowed = --&gt; Real
+ --&gt; Enter a real value is greater than 0.0 and less than 1.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NMO_APPL">
+      <Tip>--&gt;Has NMO been applied to the prestack traces?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - NMO_APPL<br> --&gt;Has NMO been applied to the prestack traces?</center></b>
+<pre> Default = --&gt; YES
+ Allowed = --&gt; YES
+ Allowed = --&gt; NO
+ --&gt; If 'Yes', then the program will assume nmo has been applied</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avopcomp - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="avopcomp">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : AVOPCOMP
+ Category   : amplitude_mod
+ Written    : 2004-02-18   by: Michael Ried
+ Revised    : 2006-10-31   by: B. Menger
+ Maturity   : production
+ Purpose    : Emphasizes gradient anomalies
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This tool rotates the complex AVO data so as eliminate mutual correlations
+ and to align the data into a dominant (principal) component and a minor
+ (outlying) component. The complex A trace will be replaced by the dominant
+ component, while the outlying component will replace the complex B trace.
+ Mathematically, this operation is described by
+ 
+ A &lt;-- (cos q cos f + i sin q sin f) A + (sin q cos f + i cos q sin f) B
+ 
+ B &lt;-- (-sin q cos f + i cos q sin f) A + (cos q cos f + i cos q sin f) B,
+ 
+ where q and f are the rotation angles necessary to achieve decoupling of A
+ and B.
+ 
+ Inputs and Outputs:
+ 
+ Minimum input to this tool is a Standard Suite, consisting of the following
+ traces:
+ 
+ 
+ Trace                   Header trc_type
+                         (Stored in Header #49)
+ Real AVO "A" trace      43
+ Real AVO "B" trace      44
+ Imag AVO "A" trace      17
+ Imag AVO "B" trace      18
+ Standard deviation "A"  45
+ Standard deviation "B"  47
+ Real correlation        48
+ Imag correlation        41
+ 
+ Parameters:
+ 
+ Do you wish to output the rotation angles?
+ 
+ Specify "Yes" if you wish to append the rotation angle traces to the
+ modified standard suite. Otherwise, only the rotated standard suite will
+ be passed.
+ 
+ Threshold of sphericity:
+ 
+ If the distribution of data is spherical, it will not be possible to
+ determine unique rotation angles q and f. For this reason, it is necessary
+ for this tool to gravitate in a controlled and orderly manner towards
+ preferred rotation angles for q and f as the data distribution becomes more
+ and more spherical. These preferred rotation angles are permanently set
+ within the tool to be -p/4 and 0 radians, respectively. However, the user
+ does have control over the degree of sphericity that will cause the tool to
+ begin gravitating towards these preferred rotation angles. This sphericity
+ threshold can vary between 0, meaning perfect sphericity to 1.0 for perfect
+ alignment along a single line. A good default value for this parameter is
+ 0.1.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Optional input to this tool are prestack data, passed through AVEL and the
+ Standard Suite tool. This data may or may not be moved out, and must follow
+ the standard suite traces in each ensemble. A velocity trace (trc_type 51)
+ must appear between the standard suite and the prestack data. The prestack
+ data is assumed to be x-t data, unless the ang_value trace header is present.
+ In this case, it is assumed to be constant angle data, whose angle is
+ contained in that header.
+ 
+ The output from this tool is a possibly augmented standard suite, containing
+ the principal and minor data components and their corresponding statistics.
+ The correlation coefficient will be set to zero. Optional outputs are the
+ rotation angles f and q (in degrees) which were necessary to decouple the
+ output data. These rotation angle traces are appended to the end of each
+ input ensemble. These angle traces have trace types of 52 for q and 53 for f,
+ respectively. If prestack data was appended to the suite, it will be
+ transformed in such a way as to produce the same intercept and gradient
+ traces as the transformed traces passed in the suite.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+  3. 2006-10-31  B. Menger  Removed Unused Variables.
+  2. 2005-10-10  Goodger    Change argument a in routine hermtp from intent
+                            out to intent inout to satisfy absoft 9.0
+                            compiler.
+  1. 2005-01-03  Mike Ried  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

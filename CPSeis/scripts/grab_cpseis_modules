@@ -1,0 +1,57 @@
+#! /bin/csh -f
+
+##------------------------- grab_cpseis_modules ---------------------------##
+##------------------------- grab_cpseis_modules ---------------------------##
+##------------------------- grab_cpseis_modules ---------------------------##
+
+# This  script is simply a convenience for grabbing the cpseis processing
+# modules out of the src directory and copying them to a TEMPORARY directory
+# under the src directory so they can be more easily viewed without the
+# primitives and wrapper files in the way.  A PURPOSES file is also
+# created which contains the one-line purpose of each module.
+
+# This script considers a file to be a processing module only if the following
+# string is in the first two lines of the file:  CPS_v1 type="PROCESS"
+
+mkdir -p $CPSEIS_HOME/src/TEMPORARY
+rm    -f $CPSEIS_HOME/src/TEMPORARY/*
+
+setenv CLASSPATH $CPSEIS_HOME/wrappers/classes
+
+set kount = 0
+set append_spaces = "java -ea org.cpseis.util.StringUtil -appendSpaces"
+
+foreach file ($CPSEIS_HOME/src/*.f90)
+
+   head -n2 $file | grep -q 'CPS_v1 type="PROCESS"' || continue
+
+   cp -f $file $CPSEIS_HOME/src/TEMPORARY
+
+   @ kount += 1
+
+   set name     = "`$append_spaces $file:r:t 16`"
+   set category = `grep Category $file | sed s/Category//g | sed s/\://g | sed s/"!"//g`
+   set purpose  = `grep Purpose  $file | sed s/Purpose//g | sed s/\://g`
+   set category = "`$append_spaces $category 20`"
+
+   echo "$name" "$category" "$purpose"
+   echo "$name" "$category" "$purpose" >> $CPSEIS_HOME/src/TEMPORARY/DOC
+
+end
+
+echo $kount modules
+
+cd $CPSEIS_HOME/src/TEMPORARY
+
+grep Purpose *.f90 | sed s/"\.f90\:\! "/"         "/g \
+                   > $CPSEIS_HOME/src/TEMPORARY/PURPOSES
+
+grep Category *.f90 | sed s/"\.f90\:\! "/"         "/g \
+                    | sort -k4 \
+                    > $CPSEIS_HOME/src/TEMPORARY/CATEGORIES
+
+sort -k2 DOC > SORTED
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##

@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="kdmo" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="KDMOPROCESS" title="KDMO Process" rows="24" columns="80">
+    <Label keyword="COMMENT_PERFORMANTIALIASINGDMOON" alignment="center">Perform anti-aliasing DMO on NMO corrected data.</Label>
+    <Label keyword="LABEL_COORD" alignment="left">COORD=</Label>
+    <Field keyword="COORD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_WID" alignment="left">BIN_WID=</Label>
+    <Field keyword="BIN_WID" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_MAX" alignment="left">OFF_MAX=</Label>
+    <Field keyword="OFF_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_DMO" alignment="left">VEL_DMO=</Label>
+    <Field keyword="VEL_DMO" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX=</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CALC_OFFSET" alignment="left">CALC_OFFSET=</Label>
+    <Field keyword="CALC_OFFSET" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_INL" alignment="left">HDR_INL=</Label>
+    <Field keyword="HDR_INL" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CRL" alignment="left">HDR_CRL=</Label>
+    <Field keyword="HDR_CRL" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_PERFORMANTIALIASINGDMOON" xPos="8" yPos="1" xSize="48" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_COORD" xPos="1" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COORD" xPos="10" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_BIN_WID" xPos="24" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_WID" xPos="33" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MAX" xPos="49" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MAX" xPos="61" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_DMO" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_DMO" xPos="10" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="24" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="33" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CALC_OFFSET" xPos="49" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CALC_OFFSET" xPos="61" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_INL" xPos="1" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_INL" xPos="10" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_CRL" xPos="24" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CRL" xPos="33" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="COORD">
+      <Tip>Whether to use 2D or 3D header words for location.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - COORD<br> Whether to use 2D or 3D header words for location.</center></b>
+<pre> Default = 3D
+ Allowed = 2D
+ Allowed = 3D
+ If COORD = 2D, then use offset and midpoint surveyed inline coordinate.
+ If COORD = 3D, then use source and receiver surveyed coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_WID">
+      <Tip>Width of the stack bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - BIN_WID<br> Width of the stack bins.</center></b>
+<pre> Default =  1
+ Allowed = real &gt; 0.0
+ Width of the stack bins along the line connecting source and receiver.  This
+ is normally the CMP interval in the inline direction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MAX">
+      <Tip>Maximum offset in dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - OFF_MAX<br> Maximum offset in dataset.</center></b>
+<pre> Default =  1
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_DMO">
+      <Tip>Minimum propagation velocity in medium.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - VEL_DMO<br> Minimum propagation velocity in medium.</center></b>
+<pre> Default = 1500
+ Allowed = real &gt; 0.0
+ VEL_DMO is used to calculate the maximum dip to be preserved in the data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency to be preserved in data, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - FREQ_MAX<br> Maximum frequency to be preserved in data, in Hz.</center></b>
+<pre> Default = 90
+ Allowed = real &gt; 0.0
+ FREQ_MAX is used in the DMO operator calculation as the highest frequency to
+ preserve in the data.  Larger values of FREQ_MAX require significantly more
+ run-time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CALC_OFFSET">
+      <Tip>Re-calculate offsets for 3D data only.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - CALC_OFFSET<br> Re-calculate offsets for 3D data only.</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ If CALC_OFFSET = YES, offsets are re-calculated as in the General Description
+ section.
+ 
+ If CALC_OFFSET = NO, offsets are assigned from values of header word 6.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_INL">
+      <Tip>Header word for inline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - HDR_INL<br> Header word for inline coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CRL">
+      <Tip>Header word for crossline coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - HDR_CRL<br> Header word for crossline coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>kdmo - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="kdmo">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : KDMO
+ Category   : migrations
+ Written    : 1989-11-20   by: Greg Lazear
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Perform anti-aliasing DMO on NMO corrected data.
+ Portability: No known limitations.
+ Parallel   : NO
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ KDMO is a Kirchhoff DMO process that uses the Hale algorithm to prevent
+ operator aliasing.  KDMO accepts only ONE input trace each time it is called.
+ For each input trace the program computes the DMO corrected contribution to
+ all CMPs along the azimuth containing the source and receiver, but outputs
+ these one at a time. Thus one trace comes in and KDMO becomes a trace
+ supplying process. The center trace of the DMO response is output by itself,
+ then each symmetric pair of DMO broadcast traces are output one at a time.
+ 
+ Normally KDMO is followed by GSTK to collect and stack the broadcast traces.
+ Production use of KDMO is normally within the macros CODMO (2D) and DMO3D
+ (3D).
+ 
+ 
+ Coordinates
+ 
+ The parameter COORD controls which header words are used to locate the trace
+ and its source and receiver positions.
+ 
+ If COORD=2D the offset and midpoint surveyed coordinate (HDR 17) are used.
+ (Header word 17 is assumed to carry the midpoint inline location.)  Source
+ and receiver surveyed coordinates in the input trace are ignored and pass
+ unchanged to the output traces.  The midpoints of the output traces in
+ surveyed coordinates range from HDR(17) - HDR(6)/2. to HDR(17) + HDR(6)/2.
+ 
+ If COORD=3D the source and receiver surveyed coordinates are used.  Offset
+ and midpoint coordinates are computed from the source and receiver surveyed
+ coordinates.  Equations for each are given below.
+ 
+       Offset      = SQRT( (HDR(11)-HDR(14))**2 +
+                           (HDR(12)-HDR(15))**2  )
+ 
+       Midpoint easting  =  HDR(11) + (HDR(14)-HDR(11))/2.
+       Midpoint northing =  HDR(12) + (HDR(15)-HDR(12))/2.
+ 
+ For both 2D and 3D operation, KDMO determines the location of input traces
+ and broadcast traces using surveyed coordinates.  Midpoint grid coordinates
+ are calculated and set for output traces using the grid global.
+ 
+ 
+ REFERENCE
+ Hale, D., 1988, Dip Moveout Processing:  Society of Exploration Geophysicists.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author      Description
+     ----       ------      -----------
+019. 2006-06-20  B. Menger   Removed Unused Variables.
+ 18. 2002-03-07 Chiu        Fix frontend problem of CALC_OFFSET parameter.
+ 17. 2001-06-18 Chiu        Fix large data values after interp. PRODUCTION.
+ 16. 2001-04-30 Chiu        Clear a temporay work array properly.
+ 15. 2001-02-14 Chiu        Change wrapped_up to skip_wrapup.
+ 14. 2000-08-30 Chiu        Normalize the 45 degree phase filter and
+                            set the end mute.
+ 13. 2000-07-20 Chiu        Use new coordinate for header 7 and 8.
+ 12  2000-06-14 Chiu        Added Gui parameters.
+ 11. 2000-03-21 Chiu        Remove PC_BACKEND check for pc_put_contol.
+ 10. 2000-01-27 Chiu        For 3D, added an option either to compute
+                            offsets or to use header word for offsets.
+ 9.  1999-12-13 Chiu        Convert to new CPS.
+ 8.  1999-01-11 Vunderink   Begin using the f90 compiler.
+ 7.  1995-04-03 Troutt      Minor change.  Add check for NWPT&gt;=NDPT+2.
+                            "TRACE" must be dimensioned at least ndpt+2
+                            for INTBRC call.
+ 6.  1990-03-22 Howard      Change to avoid round off error.
+ 5.  1990-02-26 Lazear      Install Tom Hill's code speed-up in loop 40
+ 4.  1990-02-20 Lazear      Change to single trace output
+ 3.  1990-02-13 Lazear      Modify velocity cut-off logic
+ 2.  1990-01-15 Lazear      Optimizations of algorithm installed
+ 1.  1989-11-20 Lazear      Wrote  KDMO algorithm to
+                            eliminate operator aliasing over CMP. Used
+                            Sinton's KDMO3 as basic framework for new
+                            program. This algorithm comes from Dave Hale.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

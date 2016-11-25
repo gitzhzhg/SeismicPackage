@@ -1,0 +1,36 @@
+#!/bin/bash
+# toggle from private to public vnc password
+if [ ! -z $1 ] ; then
+if [ "$1" = "-setup" ] ; then
+        echo "copying private password"
+        cp ~/.vnc/passwd ~/.vnc/passwd.private
+        echo "create your public password"
+        vncpasswd
+        echo "copying public password"
+        cp ~/.vnc/passwd ~/.vnc/passwd.public
+        echo "setting flag public to true"
+        touch ~/.vnc/public
+        echo "PUBLIC IS SET (Password=public)"
+        exit 0
+elif [ "$1" = "-help" ] ; then
+        echo "This is a process to toggle between public and private vnc passwords."
+        echo " Use -setup to initialize.  This assumes you have a private password set"
+        echo "and you want to initialize this process.  "
+        echo "Run the script without arguments to toggle"
+        echo "between your public and private passwords."
+        exit 0
+else
+        echo "Type -help for instructions"
+        exit 1
+fi
+fi
+if [ -f ~/.vnc/public ] ; then
+        cp ~/.vnc/passwd.private ~/.vnc/passwd
+        rm ~/.vnc/public
+        echo "PRIVATE IS SET"
+else
+        touch ~/.vnc/public
+        cp ~/.vnc/passwd.public ~/.vnc/passwd
+        echo "PUBLIC IS SET (Password=public)"
+fi
+exit 0

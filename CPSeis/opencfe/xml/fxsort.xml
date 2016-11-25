@@ -1,0 +1,657 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fxsort" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCREEN1" title="FXSORT_PROCESS" rows="27" columns="80">
+    <Label keyword="LABEL_TIME_LOCK" alignment="left">TIME_LOCK=</Label>
+    <Field keyword="TIME_LOCK" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_XY_SEPARATION" alignment="left">XY_SEPARATION=</Label>
+    <Field keyword="XY_SEPARATION" type="float" maxLength="14" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SET_HEADERS" alignment="left">SET_HEADERS=</Label>
+    <Field keyword="SET_HEADERS" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_HEADERS" alignment="left">BIN_HEADERS=</Label>
+    <Field keyword="BIN_HEADERS" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_GATHERS" alignment="left">BIN_GATHERS=</Label>
+    <Field keyword="BIN_GATHERS" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RESET_OFFSET" alignment="left">RESET_OFFSET=</Label>
+    <Field keyword="RESET_OFFSET" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFFSET_OLD" alignment="left">HDR_OFFSET_OLD=</Label>
+    <Field keyword="HDR_OFFSET_OLD" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFFSET_NEW" alignment="left">HDR_OFFSET_NEW=</Label>
+    <Field keyword="HDR_OFFSET_NEW" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X  =</Label>
+    <Field keyword="HDR_X" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y   =</Label>
+    <Field keyword="HDR_Y" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SAVE_INFO_OUT" alignment="left">SAVE_INFO_OUT=</Label>
+    <Field keyword="SAVE_INFO_OUT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SOURCE_GATHER" alignment="left">SOURCE_GATHER=</Label>
+    <Field keyword="SOURCE_GATHER" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RECEIVER_GATHER" alignment="left">RECEIVER_GATHER=</Label>
+    <Field keyword="RECEIVER_GATHER" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_TOT" alignment="left">X_TOT  =</Label>
+    <Field keyword="X_TOT" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT  =</Label>
+    <Field keyword="X_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_LAST" alignment="left">X_LAST  =</Label>
+    <Field keyword="X_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC  =</Label>
+    <Field keyword="X_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_TOT" alignment="left">Y_TOT  =</Label>
+    <Field keyword="Y_TOT" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT  =</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_LAST" alignment="left">Y_LAST  =</Label>
+    <Field keyword="Y_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC  =</Label>
+    <Field keyword="Y_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_INDEX" alignment="left">LINE_INDEX=</Label>
+    <Field keyword="LINE_INDEX" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LINE_TITLE" alignment="left">LINE_TITLE=</Label>
+    <Field keyword="LINE_TITLE" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Button keyword="READ_LIST">READ_LIST</Button>
+    <Button keyword="WRITE_LIST">WRITE_LIST</Button>
+    <Label keyword="LABEL_OPT_TRIN" alignment="left">OPT_TRIN=</Label>
+    <Field keyword="OPT_TRIN" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_TROT" alignment="left">OPT_TROT=</Label>
+    <Field keyword="OPT_TROT" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_INFO_TROT">Select INFO_TROT</Button>
+    <Label keyword="EQLAB_INFO_TROT" alignment="left">=</Label>
+    <Field keyword="INFO_TROT" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_TROT">Select PATH_TROT</Button>
+    <Label keyword="EQLAB_PATH_TROT" alignment="left">=</Label>
+    <Field keyword="PATH_TROT" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_LIST_TRIN">Select LIST_TRIN</Button>
+    <Label keyword="EQLAB_LIST_TRIN" alignment="left">=</Label>
+    <Field keyword="LIST_TRIN" type="string" maxLength="91" editable="yes" sensitive="yes"/>
+    <Array keyword="INFO_TRIN" type="string" maxLength="128" columnName="INFO_TRIN" editable="yes" sensitive="yes" columnSize="121"/>
+    <Array keyword="PATH_TRIN" type="string" maxLength="128" columnName="PATH_TRIN" editable="yes" sensitive="yes" columnSize="121"/>
+    <Layout>
+     <Constraints component="LABEL_TIME_LOCK" xPos="1" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_LOCK" xPos="11" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_XY_SEPARATION" xPos="25" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XY_SEPARATION" xPos="39" yPos="1" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SET_HEADERS" xPos="1" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SET_HEADERS" xPos="13" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_BIN_HEADERS" xPos="25" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_HEADERS" xPos="37" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_BIN_GATHERS" xPos="44" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_GATHERS" xPos="56" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RESET_OFFSET" xPos="1" yPos="3" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RESET_OFFSET" xPos="14" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_OFFSET_OLD" xPos="25" yPos="3" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFFSET_OLD" xPos="40" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFFSET_NEW" xPos="44" yPos="3" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFFSET_NEW" xPos="59" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="1" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="9" yPos="4" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_Y" xPos="25" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="34" yPos="4" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SAVE_INFO_OUT" xPos="44" yPos="4" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAVE_INFO_OUT" xPos="58" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SOURCE_GATHER" xPos="1" yPos="5" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SOURCE_GATHER" xPos="15" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RECEIVER_GATHER" xPos="25" yPos="5" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RECEIVER_GATHER" xPos="41" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_X_TOT" xPos="1" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_TOT" xPos="9" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="20" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="29" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_LAST" xPos="40" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_LAST" xPos="49" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="60" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="68" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_TOT" xPos="1" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_TOT" xPos="9" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="20" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="29" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_LAST" xPos="40" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_LAST" xPos="49" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="60" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="68" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_INDEX" xPos="1" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_INDEX" xPos="12" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LINE_TITLE" xPos="1" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LINE_TITLE" xPos="12" yPos="10" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="READ_LIST" xPos="1" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="WRITE_LIST" xPos="25" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_TRIN" xPos="1" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TRIN" xPos="10" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_TROT" xPos="21" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TROT" xPos="30" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_INFO_TROT" xPos="1" yPos="14" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_INFO_TROT" xPos="18" yPos="14" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_TROT" xPos="19" yPos="14" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_TROT" xPos="1" yPos="15" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_TROT" xPos="18" yPos="15" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_TROT" xPos="19" yPos="15" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_LIST_TRIN" xPos="1" yPos="16" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_LIST_TRIN" xPos="18" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LIST_TRIN" xPos="19" yPos="16" xSize="91" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INFO_TRIN" xPos="1" yPos="17" xSize="121" ySize="5" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_TRIN" xPos="1" yPos="22" xSize="121" ySize="5" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="TIME_LOCK">
+      <Tip>File lock time in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - TIME_LOCK<br> File lock time in seconds.</center></b>
+<pre> Default = 60
+ Allowed = 1 &lt;= int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XY_SEPARATION">
+      <Tip>Sort separation distance.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - XY_SEPARATION<br> Sort separation distance.</center></b>
+<pre> Default = 0
+ Allowed = real &gt;= 0.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SET_HEADERS">
+      <Tip>Set the trace gather location to that of the first trace in gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - SET_HEADERS<br> Set the trace gather location to that of the first trace in gather.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If SET_HEADERS=NO  FXINFO will not reset header words to the xy grid.
+ If SET_HEADERS=YES FXINFO will     reset header words to the xy grid.
+ This will be done before any BIN_HEADERS operation and will preserve offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_HEADERS">
+      <Tip>Reset trace header words to the binned x,y grid.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - BIN_HEADERS<br> Reset trace header words to the binned x,y grid.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If BIN_HEADERS=NO  FXINFO will not reset header words to the xy grid.
+ If BIN_HEADERS=YES FXINFO will reset header words to the xy grid.
+ This will be done after any SET_HEADERS operation and will not preserve
+ offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_GATHERS">
+      <Tip>Reset trace header words to the binned x,y grid.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - BIN_GATHERS<br> Reset trace header words to the binned x,y grid.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If BIN_GATHERS=NO   FXINFO will not combine spearate gathers.
+ If BIN_GATHERS=YES  FXINFO will     combine spearate gathers.
+ offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RESET_OFFSET">
+      <Tip>Set the trace offset from the input source receiver locations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - RESET_OFFSET<br> Set the trace offset from the input source receiver locations.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If RESET_OFFSET =NO  FXINFO will not reset the input offset header word value.
+ If RESET_OFFSET =YES FXINFO will     reset the input offset header word value.
+ This accounts for a possible inconsistency in offset values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFFSET_OLD">
+      <Tip>Header word holding old offset value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - HDR_OFFSET_OLD<br> Header word holding old offset value.</center></b>
+<pre> Default = 55
+ Allowed = 1&lt;=int&lt;=64
+ The header word location for the old header word value.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFFSET_NEW">
+      <Tip>Header word holding new offset value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - HDR_OFFSET_NEW<br> Header word holding new offset value.</center></b>
+<pre> Default = 6 = HDR_OFFSET
+ Allowed = 1&lt;=int&lt;=64
+ The header word location for the new header word value.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word indicating the X direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - HDR_X<br> Header word indicating the X direction.</center></b>
+<pre> Default = 7
+ Allowed = 1&lt;=int&lt;=64
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word indicating the Y direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - HDR_Y<br> Header word indicating the Y direction.</center></b>
+<pre> Default = 7
+ Allowed = 1&lt;=int&lt;=64
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAVE_INFO_OUT">
+      <Tip>Save the info file for external output.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - SAVE_INFO_OUT<br> Save the info file for external output.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If SAVE_INFO_OUT=NO  FXINFO will not save the info for external output.
+ If SAVE_INFO_OUT=YES FXINFO will save the info file for external output.
+ offset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SOURCE_GATHER">
+      <Tip>Source gather flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - SOURCE_GATHER<br> Source gather flag.</center></b>
+<pre> Default = YES
+ Allowed = YES,NO
+ If SOURCE_GATHER=YES FXINFO will output info on shot gathers.
+ If SOURCE_GATHER=NO  FXINFO will output info on receiver gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RECEIVER_GATHER">
+      <Tip>Receiver gather flag.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - RECEIVER_GATHER<br> Receiver gather flag.</center></b>
+<pre> Default = NO
+ Allowed = YES,NO
+ If RECEIVER_GATHER=NO  FXINFO will output info on shot gathers.
+ If RECEIVER_GATHER=YES FXINFO will output info on receiver gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_TOT">
+      <Tip>Number of image locations to migrate data to in the INL direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - X_TOT<br> Number of image locations to migrate data to in the INL direction.</center></b>
+<pre> Default = 101
+ Allowed = int&gt;0
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>First INL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - X_INIT<br> First INL image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by HDR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_LAST">
+      <Tip>Last INL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - X_LAST<br> Last INL image location to migrate data to.</center></b>
+<pre> Default = 100
+ Allowed = real
+ Units are determined by HDR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>INL image location spacing to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - X_INC<br> INL image location spacing to migrate data to.</center></b>
+<pre> Default = 1
+ Allowed = real
+ Units are determined by HDR_X.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_TOT">
+      <Tip>Number of image locations to migrate data to in the CRL direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - Y_TOT<br> Number of image locations to migrate data to in the CRL direction.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0
+ The number of image traces output may be less than X_TOT*Y_TOT
+ if no input traces are ever migrated to a portion of the image.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>First CRL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - Y_INIT<br> First CRL image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by HDR_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_LAST">
+      <Tip>Last CRL image location to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - Y_LAST<br> Last CRL image location to migrate data to.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are determined by HDR_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>CRL image location spacing to migrate data to.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - Y_INC<br> CRL image location spacing to migrate data to.</center></b>
+<pre> Default = 1
+ Allowed = real
+ Units are determined by HDR_Y.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_INDEX">
+      <Tip>Integer index number for line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - LINE_INDEX<br> Integer index number for line.</center></b>
+<pre> Default = 1
+ Allowed = INT</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LINE_TITLE">
+      <Tip>Character title for line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - LINE_TITLE<br> Character title for line.</center></b>
+<pre> Default = NONE
+ Allowed = CHARACTER</pre></head></html>]]></Text>
+     </Help>
+     <Help component="READ_LIST">
+      <Tip>Press button to read the LIST_TRIN list of sum files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - READ_LIST<br> Press button to read the LIST_TRIN list of sum files.</center></b>
+<pre> When the READ_LIST button is pressed the
+ FXSORT  will read the LIST_TRIN list of sum files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WRITE_LIST">
+      <Tip>Press button to write the LIST_TRIN list of sum files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - WRITE_LIST<br> Press button to write the LIST_TRIN list of sum files.</center></b>
+<pre> When the WRITE_LIST button is pressed the
+ FXSORT  will write the LIST_TRIN list of sum files.
+ This will only happen if OPT_TRIN=PATH_TRIN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_TRIN">
+      <Tip>Set trace sum files from LIST_TRIN or INFO_TRIN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - OPT_TRIN<br> Set trace sum files from LIST_TRIN or INFO_TRIN.</center></b>
+<pre> Default = LIST_TRIN
+ Allowed = LIST_TRIN Set trace sum files from LIST_TRIN.
+ Allowed = INFO_TRIN Set trace sum files from INFO_TRIN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_TROT">
+      <Tip>Output the traces internaly or externaly.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - OPT_TROT<br> Output the traces internaly or externaly.</center></b>
+<pre> Default = INTERNAL
+ Allowed = EXTERNAL FXSORT will output traces externaly.
+ Allowed = INTERNAL FXSORT will output traces internaly.
+ Allowed = BOTH     FXSORT will output traces both internaly and externaly.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_INFO_TROT">
+      <Tip>Select the output trace file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - SELECT_INFO_TROT<br> Select the output trace file name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="INFO_TROT">
+      <Tip>Output trace file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - INFO_TROT<br> Output trace file name.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_TROT">
+      <Tip>Select the output trace file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - SELECT_PATH_TROT<br> Select the output trace file name.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_TROT">
+      <Tip>Output trace file name.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PATH_TROT<br> Output trace file name.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LIST_TRIN">
+      <Tip>Select the list file name of sum trace files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - SELECT_LIST_TRIN<br> Select the list file name of sum trace files.</center></b>
+<pre> The following is an example of a LIST_TRIN file which contains the names
+ of two files.
+ INFO_TRIN = (
+ /ptmp/poeplx01/scratch/hansodw/fxmig/fx01a.trc ,
+ /ptmp/poeplx01/scratch/hansodw/fxmig/fx01b.trc
+ )</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LIST_TRIN">
+      <Tip>List file name of sum trace files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - LIST_TRIN<br> List file name of sum trace files.</center></b>
+<pre> Default = NONE
+ Allowed = Character
+ The following is an example of a LIST_TRIN file which contains the names
+ of two files.
+ INFO_TRIN = (
+ /ptmp/poeplx01/scratch/hansodw/fxmig/fx01a.trc ,
+ /ptmp/poeplx01/scratch/hansodw/fxmig/fx01b.trc
+ )</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INFO_TRIN">
+      <Tip>List file name of sum info files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - INFO_TRIN<br> List file name of sum info files.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_TRIN">
+      <Tip>List file name of sum trace files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PATH_TRIN<br> List file name of sum trace files.</center></b>
+<pre> Default = NONE
+ Allowed = Character</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>fxsort - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fxsort">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : fxsort    ( FX SORT )
+ Category   : MIGRATIONS
+ Written    : 2004-08-10   by: Douglas Hanson
+ Revised    : 2006-04-25   by: Ioan Vlad  Remove unused variables.
+ Maturity   : production
+ Purpose    : Sort FX info data
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Purpose    : Sort FX info data
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ FXSORT is ment to be a trace header preprocess to adjust headers
+ for FX imaging.
+ A typical work flow might be
+ 
+ JOB 1) write shots to a TROT file TROT_1
+ 
+ JOB 2) Create and info file by running FXINFO with TROT_1
+        as the input and INFO_1 as the output
+ 
+ JOB 3) Run fxproject to sort shots from INFO_1 to INFO_1_GROUPED
+ 
+ JOB 4) A) Run fxsort to read sorted shots using INFO_1_GROUPED
+           and traces from TROT_1
+           1)  combine gathers that fall within a distance of XY_SEPARATION
+               from one another and which have a gather position has the same
+               nearest image node location.
+           2)  set the x,y source and receiver positions
+               to the nearest image node location
+           3)  set the x,y gather position ( either source or reciever)
+               to the same value for all traces in a gather.
+           4)  save old offset in header word 6
+           5)  save new offset in header word 55
+        B)  Run forward NMO using the old offset ( with DOPPLER=-1 )
+        C)  Run SETWORD to swap header words 6 and 55
+            to put the new offset in header word 6.
+        D)  Run inverse NMO using new offset ( with DOPPLER=-1 )
+        E)  Run TROT to create the new trace file TROT_2
+        F)  Run FXINFO to create the new info INFO_2
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+     Date        Author        Description
+     ----        ------        -----------
+  6  2006-04-25 Ioan Vlad      Remove unused variables.
+  5  2005-05-24 Douglas Hanson Check LIST_TRIN.
+  4  2005-01-31 R.S.Day        Promoted to beta.
+  3  2004-08-19 Douglas Hanson Add opt_trot.
+  2  2004-08-12 Douglas Hanson Use fxdata_get_info_type.
+  1  2004-08-10 Douglas Hanson Original version
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

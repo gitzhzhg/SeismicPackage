@@ -1,0 +1,49 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                             run_native_programs
+#-------------------------------------------------------------------------------
+# Run all specified native programs in the current directory.
+#
+# A list of the native programs must be passed as an argument.
+#
+# The native programs must have been linked before this script is run.
+# The list of native programs can also include scripts.
+#
+# The user will be prompted to press enter to continue before each test.
+# This action is disabled if the word AUTO is passed as a second argument.
+#-------------------------------------------------------------------------------
+
+
+set PROGRAMS = "$1"
+set AUTO     = "$2"
+
+if(`echo $PROGRAMS` == "") then
+   exit 0
+endif
+
+foreach program ($PROGRAMS)
+
+   echo ""
+   echo ""
+   echo ""
+   echo "---> ready to run native $program"
+   if ($AUTO != AUTO) then
+     echo "---> press enter to continue"
+     set xxx = $<
+   endif
+
+   ./$program $AUTO
+
+   echo ""
+   echo "---> finished running native $program"
+   if ($AUTO != AUTO) then
+     echo "---> press enter to continue"
+     set xxx = $<
+   endif
+
+end
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+

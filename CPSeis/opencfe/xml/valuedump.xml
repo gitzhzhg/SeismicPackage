@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="valuedump" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="CC3DPROCESS" title="CC3D Process" rows="24" columns="80">
+    <Label keyword="COMMENT_VALUEDUMPDUMPTRACEVALUES" alignment="center">VALUEDUMP (dump trace values to file)</Label>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG      =</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDDENOTINGFLAGGE" alignment="left">Header word denoting flagged traces.</Label>
+    <Label keyword="LABEL_TIME_INIT" alignment="left">TIME_INIT     =</Label>
+    <Field keyword="TIME_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FIRSTTRACETIMETODUMP" alignment="left">First trace time to dump.</Label>
+    <Label keyword="LABEL_TSTRT" alignment="left">TSTRT=</Label>
+    <Field keyword="TSTRT" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_INC" alignment="left">TIME_INC      =</Label>
+    <Field keyword="TIME_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TRACETIMEINCREMENTTODUMP" alignment="left">Trace time increment to dump.</Label>
+    <Label keyword="LABEL_DT" alignment="left">DT   =</Label>
+    <Field keyword="DT" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_LAST" alignment="left">TIME_LAST     =</Label>
+    <Field keyword="TIME_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_LASTTRACETIMETODUMP" alignment="left">Last trace time to dump.</Label>
+    <Label keyword="LABEL_TSTOP" alignment="left">TSTOP=</Label>
+    <Field keyword="TSTOP" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_SELF_DEFINING" alignment="left">SELF_DEFINING =</Label>
+    <Field keyword="SELF_DEFINING" type="comboButton" maxLength="4" sensitive="yes"/>
+    <Label keyword="COMMENT_PUTSELFDEFININGHEADERSEC" alignment="left">Put self-defining header section on the file.</Label>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <ArraySet keyword="LABEL_ARRAYSET" label="LABEL           HEADER WIDTH DECIMALS MULTIPLIER">
+     <Array keyword="LABEL" type="string" maxLength="16 " columnName="LABEL" editable="yes" sensitive="yes" columnSize="16"/>
+     <Array keyword="HEADER" type="string" maxLength="7  " columnName="HEADER" editable="yes" sensitive="yes" columnSize="7"/>
+     <Array keyword="WIDTH" type="int" maxLength="6  " columnName="WIDTH" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="DECIMALS" type="int" maxLength="9  " columnName="DECIMALS" editable="yes" sensitive="yes" columnSize="9"/>
+     <Array keyword="MULTIPLIER" type="float" maxLength="13 " columnName="MULTIPLIER" editable="yes" sensitive="yes" columnSize="13"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_VALUEDUMPDUMPTRACEVALUES" xPos="20" yPos="0" xSize="37" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="2" yPos="2" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="17" yPos="2" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDDENOTINGFLAGGE" xPos="31" yPos="2" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIME_INIT" xPos="2" yPos="4" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_INIT" xPos="17" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FIRSTTRACETIMETODUMP" xPos="31" yPos="4" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TSTRT" xPos="62" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TSTRT" xPos="68" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_INC" xPos="2" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_INC" xPos="17" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TRACETIMEINCREMENTTODUMP" xPos="31" yPos="5" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DT" xPos="62" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DT" xPos="68" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_LAST" xPos="2" yPos="6" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_LAST" xPos="17" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_LASTTRACETIMETODUMP" xPos="31" yPos="6" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TSTOP" xPos="62" yPos="6" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TSTOP" xPos="68" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_SELF_DEFINING" xPos="2" yPos="8" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELF_DEFINING" xPos="17" yPos="8" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_PUTSELFDEFININGHEADERSEC" xPos="31" yPos="8" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME" xPos="2" yPos="10" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="17" yPos="10" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="18" yPos="10" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="18" yPos="11" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ARRAYSET" xPos="10" yPos="13" xSize="54" ySize="9" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ 
+ If HDR_FLAG = 0, then all traces are dumped.
+ Otherwise, only traces with a flag set in header word HDR_FLAG are dumped.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_INIT">
+      <Tip>First trace time to dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - TIME_INIT<br> First trace time to dump.</center></b>
+<pre> Default = first time on trace.
+ Allowed = real (in seconds).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSTRT">
+      <Tip>First time on trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - TSTRT<br> First time on trace.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIME_INC">
+      <Tip>Trace time increment to dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - TIME_INC<br> Trace time increment to dump.</center></b>
+<pre> Default = 0.1
+ Allowed = real (in seconds).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DT">
+      <Tip>Trace sample interval.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - DT<br> Trace sample interval.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIME_LAST">
+      <Tip>Last trace time to dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - TIME_LAST<br> Last trace time to dump.</center></b>
+<pre> Default = last time on trace.
+ Allowed = real (in seconds).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSTOP">
+      <Tip>Last time on trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - TSTOP<br> Last time on trace.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELF_DEFINING">
+      <Tip>Whether to put a self-defining header section on the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - SELF_DEFINING<br> Whether to put a self-defining header section on the file.</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ 
+ If this parameter is YES, a self-defining header section, plus various
+ tags, will be put on the file.
+ 
+ If this parameter is NO, only the columns of numbers will be put on the
+ file, with the first line of the file containing the labels for the
+ columns.  This choice is useful if the file will be given to an outside
+ contractor.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Name for the output file containing trace value dump.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PATHNAME<br> Name for the output file containing trace value dump.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ A file name must be specified.
+ The extension .valuedump will always be appended.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="LABEL">
+      <Tip>Label identifying the values in each column on the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - LABEL<br> Label identifying the values in each column on the file.</center></b>
+<pre> Default = names built from the corresponding HEADER entries.
+ Allowed = any single word.
+ 
+ This is the identifier at the top of each column in the file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HEADER">
+      <Tip>CPS header word for the values in each column on the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - HEADER<br> CPS header word for the values in each column on the file.</center></b>
+<pre> Default = the six values 7, 8, 37, 38, T, and V.
+ Allowed = any valid header word (1 - NWIH) or the letter T or V.
+ 
+ Letter should be T (upper/lower case) for the column containing trace times.
+ Letter should be V (upper/lower case) for the column containing trace values.
+ 
+ Columns containing trace times and trace values are both required if either
+ one is specified.  In this case, several lines will be written to the file
+ for each trace.  Each line will correspond to a different trace time as
+ specified with the parameters TIME_INIT, TIME_INC, and TIME_LAST.
+ 
+ If both trace times and trace values are omitted, then only one line will
+ be written to the file for each trace, with the result that the file will
+ be a trace header dump only.  In this case the parameters TIME_INIT,
+ TIME_INC, and TIME_LAST are not used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIDTH">
+      <Tip>Width for each column on the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - WIDTH<br> Width for each column on the file.</center></b>
+<pre> Default = 12
+ Allowed = integer (&gt;= 0).
+ 
+ If this parameter is zero for any column, numbers in that column will take
+ up as much column width as required, with the result that the columns will
+ not be lined up vertically.
+ 
+ If this parameter is greater than zero for any column, all the numbers
+ in that column will be constrained to fit within the specified width if
+ possible, by lowering the number of significant figures if necessary.
+ It will be a fatal error if the column width is too narrow to do this.
+ 
+ This parameter should be greater than zero for all columns if you want
+ all columns to line up vertically.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DECIMALS">
+      <Tip>Maximum number of decimals for the values in each column.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - DECIMALS<br> Maximum number of decimals for the values in each column.</center></b>
+<pre> Default = 0 for header words, 3 for time, and 5 for trace value.
+ Allowed = integer (&gt;= 0).
+ 
+ No constraints are placed on the number of decimals if this parameter is
+ nearly as large as, or larger than, the column width.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MULTIPLIER">
+      <Tip>Number to multiply each value by before writing it to the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - MULTIPLIER<br> Number to multiply each value by before writing it to the file.</center></b>
+<pre> Default = 1.0
+ Allowed = any floating point number except zero.
+ 
+ Each column has a separate multiplier.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>valuedump - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="valuedump">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : VALUEDUMP
+ Category   : diagnostics
+ Written    : 2004-01-21   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Dump trace values to file.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Dump trace values to file.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+003. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+  2. 2005-01-03  Stoeckley  Improve some defaults.
+  1. 2004-01-21  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

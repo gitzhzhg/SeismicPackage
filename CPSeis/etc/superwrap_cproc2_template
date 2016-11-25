@@ -1,0 +1,46 @@
+
+/*------------------------------- UUUU -------------------------------*/
+/*------------------------------- UUUU -------------------------------*/
+/*------------------------------- UUUU -------------------------------*/
+
+
+#ifdef NEED_UNDERSCORE
+#define XXXX_superwrap_create            XXXX_superwrap_create_
+#define XXXX_superwrap_init              XXXX_superwrap_init_
+#define XXXX_superwrap_update            XXXX_superwrap_update_
+#define XXXX_superwrap_oneset            XXXX_superwrap_oneset_ 
+#define XXXX_superwrap_twosets           XXXX_superwrap_twosets_
+#define XXXX_superwrap_wrapup            XXXX_superwrap_wrapup_
+#define XXXX_superwrap_delete            XXXX_superwrap_delete_
+#elif defined NEED_CAPITALS
+#define XXXX_superwrap_create            UUUU_SUPERWRAP_CREATE
+#define XXXX_superwrap_init              UUUU_SUPERWRAP_INIT
+#define XXXX_superwrap_update            UUUU_SUPERWRAP_UPDATE
+#define XXXX_superwrap_oneset            UUUU_SUPERWRAP_ONESET 
+#define XXXX_superwrap_twosets           UUUU_SUPERWRAP_TWOSETS
+#define XXXX_superwrap_wrapup            UUUU_SUPERWRAP_WRAPUP
+#define XXXX_superwrap_delete            UUUU_SUPERWRAP_DELETE
+#endif
+
+
+ProcessCreate     XXXX_superwrap_create;
+ProcessInitialize XXXX_superwrap_init;
+ProcessUpdate     XXXX_superwrap_update;
+ProcessOneset     XXXX_superwrap_oneset;
+ProcessTwosets    XXXX_superwrap_twosets;
+ProcessWrapup     XXXX_superwrap_wrapup;
+ProcessDelete     XXXX_superwrap_delete;
+
+
+void superwrap_XXXX_startup (SuperMiddleStruct *THIS)
+{
+  THIS->create     = XXXX_superwrap_create;
+  THIS->initialize = XXXX_superwrap_init;
+  THIS->update     = XXXX_superwrap_update;
+  THIS->oneset     = XXXX_superwrap_oneset;
+  THIS->twosets    = XXXX_superwrap_twosets;
+  THIS->wrapup     = XXXX_superwrap_wrapup;
+  THIS->delete     = XXXX_superwrap_delete;
+}
+
+

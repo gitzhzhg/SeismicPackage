@@ -1,0 +1,216 @@
+!!!
+!!!                       Auxiliary Fortran Template
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!!  7. 2003-08-14  Goodger    Change the brief doc to indicate whether the
+!!!                            auxiliary file is a process or primitive.
+!!!  6. 2002-10-23  Stoeckley  Minor documentation and ident string changes.
+!!!  5. 2002-05-16  Stoeckley  Add brief doc section.
+!!!  4. 2001-10-22  Stoeckley  Add advice concerning the RCS ident string;
+!!!                             add code check-in instructions.
+!!!  3. 2000-10-06  Stoeckley  Fix RCS ident string line to be less likely
+!!!                             to exceed 80 characters.
+!!!  2. 1999-11-11  Stoeckley  Add ident string for RCS.
+!!!  1. 1999-09-10  Stoeckley  Initial version.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         GENERAL INFORMATION
+!!!
+!!! This is the template for Fortran auxiliary files.  Such auxiliary
+!!! files are to be used with, and considered part of, C-language primitive
+!!! modules which need fortran code.  Here are some of the reasons
+!!! why C-language primitives might need to incorporate Fortran code:
+!!!
+!!!  (1) because of the need for specific Fortran language features.
+!!!  (2) to facilitate an interface for calling certain Fortran primitives
+!!!        which do not have a C-language interface of their own.
+!!!  (3) to provide a Fortran-callable interface (wrapper) to the C-language
+!!!        primitive.
+!!!
+!!! In rare instances, a Fortran auxiliary file might be needed, and
+!!! considered part of, a Fortran primitive whose main implementation
+!!! is in another file.  This could be true if a Fortran interface is
+!!! needed to facilitate calling the primitive from C, and there are
+!!! reasons why this interface should be kept separate from the main
+!!! Fortran implementation file.  It is possible in this circumstance that
+!!! a C-language auxiliary file might also be needed which is called from
+!!! external C code and which in turn calls the Fortran auxiliary
+!!! file which finally calls the Fortran main implementation file.
+!!!
+!!! This template for Fortran auxiliary files constitutes part of the
+!!! standards for writing process and primitive modules for the Conoco
+!!! Processing System.  This template, including the instructions and
+!!! comments within this template, is to be used for creating auxiliary
+!!! files containing Fortran code which is an auxiliary part of a
+!!! C-language primitive, or (rarely) a Fortran process or primitive.
+!!!
+!!! Fortran auxiliary files should have the name of the process or primitive
+!!! plus the suffix "_frou" appended (before the extension) to the file
+!!! name.
+!!!
+!!! If code in this Fortran auxiliary file will be called only from the
+!!! C-language primitive to which it belongs, the header file should not
+!!! contain the prototypes for these Fortran routines; the prototypes should
+!!! reside in the main C-language implementation file.  But if any code in
+!!! this Fortran auxiliary file will be called from external C-language code
+!!! (outside of this primitive), the prototypes should be in a corresponding
+!!! header file.
+!!!
+!!! All of the instructions, comments, and sample code in this template are
+!!! commented out with three exclamation points to allow new code to be
+!!! inserted and tested without having to delete this information first.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                        SUPPORTING DOCUMENTS
+!!!
+!!! (1) Documentation accessed by the CPSDOC program.
+!!! (2) Templates for processes and primitives            (in ~sps/templates).
+!!! (3) Coding Standards for Mixing Programming Languages (in ~sps/templates).
+!!! (4) Detailed Fortran Coding Standards                 (in ~sps/templates).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       INITIAL STEPS TO PERFORM
+!!!
+!!! (1) Copy this template to a new file with the name "xxxx_frou.f90" where
+!!!     "xxxx" is the name of the (normally C-language) process or primitive
+!!!     to which this auxiliary file belongs.
+!!!
+!!! (2) Make the following replacements in this template wherever they occur:
+!!!     Replace  xxxx or XXXX  with the process or primitive name.
+!!!     Replace  2001-01-01    with the current check-in date (year-month-day).
+!!!     Replace      NNNN      with your name.
+!!!
+!!! (3) Insert your code into this template at locations where instructions
+!!!     are found.  Make sure all inserted code conforms to the appropriate
+!!!     standards, including naming conventions.
+!!!
+!!! (4) All documentation for this process or primitive, except for the
+!!!     brief doc and revision history of this auxiliary file, is to be
+!!!     included in the main file for this process or primitive.
+!!!
+!!! (5) Delete all instructions, comments, and sample code (lines beginning
+!!!     with !!!) in this file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       CODE CHECK-IN INSTRUCTIONS
+!!!
+!!! (1) Test the code thoroughly until you believe that it is ready
+!!!     for BETA TESTING if it is to be placed into betalib, or ALPHA
+!!!     TESTING if it is to be placed into alphalib.
+!!!
+!!! (2) Make sure the code compiles and works on all available compilers.
+!!!
+!!! (3) Make sure a new entry has been added to the revision history, and
+!!!     set this entry to the current check-in date.
+!!!
+!!! (4) Check the code using the checkc script.
+!!!
+!!! (5) Check in the new code before 3:00 p.m.
+!!!
+!!! (6) If this code is to be included by a user as a custom compile in
+!!!     a CPS job, you should make sure that the RCS ident string includes
+!!!     the file name, revision date, author, and maturity (custom) to
+!!!     insure that the correct information is displayed in the report file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!
+!!!
+!<CPS_v1 type="AUXILIARY_FILE"/>
+!!----------------------------- xxxx_frou.f90 -----------------------------!!
+!!----------------------------- xxxx_frou.f90 -----------------------------!!
+!!----------------------------- xxxx_frou.f90 -----------------------------!!
+
+        ! other files are:  xxxx.f90  xxxx.c  xxxx_crou.c  xxxx.h
+ 
+!!! --> Delete from the above list any other files which do NOT exist.
+!!! --> There must always be an xxxx.f90 or xxxx.c file (but not both).
+!!!
+!!!
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!!! -->  Keep either the process or primitive line below
+!
+!                   C P S   P R O C E S S 
+!                          or
+!                   C P S   P R I M I T I V E
+!
+! Name       : XXXX_FROU
+! Category   : should match the main file of this primitive.
+! Written    : 2001-01-01   by: NNNN
+! Revised    : 2001-01-01   by: NNNN
+! Maturity   : beta
+! Purpose    : should match the main file of this primitive.
+! Portability: No known limitations.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> All items in this section should be restricted to a single line.
+!!!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                     AUXILIARY FILE REVISION HISTORY 
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. 2001-01-01  NNNN       Initial version.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> This revision history should pertain only to this auxiliary file.
+!!!  --> The revision history in the main process or primitive implementation
+!!!  --> file should pertain only to the main implementation file.
+!!!
+!!!  --> The revision history should be listed in descending order, with
+!!!  --> the most recent revision at the top.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+
+!!-------------------------- start of coding ------------------------------!!
+!!-------------------------- start of coding ------------------------------!!
+!!-------------------------- start of coding ------------------------------!!
+
+
+      module xxxx_frou_module
+      implicit none
+
+      character(len=100),public,save :: XXXX_FROU_IDENT = &
+'$Id: auxiliary_fortran_template,v 1.6 2002/10/23 20:59:20 Stoeckley custom sps $'
+
+      end module xxxx_frou_module
+
+!!!
+!!! The above module is needed for the RCS ident string if for nothing else.
+!!! Put your Fortran code here or in the above module, depending on where
+!!! it has to reside.  If the Fortran routines are to be called from Fortran,
+!!! they should be in the module.  If the Fortran routines are to be called
+!!! from C, they cannot be in a module, but they can USE a module.
+!!!
+!!! There can be separate sections like this one for large routines
+!!! or related groups of routines.
+!!!
+!!!
+
+!!--------------------------------- end -----------------------------------!!
+!!--------------------------------- end -----------------------------------!!
+!!--------------------------------- end -----------------------------------!!
+

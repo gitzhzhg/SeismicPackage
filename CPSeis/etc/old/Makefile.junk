@@ -1,0 +1,290 @@
+#----- Bill's version of makefile for cpseis ...
+#----- This does not make jobmon (cluster job monitoring tool)
+#-----                 or cfe (the graphical user interface for cpseis)
+#----- AND it is dependent upon you having an gfortran32 and g++ compiler
+#----- AND it only builds on linux.
+#----- Much better make files exist that build for many platforms and build the
+#----- other tools, but this is all that I have time for (now!).
+#----- Bill Menger bill.menger@gmail.com
+#----- DO THIS:
+#-----    Put all your source in this directory, create a cpseis subdirectory with
+#-----    lib and etc underneath it for your builds.
+#-----    Modify the FFLAGS and CFLAGS to suit.
+#-----    Build fftw version 2.1.5 and locate it where the make can find it (see below) 
+#-----    make clean all
+#-----    test system with icps by running it through test.wrk with the following:
+#-----    ./cpseis/bin/icps test.wrk
+CPSEIS_HOME = $(CPSEIS_INSTALL_DIR)
+CPSEIS_ARCH = junk
+SRCDIR = $(CPSEIS_HOME)/src
+LIBDIR = $(CPSEIS_HOME)/lib/$(CPSEIS_ARCH)
+BINDIR = $(CPSEIS_HOME)/bin/$(CPSEIS_ARCH)
+MODDIR = $(CPSEIS_HOME)/mod/$(CPSEIS_ARCH)
+OBJDIR = $(CPSEIS_HOME)/obj/$(CPSEIS_ARCH)
+CFEDIR = $(CPSEIS_HOME)/opencfe/src
+THIRDPARTY = $(THIRDPARTY_INSTALL_DIR)
+#
+
+ICPS =					$(BINDIR)/icps                # "interactive" cpseis (non parallel version)
+BANNER =                                $(BINDIR)/banner              # bsd banner program
+EZCPS =					$(BINDIR)/ezcps               # Tool to build a template for adding a new module (tool) to cpseis
+EZGUI =					$(BINDIR)/ezgui               # Tool for laying out the gui for your new module.
+EZSUB =					$(BINDIR)/ezsub               # I can't remember what this is for, but I'll get back...
+SPS_BUILD_SUPERPROC =	$(BINDIR)/sps_build_superproc # This builds wrapper code
+CMDTIM =                $(BINDIR)/command_timeout     # wraps a shell command with a signal timer to kill if it takes too long.
+BLDSUP =				$(BINDIR)/bldsup			  # builds the super.f90 program for CFE building.
+CFEBLD =				$(BINDIR)/cfebld              # Builds stand-alone jobs from work files.
+CFESER =                $(BINDIR)/cfeseries           # Creates a job series by using one workfile template and generating many.
+CFESUB =                $(BINDIR)/cfesub              # submits jobs from cfe front end gui.
+CHECKC =				$(BINDIR)/checkc              # Looks over your code to see if it meets the old conoco standards.
+CFE =					$(BINDIR)/cfe                 # This is the front end system (not built yet)
+CKCOMLOGS =				$(BINDIR)/ckcomlogs           # extracts information from the log files.
+COLOR2CGM =				$(BINDIR)/color2cgm           # for the splt and color tools, this creates cgm output for plotter hardcopy
+CPSACCTPRG =			$(BINDIR)/cpsacct             # Looks at the accounting logs to do run statistics extraction.
+FILERESERVE =			$(BINDIR)/filereserve         # reserves file space for an output by prewriting blocks of zeroes.
+FILERESERVENA =			$(BINDIR)/filereservena       # Does the same on network appliance systems (requires root access to the NA)
+FX2FR =					$(BINDIR)/fx2fr               # Can't remember what this does.
+FSIZE =					$(BINDIR)/fsize               # Attempts to tell you how large your file will be based on number of traces.
+JUNK2BLANK =			$(BINDIR)/junk2blank          # Strips out nonprintable characters from a file.
+PERMSAVE =				$(BINDIR)/permsave            # Helps you create a file list for copy to tape for archiving.
+PFTOOLS =				$(BINDIR)/pftools             # creates prm, pcp, psz... which allow you to do file operations on the
+	                                              # multiple-extent files from cpseis.  If you just to an "rm" on one of these
+	                                              # then you will only remove the link that points to the first file extent and
+	                                              # you will leave lots of data orphaned on your file system.  Read the documentation
+	                                              # in pfio, cio, bfio, pftools.
+PICKMERGE =				$(BINDIR)/pickmerge           # Merges pick files but I don't know what to do with this. 
+REFRESHLOCK =			$(BINDIR)/refreshlock         # If you choose to start up lock files for your data, this is a daemon that
+	                                              # needs to be running on your lock file server.  It attempts to restart lock
+	                                              # servers that are hung.  Doesn't always work.  I LOVE nfs. :^(
+RSH_TIMEOUT =			$(BINDIR)/rsh_timeout         # Wraps an rsh command in a timer that kills it after a wait period.
+SD2FG =					$(BINDIR)/sd2fg               # This is for geometry set up for the fg module (field geometry).
+SEGYFIX =				$(BINDIR)/segyfix             # Allows you to modify segy files (don't know how useful it is.)
+SEGYVIEW =				$(BINDIR)/segyview            # REALLY cheezy non-graphical segy file viewer.  It will REMAP the segy headers
+	                                              # into cpseis headers so it won't always tell you what you need, but it does
+	                                              # a tab plot shamelessly borrowed from cwp's su system.
+
+STATIC_EXT = .a
+SHARED_EXT = .so
+#--------------- Here is where you need to modify the make file to point to your fft library.
+FFTW_LDFLAGS =  -L$(THIRDPARTY)/lib -lfftw -lrfftw
+MPI_LDFLAGS =   -L$(THIRDPARTY)/lib -lmpich -lfmpich
+
+F90 = mpif90
+CC  = mpicc
+STATIC_LINKER = mpif90 -nofor-main
+#STATIC_LINKER = gfortran -static -static-libgcc
+#SHARED_LINKER = gfortran -shared
+SHARED_LINKER = mpif90 -shared
+F90_LINK_DIR = 
+#
+#FFLAGS = -g -fPIC -fno-range-check -fno-second-underscore -ffree-form 
+FFLAGS = -g -O2 -fPIC -gen-interfaces -I$(MODDIR) -module $(MODDIR)
+CFLAGS = -g -fPIC -DLINUXI -DNEED_UNDERSCORE -D_REENTRANT -D_FILE_OFFSET_BITS=64 -I. -DLINUXGCC
+CLIBS  = -L$(THIRDPARTY)/lib/shared -lmpich  -L$(THIRDPARTY)/lib -lfmpich
+
+#Linker flags
+LDFLAGS = -L../lib -L$(FFTW_LDFLAGS) -lm -lpthread $(MPI_LDFLAGS) -lm -lpthread
+
+STATIC_LIBCPS = $(LIBDIR)/libcps$(STATIC_EXT)
+SHARED_LIBCPS = $(LIBDIR)/libcps$(SHARED_EXT)
+
+STATIC_LIBCGM = $(LIBDIR)/libcgm$(STATIC_EXT)
+SHARED_LIBCGM = $(LIBDIR)/libcgm$(SHARED_EXT)
+
+INSTALL_DIR = $(BINDIR)
+
+all :	icps static shared cfebld ezcps ezgui \
+		sps_build_superproc command_timeout cfeseries \
+		cfesub ckcomlogs cpsacct filereserve filereservena \
+		color2cgm fx2fr fsize pftools pickmerge refreshlock \
+		rsh_timeout sd2fg segyfix segyview ezsub junk2blank \
+		permsave checkc objs banner
+#---------------
+#		cfe jobmon\
+
+
+install:
+	ln -s $(CPSEIS_HOME)/scripts/* $(BINDIR)
+	#cp $(BINDIR)/* $(INSTALL_DIR)
+
+clean : 
+	rm -f $(OBJDIR)/*.o $(MODDIR)/*.mod 
+
+clean_all: 
+	rm -f $(BINDIR)/* $(OBJDIR)/*.o $(MODDIR)/*.mod
+	#rm -f $(INSTALL_DIR)libcgm.a $(INSTALL_DIR)libcgm.so $(INSTALL_DIR)libopencfe.so $(INSTALL_DIR)libcps.a $(INSTALL_DIR)libcps.so
+	rm -f $(STATIC_LIBCPS) $(SHARED_LIBCPS) $(STATIC_LIBCGM) $(SHARED_LIBCGM)
+
+clean_shared :
+	rm -f $(SHARED_LIBCPS)
+
+static : $(STATIC_LIBCPS) $(STATIC_LIBCGM)
+
+shared : $(SHARED_LIBCPS) $(SHARED_LIBCGM)
+
+shared_libcps : $(SHARED_LIBCPS)
+
+include $(CPSEIS_HOME)/etc/makefile_junk.depend
+
+OBJS = $(COBJS) $(FOBJS) $(FPROBJS) $(CPROBJS) $(CGMOBJS) $(MPIOBJS)
+
+objs : $(OBJS)
+
+progs : icps cfebld ezcps ezgui sps_build_superproc command_timeout cfeseries \
+	cfesub ckcomlogs cpsacct filereserve filereservena \
+	color2cgm fx2fr fsize pftools pickmerge refreshlock \
+	rsh_timeout sd2fg segyfix segyview ezsub junk2blank \
+	permsave checkc objs
+
+cfe :	$(SHARED_LIBCPS)
+	cd $(CFEDIR) && make -f Makefile.$(CPSEIS_ARCH) clean all install
+
+banner : banner.c
+	gcc -o $(BANNER) banner.c
+
+icps : $(OBJDIR)/icps.o $(STATIC_LIBCPS) $(FPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(ICPS) $(OBJDIR)/icps.o $(OBJDIR)/engine.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+ezcps : $(OBJDIR)/ezcps.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(EZCPS) $(OBJDIR)/ezcps.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+bldsup : $(OBJDIR)/bldsup.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(BLDSUP) $(OBJDIR)/bldsup.o $(OBJDIR)/build_super.o \
+	$(STATIC_LIBCPS) $(LDFLAGS)
+
+checkc : $(OBJDIR)/checkc.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CHECKC) $(OBJDIR)/checkc.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+ezgui : $(OBJDIR)/ezgui.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(EZGUI) $(OBJDIR)/ezgui.o $(OBJDIR)/ezgui_frou.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+ezsub : $(OBJDIR)/ezsub.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(EZSUB) $(OBJDIR)/ezsub.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+permsave : $(OBJDIR)/permsave.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(PERMSAVE) $(OBJDIR)/permsave.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+junk2blank : $(OBJDIR)/junk2blank.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(JUNK2BLANK) $(OBJDIR)/junk2blank.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+command_timeout : command_timeout.o
+	$(STATIC_LINKER) $(FFLAGS) -o $(CMDTIM) $(OBJDIR)/command_timeout.o $(LDFLAGS)
+
+sps_build_superproc : sps_build_superproc.f90 \
+	$(OBJDIR)/alphasort.o $(OBJDIR)/getsys.o $(OBJDIR)/putsys.o $(OBJDIR)/string.o $(OBJDIR)/named_constants.o \
+	$(OBJDIR)/sizeof.o $(OBJDIR)/string_crou.o  $(OBJDIR)/sizeof_crou.o $(OBJDIR)/cgetsys.o $(OBJDIR)/str.o \
+	$(OBJDIR)/cputsys.o $(OBJDIR)/cnfg.o $(OBJDIR)/cnfg_crou.o $(OBJDIR)/unix.o $(OBJDIR)/unix_crou.o $(OBJDIR)/sizeof_crou.o \
+	$(STATIC_LINKER) $(FFLAGS) -o $(SPS_BUILD_SUPERPROC) sps_build_superproc.f90 \
+	$(OBJDIR)/alphasort.o $(OBJDIR)/getsys.o $(OBJDIR)/putsys.o $(OBJDIR)/string.o $(OBJDIR)/named_constants.o \
+	$(OBJDIR)/sizeof.o $(OBJDIR)/sizeof_crou.o $(OBJDIR)/string_crou.o $(OBJDIR)/cgetsys.o $(OBJDIR)/str.o \
+	$(OBJDIR)/cputsys.o $(OBJDIR)/cnfg.o $(OBJDIR)/cnfg_crou.o $(OBJDIR)/unix.o $(OBJDIR)/unix_crou.o $(LDFLAGS)
+
+cfebld : cfebldbeta.c buildjob.f90 cfebld_frou.f90 $(CPROBJS) $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CFEBLD) $(OBJDIR)/cfebldbeta.o $(OBJDIR)/buildjob.o $(OBJDIR)/cfebld_frou.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+cfeseries : $(OBJDIR)/cfeseries.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CFESER) $(OBJDIR)/cfeseries.o $(OBJDIR)/cfeseries_frou.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+cfesub : $(OBJDIR)/cfesub.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CFESUB) $(OBJDIR)/cfesub.o $(OBJDIR)/cfesub_frou.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+ckcomlogs : $(OBJDIR)/ckcomlogs.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CKCOMLOGS) $(OBJDIR)/ckcomlogs.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+cpsacct : $(OBJDIR)/cpsacctprg.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CPSACCTPRG) $(OBJDIR)/cpsacctprg.o $(OBJDIR)/cnfg.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+filereserve : $(OBJDIR)/filereserve.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FILERESERVE) $(OBJDIR)/filereserve.o $(OBJDIR)/pfio.o $(OBJDIR)/str.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+filereservena : $(OBJDIR)/filereservenetapps.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FILERESERVENA) $(OBJDIR)/filereservenetapps.o $(OBJDIR)/pfio.o $(OBJDIR)/cnfg.o \
+	$(STATIC_LIBCPS) $(LDFLAGS)
+
+color2cgm : $(OBJDIR)/color2cgm.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(COLOR2CGM) $(OBJDIR)/color2cgm.o $(STATIC_LIBCPS) $(STATIC_LIBCGM) $(LDFLAGS)
+
+fx2fr : $(OBJDIR)/fx2fr.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FX2FR) $(OBJDIR)/fx2fr.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+fsize : $(OBJDIR)/fsize.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FSIZE) $(OBJDIR)/fsize.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+pftools : $(OBJDIR)/pftools.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(PFTOOLS) $(OBJDIR)/pftools.o $(STATIC_LIBCPS) $(LDFLAGS)
+	ln -f $(PFTOOLS) $(BINDIR)/psz
+	ln -f $(PFTOOLS) $(BINDIR)/pcp
+	ln -f $(PFTOOLS) $(BINDIR)/pchmod
+	ln -f $(PFTOOLS) $(BINDIR)/pmv
+	ln -f $(PFTOOLS) $(BINDIR)/prcp
+	ln -f $(PFTOOLS) $(BINDIR)/prm
+	ln -f $(PFTOOLS) $(BINDIR)/ulf
+	ln -f $(PFTOOLS) $(BINDIR)/lfd
+
+pickmerge : $(OBJDIR)/pickmerge.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(PICKMERGE) $(OBJDIR)/pickmerge.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+refreshlock : $(OBJDIR)/refreshlock.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(REFRESHLOCK) $(OBJDIR)/refreshlock.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+rsh_timeout : $(OBJDIR)/rsh_timeout.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(RSH_TIMEOUT) $(OBJDIR)/rsh_timeout.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+sd2fg : $(OBJDIR)/sd2fg.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(SD2FG) $(OBJDIR)/sd2fg.o $(STATIC_LIBCPS) $(LDFLAGS)
+
+segyfix : $(OBJDIR)/segyfix.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(SEGYFIX) $(OBJDIR)/segyfix.o $(OBJDIR)/modgrid.o $(OBJDIR)/modgrid_frou.o \
+	$(STATIC_LIBCPS) $(LDFLAGS)
+
+segyview : $(OBJDIR)/segyview.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(SEGYVIEW) $(OBJDIR)/segyview.o $(OBJDIR)/cio.o $(OBJDIR)/named_constants.o $(OBJDIR)/put.o $(OBJDIR)/segy.o \
+	$(OBJDIR)/swap.o $(OBJDIR)/trcio.o $(OBJDIR)/wrdc.o $(OBJDIR)/put_crou.o $(OBJDIR)/segy_crou.o \
+	$(STATIC_LIBCPS) $(LDFLAGS)
+
+$(STATIC_LIBCPS) : $(COBJS) $(FOBJS)
+	ar crv $@ $?
+
+$(SHARED_LIBCPS) : $(COBJS) $(FOBJS) $(MPIOBJS)
+	$(SHARED_LINKER) $(CFLAGS) $(CLIBS) -o $@ $? 
+
+$(STATIC_LIBCGM) : $(CGMOBJS) $(OBJDIR)/cgm.o
+	ar crv $@ $?
+
+$(SHARED_LIBCGM) : $(CGMOBJS) $(OBJDIR)/cgm.o
+	$(SHARED_LINKER) -o $@ $? $(LDFLAGS)
+
+$(COBJS) : %.o : %.c
+	$(CC) -c -o $(OBJDIR)/$@ $(CFLAGS) $<
+
+$(FOBJS) : %.o : %.f90
+	$(F90) -c -o $(OBJDIR)/$@ $(FFLAGS) $<
+
+$(FPROBJS) : %.o : %.f90
+	$(F90) -c -o $(OBJDIR)/$@ $(FFLAGS) $<
+
+$(CPROBJS) : %.o : %.c
+	$(CC) -c -o $(OBJDIR)/$@ $(CFLAGS) $<
+
+$(MPIOBJS) : %.o : %.c
+	$(CC) -c -o $(OBJDIR)/$@ $(CFLAGS) $<
+
+$(CGMOBJS) : %.o : %.c
+	$(CC) -c -o $(OBJDIR)/$@ $(CFLAGS) $<
+
+#%.f90 : 
+#	cp `findcps $@` $@
+
+#%.h :
+#	cp `findcps $@` $@
+
+#%.c :
+#	cp `findcps $@` $@
+
+
+.PHONY: all clean static shared icps cfebld ezcps ezgui \
+		sps_build_superproc command_timeout cfeseries \
+		cfesub ckcomlogs cpsacct filereserve filereservena \
+		color2cgm fx2fr fsize pftools pickmerge refreshlock \
+		rsh_timeout sd2fg segyfix segyview ezsub junk2blank \
+		permsave checkc objs progs cfe banner

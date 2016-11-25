@@ -1,0 +1,585 @@
+!<CPS_v1 type="PRIMITIVE"/>
+
+!!----------------------------- super.f90 ---------------------------------!!
+!!----------------------------- super.f90 ---------------------------------!!
+!!----------------------------- super.f90 ---------------------------------!!
+
+!    other files are:  super_wrapper.f90  super_frou.f90  super_crou.c
+
+
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                        C P S  P R I M I T I V E
+!
+! Name       : super
+! Category   : cfe
+! Written    : 1999-09-09   by: Donna K. Vunderink
+!!!!REVISED
+! Purpose    : CFE Super Process Object Module.
+! Portability: No known limitations.
+!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                         GENERAL DESCRIPTION
+!
+! This module provides generic access to all CPS processes.  It is
+! somewhat analogous to a base class in object-oriented languages.
+!
+!-------------------------------------------------------------------------------
+!</descript_doc>
+
+
+!<calling_doc>
+!-------------------------------------------------------------------------------
+!                      INPUT AND OUTPUT ARGUMENTS
+!
+! For each subroutine or function documented below, each argument is
+! flagged as follows:
+!   i = intent(in)    = value required upon INPUT.
+!   o = intent(out)   = value set by the routine upon OUTPUT.
+!   b = intent(inout) = value BOTH required upon input and changed upon output.
+!
+! Optional arguments are also flagged as follows:
+!   opt = this argument is optional.
+!
+!-------------------------------------------------------------------------------
+!                          CALLING SEQUENCE
+!
+!                                   o       i
+!        call super_create        (obj, process_name)
+!
+!                                   b
+!        call super_initialize    (obj)
+!        call super_update        (obj)
+!        call super_wrapup        (obj)
+!        call super_delete        (obj)
+!
+!                                   i        o
+!        call super_get_name      (obj, process_name)
+!
+!                                   b    b    b    b
+!        call super_oneset        (obj, ntr, hd,  tr)
+!        call super_twosets       (obj, ntr, hd1, tr1, hd2, tr2)
+!                                   b    b    b    b    o    o
+!
+!                                                                   opt
+!                                       o             o              i
+!        call super_list          (process_list, nprocess_list, category_name)
+!
+!       o                               i
+!     valid = super_validate      (process_name)
+!
+!                                       i
+!        call super_set_view      (desired_view)
+!
+!                                       i          o
+!        call super_get_rcs_ident (process_name, ident)
+!
+!
+! type(super_struct),pointer          obj = pointer to the SUPER structure.
+! character(*)               process_name = name of CPS process.
+! integer                             ntr = number of traces in and out.
+! double precision                hd(:,:) = input and output trace headers.
+! real                            tr(:,:) = input and output traces.
+! double precision               hd1(:,:) = input trace headers.
+! real                           tr1(:,:) = input traces.
+! double precision               hd2(:,:) = output trace headers.
+! real                           tr2(:,:) = output traces.
+! character(*)              category_name = name of CPS process category.
+! character(*),pointer    process_list(:) = pointer to list of CPS processes.
+! integer                   nprocess_list = number of CPS processes.
+! logical                           valid = true if process name is valid.
+! integer                    desired_view = index of desired view.
+! character(*)                      ident = RCS ident of specified CPS process.
+!
+! PROCESS_LIST must be nullified before first use.  It will be deallocated
+! (if associated) and then reallocated to contain a list of NPROCESS_LIST
+! processes.
+!
+! DESIRED_VIEW must be set to one of the following named constants:
+!                         SUPER_PRODUCTION
+!                         SUPER_BETA     
+!                         SUPER_ALPHA   
+!                         SUPER_RAW    
+!
+! Note: HD1 and TR1 are intent(inout) rather than intent(in) because some
+! processes might alter the input traces while working with them.
+!
+!-------------------------------------------------------------------------------
+!</calling_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                           REVISION HISTORY
+!
+!     Date        Author           Description
+!     ----        ------           -----------
+!!!!HISTORY
+!  1. 1999-09-09  Vunderink        Initial version.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<portability_doc>
+!-------------------------------------------------------------------------------
+!                         PORTABILITY LIMITATIONS
+!
+! No known limitations.
+!
+!-------------------------------------------------------------------------------
+!</portability_doc>
+
+
+!<compile_doc>
+!-------------------------------------------------------------------------------
+!                      SPECIAL COMPILING REQUIREMENTS
+!
+! No special requirements.
+!
+!-------------------------------------------------------------------------------
+!</compile_doc>
+
+
+!<algorithm_doc>
+!-------------------------------------------------------------------------------
+!                   ALGORITHM DESCRIPTION FOR DEVELOPERS
+!
+!
+!-------------------------------------------------------------------------------
+!</algorithm_doc>
+
+
+!<programming_doc>
+!-------------------------------------------------------------------------------
+!                           PROGRAMMING NOTES
+!
+!
+!-------------------------------------------------------------------------------
+!</programming_doc>
+
+
+!<process_list>
+!!!!LIST
+!</process_list>
+
+
+!!-------------------------- start of module ------------------------------!!
+!!-------------------------- start of module ------------------------------!!
+!!-------------------------- start of module ------------------------------!!
+
+
+      module super_module
+      use pc_module
+      use named_constants_module
+      use string_module
+      use cio_module
+
+!!!!USE
+
+      implicit none
+      private
+      public :: super_create
+      public :: super_initialize
+      public :: super_update
+      public :: super_wrapup
+      public :: super_oneset
+      public :: super_twosets
+      public :: super_delete
+      public :: super_list
+      public :: super_validate
+      public :: super_set_view
+      public :: super_get_name
+      public :: super_get_rcs_ident
+
+      character(len=100),public,save :: super_ident = &
+       '$Id: super.f90,v 1.126 2003/07/17 21:54:16 Goodger beta sps $'
+
+
+!!---------------------- parameter structure -------------------------------!!
+!!---------------------- parameter structure -------------------------------!!
+!!---------------------- parameter structure -------------------------------!!
+
+
+      type,public :: super_struct
+
+        private
+        character(len=PC_LENGTH) :: name
+
+!!!!STRUCT
+
+      end type super_struct
+
+      type :: plist_struct
+        character(len=PC_LENGTH) :: process
+        character(len=20)        :: category
+        integer                  :: maturity
+      end type plist_struct
+
+      integer,parameter,public   :: SUPER_PRODUCTION = 1
+      integer,parameter,public   :: SUPER_BETA       = 2
+      integer,parameter,public   :: SUPER_ALPHA      = 3
+      integer,parameter,public   :: SUPER_RAW        = 4
+!!!!LEN_ALL
+
+      type(plist_struct)         :: all(LEN_ALL)
+      integer,save               :: view = SUPER_BETA
+      logical,save               :: first_time = .TRUE.
+
+      contains
+
+
+!!----------------------------- create -------------------------------------!!
+!!----------------------------- create -------------------------------------!!
+!!----------------------------- create -------------------------------------!!
+
+
+      subroutine super_create (obj,process_name)
+      implicit none
+      type(super_struct),pointer       :: obj                !argument
+      character(len=*),intent(in)      :: process_name       !argument
+
+      allocate (obj)
+
+!!!!NULLIFY
+
+      obj%name = process_name
+      call string_to_upper (obj%name)
+
+      select case (obj%name)
+
+!!!!CREATE
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      end subroutine super_create
+
+
+!!------------------------------- delete -----------------------------------!!
+!!------------------------------- delete -----------------------------------!!
+!!------------------------------- delete -----------------------------------!!
+
+
+      subroutine super_delete (obj)
+      implicit none
+      type(super_struct),pointer       :: obj                !argument
+
+      if (.not. associated(obj)) return
+
+      print *,'deleting process '//trim(obj%name)
+
+      select case (obj%name)
+
+!!!!DELETE
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      deallocate(obj)
+
+      end subroutine super_delete
+
+
+!!----------------------------- initialize ---------------------------------!!
+!!----------------------------- initialize ---------------------------------!!
+!!----------------------------- initialize ---------------------------------!!
+
+
+      subroutine super_initialize (obj)
+      implicit none
+      type(super_struct),pointer       :: obj                !argument
+
+      select case (obj%name)
+
+!!!!INITIALIZE
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      end subroutine super_initialize
+
+
+!!------------------------------- update -----------------------------------!!
+!!------------------------------- update -----------------------------------!!
+!!------------------------------- update -----------------------------------!!
+
+
+      subroutine super_update (obj)
+      implicit none
+      type(super_struct),pointer       :: obj                !argument
+
+
+      if (.not. associated(obj)) return
+
+      select case (obj%name)
+
+!!!!UPDATE
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      end subroutine super_update
+
+
+!!------------------------ get rcs ident -------------------------------!!
+!!------------------------ get rcs ident -------------------------------!!
+!!------------------------ get rcs ident -------------------------------!!
+
+
+      subroutine super_get_rcs_ident (name,ident)
+      implicit none
+      character(len=*)  ,intent(in)    :: name               !argument
+      character(len=*)  ,intent(out)   :: ident              !argument
+
+      select case (name)
+
+!!!!IDENT
+
+      case default ; print *, "Invalid process "//trim(name)
+      end select
+
+      end subroutine super_get_rcs_ident
+
+
+!!----------------------------- wrapup ---------------------------------!!
+!!----------------------------- wrapup ---------------------------------!!
+!!----------------------------- wrapup ---------------------------------!!
+
+
+      subroutine super_wrapup (obj)
+      implicit none
+      type(super_struct),pointer       :: obj                !argument
+
+
+      select case (obj%name)
+
+!!!!WRAPUP
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      end subroutine super_wrapup
+
+
+!!----------------------------- oneset ---------------------------------!!
+!!----------------------------- oneset ---------------------------------!!
+!!----------------------------- oneset ---------------------------------!!
+
+
+      subroutine super_oneset (obj,ntr,hd,tr)
+      implicit none
+      type(super_struct),pointer       :: obj               ! arguments
+      integer           ,intent(inout) :: ntr               ! arguments
+      double precision  ,intent(inout) :: hd(:,:)           ! arguments
+      real              ,intent(inout) :: tr(:,:)           ! arguments
+
+      select case (obj%name)
+
+!!!!ONESET
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      end subroutine super_oneset
+
+
+!!----------------------------- twosets ---------------------------------!!
+!!----------------------------- twosets ---------------------------------!!
+!!----------------------------- twosets ---------------------------------!!
+
+
+      subroutine super_twosets (obj,ntr,hd1,tr1,hd2,tr2)
+      implicit none
+      type(super_struct),pointer       :: obj               ! arguments
+      integer           ,intent(inout) :: ntr               ! arguments
+      double precision  ,intent(inout) :: hd1(:,:)          ! arguments
+      real              ,intent(inout) :: tr1(:,:)          ! arguments
+      double precision  ,intent(inout) :: hd2(:,:)          ! arguments
+      real              ,intent(inout) :: tr2(:,:)          ! arguments
+
+      select case (obj%name)
+
+!!!!TWOSETS
+
+      case default ; call pc_error ("Invalid process",obj%name)
+      end select
+
+      end subroutine super_twosets
+
+
+!!------------------------------ load_list ---------------------------------!!
+!!------------------------------ load_list ---------------------------------!!
+!!------------------------------ load_list ---------------------------------!!
+
+
+      subroutine super_load_list
+
+!!!!LOADLIST
+      first_time = .FALSE.
+
+      end subroutine super_load_list
+
+
+!!-------------------------------- list ------------------------------------!!
+!!-------------------------------- list ------------------------------------!!
+!!-------------------------------- list ------------------------------------!!
+
+
+      subroutine super_list (process_list,nprocess_list,category_name)
+      implicit none
+      character(len=*),pointer             :: process_list(:)    ! argument
+      integer         ,intent(out)         :: nprocess_list      ! argument
+      character(len=*),optional,intent(in) :: category_name      ! argument
+      character(len=PC_LENGTH)             :: category           ! local
+      integer                              :: i                  ! local
+      integer                              :: istat              ! local
+
+      if (first_time) call super_load_list
+
+      if (present(category_name)) then
+        category = category_name
+        call string_to_upper(category)
+      else
+        category = 'ALL_PROCESSES'
+      endif
+
+      nprocess_list = 0
+      if (associated(process_list)) then
+        deallocate(process_list,stat=istat)
+        if (istat /= 0) then
+          print *,'super_list: deallocate error istat=',istat
+        endif
+      endif
+
+      select case (category)
+        case ('ALL_PROCESSES')
+          nprocess_list = 0
+          do i=1,LEN_ALL
+            if (view >= all(i)%maturity) nprocess_list = nprocess_list + 1
+          enddo
+          if (nprocess_list > 0) then
+            allocate(process_list(nprocess_list))
+            nprocess_list = 0
+            do i=1,LEN_ALL
+              if (view >= all(i)%maturity) then
+                nprocess_list = nprocess_list + 1
+                process_list(nprocess_list) = all(i)%process
+              endif
+            enddo
+          endif
+
+        case default
+          nprocess_list = 0
+          do i=1,LEN_ALL
+            if (all(i)%category == category .and.    &
+                view >= all(i)%maturity) nprocess_list = nprocess_list + 1
+          enddo
+          if (nprocess_list > 0) then
+            allocate(process_list(nprocess_list))
+            nprocess_list = 0
+            do i=1,LEN_ALL
+              if (all(i)%category == category .and.  &
+                  view >= all(i)%maturity) then
+                nprocess_list = nprocess_list + 1
+                process_list(nprocess_list) = all(i)%process
+              endif
+            enddo
+          endif
+      end select
+
+      if (.not. associated(process_list)) then
+        allocate(process_list(1))
+        process_list(1) = ' '
+      endif
+
+      end subroutine super_list
+
+
+!!------------------------------ validate ----------------------------------!!
+!!------------------------------ validate ----------------------------------!!
+!!------------------------------ validate ----------------------------------!!
+
+
+      function super_validate (process_name) result (valid)
+      implicit none
+      character(len=*),intent(in)      :: process_name       !argument
+      logical                          :: valid              !result
+
+      character(len=PC_LENGTH)         :: process            !local
+      integer                          :: i                  !local
+
+      if (first_time) call super_load_list
+
+      process = process_name
+      call string_to_upper (process)
+
+      valid = .FALSE.
+      do i=1,LEN_ALL
+        if (all(i)%process == process .and.  &
+            view >= all(i)%maturity) then
+          valid = .TRUE.
+          exit
+        endif
+      enddo
+
+      end function super_validate
+
+
+!!------------------------------- set_view ---------------------------------!!
+!!------------------------------- set_view ---------------------------------!!
+!!------------------------------- set_view ---------------------------------!!
+
+
+      subroutine super_set_view (desired_view)
+      implicit none
+      integer,intent(in)       :: desired_view                  !argument
+
+      if (desired_view >= SUPER_PRODUCTION .and. desired_view <= SUPER_RAW) then
+        view = desired_view
+      endif
+
+      end subroutine super_set_view
+
+
+!!------------------------------- get_name ---------------------------------!!
+!!------------------------------- get_name ---------------------------------!!
+!!------------------------------- get_name ---------------------------------!!
+
+
+      subroutine super_get_name (obj, process_name)
+      implicit none
+      type(super_struct),intent(in)    :: obj                !argument
+      character(len=*)  ,intent(out)   :: process_name       !argument
+
+      process_name = obj%name
+
+      end subroutine super_get_name
+
+
+!!----------------------------- end of module ------------------------------!!
+!!----------------------------- end of module ------------------------------!!
+!!----------------------------- end of module ------------------------------!!
+
+
+      end module super_module
+
+
+!!--------------------------------- end ------------------------------------!!
+!!--------------------------------- end ------------------------------------!!
+!!--------------------------------- end ------------------------------------!!
+

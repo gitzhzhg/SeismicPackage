@@ -1,0 +1,561 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="tsort" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TSORTPROCESS" title="TSORT Process" rows="24" columns="80">
+    <Label keyword="COMMENT_SORTTRACESBYHEADERWORDVA" alignment="center">Sort traces by header word values.</Label>
+    <Label keyword="LABEL_MNTOD" alignment="left">MNTOD=</Label>
+    <Field keyword="MNTOD" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ATOD" alignment="left">ATOD=</Label>
+    <Field keyword="ATOD" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_PRINT" alignment="left">OPT_PRINT=</Label>
+    <Field keyword="OPT_PRINT" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SORT" alignment="left">OPT_SORT=</Label>
+    <Field keyword="OPT_SORT" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_PRI" alignment="left">HDR_PRI =</Label>
+    <Field keyword="HDR_PRI" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_INIT" alignment="left">PRI_INIT =</Label>
+    <Field keyword="PRI_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRI_INC" alignment="left">PRI_INC =</Label>
+    <Field keyword="PRI_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEC" alignment="left">HDR_SEC =</Label>
+    <Field keyword="HDR_SEC" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEC_INIT" alignment="left">SEC_INIT =</Label>
+    <Field keyword="SEC_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SEC_INC" alignment="left">SEC_INC =</Label>
+    <Field keyword="SEC_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TERT" alignment="left">HDR_TERT=</Label>
+    <Field keyword="HDR_TERT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERT_INIT" alignment="left">TERT_INIT=</Label>
+    <Field keyword="TERT_INIT" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TERT_INC" alignment="left">TERT_INC=</Label>
+    <Field keyword="TERT_INC" type="float" maxLength="11" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_HEADERLOCATIONSFORSTORIN" alignment="center">Header Locations for Storing Bin Values From Sort</Label>
+    <Label keyword="LABEL_HDR_PRI_BIN" alignment="left">HDR_PRI_BIN =</Label>
+    <Field keyword="HDR_PRI_BIN" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SEC_BIN" alignment="left">HDR_SEC_BIN =</Label>
+    <Field keyword="HDR_SEC_BIN" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TERT_BIN" alignment="left">HDR_TERT_BIN =</Label>
+    <Field keyword="HDR_TERT_BIN" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_SORTTRACESBYHEADERWORDVA" xPos="19" yPos="0" xSize="34" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MNTOD" xPos="5" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MNTOD" xPos="14" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ATOD" xPos="30" yPos="2" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ATOD" xPos="35" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_PRINT" xPos="45" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_PRINT" xPos="55" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SORT" xPos="5" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SORT" xPos="14" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_PRI" xPos="5" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PRI" xPos="14" yPos="6" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_INIT" xPos="23" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_INIT" xPos="33" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PRI_INC" xPos="47" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PRI_INC" xPos="56" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEC" xPos="5" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEC" xPos="14" yPos="7" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEC_INIT" xPos="23" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEC_INIT" xPos="33" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEC_INC" xPos="47" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEC_INC" xPos="56" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TERT" xPos="5" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TERT" xPos="14" yPos="8" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERT_INIT" xPos="23" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERT_INIT" xPos="33" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TERT_INC" xPos="47" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TERT_INC" xPos="56" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="10" xSize="77" ySize="5"/>
+     <Constraints component="COMMENT_HEADERLOCATIONSFORSTORIN" xPos="3" yPos="11" xSize="49" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_PRI_BIN" xPos="3" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_PRI_BIN" xPos="17" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_SEC_BIN" xPos="28" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SEC_BIN" xPos="42" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TERT_BIN" xPos="53" yPos="13" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TERT_BIN" xPos="68" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MNTOD">
+      <Tip>Maximum Number of Traces On Disk at once.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - MNTOD<br> Maximum Number of Traces On Disk at once.</center></b>
+<pre> Default = 10000
+ Allowed = int &gt; 0
+ 
+ MNTOD is the maximum number of traces to store on disk at once for the
+ sorting operation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ATOD">
+      <Tip>Whether to store All input Traces On Disk at once?.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - ATOD<br> Whether to store All input Traces On Disk at once?.</center></b>
+<pre> Default = N
+ Allowed = YES/NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_PRINT">
+      <Tip>Option whether to print detailed or summary sort statistics.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - OPT_PRINT<br> Option whether to print detailed or summary sort statistics.</center></b>
+<pre> Default = DETAILED
+ Allowed = DETAILED   (Print detailed sort statistics.)
+ Allowed = SUMMARY   (Print summary sort statistics.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SORT">
+      <Tip>Option for selecting common sorts or a custom sort.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - OPT_SORT<br> Option for selecting common sorts or a custom sort.</center></b>
+<pre> Default = CUSTOM
+ Allowed = COMMON_MIDPOINT ( 8, 7, 6)
+ Allowed = COMMON_SOURCE   ( 9,10, 1)
+ Allowed = COMMON_RECEIVER (10, 9, 1)
+ Allowed = COMMON_OFFSET   ( 6, 8, 7)
+ Allowed = CUSTOM</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PRI">
+      <Tip>Header word designating primary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HDR_PRI<br> Header word designating primary sort bins.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ 
+ HDR_PRI is the least rapidly changing sort header for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_INIT">
+      <Tip>Value for the center of ANY primary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PRI_INIT<br> Value for the center of ANY primary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRI_INC">
+      <Tip>Increment for primary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PRI_INC<br> Increment for primary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ PRI_INC is the increment between, and the width of, primary sort bins.
+ If PRI_INC &lt; 0, traces will be output in descending order of HDR_PRI.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEC">
+      <Tip>Header word designating secondary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HDR_SEC<br> Header word designating secondary sort bins.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH
+ 
+ HDR_SEC has intermediate rapidity of change for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEC_INIT">
+      <Tip>Value for the center of ANY secondary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - SEC_INIT<br> Value for the center of ANY secondary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SEC_INC">
+      <Tip>Increment for secondary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - SEC_INC<br> Increment for secondary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ SEC_INC is the increment between, and the width of, secondary sort bins.
+ If SEC_INC &lt; 0, traces will be output in descending order of HDR_SEC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TERT">
+      <Tip>Header word designating tertiary sort bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HDR_TERT<br> Header word designating tertiary sort bins.</center></b>
+<pre> Default = 1
+ Allowed = 1 - NWIH
+ 
+ HDR_TERT is the most rapidly changing sort header for output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERT_INIT">
+      <Tip>Value for the center of ANY tertiary sort bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - TERT_INIT<br> Value for the center of ANY tertiary sort bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TERT_INC">
+      <Tip>Increment for tertiary header word.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - TERT_INC<br> Increment for tertiary header word.</center></b>
+<pre> Default = 1.0
+ Allowed = real (but not zero)
+ 
+ TERT_INC is the increment between, and the width of, tertiary sort bins.
+ If TERT_INC &lt; 0, traces will be output in descending order of HDR_TERT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_PRI_BIN">
+      <Tip>Header word in which to store value of primary sort bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HDR_PRI_BIN<br> Header word in which to store value of primary sort bin center.</center></b>
+<pre> Default = 0
+ Allowed = 0 or any valid header word number
+ 
+ If HDR_PRI_BIN &gt; 1, then store the value of the primary bin center in
+ header location HDR_PRI_BIN of the output trace header.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SEC_BIN">
+      <Tip>Header word in which to store value of secondary sort bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HDR_SEC_BIN<br> Header word in which to store value of secondary sort bin center.</center></b>
+<pre> Default = 0
+ Allowed = 0 or any valid header word number
+ 
+ If HDR_SEC_BIN &gt; 1, then store the value of the secondary bin center in
+ header location HDR_SEC_BIN of the output trace header.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TERT_BIN">
+      <Tip>Header word in which to store value of tertiary sort bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HDR_TERT_BIN<br> Header word in which to store value of tertiary sort bin center.</center></b>
+<pre> Default = 0
+ Allowed = 0 or any valid header word number
+ 
+ If HDR_TERT_BIN &gt; 1, then store the value of the tertiary bin center in
+ header location HDR_TERT_BIN of the output trace header.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tsort - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="tsort">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R O C E S S
+ 
+ Name       : TSORT   (Trace SORT)
+ Category   : sorts
+ Written    : 1990-03-15   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Sort traces by header word values.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ TSORT sorts (reorders) traces using a binning scheme in which traces are
+ assigned to as many as three levels of bins according to the header words
+ HDR_PRI, HDR_SEC and HDR_TERT.  Traces are output so that the traces in each
+ primary bin are output before those in the next primary bin.  Traces are
+ ordered within each primary bin so that those in each secondary bin are
+ output before those in the next secondary bin.  Similarly, traces are ordered
+ within each secondary bin so that those in each tertiary bin are output
+ before those in the next tertiary bin.
+ 
+ If one of the sort header words is 1, that level of sort is based on the
+ sequential trace number, the order of the input traces.  If you want fewer
+ than three levels of sort, the lowest level(s) should use header word 1.
+ 
+ TSORT will store input traces on disk until MNTOD traces have been stored.
+ When MNTOD traces have been stored on disk, TSORT will begin to pass out
+ traces while reading in new traces until all traces have been sorted.
+ 
+ If at any time TSORT receives a trace that is assigned to a bin that was
+ previously output, it will delete that trace and print a message indicating
+ how many such traces were deleted.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           ADVICE FOR USERS
+ 
+ Setting MNTOD:
+ Because TSORT may pass out traces before it has read in all input traces,
+ MNTOD must be set large enough so that the first MNTOD traces will include
+ all the traces assigned to the first primary bin.
+ 
+ For "easy" sorts, such as sorting from shot profile order to CMP order, MNTOD
+ should be set to approximately N squared, where N is the number of traces in
+ the shot profile.  For "hard" sorts, such as sorting from shot profile or CMP
+ order to common offset order, MNTOD will have to be set to the size of the
+ whole dataset.
+ 
+ Setting ATOD:
+ If it is necessary for all traces to be stored on disk at once, MNTOD must be
+ set at least as large as the number of traces in the dataset.  When ATOD is
+ set to YES then TSORT will print a warning message if the number of input
+ traces exceeds MNTOD.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          REVISION HISTORY
+ 
+      Date       Author     Description
+      ----       ------     -----------
+053. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+052. 2006-01-10  B. Menger  Removed Unused Variables.
+  51. 2004-05-26 Done       Add gui fields HDR_PRI_BIN, HDR_SEC_BIN,
+                             and HDR_TERT_BIN. If the contents of these
+                             fields are &gt; 1, the corresponding bin center
+                             value is saved in that header location for
+                             each output trace.
+  50. 2003-12-09 Stoeckley  Increase output format field to display larger
+                             numbers.
+  49. 2003-10-07 Stoeckley  Change from real to double precision.
+  48. 2002-08-26 Stoeckley  Add error check for memory allocations.
+  47. 2002-02-04 Stoeckley  Remove some code to new TSORTPARAMS primitive for
+                             reuse by new processes TABLESORT and TRINSORT.
+  46. 2001-05-14 Stoeckley  Modify to reset extent size for large files.
+  45. 2001-04-04 Stoeckley  Fix GUI problem with sort option and header word
+                             fields.
+  44. 2001-03-20 Stoeckley  Remove the FILL option (it has been placed into
+                             a new process called FILL instead for simplicity,
+                             user flexibility, maintainability, and easier
+                             CPU parallelization).  Replace sorting code with
+                             calls to the TRIPLESORT primitive.  Fix some
+                             logic which occasionally caused a few traces to
+                             be sorted incorrectly.  Change some other logic
+                             to speed up the reduced-disk sort user CPU time
+                             (by a factor of about 4 in my tests) and the
+                             reduced-disk sort clock time (by a factor of
+                             about 2 in my tests).  This new logic is more
+                             like the old Cray TSORT logic.
+  43. 2001-01-23 Stoeckley  Modify to use TEMPTFILE instead of TRCIO.
+  42. 2000-12-04 Stoeckley  Fix bug where bin number was set into hwd3 before
+                             using hwd3 when hwd3 is a sort header; fix bug
+                             where the FILL option wrongly threw out traces
+                             when one of the sort header words was 1; fix
+                             printout bug when traces outside of user bin
+                             range are dropped.
+  41. 2000-11-14 Stoeckley  Fix bug getting fold if tertiary sort is not hwd1.
+  40. 2000-10-13 Stoeckley  Fix bug when number of header words exceeds 64.
+  39. 2000-08-27 O'Brien    Desensitize headerword selection for predefined
+                             sort options.Only sensitive for CUSTOM sorts.
+  38. 2000-07-12 O'Brien    tmp file i/o switched from native FORTRAN i/o to
+                             trcio. File is still invisible to user.
+  37. 2000-05-25 O'Brien    Implement optional bin range limits when FILL==YES.
+  36. 2000-04-27 O'Brien    Add counters for writes to and read from tmpfile.
+                             Remove forced header defs for OPT_SORT=='CUSTOM'
+                             Fix bug when gathered data are input.
+                             Implemented GUI_DEFS.
+  35. 2000-03-09 O'Brien    Set global variables GATHERED and NUMTR.
+  34. 2000-02-23 O'Brien    Made header calculation for fill traces
+                             consistent with bin calculation from input
+                             headers.
+  33. 2000-02-16 O'Brien    Allow selection of common sorts with OPT_SORT.
+  32. 2000-02-10 O'Brien    Removed parameter DISKNAME all together, using
+                             scratch file instead.
+  31. 2000-02-08 O'Brien    Removed username and node from DISKNAME in order
+                             for fortran OPEN to work.
+  30. 2000-02-03 O'Brien    Put TWOSETS, NEED_LABEL and NEED_REQUEST control
+                             parameters in the parameter cache.
+  29. 2000-02-02 O'Brien    Pieced in new document from C.I. Burch.
+  28. 2000-01-31 O'Brien    Removed FILENAME_LENGTH parameter as it's now
+                             available through pathcheck_module.
+  27. 2000-01-28 O'Brien    Implemented pc_put_options_field for OPT_PRINT,
+                             FILL, and ATOD parameters.
+                            Added PATHCHECK logic for parameter DISKNAME.
+  26. 2000-01-13 O'Brien    Test for pc_do_not_process_traces() in wrapup
+                             routine to avoid accessing files that weren't
+                             ever created.
+  25. 2000-01-13 O'Brien    Fixed 'premature' test in reporter routine.
+  24. 2000-01-11 O'Brien    Added diagnostic messages to printed summary.
+  23. 2000-01-08 O'Brien    Modified tsort_delete to call tsort_wrapup
+                             when running from &lt;execute_only&gt; mode.
+  22. 1999-12-29 O'Brien    Implemented derived data type(triplesort_ints)
+                             for sort keys and many of the variables
+                             they're compared with.
+                             Removed SORT_TYPE paramerter.
+                             Renamed tsort_tkshell to tsort_shellisort.
+  21. 1999-12-16 O'Brien    Added RCS identifier variable.
+                             Added development &amp; testing param SORT_TYPE.
+                             Inserted routine tsort_tkshell
+                               (Three Key SHELL sort).
+                             "PROGRAMMING NOTES" section brought up to date.
+  20. 1999-10-20 O'Brien    Implemented fill option.
+  19. 1999-10-08 O'Brien    Full f90 conversion.
+  18. 1998-11-05 Goodger    Begin using the f90 compiler.
+  17. 1994-06-21 Troutt     Remove the "-f" that was in the rm command for
+                             deleting the file from $SORTDIR (the -f option
+                             returns zero status even if the file does not
+                             exist!!).
+  16. 1993-05-12 Peterson   New parameter SAVE for sorting disk = $SORTDIR.
+  15. 1993-05-07 Peterson   Hardwired DTROT-DTRIN sorting disk = $SORTDIR.
+  14. 1993-04-15 Peterson   Changed name of subroutine TSORTB to TSORTC so
+                             it would not interfere with new sort method
+                             using routines called TSORTA and TSORTB.
+  13. 1992-09-24 Troutt     Add ALLONDSK to argument list for TSORTW2.
+  12. 1992-07-08 Howard     Call DTROT instead of DTWRITE if sequential.
+  11. 1992-02-14 Howard     Call DTLIST (for read ahead) if ALLONDSK=YES.
+  10. 1991-09-18 Troutt     Correct mispelled variable from 09-17.
+   9. 1991-09-17 Troutt     Remove DTROT file when finished.
+   8. 1991-08-07 Troutt     Print out maximum fold at N=0.
+   7. 1991-07-30 Troutt     Add warning when ALLONDSK=YES and MAXONDSK not
+                             large enough.
+   6. 1991-04-03 Troutt     Add PRINT parameter to provide option to limit
+                             printout.
+   5. 1990-08-06 Stoeckley  Change header 3 to be incremented differently.
+   4. 1990-07-02 Stoeckley  Increase max# bins limit from 48576 to 1097152.
+   3. 1990-05-04 Stoeckley  Remove restriction on VAL and VINC for header
+                             word 1.
+   2. 1990-03-21 Stoeckley  Fix bug to use all traces in a gather.
+   1. 1990-03-15 Stoeckley  First version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

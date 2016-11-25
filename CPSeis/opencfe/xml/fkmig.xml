@@ -1,0 +1,773 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="fkmig" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FKMIGPROCESS" title="FKMIG Process" rows="28" columns="80">
+    <Label keyword="LABEL1" alignment="center">2D zero-offset F-K time migration (Stolt or cascaded).</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL2" alignment="left">HDR_SLOW=</Label>
+    <Field keyword="HDR_SLOW" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL3" alignment="left">SLOW_INIT=</Label>
+    <Field keyword="SLOW_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL4" alignment="left">SLOW_INC=</Label>
+    <Field keyword="SLOW_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL5" alignment="left">SLOW_LAST=</Label>
+    <Field keyword="SLOW_LAST" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL6" alignment="left">SLOW_TOT=</Label>
+    <Field keyword="SLOW_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL7" alignment="left">HDR_FAST=</Label>
+    <Field keyword="HDR_FAST" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL8" alignment="left">FAST_INIT=</Label>
+    <Field keyword="FAST_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL9" alignment="left">FAST_INC=</Label>
+    <Field keyword="FAST_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL10" alignment="left">FAST_LAST=</Label>
+    <Field keyword="FAST_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL11" alignment="left">FAST_TOT=</Label>
+    <Field keyword="FAST_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL12" alignment="left">DIST_FAST=</Label>
+    <Field keyword="DIST_FAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL13" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL14" alignment="left">CALC_CV=</Label>
+    <Field keyword="CALC_CV" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL15" alignment="left">VEL_CONST=</Label>
+    <Field keyword="VEL_CONST" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL16" alignment="left">PATHNAME_CAS=</Label>
+    <Field keyword="PATHNAME_CAS" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL17" alignment="left">NAME_FUNCT=</Label>
+    <Field keyword="NAME_FUNCT" type="string" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL18" alignment="left">PATHNAME_MIG=</Label>
+    <Field keyword="PATHNAME_MIG" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL19" alignment="left">SMOOTH=</Label>
+    <Field keyword="SMOOTH" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL20" alignment="left">DEGREE=</Label>
+    <Field keyword="DEGREE" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL21" alignment="left">FSWP=</Label>
+    <Field keyword="FSWP" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL22" alignment="left">DAP=</Label>
+    <Field keyword="DAP" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL23" alignment="left">REE=</Label>
+    <Field keyword="REE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL24" alignment="left">NUM_PANELS=</Label>
+    <Field keyword="NUM_PANELS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL25" alignment="left">MULT_INIT=</Label>
+    <Field keyword="MULT_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL26" alignment="left">MULT_INC=</Label>
+    <Field keyword="MULT_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL27" alignment="left">STRETCH=</Label>
+    <Field keyword="STRETCH" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL28" alignment="left">MEM_USE=</Label>
+    <Field keyword="MEM_USE" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL1" xPos="1" yPos="0" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="4" yPos="1" xSize="47" ySize="5"/>
+     <Constraints component="LABEL2" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SLOW" xPos="15" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL3" xPos="5" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_INIT" xPos="15" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL4" xPos="29" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_INC" xPos="38" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL5" xPos="5" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_LAST" xPos="15" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL6" xPos="29" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SLOW_TOT" xPos="38" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="4" yPos="7" xSize="47" ySize="6"/>
+     <Constraints component="LABEL7" xPos="5" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FAST" xPos="15" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL8" xPos="5" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_INIT" xPos="15" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL9" xPos="29" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_INC" xPos="38" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL10" xPos="5" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_LAST" xPos="15" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL11" xPos="29" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAST_TOT" xPos="38" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL12" xPos="5" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIST_FAST" xPos="15" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL13" xPos="1" yPos="14" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="6" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL14" xPos="17" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CALC_CV" xPos="25" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL15" xPos="35" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_CONST" xPos="45" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL16" xPos="1" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_CAS" xPos="14" yPos="16" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL17" xPos="1" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NAME_FUNCT" xPos="14" yPos="18" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL18" xPos="1" yPos="20" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_MIG" xPos="14" yPos="20" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL19" xPos="1" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMOOTH" xPos="8" yPos="22" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL20" xPos="15" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEGREE" xPos="22" yPos="22" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL21" xPos="26" yPos="22" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FSWP" xPos="31" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL22" xPos="45" yPos="22" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DAP" xPos="49" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL23" xPos="59" yPos="22" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REE" xPos="63" yPos="22" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL24" xPos="1" yPos="24" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_PANELS" xPos="12" yPos="24" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL25" xPos="23" yPos="24" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MULT_INIT" xPos="33" yPos="24" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL26" xPos="46" yPos="24" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MULT_INC" xPos="55" yPos="24" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL27" xPos="1" yPos="26" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STRETCH" xPos="9" yPos="26" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL28" xPos="1" yPos="27" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MEM_USE" xPos="9" yPos="27" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_SLOW">
+      <Tip>Header word designating lines.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - HDR_SLOW<br> Header word designating lines.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH
+ HDR_SLOW should be the primary sort header word.</pre></html>]]></Text>
+     </Help>
+     <Help component="SLOW_INIT">
+      <Tip>Value of HDR_SLOW for first input line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - SLOW_INIT<br> Value of HDR_SLOW for first input line.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+     <Help component="SLOW_INC">
+      <Tip>Increment of HDR_SLOW between input lines.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - SLOW_INC<br> Increment of HDR_SLOW between input lines.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+     <Help component="SLOW_LAST">
+      <Tip>Value of HDR_SLOW for last input line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - SLOW_LAST<br> Value of HDR_SLOW for last input line.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+     <Help component="SLOW_TOT">
+      <Tip>Number of input 2D lines to migrate.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - SLOW_TOT<br> Number of input 2D lines to migrate.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></html>]]></Text>
+     </Help>
+     <Help component="HDR_FAST">
+      <Tip>Header word designating traces within a line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - HDR_FAST<br> Header word designating traces within a line.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></html>]]></Text>
+     </Help>
+     <Help component="FAST_INIT">
+      <Tip>Value of HDR_FAST for first trace in a line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - FAST_INIT<br> Value of HDR_FAST for first trace in a line.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></html>]]></Text>
+     </Help>
+     <Help component="FAST_INC">
+      <Tip>Increment of HDR_FAST between traces in a line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - FAST_INC<br> Increment of HDR_FAST between traces in a line.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ HDR_FAST should be the secondary sort header word.</pre></html>]]></Text>
+     </Help>
+     <Help component="FAST_LAST">
+      <Tip>Value of HDR_FAST for last trace in a line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - FAST_LAST<br> Value of HDR_FAST for last trace in a line.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ Size of the spatial transform will be at least 200 more than TR_TOT.</pre></html>]]></Text>
+     </Help>
+     <Help component="FAST_TOT">
+      <Tip>Maximum number of traces in any input line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - FAST_TOT<br> Maximum number of traces in any input line.</center></b>
+<pre> Default = 1000
+ Allowed = int &lt; 32769
+ Size of the spatial transform will be at least 200 more than TR_TOT.</pre></html>]]></Text>
+     </Help>
+     <Help component="DIST_FAST">
+      <Tip>Physical distance associated with unit change in HDR_FAST.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - DIST_FAST<br> Physical distance associated with unit change in HDR_FAST.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ DIST_FAST is the physical distance in feet or meters associated with a change
+ in HDR_FAST of 1.0.  It is not necessarily the distance between actual
+ traces (which may be associated with a change of HDR_FAST of 2.0 or more).</pre></html>]]></Text>
+     </Help>
+     <Help component="MODE">
+      <Tip>Whether to use Stolt or Cascaded F-K migration.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - MODE<br> Whether to use Stolt or Cascaded F-K migration.</center></b>
+<pre> Default = STOLT
+ Allowed = STOLT
+ Allowed = CASCADED</pre></html>]]></Text>
+     </Help>
+     <Help component="CALC_CV">
+      <Tip>Method to use for calculating constant velocity.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - CALC_CV<br> Method to use for calculating constant velocity.</center></b>
+<pre> Default = MIN_STR
+ Allowed = MIN_STR  (Use minimum stretching criteria.)
+ Allowed = USER     (Constant velocity is input by the user.)
+ Method to use for calculating constant velocity for Stolt F-K migration.
+ Normally the default is used.</pre></html>]]></Text>
+     </Help>
+     <Help component="VEL_CONST">
+      <Tip>User supplied constant velocity for Stolt F-K migration.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - VEL_CONST<br> User supplied constant velocity for Stolt F-K migration.</center></b>
+<pre> Default = 1500.0
+ Allowed = real &gt; 0.0</pre></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_CAS">
+      <Tip>Pathname for velocity file specifying cascade velocities.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - PATHNAME_CAS<br> Pathname for velocity file specifying cascade velocities.</center></b>
+<pre> Default = -
+ Allowed = char
+ Pathname for velocity file containing a velocity function specifying a
+ velocity for each migration in the cascade.</pre></html>]]></Text>
+     </Help>
+     <Help component="NAME_FUNCT">
+      <Tip>Name of the desired velocity function within PATHNAME_CAS.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - NAME_FUNCT<br> Name of the desired velocity function within PATHNAME_CAS.</center></b>
+<pre> Default = FIRST
+ Allowed = char
+ If NAME_FUNCT = FIRST, then the first velocity function in the velocity file
+ PATHNAME_CAS will be used.</pre></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_MIG">
+      <Tip>Pathname for velocity file specifying migration velocity field.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - PATHNAME_MIG<br> Pathname for velocity file specifying migration velocity field.</center></b>
+<pre> Default = -
+ Allowed = char
+ Pathname for velocity file specifying migration velocity field for FKMIG.
+ This pathname is also used by the Stolt Stretch primitive, which is called
+ internally.
+ 
+ If PATHNAME_MIG = NONE, then no stretching is done and CALC_CV must be set to
+ USER.</pre></html>]]></Text>
+     </Help>
+     <Help component="SMOOTH">
+      <Tip>Smooth the velocity field by interpolation or polynomial fitting.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - SMOOTH<br> Smooth the velocity field by interpolation or polynomial fitting.</center></b>
+<pre> Default = FIT
+ Allowed = FIT
+ Allowed = INTERP
+ If SMOOTH = FIT, then smooth the migration velocity field by using a least-
+ squares fit to a polynomial of degree specified by the DEGREE parameter.
+ 
+ If SMOOTH = INTERP, then do linear interpolation between velocity function
+ locations (and use constant extrapolation at the ends).  WARNING:  this
+ option may cause chevron shaped artifacts unless the velocity field is
+ naturally very smooth or you have previously smoothed it.</pre></html>]]></Text>
+     </Help>
+     <Help component="DEGREE">
+      <Tip>Degree of polynomial to use when SMOOTH = FIT.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - DEGREE<br> Degree of polynomial to use when SMOOTH = FIT.</center></b>
+<pre> Default = 1
+ Allowed = int &gt;= 0
+ Normally DEGREE should not exceed 2 or 3.  DEGREE = 0 allows no lateral
+ variation.</pre></html>]]></Text>
+     </Help>
+     <Help component="FSWP">
+      <Tip>Fold of Stack Weighting Power.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - FSWP<br> Fold of Stack Weighting Power.</center></b>
+<pre> Default = 0.5
+ Allowed = 1.0 &gt;= real &gt;= 0.0
+ FSWP weighting causes traces to be weighted such that New Amplitude = Old
+ Amplitude ** FSWP.  This is an effort to control lateral edge artifacts.</pre></html>]]></Text>
+     </Help>
+     <Help component="DAP">
+      <Tip>Dip Attenuation Parameter.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - DAP<br> Dip Attenuation Parameter.</center></b>
+<pre> Default = 1
+ Allowed = int &gt;= 0
+ FKMIG can perform a sort of dip filtering in the F-K plane.  If DAP &gt; 1 then
+ steep dips will be attenuated (with more attenuation for larger values of
+ DAP).  DAP = 1 produces no dip filtering.  DAP = 0 causes increased steeply
+ dipping energy.
+ 
+ DAP = 2 or 3 is often used to attenuate random noise if there is little
+ steeply dipping desirable signal.</pre></html>]]></Text>
+     </Help>
+     <Help component="REE">
+      <Tip>Restore Evanescent Energy.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - REE<br> Restore Evanescent Energy.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ REE = NO removes energy with unphysically steep dips from the data.
+ (Migration naturally does this.)
+ 
+ REE = Y saves the energy with unphysically steep dips and restores it to the
+ data after migration.  This is sometimes done to make datasets more
+ cosmetically acceptable that would otherwise have a mixed appearance.</pre></html>]]></Text>
+     </Help>
+     <Help component="NUM_PANELS">
+      <Tip>Number of migration velocity analysis panels for each input line.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - NUM_PANELS<br> Number of migration velocity analysis panels for each input line.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0</pre></html>]]></Text>
+     </Help>
+     <Help component="MULT_INIT">
+      <Tip>Velocity multiplier for the first migration velocity panel.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - MULT_INIT<br> Velocity multiplier for the first migration velocity panel.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ Velocity multiplier for the first migration velocity analysis panel.</pre></html>]]></Text>
+     </Help>
+     <Help component="MULT_INC">
+      <Tip>Increment of velocity multiplier between migration panels.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - MULT_INC<br> Increment of velocity multiplier between migration panels.</center></b>
+<pre> Default = 0.05
+ Allowed = real &gt; 0.0
+ Increment of velocity multiplier between migration velocity analysis panels.</pre></html>]]></Text>
+     </Help>
+     <Help component="STRETCH">
+      <Tip>Call the Stolt Stretch primitive internally?</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - STRETCH<br> Call the Stolt Stretch primitive internally?</center></b>
+<pre> Default = YES
+ Allowed = YES  (Call the Stolt Stretch primitive before and after migration.)
+ Allowed = NO   (Do not call the Stolt Stretch primitive.)</pre></html>]]></Text>
+     </Help>
+     <Help component="MEM_USE">
+      <Tip>The amount of memory fkmig can use in word.</Tip>
+      <Text><![CDATA[<html>
+<b><center>fkmig - MEM_USE<br> The amount of memory fkmig can use in word.</center></b>
+<pre> Default = 25000000
+ Allowed = int &gt; 0
+ MEM_USE determines either the migration is done in core or out of core.</pre></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="105">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">((</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">))</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="0" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="5" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="13" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="22" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="31" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="36" yPos="0" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="58" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="63" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="78" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="91" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html>
+<b><center>fkmig - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="fkmig">
+   <Text><![CDATA[<html>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FKMIG     (F-K MIGration)
+ Category   : migrations
+ Written    : 1988-02-01   by: Richard Day and Doug Hanson
+ Revised    : 2000-04-25   by: Stephen Chiu
+ Maturity   : raw
+ Purpose    : 2D zero-offset F-K time migration (Stolt or cascaded).
+ Portability: No known limitations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ FKMIG is a 2D zero-offset F-K time migration process.  Because F-K migration
+ is a constant velocity migration, FKMIG calls the Stolt Stretch primitive
+ before the migration to stretch traces so that they mimic the constant
+ velocity used in the migration.  After the migration the Stolt Stretch
+ primitive is called again to shrink the traces back to the input stacking
+ velocity.  FKMIG calculates the constant velocity for migration based on the
+ input stacking velocity field.
+ 
+ 
+ Cascaded F-K Migration
+ 
+ FKMIG can also perform Cascaded F-K Migration, in which data is migrated with
+ a sequence of velocities.  This results in somewhat more precise image
+ locations for steeply dipping events than would be the case with Stolt F-K
+ migration.
+ 
+ The sequence of velocities to be used in the cascade is specified by the
+ velocity function named NAME_FUNCT that is contained in the velocity file
+ PATHNAME_CAS.  The number of migrations in the cascade normally need not
+ exceed 3 or 4.
+ 
+ 
+ Migration Velocity Analysis (not implememted in this version)
+ 
+ FKMIG can perform migration velocity analysis by doing the migration multiple
+ times, each with its own output.  Each individual migration uses a velocity
+ field that is the same trial velocity field multiplied by a different scale
+ factor.  By examining these migration velocity panels, the user can determine
+ what velocity causes a given event to be neither undermigrated nor
+ overmigrated.
+ 
+ 
+ Experimental FKMIG Operation
+ 
+ For experimental purposes it is possible to run FKMIG without calling the
+ stretch primitive before and after the actual F-K migration.  If
+ PATHNAME_MIG = NONE, then no calls to stretch are made and the F-K migration
+ runs by itself.  In this case CALC_CV must be set to USER so the constant
+ migration velocity can be input by the user.  The STRETCH parameter also
+ allows independent control over whether the stretch primitive is called.
+ 
+ 
+ Mute Restoration
+ 
+ FKMIG automatically restores the head and tail mutes.
+ 
+ 
+ References
+ 
+ Stolt, R., H., 1978, Migration by Fourier Transform:  Geophysics, v. 43, p.
+ 23 - 48.
+ 
+ Beasley, C., et. al., 1987, Cascaded Frequency-Wavenumber (F-K) Migration,
+ Presented at 57th SEG Convention, New Orleans, LA.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ TSTRT Value
+ 
+ Input data for FKMIG cannot have a negative TSTRT.
+ 
+ 
+ 2-Pass 3D F-K Migration
+ 
+ FKMIG can be used to perform 2-pass 3D F-K migration by first migrating
+ inlines then sorting to crosslines and migrating crosslines (or crosslines
+ first and then inlines).  Some hints for 2-pass 3D F-K migration:
+ 
+       1. Insure that the Input Characterization parameters are consistent
+       with the data as it is currently sorted (HDR_SLOW must be the primary
+       sort header and HDR_FAST the secondary sort header). These parameters
+       must be changed to reflect the new state of the data after the sort
+       between passes.
+ 
+       2. Check that DIST_FAST is the physical distance associated with a unit
+       change in HDR_FAST.  It may need to be changed between passes.
+ 
+       3. The FSWP and DAP parameters may need special attention so that they
+       are not inadvertently applied twice.  Usually they are set to neutral
+       values for the second pass.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date      Author       Description
+     ----      ------       -----------
+ 66  2000-04-25 Chiu       Fix Gui problems.
+ 65  2000-04-06 Chiu       Add Gui.
+ 64  2000-04-05 Chiu       Convert to new CPS.
+ 63. 1998-12-08 Goodger    Begin using the f90 compiler.
+ 62. 1998-06-25 Goodger    Remove custom code message.
+ 61. 1997-11-04 Goodger    Fix problem with call to fkmig_migrate from
+                           the main logic.  The last argument, CTR, needs
+                           to be indexed by the offset result of the
+                           offset_index_words call.
+                           Force a disk job if obj%num_panels is greater than one.
+                           The program is expecting the data to be on
+                           disk in this case, even though all should fit
+                           in memory.
+ 60. 1997-08-25 Day        Overhauled IO to avoid buffer conflicts when
+                           multiple jobs are running.
+ 59. 1997-06-25 Goodger    Changed some parameter names.  Use one dcode
+                           rather than two.
+ 58. 1997-06-25 Day        A major overhaul. Eliminated cray specific
+                           syntax such as pointers and packing of arrays
+                           in memory. Made FKMIG more modular for easier
+                           maintenence. Changed the internal calls to
+                           SSTRANS. Totally overhauled the way data is
+                           cached to disk. Only 3 C-language stream type
+                           files are employed now. The logic for storing
+                           and outputting velocity panels was changed to
+                           conserve disk space. Added the AVERAGE option
+                           for MACVEL.
+ 57. 1997-03-25 Vunderink  Added MACFILE parameter and changed I-O
+                           from READWA-WRITEWA to PUTWA-GETWA
+ 56. 1996-11-11 Vunderink  Added FFT parameters NBFFT and NTFFT
+ 55. 1994-10-18 Troutt     Add check for zero divide in FKMIG1 due to
+                           non-increasing times.
+ 54. 1994-06-03 Troutt     Raised limit of NBASE from 16384 to 32768.
+ 53. 1993-11-29 Troutt     Make sure that power of two for spatial
+                           transform is at least 200 more than NBASE.
+                           Raised limit of NBASE from 198192 to 16384.
+                           Note that 16384 limit on NBASE is arbitrary
+                           and can be increased if needed (memory is the
+                           ultimate limit).
+ 52. 1993-06-16 Troutt     Add check for negative TSTART (NOT ALLOWED).
+                           Added note #5.
+ 51. 1992-08-07 Troutt     Fix minor bug regarding header interpolation
+                           for "missing" traces. Problem occurred when
+                           bin before last input bin was empty.
+                           Also add warning for header file read error.
+                           Change misleading message regarding LIVE
+                           traces to say INPUT traces (includes dead
+                           traces and unused traces when a bin gets more
+                           than one input).
+ 50. 1992-07-27 Troutt     Remove restriction of 300 velocity functions
+                           (let GETV dictate the limit). Also reduce
+                           printout of each function to only 1st and
+                           last if &gt; 50 functions.
+ 49. 1992-04-30 Troutt     Change default ORDER=0.
+ 48. 1992-03-18 Troutt     Add tail mute restoration to output (call
+                           MUTEHW).
+ 47. 1992-01-09 Troutt     a)Fix NDEAD count. It was wrong for multi-group
+                           case if 1st trace of "next" group was dead.
+                           Had to add ntsav to common for this.
+                           b)Changed argument passed to FKMIGF from NTC to
+                           ntsav.
+                           c)Fixed problem with missing traces for multiple
+                           lines when doing out-of-core migration. This
+                           required clearing out all of the disk file
+                           for each new line (not just at the start).
+                           Increased size of WORK to 512 and used it for
+                           clearing instead of TRO.
+                           (Noted Lazear's note of 10-90)
+ 46. 1991-12-31 Troutt     Add NTC argument to FKMIGF so that inserted
+                           missing traces could have mutes indicating
+                           dead traces. (Requested by M. Howard)
+ 45. 1991-10-30 Troutt     Increase limit for number of T,V pairs allowed
+                           on velocity functions from 50 to 100 (new
+                           parameter NWTV) for compatability with GETV.
+ 44. 1991-08-19 Peterson   Fix to not allow NLIVE traces to overflow BIN.
+ 43. 1991-04-19 Howard     Fix bug in reapplying original mute.
+ 42  1991-01-30 Day        Corrected IO-memory problem in FKMIG1.
+ 41  1991-01-24 Day        Increased to 300 the velocity function limit.
+ 40. 1990-10-10 Lazear     Fix bug in migration of multiple lines.
+ 39. 1990-08-27 Lazear     Changed file naming scheme for max. of 52
+                           time swath files.
+ 38. 1990-08-14 Lazear     Reset limit on number of time swaths from
+                           16 to 26 (limited by 26 letters for file name)
+ 37. 1990-08-10 Lazear     Pass IPN to SSTRANSS for restoring globals
+                           on the inverse call. Also removed 198192 limit
+                           on time FFT size.
+ 36. 1990-07-25 Lazear     Fix zeroing of Nyquist wavenumber and memory
+                           allocation for time swath in memory.
+ 35. 1990-07-23 Lazear     Save parameters to make reenterant
+ 34. 1990-07-17 Lazear     Combined origin shift and FAC into FSHIFT, and
+                           compute origin phase shift exactly rather than
+                           interpolate. Do Bill Harlans frequency domain
+                           interpolation and remove IRATIO padding of
+                           time FFT.
+ 33. 1990-07-05 Lazear     Fix frequency shift at k=0, remove hardwire
+              Day          of PWRW=1, moved X-FFT init outside of block
+                           loop, removed filtering out of K-nyquist, and
+                           fixed overwritting of array BUFR.
+ 32. 1990-04-12 Day        Cascade bug fixed.
+ 31. 1990-04-02 Day        IOPFK option fixed.
+ 30. 1990-03-30 Day        Fixed problem with bypassed sstrans calls.
+ 29. 1990-03-27 Day        Total overhaul.
+ 28. 1989-12-14 Troutt     Change SPWR logic so that low fold traces are
+                           still weighted down before migration, but are
+                           NOT WEIGHTED BACK UP AFTER MIGRATION.
+ 27. 1989-12-04 Day        Dead traces passed to output. Added vcon0 call
+                           to fix cascade fk conventions. Fixed disk
+                           initialization problems with ngrp>0. Cascade
+                           problem with sqrt fixed.
+ 26. 1989-11-08 Day        Demig amplitude clipped at min and max levels
+ 25. 1989-11-03 Day        Blend DEMIG into migrated section
+ 24. 1989-11-02 Day        TRO initializated prior to disk initialization
+ 23. 1989-11-01 Day        IO error fixed when NVEL>1 .
+ 22. 1989-10-31 Day        WBAR factor, BHDR changed, Slightly altered IO,
+                           Cascade conventions altered slightly.
+ 21. 1989-08-31 Day        Corrected stretch bypass logic
+ 20. 1989-08-24 Day        MACTYPE default set to VTRM.
+ 19. 1989-08-23 Troutt     Fix logic for TSTRT not zero. ("T00" is TSTRT)
+ 18. 1989-08-11 Day        Brought MACTYPE up to current CPS conventions.
+ 17. 1989-07-19 Howard     Change to use all SCRATCH available.
+ 16. 1989-06-27 Day        Corrected file naming problem with long traces.
+ 15. 1989-06-26 Day        Limit on time swaths increased to 16.
+ 14. 1989-06-22 Day        Call to stretch altered. Memory changed due
+                           to regridding for stretch. DEMIG option
+ 13. 1989-05-25 Day        Added ORDER parameter. Remove SPWR weighting
+                           before dumping traces to output.
+ 12. 1989-05-23 Day        Added SPWR and PWRW parameters.
+ 11. 1989-04-07 Day        Velocity panel option added
+ 10. 1989-01-13 Day        BYPASS parameter added. Converted to the new
+                           Velocity function protocol.
+ 9.  1988-05-11 Day        MAJOR REVISION. SINGLE CHANNEL INPUT,
+                           MULTIPLE GROUPS ENABLED, C0 INPUT ADDED, WORD
+                           ADDRESSABLE DISK IO INCORPORATED.
+ 8.  1988-03-26 Day        Mute is back,Header fill corrected
+ 7.  1988-03-25 Day        REMOVED MUTE,GETV check correctd
+ 6.  1988-03-24 Day        Switched call order of mute &amp; unstretch
+ 5.  1988-03-09 Day        Mute clear correction. BINHDR option added
+ 4.  1988-03-03 Hanson     SAVE AND INTERPOLATE HEADER WORDS
+ 3.  1988-02-16 Day        DISK IO FOR LARGE SECTIONS. SSTRANS
+                           CALLED INTERNALLY.( MINIMUM MUTE 3-1-88)
+ 2.  1988-02-02 Day        GOT RID OF INADVERTANT GETVN CALL
+ 1.  1988-02-02 Hanson     INCLUDE CASCADED MIGRATION OPTION
+ 
+ 
+-------------------------------------------------------------------------------</pre></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

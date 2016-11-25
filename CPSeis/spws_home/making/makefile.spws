@@ -1,0 +1,1244 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : makefile.spws
+# Category   : stand-alone
+# Written    : 2003-06-10   by: Tom Stoeckley
+# Revised    : 2003-11-07   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Comprehensive include makefile for CPS developers and managers.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This comprehensive include file should simplify the efforts of ~sps and
+# ~spws developers, and ~spws managers.  This include file can be included
+# in the user's makefile for simplicity and uniformity.
+#
+# An appropriate way to use this file is to simply include this file in
+# the user's makefile as follows:
+#
+#                include $(SPWSMAKEDIR)/makefile.spws
+#
+# The following targets are supported by this makefile:
+#
+#       gmake               build TARGET_LIBRARY and TARGET_PROGRAMS.
+#       gmake all           build TARGET_LIBRARY and TARGET_PROGRAMS.
+#       gmake programs      build TARGET_PROGRAMS.
+#       gmake program       build TARGET_PROGRAMS.
+#       gmake progs         build TARGET_PROGRAMS.
+#       gmake prog          build TARGET_PROGRAMS.
+#       gmake library       build TARGET_LIBRARY.
+#       gmake lib           build TARGET_LIBRARY.
+#       gmake depend        build makefile.depend.
+#       gmake clean         remove all .o and .mod files.
+#       gmake help          print this help information.
+#       gmake list          list macros used/created in this makefile.
+#
+# The gmake command must always be typed in a platform-specific directory
+# regardless of the target (even for gmake depend and gmake help, which are
+# not platform-specific operations).
+#
+#-------------------------------------------------------------------------------
+#                         CONTENTS OF THIS FILE
+#
+# This include file is divided into four sections:
+#
+#   (1) Defaults:
+#
+#           Sets defaults for unspecified user-defined macros.
+#
+#   (2) Inclusion of makefile.platforms:
+#
+#           Uses a few user-defined macros.
+#           Sets platform-specific macros.
+#
+#   (3) Commands:
+#
+#           Uses user-defined macros.
+#           Uses platform-specific macros.
+#           Contains commands for compiling, linking, etc.
+#
+#   (4) Inclusion of makefile.depend:
+#
+#           Contains dependencies.
+#           Resides in the source code directory.
+#           Generated automatically by typing "gmake depend" in any
+#            platform-specific directory.
+#
+# The file called makefile.depend contains all dependencies for Fortran,
+# C, C++, and XML files.  This makefile.depend file is useful for ~spws
+# managers, and ~spws and ~sps developers, and is automatically created
+# by executing "gmake depend" in any platform-specific directory below
+# the source code code directory.  You should run "gmake depend" whenever
+# you make source code changes which will change the dependencies.
+#
+#-------------------------------------------------------------------------------
+#                           INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#    SPWSDIR            Absolute path to ~spws home directory.
+#    SPSDIR             Absolute path to ~sps home directory.
+#    CFECUSTOMDIR       Location of cfecustom makefiles.
+#    CFECUSTOMSCRIPTS   Location of cfecustom scripts.
+#    CFECUSTOMPROGRAMS  Location of cfecustom programs.
+#    SPWSMAKEDIR        Location of spws scripts and makefiles.
+#    ARCHITECTURE       Hardware/OS architecture.
+#    HOST               Name of host computer.
+#
+#    All of the above are set in the script called setup_sps_environment,
+#    which is normally sourced from the user's .cshrc file.
+#
+# The following makefile variables must be set (for makefile.platforms):
+#
+#    MATURITY           Set to alpha or beta or production or none.
+#    INCDIRS            List of directories where include files can be found.
+#    MODDIRS            List of directories where module files can be found.
+#    DIRECTIVES         List of -D directives for C and C++ compilers.
+#
+# The following makefile variables must be set (for commands):
+#
+#    LINKMODE           Type of linker and libraries required.
+#    SPWSLIBS           List of ~spws libraries to link to.
+#    MYLIBS             List of a user's own libraries to link to.
+#    SRCDIR             Single directory containing source files.
+#    PREFIX             Filename prefix for all source code main programs.
+#    EXCLUDE            List of source files to exclude.
+#    TARGET_PROGRAMS    List of executables created by the makefile.
+#    TARGET_LIBRARY     Single library created or updated by the makefile.
+#    SRCS               List of source files in SRCDIR.
+#    OBJS               List of object files in local directory to link to.
+#    MODPUT             Single directory where module files are put.
+#    LINK_TO_LIBS_ONLY  Whether to link only to libraries and not OBJS.
+#    REMOVE_AND_TOUCH   Whether to remove and touch all .o files after
+#                        updating the library.
+#
+# The following scripts and include files are used:
+#
+#    $(SRCDIR)/makefile.depend
+#    $(CFECUSTOMDIR)/makefile.platforms        <-- if no special version.
+#    $(SPWSMAKEDIR)/makefile.platforms         <-- if special ~spws version.
+#    $(CFECUSTOMSCRIPTS)/make_dependencies
+#    $(CFECUSTOMSCRIPTS)/sps_fix_dependencies
+#    $(CFECUSTOMPROGRAMS)/sps_fortran_dependencies
+#    $(CFECUSTOMPROGRAMS)/sps_xml_dependencies
+#
+#-------------------------------------------------------------------------------
+#                      MAKEFILE VARIABLE DEFAULTS
+#
+# Any makefile variables which have not been set in the user's makefile
+# will be set to the following valid defaults:
+#
+#    MATURITY           production (must be alpha or beta or production or none)
+#    INCDIRS            created from LINKMODE and SRCDIR and MATURITY
+#    MODDIRS            created from LINKMODE and MATURITY
+#    DIRECTIVES         (blank)
+#
+#    LINKMODE           fortran (must be fortran or c or cxx or spws or motif)
+#    SPWSLIBS           list of all spws libraries in correct order
+#    MYLIBS             (blank)
+#    SRCDIR             full path of parent directory
+#    PREFIX             (blank)
+#    EXCLUDE            (blank)
+#    TARGET_PROGRAMS    created from SRCDIR and PREFIX and EXCLUDE
+#    TARGET_LIBRARY     (blank)
+#    SRCS               created from SRCDIR and TARGET_PROGRAMS and EXCLUDE
+#    OBJS               created from SRCS
+#    MODPUT             . (current directory)
+#    LINK_TO_LIBS_ONLY  no (must be yes or no)
+#    REMOVE_AND_TOUCH   no (must be yes or no)
+#
+# Any makefile variables which have been set in the user's makefile will
+# not be changed.  Exception: TARGET_PROGRAMS and SRCS will be modified if
+# EXCLUDE is not blank.
+#
+#-------------------------------------------------------------------------------
+#                      MAKEFILE VARIABLE DETAILS
+#
+# MATURITY:
+#
+#   (1) Maturity of ~sps library to link to.
+#   (2) If set to none, no ~sps library will be linked to.
+#   (3) Used by makefile.platforms.
+#   (4) ALLOWED: production or beta or alpha or none
+#   (5) DEFAULT: production
+#
+# INCDIRS:
+#
+#   (1) List of directories where include files can be found.
+#   (2) Needed only for the -I option for C and C++ compilers.
+#   (3) This macro must not include the -I flags.
+#   (4) This macro normally should include full paths (except for possibly ..).
+#   (5) The order of the directories in INCDIRS must be the order in which
+#        the directories should be searched to find include files.
+#   (6) Normally for developers who keep their include files in the same
+#        directory as the source files, INCDIRS should have the source file
+#        directory (normally ..) listed as the first directory.
+#   (7) Used by makefile.platforms and vpath.
+#   (8) DEFAULT: depends on LINKMODE and MATURITY as follows:
+#        if LINKMODE == spws:  INCDIRS = $(SRCDIR) $(SPWSDIR)/include
+#        otherwise:            INCDIRS = $(SRCDIR)
+#        plus one of the following lines:
+#                                                  $(SPSDIR)/production/include
+#                           $(SPSDIR)/beta/include $(SPSDIR)/production/include
+#   $(SPSDIR)/alpha/include $(SPSDIR)/beta/include $(SPSDIR)/production/include
+#
+# MODDIRS:
+#
+#   (1) List of directories where fortran module files can be found.
+#   (2) Needed only for the modules option for Fortran-90 compilers.
+#   (3) This macro must not include the module flags (-M or -p or whatever).
+#   (4) These directories should normally be appended with /$(PLATFORM) unless
+#        they are the local directory.
+#   (5) The order of the directories in MODDIRS must be the order in which
+#        the directories should be searched to find module files.
+#   (6) Used by makefile.platforms and vpath.
+#   (7) MODDIRS normally should include full paths terminating with
+#        /$(PLATFORM) (except for possibly .).
+#   (8) Normally for developers who keep their module files in the same
+#        directory as the object files, MODDIRS should have the object file
+#        directory (normally .) listed as the first directory.
+#   (9) For commands, this macro must include the local directory (.) as the
+#        first directory, and also MODPUT as the second directory unless
+#        MODPUT is the local directory (.).
+#  (10) DEFAULT: depends on LINKMODE and MATURITY as follows:
+#        if LINKMODE == spws:  MODDIRS = . $(SPWSDIR)/modules/$(PLATFORM)
+#        otherwise:            MODDIRS = .
+#        plus one of the following lines:
+#                $(SPSDIR)/production/modules/$(PLATFORM)
+#                $(SPSDIR)/beta/modules/$(PLATFORM)
+#                $(SPSDIR)/alpha/modules/$(PLATFORM)
+#        SPS managers would need to use subdirectory spsmodules above.
+#
+# DIRECTIVES:
+#
+#   (1) Some directives to define for C and C++ compilers.
+#   (2) This macro must not include the -D flags.
+#   (3) Used by makefile.platforms.
+#   (4) Additional directives representing platform and maturity will be
+#        added to the C and C++ compile commands, so they should not be
+#        included in the DIRECTIVES variable.
+#   (5) DEFAULT: blank
+#
+# LINKMODE:  
+#
+#   (1) Type of linker and libraries required.
+#   (2) Must be set to fortran if using a Fortran linker.
+#   (3) Must be set to    c    if using a C linker.
+#   (4) Must be set to   cxx   if using a C++ linker.
+#   (5) Must be set to  spws   if using a C++ linker for ~spws programs.
+#   (6) Must be set to  motif  if using a C++ linker and motif but not ~spws.
+#   (7) Fortran libraries are linked to for C and C++ linkers.
+#   (8) X-windows and Motif libraries are linked to for spws/motif programs.
+#
+# SPWSLIBS:
+#
+#   (1) List of ~spws libraries to link to.
+#   (2) These libraries must be in the correct order for the linker.
+#   (3) These libraries must include directory paths.
+#   (4) These libraries cannot be specified with -L or -l because they are
+#        used for dependencies as well as on the link command.
+#   (5) These libraries must not include system libraries or alphalib or
+#        betalib or prodlib.
+#   (6) DEFAULT: all ~spws libraries in (hopefully) the correct order.
+#
+# MYLIBS:
+#
+#   (1) List of user libraries to link to.
+#   (2) These libraries must be in the correct order for the linker.
+#   (3) These libraries will precede any other libraries on the link command.
+#   (4) These libraries must include directory paths.
+#   (5) These libraries cannot be specified with -L or -l because they are
+#        used for dependencies as well as on the link command.
+#   (6) These libraries must not include system libraries or alphalib or
+#        betalib or prodlib or ~spws libraries.
+#   (7) DEFAULT: blank
+#
+# SRCDIR:
+#
+#   (1) Directory containing source files.
+#   (2) Needed for vpath and compiler commands.
+#   (3) Needed to define SRCS if the user has not done so.
+#   (4) Used by makefile.commands.
+#   (5) DEFAULT: parent directory.
+#
+# PREFIX:
+#
+#   (1) A filename prefix identifying all source code files which are main
+#        programs.
+#   (2) All executables with names corresponding to source code files starting
+#        with this prefix are added to TARGET_PROGRAMS.
+#   (3) Used only to set the default for TARGET_PROGRAMS.
+#   (4) DEFAULT: blank
+#
+# EXCLUDE:
+#
+#   (1) List of source files in the SRCDIR directory to be excluded from SRCS
+#        and TARGET_PROGRAMS.
+#   (2) These files must not include a directory path.
+#   (3) Used only to set the defaults for TARGET_PROGRAMS and SCRS, and
+#        indirectly for OBJS.
+#   (4) DEFAULT: blank
+#
+# TARGET_PROGRAMS:
+#
+#   (1) List of executables.
+#   (2) These files must include the directory path (with /$(PLATFORM)
+#        appended) unless they reside in the local directory.
+#   (3) Files defined by PREFIX are added to TARGET_PROGRAMS.
+#   (4) Files defined by EXCLUDE are then removed from TARGET_PROGRAMS.
+#   (5) These programs will be made if gmake is typed without a target
+#        argument, or with the 'all' or 'programs' or 'program' or 'progs'
+#        or 'prog' target.
+#   (6) Used by commands for linking.
+#   (7) DEFAULT: blank
+#
+# TARGET_LIBRARY:
+#
+#   (1) Single library created or updated by the makefile.
+#   (2) This file must include the directory path (with /$(PLATFORM) appended)
+#        unless it resides in the local directory.
+#   (3) This library will be made if gmake is typed without a target argument,
+#        or with the 'all' or 'library' or 'lib' target,
+#   (4) Used by commands for library updates.
+#   (5) DEFAULT: blank
+#
+# SRCS:
+#
+#   (1) List of source files in the SRCDIR directory.
+#   (2) These files must not include a directory path.
+#   (3) These files must not include any main programs.
+#   (4) Files defined by TARGET_PROGRAMS are removed from SCRS.
+#   (5) Files defined by EXCLUDE are then removed from SCRS.
+#   (6) Used only to set the default for OBJS.
+#   (7) DEFAULT: all .f90 and .f and .c and .cc files in SRCDIR.
+#
+# OBJS:
+#
+#   (1) List of object files in the local directory (where gmake is invoked).
+#   (2) These files must not include a directory path.
+#   (3) These files must not include any main programs.
+#   (4) Used by commands for linking and library updates.
+#   (5) DEFAULT: list of .o files made from all of the files listed in SRCS.
+#
+# MODPUT:
+#
+#   (1) Single directory where fortran module files are put.
+#   (2) This directory must be appended with /$(PLATFORM) unless it is the
+#        local directory.
+#   (3) Needed for the commands which make an executable or a library.
+#   (4) After a library update, all modules will be copied to the directory
+#        specified by MODPUT.  This directory must also be the second directory
+#        specified in MODDIRS (after .).  Modules are not copied at any other
+#        time.
+#   (5) DEFAULT: local directory
+#
+# LINK_TO_LIBS_ONLY:
+#
+#   (1) Whether to link only to LIBS and not OBJS.
+#   (2) Used when updating a program in TARGET_PROGRAMS.
+#   (3) If this macro is no, OBJS followed by LIBS will both be dependencies
+#        and on the link command.
+#   (4) If this macro is yes, just LIBS will both be dependencies and on the
+#        link command.
+#   (5) It makes sense for this macro to be yes only if TARGET_LIBRARY is
+#        specified, is the first library in LIBS, and no subsequent library
+#        in LIBS (if any) refers to anything in the first library.
+#   (6) ALLOWED: yes or no
+#   (7) DEFAULT: no
+#
+# REMOVE_AND_TOUCH:
+#
+#   (1) Whether to remove and touch all .o files after updating the library.
+#   (2) Used when updating the library in TARGET_LIBRARY.
+#   (3) If this macro is yes, after a library update, all object code will
+#        be removed, then touched to create zero-length files with the
+#        appropriate time stamp.  This is simply to save disk space when
+#        the object code is not really needed after it placed onto the library.
+#   (4) This macro can safely be yes in any circumstances EXCEPT when
+#        both TARGET_LIBRARY and TARGET_PROGRAMS are specified, and
+#        TARGET_LIBRARY is not in LIBS or not the only library listed in LIBS.
+#   (5) If this macro is yes, the object code will not be included in the
+#        link command because the libraries will satisfy all externals, and
+#        because the object files will have zero length.
+#        Otherwise, the object code will be included before the libraries.
+#   (6) ALLOWED: yes or no
+#   (7) DEFAULT: no
+#
+#-------------------------------------------------------------------------------
+#                                ERRORS
+#
+# This include file quits with an error message if any required environment
+# variables are not set, or if any makefile variable has been set to an
+# illegal value.  But it is OK for any makefile variables to be missing or
+# blank.
+#
+# This include file also quits with an error message if gmake is not
+# executed in a supported platform-specific directory, or if that directory
+# is not compatible with the host computer or its architecture.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<advice_doc>
+#-------------------------------------------------------------------------------
+#                   MAKEFILE EXAMPLE FOR ~SPS DEVELOPERS
+#
+# Example of a makefile which makes several executable test programs
+# (whose filenames begin with test_) and a library for use with the test
+# programs:
+#
+# (1) The source code and include files reside in the parent directory.
+# (2) The object code and modules reside in the local platform-specific dir.
+# (3) The executables and library reside in the local platform-specific dir.
+# (4) Additional include files and modules reside in ~sps directories.
+# (5) All source files with extensions .f90 and .f and .c and .cc are used.
+# (6) The executables are linked to the target library and betalib.
+#
+#    LINKMODE        = fortran
+#    MATURITY        = beta
+#    PREFIX          = test_
+#    TARGET_LIBRARY  = mylib.a
+#
+#    include ($SPWSMAKEDIR)/makefile.spws
+#
+#-------------------------------------------------------------------------------
+#             MAKEFILE EXAMPLE FOR ~SPWS DEVELOPERS AND MANAGERS
+#
+# Example of a makefile which makes a single executable program:
+#
+# (1) The source code and include files reside in the parent directory.
+# (2) The object code and modules reside in the local platform-specific dir.
+# (3) The executable resides in the local platform-specific dir.
+# (4) Additional include files and modules reside in ~spws and ~sps dirs.
+# (5) All source files with extensions .f90 and .f and .c and .cc are used.
+# (6) The executable is linked to ~spws libraries and prodlib.
+#
+#    LINKMODE        = spws
+#    MATURITY        = production
+#    TARGET_PROGRAMS = cbyt
+#
+#    include ($SPWSMAKEDIR)/makefile.spws
+#
+#-------------------------------------------------------------------------------
+#                   MAKEFILE EXAMPLE FOR ~SPWS MANAGERS
+#
+# Example of a makefile which makes a single library:
+#
+# (1) The source code and include files reside in the parent directory.
+# (2) The object code and modules reside in the local platform-specific dir.
+# (3) Additional include files and modules reside in ~spws and ~sps dirs.
+# (4) All source files with extensions .f90 and .f and .c and .cc are used.
+# (5) Module files created by the fortran compiler are copied to the
+#      MODPUT directory when the library is made.
+# (6) The object code created by the compilers is converted to zero-length
+#      files when the library is made.
+#
+#    LINKMODE         = spws
+#    MATURITY         = production
+#    REMOVE_AND_TOUCH = yes
+#    MODPUT           = $(SPWSDIR)/modules/$(PLATFORM)
+#    TARGET_LIBRARY   = $(SPWSDIR)/lib/$(PLATFORM)/liboprim.a
+#
+#    include ($SPWSMAKEDIR)/makefile.spws
+#
+#-------------------------------------------------------------------------------
+#</advice_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  2. 2003-11-07  Stoeckley  Remove obsolete special treatment of modules for
+#                             Portland Group compiler.
+#  1. 2003-06-10  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: makefile.spws,v 1.4 2004/04/15 17:20:44 wjdone Exp spws $
+#-------------------------------------------------------------------------------
+
+
+##---------------- verify presence of required variables -------------------##
+##---------------- verify presence of required variables -------------------##
+##---------------- verify presence of required variables -------------------##
+
+      # all other required variables are verified in makefile.platforms.
+
+ifeq ($(strip $(SPWSDIR)),)
+  $(error environment variable SPWSDIR not set)
+endif
+
+
+##----------------------- duplicate definition of PARENT -------------------##
+##----------------------- duplicate definition of PARENT -------------------##
+##----------------------- duplicate definition of PARENT -------------------##
+
+   # PARENT is defined here even though it is defined in makefile.platforms,
+   # because it is used by makefile.spws to define TARGET_PROGRAMS, and
+   # must precede the := redefinition of TARGET_PROGRAMS below since that
+   # redefinition is not recursive.
+
+PARENT   = $(notdir $(patsubst %/,%, $(dir $(CURDIR))))
+
+
+##----------------------- set simple defaults -----------------------------##
+##----------------------- set simple defaults -----------------------------##
+##----------------------- set simple defaults -----------------------------##
+
+	    # CURDIR is a gmake variable which is always defined.
+
+ifeq ($(strip $(MATURITY)),)
+  MATURITY = production
+endif
+
+ifeq ($(strip $(DIRECTIVES)),)
+  DIRECTIVES =
+endif
+
+ifeq ($(strip $(LINKMODE)),)
+  LINKMODE = fortran
+endif
+
+ifeq ($(strip $(MYLIBS)),)
+  MYLIBS =
+endif
+
+ifeq ($(strip $(SRCDIR)),)
+  SRCDIR = $(patsubst %/,%, $(dir $(CURDIR)))
+endif
+
+ifeq ($(strip $(PREFIX)),)
+  PREFIX =
+endif
+
+ifeq ($(strip $(EXCLUDE)),)
+  EXCLUDE =
+endif
+
+ifeq ($(strip $(TARGET_LIBRARY)),)
+  TARGET_LIBRARY =
+endif
+
+ifeq ($(strip $(MODPUT)),)
+  MODPUT = .
+endif
+
+ifeq ($(strip $(LINK_TO_LIBS_ONLY)),)
+  LINK_TO_LIBS_ONLY = no
+endif
+
+ifeq ($(strip $(REMOVE_AND_TOUCH)),)
+  REMOVE_AND_TOUCH = no
+endif
+
+
+##---------------------- set default for INCDIRS -------------------------##
+##---------------------- set default for INCDIRS -------------------------##
+##---------------------- set default for INCDIRS -------------------------##
+
+
+ifeq ($(strip $(INCDIRS)),)
+
+  ifeq ($(LINKMODE),spws)
+    INCDIRS = $(SRCDIR) $(CPSEIS_INSTALL_DIR)/include
+  else
+    INCDIRS = $(SRCDIR)
+  endif
+
+  INCDIRS += $(SPSDIR)/include
+  INCDIRS += $(JAVA_HOME)include
+  INCDIRS += $(JAVA_HOME)include/linux
+  INCDIRS += /usr/X11R6/include/X11/SM
+  INCDIRS += /usr/X11R6/include/X11/ICE
+  INCDIRS += /usr/X11R6/include/Xm
+
+endif
+
+
+##---------------------- set default for MODDIRS -------------------------##
+##---------------------- set default for MODDIRS -------------------------##
+##---------------------- set default for MODDIRS -------------------------##
+
+
+ifeq ($(strip $(MODDIRS)),)
+
+  ifeq ($(LINKMODE),spws)
+    MODDIRS = . $(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)
+  else
+    MODDIRS = . $(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)
+#   MODDIRS = .
+  endif
+
+endif
+
+
+##---------------------- set default for SPWSLIBS -------------------------##
+##---------------------- set default for SPWSLIBS -------------------------##
+##---------------------- set default for SPWSLIBS -------------------------##
+
+     # NOTE: libvfgui.a is in the following list twice because one
+     #       file in libvfgui.a (vfgui_info) calls libvaplots.a,
+     #       whereas many files in libvaplots.a call libvfgui.a.
+
+  #             $(SPWSDIR)/spws/lib/$(PLATFORM)/libgpplots.a   \
+  #             $(SPWSDIR)/spws/lib/$(PLATFORM)/libgpgui.a     \
+  #             $(SPWSDIR)/spws/lib/$(PLATFORM)/libgp.a        \
+
+ifeq ($(strip $(SPWSLIBS)),)
+
+  SPWSLIBS = \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libfggui.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libfgxp.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libfg2d.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libfgmap.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libfgqc.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libstatgui.a   \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcube.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libpick.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libvfgui.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libvaplots.a   \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libdp.a        \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libvfgui.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libvf.a        \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libvu.a        \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libtrslib.a    \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libplot.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libvect.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libimage.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libinterp.a    \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcubeio.a    \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libhardcopy.a  \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libipc.a       \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libwbox.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libnet.a       \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libgeom.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libwproc.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libstat.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/liboprim.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libmodel.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcell.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libtfio.a      \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libutlib.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcpsprim.a   \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libtransform.a \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libinitusage.a \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcprim.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcurves.a    \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libsl.a        \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libsp.a        \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcolor.a     \
+	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libjseis.a 
+
+endif
+
+ifeq ($(MAKE_GEOPRESS),wmm-test)
+
+	SPWSLIBS  +=	$(SPWSDIR)/spws/lib/$(PLATFORM)/libgp.a \
+	                $(SPWSDIR)/spws/lib/$(PLATFORM)/libgpgui.a \
+	                $(SPWSDIR)/spws/lib/$(PLATFORM)/libgpplots.a
+
+endif
+
+#wmm...	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libusgtrk.a    \
+#wmm...	       $(SPWSDIR)/spws/lib/$(PLATFORM)/libcwp.a
+
+ifeq ($(strip $(SPWSLIBS)),)
+  $(error SPWSLIBS cannot be blank... TOM and BILL 12/4/2009 test added.)
+endif
+
+
+##------------------- set default for TARGET_PROGRAMS ----------------------##
+##------------------- set default for TARGET_PROGRAMS ----------------------##
+##------------------- set default for TARGET_PROGRAMS ----------------------##
+
+	       # also modify TARGET_PROGRAMS based on EXCLUDE.
+
+ifneq ($(strip $(PREFIX)),)
+   target_programs := $(notdir $(wildcard $(SRCDIR)/$(PREFIX)*.f90) \
+	                       $(wildcard $(SRCDIR)/$(PREFIX)*.f  ) \
+	                       $(wildcard $(SRCDIR)/$(PREFIX)*.c  ) \
+	                       $(wildcard $(SRCDIR)/$(PREFIX)*.cc ))
+   target_programs := $(basename $(target_programs))
+   TARGET_PROGRAMS := $(TARGET_PROGRAMS) $(target_programs)
+endif
+
+TARGET_PROGRAMS := $(filter-out $(basename $(EXCLUDE)), $(TARGET_PROGRAMS))
+
+
+##---------------------- set default for SRCS ---------------------------##
+##---------------------- set default for SRCS ---------------------------##
+##---------------------- set default for SRCS ---------------------------##
+
+	         # also modify SCRS based on EXCLUDE.
+
+ifeq ($(strip $(SRCS)),)
+  SRCS      := $(notdir $(wildcard $(SRCDIR)/*.f90)  \
+	                $(wildcard $(SRCDIR)/*.f  )  \
+	                $(wildcard $(SRCDIR)/*.c  )  \
+	                $(wildcard $(SRCDIR)/*.cc ))
+# templist1 := $(patsubst %, %.f90, $(TARGET_PROGRAMS))
+# templist2 := $(patsubst %, %.f,   $(TARGET_PROGRAMS))
+# templist3 := $(patsubst %, %.c,   $(TARGET_PROGRAMS))
+# templist4 := $(patsubst %, %.cc,  $(TARGET_PROGRAMS))
+  templist1 := $(addsuffix .f90, $(TARGET_PROGRAMS))    # same as above.
+  templist2 := $(addsuffix .f,   $(TARGET_PROGRAMS))    # same as above.
+  templist3 := $(addsuffix .c,   $(TARGET_PROGRAMS))    # same as above.
+  templist4 := $(addsuffix .cc,  $(TARGET_PROGRAMS))    # same as above.
+  templist  := $(templist1) $(templist2) $(templist3) $(templist4)
+  SRCS      := $(filter-out $(templist), $(SRCS))
+endif
+
+SRCS := $(filter-out $(EXCLUDE), $(SRCS))
+
+
+##---------------------- set default for OBJS ---------------------------##
+##---------------------- set default for OBJS ---------------------------##
+##---------------------- set default for OBJS ---------------------------##
+
+
+ifeq ($(strip $(OBJS)),)
+# OBJS := $(patsubst %.f90, %.o, $(filter %.f90, $(SRCS)))  \
+#         $(patsubst %.f,   %.o, $(filter %.f,   $(SRCS)))  \
+#         $(patsubst %.c,   %.o, $(filter %.c,   $(SRCS)))  \
+#         $(patsubst %.cc,  %.o, $(filter %.cc,  $(SRCS)))
+  OBJS := $(addsuffix .o, $(basename $(SRCS)))        # better than above.
+endif
+
+
+##------------------------ makefile.platforms -----------------------------##
+##------------------------ makefile.platforms -----------------------------##
+##------------------------ makefile.platforms -----------------------------##
+
+
+## Input variables:
+##
+##    INCDIRS        List of directories where include files can be found.
+##    MODDIRS        List of directories where module files can be found.
+##    DIRECTIVES     List of -D directives to define for C and C++ compilers.
+##    MATURITY       Maturity of the ~sps library to link to.
+
+include $(SPWSMAKEDIR)/makefile.platforms
+
+## Output variables:
+##
+##    PLATFORM          Platform-specific directory in which gmake was typed.
+##    PARENT            Directory just above the platform-specific directory.
+##
+##    FC                Fortran compiler with flags.
+##    FC_FLOATIO        Fortran compiler with flags for FLOATIO.
+##    FC_KMIG           Fortran compiler with flags for KMIG.
+##    FC_PPIO           Fortran compiler with flags for PPIO.
+##    FC_LINK           Fortran linker with flags.
+##
+##    CC                C compiler with flags.
+##    CC_LINK           C linker with flags.
+##
+##    CXX               C++ compiler with flags.
+##    CXX_DEPEND        C++ compiler with flags for generating dependencies.
+##    CXX_LINK          C++ linker with flags.
+##
+##    PURE_LINK         Purify linker with flags.
+##    AR_LINK           Archive library (.a) maker with flags.
+##    SO_LINK           Shared library (.so) maker with flags.
+##
+##    MODEXT            Fortran90 module file extension (with period).
+##    MODFLAG           Fortran90 compiler flag for module directories.
+##
+##    SPS_LIBS          Low level ~sps libraries.
+##    FOR_LIBS          Fortran libraries (needed if using C or C++ linker).
+##    GUI_LIBS          X/Motif libraries (needed for most ~spws programs).
+##    MATH_LIBS         Math and miscellaneous libraries.
+##    CPSLIB            The ~sps library (of requested maturity) to link to.
+##
+## Notes:
+##
+##    PLATFORM will not contain the full path.
+##    PARENT   will not contain the full path.
+##    SPS_LIBS will not include prodlib or betalib or alphalib.
+##    CPSLIB will be the absolute path to prodlib or betalib or alphalib.
+##    CPSLIB and SPS_LIBS will be blank if MATURITY is none.
+
+
+##--------------------- get variables based on linkmode --------------------##
+##--------------------- get variables based on linkmode --------------------##
+##--------------------- get variables based on linkmode --------------------##
+
+
+ifeq ($(LINKMODE), spws)
+ifeq ($(MATURITY), none)
+  $(error MATURITY cannot be none when LINKMODE is spws)
+endif
+endif
+
+LINKER = invalid
+
+ifeq ($(LINKMODE), fortran)
+  LINKER  = $(FC_LINK)
+# LIBS    = $(MYLIBS)   $(CPSLIB)
+  LIBS    = $(MYLIBS)   $(SPWSLIBS) $(CPSLIB)
+  SYSLIBS = $(SPS_LIBS) $(MATH_LIBS)
+endif
+
+ifeq ($(LINKMODE), c)
+  LINKER  = $(CC_LINK)
+  LIBS    = $(MYLIBS)   $(CPSLIB)
+  SYSLIBS = $(SPS_LIBS) $(FOR_LIBS) $(MATH_LIBS)
+endif
+
+ifeq ($(LINKMODE), cxx)
+  LINKER  = $(CXX_LINK)
+  LIBS    = $(MYLIBS)   $(CPSLIB)
+  SYSLIBS = $(SPS_LIBS) $(FOR_LIBS) $(MATH_LIBS)
+endif
+
+ifeq ($(LINKMODE), spws)
+  LINKER  = $(CXX_LINK)
+  LIBS    = $(MYLIBS)   $(SPWSLIBS) $(CPSLIB)
+  SYSLIBS = $(SPS_LIBS) $(FOR_LIBS) $(GUI_LIBS) $(MATH_LIBS) $(JAVA_LIBS)
+endif
+
+ifeq ($(LINKMODE), motif)
+  LINKER  = $(CXX_LINK)
+  LIBS    = $(MYLIBS)   $(CPSLIB)
+  SYSLIBS = $(SPS_LIBS) $(FOR_LIBS) $(GUI_LIBS) $(MATH_LIBS)
+endif
+
+ifeq ($(LINKER), invalid)
+  $(warning invalid LINKMODE $(LINKMODE))
+  $(error LINKMODE must be fortran or c or cxx or spws or motif)
+endif
+
+
+##------------------------------ vpath ------------------------------------##
+##------------------------------ vpath ------------------------------------##
+##------------------------------ vpath ------------------------------------##
+
+
+vpath
+vpath %.f90        $(SRCDIR)
+vpath %.f          $(SRCDIR)
+vpath %.c          $(SRCDIR)
+vpath %.cc         $(SRCDIR)
+vpath %.h          $(SRCDIR) $(INCDIRS)
+vpath %.hh         $(SRCDIR) $(INCDIRS)
+vpath %$(MODEXT)   $(MODPUT) $(MODDIRS)
+
+
+##------------------------------ commands --------------------------------##
+##------------------------------ commands --------------------------------##
+##------------------------------ commands --------------------------------##
+
+
+####.SUFFIXES: .cc .c .o .f90 .f .pure
+
+.PHONY : all programs program progs prog library lib depend clean list help
+
+
+all      :  $(TARGET_LIBRARY) $(TARGET_PROGRAMS)
+programs :                    $(TARGET_PROGRAMS)
+program  :                    $(TARGET_PROGRAMS)
+progs    :                    $(TARGET_PROGRAMS)
+prog     :                    $(TARGET_PROGRAMS)
+library  :  $(TARGET_LIBRARY)
+lib      :  $(TARGET_LIBRARY)
+
+
+##---------------------- specific compile commands -----------------------##
+##---------------------- specific compile commands -----------------------##
+##---------------------- specific compile commands -----------------------##
+
+ 
+kmig.o : kmig.f90
+	@echo ""
+	$(FC_KMIG) -o kmig.o $(SRCDIR)/kmig.f90
+ 
+ 
+floatio.o : floatio.f90
+	@echo ""
+	$(FC_FLOATIO) -o floatio.o $(SRCDIR)/floatio.f90
+ 
+ 
+ppio.o : ppio.f90
+	@echo ""
+	$(FC_PPIO) -o ppio.o $(SRCDIR)/ppio.f90
+ 
+ 
+##---------------------- general compile commands ------------------------##
+##---------------------- general compile commands ------------------------##
+##---------------------- general compile commands ------------------------##
+
+ 
+%.o : %.f90
+	@echo ""
+	$(FC) -o $*.o $(SRCDIR)/$*.f90
+ 
+ 
+%.o : %.f
+	@echo ""
+	$(FC) -o $*.o $(SRCDIR)/$*.f
+ 
+ 
+%.o : %.cc
+	@echo ""
+	$(CXX) -o $*.o $(SRCDIR)/$*.cc
+ 
+ 
+%.o : %.c
+	@echo ""
+	$(CC) -o $*.o $(SRCDIR)/$*.c
+ 
+ 
+##------------------- library create/update command ---------------------##
+##------------------- library create/update command ---------------------##
+##------------------- library create/update command ---------------------##
+
+ 
+$(TARGET_LIBRARY): $(OBJS)
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "making library  $@  in  $(PLATFORM)"
+	@echo "-------------------------------------------------------"
+	$(AR_LINK)      $@ $?
+ifeq ($(REMOVE_AND_TOUCH),yes)
+	-\rm -f    $?
+	touch      $?
+	touch      $@
+endif
+
+ifneq ($(MODPUT),.)
+	`touch junk.mod`
+	`mkdir -p $(MODPUT)`
+	-\cp *$(MODEXT) $(MODPUT)
+endif
+	@echo "-------------------------------------------------------"
+	@echo "library  $@  in  $(PLATFORM)  finished  `date`"
+	@echo "-------------------------------------------------------"
+	@echo ""
+ 
+
+##---------------------------- link commands -----------------------------##
+##---------------------------- link commands -----------------------------##
+##---------------------------- link commands -----------------------------##
+
+FFTW_LIBS=$(FFTW_DIR)/lib/libfftw.a $(FFTW_DIR)/lib/librfftw.a
+ifeq ($(MPI),lam)
+	MPI_LIBS=$(LAM_DIR)/lib/libmpi.a $(LAM_DIR)/lib/liblam.a $(LAM_DIR)/lib/liblamf77mpi.a $(LAM_DIR)/lib/libmpi.a $(LAM_DIR)/lib/liblam.a
+        ifeq ($(HOST),helios02)
+          ##### needed on helios02 since no archive libraries there:
+      	  MPI_LIBS= -L$(LAM_DIR)/lib -lmpi -llam -llamf77mpi -lmpi -llam -lutil
+        endif
+else
+	MPI_LIBS=-L$(MPICH_DIR)/lib -lmpich -lfmpich
+endif
+ifeq ($(CPSEIS_COMPILER),intel)
+	ifeq ($(ARCHITECTURE),x86_64) 
+	        INTEL_HOME=/opt/intel/fce/10.0.025/lib
+	        INTEL_HOME=/apps/intel_fortran_10.1/lib
+	        INTEL_LIBS=$(INTEL_HOME)/libimf.a
+	        INTEL_LIBS+=$(INTEL_HOME)/libguide.a
+	        INTEL_LIBS+=$(INTEL_HOME)/libguide_stats.a
+	endif
+	ifeq ($(ARCHITECTURE),i686)
+	        INTEL_HOME=/opt/intel/fc/10.0.025/lib
+	        INTEL_LIBS=$(INTEL_HOME)/libimf.a
+	        INTEL_LIBS+=$(INTEL_HOME)/libguide.a
+	        INTEL_LIBS+=$(INTEL_HOME)/libguide_stats.a
+	        #INTEL_LIBS=-L$(INTEL_HOME) -limf -lguide -lguide_stats
+	endif
+else
+	INTEL_LIBS=
+endif
+OBJS_AND_LIBS = $(OBJS) $(MATH_LIBS) $(LIBS) 
+#CPSLIB=-L$(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)/lib -lcps
+CPSLIB=$(CPSEIS_INSTALL_DIR)/platforms/$(CPSEIS_ARCH)/lib/libcps.a
+ifeq ($(strip $(LINK_TO_LIBS_ONLY)),yes)
+  OBJS_AND_LIBS = $(LIBS) 
+endif
+
+ifeq ($(strip $(REMOVE_AND_TOUCH)),yes)
+  OBJS_AND_LIBS = $(LIBS) 
+endif
+
+
+	ifeq ($@,geopress)
+		@echo ""
+		@echo "-------------------------------------------------------"
+		@echo "making program  $@  in  $(PLATFORM)"
+		@echo "-------------------------------------------------------"
+		exit 5
+		GEOPRESS_LIBS =	$(SPWSDIR)/spws/lib/$(PLATFORM)/libgp.a \
+		                $(SPWSDIR)/spws/lib/$(PLATFORM)/libgpgui.a \   
+		                $(SPWSDIR)/spws/lib/$(PLATFORM)/libgpplots.a  
+	
+		SPWSLIBS +=$(GEOPRESS_LIBS)
+	endif
+
+# Note: The linker (ifort) passes to the loader (ld) commands following "-Wl," (-Wl followed
+# by a comma). In the following command, -( and -) are passed to the loader.  All libraries
+# between these two commands are searched recursively to resolve all unsatisfied references
+# which might refer to each other circularly, or for which the libraries are not listed in
+# the correct order.
+
+$(TARGET_PROGRAMS): %: %.o $(OBJS_AND_LIBS)
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "making program  $@  in  $(PLATFORM)"
+	@echo "-------------------------------------------------------"
+#	$(LINKER) -V -o $@ $@.o $(SPWSLIBS) $(OBJS_AND_LIBS) $(SYSLIBS) $(SPWSLIBS) \
+#                            $(CPSLIB) $(FFTW_LIBS) $(INTEL_LIBS) $(MATH_LIBS) $(MPI_LIBS) \
+#                            $(GUI_LIBS)
+	$(LINKER) -o $@ $@.o -Wl,"-(" $(OBJS_AND_LIBS) $(SYSLIBS) \
+                            $(FFTW_LIBS) $(INTEL_LIBS) $(MPI_LIBS) -Wl,"-)"
+	@echo "-------------------------------------------------------"
+	@echo "program  $@  in  $(PLATFORM)  finished  `date`"
+	@echo "creating install directory"
+	mkdir -p $(CPSEIS_INSTALL_DIR)/platforms/$(PLATFORM)/bin/
+	@echo "copying program to install directory"
+	cp $@ $(CPSEIS_INSTALL_DIR)/platforms/$(PLATFORM)/bin/
+	@echo "-------------------------------------------------------"
+	@echo ""
+ 
+ 
+####.o.pure:
+####	@echo ""
+####	@echo "making purified program $@"
+####	$(PURE_LINK) -o $@ $@.o $(OBJS_AND_LIBS)
+ 
+ 
+%.pure : %.o $(OBJS_AND_LIBS)
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "making purified program  $@  in  $(PLATFORM)"
+	@echo "-------------------------------------------------------"
+	$(PURE_LINK) -o $@ $^        $(OBJS_AND_LIBS) $(SYSLIBS)
+#	$(PURE_LINK) -o $@ $@.o      $(OBJS_AND_LIBS) $(SYSLIBS)
+	@echo "-------------------------------------------------------"
+	@echo "purified program  $@  in  $(PLATFORM)  finished  `date`"
+	@echo "-------------------------------------------------------"
+	@echo ""
+ 
+
+##------------------------ depend command ---------------------------------##
+##------------------------ depend command ---------------------------------##
+##------------------------ depend command ---------------------------------##
+
+
+depend:
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "creating  makefile.depend  in  $(SRCDIR)"
+	@echo "-------------------------------------------------------"
+	cd $(SRCDIR); $(CFECUSTOMSCRIPTS)/make_dependencies "$(CXX_DEPEND)"
+	@echo "-------------------------------------------------------"
+	@echo "makefile.depend  in  $(SRCDIR)  finished  `date`"
+	@echo "-------------------------------------------------------"
+	@echo ""
+
+
+##--------------------------- install command ----------------------------##
+##--------------------------- install command ----------------------------##
+##--------------------------- install command ----------------------------##
+
+
+install: $(TARGET_PROGRAMS)
+	@echo ""
+	@echo "-------------------------------------------------------"
+	@echo "installing program  $?  in  $(PLATFORM)"
+	@echo "-------------------------------------------------------"
+	@$(SPWSMAKEDIR)/install_spws_program $?
+	@touch install
+	@echo "-------------------------------------------------------"
+	@echo "program  $?  in  $(PLATFORM)  installed  `date`"
+	@echo "-------------------------------------------------------"
+	@echo ""
+
+
+##------------------------ clean command ---------------------------------##
+##------------------------ clean command ---------------------------------##
+##------------------------ clean command ---------------------------------##
+
+
+clean:
+	-rm -f *.o *$(MODEXT) *.a
+
+
+##-------------------------- help command ---------------------------------##
+##-------------------------- help command ---------------------------------##
+##-------------------------- help command ---------------------------------##
+
+ 
+help:
+	@echo ""
+	@echo "--------------------------------------------------------------"
+	@echo You must type the following in a platform-specific directory:
+	@echo "--------------------------------------------------------------"
+	@echo gmake ============= build TARGET_LIBRARY and TARGET_PROGRAMS.
+	@echo gmake all ========= build TARGET_LIBRARY and TARGET_PROGRAMS.
+	@echo gmake programs ==== build TARGET_PROGRAMS.
+	@echo gmake program ===== build TARGET_PROGRAMS.
+	@echo gmake progs ======= build TARGET_PROGRAMS.
+	@echo gmake prog ======== build TARGET_PROGRAMS.
+	@echo gmake library ===== build TARGET_LIBRARY.
+	@echo gmake lib ========= build TARGET_LIBRARY.
+	@echo gmake depend ====== build makefile.depend.
+	@echo gmake clean ======= remove all .o and $(MODEXT) files.
+	@echo gmake help ======== print this help information.
+	@echo gmake list ======== list macros used/created in this makefile.
+	@echo "--------------------------------------------------------------"
+	@echo ""
+
+
+##-------------------------- list command ---------------------------------##
+##-------------------------- list command ---------------------------------##
+##-------------------------- list command ---------------------------------##
+
+ 
+list:
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  environment variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo SPSDIR ================= $(SPSDIR)
+	@echo SPWSDIR ================ $(SPWSDIR)
+	@echo CFECUSTOMDIR =========== $(CFECUSTOMDIR)
+	@echo CFECUSTOMSCRIPTS ======= $(CFECUSTOMSCRIPTS)
+	@echo CFECUSTOMPROGRAMS ====== $(CFECUSTOMPROGRAMS)
+	@echo ARCHITECTURE =========== $(ARCHITECTURE)
+	@echo SPWSMAKEDIR ============ $(SPWSMAKEDIR)
+	@echo HOST =================== $(HOST)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  user specified variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo LINKMODE =============== $(LINKMODE)
+	@echo MATURITY =============== $(MATURITY)
+	@echo INCDIRS ================ $(INCDIRS)
+	@echo MODDIRS ================ $(MODDIRS)
+	@echo DIRECTIVES ============= $(DIRECTIVES)
+	@echo SPWSLIBS =============== $(SPWSLIBS)
+	@echo MYLIBS ================= $(MYLIBS)
+	@echo SRCDIR ================= $(SRCDIR)
+	@echo PREFIX ================= $(PREFIX)
+	@echo EXCLUDE ================ $(EXCLUDE)
+	@echo TARGET_PROGRAMS ======== $(TARGET_PROGRAMS)
+	@echo TARGET_LIBRARY ========= $(TARGET_LIBRARY)
+	@echo SRCS =================== $(SRCS)
+	@echo OBJS =================== $(OBJS)
+	@echo MODPUT ================= $(MODPUT)
+	@echo LINK_TO_LIBS_ONLY ====== $(LINK_TO_LIBS_ONLY)
+	@echo REMOVE_AND_TOUCH ======= $(REMOVE_AND_TOUCH)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  variables input to makefile.platforms:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo INCDIRS ================ $(INCDIRS)
+	@echo MODDIRS ================ $(MODDIRS)
+	@echo DIRECTIVES ============= $(DIRECTIVES)
+	@echo MATURITY =============== $(MATURITY)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  variables output from makefile.platforms:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo PLATFORM =============== $(PLATFORM)
+	@echo PARENT ================= $(PARENT)
+	@echo ""
+	@echo FC ===================== $(FC)
+	@echo FC_FLOATIO ============= $(FC_FLOATIO)
+	@echo FC_KMIG ================ $(FC_KMIG)
+	@echo FC_PPIO ================ $(FC_PPIO)
+	@echo FC_LINK ================ $(FC_LINK)
+	@echo ""
+	@echo CC ===================== $(CC)
+	@echo CC_LINK ================ $(CC_LINK)
+	@echo ""
+	@echo CXX ==================== $(CXX)
+	@echo CXX_DEPEND ============= $(CXX_DEPEND)
+	@echo CXX_LINK =============== $(CXX_LINK)
+	@echo ""
+	@echo PURE_LINK ============== $(PURE_LINK)
+	@echo AR_LINK ================ $(AR_LINK)
+	@echo SO_LINK ================ $(SO_LINK)
+	@echo ""
+	@echo MODEXT ================= $(MODEXT)
+	@echo MODFLAG ================ $(MODFLAG)
+	@echo ""
+	@echo SPS_LIBS =============== $(SPS_LIBS)
+	@echo FOR_LIBS =============== $(FOR_LIBS)
+	@echo GUI_LIBS =============== $(GUI_LIBS)
+	@echo MATH_LIBS ============== $(MATH_LIBS)
+	@echo JAVA_LIBS ============== $(JAVA_LIBS)
+	@echo CPSLIB ================= $(CPSLIB)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  internal variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo LINKER ================= $(LINKER)
+	@echo LIBS =================== $(LIBS)
+	@echo SYSLIBS ================ $(SYSLIBS)
+	@echo OBJS_AND_LIBS ========== $(OBJS_AND_LIBS)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  end of list"
+	@echo "----------------------------------------------"
+	@echo ""
+
+
+##-------------------------- makefile.depend -------------------------------##
+##-------------------------- makefile.depend -------------------------------##
+##-------------------------- makefile.depend -------------------------------##
+
+
+-include $(SRCDIR)/makefile.depend
+
+
+ifneq ($(notdir $(wildcard $(SRCDIR)/makefile.depend)), makefile.depend)
+  $(warning ----------------------------------------)
+  $(warning Warning: no makefile.depend found...    )
+  $(warning ----------------------------------------)
+  $(warning You should run "gmake depend"           )
+  $(warning in any platform-specific directory.     )
+  $(warning ----------------------------------------)
+  $(warning You should also run "gmake depend" again)
+  $(warning whenever you make source code changes   )
+  $(warning which might change some dependencies.   )
+  $(warning ----------------------------------------)
+endif
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

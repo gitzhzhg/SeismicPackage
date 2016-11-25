@@ -1,0 +1,33 @@
+#! /bin/csh -f
+##------------------------- fetch_cpseis_home ---------------------------##
+##------------------------- fetch_cpseis_home ---------------------------##
+##------------------------- fetch_cpseis_home ---------------------------##
+
+# This script returns the CPSEIS_HOME environment variable which points
+# to the directory tree containing this local directory which resides
+# within CPSEIS_HOME/wrappers.
+
+##-------------------------- start of script -------------------------------##
+##-------------------------- start of script -------------------------------##
+##-------------------------- start of script -------------------------------##
+
+set curdir = `pwd`
+
+while (1)
+
+  cd ..
+  set curdir = `pwd`
+  if ($curdir:t == wrappers) then
+    if (-d src) break
+  endif
+  if ($curdir:t == "/") break
+  if ($curdir:t == "") break
+
+end
+
+cd ..
+echo $PWD
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##

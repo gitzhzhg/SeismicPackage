@@ -1,0 +1,21 @@
+#! /bin/csh -f
+
+
+##------------------------ define ARCHITECTURE --------------------##
+##------------------------ define ARCHITECTURE --------------------##
+##------------------------ define ARCHITECTURE --------------------##
+
+if(`uname` == Linux) then
+  setenv ARCHITECTURE ix86-intel-linux
+else
+  echo ++++ setup_sps_environment unsupported architecture:
+  echo ++++ `uname -a`
+  exit
+endif
+
+##--------------------- setup SPWS environment --------------------##
+##--------------------- setup SPWS environment --------------------##
+##--------------------- setup SPWS environment --------------------##
+
+source ${SPWSINSTALLDIR}/scripts/setup_spws_environment
+${SPWSINSTALLDIR}/bin/${ARCHITECTURE}/$1 $*

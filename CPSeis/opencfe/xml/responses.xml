@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<!DOCTYPE Responses SYSTEM "http://pospx1.po.conoco.com/Conoco/dtds/tester.dtd">
+
+<!-- responses.xml -->
+
+<Responses>
+	<RequestInitializeApp>
+		<SetGUI keyword="WorkfileBuilder" value="guiWorkfileBuilder.xml" />
+		<OptionsArray processId="1"	keyword="oldJobName"
+			elements="ExampleJobA ExampleJobB"
+			startElement="1" endElement="2" />
+		<ModifyField processId="1" keyword="oldJobComment"
+			value="This is the tool tip for job: Example_JobA" />
+		<ModifyElements processId="1" keyword="oldProcessList"
+			elements="Job020Data Process020Data Velf Example Velf"
+			startElement="1" endElement="5" />
+		<OptionsArray processId="1" keyword="processSubset"
+			elements="All020Processes Migration Filtering"
+			startElement="1" endElement="3" />
+		<ModifyElements processId="1" keyword="subsetProcessList"
+			elements="Velf Example"
+			startElement="1" endElement="2" />
+	</RequestInitializeApp>
+
+<!--===============================================================-->
+<!--  Workfile builder data responses - main window                -->
+<!--===============================================================-->
+	<RequestModifyJob keyword="Example_JobA">
+		<ModifyField processId="1" keyword="currentJobName" value="Example_JobA" />
+		<OptionsArray processId="1"	keyword="currentProcessList"
+			elements="Job020Data Process020Data Velf Example Velf"
+			startElement="1" endElement="5" />
+	</RequestModifyJob>
+
+<!--===============================================================-->
+<!--  Job data responses - process 1                               -->
+<!--===============================================================-->
+<!--                                   -->
+<!-- Job Data Process, process #1 -->
+<!--                                   -->
+	<RequestModifyProcess processId="1">
+		<ModifyProcess processId="1" />
+		<SetGUI	keyword="ProcessEditor" value="job_data.xml" />
+	</RequestModifyProcess>
+
+<!--          -->
+<!-- Screen 1 -->
+<!--          -->
+
+<!--===============================================================-->
+<!--  Process data responses - process 2                           -->
+<!--===============================================================-->
+<!--                                  -->
+<!-- Process Data Process, process #2 -->
+<!--                                  -->
+	<RequestModifyProcess processId="2">
+		<ModifyProcess processId="2" />
+		<SetGUI	keyword="ProcessEditor" value="process_data.xml" />
+	</RequestModifyProcess>
+
+<!--          -->
+<!-- Screen 1 -->
+<!--          -->
+
+<!--===============================================================-->
+<!--  Velf process responses - process 3                           -->
+<!--===============================================================-->
+<!--                                     -->
+<!-- Process Data Process, process #3    -->
+<!--                                     -->
+	<RequestModifyProcess processId="3">
+		<ModifyProcess />
+		<SetGUI	keyword="ProcessEditor" value="velf_gui.xml" />
+	</RequestModifyProcess>
+
+<!--          -->
+<!-- Screen 1 -->
+<!--          -->
+	<RequestModifyField processId="3" keyword="VELF_IFN">
+    	<ModifyField keyword="VELF_IFN" />
+	    <JumpField keyword="VELF_NHX" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_NHX">
+    	<ModifyField keyword="VELF_NHX" />
+    	<JumpField keyword="VELF_NHY" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_NHY">
+	    <ModifyField keyword="VELF_NHY" />
+	    <JumpField keyword="VELF_OFN" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_OFN">
+	    <ModifyField keyword="VELF_OFN" />
+	    <JumpField keyword="VELF_MOP" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_MOP">
+	    <ModifyField keyword="VELF_MOP" />
+	    <JumpField keyword="VELF_MEOP" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_MEOP">
+	    <ModifyField keyword="VELF_MEOP" />
+	    <JumpField keyword="VELF_POP" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_POP">
+	    <ModifyField keyword="VELF_POP" />
+	    <JumpScreen keyword="scr2" />
+	    <JumpField keyword="VELF_S2_TYPE" />
+	</RequestModifyField>
+
+<!--          -->
+<!-- Screen 2 -->
+<!--          -->
+	<RequestModifyField processId="3" keyword="VELF_S2_TYPE">
+	    <ModifyField keyword="VELF_S2_TYPE" />
+	    <JumpField keyword="VELF_S2_PROJECT" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_S2_PROJECT">
+	    <ModifyField keyword="VELF_S2_PROJECT" />
+	    <JumpField keyword="VELF_S2_LINE" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_S2_LINE">
+	    <ModifyField keyword="VELF_S2_LINE" />
+	    <JumpField keyword="VELF_S2_UID" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="3" keyword="VELF_S2_UID">
+	    <ModifyField keyword="VELF_S2_UID" />
+	    <JumpArraySet keyword="VELF_S2_NUM" />
+	</RequestModifyField>
+
+<!-- Array Set VELF_S2_NUM -->
+
+	<RequestModifyElements processId="3" keyword="VELF_S2_PICK">
+	    <ModifyElements keyword="VELF_S2_PICK" />
+	    <JumpArray keyword="VELF_S2_NAME" />
+	</RequestModifyElements>
+
+	<RequestModifyElements processId="3" keyword="VELF_S2_NAME">
+	    <ModifyElements keyword="VELF_S2_NAME" />
+	    <JumpArray keyword="VELF_S2_N" />
+	</RequestModifyElements>
+
+	<RequestModifyElements processId="3" keyword="VELF_S2_N">
+	    <ModifyElements keyword="VELF_S2_N" />
+	    <JumpArray keyword="VELF_S2_XSHTP" />
+	</RequestModifyElements>
+
+	<RequestModifyElements processId="3" keyword="VELF_S2_XSHTP">
+	    <ModifyElements keyword="VELF_S2_XSHTP" />
+	    <JumpArray keyword="VELF_S2_YSHTP" />
+	</RequestModifyElements>
+	
+	<RequestModifyElements processId="3" keyword="VELF_S2_YSHTP">
+	    <ModifyElements keyword="VELF_S2_YSHTP" />
+	    <JumpArray keyword="VELF_S2_COMM" />
+	</RequestModifyElements>
+	
+	<RequestModifyElements processId="3" keyword="VELF_S2_COMM">
+	    <ModifyElements keyword="VELF_S2_COMM" />
+	    <JumpArraySetRow keyword="VELF_S2_NUM" rowNumber="1" />
+	</RequestModifyElements>
+	
+	<RequestLeaveArraySet processId="3" keyword="VELF_S2_NUM">
+	    <JumpScreen keyword="scr3" />
+	</RequestLeaveArraySet>
+
+<!-- /Array Set VELF_S2_NUM -->
+
+<!--          -->
+<!-- Screen 3 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 4 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 5 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 6 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 7 -->
+<!--          -->
+
+
+<!--===============================================================-->
+<!--  Example process responses - process 4                        -->
+<!--===============================================================-->
+
+	<RequestModifyProcess processId="4">
+		<ModifyProcess processId="4" />
+		<SetGUI	keyword="ProcessEditor" value="example_gui.xml" />
+	</RequestModifyProcess>
+
+<!--          -->
+<!-- Screen 1 -->
+<!--          -->
+
+<!--===============================================================-->
+<!--  Velf process responses - process 5                           -->
+<!--===============================================================-->
+<!--                                     -->
+<!-- Process Data Process, process #5    -->
+<!--                                     -->
+	<RequestModifyProcess processId="5">
+		<ModifyProcess />
+		<SetGUI	keyword="ProcessEditor" value="velf_gui.xml" />
+	</RequestModifyProcess>
+
+<!--          -->
+<!-- Screen 1 -->
+<!--          -->
+	<RequestModifyField processId="5" keyword="VELF_IFN">
+    	<ModifyField keyword="VELF_IFN" />
+	    <JumpField keyword="VELF_NHX" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_NHX">
+    	<ModifyField keyword="VELF_NHX" />
+    	<JumpField keyword="VELF_NHY" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_NHY">
+	    <ModifyField keyword="VELF_NHY" />
+	    <JumpField keyword="VELF_OFN" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_OFN">
+	    <ModifyField keyword="VELF_OFN" />
+	    <JumpField keyword="VELF_MOP" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_MOP">
+	    <ModifyField keyword="VELF_MOP" />
+	    <JumpField keyword="VELF_MEOP" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_MEOP">
+	    <ModifyField keyword="VELF_MEOP" />
+	    <JumpField keyword="VELF_POP" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_POP">
+	    <ModifyField keyword="VELF_POP" />
+	    <JumpScreen keyword="scr2" />
+	    <JumpField keyword="VELF_S2_TYPE" />
+	</RequestModifyField>
+
+<!--          -->
+<!-- Screen 2 -->
+<!--          -->
+	<RequestModifyField processId="5" keyword="VELF_S2_TYPE">
+	    <ModifyField keyword="VELF_S2_TYPE" />
+	    <JumpField keyword="VELF_S2_PROJECT" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_S2_PROJECT">
+	    <ModifyField keyword="VELF_S2_PROJECT" />
+	    <JumpField keyword="VELF_S2_LINE" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_S2_LINE">
+	    <ModifyField keyword="VELF_S2_LINE" />
+	    <JumpField keyword="VELF_S2_UID" />
+	</RequestModifyField>
+
+	<RequestModifyField processId="5" keyword="VELF_S2_UID">
+	    <ModifyField keyword="VELF_S2_UID" />
+	    <JumpArraySet keyword="VELF_S2_NUM" />
+	</RequestModifyField>
+
+<!-- Array Set VELF_S2_NUM -->
+
+	<RequestModifyElements processId="5" keyword="VELF_S2_PICK">
+	    <ModifyElements keyword="VELF_S2_PICK" />
+	    <JumpArray keyword="VELF_S2_NAME" />
+	</RequestModifyElements>
+
+	<RequestModifyElements processId="5" keyword="VELF_S2_NAME">
+	    <ModifyElements keyword="VELF_S2_NAME" />
+	    <JumpArray keyword="VELF_S2_N" />
+	</RequestModifyElements>
+
+	<RequestModifyElements processId="5" keyword="VELF_S2_N">
+	    <ModifyElements keyword="VELF_S2_N" />
+	    <JumpArray keyword="VELF_S2_XSHTP" />
+	</RequestModifyElements>
+
+	<RequestModifyElements processId="5" keyword="VELF_S2_XSHTP">
+	    <ModifyElements keyword="VELF_S2_XSHTP" />
+	    <JumpArray keyword="VELF_S2_YSHTP" />
+	</RequestModifyElements>
+	
+	<RequestModifyElements processId="5" keyword="VELF_S2_YSHTP">
+	    <ModifyElements keyword="VELF_S2_YSHTP" />
+	    <JumpArray keyword="VELF_S2_COMM" />
+	</RequestModifyElements>
+	
+	<RequestModifyElements processId="5" keyword="VELF_S2_COMM">
+	    <ModifyElements keyword="VELF_S2_COMM" />
+	    <JumpArraySetRow keyword="VELF_S2_NUM" rowNumber="1" />
+	</RequestModifyElements>
+	
+	<RequestLeaveArraySet processId="5" keyword="VELF_S2_NUM">
+	    <JumpScreen keyword="scr3" />
+	</RequestLeaveArraySet>
+
+<!-- /Array Set VELF_S2_NUM -->
+
+<!--          -->
+<!-- Screen 3 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 4 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 5 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 6 -->
+<!--          -->
+
+<!--          -->
+<!-- Screen 7 -->
+<!--          -->
+
+
+</Responses>

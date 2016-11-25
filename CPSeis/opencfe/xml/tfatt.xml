@@ -1,0 +1,758 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="tfatt" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TFATTPROCESS" title="tfatt Process" rows="35" columns="80">
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_WINDOWINGOPTIONS" alignment="center">Windowing Options</Label>
+    <Label keyword="LABEL_OPT_WIN" alignment="left">OPT_WIN=</Label>
+    <Field keyword="OPT_WIN" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="COMMENT_DISPLAYOPTIONS" alignment="center">Display Options</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG=</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END=</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FREQ" alignment="left">HDR_FREQ=</Label>
+    <Field keyword="HDR_FREQ" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_ATT" alignment="left">HDR_ATT=</Label>
+    <Field keyword="HDR_ATT" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER3"/>
+    <Label keyword="COMMENT_TIMEFREQUENCYOPTIONS" alignment="center">Time Frequency Options</Label>
+    <Label keyword="LABEL_OPT_ALG" alignment="left">OPT_ALG=</Label>
+    <Field keyword="OPT_ALG" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_WIN" alignment="left">TIM_WIN=</Label>
+    <Field keyword="TIM_WIN" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Field keyword="C1" type="int" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_WINSAMPLECOUNT" alignment="center">WIN Sample Count</Label>
+    <Label keyword="LABEL_TIM_FFT" alignment="left">TIM_FFT=</Label>
+    <Field keyword="TIM_FFT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Field keyword="C2" type="int" maxLength="6" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_FFTSAMPLECOUNT" alignment="center">FFT Sample Count</Label>
+    <Label keyword="LABEL_AOK_OPTIMIZE" alignment="left">AOK_OPTIMIZE=</Label>
+    <Field keyword="AOK_OPTIMIZE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TYPE_WIN" alignment="left">TYPE_WIN=</Label>
+    <Field keyword="TYPE_WIN" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IDF" alignment="left">IDF=</Label>
+    <Field keyword="IDF" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INSTANTANEOUSDOMINANTFRE" alignment="center">Instantaneous Dominant Frequency</Label>
+    <Label keyword="LABEL_IQ" alignment="left">IQ =</Label>
+    <Field keyword="IQ" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INSTANTANEOUSQ" alignment="center">Instantaneous Q</Label>
+    <Label keyword="LABEL_ICF" alignment="left">ICF=</Label>
+    <Field keyword="ICF" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INSTANTANEOUSCENTERFREQU" alignment="center">Instantaneous Center Frequency</Label>
+    <Label keyword="LABEL_IBW" alignment="left">IBW=</Label>
+    <Field keyword="IBW" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INSTANTANEOUSBANDWIDTH" alignment="center">Instantaneous Bandwidth</Label>
+    <Label keyword="LABEL_IMF" alignment="left">IMF=</Label>
+    <Field keyword="IMF" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_INSTANTANEOUSMAXIMUMFREQ" alignment="center">Instantaneous Maximum Frequency</Label>
+    <Label keyword="LABEL_T_F_NORMALIZE" alignment="left">T_F_NORMALIZE=</Label>
+    <Field keyword="T_F_NORMALIZE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="BORDER1" xPos="1" yPos="1" xSize="64" ySize="6"/>
+     <Constraints component="COMMENT_WINDOWINGOPTIONS" xPos="2" yPos="2" xSize="17" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_WIN" xPos="2" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_WIN" xPos="10" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="22" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="30" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="45" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="53" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="22" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="30" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="45" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="53" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="8" xSize="23" ySize="9"/>
+     <Constraints component="COMMENT_DISPLAYOPTIONS" xPos="2" yPos="9" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="2" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="11" yPos="11" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FREQ_BEG" xPos="2" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="11" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="2" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="11" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FREQ" xPos="2" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FREQ" xPos="11" yPos="14" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_ATT" xPos="2" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_ATT" xPos="11" yPos="15" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="18" xSize="54" ySize="15"/>
+     <Constraints component="COMMENT_TIMEFREQUENCYOPTIONS" xPos="2" yPos="19" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_ALG" xPos="2" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_ALG" xPos="15" yPos="21" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TIM_WIN" xPos="2" yPos="22" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_WIN" xPos="15" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="C1" xPos="26" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_WINSAMPLECOUNT" xPos="33" yPos="22" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_FFT" xPos="2" yPos="23" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_FFT" xPos="15" yPos="23" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="C2" xPos="26" yPos="23" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FFTSAMPLECOUNT" xPos="33" yPos="23" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_AOK_OPTIMIZE" xPos="2" yPos="24" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AOK_OPTIMIZE" xPos="15" yPos="24" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TYPE_WIN" xPos="2" yPos="25" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_WIN" xPos="15" yPos="25" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_IDF" xPos="2" yPos="27" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IDF" xPos="6" yPos="27" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INSTANTANEOUSDOMINANTFRE" xPos="12" yPos="27" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_IQ" xPos="2" yPos="28" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IQ" xPos="6" yPos="28" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INSTANTANEOUSQ" xPos="15" yPos="28" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ICF" xPos="2" yPos="29" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ICF" xPos="6" yPos="29" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INSTANTANEOUSCENTERFREQU" xPos="12" yPos="29" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_IBW" xPos="2" yPos="30" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IBW" xPos="6" yPos="30" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INSTANTANEOUSBANDWIDTH" xPos="13" yPos="30" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_IMF" xPos="2" yPos="31" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IMF" xPos="6" yPos="31" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_INSTANTANEOUSMAXIMUMFREQ" xPos="12" yPos="31" xSize="31" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_T_F_NORMALIZE" xPos="2" yPos="34" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T_F_NORMALIZE" xPos="16" yPos="34" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_WIN">
+      <Tip>Method to use for specifying trace time window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - OPT_WIN<br> Method to use for specifying trace time window.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE      (Window defined by times measured from the head mute.)
+ Allowed = FIXED     (Window is fixed.)
+ 
+ TFATT only analyzes the trace samples within the trace time window.
+ 
+ If OPT_WIN = MUTE then the window is specified by TIM_ADD and WIN_LEN.
+ 
+ If OPT_WIN = FIXED then the window is specified by TIM_BEG and TIM_END.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Time at top of window, in seconds, if OPT_WIN = FIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - TIM_BEG<br> Time at top of window, in seconds, if OPT_WIN = FIXED.</center></b>
+<pre> Default = TSTRT
+ Allowed = real &gt;= TSTRT
+ 
+ Top of window will be set to the larger of TIM_BEG or the head mute time.
+ 
+ Active only if OPT_WIN = FIXED.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Time at bottom of window, in seconds, if OPT_WIN = FIXED.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - TIM_END<br> Time at bottom of window, in seconds, if OPT_WIN = FIXED.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TIM_BEG
+ 
+ Bottom of window will be set to the smaller of TIM_END or the tail mute time.
+ 
+ Active only if OPT_WIN = FIXED.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Time at top of window = mute time + TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - TIM_ADD<br> Time at top of window = mute time + TIM_ADD.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ TIM_ADD has units of seconds.
+ 
+ Active only if OPT_WIN = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - WIN_LEN<br> Time at bottom of window = time at top of window + WIN_LEN.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0
+ 
+ WIN_LEN is the length of the trace window in seconds.
+ 
+ Active only if OPT_WIN = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODE">
+      <Tip>Output t-f spectra or t-f attribute traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - MODE<br> Output t-f spectra or t-f attribute traces.</center></b>
+<pre> Default = T_F
+ Allowed = T_F    (Output t-f spectra traces.)
+ Allowed = ATT    (Output t-f attribute traces.)
+ 
+ If MODE = T_F, then for each input trace the t-f spectrum is calculated
+ and output as a group of traces where each output trace is a distinct
+ frequency sample.  There is one output t-f group of traces for each input
+ trace.  The input traces are not passed through.
+ 
+ If MODE = ATT, then for each input trace, the t-f spectrum is calculated and
+ then the desired attribute traces are calculated from the t-f spectrum.  The
+ attribute traces are then output.  The input traces are not passed through.
+ 
+ These t-f attributes are instantaneous in the sense that each time sample of
+ an attribute is calculated from the associated time-slice through the t-f
+ spectrum.  T-f attributes should give results that have a more physical
+ interpretation than the Hilbert Transform derived instantaneous attributes.
+ 
+ If MODE = BOTH:  DISABLED
+ 
+ For each input trace, the t-f spectrum is calculated and then the desired
+ attribute traces are calculated from the t-f spectrum.  The attribute
+ traces are output followed by the spectrum traces, all in one gather.
+ The input traces are not passed through.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_BEG">
+      <Tip>Lowest frequency to use for t-f output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - FREQ_BEG<br> Lowest frequency to use for t-f output traces.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ The FREQ_BEG and FREQ_END parameters allow the user to restrict the frequency
+ band represented by t-f output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>Highest frequency to use for t-f output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - FREQ_END<br> Highest frequency to use for t-f output traces.</center></b>
+<pre> Default = Nyquist
+ Allowed = real &gt; FREQ_BEG
+ 
+ The FREQ_BEG and FREQ_END parameters allow the user to restrict the frequency
+ band represented by t-f output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FREQ">
+      <Tip>Header word to carry frequency of output t-f spectrum traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - HDR_FREQ<br> Header word to carry frequency of output t-f spectrum traces.</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH
+ 
+ Header word HDR_FREQ + 1 will carry the frequency sample interval of output
+ t-f spectrum traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_ATT">
+      <Tip>Header word to carry integer indicating attribute type of trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - HDR_ATT<br> Header word to carry integer indicating attribute type of trace.</center></b>
+<pre> Default = 50
+ Allowed = 1 - NWIH
+ If MODE = ATT, an integer indicating the trace attribute type is
+ written in header word HDR_ATT of output traces as follows.
+ 
+     0     Time-frequency Spectra
+     1     Instantaneous Dominant Frequency
+     2     Instantaneous Q
+     3     Instantaneous Center Frequency
+     4     Instantaneous Bandwidth
+     5     Instantaneous Maximum Frequency
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_ALG">
+      <Tip>Algorithm to use for t-f calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - OPT_ALG<br> Algorithm to use for t-f calculation.</center></b>
+<pre> Default = AOK
+ Allowed = AOK  (Adaptive Optimized Kernel (AOK).)
+ Allowed = WIG  (Wigner transform, AOK without optimization) EXPERIMENTAL
+ Allowed = SWF  (Short Window Fourier.)
+ 
+ OPT_ALG = AOK is slowest with optimum resolution and optimum noise.
+ 
+ OPT_ALG = WIG is slow with best resolution and highest noise.
+ 
+ OPT_ALG = SWF is fastest with poor resolution and lowest noise.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_WIN">
+      <Tip>Sliding time window to use in the t-f calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - TIM_WIN<br> Sliding time window to use in the t-f calculations.</center></b>
+<pre> Default = 10*DT
+ Allowed = real &gt; 0.0 (an even multiple of DT)
+ 
+ TIM_WIN is the length, in seconds, of the sliding time window used in the
+ t-f calculations.  Lower values give better time resolution and worse
+ frequency resolution and conversely.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C1">
+      <Tip>TIM_WIN sample count.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - C1<br> TIM_WIN sample count.</center></b>
+<pre> Number of time samples in sliding time window.
+ 
+ TIM_WIN = N * DT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_FFT">
+      <Tip>Total time, in seconds, to use in each AOK and SWF calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - TIM_FFT<br> Total time, in seconds, to use in each AOK and SWF calculation.</center></b>
+<pre> Default = dt * 64
+ Allowed = real = dt * (2**N) where (2**N) &gt; (TIM_WIN sample count).
+ 
+ TIM_FFT is the total time, in seconds, used in each AOK and SWF
+ calculation.  As a preliminary step, these calculations pad the data in the
+ TIM_WIN window with zeros to the larger total time of TIM_FFT. The number of
+ frequency values calculated is given by (1 + (TIM_FFT/DT) / 2).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="C2">
+      <Tip>Number of time samples in FFT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - C2<br> Number of time samples in FFT.</center></b>
+<pre> Must be a power of 2 greater than TIM_WIN sample count.
+ 
+ TIM_FFT = N * DT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AOK_OPTIMIZE">
+      <Tip>Optimization parameter for the AOK calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - AOK_OPTIMIZE<br> Optimization parameter for the AOK calculation.</center></b>
+<pre> Default = 2.0
+ Allowed = 1.0 =&lt; real =&lt; 5.0
+ 
+ AOK_OPTIMIZE is the parameter that controls optimization of the AOK
+ calculation (this optimization reduces non-physical artifacts).  Small
+ changes in AOK_OPTIMIZE will not make a noticable difference in the output.
+ 
+ Active only if OPT_ALG = AOK.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TYPE_WIN">
+      <Tip>Type of windowing to use in SWF calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - TYPE_WIN<br> Type of windowing to use in SWF calculations.</center></b>
+<pre> Default = HAMM
+ Allowed = HAMM   (Hamming window)
+ Allowed = BOX    (Boxcar window)
+ Allowed = BLAC   (Blackman window)
+ Allowed = BART   (Bartlet window)
+ 
+ Active only if OPT_ALG = SWF.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IDF">
+      <Tip>Instantaneous Dominant Frequency (toggle).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - IDF<br> Instantaneous Dominant Frequency (toggle).</center></b>
+<pre> Default = YES (enabled)
+ Allowed = YES (enabled)
+ Allowed = NO  (disabled)
+ IDF (Instantaneous Dominant Frequency) is the square root of the second
+ moment of the spectrum, or the RMS frequency.  Instantaneous Dominant
+ Frequency should be a good approximation to the zero-crossing frequency.
+ 
+ Active only if MODE = ATT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IQ">
+      <Tip>Instantaneous Q (toggle).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - IQ<br> Instantaneous Q (toggle).</center></b>
+<pre> Default = YES (enabled)
+ Allowed = YES (enabled)
+ Allowed = NO  (disabled)
+ IQ is 2 pi times the center frequency divided by the bandwidth.  This is
+ analogous to the electrical engineering definition of Q and may not be
+ closely related to the seismic wave propagation definition of Q.
+ 
+ Active only if MODE = ATT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ICF">
+      <Tip>Instantaneous Center Frequency (toggle).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - ICF<br> Instantaneous Center Frequency (toggle).</center></b>
+<pre> Default = NO  (disabled)
+ Allowed = YES (enabled)
+ Allowed = NO  (disabled)
+ 
+ ICF (Instantaneous Center Frequency) is the average frequency weighted by the
+ spectrum.  (Also can be thought of as the spectrum centroid or the
+ expectation of frequency given the power spectrum.)
+ 
+ Active only if MODE = ATT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IBW">
+      <Tip>Instantaneous Bandwidth (toggle).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - IBW<br> Instantaneous Bandwidth (toggle).</center></b>
+<pre> Default = NO  (disabled)
+ Allowed = YES (enabled)
+ Allowed = NO (disabled)
+ IBW (Instantaneous Bandwidth) is the standard deviation of the spectrum about
+ its center frequency.  (This will give lower values than the difference
+ between the high and low half-power frequencies.)
+ 
+ Active only if MODE = ATT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IMF">
+      <Tip>Instantaneous Maximum Frequency (toggle).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - IMF<br> Instantaneous Maximum Frequency (toggle).</center></b>
+<pre> Default = NO  (disabled)
+ Allowed = YES (enabled)
+ Allowed = NO (disabled)
+ IMF (Instantaneous Maximum Frequency) is the frequency having maximum
+ power (mode) in the spectrum.
+ 
+ Active only if MODE = ATT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="T_F_NORMALIZE">
+      <Tip>Method to use for normalizing t-f spectra.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - T_F_NORMALIZE<br> Method to use for normalizing t-f spectra.</center></b>
+<pre> Default = NONE
+ Allowed = NONE (No spectrum normalization.)
+ Allowed = TIME (Integral of each t-f spectrum time-slice is set to unity.)
+ Allowed = FREQ (Integral of each t-f spectrum frequency-slice is set to unity)</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>tfatt - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="tfatt">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TFATT   (Time-Frequency Attributes)
+ Category   : transforms
+ Written    : 2001-05-09   by: Randall L. Selzler, Data-Warp, Inc.
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Generate t-f spectra or t-f attributes of input traces.
+ Portability: No known limitations.
+ Parallel   : Yes
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            GENERAL DESCRIPTION
+ 
+ TFATT performs general time-frequency spectrum analysis of input traces.  The
+ Heisenburg Uncertainty Principle sets a minimum value on the product of the
+ time resolution and the frequency resolution for t-f spectra.  The algorithms
+ used by TFATT honor the Uncertainty Principle.  The t-f spectra generated by
+ TFATT are power spectra, not amplitude spectra.
+ 
+ 
+ If MODE = T_F:
+ 
+     For each input trace a t-f spectrum is calculated and output as a group
+     of traces where each output trace is a distinct frequency sample.
+     There is one output t-f group of traces for each input trace.  The input
+     traces are not passed through.
+ 
+ If MODE = ATT:
+ 
+     For each input trace, the t-f spectrum is calculated and then the desired
+     attribute traces are calculated from the t-f spectrum.  The attribute
+     traces are then output.  The input traces are not passed through.
+ 
+     These t-f attributes are instantaneous in the sense that each time sample
+     of an attribute is calculated from the associated time-slice through the
+     t-f spectrum.  T-f attributes should give results that have a more
+     physical interpretation and less noise than instantaneous attributes
+     based on the Hilbert Transform.
+ 
+ If MODE = BOTH:  DISABLED
+ 
+     For each input trace, the t-f spectrum is calculated and then the desired
+     attribute traces are calculated from the t-f spectrum.  The attribute
+     traces are output followed by the spectrum traces, all in one gather.
+     The input traces are not passed through.
+ 
+ 
+ Algorithms
+ 
+ Three algorithms are available for calculating the t-f spectrum:  Short Window
+ Fourier, Wigner and Adaptive Optimized Kernel (AOK) which is an optimized
+ Wigner Transform.  Normally the AOK algorithm provides the optimal compromise
+ among resolution, noise and computation time.
+ 
+ 
+ Attributes
+ 
+     T-F Spectrum
+     The time-frequency spectrum (available in MODE = T_F or BOTH).
+ 
+     Instantaneous Dominant Frequency
+     The square root of the second moment of the spectrum, or the RMS
+     frequency.  Instantaneous Dominant Frequency should be a good
+     approximation to the zero-crossing frequency.
+ 
+     Instantaneous Q
+     2 pi times the center frequency divided by the bandwidth.  This is
+     analogous to the electrical engineering definition of Q and may not be
+     closely related to the seismic wave propagation definition of Q.
+ 
+     Instantaneous Center Frequency
+     The average frequency weighted by the spectrum.  (Also can be thought of
+     as the spectrum centroid or the expectation of frequency given the power
+     spectrum.)
+ 
+     Instantaneous Bandwidth
+     The standard deviation of the spectrum about its center frequency.
+     (Generally this will give lower values than the difference between the
+     high and low half-power frequencies.)
+ 
+     Instantaneous Maximum Frequency
+     The frequency having maximum power (mode) in the spectrum.
+ 
+ 
+ Number of Output Traces
+ 
+ If MODE = ATT, there will be n output attribute traces for each input trace,
+ where n is the number of attributes selected by the user.
+ 
+ If MODE = T_F, there will be as many traces in the output t-f group of traces
+ as time samples used in the FFT, i.e. (1 + (TIM_FFT/DT) / 2).
+ These correspond to DC (zero frequency) through Nyquist.  However, the
+ FREQ_BEG and FREQ_END parameters define a frequency range such that only
+ t-f traces within the range will be output.
+ 
+ If MODE = BOTH, all the traces produced by MODE = T_F and by MODE = ATT will
+ be output.
+ 
+ 
+ Output Trace Timing and Header Words
+ 
+ Output traces have the same timing as input traces and carry attribute
+ information only in the user specified trace time window.  Output traces are
+ dead outside the time window.  Header words 2 and 64 are set appropriately
+ for the live part of the output trace.
+ 
+ In MODE = T_F and BOTH, the frequency associated with an output trace is
+ written in header word HDR_FREQ and the frequency sample interval is written
+ in header word HDR_FREQ + 1.
+ 
+ For all modes, an integer indicating the trace type is written in header word
+ HDR_ATT as follows.
+ 
+     0     Time-frequency Spectrum
+ 
+     1     Instantaneous Dominant Frequency
+ 
+     2     Instantaneous Q
+ 
+     3     Instantaneous Center Frequency
+ 
+     4     Instantaneous Bandwidth
+ 
+     5     Instantaneous Maximum Frequency
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                              ADVICE FOR USERS
+ 
+ 
+ Run Time
+ 
+ Because almost all of the TFATT run-time is used to calculate the t-f
+ spectrum and very little is used to calculate attribute traces, it is
+ preferable to run the dataset through TFATT once and calculate all the
+ attributes that may possibly interest you rather than running the dataset
+ through TFATT multiple times to calculate additional attributes.
+ 
+ 
+ T-F Spectrum Normalization
+ 
+ The t-f spectra can be normalized by setting T_F_NORMALIZE to TIME or FREQ.
+ Typically this will be necessary only if input traces have not had XP
+ or MVXP applied or if datasets with different characteristic amplitudes are
+ being compared.
+ 
+ T_F_NORMALIZE = TIME, removes variations in amplitude with time but does not
+ alter the shape of the spectra produced by taking time-slices through the
+ t-f spectra.
+ 
+ T_F_NORMALIZE = FREQ, removes variations in amplitude with frequency but does
+ not alter the shape of the plot of amplitude vs. time for any frequency-slice
+ through the t-f spectra.
+ 
+ 
+ T-F Edge Effects
+ 
+ Because the t-f spectrum calculation uses a sliding window of length TIM_WIN
+ seconds, the top and bottom of the spectrum may be inaccurate where this
+ window is sliding into and out of the trace time window.  You should specify
+ the trace time window larger than your area of interest by TIM_WIN seconds at
+ the top and the bottom so that the edge effects lie outside your area of
+ interest.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author       Description
+     ----       ------       -----------
+007. 2006-06-20  B. Menger   Removed Unused Variables.
+  6. 2002-04-30 Goodger      Fix bug with trace type flag in HDR_ATT.
+                             Disable BOTH option.
+                             Move some error checking to traps.
+  5. 2001-10-30 Selzler      Clarified TIM_WIN and TIM_FFT usage/doc.
+  4. 2001-08-03 Selzler      Added pcps_set calls for parallel setup
+  3. 2001-07-30 Selzler      Added multiple trace input and output
+  2. 2001-07-25 Selzler      Added attribute options
+  1. 2001-07-11 Selzler      Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

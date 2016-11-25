@@ -1,0 +1,30 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                            first_file_is_newer
+#-------------------------------------------------------------------------------
+# Find out whether the first file is newer than the second file.
+# Run this script with two arguments as follows:
+#
+#               first_file_is_newer    first_file    second_file
+#
+# Returns 0 if first_file is newer than second_file (or second_file is missing).
+# Returns 1 if first_file is older than second_file.
+#-------------------------------------------------------------------------------
+
+   set first_file  = $1
+   set second_file = $2
+
+   if(! -e $second_file) exit 0
+
+   set list = `ls -t $second_file $first_file`
+
+   if($list[1] == $first_file) then
+      exit 0
+   else
+      exit 1
+   endif
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+

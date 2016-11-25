@@ -1,0 +1,49 @@
+##--------------------- makefile.x86_64_gfortran_mpich2 ------------------------##
+##--------------------- makefile.x86_64_gfortran_mpich2 ------------------------##
+##--------------------- makefile.x86_64_gfortran_mpich2 ------------------------##
+
+# Note: GUI_INCS and GUI_LIBS are not needed since we are not linking to X-windows.
+# Note: CXX_LIBS are not needed since we are using the -cxxlib ifort link option.
+# Note: F90_LIBS are not needed since we are using the ifort compiler to link.
+
+CC           := gcc -c -g -O0 -fPIC -Wall -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DLINUXI -DPARALLEL
+CXX          := g++ -c -g -O0 -fPIC -Wall -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DLINUXI -DPARALLEL
+F90          := gfortran -c -g -O2 -fPIC -unroll
+MOD_PREFIX   := -I
+MOD_SUFFIX   := mod
+
+JAVA_INCS    := $(JAVA_HOME)/include $(JAVA_HOME)/include/linux
+GUI_INCS     := 
+#GUI_INCS     := /usr/include /usr/include/Xm /usr/include/X11 /usr/include/X11/SM /usr/include/X11/ICE \
+#                /usr/include/X11/Xt /usr/include/X11/Xm /usr/include/X11/Xmu /usr/include/X11/Xext
+
+LD_SHARED    := gfortran -shared
+LD_STATIC    := gfortran 
+ARCHIVE      := ar rc
+
+JAVA_LIBS    := -L$(JAVA_HOME)/jre/lib/amd64 -L$(JAVA_HOME)/jre/lib/amd64/server -ljava -ljvm -lverify
+FFTW_LIBS    := -L$(FFTW_DIR)/lib -lfftw -lrfftw
+
+ifeq "$(MPI)" "lam"
+	MPI_INCS     := $(LAM_DIR)/include
+	MPI_LIBS     := -L$(LAM_DIR)/lib -llammpi++ -lmpi -llam -llamf77mpi
+endif
+
+ifeq "$(MPI)" "mpich2"
+	MPI_INCS     := $(MPICH_DIR)/include
+	MPI_LIBS     := -L$(MPICH_DIR)/lib -lmpich -lfmpich
+
+endif
+
+#GUI_LIBS     := -L/usr/lib64 -lXm -lXmu -lXp -lXext -lXt -lSM -lICE -lX11
+GUI_LIBS     :=
+
+F90_LIBS     :=
+CXX_LIBS     := -lstdc++ -lm -lgcc_s -lc -lgcc_s
+#CXX_LIBS     :=
+MATH_LIBS    := -lutil -lc -lm -lpthread
+OTHER_LIBS   :=
+
+##------------------------------ end -------------------------------------##
+##------------------------------ end -------------------------------------##
+##------------------------------ end -------------------------------------##

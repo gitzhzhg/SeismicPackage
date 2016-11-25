@@ -1,0 +1,1352 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="trot" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="TROT" title="TROT" rows="33" columns="80">
+    <Label keyword="LABEL_EXTENT_SIZE_MB" alignment="left">EXTENT_SIZE_MB=</Label>
+    <Field keyword="EXTENT_SIZE_MB" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RESERVE_DISK" alignment="left">RESERVE_DISK=</Label>
+    <Field keyword="RESERVE_DISK" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TYPE" alignment="left">TYPE=</Label>
+    <Field keyword="TYPE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PERMISSION" alignment="left">PERMISSION=</Label>
+    <Field keyword="PERMISSION" type="string" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HISTORY" alignment="left">HISTORY=</Label>
+    <Field keyword="HISTORY" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WRITE" alignment="left">WRITE=</Label>
+    <Field keyword="WRITE" type="comboBox" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_BITS" alignment="left">NUM_BITS=</Label>
+    <Field keyword="NUM_BITS" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_FLAG" alignment="left">HDR_FLAG=</Label>
+    <Field keyword="HDR_FLAG" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_NORM" alignment="left">OPT_NORM=</Label>
+    <Field keyword="OPT_NORM" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AMPL_MAX" alignment="left">AMPL_MAX=</Label>
+    <Field keyword="AMPL_MAX" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CREATE_CSV" alignment="left">CREATE_CSV=</Label>
+    <Field keyword="CREATE_CSV" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_PERFORMDOSKIPPATTERNSONS" alignment="center">Perform do-skip patterns on sequences of items.</Label>
+    <Label keyword="LABEL_TR_MAX" alignment="left">TR_MAX=</Label>
+    <Field keyword="TR_MAX" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SKIP_INIT" alignment="left">SKIP_INIT=</Label>
+    <Field keyword="SKIP_INIT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_DO" alignment="left">NUM_DO=</Label>
+    <Field keyword="NUM_DO" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_SKIP" alignment="left">NUM_SKIP=</Label>
+    <Field keyword="NUM_SKIP" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_FILE" alignment="left">OPT_FILE=</Label>
+    <Field keyword="OPT_FILE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CHECKFILE" alignment="left">CHECKFILE=</Label>
+    <Field keyword="CHECKFILE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="TEST_BEYOND_SYMLINKS">Test Beyond Symbolic Links</Button>
+    <Button keyword="SELECT_LATEST_PATHNAME">Select PATHNAME</Button>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS  PATHNAMES">
+     <Array keyword="STATUS" type="string" maxLength="8  " columnName="STATUS" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="PATHNAMES" type="string" maxLength="128" columnName="PATHNAMES" editable="yes" sensitive="yes" columnSize="55"/>
+    </ArraySet>
+    <Button keyword="SELECT_PATH_LIST">Select PATH_LIST</Button>
+    <Label keyword="EQLAB_PATH_LIST" alignment="left">=</Label>
+    <Field keyword="PATH_LIST" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_EXTENT_SIZE_MB" xPos="0" yPos="0" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EXTENT_SIZE_MB" xPos="15" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RESERVE_DISK" xPos="22" yPos="0" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RESERVE_DISK" xPos="35" yPos="0" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TYPE" xPos="40" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE" xPos="45" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PERMISSION" xPos="53" yPos="0" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PERMISSION" xPos="64" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HISTORY" xPos="0" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HISTORY" xPos="8" yPos="2" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WRITE" xPos="17" yPos="2" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WRITE" xPos="23" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUM_BITS" xPos="34" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_BITS" xPos="43" yPos="2" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_FLAG" xPos="0" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_FLAG" xPos="9" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_NORM" xPos="13" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_NORM" xPos="22" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_AMPL_MAX" xPos="32" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AMPL_MAX" xPos="41" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CREATE_CSV" xPos="52" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CREATE_CSV" xPos="63" yPos="4" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="0" yPos="6" xSize="48" ySize="5"/>
+     <Constraints component="COMMENT_PERFORMDOSKIPPATTERNSONS" xPos="1" yPos="7" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TR_MAX" xPos="1" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_MAX" xPos="10" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SKIP_INIT" xPos="22" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SKIP_INIT" xPos="34" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_DO" xPos="1" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_DO" xPos="10" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_SKIP" xPos="23" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_SKIP" xPos="34" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_FILE" xPos="10" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FILE" xPos="19" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CHECKFILE" xPos="48" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CHECKFILE" xPos="58" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TEST_BEYOND_SYMLINKS" xPos="10" yPos="15" xSize="26" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_LATEST_PATHNAME" xPos="10" yPos="17" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="10" yPos="18" xSize="66" ySize="11" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST" xPos="2" yPos="31" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_LIST" xPos="18" yPos="31" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_LIST" xPos="19" yPos="31" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_INFO" xPos="19" yPos="32" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="EXTENT_SIZE_MB">
+      <Tip>This is the file extent size in Mbytes. The default is 250.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - EXTENT_SIZE_MB<br> This is the file extent size in Mbytes. The default is 250.</center></b>
+<pre> Default = 250
+ Allowed = 0 - 99999
+ Your disk file can be comprised of up to 9999 segments.  A base segment and
+ up to 9999 extents will be seen by the system as one file.  If you need a lot
+ of disk space for your file, it can be as large as 24.9 Terabytes if you were
+ to use 99999 for each of 255 extent sizes.  This is not recommended.  If you
+ are asking the system to initialize your files before writing to disk (in
+ order to guarantee you have adequate disk space) then you might consider a
+ smaller extent size (if you don't need 512 Gbytes).  You could use 100 Mbytes
+ for instance, and the initialization would proceed in 100 Mbyte chunks.  If
+ you used 2Gbytes then initialization will proceed by initializing
+ one entire 2Gbyte chunk at a time.  Your tradeoff is maximum file size vs.
+ speed of initialization of each extent.  If you choose &gt; 20 Gbytes then the
+ file will not be pre-initialized and your file space is not guaranteed.
+ By using a large extent size &gt; 20 Gigs (extent size &gt; 20480 ) you can write
+ your data to a "monolithic" file in  CPSDATA or CPSTEMP but your
+ disk space will not be preallocated.
+ work.
+-------------------------------------------------
+   EXTENT SIZE              MAX FILE SIZE
+     128 Mbytes               32   Gbytes
+     256 Mbytes               64   Gbytes
+     512 Mbytes              128   Gbytes
+    1024 Gbyte               256   Gbytes
+    2048 Gbyte               512   Gbytes
+   20480 Gbyte     up to 4.98 Terabytes reserve capability allowed.
+  &gt;20480 Gbyte     up to size of file system capacity not reserved.
+--------------------------------------------------</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RESERVE_DISK">
+      <Tip>To reserve disk space, your job will initialize each extent with 0.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - RESERVE_DISK<br> To reserve disk space, your job will initialize each extent with 0.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ If YES, then when the file or a file extent is opened, the disk will first
+ be filled with 0s to ensure the file space is reserved.  This takes longer
+ up front but guarantees you have the space needed.  If EXTENT_SIZE_MB &gt;20480
+ this is turned to NO and the system will NOT check for availability of space.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="TYPE">
+      <Tip>TYPE of file to be written.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - TYPE<br> TYPE of file to be written.</center></b>
+<pre> Default = LBO
+ Allowed = TRCIO  (32-bit IEEE format data samples)
+ Allowed = LBO    (Local Bit Optimization format)
+ Allowed = LBO2   (LBO with support for NILs)
+ Allowed = SEGY   (An industry standard SEGY file.)
+ Allowed = SU     (A CWP "segy-like" format)
+ Note that SEGY files have an externally defined format and do not
+ contain all the information contained in the internal files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PERMISSION">
+      <Tip>Permission for future access of the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PERMISSION<br> Permission for future access of the file.</center></b>
+<pre> Default = rw-rw-r--
+ Allowed = valid chmod specification
+ The default value is the permission that is usually set.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HISTORY">
+      <Tip>How to control transfer of processing history.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - HISTORY<br> How to control transfer of processing history.</center></b>
+<pre> Default = MODEL for  &gt;= 32-bit TRCIO files.
+ Default = CURRENT for &lt;= 16-bit TRCIO files.
+ Allowed = ALL     (Write all old histories.)
+ Allowed = MODEL   (Save a set of histories that model job processing.)
+ Allowed = CURRENT (Write current history only.)
+ Allowed = NONE    (Do not write any history.)
+ History can only be written to file types of "TRCIO".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WRITE">
+      <Tip>File writing options.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - WRITE<br> File writing options.</center></b>
+<pre> Default = OVERWRITE
+ Allowed = OVERWRITE
+ Allowed = NEW
+ Allowed = APPEND
+ If WRITE=OVERWRITE, then overwrite a file with the same name or create a new
+ file if one does not already exist with the same name.
+ 
+ If WRITE=NEW, then create a new file or abort if there is already a file with
+ that name.
+ 
+ If WRITE=APPEND, then append traces to the existing file with the same name
+ or create it if it does not already exist.  Abort if there is a conflict
+ between file globals and process globals.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_BITS">
+      <Tip>Number of bits used for each trace sample in the file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - NUM_BITS<br> Number of bits used for each trace sample in the file.</center></b>
+<pre> Default = 32  (16 for LBO, LBO2 formats)
+ Allowed = 1 - 64  (6 - 20 for LBO, LBO2 formats)
+ NUM_BITS must be 16 or 32 for SEGY files and 8 or 32 for VOXET files.
+ QTROT requires 32 bits.
+ Normally it will be 8, 16, or 32.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_FLAG">
+      <Tip>Header word denoting flagged traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - HDR_FLAG<br> Header word denoting flagged traces.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ If HDR_FLAG = 0, then all traces are written.  Otherwise, only traces with
+ a flag set in header word HDR_FLAG are written. Flag is set == .true. IF the
+ value in header(hdr_flag) is &gt; 0.0; otherwise if header(hdr_flag) &lt;= 0.0,
+ flag is UNSET (flag == .false.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_NORM">
+      <Tip>Option to scale values by trace LAV or by a specified value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - OPT_NORM<br> Option to scale values by trace LAV or by a specified value.</center></b>
+<pre> Default = TR_LAV
+ Allowed = TR_LAV
+ Allowed = AMPL_MAX
+ 
+ If OPT_NORM = TR_LAV, integer samples are normalized by individual trace so
+ that the largest possible integer absolute amplitude for a trace is that
+ trace's LAV.  If OPT_NORM = AMPL_MAX, all integer samples are scaled so the
+ largest possible integer absolute amplitude is the user-specified value
+ AMPL_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AMPL_MAX">
+      <Tip>Amplitude for the largest possible integer sample value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - AMPL_MAX<br> Amplitude for the largest possible integer sample value.</center></b>
+<pre> Default = 10.0
+ Allowed = real&gt;0.0
+ 
+ If OPT_NORM = AMPL_MAX, all integer samples are scaled so that the largest
+ possible integer absolute amplitude is the user-specified value AMPL_MAX.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CREATE_CSV">
+      <Tip>Create a CSV file from your trot file?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - CREATE_CSV<br> Create a CSV file from your trot file?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ Create a workstation CSV file after your trot file is written.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_MAX">
+      <Tip>Maximum number of items to ultimately select.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - TR_MAX<br> Maximum number of items to ultimately select.</center></b>
+<pre> Default = 99999999
+ Allowed = int &gt;= 0
+ Selection will stop once tr_max items have been selected with the do_skip
+ pattern. TR_MAX is the maximum number of items SELECTED by do_skip.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SKIP_INIT">
+      <Tip>Number of items to skip over initially before selecting any.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - SKIP_INIT<br> Number of items to skip over initially before selecting any.</center></b>
+<pre> Default = 0
+ Allowed = int &gt;= 0
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DO">
+      <Tip>Number of items to process at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - NUM_DO<br> Number of items to process at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SKIP">
+      <Tip>Number of items to skip at a time in the DO-SKIP selection.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - NUM_SKIP<br> Number of items to skip at a time in the DO-SKIP selection.</center></b>
+<pre> Default = 0
+ Allowed = int (positive,negative, or 0 unless restricted by the programmer.)
+ The DO-SKIP item selection method consists of initially skipping SKIP_INIT
+ items, then sequentially processing ("doing") NUM_DO consecutive items
+ and skipping NUM_SKIP consecutive items.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_FILE">
+      <Tip>Source of input files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - OPT_FILE<br> Source of input files.</center></b>
+<pre> Default = PATHNAMES
+ Allowed = PATHNAMES, PATH_LIST
+ If OPT_FILE = PATHNAMES, file(s) listed in PATHNAMES array.
+ If OPT_FILE = PATH_LIST, file(s) listed in file indicated by PATH_LIST.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CHECKFILE">
+      <Tip>Check that the file is valid trace file with consistent globals.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - CHECKFILE<br> Check that the file is valid trace file with consistent globals.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ CFE can check the file for consistency and existence, and in the process will
+ load special globals (scalar ones) for subsequent job processes to use.
+ These are so that GVS, some Migrations, etc. will have proper globals set
+ by the input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TEST_BEYOND_SYMLINKS">
+      <Tip>Forces more thorough file STATUS checking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - TEST_BEYOND_SYMLINKS<br> Forces more thorough file STATUS checking.</center></b>
+<pre> Default behavior is to not pursue file STATUS checking beyond the symbolic
+ links themselves.  Pushing this button causes more thorough file STATUS
+ information to be provided.  Refrain from pushing this button during periods
+ of NFS or disk problems.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LATEST_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - SELECT_LATEST_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>File status (if CHECKSTATUS=YES).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - STATUS<br> File status (if CHECKSTATUS=YES).</center></b>
+<pre>  R  -- File found and readable.
+ RE  -- File not found or not readable.
+  W  -- File found and writable.
+  C  -- File not found, but creatable.
+ CE  -- File not found and not creatable.
+ WE  -- File exists and can not be overwritten.  Checks both file and
+        directory permissions.
+ WB  -- Blank filename.
+ NTF -- File not a trc, cmpr, or segy file (only if CHECKFILE == YES).
+ BG  -- File globals disagree with job (only if CHECKFILE == YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES">
+      <Tip>Pathname(s) for the file(s) to be read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PATHNAMES<br> Pathname(s) for the file(s) to be read.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of file(s), including optional node, userid, and dir.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST">
+      <Tip>Choose PATH_LIST with a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - SELECT_PATH_LIST<br> Choose PATH_LIST with a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST">
+      <Tip>ASCII file containing list of file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PATH_LIST<br> ASCII file containing list of file names.</center></b>
+<pre> Default = blank
+ Allowed = char
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_INFO">
+      <Tip>File status for PATH_LIST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PATH_LIST_INFO<br> File status for PATH_LIST.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="MULTIFILE" title="Multi-File" rows="24" columns="80">
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_OPT_SWITCH" alignment="left">OPT_SWITCH=</Label>
+    <Field keyword="OPT_SWITCH" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FILE_MAX" alignment="left">FILE_MAX=</Label>
+    <Field keyword="FILE_MAX" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_BIN" alignment="left">HDR_BIN =</Label>
+    <Field keyword="HDR_BIN" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_INIT" alignment="left">BIN_INIT=</Label>
+    <Field keyword="BIN_INIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_INC" alignment="left">BIN_INC =</Label>
+    <Field keyword="BIN_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_LAST" alignment="left">BIN_LAST=</Label>
+    <Field keyword="BIN_LAST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BIN_TOT" alignment="left">BIN_TOT =</Label>
+    <Field keyword="BIN_TOT" type="int" maxLength="11" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="BORDER2" xPos="2" yPos="0" xSize="41" ySize="9"/>
+     <Constraints component="LABEL_OPT_SWITCH" xPos="3" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SWITCH" xPos="14" yPos="1" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_FILE_MAX" xPos="21" yPos="1" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILE_MAX" xPos="31" yPos="1" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_BIN" xPos="3" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_BIN" xPos="13" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BIN_INIT" xPos="3" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_INIT" xPos="13" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BIN_INC" xPos="3" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_INC" xPos="13" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BIN_LAST" xPos="3" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_LAST" xPos="13" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BIN_TOT" xPos="3" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BIN_TOT" xPos="13" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_SWITCH">
+      <Tip>Write traces into multiple files by header or trace count.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - OPT_SWITCH<br> Write traces into multiple files by header or trace count.</center></b>
+<pre> Default = COUNT
+ Allowed = COUNT  Write FILE_MAX traces into each file.
+ Allowed = HDR    Write into multiple files based on header HDR_BIN.
+ If compressing output or writing a csv file, must use COUNT to a single
+ file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILE_MAX">
+      <Tip>Maximum number of traces written to each file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - FILE_MAX<br> Maximum number of traces written to each file.</center></b>
+<pre> Default = 99999999
+ Allowed = Any positive number.
+ Only active if OPT_SWITCH = COUNT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_BIN">
+      <Tip>Header word to use to bin into multiple files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - HDR_BIN<br> Header word to use to bin into multiple files.</center></b>
+<pre> Default = 3
+ Allowed = Any header word.
+ Only active if OPT_SWITCH = HDR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_INIT">
+      <Tip>Bin center of first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - BIN_INIT<br> Bin center of first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = Any real value.
+ Only active if OPT_SWITCH = HDR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_INC">
+      <Tip>Distance between bin centers.  Also the width of each bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - BIN_INC<br> Distance between bin centers.  Also the width of each bin.</center></b>
+<pre> Default = 1.0
+ Allowed = Any non-zero, real value.
+ Only active if OPT_SWITCH = HDR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_LAST">
+      <Tip>Bin center of last bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - BIN_LAST<br> Bin center of last bin.</center></b>
+<pre> Default = 1.0
+ Allowed = Any real value.
+ Only active if OPT_SWITCH = HDR.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BIN_TOT">
+      <Tip>Total number of bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - BIN_TOT<br> Total number of bins.</center></b>
+<pre> Default = 1
+ Allowed = Any positive number.
+ Only active if OPT_SWITCH = HDR.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SEGY" title="SEGY" rows="24" columns="80">
+    <Border keyword="BORDER3"/>
+    <Label keyword="COMMENT_EBCDIC" alignment="center">(ebcdic)</Label>
+    <Label keyword="LABEL_FOUND" alignment="left">FOUND=</Label>
+    <Field keyword="FOUND" type="string" maxLength="9" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_SEGYHEADER" alignment="left">SEGYHEADER=</Label>
+    <Field keyword="SEGYHEADER" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_" alignment="center">-------------------------------------------------------------------</Label>
+    <Label keyword="LABEL_MOD_SEGY" alignment="left">MOD_SEGY =</Label>
+    <Field keyword="MOD_SEGY" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="SBYTE_ARRAYSET" label="SBYTE BYTES CPS_HDR MTYPE">
+     <Array keyword="SBYTE" type="int" maxLength="6  " columnName="SBYTE" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="BYTES" type="int" maxLength="6  " columnName="BYTES" editable="yes" sensitive="yes" columnSize="6"/>
+     <Array keyword="CPS_HDR" type="int" maxLength="8  " columnName="CPS_HDR" editable="yes" sensitive="yes" columnSize="8"/>
+     <Array keyword="MTYPE" type="string" maxLength="5  " columnName="MTYPE" editable="yes" sensitive="yes" columnSize="5"/>
+    </ArraySet>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">-------------------------------------------------------------------</Label>
+    <Layout>
+     <Constraints component="BORDER3" xPos="2" yPos="0" xSize="77" ySize="5"/>
+     <Constraints component="COMMENT_EBCDIC" xPos="21" yPos="1" xSize="8" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FOUND" xPos="3" yPos="2" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOUND" xPos="9" yPos="2" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SEGYHEADER" xPos="20" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEGYHEADER" xPos="31" yPos="2" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_" xPos="1" yPos="5" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MOD_SEGY" xPos="21" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MOD_SEGY" xPos="32" yPos="6" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SBYTE_ARRAYSET" xPos="22" yPos="8" xSize="28" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="1" yPos="13" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FOUND">
+      <Tip>This tells the status of the EBCDIC header file you specify.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - FOUND<br> This tells the status of the EBCDIC header file you specify.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SEGYHEADER">
+      <Tip>Pathame of text file used to supply the 3200 byte SEGY header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - SEGYHEADER<br> Pathame of text file used to supply the 3200 byte SEGY header.</center></b>
+<pre> Default = blank
+ Allowed = char
+ This file must consist of exactly 40 lines with no more than 80 characters
+ each.  If no file is specified, a default empty SEGY header will be supplied.
+ SEGYHEADER is active only if TYPE = SEGY.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MOD_SEGY">
+      <Tip>Type of segy mapping.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - MOD_SEGY<br> Type of segy mapping.</center></b>
+<pre> Default = LANDMARK
+ Allowed = STAN      (Standard SEGY to CPS mapping.
+ Allowed = LANDMARK
+ Allowed = GEODEPTH
+ Allowed = JASON
+ Allowed = HAMPSON-RUSSELL-2D
+ Allowed = HAMPSON-RUSSELL-3D
+ Allowed = USER      (User specified mapping)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SBYTE">
+      <Tip>Starting byte of the SEGY header to be moved.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - SBYTE<br> Starting byte of the SEGY header to be moved.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BYTES">
+      <Tip>Number of bytes to be moved to a CPS header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - BYTES<br> Number of bytes to be moved to a CPS header.</center></b>
+<pre> Default = -
+ Allowed = int &gt; 0 (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CPS_HDR">
+      <Tip>CPS header word to receive the SEGY header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - CPS_HDR<br> CPS header word to receive the SEGY header.</center></b>
+<pre> Default = -
+ Allowed = 1 to NWIH (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MTYPE">
+      <Tip>Treat Segy header word as I(integer), or F(floating point).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - MTYPE<br> Treat Segy header word as I(integer), or F(floating point).</center></b>
+<pre> Default = -
+ Allowed = char(8) (linked array)
+ Active if MOD_SEGY=USER.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>trot - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="trot">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : TROT    (TRace OuTput to disk)
+ Category   : io
+ Written    : 2000-01-07   by: Bill Menger
+ Revised    : 2006-11-14   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Write seismic traces to one or more disk files.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ [Note that not all the parameters shown here will have been implemented when
+ testing begins for TROT.  Some may prove to be undesirable or unnecessary.]
+ 
+ 
+ TROT writes traces to disk file(s). The PATHNAMES is the only input parameter
+ that must be entered; defaults can be used for all other parameters.  TRIN is
+ the corresponding process for reading disk files.
+ 
+ Multi-Trace Compression (disabled)
+ 
+ The CMPR compression mode within TROT allows the user to store seismic
+ trace datasets on disk in a compressed form, taking fewer bytes of storage
+ than would be required for the original volume before compression.
+ Compressed datasets on disk are automatically recognized and decompressed by
+ TRIN.
+ 
+ Single-Trace Compression
+ 
+ Details on the LBO and LBO2 compression modes are found in the documentation
+ for primitive 'lbo.f90'.  LBO uses a single-trace compression approach.
+ 
+ File Identification
+ 
+ The user enters PATHNAMES of the form user@node:dir/subdir/file.ext
+ Because the CBYT program uses file extensions to determine file type, do
+ not use ".byt" ... also, when writing SEGY files, CBYT expects the file
+ name to end in ".sgy".
+ 
+ File Access
+ 
+ PERMISSION is any valid unix chmod specification for future access
+ of the file in ascii format: 3 parts
+ the first part determines OWNER permission, the second part
+ GROUP permission, and the third WORLD permission.  The characters mean:
+            - or blank = no access
+            x = execute permission (The file can be run as a program)
+            w = Write permission (The file can be written to)
+            r = Read permission (The file can be read)
+ To provide OWNER=read/write, GROUP=r, WORLD=x you would use:
+ PERMISSION = 'rw-r----x'
+ To test out how permissions on a UNIX file work, type :
+ $ touch tmp
+ $ chmod 644 tmp
+ $ ls -l tmp
+ and see:
+ -rw-r--r--   1 mengewm  man             0 Feb  3 07:42 tmp
+ ^---Special bit (d=directory,l=symbolic link, - = regular file)
+  ^^^ --- OWNER permissions (rwx either set or unset (unset = "-")
+     ^^^ --- GROUP permissions (rwx)
+        ^^^ --- WORLD permissions (rwx)
+              ^ --- how many links to this file
+ -rw-r--r--   1 mengewm  man             0 Feb  3 07:42 tmp
+                ^^^^^^^ --- OWNER's name
+                         ^^^^^^^ --- GROUP's name
+                                 ^^^^^^^^^ --- file size in bytes
+ -rw-r--r--   1 mengewm  man             0 Feb  3 07:42 tmp
+                                           ^^^^^^^^^^^^ -- date last modified
+                                                        ^^^^ -- filename
+ File Type
+ 
+ Options for file TYPE are:
+ (TYPE=TRCIO)   the preferred default,
+ (TYPE=SEGY)    industry standard SEGY,
+ (TYPE=LBO)     localized bit optimization
+ (TYPE=LBO2)    localized bit optimization with NIL support
+ 
+ DISABLED (TYPE=CMPR)    the new compressed trace format (also preferred),
+ DISABLED (TYPE=QTROT)   an archaic CPS file format. (DISABLED 4 Mar 2004)
+ [not implemented] (TYPE=VOXET), a special GOCAD file type,
+ 
+ (SEGY and VOXET files have an externally defined
+ format and do not contain all the information contained in the internal
+ files.)  SEGYHEADER takes the name of a textfile used to supply the 3200 byte
+ SEGY header.
+ 
+ [The TRCIO file type replaces the following file types formerly used in CPS:
+ 8-bit bytefile, TFILE (DINT and DOUT), traditional Cray STROT and DTROT and
+ related file types.]
+ 
+ File Structure
+ 
+ The file structure for a disk file always contains trace and global sections
+ and may optionally contain header and history sections.
+ SEGY and VOXET files have an externally defined format
+ and do not contain all the information contained in the internal files.  They
+ are intended for communication with non-Conoco applications.
+ QTROT format does not contain the full file header of a TRCIO file.
+ It also has 32 bit trace headers instead of 64 bit headers.
+ This format is deprecated and should not be used except to support temporary
+ bridge systems in place while CPS is being built.
+ 
+ (disabled) --
+  CMPR format contains sections describing what is in the file, similar to the
+  CPS standard file format, (TRCIO format).
+ 
+ Retention [NOT IMPLEMENTED]
+ RETENTION is the number of days the file will be retained after it was last
+ accessed. There is no provision in the UNIX operating system to automatically
+ remove a file based on this RETENTION.  It is not saved by the OS, but is
+ found in the file's ASCII header (if the file is of TRCIO type.)
+ 
+ File size
+ 
+ Files consist (internally to CPS) of up to 9999 segments.  The base segment
+ is always the user-supplied pathname of the file, and the extents
+ are named by adding ".nnnn" to the base file name.  This method allows CPS to
+ see a file of very large size.  A parameter "EXTENT_SIZE_MB"
+ determines how much space is in the base file and its extents.
+ To guarantee file space, a parameter "RESERVE_DISK" may be used which will
+ always write "0"s to an entire file segment prior to performing any other I/O.
+ This takes longer with large extent sizes, thus the extent size is user-
+ defined. (default is 250Megabytes).
+ 
+ Trace Attributes
+ 
+ NUM_BITS is the number of bits used for each trace sample on disk.  Whether
+ to compress the dynamic range of samples is specified by
+ (disabled) dyn_range_cmpr = YES/NO.
+ This attribute is independent of WAVE_DR (wavelet dynamic range compression)
+ (also disabled).
+ 
+ History Selection
+ 
+ HISTORY options to control transfer of histories to the file are ALL, MODEL,
+ CURRENT or NONE.
+ 
+ 
+ File Writing Options [APPEND OVERWRITE NEW]
+ 
+ If WRITE=APPEND, then append traces to the existing file with the same name
+ or create it if it does not exist.  If WRITE=OVERWRITE, then overwrite a file
+ with the same name or create a new file if one does not already exist with
+ the same name. If WRITE=NEW, then create a new file or abort if there is a
+ file with that name.
+ 
+ TROT will abort if there is a conflict between globals in an existing file and
+ TROT process globals.
+ 
+ TROT will print a summary of globals of any pre-existing files with the same
+ name as specified in TROT.
+ 
+ 
+ Trace Selection and Sorting
+ 
+ TR_MAX is the maximum number of traces this process will write (total of all
+ files).  Set TR_MAX to 0 to write no traces, set TR_MAX to a very large
+ number to write all traces.
+ 
+ SKIP_INIT will skip this number of traces that come in to TROT before
+ TROT will begin writing any traces out. SKIP_INIT is honored EVEN if the
+ METHOD is SEQ.
+ 
+ NUM_DO will cause TROT to write NUM_DO traces (in sequence as they come)
+ NUM_SKIP will cause TROT to ignore NUM_SKIP traces after each NUM_DO group
+ before writing the next group of NUM_DO traces.
+ 
+ EXAMPLE:  To read 10,000 traces, write out every 100th starting with trace
+           100, one would:
+           call TRIN with TR_MAX=10000
+           call TROT with TR_MAX=100,SKIP_INIT=99,NUM_DO=1,NUM_SKIP=99
+  Output will be a file with 100 traces on it, numbered 1-100, but they will
+  be the 100th, 200th, 300th, ... 10000th trace from the input file.
+ 
+ HDR_FLAG is the flagword parameter.  If HDR_FLAG /= 0, only traces with a
+ flag in HDR_FLAG will be written to a file.
+ 
+ Global Summary
+ This process prints, at setup time, a summary of the globals on each
+ previously-existing file which will be appended to or might be overwritten.
+ It also prints warning or error messages for any mis-matches between the
+ file(s) and the CPS globals when appending traces to an existing file.
+ 
+ 
+ File Verification [NOT IMPLEMENTED]
+ The front end for this process provides the user with the option to verify
+ (at job creation time) whether the output file(s) already exist, are readable
+ and writeable, and (for APPEND=YES) contain incompatible globals which will
+ cause the job to abort.  The front end will check the files across the
+ network if necessary.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+                            SEGY Header Words
+ When TROT writes a SEGY file, it maps CPS headers to SEGY headers using the
+ following mapping.  For byte offsets of the segyhd%xxxx words, either see
+ below (where the description of SEGY-&gt;CPS mapping is found, or look in the
+ SEGY documentation, or look in the Seismic Unix documentation from the CWP at
+ Colorado School of mines.  Their naming convention for segy headers is used.
+ 
+ If CPS creates the SEGY file with TROT, conoco job globals are written to
+ unused portions of the binary header, and are detected by TRIN.  The LAV is
+ also saved for each trace, as is the MIDPOINT x,y,elev, etc.  (see midpoint
+ information below.)
+ 
+ ----------- MAPPING CPS &lt;==&gt; SEGY  sort by segy_byte#--(sort by CPS# is below)
+ SEGY BYTES CPS HDR CPS                   SEGY
+ BEG:END    NUMBER  NAME                  NAME
+ -------     --     -----------------     -------
+ 001:004     01     sequence              tracl
+ 005:008     01     sequence              tracr
+ 009:012     03     current_group         fldr
+ 013:016     04     current_channel       tracf
+ 017:020     29     source_shotpoint      ep
+ 021:024     37     midpoint_xgrid        cdp
+ 025:028     38     midpoint_line         cdpt
+ 029:030                                  trid
+ 031:032                                  nvs
+ 033:034     05     fold                  nhs
+ 035:036                                  duse
+ 037:040     06     offset                offset
+ 041:044     16     receiver_elev         gelev
+ 045:048     13     source_elev           selev
+ 049:052     20     source_depth          sdepth
+ 053:056                                  gdel
+ 057:060                                  sdel
+ 061:064                                  swdep
+ 065:068                                  gwdep
+ 069:070                                  scalel
+ 071:072                                  scalco
+ 073:076     11     source_xloc           sx
+ 077:080     12     source_yloc           sy
+ 081:084     14     receiver_xloc         gx
+ 085:088     15     receiver_yloc         gy
+ 089:090                                  counit
+ 091:092                                  wevel
+ 093:094                                  swevel
+ 095:096     44     source_uptime         sut
+ 097:098     45     receiver_uptime       gut
+ 099:100     39     pre                   sstat
+ 101:102     40     post                  gstat
+ 103:104     43     cum_resid_static      tstat
+ 105:106                                  laga
+ 107:108                                  lagb
+ 109:110                                  delrt
+ 111:112     02     top_mute              muts
+ 113:114     64     bottom_mute           mute
+ 115:116                                  ns
+ 117:118                                  dt
+ 119:120                                  gain
+ 121:122                                  igc
+ 123:124                                  igi
+ 125:126                                  corr
+ 127:128                                  sfs
+ 129:130                                  sfe
+ 131:132                                  slen
+ 133:134                                  styp
+ 135:136                                  stas
+ 137:138                                  stae
+ 139:140                                  tatyp
+ 141:142                                  afilf
+ 143:144                                  afils
+ 145:146                                  nofilf
+ 147:148                                  nofils
+ 149:150                                  lcf
+ 151:152                                  hcf
+ 153:154                                  lcs
+ 155:156                                  hcs
+ 157:158                                  year
+ 159:160                                  day
+ 161:162                                  hour
+ 163:164                                  minute
+ 165:166                                  sec
+ 167:168                                  timbas
+ 169:170                                  trwf
+ 171:172                                  grnors
+ 173:174                                  grnofr
+ 175:176                                  grnlof
+ 177:178                                  gaps
+ 179:180                                  otrav
+ 181:188
+ 189:192
+ 193:200
+ 201:208
+ 209:216
+ 217:224
+ 218:232
+ 233:236
+ 237:240                                  unused1
+ 
+ 
+ ----------- MAPPING CPS &lt;==&gt; SEGY sort by CPS hdr#-------------
+ SEGY BYTES CPS HDR CPS                   SEGY
+ BEG:END    NUMBER  NAME                  NAME
+ -------     --     -----------------     -------
+ 001:004     01     sequence              tracl
+ 005:008     01     sequence              tracr
+ 111:112     02     top_mute              muts
+ 009:012     03     current_group         fldr
+ 013:016     04     current_channel       tracf
+ 033:034     05     fold                  nhs
+ 037:040     06     offset                offset
+ 073:076     11     source_xloc           sx
+ 077:080     12     source_yloc           sy
+ 045:048     13     source_elev           selev
+ 081:084     14     receiver_xloc         gx
+ 085:088     15     receiver_yloc         gy
+ 041:044     16     receiver_elev         gelev
+ 193:200     17     midpoint_xloc         mp_xloc
+ 201:208     18     midpoint_yloc         mp_yloc
+ 209:216     19     midpoint_elev         mp_elev
+ 049:052     20     source_depth          sdepth
+ 017:020     29     source_shotpoint      ep
+ 021:024     37     midpoint_xgrid        cdp
+ 025:028     38     midpoint_line         cdpt
+ 099:100     39     pre                   sstat
+ 101:102     40     post                  gstat
+ 103:104     43     cum_resid_static      tstat
+ 095:096     44     source_uptime         sut
+ 097:098     45     receiver_uptime       gut
+ 113:114     64     bottom_mute           mute
+ 
+ Not all CPS header words have a corresponding SEGY header.  If you create a
+ file with TROT in SEGY format, and read that file with TRIN, you will lose
+ some header words.  Also, SEGY header words are integer, so you may lose
+ precision making the round trip.
+ 
+                       TRACE COMPRESSION (disabled)
+ 
+ The trace compression utility within TROT allows the user to store seismic
+ trace datasets on disk in a compressed form, taking fewer bytes of storage
+ than would be required for the original volume before compression.
+ Compressed datasets on disk are automatically recognized and decompressed by
+ TRIN.
+ 
+ Trace Compression Algorithm
+ 
+ The compression algorithm involves performing a wavelet transform and
+ retaining only the the largest coefficients.  The largest coefficients are
+ associated with the highest amplitude events on the trace and the smallest
+ coefficients are associated with lowest amplitude events on the trace which
+ are presumed to be noise.  Trace compression always involves some loss of
+ data integrity.
+ 
+ Trace compression is often characterized by its signal to noise ratio (S/N).
+ In this context, "signal" refers to the original data before compression and
+ "noise" refers to the difference between the uncompressed data after
+ compression and the original data before compression.
+ 
+ Dynamic range is the ratio of the maximum reading to the minimum reading
+ (the minimum often being the noise level) which can be recorded by and
+ read from an instrument without change of scale. (Encyclopedic Dictionary
+ of Applied Geophysics, Fourth Edition).
+ 
+ The actual number of coefficients retained (and the amount of compression) is
+ determined by the user specified value for SN_RATIO, C_RATIO, or WAVE_DR.
+ (Note: C_RATIO and WAVE_DR were disabled on 4 Mar 2004).
+ Only one may be non-zero.  It determines which compression goal is honored.
+ Header word
+ values are compressed using a lossless compression algorithm.  The actual
+ compression is done with vendor software provided by GeoEnergy.
+ 
+ 
+ Trace Compression Options
+ 
+     If COMPRESS = SN_RATIO, then traces are compressed to maintain a
+     specified S/N ratio before being written to disk.  SN_RATIO is the desired
+     signal to noise ratio to be preserved in trace compression, in dB.
+     Larger values of SN_RATIO correspond to smaller values of the compression
+     ratio used in the compression.
+ 
+     If COMPRESS = C_RATIO, then traces are compressed by a specified
+     compression ratio before being written to disk.  The size of the original
+     data volume, in bytes, is C_RATIO times the compressed data volume, in
+     bytes.  Larger values of C_RATIO correspond to smaller values of signal
+     to noise ratio preserved by the compression.  (Disabled 4 Mar 2004)
+ 
+     If COMPRESS = WAVE_DR, then traces are compressed such that the specified
+     wavelet dynamic range (ratio) is preserved.  The ratio of the byte size
+     for compressed and uncompressed data will vary, depending upon the actual
+     minimum and maximum values.  (Disabled 4 Mar 2004)
+ 
+ Normally SN_RATIO is the preferred option because it runs faster than the
+ C_RATIO option.  It may also be the safer option as it allows the user to
+ specify directly the signal to noise ratio to be preserved by the compression.
+ 
+ 
+ Gathers and Trace Compression
+ 
+ The trace compression algorithm expects that consecutive traces, within a
+ gather, will have some similarity.  To avoid modeling across edges of gathers,
+ header word HDR_GATH is used to define gathers.  HDR_GATH should be set so
+ that its value changes at natural gather edges or at junctures between groups
+ of similar traces.  This is accomplished by a call to GATHER before calling
+ TROT with the COMPRESSION option.  HDR_GATH should be set to the same value
+ used in the GATHER process.  For example:
+ 
+      Set HDR_GATH to 3 for input data in common shot, common receiver or CMP
+      order.
+ 
+      Set HDR_GATH to 6 for 2D pre-stack data in common offset order.
+ 
+      Set HDR_GATH to 8 for 3D pre-stack data in common offset order (sorted
+      from slow to fast: hdr 6, hdr 8, hdr 7).
+ 
+      Set HDR_GATH to 1 for a collection of traces that are independent of
+      each other.
+ 
+ Amplitude Balance and Trace Compression
+ 
+ Traces being compressed should be well balanced in amplitude with either a
+ windowed or deterministic amplitude balance applied before compression.
+ Because the compression algorithm retains the largest wavelet coefficients,
+ unbalanced traces will not compress well.  The lower amplitude parts of
+ unbalanced traces will suffer a loss of data integrity if C_RATIO is
+ specified.  And unbalanced traces will have a poor compression ratio if
+ SN_RATIO is specified.
+ 
+ The effects of decaying data vertically and horizontally need to be studied
+ further when the data is compressed using various techniques.
+ 
+ Trace amplitude should also be balanced laterally, but this is less important
+ than amplitude balance with each trace.
+ 
+ 
+ Process Sequence and Trace Compression
+ 
+ Trace compression before integrating or smoothing processes (such as DMO or
+ migration) should not be problematic.  Trace compression before
+ differentiating processes (such as decon) may be problematic because
+ compression will reduce the noise level and decon is sensitive to noise
+ levels.
+ 
+ It is safest not to do trace compression before decon; if trace compression
+ is done before decon it should be very mild.  Generally, the effects of any
+ trace compression done before decon become progressively less noticable as
+ more processes are added to the sequence after decon.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 81. 2006-11-14  Stoeckley    Replace pc_register_tab_group w HelpSection line.
+ 80. 2006-08-24  D. Glover    Added NULLIFY statements for Intel compiler.
+ 79. 2006-06-20  Stoeckley    Add pc_register_tab_group for SeisSpace.
+ 78. 2006-05-25  Cook/Menger  Removed trace compression (wavelet and dynamic
+                              range compression). Added SU output format.
+                              Modified MAPSEGY to default to LANDMARK.
+                              Added LBO2 file type.  LBO2 supports FNILs,
+                              which are used to flag salt in some internal
+                              programs).  User must explicitly choose LBO2 --
+                              it is NOT the TROT default because it requires
+                              an extra bit per sample and thereby would be
+                              wasteful in most seismic data cases.  LBO2
+                              uses file extension '.lbo'.  Also needed to add
+                              code to prevent TROT from redefining wtype in
+                              the LBO/LBO2 cases.
+ 77. 2006-01-10  B. Menger    Removed Unused Variables.
+ 76. 2005-07-11  Bill Menger  Modified trace count when error occurs to not
+                              count last trace (the one that failed).
+ 75. 2005-04-12  Goodger      Added a test for pointer association on filename
+                              in end session trap.
+ 74. 2005-04-06  Goodger      Issure a warning if data type is LBO, but user
+                              puts a .trc extension on the filename.
+ 73. 2004-12-15  Goodger      Insure CREATE_CSV is set to NO if not trcio
+                              format.
+ 72. 2004-09-23  Bill Menger  Made LBO the default format.
+ 71. 2004-08-26  Bill Menger  Fixed FrontEnd to look for segy header files.
+ 70. 2004-06-15  Bill Menger  Moved main parameters into main screen.
+ 69. 2004-04-27  SMCook       Fixed problem for LBO mode wherein NUM_BITS was
+                               jumping back to the default value of 16 after
+                               leaving TROT screen and then coming back to it
+                               (introduced new variable update_count).
+ 68. 2004-04-06  SMCook       Added LBO format support.
+ 67. 2004-03-29  R Selzler    Corrected benign read outside array bounds,
+                              detected by compiler run time checks.
+ 66. 2004-03-04  R Selzler    Disable C_RATIO, WAVE_DR and QTROT features.
+ 65. 2004-03-03  Bill Menger  Allow non-extent files if desired, by setting
+                              extsize to large value (large enough to not split
+                              the file.)  If &gt; 20480 mb, disable reserve space.
+ 64. 2004-02-04  R Selzler    Removed QUIT_ON_ERROR parameter.
+                              TROT will now always quit (previous default
+                              was to continue writing, without meaningful
+                              recovery proceedures).
+ 63. 2004-01-27  R Selzler    Added support for GeoEnergy compression
+                              using wavelet dynamic range (WAVE_DR).
+ 62. 2003-12-15  Goodger      Change default permissions to rw-rw-r--.
+ 61. 2003-11-18  SMCook       User now warned that SEGY TR_LAV mode with SEGY
+                               8-bit and SEGY 16-bit output results in relative
+                               amplitudes being lost due to unrecoverable trace
+                               normalization.
+ 60. 2003-10-07  Bill Menger  Added ability to append data to a file.
+ 59. 2002-10-07  Ed Schmauch  Added cio_chmod to trot_wrapup.
+ 58. 2002-09-20  K. Goodger   Add process number to write_history_cards call.
+ 57. 2002-08-26  K. Goodger   Write output files names to history.
+ 56. 2002-07-17  Ed Schmauch  Optional arguments extsize and alloc_disk are
+                              removed from trcio_open; I must call
+                              cio_set_file_ext_size and
+                              cio_set_file_space_commit myself.
+ 55. 2002-07-01  Ed Schmauch  Added multifile, keeping downward compatibility.
+ 54. 2002-05-20  M.L.Sherrill Added option to create a workstation CSV type
+                              file.
+ 53. 2002-04-18  Ed Schmauch  Close files before truncating them.
+                              No direct calls to cmprio_module, only indirct
+                              access through trcio_module.
+ 52. 2002-02-04  Ed Schmauch  Removed old multifile options.  Removed TIM_BEG
+                              and TIM_END; TROT will output according to
+                              globals TSTRT and TEND.  Changed trot_struct
+                              members hdi, tri, and ntr to global variables and
+                              renamed accordingly; renamed trot_alloc_hdi_tri
+                              to trot_alloc_global_hdi_tri.  This helps
+                              reduce the memory requirements for compression.
+                              Removed use of mutehw with MUTEHW_SET before
+                              writing since without TIM_BEG and TIM_END there
+                              is no need to shift the mutes.
+                              Added some nullifies to make work with intel
+                              compiler.
+ 51. 2001-11-12  Ed Schmauch  Fixed bug in trot_cmpr.
+ 50. 2001-11-08  Stoeckley    Add file selection dialog, status line, and
+                               default extensions for PATHNAME.
+ 49. 2001-11-07  Ed Schmauch  Fixed bug, compressed output could ignore do-skip
+                              pattern.  Fixed bug in trot_alloc_hdi_tri.
+ 48. 2001-11-06  Ed Schmauch  Removed all Conoco extensions to segy format.
+ 47. 2001-10-29  Stoeckley    Fix problem where mute headers were not reset
+                               when writing traces with TIM_BEG and TIM_END
+                               different from globals.
+ 46. 2001-10-24  Bill Menger  Required gather code fixed, re-modified gui.
+ 45. 2001-10-22  Bill Menger  Modified memory usage for gathered traces.
+ 44. 2001-10-18  Ed Schmauch  Put in nint to remove roundoff error in segy
+                              binary header dt.
+ 43. 2001-10-18  Bill Menger  Required GATHER before compression,modified gui.
+ 42. 2001-10-09  Ed Schmauch  Changed header equality check in gather code
+                              to use nint.
+ 41. 2001-08-27  K. Goodger   Replace trcio and cmprio calls with new manhist
+                              routines.
+ 40. 2001-07-03  Bill Menger  Added internal gather code.
+ 39. 2001-06-18  Ed Schmauch  Allowed 8- and 16-bit SEGY to use OPT_NORM
+                              and AMPL_MAX. PRODUCTION.
+ 38. 2001-05-14  Goodger      Move segy header mapping to primitive mapsegy.
+ 37. 2001-04-30  Ed Schmauch  Added parameters OPT_NORM and AMPL_MAX.
+                              These parameters are only used for 8 and 16 bit
+                              TRCIO files.
+                              Made CURRENT the default HISTORY for 8 and 16 bit
+                              TRCIO files.
+ 36. 2001-03-21  Bill Menger  Removed unused trcio structure elements.
+ 35. 2001-02-21  Bill Menger  Added trace compression.
+                              Changed default extent size back to 2048
+                              Changed default disk allocation to "NO"
+                              Open file only on first call to trot proper.
+                              Added pc_warning vs pc_info on time range error.
+ 34. 2001-01-25  Bill Menger  Modified documentation for TIM_BEG,TIM_END,
+                              added history write before file opens to include
+                              current TROT in the file's history, and fixed
+                              bug on TIM_BEG, TIM_END where negative tstrt
+                              is present.
+                              Forced a bhists, bhist call even when not a
+                              trcio file type.
+ 33. 2001-01-12  Bill Menger  Changed default extent size to 256 Mbytes.
+ 32. 2001-01-11  Bill Menger  Fixed tim-beg, tim-end problem,added output of
+                              EBCDIC header when writing SEGY files, added
+                              warnings when writing time range different from
+                              input trace range, changed PRI_INIT,INC,LAST and
+                              SEC_INIT,INC,LAST to allow Floating pt. input.
+ 31. 2000-12-13  Bill Menger  Fixed bug about extent size.
+ 30. 2000-12-12  Bill Menger  Fixed bug that called pc_get_lun() after update
+                              which caused history to not work correctly.
+                              Added skip_wrapup flag, removed wrapped_up flag.
+                              Added variable extent size option.
+                              Added reserve_disk option.
+                              Added file_size and truncate feature.
+ 29. 2000-12-01  Bill Menger  Modified open statement for segyheader and
+                              allowed it to read files without line feeds
+                              in them if desired.
+ 28. 2000-11-29  Bill Menger  Reversed quit-on-error flag. (oops)
+ 27. 2000-11-27  Bill Menger  Fixed bug where QTROT files sometimes did not
+                              reopen correctly. Added quit_on_error flag.
+ 26. 2000-11-20  Bill Menger  Fixed bug in file closer for case when more than
+                              30 files are opened simultaneously.
+ 25. 2000-11-20  Bill Menger  Added better killed message and set ntr-fatal on
+                              i/o error... also moved some segy-mapping codes
+                              into if-blocks so they don't execute always.
+ 24. 2000-11-13  Bill Menger  Modified mode = multiple KLUDGE file naming for
+                              old cluster support.
+ 23. 2000-11-09  R.S.Day      Added optional SEGY custom header mapping
+ 22. 2000-10-24  Bill Menger  Modified to handle situations where file array
+                              tries to open a file outside of the boundaries
+                              of the primary and secondary bins.
+ 21. 2000-10-17  Bill Menger  Added mode=multiple option.
+ 20. 2000-09-26  Bill Menger  Reworked doc and gui, added compression parms,
+                              added write of jobglobals section to file.
+ 19. 2000-08-17  Bill Menger  Add history capability.
+ 18. 2000-07-18  Bill Menger  Added hdr_flag option.
+ 17. 2000-07-11  Bill Menger  Modified so that SEGY is always written
+                              big-endian
+ 16. 2000-07-07  Bill Menger  Added "QTROT file" support.
+ 15. 2000-05-15  Bill Menger  Fixed segyheader field to not go grey after inp.
+ 14. 2000-05-08  Bill Menger  Added the do_skip primitive.
+ 13. 2000-04-19  Bill Menger  Changed byte position to "pos" vector position
+                              to allow for very large files.
+ 12. 2000-04-11  Bill Menger  Modified help for NUM_BITS_HD to NUM_BITS_HDR
+ 11. 2000-04-03  Bill Menger  Added a return to segyheader trap to quit if
+                              not type SEGY.
+ 10. 2000-02-24  Bill Menger  Modified pc_get_update_state() call to include
+                              PC_GUI to keep bad printout from showing up.
+  9. 2000-02-21  Bill Menger  Added num_bits_hdr information to FE.
+  8. 2000-02-17  Bill Menger  Changed error message on segy header file open.
+  7. 2000-02-14  Bill Menger  Modified permission stuff
+  6. 2000-02-03  Bill Menger  Added segy doc, fixed traps to use keyword arg,
+                              grayed out unsupported parameters.
+  5. 2000-01-27  Bill Menger  Made traps go to uppercase except for filenames.
+  4. 2000-01-21  Bill Menger  Added different word types for INT and CMPI
+                              Minor changes to support compression, fixed
+                              trap for permission (still not used!)
+  3. 2000-01-18  Bill Menger  Added pathname module calls,nbits to segybhed.
+  2. 2000-01-11  Bill Menger  minor code revision around the trcio_write call.
+                              Added front-end calls to clean up CFE.
+  1. 2000-01-07  Bill Menger  Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

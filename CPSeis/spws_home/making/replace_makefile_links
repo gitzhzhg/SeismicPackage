@@ -1,0 +1,72 @@
+#! /bin/csh -f
+
+# replace_makefile_links
+#
+# $Id: replace_makefile_links,v 1.2 2004/03/04 14:07:43 wjdone Exp $
+#
+# run this script to replace the makefiles in all oop and util and
+#   program directories.
+# useful if the location or name of the makefile to link to is moved.
+# note that the name of the makefile to link to does not have to be makefile.
+# note that the makefiles to link to are hardwired in this script.
+#
+# simply type this:
+#                    replace_makefile_links
+#
+# note than on 3 sept 2010 the links oooo and pppp were changed from
+# absolute to relative links.
+#------------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo SPWSMAKEDIR not set
+     exit
+endif
+
+echo " "
+echo SPWSDIR ======= $SPWSDIR
+echo SPWSMAKEDIR === $SPWSMAKEDIR
+echo " "
+
+#------------------------------------------------------------------------------
+
+#set oooo = $SPWSMAKEDIR/makefile_for_spws_libraries
+#set pppp = $SPWSMAKEDIR/makefile_for_spws_programs
+set oooo = ../../making/makefile_for_spws_libraries
+set pppp = ../../making/makefile_for_spws_programs
+
+
+echo
+echo replacing makefile links with $oooo;
+echo
+foreach name ($SPWSDIR/oop/*)
+  if($name == obsolete_or_reference) continue
+  echo replacing makefile link in $name
+  cd $name; \rm makefile; ln -s $oooo makefile
+end
+
+
+echo
+echo replacing makefile links with $oooo;
+echo
+foreach name ($SPWSDIR/util/*)
+  if($name == obsolete_or_reference) continue
+  echo replacing makefile link in $name
+  cd $name; \rm makefile; ln -s $oooo makefile
+end
+
+
+echo
+echo replacing makefile links with $pppp;
+echo
+foreach name ($SPWSDIR/programs/*)
+  if($name == obsolete_or_reference) continue
+  echo replacing makefile link in $name
+  cd $name; \rm makefile; ln -s $pppp makefile
+end
+
+

@@ -1,0 +1,567 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="abal" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="ABALPROCESS" title="ABAL Process" rows="24" columns="80">
+    <Label keyword="COMMENT_AMPLITUDEBALANCE" alignment="center">Amplitude BALance</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STAT" alignment="left">STAT=</Label>
+    <Field keyword="STAT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_PRINT" alignment="left">OPT_PRINT=</Label>
+    <Field keyword="OPT_PRINT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SCALE" alignment="left">OPT_SCALE=</Label>
+    <Field keyword="OPT_SCALE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_SCALE" alignment="left">OFF_SCALE=</Label>
+    <Field keyword="OFF_SCALE" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ORDER" alignment="left">ORDER=</Label>
+    <Field keyword="ORDER" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DB_KILL" alignment="left">DB_KILL=</Label>
+    <Field keyword="DB_KILL" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AMPLITUDEBALANCE" xPos="15" yPos="1" xSize="17" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="1" yPos="4" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="6" yPos="4" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_STAT" xPos="1" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STAT" xPos="6" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_PRINT" xPos="1" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_PRINT" xPos="11" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SCALE" xPos="1" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SCALE" xPos="11" yPos="11" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OFF_SCALE" xPos="1" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_SCALE" xPos="11" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ORDER" xPos="1" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ORDER" xPos="7" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DB_KILL" xPos="1" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DB_KILL" xPos="9" yPos="19" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Whether to use CMP, SHOT or SINGLE mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - MODE<br> Whether to use CMP, SHOT or SINGLE mode.</center></b>
+<pre> Default = CMP
+ Allowed = CMP     (Balance traces within CMP gathers.)
+ Allowed = SHOT    (Balance traces within shot profiles.)
+ Allowed = SINGLE  (Perform trace equalization on single traces individually.)
+ If MODE = CMP, traces must be input in CMP gathers.
+ 
+ If MODE = SHOT, traces must be input in SHOT gathers.
+ 
+ If MODE = SINGLE, traces may be input in any order, either gathered or as
+ single traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STAT">
+      <Tip>Statistic for measuring amplitude in trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - STAT<br> Statistic for measuring amplitude in trace windows.</center></b>
+<pre> Default = MED
+ Allowed = MED   (Median of absolute value.)
+ Allowed = AVE   (Average of absolute value.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_PRINT">
+      <Tip>Whether to print 'Diagnostic Table #2' in the .rpt file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - OPT_PRINT<br> Whether to print 'Diagnostic Table #2' in the .rpt file.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ Warning:  use only with small datasets since this option prints a line in the
+ .rpt file for each input trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SCALE">
+      <Tip>Option on how to scale traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - OPT_SCALE<br> Option on how to scale traces.</center></b>
+<pre> Default = TRACE
+ Allowed = TRACE    (Scale traces in each gather to the fitted trend.)
+ Allowed = GATHER   (Also scale gathers to each other.)
+ Allowed = NONE     (Do not scale traces.)
+ If OPT_SCALE = TRACE, individual traces in each gather are scaled to the
+ fitted trend for that gather.
+ 
+ If OPT_SCALE = GATHER, individual traces in each gather are scaled to the
+ fitted trend for that gather and gathers are scaled to make their
+ amplitudes at offset OFF_SCALE equal to unity.
+ 
+ If OPT_SCALE = NONE, then do no scaling.  Choose this option if you want only
+ to kill traces or to print 'Diagnostic Table #2' in the .rpt file or both.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_SCALE">
+      <Tip>Offset to use when scaling gathers to each other.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - OFF_SCALE<br> Offset to use when scaling gathers to each other.</center></b>
+<pre> Default = 0.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ORDER">
+      <Tip>Order of polynomial fit of AVO.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - ORDER<br> Order of polynomial fit of AVO.</center></b>
+<pre> Default = 3
+ Allowed = int &gt; 0
+ (In SHOT mode, ABAL fits the amplitude trend to offset, while in CMP mode it
+ fits the amplitude trend to offset squared.  This permits ABAL to handle
+ traces with signed offset in CMPs.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DB_KILL">
+      <Tip>Threshold for killing traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - DB_KILL<br> Threshold for killing traces.</center></b>
+<pre> Default = 15.0
+ Allowed = real &gt;= 0.0
+ Kill all traces whose amplitude, relative to the fitted trend, is either
+ greater than DB_KILL db or less than -DB_KILL db.
+ 
+ If DB_KILL = 0.0, then do not kill traces.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="Window Parameters" rows="24" columns="80">
+    <Label keyword="LABEL_WIN_OPT" alignment="left">WIN_OPT=</Label>
+    <Field keyword="WIN_OPT" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_ADD" alignment="left">WIN_TIM_ADD=</Label>
+    <Field keyword="WIN_TIM_ADD" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_TIM_LEN" alignment="left">WIN_TIM_LEN=</Label>
+    <Field keyword="WIN_TIM_LEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="WIN_COOR_X_ARRAYSET" label="WIN_COOR_XWIN_COOR_YWIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="WIN_COOR_X" type="float" maxLength="10 " columnName="WIN_COOR_X" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_COOR_Y" type="float" maxLength="10 " columnName="WIN_COOR_Y" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_OPT" xPos="5" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_OPT" xPos="13" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_WIN_TIM_ADD" xPos="20" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_ADD" xPos="32" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_TIM_LEN" xPos="42" yPos="0" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_TIM_LEN" xPos="54" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="5" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="15" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="20" yPos="2" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="30" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X_ARRAYSET" xPos="8" yPos="4" xSize="45" ySize="8" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_OPT">
+      <Tip>Method to use for specifying trace windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_OPT<br> Method to use for specifying trace windows.</center></b>
+<pre> Default = MUTE
+ Allowed = MUTE   (window defined by time measure from mute)
+ Allowed = GRID   (window varies laterally, or same window everywhere)
+ 
+ Segments of the input traces used in this process are defined by these
+ windows.
+ 
+ Option GRID specifies the trace windows by linked arrays of window top and
+ window bottom values which may vary lateraly (spatially) over arbitrarily
+ chosen coordinates.
+ 
+ Option MUTE specifies the trace windows by specifying the time from the
+ mute time to the top of the window, and the length of the window.
+ 
+ Some processes might disable the MUTE option if it is not appropriate
+ for that process.  In this case, the GRID option will be the default
+ and only option.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_ADD">
+      <Tip>Time at top of window = mute time + WIN_TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_TIM_ADD<br> Time at top of window = mute time + WIN_TIM_ADD.</center></b>
+<pre> Default = 0.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_LEN">
+      <Tip>Time at bottom of window = time at top of window + WIN_TIM_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_TIM_LEN<br> Time at bottom of window = time at top of window + WIN_TIM_LEN.</center></b>
+<pre> Default = 1.0.
+ Allowed = real value &gt;= 0.0.
+ Used only if WIN_OPT = MUTE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ Used only if WIN_OPT = GRID.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ Used only if WIN_OPT = GRID.
+ 
+ The (WIN_COOR_X,WIN_COOR_Y) window locations must be on a rectangular grid,
+ but not necessarily of regular spacing in either coordinate.  Therefore the
+ total number of window locations must be the product of the number of
+ separate WIN_COOR_X and WIN_COOR_Y locations.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) (one window).
+ Allowed = any number of values &gt;= top of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) (one window).
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ Used only if WIN_OPT = GRID.
+ 
+ This window is spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  The window is interpolated between the specified coordinates,
+ and extrapolated unchanged outside of the grid of coordinates.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>abal - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="abal">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : ABAL        (Amplitude BALance)
+ Category   : amplitude_mod
+ Written    : 1990-02-02   by: Bob Baumel
+ Revised    : 2006-09-18   by: D. Glover
+ Maturity   : production
+ Purpose    : Perform various trace- and gather-based amplitude balances.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ ABAL is a general trace scaling process typically used to prepare CMPs for
+ AVA analysis.  All operations are based on an amplitude statistic measurement
+ for each trace within a specified time window using either the median
+ absolute amplitude or the average absolute amplitude.  (The term "amplitude"
+ in the balance of this documentation refers to this amplitude statistic.)
+ 
+ If MODE = SINGLE, ABAL performs a simple trace equalization on single traces
+ individually.  Traces may be input in any order, gathered or as single traces.
+ 
+ If MODE = CMP or SHOT, traces must be input in CMP or SHOT gathers,
+ respectively.  ABAL does a polynomial fit of the amplitude trend with offset
+ and optionally scales traces within a gather to comply with the fitted trend.
+ ABAL will also optionally scale gathers to each other to make their
+ amplitudes at a specified offset equal to unity.
+ 
+ (In SHOT mode, ABAL fits the amplitude trend to offset, while in CMP mode it
+ fits the amplitude trend to offset squared.  This permits ABAL to handle
+ traces with signed offset in CMPs.)
+ 
+ 
+ Time Windows
+ 
+ The offset-dependent windowing scheme used by ABAL is controlled by LATWIN.
+ Please refer to the LATWIN documentation for details.
+ 
+ ABAL (via LATWIN) does not currently support defining windows using normal
+ moveout velocities like it used to on the VAX.
+ 
+ 
+ Polynomial Fitting
+ 
+ The polynomial fitting (MODE = CMP or SHOT) is done in two passes.  After
+ pass 1, traces with amplitude deviating sufficiently from the fitted trend
+ are killed.  In pass 2, the remaining traces are fitted again, and are then
+ optionally scaled to match the polynomial obtained this time.  Also at this
+ point, traces are optionally scaled to balance gathers with each other.
+ 
+ 
+ Diagnostic Table #1
+ 
+ If MODE = CMP or SHOT, ABAL prints a set of summary statistics at wrapup time
+ to the .rpt file attempting to quickly communicate to the user the overall
+ amplitude trend in the input data.  The column values are offset (or offset
+ squared) and average pass 1 predicted amplitude.  Only 95% full gathers, i.e.
+ those having at least .95*NUMTR live traces, are included in these particular
+ summary computations.  The offset range for this summary is taken as the
+ minimum and maximum absolute offsets actually encountered in the input.
+ 
+ Unlike Diagnostic Table #2, this summary table uses linear amplitude units,
+ and it pertains exclusively to the input data.
+ 
+ 
+ Diagnostic Table #2 (optional, based on OPT_PRINT)
+ 
+ If MODE = CMP or SHOT, ABAL can also print a diagnostic table in the .rpt file
+ using one line per input trace.  Each line contains 4 numbers:  trace number
+ within gather, original trace amplitude (in selected window), fitted amplitude
+ after pass 1, and final adjusted amplitude after pass 2.
+ 
+ Tables are tab-delimited for ease of use with plotting software.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Traces should have an amplitude balance applied prior to this process,
+ preferably a deterministic balance such as TPOW or GDIV, but MVXP may be
+ satisfactory in some cases.
+ 
+ ABAL is NOT surface consistent.  For a surface consistent amplitude balance,
+ use SCAB (or possibly SCDECON).
+ 
+ 
+ Warning
+ 
+ Applying a gain to a trace based on a measurement taken some distance from
+ where the gain will be applied can have unintended and undesirable results.
+ For example, traces that are generally well balanced at the bottom that
+ encounter anomalously high amplitudes shallow due to shallow gas (or
+ encounter anomalously low amplitudes shallow due to a salt lens) will have
+ the balance at the bottom disrupted if the anomalous amplitudes fall within
+ a trace equalization window.
+ 
+ Generally, if the amplitude within the window is not representative of the
+ trace as a whole, applying the balance may give undesirable results.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+015. 2006-09-18  D. Glover   Added NULLIFY statements for Intel compiler.
+014. 2006-01-10  B. Menger   Removed Unused Variables.
+13.  2001-12-10  SMCook      Changed subroutine arguments from (*) to (:).
+12.  2001-01-09  SMCook      Improved summary printouts.  Required correcting
+                              an integer division where a floating point one
+                              was needed.  Also required the addition of a temp
+                              file to prevent trace-by-trace information from
+                              being garbled up with everything else in the .rpt
+                              file.
+                             Changed wrapped_up to skip_wrapup.
+11.  2000-12-01  SMCook      Incorporates LATWIN primitive instead of carrying
+                              it's own windowing logic.
+                             Fixed bug where AVE mode was accidentally referred
+                              to as AVG mode, causing AVE mode to be identical
+                              to MED mode.
+10.  2000-09-05  SMCook      (MAJOR) Converted to new CPS system.
+ 9.  1999-01-11  Vunderink   Begin using the f90 compiler.
+ 8.  1995-05-07  Baumel      Documentation changes only.
+                             Program moved from newlib to conlib.
+ 7.  1995-04-28  Baumel      GBAL allows balancing at specified OFFSET.
+ 6.  1995-04-04  Baumel      Add GBAL parameter.
+ 5.  1995-03-31  Baumel      Recognize tail mute header word.
+ 4.  1993-02-26  Baumel      Indicate killed traces in TABLES.
+ 3.  1990-04-19  Baumel      Fix POWER bug for MODE=FIXED.
+ 2.  1990-02-06  Baumel      Fix inconsistency in TABLES output.
+ 1.  1990-02-02  Baumel      Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

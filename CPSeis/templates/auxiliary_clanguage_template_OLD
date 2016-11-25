@@ -1,0 +1,280 @@
+/****
+!!!                      Auxiliary Clanguage Template
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!! 10. 2003-08-14  Goodger    Change brief doc to indicate whether auxiliary
+!!!                            file is a process or primitive.
+!!!  9. 2002-10-23  Stoeckley  Minor documentation and ident string changes.
+!!!  8. 2002-05-16  Stoeckley  Add brief doc section.
+!!!  7. 2001-10-22  Stoeckley  Add code check-in instructions.
+!!!  6. 2001-09-07  Stoeckley  Uncomment some items; add advice concerning
+!!!                             the RCS ident string.
+!!!  5. 2000-10-06  Stoeckley  Fix RCS ident string line to be less likely
+!!!                             to exceed 80 characters.
+!!!  4. 2000-08-09  Stoeckley  Fix dimension of ident string for RCS to 100.
+!!!  3. 1999-11-11  Stoeckley  Add ident string for RCS.
+!!!  2. 1999-09-20  Stoeckley  Remove some documentation tags and add
+!!!                             reference to other files.
+!!!  1. 1999-08-31  Stoeckley  Initial version.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         GENERAL INFORMATION
+!!!
+!!! This is the template for C-language auxiliary files.  Such auxiliary
+!!! files are to be used with, and considered part of, Fortran-90 process
+!!! or primitive modules which need C code.  Here are some of the reasons
+!!! why processes and primitives might need to incorporate C code:
+!!!
+!!!  (1) because of the need for specific C language features.
+!!!  (2) to make use of more portable C precompiler directives.
+!!!  (3) to facilitate an interface for calling certain C-language primitives
+!!!        which do not have a Fortran interface of their own.
+!!!  (4) to provide a C-callable interface (wrapper) to the Fortran process
+!!!        or primitive.
+!!!
+!!! In rare instances, a C-language auxiliary file might be needed, and
+!!! considered part of, a C-language primitive whose main implementation
+!!! is in another file.  This could be true if a C-language interface is
+!!! needed to facilitate calling the primitive from Fortran, and there are
+!!! reasons why this interface should be kept separate from the main
+!!! C-language implementation file.  It is possible in this circumstance
+!!! that a Fortran auxiliary file might also be needed which is called from
+!!! external Fortran code and which in turn calls the C-language auxiliary
+!!! file which finally calls the C-language main implementation file.
+!!!
+!!! This template for C-language auxiliary files constitutes part of the
+!!! standards for writing process and primitive modules for the Conoco
+!!! Processing System.  This template, including the instructions and
+!!! comments within this template, is to be used for creating auxiliary
+!!! files containing C-language code which is an auxiliary part of a
+!!! Fortran-90 process, a Fortran-90 primitive, or (rarely) a C-language
+!!! primitive.
+!!!
+!!! C-language auxiliary files should have the name of the process or
+!!! primitive plus the suffix "_crou" appended (before the extension) to
+!!! the file name.
+!!!
+!!! Normally, code in this C-language auxiliary file will be called only from
+!!! the Fortran process or primitive to which it belongs, and therefore should
+!!! not have a corresponding header file.  However, if this file contains
+!!! functions to be called from C, a corresponding header file containing
+!!! prototypes for those functions is required.
+!!!
+!!! All of the instructions, comments, and sample code in this template are
+!!! commented out with /**** and ****/ and marked with three exclamation
+!!! points to allow new code to be inserted and tested without having to
+!!! delete this information first.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                        SUPPORTING DOCUMENTS
+!!!
+!!! (1) Documentation accessed by the CPSDOC program.
+!!! (2) Templates for processes and primitives            (in ~sps/templates).
+!!! (3) Coding Standards for Mixing Programming Languages (in ~sps/templates).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                      INITIAL STEPS TO PERFORM
+!!!
+!!! (1) Copy this template to a new file with the name "xxxx_crou.c" where
+!!!     "xxxx" is the name of the (normally Fortran) process or primitive
+!!!     to which this auxiliary file belongs.
+!!!
+!!! (2) Make the following replacements in this template wherever they occur:
+!!!     Replace  xxxx or XXXX  with the process or primitive name.
+!!!     Replace  2001-01-01    with the current check-in date (year-month-day).
+!!!     Replace      NNNN      with your name.
+!!!
+!!! (3) Insert your code into this template at locations where instructions
+!!!     are found.  Make sure all inserted code conforms to the appropriate
+!!!     standards, including naming conventions.
+!!!
+!!! (4) All documentation for this process or primitive, except for the
+!!!     brief doc and revision history of this auxiliary file, is to be
+!!!     included in the main file for this process or primitive.
+!!!
+!!! (5) Delete all instructions, comments, and sample code (lines beginning
+!!!     with !!!) in this file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       CODE CHECK-IN INSTRUCTIONS
+!!!
+!!! (1) Test the code thoroughly until you believe that it is ready
+!!!     for BETA TESTING if it is to be placed into betalib, or ALPHA
+!!!     TESTING if it is to be placed into alphalib.
+!!!
+!!! (2) Make sure the code compiles and works on all available compilers.
+!!!
+!!! (3) Make sure a new entry has been added to the revision history, and
+!!!     set this entry to the current check-in date.
+!!!
+!!! (4) Check the code using the checkc script.
+!!!
+!!! (5) Check in the new code before 3:00 p.m.
+!!!
+!!! (6) If this code is to be included by a user as a custom compile in
+!!!     a CPS job, you should make sure that the RCS ident string includes
+!!!     the file name, revision date, author, and maturity (custom) to
+!!!     insure that the correct information is displayed in the report file.
+!!!
+!!!-----------------------------------------------------------------------------
+****/
+
+
+/****
+!<CPS_v1 type="AUXILIARY_FILE"/>
+****/
+/*----------------------------- xxxx_crou.c -------------------------------*/
+/*----------------------------- xxxx_crou.c -------------------------------*/
+/*----------------------------- xxxx_crou.c -------------------------------*/
+
+    /* other files are:  xxxx.f90  xxxx.c  xxxx_frou.f90  xxxx.h */
+
+/****
+!!! --> Delete from the above list any other files which do NOT exist.
+!!! --> There must always be an xxxx.f90 or xxxx.c file (but not both).
+****/
+
+
+/****
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!!! --> Keep either the process or primitive line below
+!!! 
+!                    C P S   P R O C E S S
+!                           or
+!                    C P S   P R I M I T I V E
+!
+! Name       : XXXX_CROU
+! Category   : should match the main file of this primitive.
+! Written    : 2001-01-01   by: NNNN
+! Revised    : 2001-01-01   by: NNNN
+! Maturity   : beta
+! Purpose    : should match the main file of this primitive.
+! Portability: No known limitations.
+!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                       REVISION HISTORY 
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. 2001-01-01  NNNN       Initial version.
+!
+!!!  --> This revision history should pertain only to this auxiliary file.
+!!!  --> The revision history in the main process or primitive implementation
+!!!  --> file should pertain only to the main implementation file.
+!!!
+!!!  --> The revision history should be listed in descending order, with
+!!!  --> the most recent revision at the top.
+!!!
+!-------------------------------------------------------------------------------
+!</history_doc>
+****/
+
+
+/*--------------------------- start of coding ------------------------------*/
+/*--------------------------- start of coding ------------------------------*/
+/*--------------------------- start of coding ------------------------------*/
+
+
+char XXXX_CROU_IDENT[100] =
+"$Id: auxiliary_clanguage_template,v 1.9 2002/10/23 20:55:10 Stoeckley custom sps $";
+
+#include "xxxx.h"
+#include "named_constants.h"
+#include "c2f_interface.h"
+#include <assert.h>      /* the assert macro                                */
+#include <ctype.h>       /* functions for testing characters (like isalpha) */
+#include <errno.h>       /* error conditions                                */
+#include <float.h>       /* implementation-defined floating point limits    */
+#include <limits.h>      /* implementation-defined integer limits           */
+#include <math.h>        /* math functions (like sin and sqrt)              */
+#include <setjmp.h>      /* support for long jumps                          */
+#include <signal.h>      /* signal handling support                         */
+#include <stdarg.h>      /* support for variable argument lists             */
+#include <stddef.h>      /* miscellaneous functions (such as offsetof)      */
+#include <stdio.h>       /* file I/O functions (like fopen and sprintf)     */
+#include <stdlib.h>      /* utility functions (like malloc and qsort)       */
+#include <string.h>      /* string manipulation functions (like strcpy)     */
+#include <time.h>        /* time and date functions                         */
+
+/****
+!!!
+!!! Remove any of the above header files which are not needed, and add any
+!!! additional required header files above.  Header files need not be
+!!! specified here if they are included in other header files listed above.
+!!!
+!!! If any functions in this auxiliary file are to be called from C, you
+!!! must write the above XXXX header file and include it above.  This
+!!! header file should include prototypes for only those functions to be
+!!! called from C.  This can include prototypes of any Fortran functions
+!!! (in the main implementation file) which are called directly from C.
+!!!
+!!! Since this auxiliary file is to be called from Fortran, and/or this
+!!! file will be calling Fortran routines, you always need to include the
+!!! C2F_INTERFACE header file.  But if the XXXX header file is required,
+!!! and any of the functions prototyped in that header file are
+!!! Fortran-callable C functions or C-callable Fortran functions,
+!!! the C2F_INTERFACE file (and the following pre-compiler directives)
+!!! must be placed into the XXXX header file.
+!!!
+!!! You will also need to provide pre-compiler directives like those shown
+!!! below for each C function in this file to be called from Fortran, and
+!!! for each Fortran routine to be called from this file.
+!!!
+!!! And you will need to use variable types REAL, INTEGER, and DOUBLE
+!!! (defined in the C2F_INTERFACE header file) for the arguments to the
+!!! following routines to facilitate portability across platforms for data
+!!! types passed between C and Fortran.  See the documentation in
+!!! c2f_interface.h for further information.
+!!!
+****/
+
+#ifdef NEED_UNDERSCORE
+#define sub1    sub1_         <-- replace with actual subroutine name.
+#define sub2    sub2_         <-- replace with actual subroutine name.
+#define sub3    sub3_         <-- replace with actual subroutine name.
+#elif defined NEED_CAPITALS
+#define sub1    SUB1          <-- replace with actual subroutine name.
+#define sub2    SUB2          <-- replace with actual subroutine name.
+#define sub3    SUB3          <-- replace with actual subroutine name.
+#endif
+
+
+/*------------------------ start of functions ----------------------------*/
+/*------------------------ start of functions ----------------------------*/
+/*------------------------ start of functions ----------------------------*/
+
+
+/****
+!!!
+!!! Put your Fortran-callable C functions, and/or your C functions which
+!!! call Fortran, plus any additional required C functions, here.
+!!!
+!!! There can be separate sections like this one for large functions
+!!! or related groups of functions.
+!!!
+****/
+
+
+/*-------------------------------- end ------------------------------------*/
+/*-------------------------------- end ------------------------------------*/
+/*-------------------------------- end ------------------------------------*/
+

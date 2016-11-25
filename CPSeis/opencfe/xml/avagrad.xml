@@ -1,0 +1,954 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="avagrad" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="AVAGRADPROCESS" title="AVAGRAD Process" rows="24" columns="80">
+    <Label keyword="COMMENT_AVAGRADIENTPRODUCTSINCLU" alignment="center">AVA GRADient products (includes former ASTK, AVATUNE)</Label>
+    <Label keyword="COMMENT_GENERALPARAMETERS" alignment="center">General Parameters</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_OPT_INPUT" alignment="left">OPT_INPUT=</Label>
+    <Field keyword="OPT_INPUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_OUTPUT" alignment="left">OPT_OUTPUT=</Label>
+    <Field keyword="OPT_OUTPUT" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR_IN" alignment="left">NUMTR_IN=</Label>
+    <Field keyword="NUMTR_IN" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_NUMTR_OUT" alignment="left">NUMTR_OUT=</Label>
+    <Field keyword="NUMTR_OUT" type="string" maxLength="10" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_FOLD_MIN" alignment="left">FOLD_MIN=</Label>
+    <Field keyword="FOLD_MIN" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DLD_FIT" alignment="left">DLD_FIT=</Label>
+    <Field keyword="DLD_FIT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANG_MAX" alignment="left">ANG_MAX=</Label>
+    <Field keyword="ANG_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANG_REF" alignment="left">ANG_REF=</Label>
+    <Field keyword="ANG_REF" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PARAMETERSUSEDONLYWHENOP" alignment="center">Parameters used only when OPT_INPUT = OFFSET</Label>
+    <Border keyword="BORDER2"/>
+    <Button keyword="SELECT_PATH_VEL">Select PATH_VEL</Button>
+    <Label keyword="EQLAB_PATH_VEL" alignment="left">=</Label>
+    <Field keyword="PATH_VEL" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_VEL_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_VELTYPE" alignment="left">VELTYPE=</Label>
+    <Field keyword="VELTYPE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_AVE" alignment="left">OPT_AVE=</Label>
+    <Field keyword="OPT_AVE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_SMOOTH" alignment="left">LEN_SMOOTH=</Label>
+    <Field keyword="LEN_SMOOTH" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SR" alignment="left">OPT_SR=</Label>
+    <Field keyword="OPT_SR" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PARAMETERSFOROFFSETDEPEN" alignment="center">Parameters for Offset Dependent Tuning Correction (ODTC)</Label>
+    <Border keyword="BORDER3"/>
+    <Label keyword="LABEL_NP_FIT" alignment="left">NP_FIT=</Label>
+    <Field keyword="NP_FIT" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_WVLT">Select PATH_WVLT</Button>
+    <Label keyword="EQLAB_PATH_WVLT" alignment="left">=</Label>
+    <Field keyword="PATH_WVLT" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_WVLT_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_FIRST" alignment="left">TIM_FIRST=</Label>
+    <Field keyword="TIM_FIRST" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_OP" alignment="left">LEN_OP=</Label>
+    <Field keyword="LEN_OP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DLD_ODT" alignment="left">DLD_ODT=</Label>
+    <Field keyword="DLD_ODT" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AVAGRADIENTPRODUCTSINCLU" xPos="11" yPos="0" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_GENERALPARAMETERS" xPos="28" yPos="2" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="11" yPos="3" xSize="53" ySize="6"/>
+     <Constraints component="LABEL_OPT_INPUT" xPos="13" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_INPUT" xPos="23" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_OUTPUT" xPos="41" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_OUTPUT" xPos="52" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NUMTR_IN" xPos="13" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_IN" xPos="23" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUMTR_OUT" xPos="41" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUMTR_OUT" xPos="52" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOLD_MIN" xPos="13" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_MIN" xPos="23" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DLD_FIT" xPos="41" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DLD_FIT" xPos="52" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG_MAX" xPos="13" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG_MAX" xPos="23" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG_REF" xPos="41" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG_REF" xPos="52" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PARAMETERSUSEDONLYWHENOP" xPos="15" yPos="10" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="11" xSize="78" ySize="5"/>
+     <Constraints component="SELECT_PATH_VEL" xPos="3" yPos="12" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_VEL" xPos="18" yPos="12" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_VEL" xPos="19" yPos="12" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_VEL_INFO" xPos="19" yPos="13" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VELTYPE" xPos="4" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELTYPE" xPos="12" yPos="14" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_AVE" xPos="23" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_AVE" xPos="31" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_LEN_SMOOTH" xPos="39" yPos="14" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_SMOOTH" xPos="50" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_SR" xPos="66" yPos="14" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SR" xPos="73" yPos="14" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_PARAMETERSFOROFFSETDEPEN" xPos="10" yPos="17" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="18" xSize="78" ySize="6"/>
+     <Constraints component="LABEL_NP_FIT" xPos="32" yPos="19" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NP_FIT" xPos="39" yPos="19" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATH_WVLT" xPos="3" yPos="20" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_WVLT" xPos="19" yPos="20" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_WVLT" xPos="20" yPos="20" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_WVLT_INFO" xPos="20" yPos="21" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_FIRST" xPos="4" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_FIRST" xPos="14" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_OP" xPos="32" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OP" xPos="39" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DLD_ODT" xPos="58" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DLD_ODT" xPos="66" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_INPUT">
+      <Tip>Input CMPs in angle or offset or intercept-gradient pairs.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - OPT_INPUT<br> Input CMPs in angle or offset or intercept-gradient pairs.</center></b>
+<pre> Default = ANGLE
+ Allowed = ANGLE     (Input consists of CMP angle gathers.)
+ Allowed = OFFSET    (Input consists of ordinary CMP gathers in offset.)
+ Allowed = A_AND_B   (Input consists of 2-trace intercept-gradient gathers.)
+ 
+ If OPT_INPUT = ANGLE, header word 6 must contain reflection angle for each
+ trace, in degrees.
+ 
+ If OPT_INPUT = OFFSET, header word 6 must contain offset.
+ 
+ If OPT_INPUT = A_AND_B, each 2-trace input gather must consist of:
+ first the intercept trace (A), then the gradient trace (B).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_OUTPUT">
+      <Tip>Type of AVA gradient related output product.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - OPT_OUTPUT<br> Type of AVA gradient related output product.</center></b>
+<pre> Default = A_AND_B
+ Allowed = A_AND_B  (Intercept and Gradient.)
+ Allowed = P_REFL   (Modeled P-wave reflectivity at angle ANG_REF.)
+ Allowed = S_REFL   (Estimated S-wave reflectivity at normal incidence.)
+ Allowed = VS_VP    (Estimated VS/VP ratio.)
+ Allowed = AB_PROD  (Product of Intercept times Gradient.)
+ Allowed = MODEL    (Best-fit model of input traces.  For QC.)
+ Allowed = RESID    (Input data minus best-fit model.  For QC.)
+ 
+ OPT_OUTPUT = MODEL is not available when OPT_INPUT = A_AND_B.
+ OPT_OUTPUT = RESID is not available when OPT_INPUT = A_AND_B or, more
+ generally, whenever the input gathers contain only two traces.
+ 
+ OPT_OUTPUT = A_AND_B produces a 2-trace output gather from each input gather.
+ 
+ OPT_OUTPUT = P_REFL, S_REFL, VS_VP or AB_PROD produces a single output trace
+ from each input gather.
+ 
+ OPT_OUTPUT = MODEL or RESID produces output gathers of the same size as the
+ input gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_IN">
+      <Tip>Value of NUMTR global upon input, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - NUMTR_IN<br> Value of NUMTR global upon input, shown for reference.</center></b>
+<pre> AVAGRAD requires gathered input. NUMTR for your input traces must be at
+ least 2 for all options, and must be exactly 2 when OPT_INPUT = A_AND_B.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUMTR_OUT">
+      <Tip>Value of NUMTR global upon output, shown for reference.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - NUMTR_OUT<br> Value of NUMTR global upon output, shown for reference.</center></b>
+<pre> The value of NUMTR for your output traces depends on OPT_OUTPUT.
+ NUMTR_OUT will be 2 when OPT_OUTPUT = A_AND_B.
+ NUMTR_OUT will be 1 when OPT_OUTPUT = P_REFL, S_REFL, VS_VP or AB_PROD.
+ NUMTR_OUT will be the same as NUMTR_IN when OPT_OUTPUT = MODEL or RESID.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_MIN">
+      <Tip>Minimum # of live trace samples at any depth to do calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - FOLD_MIN<br> Minimum # of live trace samples at any depth to do calculations.</center></b>
+<pre> Default = 2
+ Allowed = int &gt;= NP_FIT
+ At each time/depth level, AVAGRAD will not do any calculations unless the
+ input gather contains at least this many live trace samples at that level.
+ 
+ If NP_FIT = 3, then FOLD_MIN must be at least 3.
+ 
+ Active only when OPT_INPUT = ANGLE or OFFSET with 3 or more traces in the
+ input gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DLD_FIT">
+      <Tip>Diagonal load, in percent, for fitting data to compute A and B.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - DLD_FIT<br> Diagonal load, in percent, for fitting data to compute A and B.</center></b>
+<pre> Default = 2.0
+ Allowed = real &gt;= 0.0
+ Given noisy data, the diagonal load factor stabilizes the data fitting in
+ computation of intercepts and gradients. Theoretically, if the signal/noise
+ ratio in your data is S/N (expressed in terms of energies, not amplitudes),
+ the diagonal load should be chosen as:
+ 
+                      DLD_FIT  =  100 / (S/N)
+ 
+ which is simply the noise/signal ratio (multiplied by 100 because diagonal
+ load is expressed as a percentage).
+ 
+ If OPT_INPUT = ANGLE, you can probably use a smaller value of DLD_FIT than
+ when OPT_INPUT = OFFSET, as the partial stacking performed in generating
+ angle gathers generally improves signal/noise ratio. Similarly, you can
+ probably use a smaller DLD_FIT when working with migrated data than with
+ unmigrated data.
+ 
+ The DLD_FIT parameter is not active when OPT_INPUT = A_AND_B, as no data
+ fitting is performed in that case.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_MAX">
+      <Tip>Maximum reflection angle to consider in input, in degrees.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - ANG_MAX<br> Maximum reflection angle to consider in input, in degrees.</center></b>
+<pre> Default = 45.0
+ Allowed = 90.0 &gt; real &gt; 0.0
+ All events in your input data regarded as having a reflection angle greater
+ than ANG_MAX will be ignored. Here, the reflection angle of an event is
+ either read from header word 6 (when OPT_INPUT = ANGLE), or calculated from
+ reflection time, velocity and offset (when OPT_INPUT = OFFSET).
+ 
+ ANG_MAX must be strictly less than 90 degrees. This guarantees that AVAGRAD
+ will not use "fullstack" traces from AVAST in case such traces were
+ accidentally left in the data, as fullstack traces from AVAST are marked by
+ having 90.0 in header word 6.
+ 
+ Active only when OPT_INPUT = ANGLE or OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG_REF">
+      <Tip>Reference angle to use, in degrees, when OPT_OUTPUT = P_REFL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - ANG_REF<br> Reference angle to use, in degrees, when OPT_OUTPUT = P_REFL.</center></b>
+<pre> Default = 0.0
+ Allowed = 90.0 &gt;= real &gt;= 0.0
+ 
+ Active only when OPT_OUTPUT = P_REFL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_VEL">
+      <Tip>Choose PATH_VEL using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - SELECT_PATH_VEL<br> Choose PATH_VEL using a file selection dialog box.</center></b>
+<pre> Active only when OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL">
+      <Tip>Pathname for a stacking or interval velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PATH_VEL<br> Pathname for a stacking or interval velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ A velocity file is needed to convert from offset to angle when the input
+ consists of CMP gathers in offset.  As in process AVAST, this file may
+ contain either stacking velocity (type VTNM or VTRM) or interval velocity
+ (type VTIN).
+ 
+ This file can be a VELIO velocity file or a modspec file or a TRCIO trace
+ file containing velocity functions.  If this file is a TRCIO file, the
+ parameter VELTYPE must be set correctly.
+ 
+ Also, if this file is a TRCIO trace file, X and Y locations must be stored
+ within this file in header words 7 and 8 (these numbers are hard-wired into
+ the velocity primitives that AVAGRAD calls). Velocity traces in this file
+ must be sorted with X and Y in ascending order, X increasing most rapidly,
+ and must fill a rectangular grid.
+ 
+ Active only when OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_VEL_INFO">
+      <Tip>Status of PATH_VEL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PATH_VEL_INFO<br> Status of PATH_VEL.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="VELTYPE">
+      <Tip>Type of velocities on the PATH_VEL file (if is trace file).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - VELTYPE<br> Type of velocities on the PATH_VEL file (if is trace file).</center></b>
+<pre> Default = VTNM   (RMS velocities versus time)
+ Allowed = VTNM   (RMS velocities versus time)
+ Allowed = VTRM   (RMS velocities versus time)
+ Allowed = VTIN   (interval velocities versus time)
+ This parameter needs to be specified only if the PATH_VEL file is a
+ TRCIO velocity trace file.  Otherwise this parameter is not used.
+ 
+ Active only when OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_AVE">
+      <Tip>Whether to average all velocity functions in the file into one.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - OPT_AVE<br> Whether to average all velocity functions in the file into one.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ Whether to average all velocity functions in the file to a single velocity
+ function.
+ 
+ As in process AVAST, the intent of OPT_AVE = NO is to be able to accommodate
+ a SLOWLY varying water depth. It is up to you to put in functions which have
+ a smooth lateral variation. It is NOT recommended that the option be used
+ with raw stacking velocites.
+ 
+ This parameter is active only when OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_SMOOTH">
+      <Tip>Length of running average smoothing for interval velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - LEN_SMOOTH<br> Length of running average smoothing for interval velocities.</center></b>
+<pre> Default = 0.2
+ Allowed = real &gt;= 0.0
+ Length, in seconds, of running average smoothing for interval velocity
+ functions.  If LEN_SMOOTH = 0.0, then no smoothing is done.
+ 
+ Normally some smoothing is required to avoid jagged velocity contours when
+ converting from offset to angle.  Typical values of LEN_SMOOTH are from
+ 0.1 s to 0.5 s.
+ 
+ Active only when OPT_INPUT = OFFSET and OPT_SR = NO.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SR">
+      <Tip>Use the inaccurate Straight Ray method to convert offset to angle.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - OPT_SR<br> Use the inaccurate Straight Ray method to convert offset to angle.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ The OPT_SR = YES option is included for historical reasons, or to compare
+ with contractor processed data, as some contractors may still be using such
+ a method for calculating gradients.  If OPT_SR = NO, an improved conversion
+ from offset to angle is used.
+ 
+ Active only if OPT_INPUT = OFFSET.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NP_FIT">
+      <Tip>Number of Parameters To Fit.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - NP_FIT<br> Number of Parameters To Fit.</center></b>
+<pre> Default = 2
+ Allowed = 2, 3
+ 
+ When NP_FIT = 2, AVAGRAD fits your data with TWO parameters of the form
+                     data  =  A + B*(sin**2)
+ and then outputs A and B. This is standard intercept-gradient analysis.
+ 
+ When NP_FIT = 3, AVAGRAD fits your data with THREE parameters of the form
+             data  =  A + B*(sin**2) + C*(sin**2)*(tan**2)
+ but then discards the computed C values and outputs only A and B. This part
+ of the ODTC algorithm is based on the notion that NMO stretch produces a
+ spurious C term which is not indicative of rock properties, but decreases
+ accuracy of calculated A and B if you do only 2-parameter fitting. This
+ option should not be attempted, however, unless you have very high-quality
+ data.
+ 
+ NP_FIT = 3 is available only when OPT_INPUT = OFFSET or ANGLE with 3 or more
+ traces in the input gathers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_WVLT">
+      <Tip>Choose PATH_WVLT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - SELECT_PATH_WVLT<br> Choose PATH_WVLT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_WVLT">
+      <Tip>Pathname of file containing estimated wavelet for ODT correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PATH_WVLT<br> Pathname of file containing estimated wavelet for ODT correction.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ If you specify PATH_WVLT, the wavelet in this file is used to derive an
+ operator to reduce contamination of the gradient by the intercept due to
+ Offset-Dependent Tuning (NMO stretch effect).
+ 
+ This file may be in TRCIO or SEGY format or any other format readable by the
+ TRCIO primitives in CPS. Only the first trace in your file will be read.
+ 
+ If PATH_WVLT = NONE, no wavelet-dependent ODT correction will be made for
+ contamination of the gradient by the intercept.
+ 
+ Wavelet-dependent ODTC is not available when OPT_OUTPUT = RESID.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_WVLT_INFO">
+      <Tip>Status of PATH_WVLT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PATH_WVLT_INFO<br> Status of PATH_WVLT.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIM_FIRST">
+      <Tip>Time of first sample in wavelet, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - TIM_FIRST<br> Time of first sample in wavelet, in seconds.</center></b>
+<pre> Default = 0.0 (or read from wavelet file)
+ Allowed = real
+ Time of first sample in wavelet is used for proper centering of the
+ wavelet (same as in wavelets used by DSIG, although correctness of the
+ centering time is more critical here than it is in DSIG).
+ 
+ As in the case of DSIG, the front end will attempt to read the TMIN value
+ from your wavelet file (if that file exists already when building the job
+ containing AVAGRAD) and will use this as the default for TIM_FIRST; however,
+ you may override this setting manually, if necessary.
+ 
+ If your wavelet is in a SEGY file, the TMIN extracted from the file will
+ always be 0.0 (because SEGY format doesn't support non-zero TMIN), so you'll
+ have to know the correct TIM_FIRST value independently.  If you extracted
+ your wavelet using interactive inversion software you probably determined
+ its TIM_FIRST value quite accurately in the extraction process.  If your
+ estimated wavelet was calculated by C4WE, the TMIN in your wavelet file is
+ only very approximate; in this case, we recommend analyzing it with SPCT to
+ determine a more accurate TIM_FIRST before using this wavelet in AVAGRAD.
+ 
+ TIM_FIRST is not active if PATH_WVLT = NONE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OP">
+      <Tip>Length of operator for wavelet-dependent correction, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - LEN_OP<br> Length of operator for wavelet-dependent correction, in seconds.</center></b>
+<pre> Default = -
+ Allowed = real &gt; 0.0
+ LEN_OP should be approximately the same as the wavelet length.
+ 
+ Not active if PATH_WVLT = NONE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DLD_ODT">
+      <Tip>Diagonal load, in percent, for computing ODTC operator.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - DLD_ODT<br> Diagonal load, in percent, for computing ODTC operator.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt;= 0.0
+ Diagonal load, in percent, for computing wavelet-dependent correction
+ operator.
+ 
+ Not active if PATH_WVLT = NONE.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avagrad - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="avagrad">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : AVAGRAD   (AVA GRADient products)   [formerly ASTK and AVATUNE]
+ Category   : diagnostics
+ Written    : 1990-06-28   by: Bill Harlan
+ Revised    : 2006-10-31   by: Bob Baumel
+ Maturity   : production
+ Purpose    : Generate various AVA gradient related products.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ AVAGRAD produces various AVA gradient related output products, including
+ Offset-Dependent Tuning Corrections (ODTC), if desired.  AVAGRAD can be used
+ to produce AVA gradient data as a final product, but typically it is used to
+ provide input data to the FFAVA and PSLINV processes.
+ 
+      If OPT_INPUT = ANGLE, then the input must be CMP angle gathers with
+      the reflection angle for each trace, in degrees, in header word 6.
+      Normally these angle range gathers will have been produced by AVAST.
+ 
+      If OPT_INPUT = OFFSET, then the input must be ordinary NMO-corrected
+      CMP gathers with trace offset in header word 6.
+ 
+      If OPT_INPUT = A_AND_B, then the input must consist of two-trace
+      Intercept-Gradient gathers (where Intercept is the first trace of each
+      input gather). Usually, this is for the purpose of applying Wavelet-
+      Dependent Offset Dependent Tuning Correction (ODTC), either because
+      the A_AND_B pairs were produced previously by AVAGRAD without ODTC, or
+      because they were obtained from a contractor.
+ 
+ 
+ Intercept-Gradient Calculation
+ 
+ If OPT_INPUT = ANGLE, then AVAGRAD fits each input CMP with flat events
+ whose amplitudes vary with angle according to:
+ 
+             data(angle,t0) = A(t0) + B(t0)*(sin(angle)**2),
+ 
+ where t0 is the zero-offset travel time, A is the intercept and B is the
+ gradient.  (This use of A and B is consistent with Castagna's notation.)
+ 
+ 
+ If OPT_INPUT = OFFSET, AVAGRAD fits each input CMP with flat events given by:
+ 
+               data(x,t0) = A(t0) + B(t0)*(sin(angle)**2),
+ 
+ where x is offset, t0 is the zero-offset travel time, A is the intercept and
+ B is the gradient.  The sine of the reflection angle is approximated by:
+ 
+                   sin(angle) = (x*VI)/(t*(VR**2)),
+ 
+ where VR = stacking (RMS) velocity, VI = interval velocity (related to VR
+ by the Dix equation) and t = reflection time derived from the NMO equation:
+ 
+                  t = sqrt( t0**2 + (x**2)/(VR**2) ).
+ 
+ Normally, an interval velocity derived from the RMS velocity by the Dix
+ equation is a jagged function of time and should be smoothed for use in
+ converting offset to angle.  LEN_SMOOTH is the length of a running average
+ smoothing operator, in seconds, that is applied to the interval velocity.
+ Typical values of LEN_SMOOTH are from 0.1 s to 0.5 s.
+ 
+ 
+ Straight Ray Offset-Angle Conversion
+ 
+ Prior to September 1995, ASTK (the precursor to AVAGRAD) used an inaccurate
+ offset-angle conversion based on a straight ray approximation, equivalent to
+ the approximation described earlier with the further simplification that
+ VI = VR; thus, the assumed relation between offset and angle was:
+ 
+                         sin(angle) = x/(t*VR),
+ 
+ which uses only the RMS velocity and makes no use of interval velocity.
+ For reflections at depth, this equation may underestimate reflection angle
+ by around a factor of two.  Setting OPT_SR = YES causes AVAGRAD to use this
+ inaccurate method.  This option is provided for historical interest or for
+ comparison with contractor-processed data since some contractors may still
+ compute AVA gradients this way.  Normally, OPT_SR should be set to NO.
+ 
+ 
+ Gradient Related Products Available
+ 
+ If OPT_INPUT = ANGLE or OFFSET, AVAGRAD first fits the input CMP as described
+ above and extracts an intercept trace and a gradient trace, including Offset
+ Dependent Tuning Correction (ODTC) if desired.  AVAGRAD then calculates the
+ desired gradient related product based on these intercept and gradient traces
+ (or may optionally produce MODEL or RESID output to indicate the quality of
+ data fitting).
+ 
+ If OPT_INPUT = A_AND_B, then AVAGRAD may optionally apply wavelet-dependent
+ ODTC, and will output only those products that can be calculated from the
+ intercept and gradient traces (Thus, the MODEL and RESID outputs are not
+ available).
+ 
+     If OPT_OUTPUT = A_AND_B, the intercept and gradient traces are output
+     in two-trace gathers (thus, 2 output traces per input gather). Here, the
+     intercept trace will be the first trace in each two-trace output gather.
+ 
+     If OPT_OUTPUT = P_REFL, a P-wave reflectivity trace at angle ANG_REF
+     is output.  (1 trace per input gather.)  A(t0) + B(t0)*(sin(ANGREF)**2).
+     When ANGREF = 0, this shows perturbations in log(P-Impedance). For
+     non-zero ANGREF, it represents perturbations in the logarithm of an
+     "Elastic Impedance" (Patrick Connolly, Leading Edge, April 1999).
+ 
+     If OPT_OUTPUT = S_REFL, an estimated S-wave reflectivity trace at normal
+     incidence is output.  (1 trace per input gather.)  0.5*( A(t0) - B(t0)).
+ 
+     If OPT_OUTPUT = VS_VP, an estimated VS/VP ratio trace is output. (One
+     trace per input gather.)  -0.5*( A(t0) + B(t0)).  Note that this has
+     the opposite polarity of a Poisson's ratio stack.
+ 
+     If OPT_OUTPUT = AB_PROD, the product of the intercept times the gradient
+     traces is output.  (1 trace per input gather.)  This highlights bright
+     spots with both large amplitudes and large AVA changes (Rutherford &amp;
+     Williams Class 3).
+ 
+     If OPT_OUTPUT = MODEL, AVAGRAD models the input gathers (as many traces
+     per gather as in the input traces) according to the calculated A(t0)
+     and B(t0) traces, including ODTC if specified.  Typically used for QC.
+     Not available when OPT_INPUT = A_AND_B since, in this case, it would be
+     identical to OPT_OUTPUT = A_AND_B.
+ 
+     If OPT_PROD = RESID, the input data minus the best-fit model is output.
+     (As many traces output as in the input gather.)  Typically used for QC.
+     Not available when OPT_INPUT = A_AND_B or when the input gathers contain
+     only two traces, since in these cases, the residual would be exactly 0.
+ 
+ 
+ Offset Dependent Tuning Correction (ODTC)
+ 
+ AVAGRAD can apply two different kinds of ODTC: High-Order AVA Correction,
+ and Wavelet-Dependent Stretch Correction:
+ 
+   High-Order AVA Correction (First kind of ODTC)
+ 
+   If NP_FIT = 2 (the default), then AVAGRAD performs a 2-parameter fit of
+   the AVA trend as described above.
+ 
+   If NP_FIT = 3, then AVAGRAD performs a 3-parameter fit of the AVA trend to
+   include a higher order AVA term.  This is the first part of an algorithm
+   for correcting Offset-Dependent Tuning (the NMO stretch effect), based on
+   work of H.W. Swan (1997 SEG, paper AVO 2.5).  In this case AVAGRAD fits
+   the input CMPs using the equation:
+ 
+             data  =  A + B*(sin**2) + C*(sin**2)*(tan**2)
+ 
+   but then discards the C term.  The idea is that NMO stretch produces a
+   spurious C term which is not indicative of rock properties, but decreases
+   the accuracy of calculated A and B if you do only 2-parameter fitting.
+   Therefore, NP_FIT = 3 is recommended if you have adequate data quality,
+   including at least 3 offsets or angles.
+ 
+   The NP_FIT = 3 option is available only when OPT_INPUT = ANGLE or OFFSET
+   with at least 3 traces per input gather.
+ 
+   If OPT_OUTPUT = MODEL, output traces are modeled using only the A and B
+   terms, even if a C term was computed when fitting the data.
+ 
+   If OPT_OUTPUT = RESID, output residual traces are based on the complete
+   data fitting, including any C term if it was computed.
+ 
+ 
+   Wavelet-Dependent Stretch Correction (Second kind of ODTC)
+ 
+   If PATH_WVLT is specified, a correction is made for wavelet-dependent
+   contamination of the gradient term by the intercept.  This correction is
+   the second part of the algorithm based on the work of H.W. Swan, cited
+   above. The correction is made using the following algorithm:
+ 
+   At setup time, AVAGRAD derives a transfer function f(t) designed to
+   transform the estimated wavelet w(t) [read from disk] into the modified
+   wavelet:
+                         w1(t) = 0.5 * t * w'(t),
+ 
+   (Here, * denotes ordinary multiplication).  At processing time, each input
+   gradient trace B(t) is replaced by a corrected gradient "Bcorr" where
+ 
+                       Bcorr(t) = B(t) + f(t)*A(t),
+ 
+   (Here, * denotes convolution), where A(t) is the matching intercept trace.
+   The intercept traces A(t) are not altered.  This routine operates entirely
+   in the time domain. The wavelet derivative w'(t) is calculated as a
+   centered finite-difference.  Calculation of the transfer function f(t) is
+   the same as in MTFUN.
+ 
+   Note: Because the equation expressing w1(t) in terms of w(t) includes
+   multiplication by time, it is important to know the zero time (centering
+   time) of your wavelet accurately. You must supply this information in the
+   TIM_FIRST parameter.
+ 
+   The Wavelet-Dependent stretch correction, if specified, is applied after
+   initial A(t) and B(t) estimates are derived by data fitting.  If you
+   specify both High Order AVA correction (NP_FIT = 3) and Wavelet-Dependent
+   correction, then the High Order AVA correction is done first (as part of
+   the data fitting); then the Wavelet-Dependent correction is applied.
+   If OPT_INPUT = A_AND_B, then no initial data fitting is done, but you may
+   still apply the Wavelet-Dependent correction.
+ 
+   If OPT_OUTPUT = MODEL, then results of Wavelet-Dependent correction, if
+   specified, are included in the output traces.  You may use this option to
+   see how well the Wavelet-Dependent correction removes NMO stretch.
+ 
+   If OPT_OUTPUT = RESID, Wavelet-Dependent correction is not available, as
+   the output traces show only the residual after initial data fitting.
+ 
+ 
+ Velocity Handling
+ 
+ Manipulation of the velocities needed for converting offset to angle when
+ OPT_INPUT = OFFSET depends on settings of OPT_AVE and OPT_SR and is designed
+ to follow the treatment in process AVAST as closely as possible. As in AVAST,
+ you may input Stacking or RMS velocities (type VTNM or VTRM) or Interval
+ velocities (type VTIN).
+ 
+ If OPT_AVE = YES, velocity functions are combined to arrive at a single
+ interval velocity function: If input velocities are of type VTNM or VTRM,
+ they are first resampled to the trace sample interval, then averaged, then
+ converted to interval velocity using Dix's formula. If they are of type
+ VTIN, they are resampled to the trace sample interval (honoring the constant
+ interval velocity "steps"), then averaged. In either case, the composited
+ interval velocity is then smoothed using the LEN_SMOOTH parameter. This
+ smoothed interval velocity is also converted to RMS velocity, because both
+ interval and RMS velocities are needed in our approximate offset-to-angle
+ conversion formula.
+ 
+ If OPT_AVE = NO, a smoothed interval velocity and corresponding RMS velocity
+ is derived separately at every velocity location and saved in a table. When
+ processing traces, interval and RMS velocities are interpolated separately
+ from the stored table to the current CMP location.
+ 
+ The intent of the OPT_AVE = NO option is to be able to accommodate a SLOWLY
+ varying water depth.  It is up to you to put in functions which have a smooth
+ lateral variation. It is NOT recommended that the option be used with raw
+ stacking velocites.
+ 
+ If OPT_SR = YES, velocity handling is as described above, except that no
+ smoothing is done, and only the RMS velocity is used (You may still input
+ interval velocities, if you wish, even when OPT_SR = YES).
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ Input Data Preparation
+ 
+ If OPT_INPUT = OFFSET, input data should have an amplitude balance applied
+ prior to this process. This should be a deterministic balance such as TPOW or
+ GDIV, but MVXP may be satisfactory in some cases.  The input data must be
+ NMO-corrected CMP gathers, preferably with multiples removed and residual NMO
+ corrected (e.g., with RFAB).  Data should be muted (head and tail) to remove
+ noise or any data that might be misinterpreted by AVAGRAD.  Use a zero length
+ taper in MUTE to avoid tapers that AVAGRAD might interpret as AVA gradients.
+ 
+ If OPT_INPUT = OFFSET, header word 6 for each input trace should be set to
+ the center value of the offset range that trace represents.
+ 
+ If OPT_INPUT = ANGLE, input data will normally be angle gathers produced by
+ AVAST, although it might also be output from a migration process designed
+ specifically to produce angle gathers.  This input data should be prepared
+ the same as for ordinary CMP gathers, but some of the input data preparation
+ may be applied before the AVAST process.
+ 
+ If OPT_INPUT = A_AND_B, the input data will be two-trace intercept-gradient
+ gathers. Usually, this is for the purpose of applying Wavelet-Dependent
+ Offset Dependent Tuning Correction (ODTC), where the input may consist of
+ either A_AND_B pairs produced previously by AVAGRAD (without ODTC) or
+ A_AND_B pairs produced by a contractor.
+ 
+ 
+ Choosing Diagonal Load
+ 
+ The diagonal load factor DLD_FIT helps to stabilize data fitting in the
+ presence of noise. If you can estimate the signal/noise ratio (S/N) in your
+ data (expressed in terms of energies, not amplitudes), then a suitable
+ diagonal load may be chosen as:
+ 
+                     DLD_FIT  =  100 / (S/N)
+ 
+ which is simply the noise/signal ratio (multiplied by 100 because diagonal
+ load is expressed as a percentage).
+ 
+ If OPT_INPUT = ANGLE, you can probably use a smaller value of DLD_FIT than
+ when OPT_INPUT = OFFSET, as the partial stacking performed in generating
+ angle gathers usually improves signal/noise ratio. Similarly, you can
+ probably use a smaller DLD_FIT when working with migrated data than with
+ unmigrated data.
+ 
+ 
+ Output Traces
+ 
+ If output traces from AVAGRAD will be inverted using PSLINV, do not apply any
+ amplitude balance between AVAGRAD and PSLINV. On the other hand, if output
+ traces will be sent to FFAVA, an MVXP is usually applied between AVAGRAD and
+ FFAVA.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         AVAGRAD REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+  8. 2006-10-31  Baumel      Add ability to read velocity functions from a
+                              trcio trace file - required addition of VELTYPE
+                              parameter, used only when velocities are in a
+                              trace file.
+  7. 2006-01-10  B. Menger   Removed Unused Variables.
+  6. 2002-08-26  CI Burch    Doc change only.
+  5. 2002-08-21  Baumel      Fix bug so FOLD_MIN works as advertised; replace
+                             Iterative Reweighted Least Squares (IRLS) method
+                             with simpler, faster, more robust diagonal load
+                             calculation; add file selection boxes to GUI.
+  4. 2001-11-01  Baumel      Add statement to compile in new absoft compiler.
+  3. 2001-04-26  Baumel      Add OPT_INPUT = OFFSET option (and all associated
+                             velocity processing).
+  2. 2001-02-14  Baumel      Renamed NTR_MIN parameter to FOLD_MIN to match
+                             analogous parameter in PSLINV process.
+  1. 2001-01-25  Bob Baumel  Converted ASTK and AVATUNE from old system
+                             (but OPT_INPUT = OFFSET not implemented yet).
+ 
+                          ASTK REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+ 20. 1998-06-02  Baumel      Add offset-detuning options and IDO=12,
+                             remove CCEXP option completely.
+ 19. 1997-02-26  Baumel      Make sure headers 2 &amp; 64 are set to first &amp;
+                             last non-zero value in all output traces;
+                             new Note 6 in doc.
+ 18. 1997-02-05  Baumel      Make sure gradient has good header if IDO=11;
+                             Also make sure header 1 is set correctly.
+ 17. 1995-11-15  Baumel      Partly reverse changes of 1995-10-06, so
+                             IDO=6 models only the angles used in fitting.
+ 16. 1995-10-06  Baumel      Model ALL angles when IDO=6 (including angles
+                             not used in fitting). Also (all IDO) now uses
+                             angle.le.ANGMAX (previously angle.lt.ANGMAX).
+ 15. 1995-09-26  Baumel      Improved robustness of fitting by adopting
+                             Iterative Reweighted Least Squares (IRLS)
+                             formulation (new parameter NUMLS).
+ 14. 1995-09-18  Baumel      Improved accuracy of offset-angle conversion
+                             when input traces in OFFSET domain &amp; VELFILE
+                             specifies velocity file (new param TSMOOTH).
+ 13. 1995-03-08  Baumel      Add NTRMIN parameter to set minimum fold.
+ 12. 1995-01-16  Harlan      Insure that ignores hard zeros in mute zone.
+ 11. 1994-10-03  Baumel      Add CCEXP parameter for coherence-weighting
+                             of gradients.
+ 10. 1994-06-29  Harlan      Ignore bottom mute of 0 (assume not set).
+  9. 1994-04-29  Harlan      Include bottom mute from header word 64.
+  8. 1994-03-03  Harlan      Add option IDO=11.
+  7. 1994-02-17  Harlan      ASTKGSTK blew up at zero-offset, zero-time
+  6. 1993-02-12  Harlan      Fix problem with ANGMAX=90.
+  5. 1993-02-12  Harlan      Fix ASTKCOMP for bottom zero padding.
+  4. 1993-01-11  Harlan      Add VELFILE='ANGLE' to input angles.
+  3. 1992-12-14  Harlan      Remove automatic mute of low fold.
+  2. 1992-12-11  Harlan      Change definition of option IDO=5.
+  1. 1990-06-28  Harlan      Original version
+ 
+                         AVATUNE REVISION HISTORY
+ 
+     Date        Author      Description
+     ----        ------      -----------
+  2. 1998-06-02  Baumel      Use F90 dynamic scratch &amp; storage, calculate
+                             operator in ASTK_DTUNE, now part of ASTK.
+                             Moved to conlib.
+  1. 1998-01-28  Baumel      Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

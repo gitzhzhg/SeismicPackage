@@ -1,0 +1,14 @@
+#! /bin/csh -f
+
+# rsh_xdiff in ~stoectr/making
+
+# This script does an rsh to holosn87 to do an xdiff since linux does
+# not have xdiff.
+
+if(`uname` == Linux) then
+  rsh holosn58 "cd `pwd`; xdiff $*"
+else
+  xdiff $*
+endif
+
+

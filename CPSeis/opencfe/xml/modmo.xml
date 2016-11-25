@@ -1,0 +1,733 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="modmo" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MODMO" title="MODMO" rows="30" columns="65">
+    <Label keyword="COMMENT_MODMOMODELBASEDMOVEOUT" alignment="center">MODMO (MODel-based Move-Out)</Label>
+    <Label keyword="LABEL_ANI_TYPE" alignment="left">ani_type=</Label>
+    <Field keyword="ANI_TYPE" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_VP0_FILE">Select VP0_FILE</Button>
+    <Label keyword="EQLAB_VP0_FILE" alignment="left">=</Label>
+    <Field keyword="VP0_FILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="VP0_FILE_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_CONSTANT_VS_VP" alignment="left">constant_vs_vp=</Label>
+    <Field keyword="CONSTANT_VS_VP" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VS_VP_RATIO" alignment="left">vs_vp_ratio=</Label>
+    <Field keyword="VS_VP_RATIO" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_VS0_FILE">Select VS0_FILE</Button>
+    <Label keyword="EQLAB_VS0_FILE" alignment="left">=</Label>
+    <Field keyword="VS0_FILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="VS0_FILE_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_EPS_FILE">Select EPS_FILE</Button>
+    <Label keyword="EQLAB_EPS_FILE" alignment="left">=</Label>
+    <Field keyword="EPS_FILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="EPS_FILE_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_DEL_FILE">Select DEL_FILE</Button>
+    <Label keyword="EQLAB_DEL_FILE" alignment="left">=</Label>
+    <Field keyword="DEL_FILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="DEL_FILE_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_TIME2DEPTH" alignment="left">time2depth=</Label>
+    <Field keyword="TIME2DEPTH" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SINGLE_VZ" alignment="left">single_vz=</Label>
+    <Field keyword="SINGLE_VZ" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NZ" alignment="left">nz=</Label>
+    <Field keyword="NZ" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NT" alignment="left">nt=</Label>
+    <Field keyword="NT" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NZM" alignment="left">nzm=</Label>
+    <Field keyword="NZM" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DZ" alignment="left">dz=</Label>
+    <Field keyword="DZ" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DELT" alignment="left">delt=</Label>
+    <Field keyword="DELT" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DZM" alignment="left">dzm=</Label>
+    <Field keyword="DZM" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z0" alignment="left">z0=</Label>
+    <Field keyword="Z0" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_T0" alignment="left">t0=</Label>
+    <Field keyword="T0" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Z0M" alignment="left">z0m=</Label>
+    <Field keyword="Z0M" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEPTH_SCALE" alignment="left">depth_scale=</Label>
+    <Field keyword="DEPTH_SCALE" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFFMAX" alignment="left">offmax=</Label>
+    <Field keyword="OFFMAX" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DXMAP" alignment="left">dxmap=</Label>
+    <Field keyword="DXMAP" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ISMOO" alignment="left">ismoo=</Label>
+    <Field keyword="ISMOO" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ANG" alignment="left">ang=</Label>
+    <Field keyword="ANG" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DANG" alignment="left">dang=</Label>
+    <Field keyword="DANG" type="float" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ILINEHDR" alignment="left">ilinehdr=</Label>
+    <Field keyword="ILINEHDR" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_XLINEHDR" alignment="left">xlinehdr=</Label>
+    <Field keyword="XLINEHDR" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IVERBOS" alignment="left">iverbos=</Label>
+    <Field keyword="IVERBOS" type="int" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DUMP_VEL" alignment="left">dump_vel=</Label>
+    <Field keyword="DUMP_VEL" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_VP0_DUMPFILE">Select VP0_DUMPFILE</Button>
+    <Label keyword="EQLAB_VP0_DUMPFILE" alignment="left">=</Label>
+    <Field keyword="VP0_DUMPFILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="VP0_DUMPFILE_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_MODMOMODELBASEDMOVEOUT" xPos="21" yPos="0" xSize="28" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_ANI_TYPE" xPos="1" yPos="2" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANI_TYPE" xPos="15" yPos="2" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_VP0_FILE" xPos="1" yPos="3" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_VP0_FILE" xPos="17" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VP0_FILE" xPos="18" yPos="3" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VP0_FILE_INFO" xPos="18" yPos="4" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CONSTANT_VS_VP" xPos="1" yPos="5" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CONSTANT_VS_VP" xPos="17" yPos="5" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VS_VP_RATIO" xPos="1" yPos="6" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VS_VP_RATIO" xPos="17" yPos="6" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_VS0_FILE" xPos="1" yPos="7" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_VS0_FILE" xPos="17" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VS0_FILE" xPos="18" yPos="7" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VS0_FILE_INFO" xPos="18" yPos="8" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_EPS_FILE" xPos="1" yPos="9" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_EPS_FILE" xPos="17" yPos="9" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EPS_FILE" xPos="18" yPos="9" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EPS_FILE_INFO" xPos="18" yPos="10" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_DEL_FILE" xPos="1" yPos="11" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_DEL_FILE" xPos="17" yPos="11" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEL_FILE" xPos="18" yPos="11" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="DEL_FILE_INFO" xPos="18" yPos="12" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME2DEPTH" xPos="1" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME2DEPTH" xPos="15" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SINGLE_VZ" xPos="1" yPos="14" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SINGLE_VZ" xPos="15" yPos="14" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_NZ" xPos="1" yPos="15" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NZ" xPos="15" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NT" xPos="21" yPos="15" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NT" xPos="28" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NZM" xPos="34" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NZM" xPos="40" yPos="15" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DZ" xPos="1" yPos="16" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DZ" xPos="15" yPos="16" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DELT" xPos="21" yPos="16" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DELT" xPos="28" yPos="16" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DZM" xPos="34" yPos="16" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DZM" xPos="40" yPos="16" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z0" xPos="1" yPos="17" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z0" xPos="15" yPos="17" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_T0" xPos="21" yPos="17" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="T0" xPos="28" yPos="17" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Z0M" xPos="34" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Z0M" xPos="40" yPos="17" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DEPTH_SCALE" xPos="1" yPos="18" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEPTH_SCALE" xPos="15" yPos="18" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFFMAX" xPos="1" yPos="19" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFFMAX" xPos="15" yPos="19" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DXMAP" xPos="1" yPos="20" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DXMAP" xPos="15" yPos="20" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ISMOO" xPos="1" yPos="21" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ISMOO" xPos="15" yPos="21" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ANG" xPos="1" yPos="22" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANG" xPos="15" yPos="22" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DANG" xPos="1" yPos="23" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DANG" xPos="15" yPos="23" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ILINEHDR" xPos="1" yPos="24" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ILINEHDR" xPos="15" yPos="24" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_XLINEHDR" xPos="1" yPos="25" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XLINEHDR" xPos="15" yPos="25" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_IVERBOS" xPos="1" yPos="26" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVERBOS" xPos="15" yPos="26" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DUMP_VEL" xPos="1" yPos="27" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DUMP_VEL" xPos="15" yPos="27" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_VP0_DUMPFILE" xPos="1" yPos="28" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_VP0_DUMPFILE" xPos="21" yPos="28" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VP0_DUMPFILE" xPos="22" yPos="28" xSize="41" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="VP0_DUMPFILE_INFO" xPos="18" yPos="29" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="ANI_TYPE">
+      <Tip>Type of anisotropy.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - ANI_TYPE<br> Type of anisotropy.</center></b>
+<pre> Default = ISOTROPIC
+ Allowed = VTI, ISOTROPIC</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_VP0_FILE">
+      <Tip>Choose VP0_FILE using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - SELECT_VP0_FILE<br> Choose VP0_FILE using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="VP0_FILE">
+      <Tip>Pathname for input vertical P-wave velocity dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VP0_FILE<br> Pathname for input vertical P-wave velocity dataset.</center></b>
+<pre> Default = NONE
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VP0_FILE_INFO">
+      <Tip>Status of VP0_FILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VP0_FILE_INFO<br> Status of VP0_FILE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="CONSTANT_VS_VP">
+      <Tip>Constant Vs/Vp ratio.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - CONSTANT_VS_VP<br> Constant Vs/Vp ratio.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VS_VP_RATIO">
+      <Tip>Constant Vs/Vp ratio value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VS_VP_RATIO<br> Constant Vs/Vp ratio value.</center></b>
+<pre> Default = 0.5
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_VS0_FILE">
+      <Tip>Choose VS0_FILE using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - SELECT_VS0_FILE<br> Choose VS0_FILE using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="VS0_FILE">
+      <Tip>Pathname for input vertical S-wave velocity dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VS0_FILE<br> Pathname for input vertical S-wave velocity dataset.</center></b>
+<pre> Default = NONE
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VS0_FILE_INFO">
+      <Tip>Status of VS0_FILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VS0_FILE_INFO<br> Status of VS0_FILE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_EPS_FILE">
+      <Tip>Choose EPS_FILE using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - SELECT_EPS_FILE<br> Choose EPS_FILE using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="EPS_FILE">
+      <Tip>Pathname for input epsilon parameter dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - EPS_FILE<br> Pathname for input epsilon parameter dataset.</center></b>
+<pre> Default = NONE
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="EPS_FILE_INFO">
+      <Tip>Status of EPS_FILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - EPS_FILE_INFO<br> Status of EPS_FILE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_DEL_FILE">
+      <Tip>Choose DEL_FILE using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - SELECT_DEL_FILE<br> Choose DEL_FILE using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="DEL_FILE">
+      <Tip>Pathname for input delta parameter dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DEL_FILE<br> Pathname for input delta parameter dataset.</center></b>
+<pre> Default = NONE
+ Allowed = char</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEL_FILE_INFO">
+      <Tip>Status of DEL_FILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DEL_FILE_INFO<br> Status of DEL_FILE.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TIME2DEPTH">
+      <Tip>Direction of transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - TIME2DEPTH<br> Direction of transform.</center></b>
+<pre> Default = TIME2DEPTH
+ Allowed = DEPTH2TIME, TIME2DEPTH
+ TIME2DEPTH converts from time to depth.
+ DEPTH2TIME converts from depth to time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SINGLE_VZ">
+      <Tip>Single velocity trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - SINGLE_VZ<br> Single velocity trace.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NZ">
+      <Tip>Number of z samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - NZ<br> Number of z samples.</center></b>
+<pre> Default = 1000
+ Allowed = int&gt;=1
+ If input is depth data, NZ is taken from the input trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NT">
+      <Tip>Number of time samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - NT<br> Number of time samples.</center></b>
+<pre> Default = 1000
+ Allowed = int&gt;=1
+ If input is time data, NT is taken from the input trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NZM">
+      <Tip>Number of z samples for model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - NZM<br> Number of z samples for model.</center></b>
+<pre> Default = NZ
+ Allowed = int&gt;=1
+ Does not need to match input velocity model, but does need to fall within
+ the input velocity model.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DZ">
+      <Tip>Depth increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DZ<br> Depth increment.</center></b>
+<pre> Default = 5.0
+ Allowed = real scalar
+ If input is depth data, DZ is taken from the input trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DELT">
+      <Tip>Time increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DELT<br> Time increment.</center></b>
+<pre> Default = 0.004
+ Allowed = real scalar
+ If input is time data, DELT is taken from the input trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DZM">
+      <Tip>Depth increment for model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DZM<br> Depth increment for model.</center></b>
+<pre> Default = DZ
+ Allowed = real scalar
+ Does not need to match input velocity model, but does need to fall within
+ the input velocity model.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z0">
+      <Tip>Starting depth.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - Z0<br> Starting depth.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar
+ If input is depth data, Z0 is taken from the input trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="T0">
+      <Tip>Starting time.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - T0<br> Starting time.</center></b>
+<pre> Default = 0.0
+ Allowed = real scalar
+ If input is time data, T0 is taken from the input trace data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Z0M">
+      <Tip>Starting depth for model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - Z0M<br> Starting depth for model.</center></b>
+<pre> Default = Z0
+ Allowed = real scalar
+ Does not need to match input velocity model, but does need to fall within
+ the input velocity model.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEPTH_SCALE">
+      <Tip>Scale factor for depth axis.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DEPTH_SCALE<br> Scale factor for depth axis.</center></b>
+<pre> Default = 1.0
+ Allowed = real scalar &gt; 0.0
+ For input depth data,
+   DZ = DT    * DEPTH_SCALE
+   Z0 = TSTRT * DEPTH_SCALE
+ For output depth data,
+   DT    = DZ / DEPTH_SCALE
+   TSTRT = Z0 / DEPTH_SCALE
+ DZM and Z0M are not affected by this parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFFMAX">
+      <Tip>Maximum offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - OFFMAX<br> Maximum offset.</center></b>
+<pre> Default = 4000.
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DXMAP">
+      <Tip>Transverse sampling in a ttmap.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DXMAP<br> Transverse sampling in a ttmap.</center></b>
+<pre> Default = 5.0
+ Allowed = real scalar</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ISMOO">
+      <Tip>Number of times to smooth the velocity model.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - ISMOO<br> Number of times to smooth the velocity model.</center></b>
+<pre> Default = 5
+ Allowed = int&gt;=0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ANG">
+      <Tip>Maximum emergence angle.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - ANG<br> Maximum emergence angle.</center></b>
+<pre> Default = 89.9
+ Allowed = real scalar
+ Specified in degrees.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DANG">
+      <Tip>Angle increment.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DANG<br> Angle increment.</center></b>
+<pre> Default = 0.5
+ Allowed = real scalar
+ Specified in degrees.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ILINEHDR">
+      <Tip>Header word to use for in-line coordinate or grid value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - ILINEHDR<br> Header word to use for in-line coordinate or grid value.</center></b>
+<pre> Default = 7
+ Allowed = valid CPS header word
+ This needs to match input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XLINEHDR">
+      <Tip>Header word to use for cross-line coordinate or grid value.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - XLINEHDR<br> Header word to use for cross-line coordinate or grid value.</center></b>
+<pre> Default = 8
+ Allowed = valid CPS header word
+ This needs to match input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVERBOS">
+      <Tip>Verbose logging.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - IVERBOS<br> Verbose logging.</center></b>
+<pre> Default = 0
+ Allowed = 0,1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DUMP_VEL">
+      <Tip>Dump velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - DUMP_VEL<br> Dump velocities.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ Dump velocities used for each gather location to disk.  See VP0_DUMPFILE for
+ more information.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_VP0_DUMPFILE">
+      <Tip>Choose VP0_DUMPFILE using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - SELECT_VP0_DUMPFILE<br> Choose VP0_DUMPFILE using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="VP0_DUMPFILE">
+      <Tip>Pathname for output vertical P-wave velocities used for each gather      locati</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VP0_DUMPFILE<br> Pathname for output vertical P-wave velocities used for each gather      locati</center></b>
+<pre> Default = NONE
+ Allowed = char
+ Pathname for output vertical P-wave velocities used for each gather location.
+ For parallel jobs, the filename is modified by appending ".peXXXX", where
+ XXXX is the worker number. The output format is CPS TRCIO.  The header words
+ for each output velocity trace are identical to the first trace in each
+ gather.  For parallel jobs, this should allow the velocity traces to be
+ sorted to the correct order.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VP0_DUMPFILE_INFO">
+      <Tip>Status of VP0_DUMPFILE.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - VP0_DUMPFILE_INFO<br> Status of VP0_DUMPFILE.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>modmo - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="modmo">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : MODMO
+ Category   : Transforms
+ Written    : 2003-05-01   by: bkmacy
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Time to depth model-based moveout.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ MODMO converts time-domain common image gathers with moveout to the
+ depth domain using model-based moveout.  Alternatively, depth-domain
+ gathers without moveout can be converted to the time domain with
+ moveout.  The model-based approach uses a locally 1-D velocity model.
+ The input velocity model is either isotropic or transversely isotropic
+ with a vertical symmetry axis (VTI).  The following velocity parameters
+ are required:
+ 
+ ISOTROPIC:     vertical P-wave velocity
+ VTI:           vertical P-wave velocity, vertical S-wave velocity, delta,
+                and epsilon.
+ 
+ This process is based on the FreeUSP-style programs GATHERT2Z_ANI and
+ GATHERZ2T_ANI written by Dan Whitmore.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ To scale the depth axis appropriately, use the DEPTH_SCALE option.  For input
+ depth traces, the sampling interval (DT) and starting depth (TSTRT) are
+ multiplied by DEPTH_SCALE to determine DZ and Z0; i.e.,
+ 
+ DZ = DT    * DEPTH_SCALE
+ Z0 = TSTRT * DEPTH_SCALE
+ 
+ For output depth traces, the sampling interval (DZ) and starting depth (Z0)
+ are divided by DEPTH_SCALE to determine DT and TSTRT; i.e.,
+ 
+ DT    = DZ / DEPTH_SCALE
+ TSTRT = Z0 / DEPTH_SCALE
+ 
+ If the true depth scale should be in feet or meters, but the input or
+ output depth traces should have a sample interval of kilofeet or
+ kilometers, set DEPTH_SCALE=1000.  For example, if the true depth sample
+ interval is 30 feet, but the input depth sample interval is 0.03 (as
+ specified by DT in JOB DATA), then set DEPTH_SCALE=1000.
+ 
+ The DEPTH_SCALE option does not affect the "model" depth parameters (DZM and
+ Z0M).  Set the model depth parameters to the same scale as DZ and Z0, not to
+ DT and TSTRT.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+018. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+017. 2006-01-10  B. Menger  Removed Unused Variables.
+ 16. 2005-01-31  bkmacy     Changed DUMP_VEL flag to be YES or NO instead of 1
+                              or 0, and to allow the user to specify the name
+                              of the output file (VP0_DUMPFILE).
+                            Introduced the use of timer routines and reporting.
+ 15. 2004-07-13  bkmacy     Added trap call when pushbutton for selecting a
+                            file is used, which will properly update the
+                            file status.
+ 14. 2004-05-25  bkmacy     Fixed vs0 trap when constant Vp/Vs is true.
+ 13. 2004-02-18  bkmacy     Fixed bug in calculating maxmem for
+                            modgrid_paint_by_obj in routine vel_paint_pencil.
+ 12. 2004-02-17  bkmacy     Changed DUMP_VEL to write out CPS TRCIO files
+                            rather than plain binary data.
+ 11. 2004-01-08  bkmacy     Improved DEPTH_SCALE documentation.
+ 10. 2004-01-06  bkmacy     Added DEPTH_SCALE option for scaling the depth
+                            interval and starting depth for input or output
+                            seismic data.
+                            Added a bounds check in modmo_vzmapr_vti.
+                            Changed order of variable declarations to satisfy
+                            Solaris 7.0 compiler.
+  9. 2003-10-06  rsday      Changed ***_fsize parameters to double precision
+  8. 2003-08-28  bkmacy     Added check for dumpvel flag when closing dumpvel
+                            files.
+  7. 2003-08-19  bkmacy     Changed name from TDRBMO to MODMO.  Promoted
+                            to betalib.
+                            Added DUMP_VEL option to write velocities used
+                            internally to a file.
+                            A warning is printed if the gather location is
+                            outside of the velocity model.
+  6. 2003-08-05  bkmacy     Changed default ilinehdr and xlinehdr from 17 and
+                            18 to 7 and 8.
+                            Changed default extension for velocity files from
+                            'segy' to '*'.
+                            Improved GUI behavior for Vs parameters for
+                            isotropic case.
+                            Removed requirement to enter Vs, epsilon, and
+                            delta filenames for isotropic case.
+  5. 2003-07-24  bkmacy     Added option for choosing a constant Vs/Vp
+                            velocity ratio.
+                            Changed from using vel_read_slice and
+                            vel_read_pencil to using new routine
+                            vel_paint_pencil, which uses the new modgrid
+                            paint functions.
+                            Fixed possible bug where nzm should have been used
+                            intead of nz when allocating velocity arrays.
+                            Modified check for z range in vel_init to
+                            accomodate modspec files.
+  4. 2003-07-17  bkmacy     Added support for parallel operation.
+                            Fixed bug in error checking for vel_read_slice.
+                            Commented out debugging statements.
+  3. 2003-07-07  bkmacy     Supports non-zero acquisition datums using the
+                            "model" z parameters.  Velocity model reading
+                            can now use in-line and cross-line grid values.
+                            The input velocity model can be isotropic,
+                            rather than just VTI.  The velocity model is
+                            interpolated in depth if the "file" z parameters
+                            do not match the "model" z parameters.
+  2. 2003-05-09  bkmacy     Added capability to convert from depth to time.
+  1. 2003-05-01  bkmacy     Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

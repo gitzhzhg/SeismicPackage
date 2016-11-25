@@ -1,0 +1,112 @@
+#! /bin/csh -f
+
+# checkin
+#
+# $Id: checkin,v 1.1 2004/07/19 14:53:06 stoectr Exp $
+#
+# Run this script to check in one RCS file into the specified ~spws directory.
+# You must be userid ~spws to do this.
+#
+# Simply type this in the user's local directory containing the new source file:
+#
+#               checkin  <filename>  <directory>
+#
+# where  <filename>   is the file name (no path) in the user's local directory.
+# where  <directory>  is the desired ~spws source code directory (full path).
+#
+# Note: You can use "su spws" (instead of "su - spws" or "rlogin ... spws")
+# to retain your own user name in the RCS log information.
+#
+#-------------------------------------------------------------------------------
+# To create a new ~spws source file (working in the user's own directory):
+# 
+# user:   (C1) Create and test the new source file.
+# 
+# spws:   (C2) Run the checkin script in the user's directory.
+# 
+#      The checkin script does the following:
+# 
+#       (a) Copies the new file from the user's directory to the ~spws
+#           directory.
+# 
+#       (b) Checks the new file into RCS, and then checks it out again
+#           read-only (unlocked) as follows:
+# 
+#                  ci  -u  filename
+#
+#-------------------------------------------------------------------------------
+# To update an ~spws source file (working in the user's own directory):
+# 
+# user:   (U1) Copy the ~spws source file to the user's directory.
+# user:   (U2) Do a chmod u+w on the copied file so it can be edited.
+#
+# user:   (U3) Update and test the file in the user's directory.
+# 
+# user:   (U4) Do a diff between the new copy and the ~spws copy to make
+#              sure the changes are only my own.  If there are any changes
+#              not my own, incorporate the changes in the new copy, then
+#              retest, then do a diff again.
+# 
+# spws:   (U5) Run the checkin script in the user's directory.
+# 
+#      The checkin script does the following:
+# 
+#       (a) Checks out read-write (locked) copy from RCS (overwriting
+#           the read-only copy) as follows:
+# 
+#                  co  -l  filename
+# 
+#       (b) Copies the updated file from the user's directory to the
+#           ~spws directory (overwriting the read-write copy just
+#           checked out).
+# 
+#       (c) Checks the updated file into RCS, and then checks it out
+#           again as read-only (unlocked) as follows:
+# 
+#                  ci  -u  filename
+# 
+#-------------------------------------------------------------------------------
+
+set filename  = $1
+set directory = $2
+
+if($filename == "") then
+     echo filename argument not set
+     exit
+endif
+
+if($directory == "") then
+     echo ~spws directory argument not set
+     exit
+endif
+
+#-------------------------------------------------------------------------------
+
+    set current = `pwd`
+
+    echo ""
+    echo "----> cd $directory"
+                cd $directory
+
+    echo ""
+    echo "----> co -l $filename"
+    echo ""
+                co -l $filename
+
+    echo ""
+    echo "----> cp $current/$filename ."
+               \cp $current/$filename .
+
+    echo ""
+    echo "----> ci -u $filename"
+    echo ""
+                ci -u $filename
+
+    echo ""
+    echo "----> rlog $filename"
+                rlog $filename
+
+    echo ""
+
+#-------------------------------------------------------------------------------
+

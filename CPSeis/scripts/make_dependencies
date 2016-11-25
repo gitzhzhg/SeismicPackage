@@ -1,0 +1,233 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name   : make_dependencies
+# Written: 1999-12-15   by: Tom Stoeckley
+# Revised: 2003-11-07   by: Tom Stoeckley
+# Purpose: Creates a file containing makefile dependencies for
+#          individual developers, to be used in their own directories.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                            DOCUMENTATION
+#
+# This script creates a file containing dependencies to be included in
+# the makefile used for keeping object code and XML files for fortran90
+# and c and c++ up to date in any SPWS DIRECTORY or in a DEVELOPER'S OWN
+# DIRECTORY.  The file is called makefile.depend and is placed into the
+# current working directory, which should be the source code directory.
+# This file should be included in the user's makefile.
+#
+# This script should be called (with one argument) from a makefile (using
+# target depend) as follows:
+#
+#    depend:
+#         cd $(SRCDIR); $(CFECUSTOMSCRIPTS)/make_dependencies "$(COMMAND)"
+#
+#      where $(SRCDIR)  = source code directory.
+#      where $(COMMAND) = entire compiler command (with -I flags but without
+#                          list of files) which will be used by this script
+#                          to generate C and C++ header file dependencies.
+#
+# This script makes the following temporary files which it then deletes:
+#
+#    ff_tempfile  (list of Fortran-90 source files)
+#    cc_tempfile  (list of C and C++ source files)
+#    pp_tempfile  (g++ compiler command to get C and C++ dependencies)
+#
+#-------------------------------------------------------------------------------
+#                           INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#       CFECUSTOMSCRIPTS    (location of cfecustom scripts)
+#       CFECUSTOMPROGRAMS   (location of cfecustom programs)
+#
+# This script needs the following executables:
+#
+#   $(CFECUSTOMPROGRAMS)/sps_fortran_dependencies (get Fortran dependencies)
+#   $(CFECUSTOMPROGRAMS)/sps_xml_dependencies     (get XML dependencies)
+#   $(CFECUSTOMSCRIPTS)/sps_fix_dependencies    (fix up C and C++ dependencies)
+#
+#------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#       Date      Author     Description
+#       ----      ------     -----------
+# 6.   2003-11-07 Stoeckley  Add -f to #! /bin/csh line.
+# 5.   2003-06-16 Stoeckley  Add ./ in front of pp_tempfile to get the command
+#                             to work on altix.
+# 4.   2003-05-13 Stoeckley  Remove all but one command line argument.
+# 3.   2003-03-18 Stoeckley  Add command line arguments; add xml dependencies;
+#                             remove platform restrictions; change name from
+#                             depend to make_dependencies.
+# 2.   1999-12-15 Goodger    Use correct path names to other scripts.
+# 1.   1999-12-15 Stoeckley  First Version.
+#
+#------------------------------------------------------------------------------
+#</history_doc>
+
+
+##--------------------- verify input argument ---------------------------##
+##--------------------- verify input argument ---------------------------##
+##--------------------- verify input argument ---------------------------##
+
+
+set command  = "$1"
+
+if("$command" == "") then
+     echo command line argument (COMMAND) missing.
+     exit
+endif
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?CFECUSTOMSCRIPTS == 0 || $CFECUSTOMSCRIPTS == "") then
+     echo environment variable CFECUSTOMSCRIPTS not set
+     exit
+endif
+
+if($?CFECUSTOMPROGRAMS == 0 || $CFECUSTOMPROGRAMS == "") then
+     echo environment variable CFECUSTOMPROGRAMS not set
+     exit
+endif
+
+
+##------------------- verify programs and scripts -------------------------##
+##------------------- verify programs and scripts -------------------------##
+##------------------- verify programs and scripts -------------------------##
+
+
+#if(! -f $CFECUSTOMPROGRAMS/sps_fortran_dependencies) then
+#     echo missing $CFECUSTOMPROGRAMS/sps_fortran_dependencies program.
+#     exit
+#endif
+
+#if(! -f $CFECUSTOMPROGRAMS/sps_xml_dependencies) then
+#     echo missing $CFECUSTOMPROGRAMS/sps_xml_dependencies program.
+#exit
+#endif
+
+if(! -f $CFECUSTOMSCRIPTS/sps_fix_dependencies) then
+     echo missing $CFECUSTOMSCRIPTS/sps_fix_dependencies script.
+     exit
+endif
+
+
+##------------------------ get lists of source files ------------------------##
+##------------------------ get lists of source files ------------------------##
+##------------------------ get lists of source files ------------------------##
+
+
+#echo '--> getting lists of fortran90 and c and c++ source files...'
+echo '--> Getting List of fortran90 source files...'
+\ls *.f90 | sed -e 's/*/ /' -e 's/@/ /' >  ff_tempfile
+echo '--> Getting List of c source files...'
+\ls *.c   | sed -e 's/*/ /' -e 's/@/ /' >  cc_tempfile
+echo '--> Getting List of c++ source files...'
+\ls *.cc  | sed -e 's/*/ /' -e 's/@/ /' >> cc_tempfile
+
+
+##----------------------- build fortran dependencies ------------------------##
+##----------------------- build fortran dependencies ------------------------##
+##----------------------- build fortran dependencies ------------------------##
+
+
+echo '--> building fortran90 dependencies...'
+
+echo ' '                                                   >  makefile.depend
+echo '################ makefile.depend ##################' >> makefile.depend
+echo ' '                                                   >> makefile.depend
+echo '############## fortran dependencies ###############' >> makefile.depend
+echo ' '                                                   >> makefile.depend
+
+$CFECUSTOMPROGRAMS/sps_fortran_dependencies  < ff_tempfile >> makefile.depend
+
+
+##----------------------- build xml dependencies ---------------------------##
+##----------------------- build xml dependencies ---------------------------##
+##----------------------- build xml dependencies ---------------------------##
+
+
+echo '--> building XML dependencies...'
+
+echo ' '                                                   >> makefile.depend
+echo '################ xml dependencies #################' >> makefile.depend
+echo ' '                                                   >> makefile.depend
+
+$CFECUSTOMPROGRAMS/sps_xml_dependencies      < ff_tempfile >> makefile.depend
+
+
+##----------------------- assemble compiler command ------------------------##
+##----------------------- assemble compiler command ------------------------##
+##----------------------- assemble compiler command ------------------------##
+
+
+echo '--> assembling compiler command for building c and c++ dependencies...'
+
+echo "$command \"                             >  pp_tempfile
+awk  '{ printf ("%s ",$0) }'    < cc_tempfile >> pp_tempfile
+echo ''                                       >> pp_tempfile
+
+
+##----------------------- build c and c++ dependencies ---------------------##
+##----------------------- build c and c++ dependencies ---------------------##
+##----------------------- build c and c++ dependencies ---------------------##
+
+
+echo '--> building c and c++ dependencies...'
+
+echo ' '                                                   >> makefile.depend
+echo '############# c and c++ dependencies ##############' >> makefile.depend
+echo ' '                                                   >> makefile.depend
+
+chmod u+x pp_tempfile
+./pp_tempfile | $CFECUSTOMSCRIPTS/sps_fix_dependencies     >> makefile.depend
+
+echo ' '                                                   >> makefile.depend
+echo '################ end dependencies #################' >> makefile.depend
+echo ' '                                                   >> makefile.depend
+
+
+##----------------------- finish up and return ------------------------------##
+##----------------------- finish up and return ------------------------------##
+##----------------------- finish up and return ------------------------------##
+
+
+\rm -f ff_tempfile cc_tempfile pp_tempfile
+
+echo '--> finished'
+echo '--> your dependencies are now in a file called makefile.depend'
+
+
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+##------------------------------- end --------------------------------------##
+

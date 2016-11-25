@@ -1,0 +1,606 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="mtfun" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MTFUNPROCESS" title="MTFUN Process" rows="23" columns="84">
+    <Label keyword="COMMENT_MULTIPLETRANSFERFUNCTION" alignment="center">Multiple Transfer Function Process Process</Label>
+    <Label keyword="COMMENT_COMPUTETRANSFERFUNCTIONS" alignment="center">Compute transfer functions between standard traces and sets of "apply" traces.</Label>
+    <Label keyword="LABEL_HDR_TYPE" alignment="left">HDR_TYPE</Label>
+    <Field keyword="HDR_TYPE" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VAL_STAND" alignment="left">VAL_STAND</Label>
+    <Field keyword="VAL_STAND" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_SETS" alignment="left">NUM_SETS</Label>
+    <Field keyword="NUM_SETS" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X</Label>
+    <Field keyword="HDR_X" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT</Label>
+    <Field keyword="X_INIT" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC</Label>
+    <Field keyword="X_INC" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC</Label>
+    <Field keyword="Y_INC" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_OP" alignment="left">LEN_OP</Label>
+    <Field keyword="LEN_OP" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIAG_LOAD" alignment="left">DIAG_LOAD</Label>
+    <Field keyword="DIAG_LOAD" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_DIAGONALLOAD" alignment="center">(Diagonal load)</Label>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END</Label>
+    <Field keyword="TIM_END" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_MIN" alignment="left">WIN_MIN</Label>
+    <Field keyword="WIN_MIN" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_DIAG">Select PATHNAME_DIAG=</Button>
+    <Label keyword="EQLAB_PATHNAME_DIAG" alignment="left">=</Label>
+    <Field keyword="PATHNAME_DIAG" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME_DIAG_INFO" alignment="left"></Label>
+    <Field keyword="PATHNAME_DIAG_INFO" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_MULTIPLETRANSFERFUNCTION" xPos="18" yPos="1" xSize="42" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_COMPUTETRANSFERFUNCTIONS" xPos="1" yPos="2" xSize="78" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TYPE" xPos="8" yPos="4" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TYPE" xPos="17" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VAL_STAND" xPos="28" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VAL_STAND" xPos="38" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_SETS" xPos="8" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_SETS" xPos="17" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_X" xPos="9" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="16" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="38" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="45" yPos="8" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="9" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="16" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="38" yPos="9" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="45" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="9" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="16" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="38" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="45" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_OP" xPos="8" yPos="12" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_OP" xPos="15" yPos="12" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIAG_LOAD" xPos="8" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIAG_LOAD" xPos="18" yPos="14" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_DIAGONALLOAD" xPos="32" yPos="14" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="8" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="16" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_BEG" xPos="33" yPos="16" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="42" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="8" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="16" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="33" yPos="17" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="42" yPos="17" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_MIN" xPos="8" yPos="18" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_MIN" xPos="16" yPos="18" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME_DIAG" xPos="0" yPos="20" xSize="21" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_DIAG" xPos="21" yPos="20" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_DIAG" xPos="22" yPos="20" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_DIAG_INFO" xPos="15" yPos="21" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_DIAG_INFO" xPos="16" yPos="21" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_TYPE">
+      <Tip>Header word labeling trace type (standard or apply).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - HDR_TYPE<br> Header word labeling trace type (standard or apply).</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VAL_STAND">
+      <Tip>Value of HDR_TYPE indicating a standard trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - VAL_STAND<br> Value of HDR_TYPE indicating a standard trace.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ Standard traces are labeled by a value of VAL_STAND in header word HDR_TYPE.
+ Traces with a value of header word HDR_TYPE different from VAL_STAND will be
+ used as apply traces.  Apply traces with different values of HDR_TYPE are
+ used as distinct sets of apply traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_SETS">
+      <Tip>Number of distinct sets of apply traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - NUM_SETS<br> Number of distinct sets of apply traces.</center></b>
+<pre> Default = 1
+ Allowed = int &gt; 0
+ NUM_SETS is the number of distinct sets of apply traces.  Within each bin,
+ MTFUN will generate transfer functions between the standard set of traces and
+ each distinct set of apply traces.  Each distinct set of apply traces has a
+ different value of HDR_TYPE that is NOT equal to VAL_STAND.
+ 
+ IT IS USUALLY MOST CONVENIENT TO SPECIFY JUST ONE SET OF APPLY TRACES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word forfirst arbitrary bin coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - HDR_X<br> Header word forfirst arbitrary bin coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 0 - NWIH
+ HDR_X is the header word for the first arbitrary bin coordinate
+ (typically inline stack bin coordinate).
+ 
+ If HDR_X = 0, then do not use this coordinate.  Either HDR_X or HDR_Y
+ must be greater than zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word for second arbitrary bin coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - HDR_Y<br> Header word for second arbitrary bin coordinate.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ HDR_Y is the header word for the second arbitrary bin coordinate (typically
+ crossline stack bin coordinate).
+ 
+ If HDR_Y = 0, then do not use this coordinate.  Either HDR_X or HDR_Y
+ must be greater than zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>Value of HDR_X at the center of the first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - X_INIT<br> Value of HDR_X at the center of the first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Value of HDR_Y at the center of the first bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - Y_INIT<br> Value of HDR_Y at the center of the first bin.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment of HDR_X values between occupied bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - X_INC<br> Increment of HDR_X values between occupied bins.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment of HDR_Y values between occupied bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - Y_INC<br> Increment of HDR_Y values between occupied bins.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_OP">
+      <Tip>Length of operator, in seconds, for transfer function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - LEN_OP<br> Length of operator, in seconds, for transfer function calculation.</center></b>
+<pre> Default = 0.4
+ Allowed = real &gt; 0.0
+ The operator is centered on zero time (with times running from -LEN_OP/2 to
+ +LEN_OP/2).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIAG_LOAD">
+      <Tip>Diagonal load, in percent, for transfer function calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - DIAG_LOAD<br> Diagonal load, in percent, for transfer function calculation.</center></b>
+<pre> Default = 2.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Top of trace window, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - TIM_BEG<br> Top of trace window, in seconds.</center></b>
+<pre> Default = TSTRT
+ Allowed = real
+ Top of trace window, in seconds, for transfer function calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_BEG">
+      <Tip>Low frequency, in Hz, for time shift and phase shift calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - FREQ_BEG<br> Low frequency, in Hz, for time shift and phase shift calculation.</center></b>
+<pre> Default = 8.0
+ Allowed = real &gt;= 0.0
+ MTFUN calculates the effective time shift and phase shift associated with each
+ transfer function by assuming the phase spectrum to be linear.  FREQ_BEG and
+ FREQ_END are used for this calculation only; no frequency filtering is done.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Bottom of trace window, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - TIM_END<br> Bottom of trace window, in seconds.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TIM_BEG
+ Bottom of trace window, in seconds, for transfer function calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>High frequency, in Hz, for time shift and phase shift calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - FREQ_END<br> High frequency, in Hz, for time shift and phase shift calculation.</center></b>
+<pre> Default = 50.0
+ Allowed = real &gt; FREQ_BEG
+ MTFUN calculates the effective time shift and phase shift associated with each
+ transfer function by assuming the phase spectrum to be linear.  FREQ_BEG and
+ FREQ_END are used for this calculation only; no frequency filtering is done.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_MIN">
+      <Tip>Minimum window length, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - WIN_MIN<br> Minimum window length, in seconds.</center></b>
+<pre> Default = 0.2
+ Allowed = real &gt; 0.0
+ Minimum window length, in seconds, required for transfer function calculation.
+ Within any bin the standard and apply traces must share a live trace interval
+ of at least WIN_MIN seconds, within the specified trace window, or the
+ transfer function calculation will not be made.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_DIAG">
+      <Tip>Choose PATHNAME_DIAG using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - SELECT_PATHNAME_DIAG<br> Choose PATHNAME_DIAG using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_DIAG">
+      <Tip>Pathname for the text file containing diagnostic information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PATHNAME_DIAG<br> Pathname for the text file containing diagnostic information.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ MTFUN will optionally write the information carried in the transfer function
+ trace headers into a diagnostic file whose pathname is PATHNAME_DIAG.
+ 
+ If PATHNAME_DIAG = NONE, then no diagnostic file will be written.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_DIAG_INFO">
+      <Tip>Status of PATHNAME_DIAG.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PATHNAME_DIAG_INFO<br> Status of PATHNAME_DIAG.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mtfun - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="mtfun">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : MTFUN (Multiple Transfer Function Process) [includes former TFUN]
+ Category   : filters
+ Written    : 1995-11-02   by: Donna Vunderink
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Compute transfer functions between standard traces and sets of
+              "apply" traces.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Within each bin, MTFUN calculates a transfer function operator between the
+ set of standard traces and each set of apply traces and outputs the transfer
+ functions as output traces from the process.
+ 
+ 
+ Bins
+ 
+ MTFUN uses a grid of bins defined by the bin parameters (HDR_X, HDR_Y, etc.)
+ and calculates a transfer function operator between the set of standard
+ traces and each set of apply traces.  This calculation is done independently
+ on traces occupying each bin.
+ 
+ 
+ Standard and Apply Traces
+ 
+ MTFUN identifies traces as standard traces that have header word HDR_TYPE set
+ to a value of VAL_STAND (typically 1.0).  Apply traces are identified by
+ having header word HDR_TYPE set to a value NOT equal to VAL_STAND.  Within
+ each bin, all standard traces are composited to a single trace and all apply
+ traces, within each set, are composited to a single trace prior to the
+ transfer function calculation.
+ 
+ It is possible to define more than one set of apply traces - each with its
+ own distinct value of HDR_TYPE.  Transfer functions are calculated between
+ the standard traces and each set of apply traces and all transfer functions
+ are output from the process.  IT IS USUALLY MOST CONVENIENT TO SPECIFY JUST
+ ONE SET OF APPLY TRACES.
+ 
+ 
+ Transfer Functions
+ 
+ We wish to find a convolutional operator of specified length (LEN_OP) such
+ that the apply trace convolved with the operator is as close as possible to
+ the standard trace in the least squares sense.  (This is also known as a
+ Wiener filter calculation.)  This operator is referred to informally as a
+ transfer function.  The transfer functions that MTFUN calculates are passed
+ out as output traces.
+ 
+ 
+ Time Shift and Phase Shift Calculation
+ 
+ For each transfer function calculated, MTFUN calculates an effective
+ equivalent time shift and phase shift.  It takes the phase spectrum, unwraps
+ it and does a least squares linear fit (between the values of FREQ_BEG and
+ FREQ_END).  The slope of the linear fit is used to calculate the time shift
+ and the phase intercept is the phase shift.  These values are put in the
+ transfer function headers and the (optional) diagnostic file.
+ 
+ 
+ Mute Header Words
+ 
+ MTFUN only uses traces samples within the range from the head mute to the tail
+ mute, inclusive.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Input Trace Preparation
+ 
+ Input traces must have the proper value set in HDR_TYPE (using SETWORD) to
+ identify them as standard or apply traces.  Input traces must also be sorted
+ so that all traces belonging to a particular bin are input consecutively.
+ This can be done with TSORT as follows:
+ 
+   TSORT (HDR_PRI = HDR_X, HDR_SEC = HDR_Y, HDR_TERT = HDR_TYPE).
+ 
+ 
+ Transfer Function Header Words
+ 
+ Transfer function operators are passed out of MTFUN as output traces with a
+ header word format as follows:
+ 
+        Header                 Definition
+         Word
+ 
+        1        Sequential trace number
+        2        Top mute (1)
+        3        Sample interval (DT)
+        4        Time of first sample (-LEN_OP/2); this places the operator
+                  center at zero time
+        5        Calculated time shift, in seconds
+        6        Calculated phase shift, in degrees
+        9        Maximum correlation coefficient between standard and apply
+                 traces BEFORE convolving with the operator
+        10       Maximum correlation coefficient between standard and apply
+                 traces AFTER convolving with the operator
+        11       Value of HDR_TYPE for the apply trace set
+        12       Value of HDR_X to identfy bin
+        13       Value of HDR_Y to identfy bin
+        25       LAV of transfer function
+        64       Bottom mute (LEN_OP)
+ 
+ This information is also optionally written to the diagnostic file.
+ 
+ 
+ Processing of Transfer Functions
+ 
+ Apart from the obvious use of convolving with the apply traces, the output
+ transfer functions can also be further processed.  Examples include:
+ 
+        1.  Transfer functions can be selected by quality as based on the
+        correlation coefficients in the headers.
+ 
+        2.  Transfer functions can be adjusted in time by using RTC.
+ 
+        3.  Transfer functions can be composited to reduce the effect of noise.
+ 
+ 
+ Use of Diagnostic File
+ 
+ Information in the transfer function headers is also optionally written to a
+ diagnostic trcio file.  This file can be used to make various diagnostic
+ plots.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 20. 2006-06-20  B. Menger    Removed Unused Variables.
+ 19. 2004-06-08  Selzler      Fixed memory overrun bug, when input NWIH &gt; 64
+ 18. 2002-09-17  Goodger      Use mth module for binning.  mtfun was NOT
+                              adding 1 to the bin calculation as does the
+                              mth_module.
+ 17. 2002-02-14  Selzler      Corrected GUI field length for PATHNAME_DIAG
+                              file selection dialogue.
+ 16. 2001-11-16  Selzler      Increase GUI field length for PATHNAME_DIAG and
+                              add file selection dialogue.
+ 15. 2001-06-27  Selzler      Bug Report #415, TSTRT validation. PRODUCTION.
+ 14. 2001-01-15  Brad Kruse   Bug Report #237, First output trace is dead,
+                              output traces are duplicated.
+ 13. 2001-01-04  Brad Kruse   Bug report #220, no PATHNAME_DIAG file, first
+                              trace is dead, and help on PATHNAME_DIAG is
+                              misleading (file is text, not TRCIO).
+                              Bug report #225, HW10, After Correlation, is
+                              incorrect; documentation incorrectly labels
+                              phase unit, HW6, as 'Hz' which should be
+                              'degrees'
+ 12. 2000-12-11  Brad Kruse   Change name for wrapup flag to SKIP_WRAPUP for
+                              clarity, and slightly change how it is used.
+ 11. 2000-12-11  Brad Kruse   CPS Conversion
+ 10. 1998-11-20 Vunderink  Begin using the f90 compiler.
+  9. 1996-03-12 Vunderink  Fixed an array reuse problem resulting in bad
+                           transfer functions
+  8. 1996-02-27 Vunderink  Changed to hardcode location for "apply" type,
+                           X bin value, and Y bin value header words in
+                           transfer function.
+  7. 1996-02-27 Vunderink  Fixed calculation for maximum STROT traces
+  6. 1996-02-27 Vunderink  Check minimum window length via standard-apply
+                           pair instead of entire bin
+  5. 1996-02-26 Vunderink  Made sure bin number is 0 when HWX or HWY are
+                           set to 0.
+  4. 1996-02-14 Vunderink  Added argument to STROTSI call to pass IPN of
+                           calling process for history-folder processing.
+  3. 1995-11-13 Vunderink  Total the number of "No standard trace",
+                           "No apply trace", and "Not enough data" occurences.
+  2. 1995-11-08 Vunderink  Fixed problem calculating new bins when XINC or
+                           YINC is not 1.  Changed to not output NULL
+                           transfer function traces.  Shorted length of
+                           transfer function traces to OPLEN.  Added
+                           calculation of before and after correlation
+                           coefficients.  Added option to use only one
+                           header word for binning.
+  1. 1995-11-02 Vunderink  Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

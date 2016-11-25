@@ -1,0 +1,462 @@
+!<CPS_v1 type="SCRIPT"/>
+ 
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+ 
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                   Detailed Fortran Coding Standards 
+!  
+! This document contains the standards for writing Fortran code for the
+! Conoco Processing System.
+!  
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                REVISION HISTORY FOR THIS DOCUMENTATION
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  2. 2002-10-25  Stoeckley  Converted to this text document for access by
+!                             the CPSDOC program.
+!  1. 1999-06-14  CIBurch &  Initial version, which is a Microsoft Word
+!                 Stoeckley   document in the Standards for the Improved
+!                             Conoco Seismic Processing System.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+ 
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                       WHAT THIS DOCUMENT COVERS 
+!  
+! The coding standards specified in this document apply to all Fortran
+! code used in the Conoco Processing System.  This code includes the
+! Fortran code in the front-end main program (also called the front-end
+! framework), the back-end main program (also called the back-end framework),
+! and all libraries to which they link.  These libraries include the
+! CPS processes and CPS primitives used in the Conoco Processing System.
+!  
+! The CPS processes (also called processing modules) are defined as
+! the coding units which perform specific functions on seismic traces
+! within the processing system.  These processes must conform to a
+! specific coding style in order to be accessed in a generic manner
+! from the front-end and back-end programs.  These processes can also
+! be called internally from other processes or called from programs
+! outside of the processing system. 
+!  
+! The CPS primitives (also called primitive modules) are defined as
+! all coding units, apart from CPS processes, which are called, directly
+! and indirectly, from processing modules, from other primitives, and
+! from the front-end and back-end main programs.  An individual primitive
+! consists of a collection of routines which perform related functions,
+! or which work together to perform a function.  A primitive might
+! occasionally contain its own data which is accessible by these routines.
+!  
+!-------------------------------------------------------------------------------
+!                  WHAT THIS DOCUMENT DOES NOT COVER 
+!  
+! The coding standards in this document do not apply to code written
+! in languages other than Fortran. 
+!  
+! The coding standards in this document do not apply to Fortran code
+! used in workstation programs associated with the Conoco Processing
+! System unless that code is also used by the front-end or back-end
+! framework, or by CPS processes or primitives. 
+!  
+! There is no attempt in this document to comprehensibly describe and
+! illustrate all Fortran 90 rules and syntax.  Instead, Fortran 90
+! manuals should be consulted for this information. 
+!  
+!-------------------------------------------------------------------------------
+!                       OTHER RELATED DOCUMENTS 
+!  
+! Standards which apply specifically to CPS programs, processes, primitives,
+! and scripts are described in the following templates found in ~sps/templates: 
+!  
+!        process_module_template           program_template
+!        primitive_module_template         auxiliary_fortran_template
+!        primitive_clanguage_template      auxiliary_clanguage_template
+!        header_file_template              script_template
+!  
+! Standards for interfacing to other programming languages are described
+! in the following document found in ~sps/templates:
+!
+!                      mixing_programming_languages
+!
+! More specific information for mixing programming languages can be found
+! in the following templates found in ~sps/templates:
+!  
+!               andrew_wrapper.cc         heidi_wrapper.h
+!               andrew_wrapper.hh         heidi_wrapper.c
+!               andrew_frou.f90           heidi_frou.f90
+!               andrew.f90                heidi.f90
+!
+!               kathy_wrapper.f90         suki.cc
+!               kathy_crou.c              suki_wrapper.f90
+!               kathy.c                   suki_crou.cc
+!               kathy.h                   suki.hh
+!
+! and in the following header file:
+!
+!                           c2f_interface.h
+!  
+!-------------------------------------------------------------------------------
+!                   APPLICATION OF CODING STANDARDS 
+!  
+! In the specific coding standards listed below, the following rules
+! apply: 
+!  
+! 1.  The word "must" means that the recommendation is mandatory. 
+!  
+! 2.  The word "should" means that the recommendation is not mandatory
+!     but is highly recommended. 
+!  
+!-------------------------------------------------------------------------------
+!                 GENERAL FORTRAN CODING REQUIREMENTS 
+!  
+! 1.  All new Fortran code should be written in Fortran 90, complying
+!     with the standards listed in this document. 
+!  
+! 2.  All existing Fortran 77 code should be recompiled with Fortran 90
+!     and brought into compliance with this document as feasible when
+!     the code is updated.  However, it may not be possible to recompile
+!     all existing Fortran 77 code with Fortran 90 if that code is needed
+!     on machines with no Fortran 90 compiler, or if that code is not owned
+!     by the Conoco Processing System.
+!  
+! 3.  Machine and operating system specific code should be avoided whenever
+!     possible.  This might include for example, compiler extensions,
+!     system-dependent subroutine calls, and packing and unpacking operations
+!     depending on word size or formats.  Such code can often be replaced
+!     by Posix compliant or ANSI-standard C and Fortran library routines.
+!     When specific code is required for efficiency or other special needs,
+!     it should be encapsulated within well-documented primitives which
+!     contain conditionally-compiled code so that the same subroutines
+!     can be called regardless of the platform on which the code is running.
+!  
+!-------------------------------------------------------------------------------
+!             FILE STRUCTURE FOR PROCESSES AND PRIMITIVES 
+!  
+! 1.  The Fortran code for an individual processing module or primitive
+!     must reside in a single source file. 
+!        
+! 2.  A single source file must contain the code for only one process
+!     or primitive. 
+!  
+! 3.  All of the source code for a process or primitive (in other words,
+!     all functions, subroutines, and data within a process or primitive)
+!     should be placed into a Fortran 90 module.  This simplifies the access
+!     to common data from all routines in the module.  This also allows
+!     the interface to each routine to be known to the compiler, so that
+!     the compiler can verify proper argument lists and allow the use of
+!     optional arguments without any extra effort by the programmer. 
+!  
+! 4.  If a routine cannot be placed into a module (for example, if
+!     it is to be callable from Fortran 77 or C or C++), then it can be
+!     kept outside of the module, but retained in the same source file.
+!     In this case, an explicit interface block should be written and
+!     put into the module to allow the compiler to verify proper argument
+!     lists when the routine is called from Fortran 90. 
+!  
+!-------------------------------------------------------------------------------
+!                          NAMING STANDARDS 
+!  
+! 1.  The name of the process or primitive must consist only of alphanumeric
+!     characters.  Spaces, underscores, and other special characters must
+!     not be used.
+!  
+! 2.  The name of the source file for an individual processing module
+!     or primitive must be the name of the process or primitive, followed
+!     by the appropriate extension. 
+!  
+! 3. The extension on a Fortran source file must be: 
+!  
+!         .f90  for Fortran 90 free-form code   (recommended)
+!         .f    for Fortran 90 fixed-form code  (to be avoided)
+!         .f77  for Fortran 77 code             (to be avoided if possible)
+!  
+! 4.  The name of the module containing a process or primitive must
+!     begin with the name of the process or primitive plus the suffix
+!     "_module" added. 
+!  
+! 5.  The name of the main data structure associated with a specific
+!     process or primitive must begin with the name of the process or
+!     primitive with the suffix "_struct" added. 
+!  
+! 6.  The names of all functions, subroutines, additional modules,
+!     and additional data structures within a process or primitive must
+!     begin with the name of the process or primitive, followed by an
+!     underscore, which is then followed by additional alphanumeric
+!     characters and possibly more underscores. 
+!  
+! 7.  Variable and subroutine names should be meaningful.  Unrecognizable
+!     abbreviations should be avoided.  Meaningful names are an example
+!     of code self-documentation.  If a name is made up of more than one
+!     word, underscores should normally be used between the words. 
+!  
+!-------------------------------------------------------------------------------
+!                 STANDARDS FOR INTERNAL DOCUMENTATION  
+!  
+! Internal documentation (comments) within code units should conform
+! to the Standards for Internal Documentation, discussed in section
+! 4.1 of the main part of this document.  
+!  
+?????????????????????????????????????????????????????????
+
+!-------------------------------------------------------------------------------
+!                      CODE APPEARANCE STANDARDS 
+!  
+! 1.  Free-form formatting should be used, but no more than 80 characters
+!     should be used in any one line of code.  The only exception is that
+!     lines in the gui_def section of a process (or primitive) module can
+!     contain more than 80 characters.
+!  
+! 2.  Code may be written in either upper case or lower case, or a
+!     mixture.  However, the programmer should exercise consistency to
+!     improve readability.  Normally, lower case is recommended except 
+!     for defined constants, which are preferably upper case.
+!  
+! 3.  Code within blocks should be indented for clarity.  Such blocks
+!     include subroutines, functions, SELECT CASE blocks, DO loops, IF
+!     blocks, derived type (data structure) definitions, modules, interface
+!     blocks, etcetera. 
+!  
+! 4.  The tab character must not be used, since the appearance of the
+!     code (its alignment) may not be portable. 
+!  
+! 5.  Similarly-structured code statements should be aligned for clarity,
+!     by using blank space to line up related code into columns.  Here
+!     are some examples: (a) Multiple assignment statements can be aligned
+!     so that the equal signs all fall in the same column. (b) Multiple
+!     calls to subroutines can be aligned so that the argument lists all
+!     begin in the same column. (c) Type statements can be aligned so that
+!     the double colons (::) fall in the same columns. (d) Comments after
+!     the code on successive lines can be aligned to start in the same
+!     column. 
+!  
+! 6.  For readability, blank space should be used between variables
+!     and operators. 
+!  
+! 7.  Comments in the code must be preceded by an exclamation point.
+!     Such comments should normally start in column one, or follow
+!     the code on a line.  Examples of appropriate comments are these:
+!     (a) A section of comments describing the purpose of a following
+!     subroutine or block of code. (b) A comment to the right of each
+!     variable declaration describing the variable. 
+!  
+! 8.  In most cases, only a single statement should reside on a line,
+!     except when the code is more readable with multiple statements on
+!     the same line.  For example, CASE statements might be easier to read
+!     if each CASE statement and its corresponding code resided on the
+!     same line, with all the CASE statements aligned vertically, as follows:
+!  
+!         select case (glotch) 
+!           case     (1);  hello = 3 * goodby + good / riddance 
+!           case     (2);  hello = 0 
+!           case     (3);  hello = 10 * hello 
+!           case default;  print *, 'Whoops!' 
+!         end select 
+!  
+!-------------------------------------------------------------------------------
+!                        UNDESIRABLE CONSTRUCTS 
+!  
+! 1.  Alternate returns must not be used, except when interfacing with
+!     existing code which contains alternate returns.  Error flags should
+!     be used instead. 
+!  
+! 2.  Subroutine ENTRY statements must not be used.  Separate subroutines
+!     should be used instead.  If the subroutines require access to the
+!     same data, the subroutines and the data should be placed into a module.
+!  
+! 3.  The NUMARG function must never be used to determine the number of
+!     arguments passed into the subroutine.  Fortran 90 optional argument
+!     capabilities must be used instead. 
+!  
+! 4.  The LOC function (and variations thereof) must not be used. 
+!     It should not be necessary within Fortran 90 to obtain the address
+!     of a variable in this manner. 
+!  
+! 5.  Assigned and computed GO TO statements must not be used.  The
+!     SELECT CASE construct can be used instead. 
+!  
+! 6.  Arithmetic IF statements must not be used.  Logical IF statements
+!     and logical IF blocks should be used instead. 
+!  
+! 7.  The END= and ERR= constructs in I/O OPEN, INQUIRE, CLOSE, READ,
+!     and WRITE statements should not be used, since these are similar
+!     to the use of alternate returns to a label.  The IOSTAT construct
+!     should be used instead. 
+!  
+! 8.  Hollerith variables must not be used.  Character variables must
+!     be used instead.  For blocks of data containing mixed data types,
+!     the Fortran 90 TRANSFER function can be used for facilitating conversion
+!     between types.  But since the TRANSFER function often contains bugs,
+!     its use should be minimized.
+!  
+!-------------------------------------------------------------------------------
+!                         REQUIRED CONSTRUCTS 
+! 
+! 1.  The IMPLICIT NONE construct must always be used.  This ensures
+!     that all variables are explicitly declared and hence documented.
+!     It also allows the compiler to detect typographical errors. 
+! 
+! 2.  The double colon (::) syntax should be used for all variable
+!     declarations, even when the compiler does not require this. 
+! 
+! 3.  The INTENT(IN), INTENT(OUT), and INTENT(INOUT) constructs must
+!     be used for all subroutine and function arguments (except for
+!     pointer arguments which cannot have these constructs). 
+! 
+! 4.  The logical comparison operators >, >=, ==, <, <=, and /= should
+!     be used instead of the old .gt., .ge., .eq., .lt., .le., and .ne.
+!     operators. 
+! 
+! 5.  The DO ... END DO syntax must be used for DO-loops instead of
+!     the syntax which uses a label. 
+!  
+!-------------------------------------------------------------------------------
+!                          MEMORY MANAGEMENT 
+! 
+! 1.  Fortran 90 memory management features must be used instead of
+!     other methods, which include use of segmented parts of common blocks,
+!     non-ANSI pointers, or storing pointers passed from C or C++ in integer
+!     variables.  Fortran 90 memory management features include automatic
+!     arrays, pointer arrays, allocable arrays, and pointers to derived
+!     types (data structures). 
+! 
+! 2.  Automatic arrays should be used instead of explicitly-allocated
+!     memory when feasible. 
+! 
+! 3.  When memory is explicitly allocated with the ALLOCATE statement,
+!     it must also be explicitly deallocated with DEALLOCATE.  The success
+!     of dynamic memory allocation and deallocation should be tested by
+!     using the optional arguments to ALLOCATE and DEALLOCATE. 
+!  
+! 4.  Pointer variables must be nullified before first use, unless the first
+!     use is a memory allocation or a reference using the => assignment.
+!
+!-------------------------------------------------------------------------------
+!                        RECOMMENDED PRACTICES 
+! 
+! 1.  Common blocks should be replaced by data within modules.  Data
+!     structures should be used when multiple copies of a set of data,
+!     such as multiple copies of the contents of a common block, are needed.
+!  
+! 2.  The use of GO TO statements and labels should be minimized. 
+!     When feasible, logical IF blocks, CYCLE statements, EXIT statements,
+!     DO WHILE statements, and SELECT CASE statements should be used instead.
+! 
+! 3.  Although allowed by Fortran 90, the use of internal subroutines
+!     (i.e. subroutines included inside other subroutines) seems like an
+!     unnecessary coding complication and is therefore not recommended
+!     (at least until an important use is recognized from experience).
+!     Instead, since a processing module or primitive resides within a
+!     Fortran 90 module, any subroutines needed only by the module and
+!     not needed from outside the module should be made PRIVATE. 
+! 
+! 4.  EQUIVALENCE statements should be replaced where feasible by the
+!     use of the Fortran 90 TRANSFER function to facilitate conversion
+!     between data types. 
+!  
+! 5.  Special constant values should be assigned to variables ("named
+!     constants") with the PARAMETER attribute.  All references to these
+!     constant values should be to the named constants rather than to the
+!     numerical values themselves.  These named constants can refer to
+!     any type of variable such as real, integer, double precision, complex,
+!     logical, character, and arrays and derived types. 
+! 
+! 6.  Logical variables should be used instead of integer or character
+!     variables to store true/false values. 
+!  
+! 7.  Recursive routines should generally not be used because they
+!     tend to degrade efficiency. 
+! 
+! 8.  When new operators are desired, new ones should generally be
+!     defined instead of overloading existing operators, except when the
+!     functionality of the operator very clearly mimics the behavior of
+!     an existing operator. 
+!  
+! 9.  The use of the KIND construct may be an important tool for improving
+!     portability between 32-bit and 64-bit platforms, so that the required
+!     variable precision can be attained on 32-bit platforms without wasting
+!     memory on 64-bit platforms.  However, the procedure is somewhat
+!     cumbersome and there is no guarantee that the required precision or
+!     flexibility exists on a given platform.  Here, however, is a procedure
+!     that might be followed:  A module can be written which defines parameters
+!     such as the following: 
+!  
+!         module precision_module 
+!           integer,parameter :: single = selected_real_kind( 6, 50) 
+!           integer,parameter :: double = selected_real_kind(12,150) 
+!         end module precision_module 
+!  
+!     Then in code for which you need a double precision variable: 
+!  
+!         use precision_module 
+!         real(kind=double) :: glotch 
+!  
+!     The variable GLOTCH might become double precision on a 32-bit machine
+!     and single precision on a 64-bit machine. 
+! 
+!     Because of the cumbersome nature of the KIND construct, and because
+!     higher precision requests may not be portable, it is recommended
+!     that the KIND construct not be used, except for possible special
+!     circumstances or unless experience dictates otherwise.  The older
+!     double precision variable type can be used when needed.
+!
+! 10. When variables are declared, everything relating to an individual
+!     variable should be included in a single type statement, rather than
+!     referring to the same variable in several statements.  Also, the
+!     DIMENSION statement should not be used.  For example, instead of
+!     this: 
+!  
+!         real pi,hello,goodby 
+!         parameter (pi = 3.14159) 
+!         dimension hello(200) 
+!         integer,dimension(5,5) :: array 
+!         save hello 
+!         data goodby/1.0/ 
+!  
+!     do this: 
+!  
+!         real,parameter :: pi = 3.14159 
+!         real,save      :: hello(200) 
+!         real,save      :: goodby = 1.0 
+!         integer        :: array(5,5) 
+!  
+!     or this: 
+!  
+!         real,parameter :: pi = 3.14159 
+!         real,save      :: hello(200), goodby = 1.0 
+!         integer        :: array(5,5) 
+!  
+! 11. Named constants should normally be used for the length of character
+!     variables and constant array dimensions instead of hard-wired constants,
+!     particularly when the constant appears more than once or might be
+!     changed in the future.  Named constants should also be used for special
+!     physical or mathematical constants.  Examples: 
+!  
+!         integer,parameter :: NCHAR = 5 
+!         integer,parameter :: NBUF = 80 
+!         character(NCHAR)  :: buffer(NBUF) 
+!         real,parameter    :: PI = 3.14159 
+! 
+! 12. Named constants for physical and mathematical constants, and
+!     various other enumerated quantities, should be placed in a special
+!     primitive module for this purpose, and added to as required. 
+!  
+!-------------------------------------------------------------------------------
+!</descript_doc>
+

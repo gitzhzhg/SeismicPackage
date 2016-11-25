@@ -1,0 +1,25 @@
+#!/bin/bash
+# build all of cpseis for a particular platform.
+LOGFILE=~/install_cpseis.log
+trap "EXIT=2;exitnow" 1 2 3 4 5 6 9 11 12 15
+rm -f $LOGFILE.pipe
+mknod $LOGFILE.pipe p
+exitnow() {
+	if [ "$EXIT" == "0" ] ; then
+		echo "Normal exit: Hit return to exit.  There is a log file in $LOGFILE."
+		rm -f $LOGFILE.pipe
+		exit $EXIT
+	fi
+	echo "Error detected.  Hit return to exit. There is a log file in $LOGFILE."
+	read prompt
+	rm -f $LOGFILE.pipe
+	exit $EXIT
+}
+export CPSEIS_INSTALLATION_CALLED_ME=1
+cat $LOGFILE.pipe | tee $LOGFILE &
+if (! ./install_cpseis.sh &>$LOGFILE.pipe ) ; then
+	EXIT=1
+	exitnow
+fi
+EXIT=0
+exitnow

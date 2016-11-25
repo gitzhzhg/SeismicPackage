@@ -1,0 +1,38 @@
+#!/bin/bash
+# provide information about the cpseis environment
+echo $CPSEIS_ARCH | awk 'BEGIN{FS="_"}{
+        if (NF==4) {
+                printf("Cpseis Arch.\t=%s_%s\nCpseis Compiler\t=%s\nCpseis Mpi\t=%s\n",$1,$2,$3,$4);
+        } 
+        if (NF==3) {
+                printf("Cpseis Arch.\t=%s\nCpseis Compiler\t=%s\nCpseis Mpi\t=%s\n",$1,$2,$3);
+        } 
+        if (NF <3 || NF > 4) {
+                printf("Cpseis Architecture unknown. %s\n",$0);
+        }
+        }'
+if [ -z $CPSEIS_INSTALL_DIR ] ; then
+        echo "CPSEIS_INSTALL_DIR is not defined"
+else
+        echo "Installation is located at $CPSEIS_INSTALL_DIR"
+fi
+if ( which icps &>/dev/null ) ; then
+        if (icps $CPSEIS_INSTALL_DIR/sample_work_files/tiny.wrk >/dev/null ) ; then
+                echo "icps passes installation test"
+                rm %HISTORY_RECORDS
+        else
+                echo "icps has problem passing installation test"
+        fi
+else
+        echo "The icps engine was not found."
+fi
+if (which cbyt &>/dev/null ) ; then
+        echo "The cbyt viewer was found"
+else
+        echo "The cbyt viewer was not found."
+fi
+if (which va &>/dev/null ) ; then
+        echo "The va  package was found"
+else
+        echo "The va  package was not found."
+fi

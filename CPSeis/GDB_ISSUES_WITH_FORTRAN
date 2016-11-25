@@ -1,0 +1,35 @@
+                   GDB_ISSUES_WITH_FORTRAN
+
+A program was written to test the fact that gdb claims that Fortran
+subroutines do not contain line number information, even though they were
+compiled with the -g option.  The program called a C++ wrapper around a
+version of XP which contained an additional CREATE subroutine which does
+not reside in the xp_module module.  A skeleton of that additional CREATE
+subroutine is shown below.  The program (which has subsequently been thrown
+away) calls that new create routine, which in turn calls the original create
+routine.
+
+The gdb debugger had no trouble displaying the code and line numbers when
+stepping through the subroutine shown below (XP_CREATE_OUTSIDE_MODULE),
+but it could not display the code and line numbers in the original create
+routine (XP_CREATE) which resides inside the module.  Both subroutines resided
+in the same source file.  In addition, gdb would always step into subroutines
+inside the XP_CREATE routine even when the "next" command was used, presumably
+because it could not determine that it was doing so.  Only the names of the
+subroutines (as seen by a linker) would be displayed.
+
+So it turns out that the Fortran subroutines do contain line number information,
+but only if the subroutines are not within a Fortran90 module.  Therefore, the
+subroutine XP_CREATE_OUTSIDE_MODULE (below) contains line number information,
+but the subroutine XP_CREATE (which to the linker is XP_MODULE_MP_XP_CREATE_)
+does not.  Or if it does, gdb cannot decipher the debug information.
+
+      subroutine XP_CREATE_OUTSIDE_MODULE (obj)
+      use xp_module
+      implicit none
+      type(xp_struct),pointer :: obj       ! arguments
+
+      call XP_CREATE (obj)
+
+      end subroutine XP_CREATE_OUTSIDE_MODULE
+

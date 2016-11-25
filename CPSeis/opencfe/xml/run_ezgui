@@ -1,0 +1,29 @@
+#!/bin/bash
+
+##------------------------------- run_ezgui ------------------------------------##
+##------------------------------- run_ezgui ------------------------------------##
+##------------------------------- run_ezgui ------------------------------------##
+
+# Simply type the following in the $CPSEIS_HOME/opencfe/xml directory:
+#
+#                      ./run_ezgui xxxx
+#
+# where xxxx is the CPSeis module name (name of the .f90 file without the file extension).
+#
+# An xml file with the extension .xml_new will be created.
+# You should rename this file with the extension .xml when you are satisfied with it.
+
+cpseisname=$1
+
+$CPSEIS_INSTALL_DIR/platforms/$CPSEIS_ARCH/bin/ezgui -I $CPSEIS_HOME/src -I $CPSEIS_HOME/etc <<EOF
+1
+$CPSEIS_INSTALL_DIR/src/$cpseisname.f90
+5
+2
+$cpseisname.xml_new
+0
+EOF
+
+##--------------------------------- end -------------------------------------##
+##--------------------------------- end -------------------------------------##
+##--------------------------------- end -------------------------------------##

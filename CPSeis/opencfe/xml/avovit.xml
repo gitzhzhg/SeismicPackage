@@ -1,0 +1,980 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="avovit" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="GENERAL" title="General" rows="24" columns="120">
+    <Label keyword="COMMENT_GENERALPARAMETERS" alignment="center">General Parameters</Label>
+    <Border keyword="BORDER1" title="General"/>
+    <Label keyword="LABEL_NUMBEROFITERATIONS" alignment="left">Number of Iterations =</Label>
+    <Field keyword="ITER_CNT" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXIMUMCDPSPERLINE" alignment="left">Maximum CDPs per Line =</Label>
+    <Field keyword="NCDP_MAX" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HEADERWORDOFPRIMARYSORTCOO" alignment="left">Header Word of Primary Sort Coord. =</Label>
+    <Field keyword="ILIN_HDR" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HEADERWORDOFSECONDARYSORTC" alignment="left">Header Word of Secondary Sort Coord. =</Label>
+    <Field keyword="XLIN_HDR" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STARTOFWINDOW" alignment="left">Start of Window =</Label>
+    <Field keyword="STIM_WIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ENDOFWINDOW" alignment="left">End of Window =</Label>
+    <Field keyword="ETIM_WIN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AVELSMOOTHINGLENGTH" alignment="left">AVEL Smoothing Length =</Label>
+    <Field keyword="SMTH_LEN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_GENERALPARAMETERS" xPos="26" yPos="0" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="3" yPos="2" xSize="116" ySize="9"/>
+     <Constraints component="LABEL_NUMBEROFITERATIONS" xPos="5" yPos="3" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ITER_CNT" xPos="45" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXIMUMCDPSPERLINE" xPos="5" yPos="4" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NCDP_MAX" xPos="45" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HEADERWORDOFPRIMARYSORTCOO" xPos="5" yPos="5" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ILIN_HDR" xPos="45" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HEADERWORDOFSECONDARYSORTC" xPos="5" yPos="6" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="XLIN_HDR" xPos="45" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_STARTOFWINDOW" xPos="5" yPos="7" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STIM_WIN" xPos="45" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ENDOFWINDOW" xPos="5" yPos="8" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ETIM_WIN" xPos="45" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AVELSMOOTHINGLENGTH" xPos="5" yPos="9" xSize="40" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMTH_LEN" xPos="45" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="ITER_CNT">
+      <Tip>Number of Iterations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - ITER_CNT<br> Number of Iterations.</center></b>
+<pre> Default = 1
+ Allowed = greater or equal to 1, less than or equal to 10
+ Enter the number of velocity iterations (between 1 and 10).
+ 
+ The number of iterations is important.  Run time will increase with
+ increasing iterations.  Too many iterations can yield unstable behavior.
+ Run time increases linearly with increasing number of iterations assuming
+ no other parameter changes.  Total run time can be estimated by running
+ one iteration and checking elapsed time.  Then just multiply by the
+ number of iterations desired to get an estimate of total run time.
+ 
+ Output trace #3 (AB*) is a QC trace that can be used to establish the
+ appropriate number of iterations.
+ 
+ This QC trace is sometimes referred to as the residual velocity
+ indicator (RVI).  This trace is the imaginary part of AB*, where
+ A = Ar + iAi, B* = Br + iBi.  Ar and Br are the intercept and gradient
+ traces of the real data.  Ai and Bi are their respective Hilbert
+ transforms.
+ 
+ The point at which the values of this trace start bouncing around is
+ indicative of the maximum number of iterations that should be used.  The
+ Q and center frequency settings generally have greater impact on the
+ stability of the solution.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NCDP_MAX">
+      <Tip>Maximum number of CDPs per line.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - NCDP_MAX<br> Maximum number of CDPs per line.</center></b>
+<pre> Default = 500
+ Allowed = greater than 0, less than 20000
+ Maximum number of CDPs per line.
+ 
+ Job will abort if AVOVIT encounters more CDP's in a line than specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ILIN_HDR">
+      <Tip>Header location of primary sort coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - ILIN_HDR<br> Header location of primary sort coordinate.</center></b>
+<pre> Default = 8
+ Allowed = any header word
+ 
+ Primary sort header (changes slowly) designating a single line.
+ Primary sort header should be a different whole number for each
+ distinct input line.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="XLIN_HDR">
+      <Tip>Header location of secondary sort coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - XLIN_HDR<br> Header location of secondary sort coordinate.</center></b>
+<pre> Default = 7
+ Allowed = any header word
+ 
+ Secondary sort header (changes rapidly) designating CMP gathers
+ within a single line.
+ Secondary sort header should be a different whole number for each
+ distinct CMP gather.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STIM_WIN">
+      <Tip>Start time of analysis window (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - STIM_WIN<br> Start time of analysis window (sec).</center></b>
+<pre> Default = 0
+ Allowed = greater than or equal to 0, less than or equal to 99
+ Start time of analysis window (sec).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ETIM_WIN">
+      <Tip>End time of analysis window (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - ETIM_WIN<br> End time of analysis window (sec).</center></b>
+<pre> Default = 0
+ Allowed = greater than or equal to 0, less than or equal to 99
+ End time of analysis window (sec).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMTH_LEN">
+      <Tip>AVEL smoothing length (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SMTH_LEN<br> AVEL smoothing length (sec).</center></b>
+<pre> Default = 0.05
+ Allowed = greater than or equal to 0.0, less than or equal to 5.0
+ AVEL smoothing length (sec).
+ 
+ This smoother is applied to the stacking "sloths", which are 1/(V**2).
+ Smoothed stacking sloths (or velocities) are essential when computing
+ interval velocities which are used in the curved ray-path option.
+ 
+ These smoothed sloths are used to moveout the data prior to computing
+ the residual velocity indicator(RVI). This happens every iteration.
+ The revised velocities of each iteration are smoothed again and it is
+ the smoothed velocity function which is iterated.
+ 
+ The RVI is one of the QC traces output by AVOVIT. This trace is the
+ imaginary part of AB*, where A = Ar + iAi, B* = Br + iBi.  Ar and Br
+ are the intercept and gradient traces of the real data.  Ai and Bi
+ are their respective Hilbert transforms.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="AVOANDVELANALYSIS" title="AVO and Vel. Analysis" rows="24" columns="120">
+    <Label keyword="COMMENT_AVOANDVELOCITYANALYSISPA" alignment="center">AVO and Velocity Analysis Parameters</Label>
+    <Border keyword="BORDER2" title="AVO and Velocity Analysis"/>
+    <Button keyword="SELECT_SVELNAME">Select Stacking Velocity File =</Button>
+    <Label keyword="EQLAB_SVELNAME" alignment="left">=</Label>
+    <Field keyword="SVELNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SVELNAME_INFO" alignment="left">=</Label>
+    <Field keyword="SVELNAME_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_USECURVEDRAYPATHS" alignment="left">Use Curved Raypaths =</Label>
+    <Field keyword="INCR_OPT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USEINTERVALVELOCITIESFORRA" alignment="left">Use Interval Velocities for Raypaths =</Label>
+    <Field keyword="USE_IVEL" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_IVELNAME">Select Interval Velocity File =</Button>
+    <Label keyword="EQLAB_IVELNAME" alignment="left">=</Label>
+    <Field keyword="IVELNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_IVELNAME_INFO" alignment="left">=</Label>
+    <Field keyword="IVELNAME_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_MAXIMUMINCIDENCEANGLE" alignment="left">Maximum Incidence Angle =</Label>
+    <Field keyword="ANGL_MAX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_COMPUTEAVERAGEVELOCITYFUNC" alignment="left">Compute Average Velocity Function for Angle Calc. =</Label>
+    <Field keyword="AVF_COMP" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SMOOTHINGLENGTHFORAVERAGEV" alignment="left">Smoothing Length for Average Velocity Function =</Label>
+    <Field keyword="AVF_SLEN" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WAVELETTYPE" alignment="left">Wavelet Type =</Label>
+    <Field keyword="FLT_TYPE" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RICKERWAVELETFREQUENCY" alignment="left">Ricker Wavelet Frequency =</Label>
+    <Field keyword="RIC_FREQ" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BANDPASSFILTERFREQUENCIES" alignment="left">Bandpass Filter Frequencies =</Label>
+    <Field keyword="BP_FREQS" type="string" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_METHODOFCOMPUTINGAB" alignment="left">Method of Computing A,B =</Label>
+    <Field keyword="METHODAB" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_AVOANDVELOCITYANALYSISPA" xPos="18" yPos="0" xSize="36" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="3" yPos="2" xSize="116" ySize="15"/>
+     <Constraints component="SELECT_SVELNAME" xPos="5" yPos="3" xSize="31" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_SVELNAME" xPos="36" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SVELNAME" xPos="37" yPos="3" xSize="71" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SVELNAME_INFO" xPos="36" yPos="4" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SVELNAME_INFO" xPos="37" yPos="4" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_USECURVEDRAYPATHS" xPos="5" yPos="5" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INCR_OPT" xPos="58" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_USEINTERVALVELOCITIESFORRA" xPos="5" yPos="6" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USE_IVEL" xPos="58" yPos="6" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_IVELNAME" xPos="5" yPos="7" xSize="31" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_IVELNAME" xPos="36" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVELNAME" xPos="37" yPos="7" xSize="71" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_IVELNAME_INFO" xPos="36" yPos="8" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVELNAME_INFO" xPos="37" yPos="8" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXIMUMINCIDENCEANGLE" xPos="5" yPos="9" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ANGL_MAX" xPos="58" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_COMPUTEAVERAGEVELOCITYFUNC" xPos="5" yPos="10" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AVF_COMP" xPos="58" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_SMOOTHINGLENGTHFORAVERAGEV" xPos="5" yPos="11" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AVF_SLEN" xPos="58" yPos="11" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WAVELETTYPE" xPos="5" yPos="12" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FLT_TYPE" xPos="58" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RICKERWAVELETFREQUENCY" xPos="5" yPos="13" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RIC_FREQ" xPos="58" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BANDPASSFILTERFREQUENCIES" xPos="5" yPos="14" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BP_FREQS" xPos="58" yPos="14" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_METHODOFCOMPUTINGAB" xPos="5" yPos="15" xSize="53" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHODAB" xPos="58" yPos="15" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_SVELNAME">
+      <Tip>Selection dialog for velocity files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SELECT_SVELNAME<br> Selection dialog for velocity files.</center></b>
+<pre> Default = N/A
+ Allowed = N/A
+ Selection dialog for velocity files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SVELNAME">
+      <Tip>Name of file containing stacking velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SVELNAME<br> Name of file containing stacking velocities.</center></b>
+<pre> Default = none
+ Allowed = any velocity file name
+ Name of file containing stacking velocities.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SVELNAME_INFO">
+      <Tip>Status of SVELNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SVELNAME_INFO<br> Status of SVELNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="INCR_OPT">
+      <Tip>Use curved raypaths?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - INCR_OPT<br> Use curved raypaths?</center></b>
+<pre> Default = NO
+ Allowed = NO, YES
+ Use curved raypaths? If 'YES', this causes AVO to be done with respect to
+ true incidence angles instead of straight ray angles. Strongly affected
+ by the length of the stacking velocity smoothing filter.
+ 
+ The smoother is applied to the stacking "sloths", which are 1/(V**2).
+ Smoothed stacking sloths (or velocities) are essential when computing
+ interval velocities which are used in the curved ray-path option.
+ 
+ The smoothed sloths are used to moveout the data prior to computing
+ the residual velocity indicator(RVI). This happens every iteration.
+ The revised velocities of each iteration are smoothed again and it is
+ the smoothed velocity function which is iterated.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_IVEL">
+      <Tip>Use interval velocities for raypath calculation?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - USE_IVEL<br> Use interval velocities for raypath calculation?</center></b>
+<pre> Default = NO
+ Allowed = NO, YES
+ Use interval velocities for raypath calculation?
+ 'YES', indicates that interval velocities independent of
+ the revised stacking velocities will be used in raypath
+ calculations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_IVELNAME">
+      <Tip>Selection dialog for velocity files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SELECT_IVELNAME<br> Selection dialog for velocity files.</center></b>
+<pre> Default = N/A
+ Allowed = N/A
+ Selection dialog for velocity files.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVELNAME">
+      <Tip>Name of file containing interval velocities.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - IVELNAME<br> Name of file containing interval velocities.</center></b>
+<pre> Default = none
+ Allowed = any velocity file name.
+ Name of file containing interval velocities.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVELNAME_INFO">
+      <Tip>Status of IVELNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - IVELNAME_INFO<br> Status of IVELNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="ANGL_MAX">
+      <Tip>Maximum incidence angle for AVO (degrees).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - ANGL_MAX<br> Maximum incidence angle for AVO (degrees).</center></b>
+<pre> Default = 40
+ Allowed = greater than or equal to 0, less than or equal to 90
+ Maximum incidence angle for AVO (degrees).
+ 
+ This parameter can be used to "mute" the data.  It should not look at data
+ beyond the angle set with this parameter.  If you do not want further muting
+ of the data, then set the angle to a large angle like 60 degrees.  Ideally,
+ you should mute your input data prior to AVOVIT and then use a large enough
+ angle so that no further muting occurs in the algorithm.
+ 
+ Note that AVOVIT calls the NMO module to apply the 2nd order velocity
+ correction.  A Doppler Mute = 1.7 is used by default and this number is
+ typically around 35 degrees.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AVF_COMP">
+      <Tip>Compute Single Average Velocity Function for Angle Calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - AVF_COMP<br> Compute Single Average Velocity Function for Angle Calculations.</center></b>
+<pre> Default = NO
+ Allowed = YES or NO
+ The primary purpose of this option is to provide the flexibility to
+ compute a consistent angle at each CDP gather location so that a
+ consistent "mute" will be defined at each CDP location.  If you have
+ already muted your data prior to AVOVIT and are setting the Max Incidence
+ Angle parameter to a large number to be sure to include all data, then
+ this option will have no affect.
+ 
+ If this option is set NO, the angle calculation is done at each velocity
+ location, and the offset limits for each panel are linearly interpolated
+ for intermediate locations.  The intent of the using the NO option is to
+ be able to accommodate a SLOWLY varying water depth.  It is up to you to
+ put in functions that have a smooth lateral variation. It is NOT recommended
+ that the NO option be used with raw stacking velocities.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AVF_SLEN">
+      <Tip>Smoothing Length for Average Interval Velocity Function (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - AVF_SLEN<br> Smoothing Length for Average Interval Velocity Function (sec).</center></b>
+<pre> Default = 0.2
+ Allowed = and value greater than or equal to 0.0
+ Length of running average smoothing for interval velocity functions
+ in seconds. If the smoothing length = 0.0, then no smoothing is done.
+ 
+ Normally some smoothing is required to avoid jagged velocity contours.
+ Typical values of the smoothing length should be at least as great as the
+ vertical sampling interval of your velocity functions.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FLT_TYPE">
+      <Tip>Type of filter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - FLT_TYPE<br> Type of filter.</center></b>
+<pre> Default = RICKER
+ Allowed = RICKER or BANDPASS
+ Select the desired type of filter, Ricker or Bandpass.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RIC_FREQ">
+      <Tip>Ricker center frequency (Hz).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - RIC_FREQ<br> Ricker center frequency (Hz).</center></b>
+<pre> Default = 30
+ Allowed = greater than or equal to 5, less than or equal to 50
+ Ricker center frequency (Hz) for NMO de-stretching.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BP_FREQS">
+      <Tip>Bandpass frequencies: F1(0%)/F2(100%)/F3(100%)/F4(0%).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - BP_FREQS<br> Bandpass frequencies: F1(0%)/F2(100%)/F3(100%)/F4(0%).</center></b>
+<pre> Default = 8/12.5/40/50
+ Allowed = greater than or equal to 0
+ Enter the four corner frequencies: F1(0%)/F2(100%)/F3(100%)/F4(0%).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHODAB">
+      <Tip>Method of computing A and B.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - METHODAB<br> Method of computing A and B.</center></b>
+<pre> Default = 2ND-ORDER
+ Allowed = 4TH-ORDER, 2ND-ORDER
+ Method of computing A and B:
+ 
+ AVOVIT fits the seismic amplitudes, using Shuey's approximation,
+ with either two terms (2nd-order) or three terms (4th-order).
+ 
+ If you have "good quality" data out to 40 degrees or higher, then
+ 4th-order is recommended. This is because higher order moveout and
+ AVO effects will corrupt the estimate of the gradient (B) (which is
+ defined to be the coefficient of sine squared of the angle) if only
+ two terms are used.  The C coefficient will leak into the B term,
+ since their functionals are not orthogonal.
+ 
+ If you have only 30 degress or less, then you should use 2nd-order,
+ since it will not be practical to separate 4th-order effects from
+ 2nd-order ones.
+ 
+ Recommended AVOVIT / ALAMO work flow
+ 
+ Input CDP's include angles &lt;= 30 degrees
+ Use 2nd-order AVOVIT to refine velocities / flatten gathers
+  (Test 4th-order option once you've obtained good 2nd-order results)
+ Use ALAMO to get 4th-order velocity correction (if necessary)
+ Compute AVO attributes (if desired)</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="VELOCITYCONSTRAINTS" title="Velocity Constraints" rows="24" columns="120">
+    <Label keyword="COMMENT_VELOCITYCONSTRAINTPARAME" alignment="center">Velocity Constraint Parameters</Label>
+    <Border keyword="BORDER3" title="Velocity Constraints"/>
+    <Label keyword="LABEL_WAVELETCENTERFREQUENCYFORV" alignment="left">Wavelet Center Frequency for Velocity Estimation =</Label>
+    <Field keyword="CTR_FREQ" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_QUALITYFACTOR" alignment="left">Quality Factor =</Label>
+    <Field keyword="Q_FACTOR" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIMEDURATIONOFCORRELATIONW" alignment="left">Time Duration of Correlation Window =</Label>
+    <Field keyword="CWIN_TIM" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SPATIALEXTENTOFCORRELATION" alignment="left">Spatial Extent of Correlation Window =</Label>
+    <Field keyword="CWIN_CDP" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEVELOFDEBUGPRINT" alignment="left">Level of Debug Print =</Label>
+    <Field keyword="DBUG_OPT" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DUMPVELFCARDS" alignment="left">Dump VELF Cards? =</Label>
+    <Field keyword="DUMP_OPT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIMEBETWEENVELFDUMPPICKS" alignment="left">Time between VELF Dump Picks =</Label>
+    <Field keyword="DTIM_DMP" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NAMEOFVELFCARDFILE" alignment="left">Name of VELF Card File =</Label>
+    <Field keyword="VELDNAME" type="string" maxLength="17" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MINIMUMDERIVEDINTERVALVELO" alignment="left">Minimum Derived Interval Velocity =</Label>
+    <Field keyword="IVEL_MIN" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXIMUMDERIVEDINTERVALVELO" alignment="left">Maximum Derived Interval Velocity =</Label>
+    <Field keyword="IVEL_MAX" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXNEGATIVEINTERVALVELCORR" alignment="left">Max. Negative Interval Vel. Correction per Iteration (%) =</Label>
+    <Field keyword="IVEL_DMN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXPOSITIVEINTERVALVELCORR" alignment="left">Max. Positive Interval Vel. Correction per Iteration (%) =</Label>
+    <Field keyword="IVEL_DMX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MINIMUMDERIVEDSTACKINGVELO" alignment="left">Minimum Derived Stacking Velocity =</Label>
+    <Field keyword="SVEL_MIN" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXIMUMDERIVEDSTACKINGVELO" alignment="left">Maximum Derived Stacking Velocity =</Label>
+    <Field keyword="SVEL_MAX" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXNEGATIVESTACKINGVELCORR" alignment="left">Max. Negative Stacking Vel. Correction per Iteration (%) =</Label>
+    <Field keyword="SVEL_DMN" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAXPOSITIVESTACKINGVELCORR" alignment="left">Max. Positive Stacking Vel. Correction per Iteration (%) =</Label>
+    <Field keyword="SVEL_DMX" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VELOCITYCUTOFFTIME" alignment="left">Velocity Cutoff Time =</Label>
+    <Field keyword="VCUT_TIM" type="int" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VELOCITYCUTOFFEXPONENT" alignment="left">Velocity Cutoff Exponent =</Label>
+    <Field keyword="VCUT_POW" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_VELOCITYCONSTRAINTPARAME" xPos="21" yPos="0" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="3" yPos="2" xSize="116" ySize="20"/>
+     <Constraints component="LABEL_WAVELETCENTERFREQUENCYFORV" xPos="5" yPos="3" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CTR_FREQ" xPos="65" yPos="3" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_QUALITYFACTOR" xPos="5" yPos="4" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Q_FACTOR" xPos="65" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIMEDURATIONOFCORRELATIONW" xPos="5" yPos="5" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CWIN_TIM" xPos="65" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SPATIALEXTENTOFCORRELATION" xPos="5" yPos="6" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CWIN_CDP" xPos="65" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEVELOFDEBUGPRINT" xPos="5" yPos="7" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DBUG_OPT" xPos="65" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DUMPVELFCARDS" xPos="5" yPos="8" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DUMP_OPT" xPos="65" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TIMEBETWEENVELFDUMPPICKS" xPos="5" yPos="9" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DTIM_DMP" xPos="65" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NAMEOFVELFCARDFILE" xPos="5" yPos="10" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELDNAME" xPos="65" yPos="10" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MINIMUMDERIVEDINTERVALVELO" xPos="5" yPos="11" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVEL_MIN" xPos="65" yPos="11" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXIMUMDERIVEDINTERVALVELO" xPos="5" yPos="12" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVEL_MAX" xPos="65" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXNEGATIVEINTERVALVELCORR" xPos="5" yPos="13" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVEL_DMN" xPos="65" yPos="13" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXPOSITIVEINTERVALVELCORR" xPos="5" yPos="14" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="IVEL_DMX" xPos="65" yPos="14" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MINIMUMDERIVEDSTACKINGVELO" xPos="5" yPos="15" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SVEL_MIN" xPos="65" yPos="15" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXIMUMDERIVEDSTACKINGVELO" xPos="5" yPos="16" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SVEL_MAX" xPos="65" yPos="16" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXNEGATIVESTACKINGVELCORR" xPos="5" yPos="17" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SVEL_DMN" xPos="65" yPos="17" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAXPOSITIVESTACKINGVELCORR" xPos="5" yPos="18" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SVEL_DMX" xPos="65" yPos="18" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VELOCITYCUTOFFTIME" xPos="5" yPos="19" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VCUT_TIM" xPos="65" yPos="19" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VELOCITYCUTOFFEXPONENT" xPos="5" yPos="20" xSize="60" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VCUT_POW" xPos="65" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="CTR_FREQ">
+      <Tip>Wavelet center frequency for velocity estimation (Hz).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - CTR_FREQ<br> Wavelet center frequency for velocity estimation (Hz).</center></b>
+<pre> Default = 30.0
+ Allowed = greater than or equal to 5.0, less than or equal to 100.0
+ Wavelet center frequency for velocity estimation (Hz).
+ The smaller the frequency, the greater the velocity adjustment
+ each iteration, for all times.
+ 
+ The wavelet center frequency should not be set less than the center
+ frequency of the data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Q_FACTOR">
+      <Tip>Quality factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - Q_FACTOR<br> Quality factor.</center></b>
+<pre> Default = 80
+ Allowed = greater than or equal to 1, less than or equal to 9999
+ Quality factor. A lower Q will increase the velocity
+ adjustment at progressively greater times.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CWIN_TIM">
+      <Tip>Time duration of correlation window (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - CWIN_TIM<br> Time duration of correlation window (sec).</center></b>
+<pre> Default = 0.25
+ Allowed = greater than or equal to 0.01, less than or equal to 5.0
+ Time duration or correlation window (sec).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CWIN_CDP">
+      <Tip>Spatial extent of correlation window (CDPs).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - CWIN_CDP<br> Spatial extent of correlation window (CDPs).</center></b>
+<pre> Default = 21
+ Allowed = greater than 1, less than or equal to 99999
+ Spatial extent of correlation window (CDPs).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DBUG_OPT">
+      <Tip>Level of debugging print.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - DBUG_OPT<br> Level of debugging print.</center></b>
+<pre> Default = SILENT
+ Allowed = SILENT, INFORMATION, MEM_CHECK, EXIT_CODES, EVERYTHING
+ Level of debugging print:
+   SILENT -&gt; Minimal diagnostic print.
+   INFORMATION -&gt; Print CDPs processes and their statistics.
+   MEM_CHECK -&gt; Frequenty verify memory integrity.
+   EXIT_CODES -&gt; Exit codes are additionally checked.
+   EVERYTHING -&gt; Full debug print is requested.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DUMP_OPT">
+      <Tip>Dump VELF cards?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - DUMP_OPT<br> Dump VELF cards?</center></b>
+<pre> Default = NO
+ Allowed = NO, YES
+ Dump VELF cards? VELF cards are sometimes necessary for
+ backward compatibility with older software packages.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DTIM_DMP">
+      <Tip>Time between velocity picks for VELF dump (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - DTIM_DMP<br> Time between velocity picks for VELF dump (sec).</center></b>
+<pre> Default = 0.05
+ Allowed = greater than 0.0
+ Enter the time (sec) between time/velocity pairs
+ to be dumped to the output VELF file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VELDNAME">
+      <Tip>Name of VELF Dump File</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - VELDNAME<br> Name of VELF Dump File</center></b>
+<pre> Default = none
+ Allowed = any valid filename
+ Specify the full pathname of the VELF dataset to output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVEL_MIN">
+      <Tip>Minimum derived interval velocity (ft/s or m/s).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - IVEL_MIN<br> Minimum derived interval velocity (ft/s or m/s).</center></b>
+<pre> Default = 0
+ Allowed = greater than or equal to 0
+ Minimum derived interval velocity (ft/s or m/s).
+ 
+ No need to change the default unless you are really trying to constrain
+ the velocity range that is output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVEL_MAX">
+      <Tip>Maximum derived interval velocity (ft/s or m/s).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - IVEL_MAX<br> Maximum derived interval velocity (ft/s or m/s).</center></b>
+<pre> Default = 50000
+ Allowed = greater than or equal to 0
+ Maximum derived interval velocity (ft/s or m/s).
+ 
+ No need to change the default unless you are really trying to constrain
+ the velocity range that is output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVEL_DMN">
+      <Tip>Largest negative interval velocity correction per iteration (%).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - IVEL_DMN<br> Largest negative interval velocity correction per iteration (%).</center></b>
+<pre> Default = 10.0
+ Allowed = greater than or equal to 0.0, less than or equal to 100.0
+ Largest negative interval velocity correction per iteration(%).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="IVEL_DMX">
+      <Tip>Largest positive interval velocity correction per iteration (%).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - IVEL_DMX<br> Largest positive interval velocity correction per iteration (%).</center></b>
+<pre> Default = 10.0
+ Allowed = greater than or equal to 0.0, less than or equal to 100.0
+ Largest positive interval velocity correction per iteration (%).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SVEL_MIN">
+      <Tip>Minimum derived stacking velocity (ft/s or m/s).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SVEL_MIN<br> Minimum derived stacking velocity (ft/s or m/s).</center></b>
+<pre> Default = 0
+ Allowed = greater than or equal to 0
+ Minimum derived stacking velocity (ft/s or m/s).
+ 
+ No need to change the default unless you are really trying to constrain
+ the velocity range that is output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SVEL_MAX">
+      <Tip>Maximum derived stacking velocity (ft/s or m/s).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SVEL_MAX<br> Maximum derived stacking velocity (ft/s or m/s).</center></b>
+<pre> Default = 50000
+ Allowed = greater than or equal to 0
+ Maximum derived stacking velocity (ft/s or m/s).
+ 
+ No need to change the default unless you are really trying to constrain
+ the velocity range that is output.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SVEL_DMN">
+      <Tip>Largest negative stacking velocity correction per iteration (%).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SVEL_DMN<br> Largest negative stacking velocity correction per iteration (%).</center></b>
+<pre> Default = 5.0
+ Allowed = greater than or equal to 0.0, less than or equal to 100.0
+ Largest negative stacking velocity correction per iteration (%).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SVEL_DMX">
+      <Tip>Largest positive stacking velocity correction per iteration (%).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - SVEL_DMX<br> Largest positive stacking velocity correction per iteration (%).</center></b>
+<pre> Default = 5.0
+ Allowed = greater than or equal to 0.0, less than or equal to 100.0
+ Largest positive stacking velocity correction per iteration (%).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VCUT_TIM">
+      <Tip>Velocity cutoff time (sec).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - VCUT_TIM<br> Velocity cutoff time (sec).</center></b>
+<pre> Default = RECORD LENGTH FROM JOB_DATA
+ Allowed = greater than or equal to 0
+ Velocity cutoff time (sec).
+ 
+ The Velocity cutoff time and Velocity cutoff exponent are
+ dependent parameters.
+ 
+ The applied change in RMS velocity will be multipled by
+ 
+   1.0/(1.0 + (time/cutoff time))**(cutoff exponent)).
+ 
+ To leave the computed change in RMS velocity unaltered, set the cutoff
+ exponent parameter = 0   Therefore, the smaller number for the
+ exponent, the smaller percentage adjustment will be made to the
+ computed change in velocity.
+ 
+ Additional examples:
+ 
+ exponent = 0.2, cutoff time = 8 s, record length = 8 s
+   1 / (1 + 8 / 8))**0.2 = 0.87  (% change at 8 seconds)
+ 
+ exponent = 1, cutoff time = 8 s, record length = 8 s
+   1 / (1 + 8 / 8))**1 = 0.5  (% change at 8 seconds)
+ 
+ exponent = 1, cutoff time = 4 s, record length = 8 s
+   1 / (1 + 8 / 4))**1 = 0.33 (% change at 8 seconds)
+ 
+ The cutoff time can be used to further reduce the % change at the
+ deeper times without changing the exponent.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VCUT_POW">
+      <Tip>Velocity cutoff exponent.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - VCUT_POW<br> Velocity cutoff exponent.</center></b>
+<pre> Default = 0.2
+ Allowed = greater than or equal to 0
+ 
+ The Velocity cutoff time and Velocity cutoff exponent are
+ dependent parameters.
+ 
+ The applied change in RMS velocity will be multipled by
+ 
+   1.0/(1.0 + (time/cutoff time))**(cutoff exponent)).
+ 
+ To leave the computed change in RMS velocity unaltered, set the cutoff
+ exponent parameter = 0   Therefore, the smaller number for the
+ exponent, the smaller percentage adjustment will be made to the
+ computed change in velocity.
+ 
+ Additional examples:
+ 
+ exponent = 0.2, cutoff time = 8 s, record length = 8 s
+   1 / (1 + 8 / 8))**0.2 = 0.87  (% change at 8 seconds)
+ 
+ exponent = 1, cutoff time = 8 s, record length = 8 s
+   1 / (1 + 8 / 8))**1 = 0.5  (% change at 8 seconds)
+ 
+ exponent = 1, cutoff time = 4 s, record length = 8 s
+   1 / (1 + 8 / 4))**1 = 0.33 (% change at 8 seconds)
+ 
+ The cutoff time can be used to further reduce the % change at the
+ deeper times without changing the exponent.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>avovit - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="avovit">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : AVOVIT
+ Category   : velocity_analysis
+ Written    : 2003-08-26   by: Bill Lucas
+ Revised    : 2007-02-05   by: D. Glover
+ Maturity   : production
+ Purpose    : AVO and Velocity Iteration (AVOVIT).
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ AVOVIT is tool to perform AVO sensitive residual velocity analysis.
+ The primary purpose of this tool is to compute residual velocities for the
+ purpose of flattening reflections within CDP gathers.  AVOVIT will normally
+ be applied to post migrated CDP gathers.  Input data requirements are
+ prestack CDP gathers with no NMO correction applied and a stacking
+ velocity function.  The program requires offset gathers as input.  The
+ algorithm only operates on data in the time domain.  Depth migrated data
+ needs to be converted to time prior to input to this process.
+ 
+ The following traces are output from AVOVIT:
+   1. Revised stacking velocities                     ( Header 49 = 51 )
+   2. Revised interval velocities                     ( Header 49 = 13 )
+   3. Imaginary part of correlation coefficient (AB*) ( Header 49 = 41 )
+       (also referred to as the residual velocity indicator (RVI))
+ 
+ The above traces are output from AVOVIT for each input CDP gather for
+ each iteration.
+ 
+ Note that Header word 51 will be set to the iteration number and the above
+ traces will be output for each iteration.  Normally, the AVOVIT process will
+ be followed by a SELECT to save the revised stacking velocities from the last
+ iteration.  See the ADVICE FOR USERS section for a sample work flow.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ AVOVIT operates as a 2D algorithm.  It operates, in the case of 3D data, on a
+ single inline at a time.  Because of this, there is the possibility of
+ creating crossline "jitter" in the resulting velocity field.  Since AVOVIT
+ outputs a velocity function at each CDP location, high frequency variations
+ in the velocity field can even occur in the inline direction depending on
+ parameter selection.  Because of these inherent problems, it is highly
+ recommended to apply some amount of smoothing to the output velocity traces
+ before they are used to flatten CDP gathers.  The process MIX can be used to
+ do a simple 3D smoothing to the data.
+ 
+ AVOVIT does not allow a time variant window specification.  What may be
+ appropriate at the shallow times may not be appropriate deeper.  Try to stay
+ away from using windows which include extremely shallow and deep reflections.
+ 
+ AVOVIT fits the seismic amplitudes, using Shuey's approximation,
+ with either two terms (2nd-order) or three terms (4th-order).
+ 
+ If you have "good quality" data out to 40 degrees or higher, then
+ 4th-order is recommended. This is because higher order moveout and
+ AVO effects will corrupt the estimate of the gradient (B) (which is
+ defined to be the coefficient of sine squared of the angle) if only
+ two terms are used.  The C coefficient will leak into the B term,
+ since their functionals are not orthogonal.
+ 
+ If you have only 30 degress or less, then you should use 2nd-order,
+ since it will not be practical to separate 4th-order effects from
+ 2nd-order ones.
+ 
+ Recommended AVOVIT / ALAMO Work Flow
+ 
+ Input CDP's include (angles &lt;= 30 degrees)
+ Use 2nd-order AVOVIT to refine velocities / flatten gathers
+  (Test 4th-order option once you've obtained good 2nd-order results)
+ Use ALAMO to compute 4th-order velocity correction (if necessary)
+ Compute AVO attributes (if desired)
+ 
+ ----------------------------------------------------------
+ Sample AVOVIT Job
+ 
+ TRIN - Input prestack CDP gathers with NMO correction (e.g. migrated CDPs)
+ Data conditioning processes for velocity analysis (e.g. MUTE, FILTER etc..)
+   Note that if the data will require ALAMO (4th order velocity corrections),
+   then a mute should be applied to mute data beyond angles &gt; 30 degrees.
+ NMO Inverse
+ GATHER - Data input to AVOVIT should be gathered.
+ AVOVIT
+ SELECT - select velocity traces for last iteration
+ TROT - Output velocity traces
+ 
+ Sample job to smooth AVOVIT velocities
+ 
+ TRIN - Final velocity traces from AVOVIT
+ MIX
+ TROT - Output final refined stacking velocity traces
+ ----------------------------------------------------------
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+  6. 2007-02-05  D. Glover  Added NULLIFY statements for Intel compiler
+005. 2006-06-12  B. Menger  Removed Unused Variables.
+  4. 2005-01-31  B. Lucas   Fixed bug in the initialization so that
+                            'nmo_create' is called only the # of times
+                            specified by the ITER_CNT parameter, rather
+                            than the max 99 times.
+  3. 2004-06-01  B. Lucas   Fixed bug in the GUI which defined both the
+                            start and end times to be integers. Converted
+                            them both to real.
+  2. 2004-04-27  B. Lucas   Added more detailed help and user information.
+                            Added option for generating an average velocity
+                            function from the stacking velocity file.
+                            Removed A and B traces (43, 44) from output.
+                            Removed original data traces from output.
+                            Switched time parameters from msec to sec.
+                            Removed "More AVEL After This" parameter.
+                            Removed "Variable Trace Weighting" parameter.
+                            Defaulted "Use Curved Raypath" to YES.
+                            Modified text of "Method of Computing A,B".
+                            Modified text of velocity change parameters.
+  1. 2003-08-26  B. Lucas   Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

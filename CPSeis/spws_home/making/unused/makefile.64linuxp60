@@ -1,0 +1,75 @@
+##----------------------------- 64linuxp60 ----------------------------------##
+##----------------------------- 64linuxp60 ----------------------------------##
+##----------------------------- 64linuxp60 ----------------------------------##
+
+
+permitted_architectures = ix86-intel-linux
+#permitted_hosts         = hoeplx03
+permitted_hosts         = hoeplx945
+
+FC         = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+FC_O1      = pgf60_f90 -c -Ktrap=fp -Mstandard -O1 -Mnoframe -Mlre -tp=k8-64 -mcmodel=medium inform=inform
+FC_FLOATIO = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform 
+FC_INTERPOLATE = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+FC_KMIG    = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+FC_PPIO    = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+FC_UNDER   = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+FC_LINK    = pgf60_f90 -Mnomain
+
+### gcc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+CC         = gcc -c -O3 -Wall -mcmodel=medium -fno-strict-aliasing \
+                                              -DLINUX -DLINUXP -D_REENTRANT \
+                                              -D_FILE_OFFSET_BITS=64
+CC_IBSMA   = gcc -c -O3 -Wall -mcmodel=medium -fno-strict-aliasing \
+                                              -DLINUX -DLINUXP -D_REENTRANT \
+                                              -D_LARGEFILE_SOURCE \
+                                              -D_FILE_OFFSET_BITS=64
+CC_LINK    = gcc
+
+CXX        = g++ -c -O3 -Wall -DLINUX -DLINUXP -DIA64
+CXX_IBSMA  = g++ -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                               -D_LARGEFILE_SOURCE \
+                                               -D_FILE_OFFSET_BITS=64 \
+                                               -DIA64
+CXX_LINK   = g++ -v
+CXX_DEPEND = g++ -MM          -DLINUX -DLINUXP
+
+PURE_LINK  = @echo "purify not available for this platform."
+AR_LINK    = ar -ursv
+SO_LINK    = g++ -shared
+
+MODEXT     = .mod
+MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+# FOR_LIBS   = -L/apps/compilers/pgi/pgi-5.2/linux86-64/5.2/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+#              /apps/compilers/pgi/pgi-5.2/linux86-64/5.2/lib/libpgc.a -lc
+
+FOR_LIBS   = /apps/compilers/pgi/pgi-6.0/linux86-64/6.0/lib/libpgc.a \
+             -L/apps/compilers/pgi/pgi-6.0/linux86-64/6.0/lib \
+             -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+             /usr/lib/gcc-lib/x86_64-redhat-linux/3.3.4/libstdc++.a \
+             -L/usr/lib64 -lc
+
+# for you require hoeplx03, may need to use...
+#            /usr/lib/gcc-lib/x86_64-redhat-linux/3.2.3/libstdc++.a \
+#            /usr/lib64/libstdc++.so.5 \
+
+# GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+#              -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+
+GUI_LIBS   = /usr/X11R6/lib64/libXm.a /usr/X11R6/lib64/libXmu.a \
+             -L/usr/X11R6/lib64 -dy -lXp -lXext -lXt -lX11
+
+MATH_LIBS  = -lm -lpthread
+
+JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+INCDIRS += /usr/include

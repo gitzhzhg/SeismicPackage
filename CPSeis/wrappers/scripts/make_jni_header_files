@@ -1,0 +1,70 @@
+#! /bin/csh -f
+#-------------------------------------------------------------------------------
+#                           make_jni_header_files
+#-------------------------------------------------------------------------------
+# Make JNI header files using javah.
+#
+# Run this script in the directory containing java source files.
+#
+# Pass three arguments to this script:
+#
+#  (1) the directory where the JNI header files should be placed.  Normally
+#       this is either the current directory (.) or the glue directory (glue).
+#  (2) the package name containing dots        (e.g. org.cpseis.modmo).
+#  (3) the package name containing underscores (e.g. org_cpseis_modmo).
+#
+# The directory will be created if necessary.
+# The directory will be populated using javah.
+#
+# The class files must have been created before this script is run.
+#
+# A JNI header file will be created for each source file which contains a
+# System.loadLibrary call and a native method declaration.  The header file
+# will be created only if there is no existing header file or if the java
+# source file is newer than the header file.  No header files will be created
+# if the string NOJAVAH is present in the file.
+#-------------------------------------------------------------------------------
+#                              INPUT FILES
+#
+#   ./       Xxxx.java          (for each java source file)
+#            Xxxx.class         (for each java source file)
+#-------------------------------------------------------------------------------
+#                              OUTPUT FILES
+#
+#   directory/  ..._Xxxx.h      (for each file which calls native code)
+#-------------------------------------------------------------------------------
+
+set directory          = $1
+set package_dot        = $2
+set package_underscore = $3
+
+if(! -e $directory) mkdir $directory
+
+if(`echo *.java` == "") then
+   echo no javah header files to create
+   exit 0
+endif
+
+set first_file_is_newer = $CPSEIS_WRAPPERS/scripts/first_file_is_newer
+set files               = *.java
+
+foreach file ($files)
+
+   grep '.loadLibrar' $file > /dev/null || continue
+   grep ' native '    $file > /dev/null || continue
+   grep 'NOJAVAH'     $file > /dev/null && continue
+
+   set name     = $file:r:t
+   set headfile = ${package_underscore}_${file:r:t}.h
+
+   $first_file_is_newer $file $headfile || continue
+
+   echo "javah -jni -force -d $directory $package_dot.$name"
+         javah -jni -force -d $directory $package_dot.$name
+
+end
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+

@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="slicer" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="INPUTANDOUTPUT" title="Input and Output" rows="27" columns="80">
+    <Label keyword="COMMENT_SLICESEISMICTRACESALONGH" alignment="center">Slice Seismic Traces along Horizons</Label>
+    <Label keyword="LABEL_HDR_IDENT" alignment="left">HDR_IDENT =</Label>
+    <Field keyword="HDR_IDENT" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDCONTAININGTRAC" alignment="left">Header word containing trace identification.</Label>
+    <Label keyword="LABEL_FILETYPE" alignment="left">FILETYPE  =</Label>
+    <Field keyword="FILETYPE" type="comboBox" maxLength="33" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Button keyword="SELECT_MODSPEC">Select MODSPEC</Button>
+    <Label keyword="EQLAB_MODSPEC" alignment="left">=</Label>
+    <Field keyword="MODSPEC" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="MODSPEC_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Field keyword="MODSPEC_NHOR" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <Border keyword="BORDER2"/>
+    <Button keyword="SELECT_HORIZON">Select HORIZON</Button>
+    <Label keyword="EQLAB_HORIZON" alignment="left">=</Label>
+    <Field keyword="HORIZON" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Field keyword="HORIZON_INFO" type="string" maxLength="140" editable="no" sensitive="yes"/>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS  HORIZONS">
+     <Array keyword="STATUS" type="string" maxLength="8  " columnName="STATUS" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="HORIZONS" type="string" maxLength="66 " columnName="HORIZONS" editable="yes" sensitive="yes" columnSize="66"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_SLICESEISMICTRACESALONGH" xPos="20" yPos="1" xSize="35" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_IDENT" xPos="1" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_IDENT" xPos="12" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDCONTAININGTRAC" xPos="23" yPos="3" xSize="44" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FILETYPE" xPos="1" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FILETYPE" xPos="12" yPos="4" xSize="33" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="1" yPos="6" xSize="77" ySize="5"/>
+     <Constraints component="SELECT_MODSPEC" xPos="2" yPos="7" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_MODSPEC" xPos="16" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODSPEC" xPos="17" yPos="7" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MODSPEC_INFO" xPos="17" yPos="8" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MODSPEC_NHOR" xPos="17" yPos="9" xSize="59" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="12" xSize="80" ySize="15"/>
+     <Constraints component="SELECT_HORIZON" xPos="2" yPos="13" xSize="14" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_HORIZON" xPos="16" yPos="13" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HORIZON" xPos="17" yPos="13" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="HORIZON_INFO" xPos="17" yPos="14" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="2" yPos="16" xSize="77" ySize="10" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_IDENT">
+      <Tip>Header word containing trace identification.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - HDR_IDENT<br> Header word containing trace identification.</center></b>
+<pre> Default = 48
+ Allowed = 0-NWIH   (normally 0 or 48-55 or 65-NWIH)
+ 
+ If HDR_IDENT is not 0, the number 1 will be placed into the specified header
+ word for the time/depth trace created by this process.  This procedure is
+ a courtesy for the DABRA process.  Other than this simple procedure, this
+ process is completely ignorent of the DABRA process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FILETYPE">
+      <Tip>Type of horizon file (or files) to read in.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - FILETYPE<br> Type of horizon file (or files) to read in.</center></b>
+<pre> Default = MODSPEC FILE
+ Allowed = MODSPEC FILE     (single modspec file containing all horizons)
+ Allowed = STATIC FILES     (each horizon in a separate "static" file)
+ 
+ If FILETYPE is "MODSPEC FILE", all horizons are in a single modspec file.
+ 
+ If FILETYPE is "STATIC FILES", each horizon is in a separate file in
+ the CPS static file format.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_MODSPEC">
+      <Tip>Choose a MODSPEC file using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - SELECT_MODSPEC<br> Choose a MODSPEC file using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MODSPEC">
+      <Tip>Pathname for a modspec file containing a set of horizons.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - MODSPEC<br> Pathname for a modspec file containing a set of horizons.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If this file is specified, the horizons on this file will be used to slice
+ the data.
+ 
+ This file is required if FILETYPE is "MODSPEC FILE".
+ This file is not used if FILETYPE is "STATIC FILES".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODSPEC_INFO">
+      <Tip>Status of MODSPEC.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - MODSPEC_INFO<br> Status of MODSPEC.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="MODSPEC_NHOR">
+      <Tip>Number of horizons on MODSPEC file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - MODSPEC_NHOR<br> Number of horizons on MODSPEC file.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_HORIZON">
+      <Tip>Choose a HORIZON file using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - SELECT_HORIZON<br> Choose a HORIZON file using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HORIZON">
+      <Tip>Pathname for horizon in static file format.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - HORIZON<br> Pathname for horizon in static file format.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If this file is specified, the horizon represented on this file will be
+ used to slice the data.
+ 
+ This file will be placed into the HORIZONS array.
+ 
+ The HORIZONS array is required if FILETYPE is "STATIC FILES".
+ The HORIZONS array is not used if FILETYPE is "MODSPEC FILE".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HORIZON_INFO">
+      <Tip>Status of HORIZON.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - HORIZON_INFO<br> Status of HORIZON.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>Status of HORIZONS.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - STATUS<br> Status of HORIZONS.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HORIZONS">
+      <Tip>Pathnames for horizons in static file format.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - HORIZONS<br> Pathnames for horizons in static file format.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ These files will be used to slice the data.
+ 
+ These files can be entered directly in this array or in the HORIZON field,
+ optionally using a file selection dialog box.
+ 
+ These files are required if FILETYPE is "STATIC FILES".
+ These files are not used if FILETYPE is "MODSPEC FILE".</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>slicer - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="slicer">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SLICER                            (slice traces)
+ Category   : miscellaneous
+ Written    : 2003-06-19   by: Tom Stoeckley
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Slice 3D seismic trace volumes along horizons.
+ Portability: No known limitations, but see note below.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process slices 3D seismic traces along horizons.
+ 
+ The horizons are defined by horizon files which are in static file
+ format.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+006. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+005. 2006-01-10  B. Menger  Removed Unused Variables.
+  4. 2005-01-31  Stoeckley  Add nullify calls before the memman_nullify calls
+                             to satisfy Portland Group compiler.
+  3. 2003-07-30  Stoeckley  Add process parameter HDR_IDENT.
+  2. 2003-07-28  Stoeckley  Add GUI information field modspec_nhor; fix
+                             problem with reading modspec files; change
+                             default for FILETYPE to MODSPEC FILE; change
+                             FILETYPE kombobox to a combobox.
+  1. 2003-06-19  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

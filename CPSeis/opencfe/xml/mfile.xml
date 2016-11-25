@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="mfile" width="1024" height="700">
+  <CommandArea keyword="CommandArea">
+   <Screen keyword="SCREEN01" title="SCREEN01" rows="1" columns="1" minCellWidth="8" minCellHeight="12">
+    <Label keyword="LABEL_OPT_FILE" alignment="left">OPT_FILE=</Label>
+    <Field keyword="OPT_FILE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CHECKFILE" alignment="left">CHECKFILE=</Label>
+    <Field keyword="CHECKFILE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="TEST_BEYOND_SYMLINKS">Test Beyond Symbolic Links</Button>
+    <Button keyword="SELECT_LATEST_PATHNAME">Select PATHNAME</Button>
+    <ArraySet keyword="STATUS_ARRAYSET" label="STATUS  PATHNAMES">
+     <Array keyword="STATUS" type="string" maxLength="8  " columnName="STATUS" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="PATHNAMES" type="string" maxLength="128" columnName="PATHNAMES" editable="yes" sensitive="yes" columnSize="55"/>
+    </ArraySet>
+    <Button keyword="SELECT_PATH_LIST">Select PATH_LIST</Button>
+    <Label keyword="EQLAB_PATH_LIST" alignment="left">=</Label>
+    <Field keyword="PATH_LIST" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_LIST_INFO" type="string" maxLength="54" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_OPT_FILE" xPos="10" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_FILE" xPos="19" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CHECKFILE" xPos="48" yPos="0" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CHECKFILE" xPos="58" yPos="0" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="TEST_BEYOND_SYMLINKS" xPos="10" yPos="3" xSize="26" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_LATEST_PATHNAME" xPos="10" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="STATUS_ARRAYSET" xPos="10" yPos="6" xSize="66" ySize="11" xStretch="true" yStretch="true"/>
+     <Constraints component="SELECT_PATH_LIST" xPos="2" yPos="19" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_LIST" xPos="18" yPos="19" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_LIST" xPos="19" yPos="19" xSize="54" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_LIST_INFO" xPos="19" yPos="20" xSize="54" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_FILE">
+      <Tip>Source of input files.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - OPT_FILE<br> Source of input files.</center></b>
+<pre> Default = PATHNAMES
+ Allowed = PATHNAMES, PATH_LIST
+ If OPT_FILE = PATHNAMES, file(s) listed in PATHNAMES array.
+ If OPT_FILE = PATH_LIST, file(s) listed in file indicated by PATH_LIST.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CHECKFILE">
+      <Tip>Check that the file is valid trace file with consistent globals.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - CHECKFILE<br> Check that the file is valid trace file with consistent globals.</center></b>
+<pre> Default = NO
+ Allowed = YES, NO
+ CFE can check the file for consistency and existence, and in the process will
+ load special globals (scalar ones) for subsequent job processes to use.
+ These are so that GVS, some Migrations, etc. will have proper globals set
+ by the input data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TEST_BEYOND_SYMLINKS">
+      <Tip>Forces more thorough file STATUS checking.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - TEST_BEYOND_SYMLINKS<br> Forces more thorough file STATUS checking.</center></b>
+<pre> Default behavior is to not pursue file STATUS checking beyond the symbolic
+ links themselves.  Pushing this button causes more thorough file STATUS
+ information to be provided.  Refrain from pushing this button during periods
+ of NFS or disk problems.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_LATEST_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - SELECT_LATEST_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="STATUS">
+      <Tip>File status (if CHECKSTATUS=YES).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - STATUS<br> File status (if CHECKSTATUS=YES).</center></b>
+<pre>  R  -- File found and readable.
+ RE  -- File not found or not readable.
+  W  -- File found and writable.
+  C  -- File not found, but creatable.
+ CE  -- File not found and not creatable.
+ WE  -- File exists and can not be overwritten.  Checks both file and
+        directory permissions.
+ WB  -- Blank filename.
+ NTF -- File not a trc, cmpr, or segy file (only if CHECKFILE == YES).
+ BG  -- File globals disagree with job (only if CHECKFILE == YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAMES">
+      <Tip>Pathname(s) for the file(s) to be read.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - PATHNAMES<br> Pathname(s) for the file(s) to be read.</center></b>
+<pre> Default = blank
+ Allowed = char
+ Pathname of file(s), including optional node, userid, and dir.
+ When using PATHNAMES, if no file suffix is specified an appropriate file
+ suffix will be added.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_LIST">
+      <Tip>Choose PATH_LIST with a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - SELECT_PATH_LIST<br> Choose PATH_LIST with a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST">
+      <Tip>ASCII file containing list of file names.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - PATH_LIST<br> ASCII file containing list of file names.</center></b>
+<pre> Default = blank
+ Allowed = char
+ When using PATH_LIST, no file suffix is added.  If the user wants file
+ suffices, he/she must specify them with each entry in PATH_LIST file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_LIST_INFO">
+      <Tip>File status for PATH_LIST.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mfile - PATH_LIST_INFO<br> File status for PATH_LIST.</center></b>
+<pre> Pathname of ASCII list file.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+  </CommandArea>
+  <Help component="mfile">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R I M I T I V E
+ 
+ Name       : MFILE
+ Category   : io
+ Written    : 2002-05-21   by: Ed Schmauch
+ Revised    : 2006-11-14   by: D. Glover
+ Maturity   : production
+ Purpose    : Specify multiple files.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ Provides a common gui and backend routines for processes requiring the
+ specification of multiple files.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author        Description
+     ----        ------        -----------
+ 13. 2006-11-14  D. Glover     Added NULLIFY statements for Intel compiler.
+ 12. 2006-06-01  Stoeckley     Add pc_register_array_names for SeisSpace.
+ 11. 2006-01-10  B. Menger     Removed Unused Variables.
+ 10. 2004-08-23  SMCook        Incorporated mfilebox (multi-file selection).
+  9. 2004-06-15  SMCook        Replaced CHECK_FILE_STATUS approach with new
+                               TEST_BEYOND_SYMLINKS approach.  MFILE does not
+                               pursue STATUS of files that symlinks point to
+                               unless the user specifically requests it by
+                               pushing this button.  Purpose is to keep NFS
+                               and/or disk problems from affecting the user
+                               interface so much.  "Typos" are still caught.
+  8. 2004-01-30  SMCook        Added CHECK_FILE_STATUS button that allows user
+                               to bypass file status checking, which can lock
+                               up the GUI when there are NFS/disk problems.
+  7. 2003-01-23  Ed Schmauch   Changed finquire_output to finquire_file in
+                               mfile_file_status.  Moved eliminating blank
+                               pathnames to end session trap.  Added CE and WB
+                               status fields.  Improved WE check to also check
+                               for directory access.  mfile_update calls
+                               pc_error in backend so processing will not
+                               start if some file(s) are bad.  This is also
+                               necessary because otherwise trot would replace
+                               a write protected file if it had write
+                               permission on the directory since trot deletes
+                               then creates a file instead of overwriting it.
+  6. 2002-09-09  Vunderink     Modifed to use jdata parameter PATHNAME_TRCIO.
+  5. 2002-08-28  K. Goodger    Move test for duplicate file names to end
+                               session trap.
+  4. 2002-08-26  K. Goodger    Clear PATHNAMES when PATH_LIST selected.
+                               Clear PATH_LIST when PATHNAMES selected.
+  3. 2002-07-01  Ed Schmauch   Added subroutine mfile_set_pathnames_ext and
+                               optional argument from_ascii_file to
+                               mfile_get_filenames.
+  2. 2002-05-28  Ed Schmauch   Made downward compatible.
+  1. 2002-05-21  Ed Schmauch   Initial version.
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

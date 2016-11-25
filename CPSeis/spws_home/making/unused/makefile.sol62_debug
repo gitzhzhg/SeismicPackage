@@ -1,0 +1,54 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+##--------------------------- sol62_debug ----------------------------------##
+##--------------------------- sol62_debug ----------------------------------##
+##--------------------------- sol62_debug ----------------------------------##
+
+permitted_architectures = sparc-sun-solaris
+permitted_hosts         = unrestricted
+
+JAVA_HOME = /apps/geophysics/jdk1.6.0
+JAVA_DIR_ROOT = $(JAVA_HOME)/jre/lib
+
+FC         = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+FC_O1         = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+FC_FLOATIO = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+FC_INTERPOLATE = sol62_f90 -mt -c    -Qoption f90comp -fephoenix
+FC_KMIG    = sol62_f90 -mt -c    -Qoption f90comp -fephoenix
+FC_PPIO    = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+FC_UNDER   = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+FC_LINK    = sol62_f90 -mt
+
+CC         = sol62_cc -mt -c -g -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+CC_IBSMA   = sol62_cc -mt -c -g -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+CC_LINK    = sol62_cc -mt                  
+
+CXX        = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN \
+                                          -D_FILE_OFFSET_BITS=64
+CXX_IBSMA  = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                       -D_FILE_OFFSET_BITS=64
+CXX_LINK   = sol62_CC -mt       -compat=4  
+CXX_DEPEND = g++      -MM            -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+PURE_LINK  = sol62_purify -best_effort \
+             -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache CC -compat=4
+AR_LINK    = ar -ursv
+SO_LINK    = sol62_f90 -mt -G
+
+MODEXT     = .mod
+MODFLAG    = -M
+
+FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+             -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+             -lfminvai -lfmaxvai -lfsu -lsunmath
+GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+
+MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+             -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc
+
+JAVA_DIR   = $(JAVA_DIR_ROOT)/sparcv9/server
+JAVA_LIBS  = -L$(JAVA_DIR_ROOT)/sparcv9 -L$(JAVA_DIR_ROOT)/sparcv9/server \
+             -ljava -ljvm -lverify
+
+INCDIRS    += $(JAVA_HOME)/include $(JAVA_HOME)/include/solaris /usr/dt/include

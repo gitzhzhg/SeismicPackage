@@ -1,0 +1,51 @@
+RadonDemultiple removes multiple events from CMP gathers through use of parabolic,  
+linear, or hyperbolic RADON transforms to model multiples and subtract them 
+from the original data.  RadonDemultiple operation follows these steps.
+
+      1.  Transform CMP gather to parabolic, linear, or hyperbolic RADON 
+          space.
+
+      2.  Identify events with residual moveout in CMPs between RMO_PRI_MIN
+          and RMO_PRI_MAX as primaries and mute (zero) them in the transformed
+          data.  (This protects the primaries.)
+
+      3.  Identify events with residual moveout in CMPs between RMO_MUL_MIN
+          and RMO_MUL_MAX as multiples and mute out everything else from
+          parabolic, linear, or hyperbolic RADON space. (Taper the mute from 
+          0.0 at RMO_PRI_MAX to 1.0 at RMO_MUL_MIN.)
+
+      4.  Transform the energy that is identified as multiple energy back
+          from parabolic, linear, or hyperbolic RADON space and subtract it 
+          from the original CMP gather.
+
+The parabolic, linear, or hyperbolic RADON transform is optimized by 
+least-squares to accurately model the phases and amplitudes of multiples in 
+noisy data with limited or irregularly sampled offsets.
+
+Parabolic and hyperbolic Scans
+
+RadonDemultiple assumes that events on input CMPs, with primary velocity 
+NMO correction applied, have a sufficiently small residual moveout such that they
+have an approximately parabolic or hyperbolic contour.  Thus, if primaries and 
+multiples have non-overlapping residual moveout on CMPs (and reasonably 
+uniform amplitude and phase), then RadonDemultiple can perform a RADON transform and 
+be able to separate primaries from multiples in parabolic or hyperbolic 
+RADON space.
+
+Linear Scans
+
+The linear Radon does not require the input CMPs to have primary velocity 
+NMO correction applied.
+
+The high-resolution Radon transform follows the sparseness constraints of
+Sacchi and Ulrych's paper (1995). This implementation uses frequency 
+independent sparseness constraints which is an average of Sacchi's frequency 
+dependent Radon solution over a frequency range. Within this frequency
+range, the signals should have the highest amplitudes. The advantage  
+of using the average of the sparseness contraints is that they can focus
+and preserve the transform amplitude better than the original Sacchi's 
+approach, but it adds more computational time to precompute the average 
+of the sparseness constraints.
+  
+Sacchi, M.D. and Ulrych, T. J. 1995, High-resolution velocity gathers and 
+offset space reconstruction, Geophysics, 60, 4, 1169-1117.

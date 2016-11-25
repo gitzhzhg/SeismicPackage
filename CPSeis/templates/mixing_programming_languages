@@ -1,0 +1,174 @@
+!<CPS_v1 type="SCRIPT"/>
+  
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                      Mixing Programming Languages 
+! 
+! This document contains the standards for mixing programming languages
+! when writing code for the Conoco Processing System.
+!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                REVISION HISTORY FOR THIS DOCUMENTATION
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  2. 2002-10-25  Stoeckley  Converted to this text document for access by
+!                             the CPSDOC program.
+!  1. 1999-04-27  CIBurch &  Initial version, which is a Microsoft Word
+!                 Stoeckley   document in the Standards for the Improved
+!                             Conoco Seismic Processing System.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                       PURPOSE OF THIS DOCUMENT
+!  
+! This document contains guidelines for calling routines which are written 
+! in different languages from routines which are written in non-matching
+! languages.  The information here is generally applicable for any situations 
+! where different programming languages talk to each other. 
+!  
+! The information here is more specifically applicable to CPS primitives which 
+! are called from CPS processes, other CPS primitives, the front-end framework, 
+! the back-end framework, and other programs including interactive workstation 
+! programs. 
+!  
+! The information here is also specifically applicable to CPS processes which 
+! are called from code, including interactive workstation programs, which 
+! are written in languages other than Fortran-90. 
+!  
+!-------------------------------------------------------------------------------
+!                       OTHER RELATED DOCUMENTS
+!
+! More specific information for mixing programming languages can be found
+! in the following templates found in ~sps/templates:
+!
+!               andrew_wrapper.cc         heidi_wrapper.h
+!               andrew_wrapper.hh         heidi_wrapper.c
+!               andrew_frou.f90           heidi_frou.f90
+!               andrew.f90                heidi.f90
+!
+!               kathy_wrapper.f90         suki.cc
+!               kathy_crou.c              suki_wrapper.f90
+!               kathy.c                   suki_crou.cc
+!               kathy.h                   suki.hh
+!
+! and in the following header file:
+!
+!                           c2f_interface.h
+!
+!-------------------------------------------------------------------------------
+!                          GENERAL GUIDELINES
+!  
+!   (1) Processing modules must be written in Fortran-90. 
+!  
+!   (2) Primitive modules should normally be written in Fortran-90.
+!  
+!   (3) When primitive modules are not written in Fortran-90, they should 
+!       preferably be written in C or Fortran-77.  If they are written in 
+!       C++, a different linker might be required on some platforms, ! so 
+!       this complication should be considered. 
+!  
+!   (4) It is very undesirable to have and maintain code with similar
+!       functionality but duplicated in more than one programming language.
+!       When such duplication exists, such code should be consolidated.
+!       Specific interfaces (wrappers) can then be provided so that the 
+!       consolidated code can be called from all of the languages it was 
+!       originally written in. 
+!  
+!   (5) Any code which might be called from a language different from that 
+!       in which it is written should be made to look like it is written
+!       in the language of the calling program.  This simplifies the
+!       reusability of the code, and reduces the tendancy to duplicate the 
+!       same functionality in different languages.  This might be implemented
+!       by writing interfaces (or wrappers) around the code written in the 
+!       languages of potential calling programs, or written to be callable
+!       as if the code were written in the languages of potential calling
+!       programs.  This might sometimes be implemented by providing additional 
+!       subroutines in the called code, or by writing a separate module
+!       which interfaces to the called code.  How this is done depends on 
+!       the specific calling and called languages and the complexity of the 
+!       called code. 
+!  
+!   (6) If a processing module or primitive module must contain code written 
+!       in more than one language, it is preferable that some of the code 
+!       be split out into a separate primitive, so that an individual module 
+!       will not contain a mixture of languages (apart from required
+!       interfaces or wrappers).  Oftentimes, such split-out code may be 
+!       generally useful on its own.  But if such split-out code is useful, 
+!       or primarily useful, only to the process or primitive from which it 
+!       was taken, its documentation should indicate so.  Splitting out such 
+!       code into a separate primitive encourages the practice of maintaining
+!       all code for an individual process or primitive in a single source
+!       file. 
+!  
+!-------------------------------------------------------------------------------
+!        WHEN TO WRITE PRIMITIVES IN LANGUAGES OTHER THAN FORTRAN-90
+!  
+!   (1) When the code will be called from outside of the processing system 
+!       from programs which run on platforms lacking a Fortran-90 compiler.
+!  
+!   (2) When the code already exists in the other language. 
+!  
+!   (3) When the code can be more easily implemented and/or maintained in 
+!       the other language. 
+!  
+!   (4) When the other language provides some desired or required 
+!       functionality. 
+!  
+!   (5) When the code is to be called primarily from the same language it is 
+!       written in. 
+!  
+!   (6) When interfaces to other required languages are more easily or more 
+!       desirably implemented when the code is not written in Fortran-90.
+!  
+!-------------------------------------------------------------------------------
+!                              TEMPLATES
+!  
+! Details for interfacing programming languages are to be provided in
+! templates prepared for specific requirements.  These templates are to
+! be consistent with the guidelines specified in this document, and are to
+! be prepared as they are needed.  As they are created, they should be
+! accepted and adopted as part of the standards for the Conoco Processing
+! System. 
+!  
+! Templates should show the following information, plus any other requirements
+! not listed here: 
+!  
+!   (1) How to match variable types between C/C++ and Fortran. 
+!  
+!   (2) How to match null-terminated strings to Fortran character variables.
+!  
+!   (3) How to deal with subroutine name spelling adjustments between C/C++ 
+!       and Fortran. 
+!  
+!   (4) How to match up calling-by-reference and calling-by-value.
+!  
+!   (5) How to reconcile incompatibilities between Fortran-90 pointers and 
+!       C/C++ pointers. 
+!  
+!   (6) Header files and other aids should be provided to assist and
+!       standardize interface efforts.  An example is the c2f_interface.h
+!       header file used by workstation programmers and found in the
+!       ~spws/include directory. 
+!  
+!-------------------------------------------------------------------------------
+!</descript_doc>
+

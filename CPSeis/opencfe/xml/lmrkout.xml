@@ -1,0 +1,748 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="lmrkout" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="LMRKOUTPROCESS" title="LMRKOUT Process" rows="29" columns="80">
+    <Label keyword="COMMENT_LMRKOUTTRACEOUTPUTDIRECT" alignment="center"> LMRKOUT -- Trace output directly to SeisWorks 3D (Landmark)</Label>
+    <Label keyword="LABEL_SEISWORKS_PROJECT" alignment="left">SEISWORKS_PROJECT=</Label>
+    <Field keyword="SEISWORKS_PROJECT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1" title=" Output Description"/>
+    <Label keyword="LABEL_BASENAME" alignment="left">BASENAME=</Label>
+    <Field keyword="BASENAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_EGASDM08013DVTESTBRIMIGC" alignment="center">(e.g. asdm0801.3dv, test.bri, mig.cmp)</Label>
+    <Label keyword="LABEL_SAMPLE_FORMAT" alignment="left">SAMPLE_FORMAT=</Label>
+    <Field keyword="SAMPLE_FORMAT" type="comboBox" maxLength="18" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INLINE_BRICK_DIM" alignment="left">INLINE_BRICK_DIM     =</Label>
+    <Field keyword="INLINE_BRICK_DIM" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ZUNIT_FLAG" alignment="left">ZUNIT_FLAG=</Label>
+    <Field keyword="ZUNIT_FLAG" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CROSSLINE_BRICK_DIM" alignment="left">CROSSLINE_BRICK_DIM  =</Label>
+    <Field keyword="CROSSLINE_BRICK_DIM" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_BRICK_DIM" alignment="left">TIME_BRICK_DIM       =</Label>
+    <Field keyword="TIME_BRICK_DIM" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FIDELITY" alignment="left">FIDELITY             =</Label>
+    <Field keyword="FIDELITY" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_AMP_FACTOR" alignment="left">AMP_FACTOR   =</Label>
+    <Field keyword="AMP_FACTOR" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2" title=" Environment Variables"/>
+    <Label keyword="LABEL_LM_LICENSE_FILE" alignment="left">LM_LICENSE_FILE  =</Label>
+    <Field keyword="LM_LICENSE_FILE" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OWHOME" alignment="left">OWHOME           =</Label>
+    <Field keyword="OWHOME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OW_PMPATH" alignment="left">OW_PMPATH        =</Label>
+    <Field keyword="OW_PMPATH" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OW_DDF" alignment="left">OW_DDF           =</Label>
+    <Field keyword="OW_DDF" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER3" title=" Seldom Changed"/>
+    <Label keyword="LABEL_WRITE" alignment="left">WRITE=</Label>
+    <Field keyword="WRITE" type="comboBox" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OUT_OF_BOUNDS_IS_FATAL" alignment="left">OUT_OF_BOUNDS_IS_FATAL=</Label>
+    <Field keyword="OUT_OF_BOUNDS_IS_FATAL" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPTIMIZE_INLINE" alignment="left">OPTIMIZE_INLINE=</Label>
+    <Field keyword="OPTIMIZE_INLINE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_LMRKOUTTRACEOUTPUTDIRECT" xPos="5" yPos="1" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SEISWORKS_PROJECT" xPos="42" yPos="3" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SEISWORKS_PROJECT" xPos="60" yPos="3" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="1" yPos="4" xSize="77" ySize="12"/>
+     <Constraints component="LABEL_BASENAME" xPos="4" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BASENAME" xPos="13" yPos="6" xSize="25" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_EGASDM08013DVTESTBRIMIGC" xPos="39" yPos="6" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SAMPLE_FORMAT" xPos="4" yPos="8" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SAMPLE_FORMAT" xPos="18" yPos="8" xSize="18" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_INLINE_BRICK_DIM" xPos="46" yPos="8" xSize="22" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INLINE_BRICK_DIM" xPos="68" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_ZUNIT_FLAG" xPos="4" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ZUNIT_FLAG" xPos="15" yPos="9" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_CROSSLINE_BRICK_DIM" xPos="46" yPos="9" xSize="22" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CROSSLINE_BRICK_DIM" xPos="68" yPos="9" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIME_BRICK_DIM" xPos="46" yPos="10" xSize="22" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIME_BRICK_DIM" xPos="68" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FIDELITY" xPos="46" yPos="11" xSize="22" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FIDELITY" xPos="68" yPos="11" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_AMP_FACTOR" xPos="4" yPos="12" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="AMP_FACTOR" xPos="18" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="4" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="12" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="22" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="30" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="1" yPos="17" xSize="77" ySize="7"/>
+     <Constraints component="LABEL_LM_LICENSE_FILE" xPos="3" yPos="19" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LM_LICENSE_FILE" xPos="21" yPos="19" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OWHOME" xPos="3" yPos="20" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OWHOME" xPos="21" yPos="20" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OW_PMPATH" xPos="3" yPos="21" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OW_PMPATH" xPos="21" yPos="21" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OW_DDF" xPos="3" yPos="22" xSize="18" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OW_DDF" xPos="21" yPos="22" xSize="56" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER3" xPos="1" yPos="25" xSize="77" ySize="4"/>
+     <Constraints component="LABEL_WRITE" xPos="2" yPos="27" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WRITE" xPos="8" yPos="27" xSize="13" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OUT_OF_BOUNDS_IS_FATAL" xPos="26" yPos="27" xSize="23" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUT_OF_BOUNDS_IS_FATAL" xPos="49" yPos="27" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPTIMIZE_INLINE" xPos="57" yPos="27" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPTIMIZE_INLINE" xPos="73" yPos="27" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SEISWORKS_PROJECT">
+      <Tip>The name of the SeisWorks (3D) Project</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - SEISWORKS_PROJECT<br> The name of the SeisWorks (3D) Project</center></b>
+<pre> Default =
+ Allowed =
+ Must pre-exist and be NFS mounted.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BASENAME">
+      <Tip>Name of output 3D volume set.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - BASENAME<br> Name of output 3D volume set.</center></b>
+<pre> Default = test_f16.bri
+ Allowed = Must have extension .3dv, .bri, or .cmp.
+ Twelve chars maximum for type .3dv (8 chars max plus '.3dv').</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SAMPLE_FORMAT">
+      <Tip>Available choices depend on BASENAME (.3dv, etc.).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - SAMPLE_FORMAT<br> Available choices depend on BASENAME (.3dv, etc.).</center></b>
+<pre> Default =
+ Allowed =
+ See the ADVICE TO USERS section.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INLINE_BRICK_DIM">
+      <Tip>Number of samps on the side of a brick in the inline dimension.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - INLINE_BRICK_DIM<br> Number of samps on the side of a brick in the inline dimension.</center></b>
+<pre> Default = 8
+ Allowed = 1 or higher
+ Used for .bri output only.
+ See Landmark documentation for detailed format discussion.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ZUNIT_FLAG">
+      <Tip>Sets flag in data header describing nature of output data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - ZUNIT_FLAG<br> Sets flag in data header describing nature of output data.</center></b>
+<pre> Default =
+ Allowed =
+ Set appropriately to TIME or DEPTH.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CROSSLINE_BRICK_DIM">
+      <Tip>Number of samps on the side of a brick in the crossline dimension.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - CROSSLINE_BRICK_DIM<br> Number of samps on the side of a brick in the crossline dimension.</center></b>
+<pre> Default = 8
+ Allowed = 1 or higher
+ Used for .bri output only.
+ See Landmark documentation for detailed format discussion.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_BRICK_DIM">
+      <Tip>Number of samps on the side of a brick in the time dimension.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - TIME_BRICK_DIM<br> Number of samps on the side of a brick in the time dimension.</center></b>
+<pre> Default = 16
+ Allowed = 1 or higher
+ Used for .bri output only.
+ See Landmark documentation for detailed format discussion.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FIDELITY">
+      <Tip>Fidelity factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - FIDELITY<br> Fidelity factor.</center></b>
+<pre> Default = 99
+ Allowed = 50 &lt;= FIDELITY &lt;= 100
+ Used for .cmp output only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AMP_FACTOR">
+      <Tip>Multiply amplitudes by this factor before writing the data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - AMP_FACTOR<br> Multiply amplitudes by this factor before writing the data.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ This scale factor does not affect the amplitudes passing through to
+ subsequent processes in the job.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Start time (or depth) of output volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - TIM_BEG<br> Start time (or depth) of output volume.</center></b>
+<pre> Default = global value
+ Allowed = sensible
+ If appending to existing file, must match existing file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>End time (or depth) of output volume.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - TIM_END<br> End time (or depth) of output volume.</center></b>
+<pre> Default = global value
+ Allowed = sensible
+ If appending to existing file, must match existing file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LM_LICENSE_FILE">
+      <Tip>Defines the OpenWorks license file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - LM_LICENSE_FILE<br> Defines the OpenWorks license file.</center></b>
+<pre> Default = Site-specific value stored in cps_config.dat.
+ Allowed =
+ Necessary for devkit operation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OWHOME">
+      <Tip>Defines the OpenWorks "home path".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - OWHOME<br> Defines the OpenWorks "home path".</center></b>
+<pre> Default = Site-specific value stored in cps_config.dat.
+ Allowed =
+ Necessary for devkit operation.  Home path for OpenWorks.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OW_PMPATH">
+      <Tip>Defines the OpenWorks project management path".</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - OW_PMPATH<br> Defines the OpenWorks project management path".</center></b>
+<pre> Default = Site-specific value stored in cps_config.dat.
+ Allowed =
+ Necessary for devkit operation.  Generally is $OWHOME/conf.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OW_DDF">
+      <Tip>Defines the 'dir.dat' file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - OW_DDF<br> Defines the 'dir.dat' file.</center></b>
+<pre> Default = Site-specific.
+ Allowed =
+ Ask your local Landmark data manager(s) for the correct dir.dat file to use.
+ Your site may not want you loading seismic data to $OWHOME/conf/dir.dat.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WRITE">
+      <Tip>Whether to overwrite or append to file set.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - WRITE<br> Whether to overwrite or append to file set.</center></b>
+<pre> Default = NEW
+ Allowed = NEW, OVERWRITE</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OUT_OF_BOUNDS_IS_FATAL">
+      <Tip>Abort if line, trace, or time range is out of bounds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - OUT_OF_BOUNDS_IS_FATAL<br> Abort if line, trace, or time range is out of bounds.</center></b>
+<pre> Default = YES
+ Allowed = YES, NO
+ Use YES normally to catch errors like inverted line and trace numbers.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPTIMIZE_INLINE">
+      <Tip>Design output file to optimize inline IO.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - OPTIMIZE_INLINE<br> Design output file to optimize inline IO.</center></b>
+<pre> Default = YES
+ Allowed = YES, NO
+ In the absence of a very good reason to do otherwise, you should use INLINE
+ for 3dv files.  This is the most common preferred interpreter viewing
+ direction, and also this is normally the way your input data is sorted.
+ In the case of brick files, this parameter is set automatically according to
+ the brick DIM values you input.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>lmrkout - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="lmrkout">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : LMRKOUT
+ Category   : io
+ Written    : 2001-07-16   by: SMCook
+ Revised    : 2007-01-08   by: Bill Menger
+ Maturity   : production
+ Purpose    : Write traces directly to SeisWorks 3D.
+ Portability: Adaptable to platforms supported by Landmark devkits.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ Overview
+ --------
+ 
+ LMRKOUT is used to write traces directly to an existing SeisWorks 3D project.
+ 
+ The typical application for LMRKOUT is to write out final migrated time or
+ depth data in a format that's convenient for the end user.  However, other
+ applications are possible and potentially quite useful, such as writing out
+ flattened pre-stack gathers to an "AVA cube", allowing an interpreter to
+ work on AVA data using familiar tools (amplitude extractions, EarthCube, ...).
+ 
+ Another potentially useful "non-standard" application would be to write out
+ an "average velocity cube" that an interpreter could use directly for depth
+ conversion (by simply multiplying a time map by an average velocity map).
+ 
+ A certain amount of leg-work is required to run LMRKOUT in the sense that you
+ will need to be aware of information such as:
+ 
+   1. the name of the SeisWorks project
+ 
+   2. the names of all existing data volumes (so you don't accidentally
+      overwrite someone else's data -- IN CERTAIN MODES LMRKOUT DOES NO
+      CHECKING FOR THIS)
+ 
+   3. the amount of disk space available under the project umbrella
+ 
+   4. environment variable settings
+ 
+ Trace output occurs under the umbrella of a pre-existing SEISWORKS_PROJECT
+ (created outside of CPS).  You won't be writing traces to the same disks you
+ typically write CPS data to.  In fact, you do not specifically define the
+ output file names per se.  You provide a BASENAME, and the devkit distributes
+ the file extents across externally pre-defined disk partitions allocated to a
+ specific SEISWORKS_PROJECT.  These partitions are specified in a configuration
+ file known as a "dir.dat" file (further discussed below).  Every Landmark
+ installation has at least one dir.dat file, and every office running Landmark
+ employs at least one person who knows how to use them.  Find this person.
+ 
+ As with Landmark's "bcm3d" data-loading program, traces are put to disk
+ roughly in the order that you write them.  A header file is generated (or
+ possibly just updated) during loading that contains the information needed to
+ map the traces on disk to their proper geographical positions when viewed in
+ SeisWorks.  The existence of this header file is what allows Landmark to store
+ irregularly-shaped surveys without storing a bunch of zeroes.  In other words,
+ SeisWorks does not assume that a dataset is or ever will be a fully populated
+ "cube".  (Please note that the usability of the final product can be greatly
+ affected by the trace sorting and choices you make, as per below.)
+ 
+ When writing out "non-standard" products like an AVA cube, you will probably
+ need to fudge header words 8 &amp; 7 to mimic some hypothetical inline/crossline
+ setup, and you may very well not want to put it into the same SeisWorks
+ project as the post-stack data.  [Each office could perhaps set up a "dummy
+ project" or two to handle AVA volumes using a standard (1 ... 1000) x
+ (1 ... 1000) numbering scheme.  The burden would then be on the end user to
+ know where each trace gather belongs geographically.]
+ 
+ 
+ Sample Formats
+ --------------
+ 
+ Conoco implements better data-loading practices than those outlined in
+ Landmark's documentation.  Specifically, it is highly recommended that you
+ ignore Landmark's advice for setting clip points based on histograms.  It is
+ the product of an era in which disk space was far more expensive than today,
+ and is incongruous with the ways in which Conoco currently uses its seismic
+ data.  Consult the customer and use your own good sense instead.
+ 
+ The following file format / sample format combinations are available:
+ 
+     3DV              BRICKED                COMPRESSED
+     ---              -------                ----------
+     INT8             BRICKED_FLOAT8         COMPRESSED_FLOAT32
+     INT16            BRICKED_FLOAT16
+     INT32            BRICKED_FLOAT32
+     FLOAT32          INT8  (discouraged)
+                      INT16 (discouraged)
+ 
+ A brief description/commentary of each follows.  Preferences are likely to
+ change over the years as computers continue to get faster.  Those with
+ (**) asterisks are considered the least useful in common situations.
+ I/O speed both for you and the end user decreases as you go down the list.
+ 
+ 
+  3DV's:
+  ------
+ 
+    INT8    - "Traditional" 8-bit data.  Fast in optimized direction.  Can be
+              the best day-to-day workhorse if amplitudes are balanced (i.e.
+              dynamic range is limited), such as with post-MVXP data.
+              Particularly justified if interpreter also has access to 16-bit
+              or better versions when needed or if it's just used for
+              structural interpretation anyway.  Potentially dangerous if no
+              other data is delivered.  Clipping at 25 times the median is
+              currently common within Conoco (if data has had MVXP applied).
+ 
+    INT16   - "Traditional" 16-bit data.  Fast in optimized direction.  Fine
+              for the majority of post-stack situations, assuming minimal
+              (better yet no) clipping during the loading/creation step,
+              assuming the data doesn't have strong amplitude decay or large
+              useful dynamic range for some other reason, and assuming no
+              unusual further specialty processing is planned (separation of
+              upgoing from downgoing energy, multiple removal, etc.).
+ 
+ ** INT32   - Rarely used since it occupies same space as floating point.
+ 
+    FLOAT32 - Full 32-bit IEEE values.  Fast in optimized direction, no data
+              loss.
+ 
+ 
+  Bricked:
+  --------
+ 
+    INT8          - Similar to 3DV INT8, but numbers are returned within the
+                    devkit as floats.  Using BRICK_FLOAT8 is normally better.
+ 
+    INT16         - Similar to 3DV INT16, but numbers are returned within the
+                    devkit as floats.  Using BRICK_FLOAT16 is normally better.
+ 
+    BRICK_FLOAT8  - Each brick takes advantage of all 8 bits by storing values
+                    from -128 to 127 plus a local scale factor.  Worth
+                    considering.
+ 
+    BRICK_FLOAT16 - Each brick takes advantage of all 16 bits by storing
+                    values from -32768 to 32767 and a local scale factor.
+                    Effectively yields floating point precision.  Very
+                    sensible format.  Not unlike PROMAX trace storage.  Note
+                    also that there's no reason a "brick" can't just be a
+                    single trace, in which case each trace essentially just
+                    gets loaded unclipped and has a single scale factor.  This
+                    is the default approach in LMRKOUT for '.bri' files.
+ 
+ ** BRICK_FLOAT32 - Each brick uses all 32 bits and has its own local scale
+                    factor.  Yields higher precision than regular floating
+                    point (overkill, in other words).
+ 
+  Compressed:
+  -----------
+ 
+    COMPRESSED_FLOAT32 - Disk savings is impressive.  Distortion is normally
+                         very acceptable (percent FIDELITY to retain is
+                         controlled by the user).  However, can suffer from
+                         significant speed degradation both for this CPS
+                         process and for the final user.  CPU-intensive to
+                         decompress, slightly ahead of its time, perhaps.
+                         Currently more popular with IM departments than with
+                         interpreters.  Good choice in some circumstances, the
+                         only choice in others.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ NOTES:
+ 
+ 1. Traces coming into LMRKOUT should be sorted as though you were cutting a
+    typical final SEGY tape, i.e. you should be dumping all the data for an
+    inline, then all the data for the next inline, etc.  Crossline numbers
+    should change monotonically within each inline and do so in a consistent
+    manner.
+ 
+    Minor deviations from this pattern are probably acceptable, but beware that
+    significant I/O inefficiencies will be created for the end user if the file
+    isn't logically organized.
+ 
+    SeisWorks does allow files to be written in a manner optimized for
+    crossline viewing rather than inline viewing.  In the interest of keeping
+    LMRKOUT easy for day-to-day use, using this capability is somewhat
+    discouraged.  References to it were placed in the "Seldom Changed" box.
+    If you use this option, you may want to presort the input data into
+    crossline chunks rather than inline chunks (input sort order doesn't affect
+    the output, but can make your CPS job run better).
+ 
+ 2. LMRKOUT cannot create new SeisWorks projects.  Creating a new SeisWorks
+    project is typically handled by a geotechnician, or someone else with the
+    appropriate permissions and training.
+ 
+ 3. It is possible that you will want to preceed LMRKOUT by SELECT.  You must
+    restrict the traces coming in to the LMRKOUT (as defined by header words
+    8 and 7) such they do not exceed the inline and crossline ranges of the
+    project.  The job will abort if you attempt to load a trace that is outside
+    of the project bounds (unless you set OUT_OF_BOUNDS_IS_FATAL_ERROR to NO).
+ 
+ 
+ POSSIBLE WORK FLOW:
+ 
+ 1. Ask the appropriate party whether SeisWorks project XYZ has enough disk
+    space to accomplish the task at hand.  He or she will need to consult the
+    dir.dat file for the project, checking for possible read-only permissions,
+    and possibly making adjustments to prepare for your output.  Make sure you
+    use the right dir.dat file -- special data-loading versions may exist.
+ 
+ 2. Check the project boundaries (fire up SeisWorks yourself or again solicit
+    help).  Make sure the values in header words 8 and 7 do not define traces
+    that are outside of the inline and crossline ranges defined for the
+    project.  If some are, be aware of variable OUT_OF_BOUNDS_IS_FATAL_ERROR.
+ 
+ 3. If appending to an existing seismic data volume, make sure the time (or
+    depth) range and sample rates match those of your traces.  If not, use
+    TSEL, etc. to force consistency.
+ 
+ 4. To reiterate, if not outputting floating point data, intelligent sample
+    format and amplitude choices will need to be made.  Make them.
+ 
+ 5. For large jobs, you may want to run a small test first if possible.  Then,
+    be sure to use WRITE = OVERWRITE so the program doesn't abort due to the
+    pre-existing files.
+ 
+ 6. The potential for visually monitoring the progress of the job does exist.
+    There is no general restriction against opening SeisWorks and "watching
+    the data load."  However, this can be somewhat fickle, and almost certainly
+    won't work until a fair amount of data has been written, and may not work
+    at all for bricked and compressed files.
+ 
+ 
+ SCALING EXAMPLES:
+ 
+ *****************************************************************************
+  To write out an unclipped INT16 .3dv volume, set AMP_FACTOR to be equal to
+  (32767 / max_absolute_amp_in_dataset).  This will avoid clipping.
+ *****************************************************************************
+ 
+ *****************************************************************************
+  To write out an unclipped FLOAT16 .bri volume, set AMP_FACTOR to whatever
+  you want (each brick carries its own local scale factor anyway), but
+  typically 1.0.
+ *****************************************************************************
+ 
+ *****************************************************************************
+  To write out an INT8 .3dv volume clipped at 25 times the median, insert
+  MVXP into the flow (immediately?) prior to LMRKOUT then, assuming the median
+  of the data is now 1.0, set AMP_FACTOR to (127 / 25), also known as 5.08.
+ 
+  To write out an INT16 volume clipped at 25 times the median, again assuming
+  the median of the data is 1.0, you'd use an AMP_FACTOR = (32767 / 25), also
+  known as 1310.68.
+ 
+  INT32 is available but rarely (if ever) used.
+ *****************************************************************************
+ 
+ *****************************************************************************
+  To write out any of the various FLOAT32 approaches, you'd typically just
+  set AMP_FACTOR to be equal to 1.0.
+ *****************************************************************************
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 22. 2007-01-08  Bill Menger Modified tim_end using ameq function so that it
+                             won't crater when the user has depth steps that
+                             round off funny.
+ 21. 2006-02-14  SMCook     Added ZUNIT_FLAG.
+ 20. 2006-01-03  SMCook     Changed min_amp_written and max_amp_written
+                             initializations to give meaningful printout when
+                             loading "non-standard" data such as velocities.
+ 19. 2004-08-11  SMCook     Enabled INT8 and INT16 bricked options, which were
+                             intentionally omitted in the original version.
+                            Added inline_inc, crossline_inc arguments.
+ 18. 2004-05-11  SMCook     Changed max 3dv chars from 12 to 34.
+ 17. 2004-04-27  SMCook     Changed brick default dimensions to 8x8x16, plus
+                             made minor doc and field sensitivity changes.
+ 16. 2003-11-19  SMCook     Modified OB trace logic to include return values
+                             1, 2, and 3 (formerly 3 only).
+                            Added new variable out_of_bounds_print so that
+                             more than one warning message will appear if
+                             there are a lot of OB traces.
+ 15. 2003-08-06  SMCook     Corrected erroneous statement that inline
+                             optimization affects only .3dv files.  Turns out
+                             it actually also affects the memory cache used
+                             for bricked and compressed files.  For bricked
+                             files, LMRKOUT now sets optimization parameter
+                             based on the type of brick dimensions the user
+                             supplies.  User is warned about trace sorting if
+                             LMRKOUT changes the optimization setting.
+ 14. 2003-06-30  SMCook     Gave user a choice whether an OB trace is a
+                             fatal error or not.
+                            Changed doc to mention that inline optimization
+                             currently only applies to 3dv files.
+ 13. 2003-06-25  SMCook     Inform user what the line, trace, and time values
+                             were when an "out of survey bounds" error is
+                             returned from the devkit.
+ 12. 2003-06-16  SMCook     Moved putenv statements so they run before traps.
+                            Removed seisworks_project_trap.
+                            Fixed create_if_absent logic.
+ 11. 2003-04-14  SMCook     Split up options NEW and OVERWRITE for protection
+                             against overwriting another's Landmark volume.
+ 10. 2003-02-12  SMCook     Changed documentation to reflect the fact that
+                             lmrkwrap.f90 now obtains the Landmark environment
+                             variable defaults from cps_config.dat.
+  9. 2003-01-15  SMCook     Added logic for LM_LICENSE_FILE.  Overrides and
+                             eliminates need for it in the job builder.
+  8. 2002-07-16  SMCook     Initialized max_amp_written (to 0).
+                            User stats now show both the min and max scaled
+                             amplitudes written to the output volume.
+                             Previously, only the max was printed out for the
+                             user.  This was potentially confusing since the
+                             user might typically be more interested in knowing
+                             the absolute max.
+  7. 2002-02-08  SMCook     Increased length allowed for output filename to 60.
+                             Changed the guidef slightly to accomodate this
+                             change (note that there is still a Landmark-
+                             imposed file name length limit for 3dv files).
+  6. 2001-10-09  SMCook     Now prints stats like line range, crossline range,
+                             and max amp to the report file every 5000 traces.
+                            Fixed GUI bug where FLOAT32 changed back to INT16.
+                            Changed OVERWRITE variable from logical YES/NO to
+                             NEW/OVERWRITE and APPEND in effort to be more
+                             clear to the user.
+                            Disabled MAX_EXTENT_SIZE variable due to failure
+                             to ever get it to work right.
+  5. 2001-08-07  SMCook     Changed trap logic in a number of places to
+                             address intermittent GUI crashes.
+                            Changed DISTORTION to more-common FIDELITY.
+  4. 2001-08-01  SMCook     Fixed BASENAME trap to guarantee valid samp_format.
+  3. 2001-07-24  SMCook     Fixed inadvertent omission of call to
+                             lmrkwrap_proj_get_path_count.
+                            Added '01.3dv' trap -- prevent invalid names.
+                            Multiply dt and tstrt by 1000 going to SeisWorks.
+  2. 2001-07-19  SMCook     Finished max_extent logic.
+                            Now using HDRs 7 &amp; 8 instead of 37 &amp; 38.
+  1. 2001-07-16  SMCook     Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

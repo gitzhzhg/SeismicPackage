@@ -1,0 +1,113 @@
+         HOW_TO_MAKE_CPSEIS  in  $CPSEIS_HOME         21 June 2011 
+
+CHECKOUT
+To check out CPSeis from the svn repository, execute the following:
+
+          svn co https://cpseis.svn.sourceforge.net/svnroot/cpseis/trunk cpseis
+
+SET_ENVIRONMENT
+To set up the CPSeis environment, something like the following should reside
+in your ~/.bashrc file (with possible variations depending on the machine),
+or in a separate script which you source either from your ~/.bashrc file,
+or manually:
+
+          export CPSEIS_INSTALL_DIR=/home/bmenger/workspace/cpseis-trunk
+          export THIRDPARTY_DIR=/apps/thirdparty
+          unset CPSEIS_ENVIRONMENT
+          source $CPSEIS_INSTALL_DIR/etc/cpseis_bashrc.sh mpich2 gfortran
+
+Note that $CPSEIS_INSTALL_DIR must be the toplevel directory you checked out.
+Note also that $CPSEIS_HOME will be set to the same as $CPSEIS_INSTALL_DIR.
+
+THIRD_PARTY_DEPENDENCIES
+The build and make will only work if you previously have set up the THIRDPARTY_DIR and put into it a java distribution, fftw, and mpich2 or lam MPI.  If these reside elsewhere, then you need to "fake it" by putting links in a directory pointed to by the THIRDPARTY_DIR environment variable.  An example follows:
+if your jdk is in /usr/local/jdk , your fftw is in /opt/fftw, your mpich2 is in /opt/mpi/mpich2, then you could 
+mkdir -p /apps/thirdparty
+mkdir -p /apps/thirdparty/fftw/platforms/$CPSEIS_ARCH
+mkdir -p /apps/thirdparty/jdk/platforms/$CPSEIS_ARCH
+mkdir -p /apps/thirdparty/mpich2/platforms/$CPSEIS_ARCH
+ln -s /usr/local/jdk /apps/thirdparty/fftw/platforms/$CPSEIS_ARCH 
+ln -s /opt/fftw /apps/thirdparty/jdk/platforms/$CPSEIS_ARCH
+ln -s /opt/mpi/mpich2 /apps/thirdparty/mpich2/platforms/$CPSEIS_ARCH
+export THIRDPARTY_DIR=/apps/thirdparty
+
+Now the packages in CPSEIS will find the appropriate libraries to do the builds.Alternatively, you can use the build scripts in CPSEIS_HOME/scripts to build fftw, mpich2, and java jdk.(jdk will require you to go to sun.com and download the bin file.)
+
+MAKE
+	cd $CPSEIS_INSTALL_DIR/scripts
+	chmod 755 *
+	./create_directories $CPSEIS_ARCH
+	unset CPSEIS_ENVIRONMENT
+	. ~/.bashrc
+	cd ../platforms/$CPSEIS_ARCH
+	./create_directories $CPSEIS_ARCH
+	make depend all install cfe 
+	cd ../../spws_home/making
+	./add_new_platform $CPSEIS_ARCH
+	cd $CPSEIS_ARCH
+	make 
+	make programs
+	fixhelp.sh
+
+(now go down to CONFIGURING CPSEIS)
+00000000011111111112222222222333333333344444444445555555555666666666677777777778
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+If we get the install script fixed right, then...the following will work.
+
+To make everything in CPSeis, you can go to the $CPSEIS_HOME/scripts directory
+and execute the following script:
+
+              ./install_cpseis
+
+The above script will do the following (in this order):
+
+(1) Create any required directories (including platform-specific directories).
+(2) Make targets in $CPSEIS_HOME/src.
+(3) Make targets in $CPSEIS_HOME/opencfe.
+(4) Make targets in $CPSEIS_HOME/wrappers.
+(5) Make targets in $CPSEIS_HOME/spws_home.
+
+After that, execute make in any the following directories (as appropriate):
+
+(1) $CPSEIS_HOME/platforms/$CPSEIS_ARCH.
+(2) $CPSEIS_HOME/wrappers.
+(3) $CPSEIS_HOME/wrappers/src/org/cpseis.
+(4) $CPSEIS_HOME/wrappers/src/org/cpseis/wwwwww.
+(5) $CPSEIS_HOME/spws_home/making/$CPSEIS_ARCH.
+(6) $CPSEIS_HOME/spws_home/ssssss/zzzzzz/$CPSEIS_ARCH.
+
+      wwwwww = util or wrappers or examples
+      ssssss = util or oop or programs
+      zzzzzz = subdirectory under util or oop or programs.
+
+CONFIGURING CPSEIS:
+
+To fix cps_config.dat (for config and lock files etc):
+
+(1) Delete the file $CPSEIS_HOME/etc/$CPSEIS_ARCH/cps_config.dat.
+(2) Source your ~/.bashrc file.
+(3) rm -rf $CPSEIS_INSTALL_DIR/log/
+(4) mkdir -p $CPSEIS_INSTALL_DIR/log
+(5) touch $CPSEIS_INSTALL_DIR/log/cps_lockfile.dat
+(6) READ and add appropriate directories for file storage for:
+    (a) $CPSEIS_INSTALL_DIR/etc/cpsdata_nodes.dat
+    (b) $CPSEIS_INSTALL_DIR/etc/cpstemp_nodes.dat
+(you will need to create some directories to hold extents of files, similar to
+what promax does (but better :^) ):
+(7) put a batchtmp directory in $CPSEIS_INSTALL_DIR/etc/cfebld_batchtmp_dirs where you want your temporary batch jobs to be built.  Failed jobs will stay here for diagnoses, but completed successful jobs will auto-delete.
+You will need a directory /ptmp with some space on it if you don't do anything to these files, that is where I put the default.
+mkdir -p /ptmp/localhost/scratch
+mkdir -p /scratch/ptmp
+
+Note that the above fix for cps_config.dat should no longer be required because
+that file has been removed from the svn repository so it will automatically get
+remade without the user having to delete it manually.
+
+To make cfe:
+
+(1) Type "make cfe" in $CPSEIS_HOME/platforms/$CPSEIS_ARCH.
+(2) Type "make install" in $CPSEIS_HOME/platforms/$CPSEIS_ARCH.
+(3) Delete $CPSEIS_HOME/etc/$CPSEIS_ARCH/cps_config.dat (which will get remade
+     by setup_cpseis_environment, which is called from cpseis_bashrc.sh).
+(4) Source your ~/.bashrc file.

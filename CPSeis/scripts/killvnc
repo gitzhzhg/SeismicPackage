@@ -1,0 +1,17 @@
+#!/bin/bash
+# kill vnc instance
+if [ -z $1 ] ; then
+	echo "$0: specify server name then screen number.  Ex: $0 mymach 2"
+	exit 1
+fi
+if [ -z $2 ] ; then
+	echo "$0: specify server name then screen number.  Ex: $0 mymach 2"
+	exit 1
+fi
+if [ "$1" != "$(uname -n)" ] ; then
+	ssh $1 vncserver -kill $1:$2
+else
+	vncserver -kill $1:$2
+fi
+rm ~/.vnc/$1:$2:*.running
+findvnc

@@ -1,0 +1,442 @@
+#!/bin/sh
+#<CPS_v1 type="PROGRAM" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   D O C U M E N T A T I O N
+#
+# Name       : cfecustom_guide
+# Category   : stand-alone
+# Written    : 2000-04-12   by: Donna K. Vunderink
+# Revised    : 2008-08-27   by: Karen Goodger
+# Maturity   : beta
+# Purpose    : A guide to building and executing a custom cfe.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+# 16. 2008-08-27  Goodger    linuxab80RHEL39 now default platform.
+# 15. 2007-10-11  Goodger    Remove references to alpha and the need for a
+#                            link in the xml directory.
+# 14. 2007-01-29  Goodger    Document that the name custom should NOT be
+#                            used as a directory name.
+# 13. 2004-10-14  Stoeckley  Add info regarding change of default gmake target
+#                             to include making icps; add info regarding
+#                             specifying alternate platform for cfebld.
+# 12. 2003-11-07  Stoeckley  Add copy_from_sps to OTHER RELATED UTILITIES list.
+# 11. 2003-11-04  Stoeckley  Remove obsolete reference to the pgln target;
+#                             add references to targets program and programs;
+#                             add references to programs USES, CHECKC, and
+#                             ICPS.
+# 10. 2003-06-19  Stoeckley  Remove references to add_custom_process since
+#                             it is now automatic.
+#  9. 2003-05-16  Stoeckley  Minor changes in documentation to reflect changes
+#                             in makefiles and scripts referred to in this
+#                             guide.
+#  8. 2003-04-04  Stoeckley  Add speedup tips; add more information about
+#                             currently available platforms; add more info
+#                             to the OTHER RELATED UTILITIES section.
+#  7. 2003-03-21  Stoeckley  Add some additional documentation details.
+#  6. 2003-03-18  Stoeckley  Rearrange the documentation to show steps in
+#                             chronological order, add some updates and
+#                             clarifications, make changes to reflect
+#                             simplifications based on new scripts and new
+#                             capabilities in the makefiles; remove
+#                             documentation for the original (deprecated)
+#                             method of maintaining a single version of
+#                             cfecustom; change name from CFEcustom_guide
+#                             to cfecustom_guide.
+#  5. 2002-05-14  Vunderink  Completely restructured.
+#  4. 2001-11-06  Vunderink  Added reminders in Multiple Custom Setups.
+#  3. 2001-09-24  Vunderink  Added Solaris build, added multiple custom setups,
+#                              added handy scripts and batch info.
+#  2. 2001-01-25  Vunderink  Updated to build linux and removed pospx1 and
+#                              poepsn05 references.
+#  1. 2000-04-12  Vunderink  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+#     This is a guide to building and executing a custom cfe library
+#     and custom xml.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<programming_doc>
+#-------------------------------------------------------------------------------
+#                             INITIAL SETUP
+#
+# Before you can run any custom versions of CFE, you must take the following
+# steps.  You need to do these only once.
+#
+# (1) Add the script called setup_sps_environment to your .cshrc file. This
+#     script will set up the appropriate environment variables, paths, and
+#     aliases which will provide access to compilers and allow easy development
+#     work for ~sps and ~spws programmers, developers, and users.
+#
+#     To call this script, simply type the following into your .cshrc file:
+#
+#                      source setup_sps_environment
+#
+#     If this script is not reachable through the PATH variable, you must
+#     specify the complete path, which can be provided to you by the ~sps
+#     system administrator.  Currently this will work:
+#
+#           source /usr/app/vendors/sps/scripts/setup_sps_environment
+#
+#     If you need to set some environment variables, paths, or aliases
+#     differently, you can simply redefine them in your .cshrc file after
+#     sourcing setup_sps_environment.
+#
+#
+#-------------------------------------------------------------------------------
+#                    SETUP FOR A CUSTOM VERSION OF CFE
+#
+# To set things up for a custom version of CFE, you may run the script
+# called cfecustom_setup.  You need to do this only once for each separate
+# custom CFE you plan to maintain.
+#
+# This script does the following:
+#
+#  (1) Creates a source code directory for the custom setup (if missing).
+#      DO NOT name the directory custom.  CFE is using this name.
+#  (2) Creates a cfe directory underneath your home directory (if missing).
+#  (3) Creates a directory (with the same name as your source code directory)
+#       underneath your cfe directory to hold xml files.
+#  (4) Creates a makefile in the source code directory.
+#  (5) Copies the system version of super.f90 to the source code directory.
+#  (6) Creates links in your new xml directory to system xml files.
+#  (7) Creates platform-specific subdirectories underneath the source code
+#       directory to hold object files, module files, and the libCFE.so library.
+#  (8) Creates makefile links in the platform-specific subdirectories.
+#  (9) Creates a nodes_and_platforms file in your source code directory.
+# (10) Creates "system preferences" files in your cfe directory.
+# (11) Changes the group name for certain files and directories to spsc.
+#
+# To run this script, type the following:
+#
+#                  cfecustom_setup
+#             or   cfecustom_setup SOURCE
+#             or   cfecustom_setup SOURCE MATURITY
+#
+# where SOURCE is the name of the source code directory you want to create,
+# and MATURITY is the maturity level of the system files you want to link to
+# for this custom version of CFE.
+#
+# If SOURCE is specified, and does not match the current working directory
+# (in which you typed the command), and does not match any directory below
+# the current working directory, a new source code directory will be created
+# below the current working directory.
+#
+# If SOURCE is omitted, it is assumed to be the current working directory.
+# If SOURCE is omitted, or has the same name as the current working directory,
+# or has the same name as a directory below the current working directory,
+# then that directory will be updated by performing items (2) thru (11).
+#
+# If MATURITY is omitted, you will be prompted for the maturity.  Permitted
+# values are beta and production (default beta).  This parameter
+# determines which XML files will be linked to, which super.f90 file will
+# be fetched, which platform-specific subdirectories will be created, which
+# preferences files will be created, and which MATURITY value will be placed
+# into the makefile.
+#
+# The source code directory will be referred to as SOURCE throughout this
+# documentation.
+#
+# NOTE REGARDING PLATFORM-SPECIFIC DIRECTORIES:
+#
+# The platform specific directories are taken from the file
+# /home/sps/etc/prefs_and_nodes_and_platforms
+#
+# NOTE REGARDING SYSTEM PREFERENCES FILES:
+# There is a single system preferences file for each supported architecture.
+# These system preferences files tell cfecustom where to find the libCFE.so
+# library and the xml files.  The platform-specific version of libCFE.so
+# which is specified in each system preferences file is the only version
+# which can be made on that architecture.  As of this writing, the
+# platform-specific version of libCFE.so which is specified in each system
+# preferences file is as follows, but this might change from time to time,
+# and THERE WILL BE NO ATTEMPT TO KEEP THE FOLLOWING LIST UP TO DATE.
+#
+#     ARCHITECTURE           preferences file            PLATFORM
+#     -----------------      ----------------------      ---------
+#     i386-intel-linux       prefs.xml.SOURCE.linux      linuxab80RHEL39
+#     sparc-sun-solaris      prefs.xml.SOURCE.sol        sol62_debug
+#
+# NOTE REGARDING THE nodes_and_platforms FILE:
+# This file placed into your source code directory contains a list of the
+# platform-specific directories used for the specified maturity, and the
+# nodes used to compile each platform.  This file is used by cfecustom_makeall
+# and cfecustom_checkall.  This file can be edited if desired.  For example,
+# if you want to use your desktop to compile a platform, you can change the
+# node for that platform to your desktop computer.  See the cfecustom_makeall
+# documentation for more information.  Note: The first line in this file
+# contains the maturity and should not be changed, because it is used by
+# various scripts to keep the maturity consistent among all scripts and
+# consistent with the maturity specified in the makefile.
+#
+#-------------------------------------------------------------------------------
+#                     MAINTAINING A CUSTOM VERSION OF CFE
+#
+# (1) Move to the source code directory SOURCE.
+#
+# (2) Copy all custom source code into SOURCE, or create links to the custom
+#     code if you want to keep that code elsewhere.
+#
+# (3) Execute cfecustom_makeall in directory SOURCE to compile on all platforms:
+#
+#     cfecustom_makeall causes all required gmake commands (listed below) to
+#     be executed in each platform-specific directory on the appropriate
+#     architecture.  Standard out and standard error are directed to the
+#     file cfecustom.log in the platform specific directory.  Platform specific
+#     directories and associated makefile links are created if they do not
+#     exist.
+#
+#     cfecustom_makeall first performs the following gmake operations
+#     (in the foreground) on the node which is listed first in the
+#     nodes_and_platforms file:     depend + xmlln + xml
+#
+#     cfecustom_makeall then performs the following gmake operations
+#     (in the background) on every node/platform which is listed in the
+#     nodes_and_platforms file:     custom + lib
+#
+#     If you specify a target to cfecustom_makeall, that target will be made
+#     (in the background) on every node/platform which is listed in the
+#     nodes_and_platforms file, instead of performing the above operations.
+#
+#     You can edit the nodes_and_platforms file to change the node which is
+#     listed first, or to change the platforms to compile on, or to change
+#     the nodes used to compile the platforms.  For example, if you want to
+#     use your desktop to compile a platform, you can change the node for
+#     that platform to your desktop computer.
+#
+# (4) Execute cfecustom_checkall in directory SOURCE:
+#
+#     cfecustom_checkall displays all the cfecustom.log files for easy review.
+#
+# (5) To compile on only one platform, move to the appropriate platform-
+#     specific directory and type any of the following, as needed:
+#
+#      gmake depend   (to build the makefile.depend include file)
+#      gmake program  (to compile and link main programs)
+#      gmake programs (to compile and link main programs)
+#      gmake xmlln    (to create links to system xml files)
+#      gmake xml      (to build new xml only)
+#      gmake clean    (to remove existing object and module code)
+#      gmake compile  (to compile your code only)
+#      gmake lib      (same as compile + build libCFE.so for this platform)
+#      gmake          (same as xml + lib + icps)
+#      gmake custom   (same as clean + compile + create source.compile file)
+#      gmake total    (same as all of the above)
+#      gmake help     (to print help information)
+#      gmake list     (to print variables used in this makefile)
+#
+# NOTE REGARDING XML FILES CREATED WITH THE xml TARGET:
+# If there is a <gui_def> tag in your source code, gmake will create xml
+# files from the <gui_def> and <HelpSection> sections, place them into your
+# xml directory, and set the group to spsc.
+#
+# NOTE REGARDING THE SUPER.F90 FILE:
+# This file must be updated for each new CPS process you create.  This file
+# is automatically copied by "gmake depend" to your source code directory,
+# and automatically updated to include all new CPS processes in your source
+# code directory.  If you wish to remove a new CPS process from being used,
+# simply rename the source file for that CPS process to not end in .f90,
+# or move it to a different directory, and run "gmake depend" again.
+#
+# NOTE REGARDING the libCFE.so FILE CREATED WITH THE lib TARGET:
+# This file might be successfully created only on the one platform which
+# corresponds to the platform specified in the system preferences file
+# for the relevant architecture, because required CFE object code might
+# not be available for all platforms on that architecture.  Any other
+# gmake targets, however, can generally be made on all platforms supported
+# by the relevant maturity.
+#
+# GENERAL SPEEDUP TIPS:
+# Do most of your development by typing "gmake" in your favorite platform
+# specific directory rather than running cfecustom_makeall every time.  Be
+# sure to type "gmake depend" whenever you make changes which might change
+# the dependencies.  Type "gmake clean" or "gmake total" only when you need
+# to wipe the plate clean for a fresh start at compiling your code.  Running
+# cfecustom_makeall is equivalent to running "gmake total" in each platform
+# specific directory.  You must run cfecustom_makeall as a final check before
+# checking in your code.
+#
+# SPEEDUP TIP WHEN TESTING THE SCREEN LAYOUT ONLY:
+# If you are testing the gui only (by editing the <gui_def> and <HelpSection>
+# sections but not the Fortran code), just run "gmake xml" and then redisplay
+# the process screen in your cfecustom.  It is not necessary to exit out of
+# cfecustom.  All you need to do is pop down the process screen (if it is up)
+# and then pop it up again.  Or, if the process screen is up, just arrow left
+# to the previous process and then arrow right.
+#
+# SPEEDUP TIP WHEN COMPILING THE CODE ONLY:
+# If you are testing the source code by compiling it over and over, but you
+# do not need to make a cfecustom just yet, just run "gmake compile".  Or to
+# compile just one file, run "gmake xxxx.o", where xxxx.f90 or xxxx.c is the
+# name of the file to compile.
+#
+#-------------------------------------------------------------------------------
+#                     RUNNING A CUSTOM VERSION OF CFE
+#
+# Your custom cfe will have the same look and feel as the system version.  If
+# you need assistance in the operation, see the "User's Guide to the New CFE".
+#
+# (1) Enter the following command from any directory:
+#
+#                    cfecustom -m SOURCE
+#
+# (2) Another user will need to enter this command instead:
+#
+#                    cfecustom -m SOURCE -u USERID
+#
+#     where USERID is your userid.
+#
+# (3) To get debug printout to your screen, add -o to the cfecustom command.
+#
+#
+#       **     SOURCE must not be named custom
+#
+#-------------------------------------------------------------------------------
+#                            SUBMITTING JOBS
+#
+# (1) Custom code is added to batch jobs using the "Custom Parameters" in
+#     the JOB_DATA process (the second tab).
+#
+# (2) The JOB_DATA parameter array CUSTOM_COMPILE is used to list source
+#     code to be compiled and added to the linking of the job executable.
+#     The source code is compiled in the listed order.  If only filenames
+#     are listed, default betalib compile options are used.  Otherwise,
+#     the complete compile command must be specified.  The complete path
+#     must be included in the filenames.
+#
+# (3) If the file extension of a file specified in the CUSTOM_COMPILE array
+#     is ".compile", this file is expected to contain a list of source code
+#     files to be compiled and added to the linking of the job executable.
+#     Again, the source code is compiled in the listed order.
+#
+# (4) Actual source code files and ".compile" list files can both be in the
+#     CUSTOM_COMPILE array and can be intermixed.
+#
+# (5) The "gmake custom" command mentioned above can be used to build a
+#     file named "source.compile" to be entered in the CUSTOM_COMPILE array.
+#     The "custom" target (as all gmake targets) must be executed in the
+#     platform-specific directory.  It will "clean" the directory, compile
+#     the code, and write the compile commands into the file "source.compile".
+#
+# (6) The variables $HOME and $PLATFORM may be used to enter the location
+#     of a ".compile" file.  For example:
+#
+#                  $HOME/version4/$PLATFORM/source.compile
+#
+#     Remember that $HOME works only for the owner of the directory tree.
+#     A processor who is accessing the file in a developer's directory
+#     must provide the full path (or use ~USERID where USERID is the
+#     developer's userid).
+#
+# (7) Using the "gmake custom" command, and putting the resulting
+#     "source.compile" file into the CUSTOM_COMPILE array, is the
+#     recommended procedure for adding custom code to batch jobs.
+#
+# NOTE REGARDING ALTERNATE WAYS TO ADD CUSTOM CODE TO JOBS:
+# Occasionally (but rarely), custom source code which you want to link
+# to may not be available (e.g. vendor code), or you may need to link
+# to additional special libraries.  To accomodate such situations,
+# the JOB_DATA parameter arrays CUSTOM_MODULES and CUSTOM_LINK are an
+# alternative way to specify custom code in the linking of the job
+# executable.  The CUSTOM_MODULES array is a list of the directories to
+# search for Fortran 90 modules when compiling the main program for the
+# job executable.  The CUSTOM_LINK array is a list of all object code
+# (except program main) and/or libraries, in the desired order, to be
+# included in the linking of the job executable.  If the system beta
+# modules directory and beta library are not specified, they are added to
+# the end of the list by the job builder.
+#
+#-------------------------------------------------------------------------------
+#                         OTHER RELATED UTILITIES
+#
+# The following utilities are not necessarily part of the cfecustom setup and
+# procedures, but are convenient to use in conjunction with cfecustom:
+#
+# (1) cpsdoc         Documentation for CPS processes, primitives, scripts, etc.
+#                    Look in this documentation for further information on
+#                    the utilities listed below.
+#
+# (2) process_module_template   This is a template which should be used
+#                               when beginning to write a new CPS process.
+#                               This template is used by ezcps and can also
+#                               be used manually.
+#
+# (3) ezcps          Creates a skeleton CPS process .f90 file from a gui_def
+#                    layout.  This file is created from the process module
+#                    template, and filled in with the process parameters found
+#                    in the gui_def layout.  Very useful when beginning to
+#                    write a new CPS process.
+#
+# (4) ezgui          Creates an xml file from a gui_def layout.
+#                    This is used by gmake xml and need not be run separately.
+#
+# (5) cfebld         Builds a job file (for batch processing) from a workfile.
+#                    The cfe and cfecustom programs can also do this.
+#
+# (6) cfesub         Submits a batch processing job.
+#                    The cfe and cfecustom programs can also do this.
+#
+# (7) cfebldbeta     Same as cfebld except links to betalib instead of prodlib.
+#
+#
+# (9) cfebldbeta -i  Same as cfebldbeta except builds an interactive job which
+#                    is useful for debugging.  Typing the job file name on the
+#                    command line will compile the code, create an executable
+#                    with extension .exe, put the process parameters in a file
+#                    called process_parameters, and run the executable.  For
+#                    subsequent running or debugging, just run the .exe file.
+#                    (You can also edit the process parameters - but not the
+#                    list of processes - in the process_parameters file, if
+#                    this helps with your testing and debugging efforts.)
+#                    Add "-p platform" to use a specific platform.
+#
+# (10) uses          Lists modules which use, and are used by, a specified
+#                    module.
+#
+# (11) checkc        Checks the custom code to make sure it conforms to
+#                    standards.
+#
+# (12) icps          Runs an interactive CPS job using a workile, without
+#                    the need to build or execute a jobfile.  You must create
+#                    a custom version of this executable if you wish to test
+#                    custom code.  This custom version can be easily created
+#                    by running gmake programs or gmake icps.  Currently
+#                    icps cannot run parallel jobs.
+#
+# (13) copy_from_sps  An easy way to copy source code from ~sps without having
+#                     to search for it.
+#
+#-------------------------------------------------------------------------------
+#</programming_doc>
+

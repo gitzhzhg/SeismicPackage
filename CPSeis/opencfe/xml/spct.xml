@@ -1,0 +1,504 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="spct" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SPCTPROCESS" title="SPCT Process" rows="25" columns="80">
+    <Label keyword="COMMENT_CALCULATETRACESPECTRA" alignment="center">calculate trace SPeCTra.</Label>
+    <Label keyword="COMMENT_TRANSFORMINPUTTRACESTOAM" alignment="center">Transform input traces to amplitude and phase spectrum traces.</Label>
+    <Label keyword="COMMENT_ORTHEINVERSE" alignment="center">or the inverse.</Label>
+    <Label keyword="LABEL_OPT_TRANSFORM" alignment="left">OPT_TRANSFORM=</Label>
+    <Field keyword="OPT_TRANSFORM" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FINDSPECTRA" alignment="center">Find Spectra</Label>
+    <Label keyword="LABEL_FREQ_SCALE" alignment="left">FREQ_SCALE=</Label>
+    <Field keyword="FREQ_SCALE" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MAX" alignment="left">FREQ_MAX=</Label>
+    <Field keyword="FREQ_MAX" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_NUM" alignment="left">TIM_NUM   =</Label>
+    <Field keyword="TIM_NUM" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INC" alignment="left">TIM_INC =</Label>
+    <Field keyword="TIM_INC" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG   =</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END =</Label>
+    <Field keyword="TIM_END" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_LEN_TAPER" alignment="left">LEN_TAPER =</Label>
+    <Field keyword="LEN_TAPER" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_PHASEMANIPULATIONOPTIONS" alignment="center">Phase Manipulation Options</Label>
+    <Label keyword="LABEL_OPT_PHASE" alignment="left">OPT_PHASE =</Label>
+    <Field keyword="OPT_PHASE" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FREQUENCYRANGEFORUNWRAPP" alignment="center">Frequency Range for Unwrapping the Phase</Label>
+    <Label keyword="LABEL_FREQ_UNW_BEG" alignment="left">FREQ_UNW_BEG=</Label>
+    <Field keyword="FREQ_UNW_BEG" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_UNW_END" alignment="left">FREQ_UNW_END=</Label>
+    <Field keyword="FREQ_UNW_END" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_FREQUENCYRANGEFORFLATTEN" alignment="center">Frequency Range for Flattening Phase Spectrum</Label>
+    <Label keyword="LABEL_FREQ_FIT_BEG" alignment="left">FREQ_FIT_BEG=</Label>
+    <Field keyword="FREQ_FIT_BEG" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_FIT_END" alignment="left">FREQ_FIT_END=</Label>
+    <Field keyword="FREQ_FIT_END" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERWORDSFORSTORINGTHE" alignment="center">Header Words for Storing the Flattening Results</Label>
+    <Label keyword="LABEL_HDR_TIM_SHFT" alignment="left">HDR_TIM_SHFT =</Label>
+    <Field keyword="HDR_TIM_SHFT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_AVE_PHASE" alignment="left">HDR_AVE_PHASE=</Label>
+    <Field keyword="HDR_AVE_PHASE" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_TIM_FIRST" alignment="left">HDR_TIM_FIRST=</Label>
+    <Field keyword="HDR_TIM_FIRST" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_CALCULATETRACESPECTRA" xPos="26" yPos="0" xSize="24" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_TRANSFORMINPUTTRACESTOAM" xPos="9" yPos="1" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_ORTHEINVERSE" xPos="9" yPos="2" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_TRANSFORM" xPos="9" yPos="4" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_TRANSFORM" xPos="23" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_FINDSPECTRA" xPos="31" yPos="6" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_SCALE" xPos="6" yPos="7" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_SCALE" xPos="17" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MAX" xPos="41" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MAX" xPos="50" yPos="7" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_NUM" xPos="6" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_NUM" xPos="17" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INC" xPos="41" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INC" xPos="50" yPos="8" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="6" yPos="9" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="17" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="41" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="50" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_LEN_TAPER" xPos="6" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LEN_TAPER" xPos="17" yPos="10" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_PHASEMANIPULATIONOPTIONS" xPos="24" yPos="12" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_PHASE" xPos="6" yPos="13" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_PHASE" xPos="17" yPos="13" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_FREQUENCYRANGEFORUNWRAPP" xPos="18" yPos="15" xSize="40" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_UNW_BEG" xPos="6" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_UNW_BEG" xPos="19" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_UNW_END" xPos="41" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_UNW_END" xPos="54" yPos="16" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_FREQUENCYRANGEFORFLATTEN" xPos="16" yPos="18" xSize="45" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_FIT_BEG" xPos="6" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_FIT_BEG" xPos="19" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_FIT_END" xPos="41" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_FIT_END" xPos="54" yPos="19" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERWORDSFORSTORINGTHE" xPos="15" yPos="21" xSize="47" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TIM_SHFT" xPos="6" yPos="22" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TIM_SHFT" xPos="20" yPos="22" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_AVE_PHASE" xPos="6" yPos="23" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_AVE_PHASE" xPos="20" yPos="23" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_TIM_FIRST" xPos="6" yPos="24" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_TIM_FIRST" xPos="20" yPos="24" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_TRANSFORM">
+      <Tip>Transform from time to frequency or frequency to time.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - OPT_TRANSFORM<br> Transform from time to frequency or frequency to time.</center></b>
+<pre> Default = TIME_TO_FREQ
+ Allowed = TIME_TO_FREQ Transform from time to frequency.
+ Allowed = FREQ_TO_TIME Transform from frequency to time.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_SCALE">
+      <Tip>Frequency interval in Hz for each "second" in output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - FREQ_SCALE<br> Frequency interval in Hz for each "second" in output traces.</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt; 0.0
+ Frequency interval in Hz denoted by each "second" in the output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MAX">
+      <Tip>Maximum frequency for calculations and spectra.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - FREQ_MAX<br> Maximum frequency for calculations and spectra.</center></b>
+<pre> Default = Nyquist
+ Allowed = real &gt; 0.0
+ Maximum frequency to include the output spectrum traces. FREQ_SCALE and
+ FREQ_MAX together determine the length of output traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_NUM">
+      <Tip>Number of time samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - TIM_NUM<br> Number of time samples.</center></b>
+<pre> Default = NDPT
+ Allowed = integer</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INC">
+      <Tip>Trace time increment for freq to time transform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - TIM_INC<br> Trace time increment for freq to time transform.</center></b>
+<pre> Default = DT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Start of input trace time window for spectrum calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - TIM_BEG<br> Start of input trace time window for spectrum calculation.</center></b>
+<pre> Default = TSTRT
+ Allowed = end_of_trace &gt; real &gt;= TSTRT
+ Start of input trace time window, in seconds, for spectrum calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>End of input trace time window for spectrum calculation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - TIM_END<br> End of input trace time window for spectrum calculation.</center></b>
+<pre> Default = end_of_trace
+ Allowed = end_of_trace &gt;= real &gt; TIM_BEG
+ End of input trace time window, in seconds, for spectrum calculation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="LEN_TAPER">
+      <Tip>Length of cosine taper, in seconds, to reduce transform artifacts.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - LEN_TAPER<br> Length of cosine taper, in seconds, to reduce transform artifacts.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt;= 0.0
+ Cosine taper is centered on nominal window edges (but if taper would run
+ off beginning or end of the trace, taper is moved inward until it lies
+ entirely on the trace).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_PHASE">
+      <Tip>Whether to unwrap phase or unwrap and flatten the phase spectrum.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - OPT_PHASE<br> Whether to unwrap phase or unwrap and flatten the phase spectrum.</center></b>
+<pre> Default = NONE
+ Allowed = NONE     (Do no phase unwrapping.)
+ Allowed = UNWRAP   (Unwrap phase but do not time-shift to flatten.)
+ Allowed = FLATTEN  (Unwrap phase and time-shift to flatten phase spectrum.)
+ Phase unwrapping eliminates the constraint that phase must lie within the
+ +/- 180 degree range.
+ 
+ Time-shifting the trace uses the phase-shift time-shift relationship to make
+ the phase spectrum as horizontal as possible in the selected frequency range.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_UNW_BEG">
+      <Tip>Low end of frequency range to use for phase unwrapping, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - FREQ_UNW_BEG<br> Low end of frequency range to use for phase unwrapping, in Hz.</center></b>
+<pre> Default = 8
+ Allowed = FREQ_MAX &gt; real &gt;= 0.0
+ Active when OPT_PHASE = UNWRAP or OPT_PHASE = FLATTEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_UNW_END">
+      <Tip>High end of frequency range to use for phase unwrapping, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - FREQ_UNW_END<br> High end of frequency range to use for phase unwrapping, in Hz.</center></b>
+<pre> Default = 60
+ Allowed = FREQ_MAX &gt;= real &gt; FREQ_UNW_BEG
+ Active when OPT_PHASE = UNWRAP or OPT_PHASE = FLATTEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_FIT_BEG">
+      <Tip>Low end of frequency range to use for phase spectrum flattening.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - FREQ_FIT_BEG<br> Low end of frequency range to use for phase spectrum flattening.</center></b>
+<pre> Default = 8
+ Allowed = FREQ_UNW_END &gt; real &gt;= FREQ_UNW_BEG
+ Active when OPT_PHASE = FLATTEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_FIT_END">
+      <Tip>High end of frequency range to use for phase spectrum flattening.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - FREQ_FIT_END<br> High end of frequency range to use for phase spectrum flattening.</center></b>
+<pre> Default = 60
+ Allowed = FREQ_UNW_END &gt;= real &gt; FREQ_FIT_BEG
+ Active when OPT_PHASE = FLATTEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TIM_SHFT">
+      <Tip>Header word to receive time-shift when OPT_PHASE = FLATTEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - HDR_TIM_SHFT<br> Header word to receive time-shift when OPT_PHASE = FLATTEN.</center></b>
+<pre> Default = 48
+ Allowed = 1 - NWIH
+ Time-shift calculated when OPT_PHASE = FLATTEN is stored in header word
+ HDR_TIM_SHFT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_AVE_PHASE">
+      <Tip>Header word to receive average phase when OPT_PHASE = FLATTEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - HDR_AVE_PHASE<br> Header word to receive average phase when OPT_PHASE = FLATTEN.</center></b>
+<pre> Default = 49
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TIM_FIRST">
+      <Tip>Header word to receive corrected TIM_FIRST if OPT_PHASE = FLATTEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - HDR_TIM_FIRST<br> Header word to receive corrected TIM_FIRST if OPT_PHASE = FLATTEN.</center></b>
+<pre> Default = 50
+ Allowed = 1 - NWIH
+ The value stored in this header word is a corrected TIM_FIRST value which
+ may be used in the DSIG process to avoid a bulk shift when using the wavelet
+ for designaturing traces.
+ 
+ The actual value stored in this header word is given by the equation
+       corrected_TIM_FIRST  =  current_TSTRT  -  TIM_SHFT
+ where TIM_SHFT is the value stored in header word HDR_TIM_SHFT.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>spct - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="spct">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SPCT         (calculate trace SPeCTra.)
+ Category   : transforms
+ Written    : 1987-10-02   by: Bob Baumel
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Transform input traces to amplitude and phase spectrum traces.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ If OPT_TRANSFORM = TIME_TO_FREQ
+ 
+ SPCT takes input traces in the time domain and produces output traces in the
+ frequency domain.  For each input trace, it generates TWO output traces:
+ first the amplitude spectrum, then the phase spectrum (in consecutive traces).
+ 
+ 
+ Phase Unwrapping
+ When OPT_PHASE = UNWRAP or OPT_PHASE = FLATTEN, the phase spectrum is
+ unwrapped in the range between FREQ_UNWRAP_BEG to FREQ_UNWRAP_END.  For
+ frequencies outside this range, the phase spectrum traces still contain the
+ original non-unwrapped phase (as in OPT_PHASE = NONE).
+ 
+ If OPT_TRANSFORM = FREQ_TO_TIME
+ 
+ SPCT takes two sequential input traces in the frequency domain and produces
+ output traces in the time domain.
+ For each pair input traces, it generates ONE output traces:
+ The first input trace in each pair is the amplitude spectrum,
+ The second input trace in each pair the phase spectrum in degrees.
+ Each pair of input traces must be passed to SPCT at the same time.
+ You can use process BUNCH to gather traces toegether.
+ No consideration is made of the phase flattening option.
+ Note that tapering in the time domain or filtering in the frequency domain
+ during the time to frequency transform may alter trace characteristics.
+ This means that a trace that had both a TIME_TO_FREQ transform followed
+ by a FREQ_TO_TIME transform may not be identical to the original trace.
+ 
+ Flattened Phase Spectra
+ For OPT_PHASE = FLATTEN, the unwrapped phase spectrum is least squares
+ fitted with a straight line between frequencies FREQ_FIT_BEG and FREQ_FIT_END
+ (like TFUN calculation), to determine the time shift that makes the unwrapped
+ phase as constant as possible in this frequency range.  (This causes the
+ the phase spectrum in this frequency range to be as horizontal as possible.)
+ 
+ The calculated time-shift is stored in header HDR_TIM_SHFT.  The average
+ phase of the time-shifted wavelet (in the frequency range between
+ FREQ_FIT_BEG and FREQ_FIT_END) is stored in header HDR_AVE_PHASE.
+ 
+ 
+ Phase Units
+ All phase values (in the output phase spectrum traces, and values stored in
+ header HDR_AVE_PHASE) are in DEGREES.  For OPT_PHASE = NONE, values in phase
+ traces are in range [-180,180]. For OPT_PHASE = UNWRAP and
+ OPT_PHASE = FLATTEN, the unwrapped phase values may extend well outside this
+ range.
+ 
+ 
+ Reference
+ Brigham, E., The Fast Fourier Transform, 1974, Prentice-Hall, p. 46.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ Frequency Sampling
+ Accuracy of phase unwrapping depends on computing the spectrum at a
+ sufficiently dense set of frequencies which, in turn, depends on the trace
+ length going into SPCT (the longer the time window, the finer the frequency
+ sampling). Thus, even if the desired spectrum is for a short wavelet (e.g.,
+ 0.2 seconds) DO NOT chop the trace to this short length using TSEL prior to
+ SPCT; instead, keep the trace several seconds long, and use TIM_BEG, TIM_END
+ and LEN_TAPER in SPCT to window the input traces.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 15. 2006-12-04  D. Glover    Added NULLIFY statements for Intel compiler.
+ 14. 2005-10-10  Goodger      Change argument tr_amp in routine transform_ft
+                              from intent(out) to intent(inout).
+ 13. 2005-06-14  D Hanson     Add OPT_TRANSFORM for inverse transform.
+ 12. 2002-04-22  B Baumel     Fix bug involving confusion of input and output
+                              NDPT globals causing invalid memory references.
+ 11. 2001-04-30  B Baumel     Change wrapped_up flag to skip_wrapup.
+ 10. 2000-06-16  B Baumel     Add setting of HDR_TIM_FIRST header word (to
+                              display TIM_FIRST value usable by DSIG) when
+                              OPT_PHASE = FLATTEN; also fix trace flow logic
+                              since this is now an "ungathering" process
+                              (change to two sets of headers &amp; traces).
+  9. 2000-06-13  B Baumel     Another tweak to time-domain tapers.
+  8. 2000-06-12  B Baumel     Additional fix to center tapers on window edges.
+  7. 2000-06-09  Brad Kruse   Comments from Bob Baumel.
+  6. 2000-04-28  Brad Kruse   Converted from old system.
+  5. 1998-02-18  B Baumel     Allow separate frequency ranges for phase
+                                unwrapping and for fitting (OPT=3).
+  4. 1997-10-27  B Baumel     Added lots of new options.
+  3. 1988-10-25  H Ball       NWIH and NWPT Conversion
+  2. 1988-06-10  B Baumel     Add CPSPRT calls.
+  1. 1987-10-02  B Baumel     Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

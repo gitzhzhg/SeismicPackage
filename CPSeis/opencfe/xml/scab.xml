@@ -1,0 +1,772 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="scab" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="SCABPROCESS" title="scab Process" rows="26" columns="80">
+    <Label keyword="COMMENT_SURFACECONSISTENTAMPLITU" alignment="center">Surface Consistent Amplitude Balancing</Label>
+    <Label keyword="LABEL_PASSES" alignment="left">PASSES=</Label>
+    <Field keyword="PASSES" type="comboBox" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TR_MAX" alignment="left">TR_MAX=</Label>
+    <Field keyword="TR_MAX" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STAT_TR" alignment="left">STAT_TR=</Label>
+    <Field keyword="STAT_TR" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STAT_SC" alignment="left">STAT_SC=</Label>
+    <Field keyword="STAT_SC" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_CORR" alignment="left">PATH_CORR=</Label>
+    <Field keyword="PATH_CORR" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATH_DIAG" alignment="left">PATH_DIAG=</Label>
+    <Field keyword="PATH_DIAG" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_SURFACECONSISTENTPARAMET" alignment="center">Surface Consistent Parameters</Label>
+    <Label keyword="LABEL_USE_SRC" alignment="left">USE_SRC=</Label>
+    <Field keyword="USE_SRC" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_SRC" alignment="left">HDR_SRC=</Label>
+    <Field keyword="HDR_SRC" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_INIT" alignment="left">SRC_INIT=</Label>
+    <Field keyword="SRC_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_INC" alignment="left">SRC_INC=</Label>
+    <Field keyword="SRC_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_LAST" alignment="left">SRC_LAST=</Label>
+    <Field keyword="SRC_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SRC_TOT" alignment="left">SRC_TOT=</Label>
+    <Field keyword="SRC_TOT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USE_REC" alignment="left">USE_REC=</Label>
+    <Field keyword="USE_REC" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_REC" alignment="left">HDR_REC=</Label>
+    <Field keyword="HDR_REC" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REC_INIT" alignment="left">REC_INIT=</Label>
+    <Field keyword="REC_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REC_INC" alignment="left">REC_INC=</Label>
+    <Field keyword="REC_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REC_LAST" alignment="left">REC_LAST=</Label>
+    <Field keyword="REC_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REC_TOT" alignment="left">REC_TOT=</Label>
+    <Field keyword="REC_TOT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_USE_OFF" alignment="left">USE_OFF=</Label>
+    <Field keyword="USE_OFF" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_OFF" alignment="left">HDR_OFF=</Label>
+    <Field keyword="HDR_OFF" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INIT" alignment="left">OFF_INIT=</Label>
+    <Field keyword="OFF_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_INC" alignment="left">OFF_INC=</Label>
+    <Field keyword="OFF_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_LAST" alignment="left">OFF_LAST=</Label>
+    <Field keyword="OFF_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_TOT" alignment="left">OFF_TOT=</Label>
+    <Field keyword="OFF_TOT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_BALANCECALCULATIONPARAME" alignment="center">Balance Calculation Parameters</Label>
+    <Label keyword="LABEL_TYPE_RA" alignment="left">TYPE_RA=</Label>
+    <Field keyword="TYPE_RA" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RANGE_KILL" alignment="left">RANGE_KILL=</Label>
+    <Field keyword="RANGE_KILL" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RANGE_CORR" alignment="left">RANGE_CORR=</Label>
+    <Field keyword="RANGE_CORR" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAS_SRC" alignment="left">RAS_SRC=</Label>
+    <Field keyword="RAS_SRC" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAS_REC" alignment="left">RAS_REC=</Label>
+    <Field keyword="RAS_REC" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAS_OFF" alignment="left">RAS_OFF=</Label>
+    <Field keyword="RAS_OFF" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_TIMEWINDOWPARAMETERS" alignment="center">Time Window Parameters</Label>
+    <Label keyword="LABEL_HDR_OFF_WIN" alignment="left">HDR_OFF_WIN=</Label>
+    <Field keyword="HDR_OFF_WIN" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="OFFSETS_ARRAYSET" label="OFFSETS     TIM_ADD     WIN_LEN">
+     <Array keyword="OFFSETS" type="float" maxLength="12 " columnName="OFFSETS" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="TIM_ADD" type="float" maxLength="20 " columnName="TIM_ADD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="WIN_LEN" type="float" maxLength="20 " columnName="  WIN_LEN" editable="yes" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_SURFACECONSISTENTAMPLITU" xPos="1" yPos="0" xSize="38" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PASSES" xPos="1" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PASSES" xPos="8" yPos="2" xSize="2" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MODE" xPos="12" yPos="2" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="17" yPos="2" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TR_MAX" xPos="25" yPos="2" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TR_MAX" xPos="32" yPos="2" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_STAT_TR" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STAT_TR" xPos="9" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_STAT_SC" xPos="14" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STAT_SC" xPos="22" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_PATH_CORR" xPos="1" yPos="4" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_CORR" xPos="11" yPos="4" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATH_DIAG" xPos="1" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_DIAG" xPos="11" yPos="5" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_SURFACECONSISTENTPARAMET" xPos="1" yPos="7" xSize="29" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_USE_SRC" xPos="1" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USE_SRC" xPos="13" yPos="8" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_SRC" xPos="27" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_SRC" xPos="35" yPos="8" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_INIT" xPos="50" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_INIT" xPos="59" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_INC" xPos="5" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_INC" xPos="13" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_LAST" xPos="27" yPos="9" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_LAST" xPos="36" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SRC_TOT" xPos="50" yPos="9" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SRC_TOT" xPos="58" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_USE_REC" xPos="1" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USE_REC" xPos="13" yPos="10" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_REC" xPos="27" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_REC" xPos="35" yPos="10" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REC_INIT" xPos="50" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REC_INIT" xPos="59" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REC_INC" xPos="5" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REC_INC" xPos="13" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REC_LAST" xPos="27" yPos="11" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REC_LAST" xPos="36" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REC_TOT" xPos="50" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REC_TOT" xPos="58" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_USE_OFF" xPos="1" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="USE_OFF" xPos="13" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_OFF" xPos="27" yPos="12" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF" xPos="35" yPos="12" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INIT" xPos="50" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INIT" xPos="59" yPos="12" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_INC" xPos="5" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_INC" xPos="13" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_LAST" xPos="27" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_LAST" xPos="36" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_TOT" xPos="50" yPos="13" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_TOT" xPos="58" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_BALANCECALCULATIONPARAME" xPos="1" yPos="15" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TYPE_RA" xPos="1" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TYPE_RA" xPos="9" yPos="16" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_RANGE_KILL" xPos="14" yPos="16" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RANGE_KILL" xPos="25" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RANGE_CORR" xPos="35" yPos="16" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RANGE_CORR" xPos="46" yPos="16" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAS_SRC" xPos="1" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAS_SRC" xPos="9" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAS_REC" xPos="17" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAS_REC" xPos="25" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAS_OFF" xPos="33" yPos="17" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAS_OFF" xPos="41" yPos="17" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_TIMEWINDOWPARAMETERS" xPos="1" yPos="19" xSize="22" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_OFF_WIN" xPos="1" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_OFF_WIN" xPos="13" yPos="20" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFFSETS_ARRAYSET" xPos="1" yPos="21" xSize="35" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PASSES">
+      <Tip>Whether to calculate and apply balance in 1 or 2 passes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PASSES<br> Whether to calculate and apply balance in 1 or 2 passes.</center></b>
+<pre> Default = 2
+ Allowed = 1, 2
+ If PASSES = 1, SCAB calculates and applies the amplitude balance in 1 pass.
+ If PASSES = 2, in a given pass, SCAB can either calculate or apply or remove
+ a correction.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODE">
+      <Tip>Mode of operation of this pass in two pass operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - MODE<br> Mode of operation of this pass in two pass operation.</center></b>
+<pre> Default = CALC
+ Allowed = CALC    (Calculate amplitude balance.)
+ Allowed = APPLY   (Apply amplitude balance.)
+ Allowed = REMOVE  (Remove previously applied amplitude balance.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TR_MAX">
+      <Tip>Maximum number of input traces to expect.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - TR_MAX<br> Maximum number of input traces to expect.</center></b>
+<pre> Default = 10000
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STAT_TR">
+      <Tip>Statistic for measuring amplitude of individual traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - STAT_TR<br> Statistic for measuring amplitude of individual traces.</center></b>
+<pre> Default = MED
+ Allowed = MED   (Median)
+ Allowed = AVE   (Average)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STAT_SC">
+      <Tip>Statistic for calculating surface consistent amplitudes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - STAT_SC<br> Statistic for calculating surface consistent amplitudes.</center></b>
+<pre> Default = MED
+ Allowed = MED   (Median)
+ Allowed = AVE   (Average)
+ STAT_SC is the statistic used to combine individual trace amplitude
+ measurements into surface consistent amplitudes.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_CORR">
+      <Tip>Pathname of file containing correction factors for second pass.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PATH_CORR<br> Pathname of file containing correction factors for second pass.</center></b>
+<pre> Default = -
+ Allowed = char
+ If PASSES = 1, then a file is created iff PATH_CORR is not NONE.
+ If PASSES = 2 and MODE = CALC, then the PATH_CORR file is created.
+ If PASSES = 2 and MODE = APPLY or REMOVE, then the PATH_CORR file is used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_DIAG">
+      <Tip>Pathname of file containing surface consistent amplitudes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PATH_DIAG<br> Pathname of file containing surface consistent amplitudes.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ Pathname of diagnostic file containing surface consistent amplitudes.
+ If PATH_DIAG = NONE, then no diagnostic file will be created.
+ 
+ You can use the "scab_reformat" shell script with the PATH_DIAG file to create
+ files of amplitudes for individual surface consistent elements.  These files
+ can be viewed with GnuPlot or another plotting application.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_SRC">
+      <Tip>Use source in surface consistent calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - USE_SRC<br> Use source in surface consistent calculations.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ In marine work surface consistent elements are usually source and offset.  In
+ land work surface consistent elements are usually source and receiver.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_SRC">
+      <Tip>Header word labeling sources.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - HDR_SRC<br> Header word labeling sources.</center></b>
+<pre> Default = 9
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_INIT">
+      <Tip>Value of HDR_SRC at first source.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - SRC_INIT<br> Value of HDR_SRC at first source.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_INC">
+      <Tip>Increment between source header word values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - SRC_INC<br> Increment between source header word values.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_LAST">
+      <Tip>Value of HDR_SRC at last source.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - SRC_LAST<br> Value of HDR_SRC at last source.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SRC_TOT">
+      <Tip>Total number of sources.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - SRC_TOT<br> Total number of sources.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_REC">
+      <Tip>Use receiver in surface consistent calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - USE_REC<br> Use receiver in surface consistent calculations.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ In marine work surface consistent elements are usually source and offset.  In
+ land work surface consistent elements are usually source and receiver.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_REC">
+      <Tip>Header word labeling receivers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - HDR_REC<br> Header word labeling receivers.</center></b>
+<pre> Default = 47
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REC_INIT">
+      <Tip>Value of HDR_REC at first receiver.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - REC_INIT<br> Value of HDR_REC at first receiver.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REC_INC">
+      <Tip>Increment between receiver header word values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - REC_INC<br> Increment between receiver header word values.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REC_LAST">
+      <Tip>Value of HDR_REC at last receiver.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - REC_LAST<br> Value of HDR_REC at last receiver.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REC_TOT">
+      <Tip>Total number of receivers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - REC_TOT<br> Total number of receivers.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="USE_OFF">
+      <Tip>Use offset in surface consistent calculations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - USE_OFF<br> Use offset in surface consistent calculations.</center></b>
+<pre> Default = YES
+ Allowed = YES/NO
+ In marine work surface consistent elements are usually source and offset.  In
+ land work surface consistent elements are usually source and receiver.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF">
+      <Tip>Header word labeling offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - HDR_OFF<br> Header word labeling offset.</center></b>
+<pre> Default = 6
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INIT">
+      <Tip>Value of HDR_OFF at first offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - OFF_INIT<br> Value of HDR_OFF at first offset.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_INC">
+      <Tip>Increment between offset header word values.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - OFF_INC<br> Increment between offset header word values.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_LAST">
+      <Tip>Value of HDR_OFF at last offset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - OFF_LAST<br> Value of HDR_OFF at last offset.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_TOT">
+      <Tip>Total number of offsets.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - OFF_TOT<br> Total number of offsets.</center></b>
+<pre> Default = 1
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TYPE_RA">
+      <Tip>Type of running average smoother to apply.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - TYPE_RA<br> Type of running average smoother to apply.</center></b>
+<pre> Default = MED
+ Allowed = MED
+ Allowed = AVE</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RANGE_KILL">
+      <Tip>Factor defining acceptable range with respect to killing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - RANGE_KILL<br> Factor defining acceptable range with respect to killing.</center></b>
+<pre> Default = 0.5
+ Allowed = real &gt;= 0.0
+ The acceptable range with respect to killing lies between
+ running_average*(1.0 - RANGE_KILL) and running_average*(1.0 + RANGE_KILL).
+ 
+ Elements whose amplitudes are above or below this range are killed.  Elements
+ whose amplitudes lie within this range are not killed but are subject to
+ possible correction as defined by the RANGE_CORR parameter.
+ 
+ If RANGE_KILL = 0.0, then the kill operation is disabled and RANGE_KILL is
+ not used in the RANGE_CORR value trap.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RANGE_CORR">
+      <Tip>Factor defining acceptable range for correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - RANGE_CORR<br> Factor defining acceptable range for correction.</center></b>
+<pre> Default = 0.15
+ Allowed = RANGE_KILL &gt; RANGE_CORR &gt;= 0.0
+ The acceptable range for correction lies between
+ running_average*(1.0 - RANGE_CORR) and running_average*(1.0 + RANGE_CORR).
+ 
+ Amplitudes lying within this range are not changed.  Amplitudes below this
+ range are increased to the lower boundary.  Amplitudes above this range are
+ reduced to the upper boundary.
+ 
+ If RANGE_CORR = 0.0, then the correction operation is disabled.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAS_SRC">
+      <Tip>Length of source running average smoother.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - RAS_SRC<br> Length of source running average smoother.</center></b>
+<pre> Default = 20
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAS_REC">
+      <Tip>Length of receiver running average smoother.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - RAS_REC<br> Length of receiver running average smoother.</center></b>
+<pre> Default = 20
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAS_OFF">
+      <Tip>Length of offset running average smoother.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - RAS_OFF<br> Length of offset running average smoother.</center></b>
+<pre> Default = 20
+ Allowed = int</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_OFF_WIN">
+      <Tip>Header word designating offset for window specification.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - HDR_OFF_WIN<br> Header word designating offset for window specification.</center></b>
+<pre> Default = 10
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFFSETS">
+      <Tip>Linked array of offsets used to define time windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - OFFSETS<br> Linked array of offsets used to define time windows.</center></b>
+<pre> Default = -
+ Allowed = real (linked array 10)
+ A linked array of OFFSETS, TIM_ADD and WIN_LEN is used to define time windows.
+ Top of time window = mute_time + TIM_ADD.
+ Bottom of time window = top of time window + WIN_LEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Top of time window = mute_time + TIM_ADD.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - TIM_ADD<br> Top of time window = mute_time + TIM_ADD.</center></b>
+<pre> Default = -
+ Allowed = real (linked array 10)
+ A linked array of OFFSETS, TIM_ADD and WIN_LEN is used to define time windows.
+ Top of time window = mute_time + TIM_ADD.
+ Bottom of time window = top of time window + WIN_LEN.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Bottom of time window = top of time window + WIN_LEN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - WIN_LEN<br> Bottom of time window = top of time window + WIN_LEN.</center></b>
+<pre> Default = -
+ Allowed = real (linked array 10)
+ A linked array of OFFSETS, TIM_ADD and WIN_LEN is used to define time windows.
+ Top of time window = mute_time + TIM_ADD.
+ Bottom of time window = top of time window + WIN_LEN.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>scab - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="scab">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : SCAB    (Surface Consistent Amplitude Balance)
+ Category   : amplitude_mod
+ Written    : 1998-03-13   by: Donna K. Vunderink &amp; Chuck I. Burch
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Calculate and apply a surface consistent amplitude balance.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ General Operation of SCAB
+ 
+ 1. Scan input traces individually, calculate window top and bottom for
+ each trace and calculate average (or median) of absolute value of trace
+ samples in window to form the amplitude measurement for each trace.
+ Write trace to disk if PASSES = 1.
+ 
+ 2. After last trace is read, form the surface consistent amplitude for
+ each source by calculating the average (or median) of the amplitude
+ measurements for each trace associated with that source.
+ 
+ 3. Take running average (running median) of source element amplitudes
+       considered as a one dimensional array.
+ 
+ 4. Repeat steps 2 and 3 for receiver and offset as indicated.
+ 
+ 5. Write a diagnostic file containing the surface consistent amplitude
+ for each chosen source, receiver or offset element.  (Same filename
+ with .src, .rec or .off extension.)
+ 
+ 6. Calculate a multiplicative correction factor as follows.
+ 
+  The acceptable range with respect to killing lies between
+                running_average*(1.0 - RANGE_KILL) and
+                running_average*(1.0 + RANGE_KILL).
+ 
+  Elements whose amplitudes are above or below this range are
+  killed.  Elements whose amplitudes lie within this range are
+  not killed but are subject to possible correction as defined by
+  the RANGE_CORR parameter.
+ 
+  The acceptable range for correction lies between
+   running_average*(1.0 - RANGE_CORR) and
+   running_average*(1.0 + RANGE_CORR).
+ 
+  Amplitudes lying within this range are not changed.  Amplitudes
+  below this range are increased to the lower boundary.
+  Amplitudes above this range are reduced to the upper boundary.
+ 
+ 7. Apply amplitude balance to each trace by multiplying each trace
+       sample by the product of source, receiver and offset correction
+       factors appropriate for that trace's headers.
+ 
+ 
+ Disabling Kill and Correction Operations
+ 
+ If MODE = APPLY (or if PASSES = 1), and RANGE_KILL = 0.0,
+ then killing will be disabled.
+ If MODE = APPLY (or if PASSES = 1), and RANGE_CORR = 0.0,
+ then correction will be disabled.
+ 
+ 
+ Modes of Operation
+ 
+ If PASSES = 1, then SCAB calculates and applies the correction in one pass.
+ If PASSES = 2, then SCAB will calculate the correction in the first pass
+ (MODE = CALC) and will either apply the correction (MODE = APPLY) or remove a
+ previously applied correction (MODE = REMOVE) in the second pass.
+ 
+ Note: REMOVE can not restore traces that were killed, it can only
+ un-do corrections that were previously applied to a trace.
+ 
+ If PASSES = 1, then the PATH_CORR file is created if and only if
+ PATH_CORR is specified (non-blank and not "NONE").
+ If PASSES = 2 and MODE = CALC, then the PATH_CORR file is created.
+ If PASSES = 2 and MODE = APPLY or REMOVE, then the PATH_CORR file is used.
+ 
+ 
+ Note on Surface Consistency
+ 
+ For the purpose of this process, a surface consistent correction is
+ understood to be a trace correction that is identical for all traces
+ associated with a given surface consistent element (such as a source).  The
+ correction for a given trace is the product of the corrections for each
+ surface consistent element with which the trace is associated (that is, a
+ trace may have a correction that is the product of the source correction and
+ the receiver correction).
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Diagnostic File
+ 
+ SCAB can write a diagnostic file (PATH_DIAG) containing the surface
+ consistent amplitude of chosen elements.  You can use the"scab_reformat"
+ shell script with the PATH_DIAG file to create files of amplitudes for
+ individual surface consistent elements.  These files are especially useful
+ for determining the desired values of the RANGE_KILL and RANGE_CORR
+ parameters.  These files can be viewed with GnuPlot or other plotting
+ application.
+ 
+ 
+ 2D vs. 3D
+ 
+ SCAB is a 2D process in that the running average smoothing operation asssumes
+ that surface consistent amplitudes represent a single line.  It may be
+ possible to use SCAB with 3D data by running separate SCAB processes on
+ sequential sail lines.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                              REVISION HISTORY
+ 
+      Date        Author     Description
+      ----        ------     -----------
+ 25.  2006-12-04  D. Glover  Added NULLIFY statements for Intel compiler.
+ 24.  2006-06-06  Stoeckley  Add call to pc_register_array_names for SeisSpace.
+023.  2006-01-10  B. Menger  Removed Unused Variables.
+ 22.  2004-09-07  Menger     Change trcio%nwih to obj%nwih from fixed 64 words.
+ 21.  2002-09-11  Goodger    Use mth module for binning.
+ 20.  2001-02-15  Selzler    Changed wrapup logic to use skip_wrapup
+ 19.  2000-10-06  Selzler    Corrected bug, trace input termination logic.
+ 18.  2000-10-04  Selzler    Corrected bug, linked array length initialization.
+                             Corrected bug, tr array sectioning in trcio call.
+ 17.  2000-09-07  Selzler    Fixed bugs in path name usage, gui updates,
+                             window parameter validation, memory allocate,
+                             median scanning, and kill values.
+ 16.  2000-07-07  Selzler    Fixed problems found by CPS Fortran Code Review.
+ 15.  2000-05-24  Selzler    Corrected miscellaneous bugs.
+ 14.  2000-05-22  Selzler    Conversion to new CPS
+ 13.  1999-06-30  Vunderink  Fixed problem of modifying data in two-pass mode.
+ 12.  1999-04-21  Vunderink  Replaced a call to SCAB_SORT with MEDIAN.
+                             One call was missed on 1998-08-26.
+ 11.  1999-01-26  Vunderink  Begin using the f90 compiler.
+ 10.  1998-08-26  Vunderink  Replaced sort with median primitive, added
+                             support for DIAGFILE=NONE and FILENAME=NONE,
+                             and keeo track of minimum source, receiver,
+                             and offset bins.
+  9.  1998-06-25  Vunderink  Changed format statments to use a G format.
+  8.  1998-06-03  Vunderink  Fixed bug in clearing OFF_ARR variable.
+  7.  1998-05-15  Vunderink  Fixed bug in SCSTAT calculation.
+  5.  1998-05-04  Vunderink  Changed running average-median to a truncated
+                             end type and changed to separate running
+                             average lengths for sources, receivers, and
+                             offsets
+  4.  1998-04-23  Vunderink  Changed running median to ignore zeros.
+  3.  1998-04-01  Vunderink  Fixed problem caused by allocating scratch
+                             when parameter value was zero.  Also, fixed
+                             two-pass apply so that the number of traces
+                             does not have to be exact.
+  2.  1998-03-25  Vunderink  Added KILFTR=-1 to not kill traces
+  1.  1998-03-13  Vunderink  Original version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

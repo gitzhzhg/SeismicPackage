@@ -1,0 +1,132 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : install_spws_script
+# Category   : stand-alone
+# Written    : 2004-02-11   by: Tom Stoeckley
+# Revised    : 2004-05-21   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script to install a script for public use.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This script is a utility to install a script for public use.
+# The following steps are performed:
+#   (1) The script is copied to the $SPWSINSTALLDIR directory.
+#   (2) A link is made in the $SPWSINSTALLDIR directory for the script.
+#   (3) A link is made in the /apps/geophysics directory for the script.
+#
+# Example of file names and locations:
+#
+#    source script:                 /home/spws/making/  glotch
+#    installed script:  /usr/app/vendors/spws/scripts/  glotch.21May2004  (1)
+#    link to (1):       /usr/app/vendors/spws/scripts/  glotch            (2)
+#    link to (2):                /apps/geophysics/bin/  glotch
+#
+# You must type the following:
+#
+#                     install_spws_script <script>
+#
+# where <script> is the name of the script to install.
+#
+# The full path must be specified if <script> is not in the local directory.
+#
+# This install_spws_script must be run on a node for each supported
+# architecture.
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#         SPWSINSTALLDIR   normally ~spws/install or /usr/app/vendors/spws
+#         USER             must be spws
+#
+# Note: ~spws/install is simply a link to /usr/app/vendors/spws.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  2. 2004-05-21  Stoeckley  Change installed name to include date to keep from
+#                             overwriting the previous version, add a link to
+#                             the new version; move most of the code to the
+#                             new script private_install.
+#  1. 2004-02-11  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: install_spws_script,v 1.2 2004/05/21 19:34:11 spws Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?SPWSINSTALLDIR == 0 || $SPWSINSTALLDIR == "") then
+     echo environment variable SPWSINSTALLDIR not set.
+     exit
+endif
+
+
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+
+
+set source_script = $1
+set script        = $1:t
+
+if($script == "") then
+  echo "missing script name"
+  exit 1
+endif
+
+set install_script = $SPWSINSTALLDIR/scripts/$script
+set link_script    = /apps/geophysics/bin/$script
+
+
+##----------------------------- do the work --------------------------------##
+##----------------------------- do the work --------------------------------##
+##----------------------------- do the work --------------------------------##
+
+
+$SPWSMAKEDIR/private_install   \
+                    $source_script $install_script $link_script
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

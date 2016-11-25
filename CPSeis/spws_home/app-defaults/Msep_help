@@ -1,0 +1,664 @@
+ 
+###########      Msep_help     revised  27 January 1997         #############
+###########      Msep_help     revised  27 January 1997         #############
+###########      Msep_help     revised  27 January 1997         #############
+
+
+
+######################## windowbox help ##################################
+######################## windowbox help ##################################
+######################## windowbox help ##################################
+################ copied from Wbox_help on 26 July 1996 ###################
+
+
+#           Wbox_help                    revised  26 July 1996
+
+#  Help for windowboxes (data entry windows created using the wbox routines
+#  on library wboxlib.a).
+
+#  The contents of this file should be copied into in the application's
+#  context-sensitive help file.  Overview help on keys is displayed 
+#  whenever the user presses CTRL-HELP or CTRL-F1 or CTRL-PF1.
+#  Context-sensitive help is optionally displayed when the user's pointer
+#  gets into the general message area or the array index area at the bottom 
+#  of the windowbox.  Context-sensitive help is also displayed for the 
+#  transient datafields used for finding an array index or an array value.
+
+#  You should also include context-sensitive help in this file, for all
+#  datafields in your windowbox (except prompt names or other fields
+#  with switch variable zero).  To do this, use identifiers typed as
+#  follows:
+#                        help*boxname_ident:
+#
+#  where boxname = the name specified in the call to wbox_create2 or
+#                    dbox_create2 or fbox_create2,
+#    and ident   = the identification integer specified in the
+#                    registration call for the variable.
+# 
+#    (Help can also be displayed for prompts associated with a variable,
+#    if the switch variable for the prompt is not zero.  In this case,
+#    the identification integer is the negative of that for the variable.)
+ 
+
+help*wbox_find_index:\
+----------------------ARRAY INDEX TO FIND-----------------------------\n\
+Type here the array index you wish to go to.  The array (or arrays)\n\
+will be scrolled if necessary.  If you just press RETURN or another non-\n\
+printable key, you will be transferred to the VALUE field at the right\n\
+(if the windowbox is wide enough to show it), where you will be able to\n\
+choose an array value rather than an array index.
+
+ 
+help*wbox_find_value:\
+----------------------ARRAY VALUE TO FIND-----------------------------\n\
+Type here the array value you wish to go to.  The array (or arrays)\n\
+will be scrolled if necessary.  If the array is a numeric array, you will\n\
+go to the nearest value in the array.  If the array is a character string\n\
+array, you will go the the value for which there is the greatest number\n\
+of beginning matching characters.
+
+ 
+help*wbox_message_line:\
+----------------------GENERAL MESSAGE AREA----------------------------\n\
+Transient messages are displayed in this line.  When there are no messages,\n\
+the type of the active datafield is displayed.  If the active datafield\n\
+is a numeric or text entry field, the current input mode is displayed.  This\n\
+input mode, and the exact location to edit, can be changed by using the\n\
+shifted arrow keys, or by repeatedly pressing mouse button 1.  Press\n\
+CTRL-HELP, CTRL-PF1, or CTRL-F1 for a description of all special action keys.
+
+ 
+help*wbox_index_line:\
+----------------------ARRAY INDEX MESSAGE AREA------------------------\n\
+When the active datafield is the element of an array, the array index,\n\
+and the length of the array, are shown in this line.  If you wish to\n\
+go to a specific array index or array value, you can press FIND or CTRL-F.\n\
+This action will temporarily display datafields on this line where you\n\
+can make your choice.  Press CTRL-HELP, CTRL-PF1, or CTRL-F1 for a\n\
+description of all special action keys.
+
+ 
+overview*wbox_keyhelp:\
+HELP ON KEYS WHICH HAVE SPECIAL FUNCTIONS IN TABLES OF DATA.\n\
+ALSO HELP ON COLOR OPTIONS (AND OTHER RESOURCES) FOR THE TABLES.\n\
+\n\
+----------------------SUMMARY OF HELP ON KEYS-------------------------\n\
+\n\
+Mouse button number 1 can be used to navigate between datafields, edit\n\
+within text-entry datafields, control scrollbars, or activate buttons\n\
+(pushbuttons, toggle buttons, and radio buttons).  The keys can also be\n\
+used for these and other purposes, summarized here and detailed below.\n\
+\n\
+TAB  SHIFT-TAB                            Move into or out of the windowbox.\n\
+ARROW  CTRL-ARROW  SHIFT-CTRL-ARROW  PREV  NEXT  Move to another datafield.\n\
+TAB  SHIFT-TAB   F20  SHIFT-F20   CTRL-T  Move to another datafield group.\n\
+SHIFT-ARROW        DELETE                 Edit a text datafield.\n\
+HELP            PF1       F1              Activate context-sensitive help.\n\
+CTRL-HELP  CTRL-PF1  CTRL-F1              Get this overview help on keys.\n\
+RETURN  SELECT  Activate a pushbutton, toggle button, or radio button.\n\
+ENTER           Same as the last arrow key (LEFT, RIGHT, UP, DOWN) used.\n\
+CTRL-D  DO      Undo most recent value, and toggle between last two values.\n\
+CTRL-S          Toggle among three keymodes for using arrow and tab keys.\n\
+CTRL-F  FIND    Find a desired index or value in the current column.\n\
+CTRL-M          Find the next matching value in the current column.\n\
+CTRL-N          Find the next non-matching value in the current column.\n\
+CTRL-V          Find ANY value which matches ANY OTHER in the current column.\n\
+CTRL-R  REMOVE  Remove a row and put it into the row-buffer.\n\
+CTRL-I  INSERT  Insert a row from the row-buffer, or insert an empty row.\n\
+CTRL-P          Paste a row from the row-buffer.\n\
+CTRL-C          Clear the row-buffer.\n\
+CTRL-H          Save table to file (for printing).\n\
+CTRL-[number]   Activate or deactivate or change debug print.\n\
+\n\
+---------------------------DEFINITIONS--------------------------------\n\
+\n\
+A WINDOWBOX is a special rectangular area in a Motif dialog box or main\n\
+   window.  This rectangular area, outlined with a 5-pixel-wide black\n\
+   border, is used primarily for displaying and editing arrays of numbers.\n\
+   This help describes common features of all windowboxes.  A windowbox\n\
+   contains one or more datafield groups, each of which contains one or\n\
+   more datafields. It also displays one or two message lines at the bottom.\n\
+   One or more windowboxes, and possibly text fields or buttons which\n\
+   are not part of any windowbox, may reside in the same dialog box or\n\
+   main window.  The buttons along the bottom of a dialog box are not part\n\
+   of any windowbox.\n\
+\n\
+A DATAFIELD is an individual text field (into which the user might be able\n\
+   to enter text or numbers), or a pushbutton, a toggle button, or a radio\n\
+   button.  These text fields and buttons look and behave similarly to\n\
+   Motif widgets.\n\
+\n\
+A DATAFIELD GROUP is either a set of linked arrays, or the set of all\n\
+   datafields which are not part of any array.  It is similar to a\n\
+   Motif "tab group".\n\
+\n\
+A SET OF LINKED ARRAYS consists of one or more side-by-side columns of\n\
+   datafields, where each column is an array.  All arrays in such a set\n\
+   always have the same number of array elements.  These arrays can be\n\
+   scrolled together (using a scrollbar or special keys) to bring into view\n\
+   all elements of the arrays.\n\
+\n\
+----------------------MOVING FROM FIELD TO FIELD----------------------\n\
+\n\
+Use mouse button 1 to move to any datafield.  It can also be used to\n\
+scroll a set of linked arrays using the normal actions of a scrollbar.\n\
+\n\
+Use ARROW keys to move up, down, left, or right to adjacent datafields\n\
+within the same datafield group.  Arrays will scroll as necessary.\n\
+The ENTER key will do the same thing as the last ARROW key used.\n\
+\n\
+Use TAB or SHIFT-TAB to move into or out of the windowbox to/from other\n\
+parts of the dialog box.  This is a standard Motif action.\n\
+\n\
+Use TAB or SHIFT-TAB or F20 or SHIFT-F20 or CTRL-T to move from one\n\
+datafield group to another within the windowbox.\n\
+\n\
+  [For keymode 2 (see CTRL-S below), you must use TAB and SHIFT-TAB\n\
+  (instead of LEFT and RIGHT) to move left or right to adjacent datafields\n\
+  within a datafield group, rather than from one datafield group to another.]\n\
+\n\
+  [Keymode 3 disables the use of TAB and SHIFT-TAB for any purpose within\n\
+  the windowbox because of the Motif action which may also occur.]\n\
+\n\
+Use CTRL-ARROW or SHIFT-CTRL-ARROW to move to top, bottom, left edge, or\n\
+right edge within a datafield group.  In arrays, the SHIFT-CTRL-UP and\n\
+SHIFT-CTRL-DOWN keys cause movement to the very beginning or end of the\n\
+arrays (scrolling as necessary), whereas the CTRL-UP (or PREV) and\n\
+CTRL-DOWN (or NEXT) keys scroll one screen-full at a time.\n\
+\n\
+------------------EDITING WITHIN A TEXT DATA FIELD--------------------\n\
+\n\
+Use mouse button 1 to move within a text datafield, and to change between\n\
+replace, insert, and overstrike text entry modes.  The current mode is\n\
+shown in a message area at the bottom.  For replace and overstrike modes,\n\
+highlighted text will be replaced when the next printable key is pressed.\n\
+For insert mode, text pushed off the right is lost.\n\
+\n\
+Alternately, use SHIFT-LEFT and SHIFT-RIGHT to move within a text datafield.\n\
+     [For keymode 2 (see CTRL-S below), you can also use LEFT and RIGHT\n\
+     for this purpose.]\n\
+\n\
+Alternately, use SHIFT-UP or SHIFT-DOWN to change between replace, insert,\n\
+and overstrike text entry modes.\n\
+\n\
+Use the DELETE key to delete a character to the left of the curser. \n\
+If all characters are deleted, the previous value reappears.\n\
+\n\
+-------------------MISCELLANEOUS SPECIAL ACTION KEYS------------------\n\
+\n\
+Use mouse button 1 (or RETURN or SELECT) to activate the highlighted\n\
+     pushbutton or toggle button or radio button.\n\
+Use DO (or CTRL-D) to undo the most recently typed value, and to toggle\n\
+     between the last two values.\n\
+Use HELP (or PF1 or F1) to activate context-sensitive help, which will be\n\
+     displayed for each field as it becomes active, and for all fields swept \n\
+     over by the pointer (with or without holding down a mouse button).\n\
+Use CTRL-HELP (or CTRL-PF1 or CTRL-F1) to get this help on keys.\n\
+Use CTRL-[an integer] to choose a debug mode (same as resource wboxdebug).\n\
+\n\
+-----------------SPECIAL OPTIONS WITHIN ARRAY FIELDS------------------\n\
+\n\
+Use FIND (or CTRL-F) to go to a desired index or value in the current column.\n\
+     The closest match will be found.\n\
+Use CTRL-M to find the next matching value in the current column.\n\
+Use CTRL-N to find the next non-matching value in the current column.\n\
+Use CTRL-V to find ANY value which matches ANY OTHER in the current column.\n\
+Use REMOVE (or CTRL-R) to remove a row and put it into the row-buffer.\n\
+Use INSERT (or CTRL-I) to insert a row from the row-buffer.\n\
+     If the row-buffer is empty, or contains a row from a different set of\n\
+     linked arrays, or the array index of the current row does not match\n\
+     the array index previously saved, the inserted row is set to nils.\n\
+Use CTRL-P (paste) like INSERT, except the current row does not have to\n\
+     match the saved row.  This enables moving rows from one row to another.\n\
+Use CTRL-C (clear) to clear the row-buffer to nils.\n\
+The current index, and the maximum current number of indices, are shown \n\
+     in a message area at the bottom.\n\
+You can resize this dialog box by grabbing its border with the mouse, to \n\
+     increase or decrease the number of rows and columns visible.  This is \n\
+     particularly useful when you have a long set of linked arrays, or a \n\
+     bunch of columns on the right which are not currently needed. \n\
+In some applications, the keys for inserting and removing rows might work\n\
+     slightly differently from the above description.\n\
+\n\
+---------------ALTERNATIVE WAYS TO USE ARROW AND TAB KEYS--------------\n\
+\n\
+Use CTRL-S (referred to above) to toggle between three keymodes for using\n\
+   arrow and tab keys (corresponding to values of the resource wboxkeymode):\n\
+\n\
+wboxkeymode 1 (most similar to EZED, and to Motif style for buttons):      \n\
+  to move within a datafield:        SHIFT-LEFT   SHIFT-RIGHT              \n\
+  to move to another datafield:      LEFT         RIGHT                    \n\
+  to move between datafield groups:  F20  SHIFT-F20  CTRL-T  TAB  SHIFT-TAB\n\
+\n\
+wboxkeymode 2 (most similar to Motif style for text):                      \n\
+  to move within a datafield:         SHIFT-LEFT  SHIFT-RIGHT  LEFT  RIGHT \n\
+  to move to another datafield:       TAB   SHIFT-TAB                      \n\
+  to move between datafield groups:   F20   SHIFT-F20   CTRL-T             \n\
+\n\
+wboxkeymode 3 (reduces conflict between windowboxes and Motif):            \n\
+  to move within a datafield:         SHIFT-LEFT   SHIFT-RIGHT             \n\
+  to move to another datafield:       LEFT         RIGHT                   \n\
+  to move between datafield groups:   F20   SHIFT-F20   CTRL-T             \n\
+\n\
+----------------------------RESOURCES---------------------------------\n\
+\n\
+The following resource be set for tables in an app-defaults file,\n\
+or in your own .Xdefaults table.  The examples shown are commonly-\n\
+used defaults (although not necessarily the defaults in this program).\n\
+\n\
+The font resource and color resources may have to be customized for\n\
+different X-window servers and for individual preferences.\n\
+On gray-scale monitors, the colors automatically change to shades of gray.\n\
+On black-white monitors, the colors automatically change to black or white.\n\
+\n\
+To change any resource, just add lines like these examples to your\n\
+.Xdefaults file in your home directory, and then load the file into\n\
+your server by typing xrdb .Xdefaults.  (The information in parentheses\n\
+should not be typed.)\n\
+\n\
+\n\
+*wboxdebug:  0    (0 = no debug print, 1 = standard debug print,\n\
+                               2 = extensive debug print, 3 = very extensive)\n\
+                              (also changable with the CTRL-0, CTRL-1, CTRL-2,\
+ and CTRL-3 keys)\n\
+\n\
+*wboxtiny:  0   (0 = invisible tiny pushbutton, needed for technical reasons)\n\
+                          1 or more = visible tiny pushbutton of\
+ indicated size for debug purposes)\n\
+\n\
+*wboxkeymode:   1    (1 = use arrow keys to move left and right,\n\
+                                    2 = use TAB and SHIFT-TAB to move\
+ left and right,\n\
+                                    3 = like 1 except TAB and SHIFT-TAB\
+ not used at all)\n\
+                                   (also changable with the CTRL-S key)\n\
+\n\
+*wboxscrollbars:   2        (0 = no scrollbars, 1 = as needed, 2 = always)\n\
+\n\
+*wboxscrollwidth:   17        (width of scrollbars in pixels)\n\
+\n\
+*wboxmaxrows:      10   (maximum number of array rows to initially display)\n\
+\n\
+*wboxfont:         9x15        (name of font to use)\n\
+\n\
+*wboxbackground:   gray        (background color of tables)\n\
+\n\
+*wboxbutton:       light blue   (background color of pushable pushbutton)\n\
+\n\
+*wboxhighlight:    light blue   (background color of enterable text field)\n\
+\n\
+*wboxpressed:      gold    (color of pressable, pressed toggle/radio button)\n\
+\n\
+*wboxtopshadow:    white     (top shadow of pushbutton, bottom of text box)\n\
+\n\
+*wboxbottomshadow: black     (bottom shadow of pushbutton, top of textbox)\n\
+\n\
+*wboxnormaltext:   black       (color of most text)\n\
+\n\
+*wboxdimtext:      gray40      (color of dimmed-out text)\n\
+\n\
+*wboxenterbox:     red   (color of small rectangle around field with focus)\n\
+\n\
+*wboxmessagetext:  white       (color of most messages in message areas)\n\
+\n\
+*wboxmessageloud:  blue      (color of important messages in message areas)\n\
+\n\
+*wboxmessagebox:   black       (color of box around message areas)\n\
+\n\
+NOTE REGARDING GRAY COLORS:\n\
+The color "black" is the same as "gray0".\n\
+The color "white" is the same as "gray100".\n\
+The color "gray" might be similar to as "gray50" or "gray75".\n\
+You can specify any shade of gray by using the name "gray" appended\n\
+by any integer between 0 and 100.\n\
+\n\
+-------------------------------END------------------------------------
+
+
+overview*DATABOX_HARDCOPY:\
+Press OK to save the contents of this table to a file.\n\
+Press Cancel if you decide NOT to save this table to a file.\n\
+\n\
+If you do not like the default filename, change it.  If you do not\n\
+type an extension, the extension ".hardcopy" will be added for you.\n\
+\n\
+The following information is saved to the file:\n\
+(1) An image of the visible table area (inside the dark black
+square).\n\
+(2) The full listing of all scrollable arrays in the table.\n\
+\n\
+It is possible to get an extremely large file if the scrollable\n\
+arrays are long.  For this reason, the approximate length of the\n\
+file is shown.\n\
+\n\
+After this file is saved, it can be edited with a text editor,\n\
+printed, and/or processed by awk or another program.\n\
+\n\
+
+
+
+
+############################ HELP FOR POPUPS ###########################
+############################ HELP FOR POPUPS ###########################
+############################ HELP FOR POPUPS ###########################
+
+overview*TRANSFORM_POPUP:\
+The ground positions in the active dataset will be transformed,\n\
+based upon the pairs of old and new ground positions specified below.\n\
+----------\n\
+The static values and the number of ground positions will not change.\n\
+\n\
+
+
+overview*RESAMPLE_POPUP:\
+The active dataset will be resampled to a new grid of ground positions,\n\
+based upon the values specified below.\n\
+The dataset might be extended or truncated,\n\
+or the bin spacing might be increased or decreased.\n\
+----------\n\
+Static values at a specified ground position will not change,\n\
+except for any necessary interpolation or extrapolation.\n\
+----------\n\
+If the dataset contains nil values, you might wish to replace nils with\n\
+interpolated values before doing any resampling.\n\
+\n\
+
+
+overview*MERGE_POPUP:\
+All selected datasets will be merged into a single merged dataset\n\
+either by adding them together, averaging them, or subtracting them.\n\
+The selected datasets will not be changed.\n\
+----------\n\
+All datasets involved with this operation must have the same header words.\n\
+----------\n\
+The bin centers and bin increments of the merged dataset will match those\n\
+of the active dataset (which may or may not also be selected).\n\
+The merged dataset optionally will include all area covered by the\n\
+individual datasets, or just the area covered by the active dataset.\n\
+Before merging, individual datasets will first optionally have nil values\n\
+replaced by interpolated values or by zero.  Then the individual datasets\n\
+will be resampled to the bins matching the merged dataset, and truncated\n\
+or extended in size if necessary.\n\
+----------\n\
+When subtracting datasets, exactly two must be selected, and one of them\n\
+must be the active dataset.  The non-active selected dataset will be\n\
+subtracted from the active selected dataset.\n\
+----------\n\
+The table below shows how nil static values are treated while merging.\n\
+If the datasets contain nil values, and you do not want them treated\n\
+as explained below, and you do not want to use the options available\n\
+here for replacing them, you might wish to first replace nils with\n\
+interpolated values using other editing methods.\n\
+----------\n\
+The symbols used below are defined as follows:\n\
+   ntotal = total number of values being merged at a given ground position\n\
+              (this is also the number of datasets being merged).\n\
+   nlive  = number of live (non-nil) values at the given ground position.\n\
+   sum    = sum of all live values at the given ground position.\n\
+   active = live static value of active dataset.\n\
+   other  = live static value of non-active dataset.\n\
+   result = resultant merged static (nil if all merged values are nil).\n\
+\n\
+ADD:       result = ntotal * sum / nlive  (or nil if nlive is zero).\n\
+AVERAGE:   result =          sum / nlive  (or nil if nlive is zero).\n\
+SUBTRACT:  result = active - other        (or nil if either is nil).\n\
+----------\n\
+\n\
+
+overview*SPLICE_POPUP:\
+All selected datasets will be spliced into a single inclusive dataset.\n\
+The selected datasets will not be changed.\n\
+----------\n\
+All datasets involved with this operation must have the same header words.\n\
+----------\n\
+The bin centers and bin increments of the spliced dataset will match those\n\
+of the active dataset (which may or may not also be selected).\n\
+The spliced dataset will include all area covered by the individual datasets.\n\
+Before splicing, individual datasets will first optionally have nil values\n\
+replaced by interpolated values.  (Extrapolated nil values will not be\n\
+replaced.)  Then the individual datasets will be resampled to the bins\n\
+matching the spliced dataset, and extended in size (using nils) if necessary.\n\
+----------\n\
+The resultant static at each location in the spliced dataset will be\n\
+the weighted sum of all live values in overlapping regions.\n\
+These weights will add to one.\n\
+These weights will be reduced (graded toward zero) for locations within\n\
+XDIST or YDIST points of any nil value.  For these purposes, each static\n\
+dataset is interpreted to be surrounded by nil values.\n\
+(XDIST is the maximum distance for grading weights in the X direction.)\n\
+(YDIST is the maximum distance for grading weights in the Y direction.)\n\
+The resultant static will be nil if all spliced values are nil.\n\
+----------\n\
+If the datasets contain nil values, and you do not want them treated\n\
+as described above, and you do not want to use the options available\n\
+here for replacing them, you might wish to first replace nils with\n\
+interpolated values using other editing methods.\n\
+----------\n\
+\n\
+
+
+
+
+################## STATIC VALUES TABLE
+################## STATIC VALUES TABLE
+################## STATIC VALUES TABLE
+
+
+overview*STATIC_VALUES:\
+\n\
+Overview help for table of static values goes here.\n\
+\n\
+
+
+overview*INTEGRATE_POPUP:\
+\n\
+Overview help for integration of static file goes here.\n\
+\n\
+
+
+
+
+################ shotpoint
+
+help*ld_table_1:\
+SP# is the shotpoint (surveyed flag number) corresponding to the XLOC and\n\
+YLOC values on this LD card.\n\
+\n\
+This shotpoint is placed into the following CPS header words:\n\
+   Scratch header word 29 for traces with a source at this flag.\n\
+   Scratch header word 28 for traces with a receiver at this flag.\n\
+   Header word 37 for traces with a midpoint at or near this flag.\n\
+\n\
+
+
+
+
+
+help*linelist_table_11: ATTNHELP: help*linelist_table_10
+
+
+
+
+
+help*tp_popup*yorigin.text:\
+This is the Y origin of the grid coordinate system, in feet or meters.\n\
+\n\
+
+
+
+
+########################### read generic file #############################
+########################### read generic file #############################
+########################### read generic file #############################
+
+
+overview*READ_GENERIC_FILE:\
+\n\
+ARRANGEMENT OF A GENERIC STATIC FILE (simple columns of numbers):\n\
+\n\
+The generic static file you wish to read is assumed to contain several\n\
+columns of numbers, with each ground position on a separate line.\n\
+This is the type of file you might obtain from another vender, or you\n\
+might wish to create for another vender or party outside of the CPS\n\
+processing system.\n\
+\n\
+-- One column must contain the X ground positions.\n\
+-- For 3D surveys, another column must contain the Y ground positions.\n\
+-- Yet another column must contain static values in seconds or milliseconds.\n\
+\n\
+Additional irrelevant columns (which will be ignored) can also exist.\n\
+\n\
+How to read the desired columns is specified by a code string which you\n\
+can type into.  This code string resides just above the listing of the\n\
+first part of the file.  How to do this is described in a special section\n\
+below entitled CODE FOR READING THE FILE.  If the file was created by this\n\
+program, or you type in a blank code, the code will be "X Y M".\n\
+\n\
+The generic static file can also contain lines beginning with #.\n\
+These lines are treated as comments (ignored) by most programs which read\n\
+generic files of this type (i.e. files containing columns of numbers).\n\
+However, this program will interpret some comment cards as containing\n\
+special information relevant to static files.  If the file was created\n\
+by this program, all required special information will exist in these\n\
+comment cards.  Otherwise, you may (if you wish) add this information\n\
+to the static file with a text editor.  How to do this is described in a\n\
+special section below entitled SPECIAL INFORMATION IN THE FILE.  If any\n\
+special information is missing, you will be prompted to type it into\n\
+the table entitled "Static File to Read".\n\
+\n\
+\n\
+CODE FOR READING THE FILE (preferred method):\n\
+\n\
+Normally, you can type a sequence of X Y S M B (one letter for each column\n\
+of numbers) in the same order as the columns of numbers in the file:\n\
+\n\
+  where X represents X ground positions.\n\
+  where Y represents Y ground positions (if 3D survey).\n\
+  where S represents static values (if in seconds).\n\
+  where M represents static values (if in milliseconds).\n\
+  and where each B represents a column to skip.\n\
+\n\
+You can use either lower-case or upper-case letters.\n\
+Spaces (blank characters) are ignored.\n\
+Any other character is illegal.\n\
+You can leave the default code unchanged if the first three columns are\n\
+arranged X Y M.\n\
+\n\
+Example (code followed by three lines from the file):\n\
+       B B X S Y\n\
+  SP 1       12.5         0.174    456\n\
+  SP 2      13.5            .067563  456\n\
+    SP 3.5     14.5     -1.e-30             456\n\
+\n\
+\n\
+CODE FOR READING THE FILE (alternate method):\n\
+\n\
+If the numbers you wish to read are restricted to fixed columns (1 - 80),\n\
+and if there is the possibility that numbers in two adjacent columns might\n\
+butt up against each other without intervening blank space, then you should\n\
+type the indicated letters into the code.  These letters must be typed\n\
+above the entire width of each column containing the indicated information:\n\
+\n\
+  Type XXXX above the X ground positions.\n\
+  Type YYYY above the Y ground positions (if 3D survey).\n\
+  Type SSSS above the static values (if in seconds).\n\
+  Type MMMM above the static values (if in milliseconds).\n\
+\n\
+You can use either lower-case or upper-case letters.\n\
+Any other character (except the space character) is illegal.\n\
+All information in other columns will be ignored.\n\
+Any part of a number falling outside the specified range will not be read.\n\
+\n\
+Example (code followed by three lines from the file):\n\
+            XXXXXX      SSSSSSSSSSSYYYYYYYYYYYY\n\
+  SP 1       12.5         0.174    456                  elevation 345\n\
+  SP 2      13.5            .067563456\n\
+               14.5     -1.e-30             456\n\
+(note that the first number on the third card will be read as 14 (not 14.5)\n\
+  since the 5 falls outside of the range defined by XXXXXX)\n\
+(this example appears accurate only if a fixed-width font is used here)\n\
+\n\
+\n\
+CODE FOR READING THE FILE (put in the file itself):\n\
+\n\
+You can also put a default code in the static file itself by adding two\n\
+cards as this example shows:\n\
+# FSF code follows\n\
+#           XXXXXX      SSSSSSSSSSSYYYYYYYYYYYY\n\
+(the pound sign in the first column is interpreted to be the same as that\n\
+  in the second column - in this case a space)\n\
+\n\
+\n\
+SPECIAL INFORMATION IN THE FILE:\n\
+\n\
+Special information in the file, recognized by this program, resides on\n\
+comment cards beginning with the pound sign (#), followed by one or more\n\
+spaces, then the three characters "FSF", followed by one or more spaces.\n\
+Then there will be a code word followed in most cases by a value.\n\
+Special history cards (also beginning with #) will reside between cards\n\
+with the code words "begin" and "end".  The best way to understand is to\n\
+save out any generic static file with this program, and then to look at it\n\
+with a text editor or by reading it back into this program and looking\n\
+at the listing of the first part of the file.\n\
+\n\
+END OF HELP\n\
+\n\
+
+
+
+help*statbox_starting_7: ATTNHELP: overview*READ_GENERIC_FILE
+
+
+
+
+########################### data control panel ############################
+########################### data control panel ############################
+########################### data control panel ############################
+
+
+overview*DATA_CONTROL_PANEL:\
+\n\
+HEADER WORD VALUES:\n\
+\n\
+You can change the header word values at any time.\n\
+For 2D data, or when using sequential ground positions, the Ybin headers\n\
+should be zero.  The SER ("source = receiver") headers should be zero\n\
+unless the file will be supplied to both sources and receivers; in this\n\
+case the first row of headers should be for the sources (or receivers)\n\
+and the second row of headers should be for the receivers (or sources).\n\
+\n\
+GROUND POSITION COORDINATES:\n\
+\n\
+You can change the ground position coordinates at any time.\n\
+These are the "first bin" and "bin increment" rows.\n\
+Any change here is a coordinate transformation.\n\
+The number of X and Y bins, and the static values, remain unchanged.\n\
+\n\
+SIZE OF STATIC FILE:\n\
+\n\
+You can change the size of the static file in this menu only when\n\
+all static values are set to nil.\n\
+To set the size to anything you want, you can type into either the\n\
+"last bin" row or the "# bins" row.\n\
+\n\
+OTHER TYPES OF EDITS:\n\
+\n\
+You can edit individual static values, and select individual values,\n\
+by typing into a table of static values found under the Table menu.\n\
+\n\
+You can also edit the static values as a group by choosing options\n\
+under the Edit menu.\n\
+\n\
+You can change the size of the static file (truncating or extending\n\
+the file, or resampling it to a finer or coarser grid) by choosing\n\
+options under the Edit menu.\n\
+\n\
+
+
+
+
+
+################################# end #####################################
+################################# end #####################################
+################################# end #####################################
+

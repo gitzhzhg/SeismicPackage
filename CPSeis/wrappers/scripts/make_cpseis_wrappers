@@ -1,0 +1,106 @@
+#! /bin/csh -f
+##------------------------- make_cpseis_wrappers ---------------------------##
+##------------------------- make_cpseis_wrappers ---------------------------##
+##------------------------- make_cpseis_wrappers ---------------------------##
+
+set package_dot          = $1
+set package_underscore   = $2
+set first_file_is_newer  = $CPSEIS_WRAPPERS/scripts/first_file_is_newer
+set templates            = $CPSEIS_WRAPPERS/templates
+set WrapperInfoParser    = "java -ea org.cpseis.util.WrapperInfoParser"
+
+##------------------------ loop through files -------------------------##
+##------------------------ loop through files -------------------------##
+##------------------------ loop through files -------------------------##
+
+# The following two lines ["foreach file (*)" and checking for the f90
+# extension] are used instead of "foreach file (*.f90)" in order to
+# keep the foreach command from aborting if there are no f90 files.
+
+foreach file ($CPSEIS_HOME/src/*)
+
+   if($file:e != f90) continue
+
+   grep 'CPS_v1 type="PROCESS"' $file > /dev/null || continue
+
+##------------------------ set variables ----------------------------##
+##------------------------ set variables ----------------------------##
+##------------------------ set variables ----------------------------##
+
+   set name         = $file:r:t
+   set first_letter = `expr $name : '\(.\).*'`
+   set last_letters = `expr $name : '.\(.*\)'`
+   set first_upper  = `echo $first_letter | tr '[a-z]' '[A-Z]'`
+   set last_uppers  = `echo $last_letters | tr '[a-z]' '[A-Z]'`
+   set Name         = $first_upper$last_letters
+ # set name         = $first_letter$last_letters      #### redundant.
+   set NAME         = $first_upper$last_uppers
+   set newfile_f90  = ${name}_wrap.f90
+   set newfile_hh   = Cpseis${Name}.hh
+   set newfile_cc   = Cpseis${Name}.cc
+   set newfile_java = Cpseis${Name}.java
+   set newfile_cpp  = Cpseis${Name}_jni.cpp
+
+#  the first line below does not work on modi:
+#  $first_file_is_newer $file $newfile_java || echo -n .; continue
+   $first_file_is_newer $file $newfile_java || continue
+
+##------------------------ parse source file ----------------------##
+##------------------------ parse source file ----------------------##
+##------------------------ parse source file ----------------------##
+
+   $WrapperInfoParser $file $name > junkfile
+
+   set lines        = `head -3 junkfile`
+   set code         = "$lines[1]"
+ # set category     = "$lines[2]"           #### not needed.
+ # set purpose      = "$lines[3-]"          #### not needed.
+   set one          = "    "
+   set two          = "    "
+
+   rm -f junkfile
+
+   if($code == ERROR) continue
+
+   if($code == 1 || $code == 0) set two = "\!\!\!\!"
+   if($code == 2 || $code == 0) set one = "\!\!\!\!"
+
+##----------------------- build wrapper files ------------------------##
+##----------------------- build wrapper files ------------------------##
+##----------------------- build wrapper files ------------------------##
+
+   sed s/xxxx/$name/g $templates/xxxx_wrap_f90                          \
+                               | sed s/1111/"$one"/g                    \
+                               | sed s/2222/"$two"/g                    \
+                               > $newfile_f90
+
+   sed s/Xxxx/$Name/g $templates/CpseisXxxx_hh                          \
+                               | sed s/XXXX/$NAME/g                     \
+                               > $newfile_hh
+
+   sed s/Xxxx/$Name/g $templates/CpseisXxxx_cc                          \
+                               | sed s/xxxx/$name/g                     \
+                               | sed s/XXXX/$NAME/g                     \
+                               > $newfile_cc
+
+   sed s/Xxxx/$Name/g $templates/CpseisXxxx_java                        \
+                               | sed s/XXXX/$NAME/g                     \
+                               | sed s/MYPACKAGE/$package_dot/g         \
+                               | sed s/UNPACKAGE/$package_underscore/g  \
+                               > $newfile_java
+
+   sed s/Xxxx/$Name/g $templates/CpseisXxxx_jni_cpp                     \
+                               | sed s/UNPACKAGE/$package_underscore/g  \
+                               > $newfile_cpp
+
+   echo "$code  generated  $newfile_f90  $newfile_hh  $newfile_cc  $newfile_java  $newfile_cpp"
+
+##-------------------------- finish loop --------------------------------##
+##-------------------------- finish loop --------------------------------##
+##-------------------------- finish loop --------------------------------##
+
+end
+
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##
+##-------------------------------- end --------------------------------------##

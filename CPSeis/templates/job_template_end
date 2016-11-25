@@ -1,0 +1,45 @@
+/EOS
+IABORT=0
+sh -ae bscript 2>>err.out || IABORT=1
+if [ -f core ] ; then
+IABORT=1
+fi
+if [ "$IABORT" -eq 1 ] ; then
+a=`date +%D`
+b=`date +%R`
+YMDATE=`date +%Y_%m`
+echo $PBS_REQID $LOGNAME 'JJJJJ' $a $b >> /usr/app/cps_log/cps_aborted_$YMDATE
+echo ' ' > temp_report_file
+banner " JOB ABORT" >>temp_report_file
+touch PPPPP/JJJJJ_$PBS_REQID.aborted 
+else
+touch PPPPP/JJJJJ_$PBS_REQID.completed 
+fi
+echo ' ' >> online
+echo "/btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID"  >> online
+ls -Ll /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID  >> online
+echo ' ' >> online
+cat err.out >> online
+if [ -f cfeseries.out ] ; then
+cat cfeseries.out >> temp_report_file
+fi
+cat online >> temp_report_file
+if [ "$IABORT" -eq 1 ] ; then
+echo "JOB ABORT" >> temp_report_file
+fi
+if [ -f core ] ; then
+echo " " >> temp_report_file
+echo "Found core file" >> temp_report_file
+echo "/btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID was not removed" >> temp_report_file
+FOUND_CORE=1
+else
+FOUND_CORE=0
+fi
+cd
+sleep 10
+cp /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID/temp_report_file PPPPP/JJJJJ.rpt.$PBS_REQID 
+killall hold_automounts.sh
+if [ "$FOUND_CORE" -eq 0 ] ; then
+rm -R /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID
+rm $HOME/cpsjobs/JJJJJ_$PBS_REQID
+fi

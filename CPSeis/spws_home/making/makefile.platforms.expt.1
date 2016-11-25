@@ -1,0 +1,2725 @@
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : makefile.platforms
+# Category   : stand-alone
+# Written    : 2003-05-13   by: Tom Stoeckley
+# Revised    : 2006-08-14   by: Karen Goodger 
+# Maturity   : beta
+# Purpose    : Include makefile which defines platforms supported by CPS.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This include file defines appropriate variables for each platform which
+# is supported by CPS (which includes the ~sps and ~spws directories).
+#
+# This include file should be included in other makefiles to provide
+# consistent definitions for the use of compilers and linkers on different
+# platforms.  It is intended that this include file be used by ~sps managers,   
+# ~spws managers, and developers in their own directories so that all of
+# the CPS seismic processing code (and related code) will be compiled and
+# linked in a consistent manner.
+#
+# A platform is defined here as a software system.  There can be more than
+# one platform on the same architecture (operating system and hardware).
+# For example: In the linux case (linux operating system on intel machines),
+# several different platforms are based on the Fortran-90 Absoft, Portland
+# Group, and Intel compilers.  In the SGI case, two different platforms might
+# use 32-bit and 64-bit addresses.  Separate platforms should also be created
+# for different versions of compilers and for different optimization/debug
+# levels.
+#
+# To use this include file, the following line should be put into the
+# user's makefile:
+#
+#             include $(CFECUSTOMDIR)/makefile.platforms
+#
+# Input and output variables in this file are upper case.
+# Internally-used variables in this file are lower case.
+#
+#-------------------------------------------------------------------------------
+#                           INPUT REQUIRMENTS
+#
+# The following environment variables must be set:
+#
+#    SPSDIR              Absolute path to ~sps home directory.
+#    CFECUSTOMDIR        Location of cfecustom makefiles.
+#    CFECUSTOMSCRIPTS    Location of cfecustom scripts.
+#    CFECUSTOMPROGRAMS   Location of cfecustom programs.
+#    ARCHITECTURE        Needed only for validating the platform.
+#    HOST                Name of host computer.
+#
+# The following makefile variables must be set:
+#
+#    INCDIRS        List of directories where include files can be found.
+#    MODDIRS        List of directories where module files can be found.
+#    DIRECTIVES     List of -D directives to define for C and C++ compilers.
+#    MATURITY       Maturity of the ~sps library to link to.
+#    NEED_MPI       Whether mpi libraries are needed (yes or no) (default no).
+#    NEED_LANDMARK  Whether landmark libraries needed (yes or no) (default no).
+#
+# Notes:
+#
+#    INCDIRS must not include the -I flags.
+#    MODDIRS must not include the module flags (-M or -p or whatever).
+#    DIRECTIVES must not include the -D flags.
+#    MATURITY must be either alpha or beta or production or none.
+#    If MATURITY is none, no ~sps library will be linked to.
+#    INCDIRS normally should include full paths (except for possibly ..).
+#    MODDIRS normally should include full paths terminating with /$(PLATFORM)
+#     (except for possibly .).
+#
+#    Additional directives representing platform and maturity will be added
+#    to the C and C++ compile commands by this include file, so they should
+#    not be included in the DIRECTIVES variable.
+#
+#-------------------------------------------------------------------------------
+#                                 ERRORS
+#
+# This include file quits with an error message if any of the above
+# environment variables are not set, or if MATURITY is not set to alpha
+# or beta or production or none.  But it is OK for INCDIRS, MODDIRS, or
+# DIRECTIVES to be missing or blank.
+#
+# This include file also quits with an error message if gmake is not
+# executed in a supported platform-specific directory, or if that directory
+# is not compatible with the host computer or its architecture.
+#
+#-------------------------------------------------------------------------------
+#                           NEW OUTPUT VARIABLES
+#
+# The following variables are defined in this makefile:
+#
+#    PLATFORM          Platform-specific directory in which gmake was typed.
+#    PARENT            Directory just above the platform-specific directory.
+#
+#    FC                Fortran compiler with flags.
+#    FC_FLOATIO        Fortran compiler with flags for FLOATIO.
+#    FC_KMIG           Fortran compiler with flags for KMIG.
+#    FC_PPIO           Fortran compiler with flags for PPIO.
+#    FC_UNDER     Fortran compiler with flags for Absoft lower case underscore.
+#    FC_LINK           Fortran linker with flags.
+#
+#    CC                C compiler with flags.
+#    CC_IBSMA          C compiler with flags for IBSMA.
+#    CC_LINK           C linker with flags.
+#
+#    CXX               C++ compiler with flags.
+#    CXX_IBSMA         C++ compiler with flags for IBSMA.
+#    CXX_DEPEND        C++ compiler with flags for generating dependencies.
+#    CXX_LINK          C++ linker with flags.
+#
+#    PURE_LINK         Purify linker with flags.
+#    AR_LINK           Archive library (.a) maker with flags.
+#    SO_LINK           Shared library (.so) maker with flags.
+#
+#    MODEXT            Fortran90 module file extension (with period).
+#    MODFLAG           Fortran90 compiler flag for module directories.
+#
+#    SPS_LIBS          Low level ~sps libraries.
+#    FOR_LIBS          Fortran libraries (needed if using C or C++ linker).
+#    GUI_LIBS          X/Motif libraries (needed for most ~spws programs).
+#    MATH_LIBS         Math and miscellaneous libraries.
+#    CPSLIB            The ~sps library (of requested maturity) to link to.
+#
+# Notes:
+#
+#    PLATFORM will not contain the full path.
+#    PARENT   will not contain the full path.
+#    SPS_LIBS will not include prodlib or betalib or alphalib.
+#    CPSLIB will be the absolute path to prodlib or betalib or alphalib.
+#    CPSLIB and SPS_LIBS will be blank if MATURITY is none.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+# 57. 2006-08-14  Goodger    Added JAVA_LIBS.
+# 56. 2006-03-28  Goodger    Fix typo on FC_LINK, linuxab90_debug platform.
+# 55. 2006-03-17  Goodger    Added OTHER_LIBS to linuxab90 platforms. This
+#                            was necessary to link test_link and icps.
+# 54. 2006-03-07  Goodger    Change linuxab90 platform so can be made on
+#                            hoeplc06, 32 bit rhel.  This required changing
+#                            gcc3 back to gcc.
+# 53. 2006-02-15  Goodger    Add platform 32elinuxp50.  This will be the
+#                            the portland 5.0 compiler made on a 32bit 
+#                            enterprize linux machine. 
+# 52. 2006-02-08  Goodger    Add 64linuxp60 platform. This platform also
+#                            requires special compiling options. Using 
+#                            FC_O1 flag.
+#                            The array routine squaks on the -fast flag.
+#                            Also change to 64linuxp52 platform to execute
+#                            script pgf52_f90 to set up the proper environment
+#                            rather than relying on the .cshrc file in ~sps.
+# 51. 2006-01-06  Goodger    Add FC_INTERPLATE.
+# 50. 2005-08-22  Goodger    Change linuxi90 and linuxi81 platform to O2.
+# 49. 2005-08-22  Goodger    Use gcc3 rather than gcc on linux compiles.
+#                            64 bit machines are still gcc as gcc3 has not
+#                            been installed.
+# 48. 2005-08-17  Goodger    Add platforms linuxi90 and linuxi90_debug
+# 47. 2005-08-12  Stoeckley  Add flag CXX_IBSMA; change SO_LINK flags for
+#                             all linux platforms to use g++ instead of ld.
+# 46. 2005-08-02  Goodger    Remove special compile flags from linuxab90_debug.
+# 45. 2005-07-28  Goodger    Add special compile variable FC_O1.
+# 44. 2005-07-12  Goodger    Add platform winab90.
+# 43. 2005-05-04  Goodger    Add special compile for apin_crou with -fPIC
+#                            flag.
+# 42. 2005-05-02  Goodger    Removed NOFSEEKO -D flag from all platforms.
+#                            Needed for large files.
+# 41. 2005-05-02  Goodger    Add platform linuxab80_kruger.
+# 40. 2005-04-28  Goodger    Add platform 64linuxp52.
+# 39. 2005-04-25  Goodger    Add mvec to MATH_LIBS on 64sol62.
+# 38. 2005-02-22  Goodger    Add platforms linuxg95 and linuxg95_debug.
+# 37. 2005-01-28  Goodger    Add more options to linuxi81_debug per Dave Glover.
+# 36. 2005-01-24  Goodger    Add -Mnomain to portland link in order to make
+#                            icps.
+# 35. 2004-12-07  Goodger    Add -traceback flag to linux81_debug platform.
+# 34. 2004-10-28  Goodger    Add platforms linuxi81 and lunxi81_debug.
+# 33. 2004-10-14  Goodger    Add platform linuxab90, linuxab90_debug.
+# 32. 2004-10-14  Stoeckley  Add variables NEED_MPI and NEED_LANDMARK and
+#                             FC_UNDER; remove unused variable LMRKLNK and
+#                             unneeded variable FC_PC; fix FOR_LIBS, GUI_LIBS,
+#                             and INCDIRS for motif platforms ab80; add motif
+#                             libs for pgf90; fix motif libs for SGI.
+# 31. 2004-10-11  Goodger    Add platform linuxab80_debug_gcc3.
+# 30. 2004-08-27  Goodger    Change motif platforms from ab75 to ab80.
+# 29. 2004-05-19  Goodger    Add -xarch=v9 to link for 64sol62.
+# 28. 2004-05-18  Goodger    Add platforms 64sol62 and 64sol62_debug.
+# 27. 2004-04-30  Goodger    Removed the Rs and Rc flags from debug platforms.
+#                            These options core dump some routines, and
+#                            making special symbols for these routines is
+#                            becoming too great.
+# 26. 2004-04-29  Stoeckley  Modify Portland Group FOR_LIBS by removing -rpath
+#                             and hardwiring -lpgc to use the .a library.
+# 25. 2004-04-27  Stoeckley  Add -DLINUXA to Absoft platforms, and add
+#                             -DLINUX to Intel and PGI platforms.  Now -DLINUX
+#                             means any linux platform, and -DLINUXA, -DLINUXP,
+#                             and -DLINUXI refer to the specific compilers.
+# 24. 2004-04-23  Stoeckley  Add platforms linuxab75_motif_1_2 and
+#                             linuxab75_motif_2_1.
+# 23. 2004-04-23  Goodger    Add platform linuxab80_xeon.
+# 22. 2004-04-05  Goodger    Adding -D_FILE_OFFSET_BITS=64 to remaining 
+#                            linux and sol platforms.
+# 21. 2004-03-25  Goodger    Adding -D_FILE_OFFSET_BITS=64 to linux and sol
+#                            debug platforms.
+# 20. 2004-03-16  Goodger    Add symbol FC_PC for special compile of
+#                            pc.f90.
+# 19. 2004-03-11  R Selzler  Added "-mt" Multi-Threaded option to Solaris
+# 18. 2004-03-02  Goodger    Remove the -Rc (array conformance) flag
+#                            on the FC_KMIG symbol for linuxab75_debug
+#                            and linuxab80_debug.  The compiler sometimes
+#                            core dumps with this flag.
+# 17. 2004-01-27  Selzler    Incorporate new compler flags for gcc.
+#                            -D_REENTRANT is needed to support pthreads
+#                            correctly, especially errno references.
+# 16. 2004-01-15  Goodger    Incorporate new compiler flages on absoft
+#                            debug platforms from Randy Selzler.
+# 15. 2003-12-01  Goodger    Use lmrk_stubs to make .so libs.  Get rid
+#                            of OWHOME and LMRKLIB.
+# 14. 2003-11-19  Goodger    Add -OPT:Olimit=6000 to 64sgi73 platform.
+# 13. 2003-11-11  Goodger    Add special compile variable CC_IBSMA.
+# 12. 2003-11-07  Stoeckley  Remove obsolete special treatment of Portland
+#                             Group compiler regarding module files; set
+#                             FOR_LIBS for pgf90 compiler; remove setting
+#                             of OWHOME and LD_LIBRARY_PATH since now
+#                             done in setup_sps_environment; add -dy to
+#                             linux GUI_LIBS.
+# 11. 2003-10-02  Goodger    Add inform=inform to portland compile.  This
+#                            will get all types of messages.
+#                            Change module flag on linuxp_debug to -I.
+#                            kmig core dumped on linuxp_debug.  The -g flag
+#                            had to be removed to get kmig to compile.
+#                            Add profiling flag to c code on platform 
+#                            linuxab80_prof.
+# 10. 2003-09-08  Goodger    Changed module flag on linuxp to -I.
+#  9. 2003-09-08  Goodger    Add platform linuxab80_prof
+#  8. 2003-09-02  Goodger    Added links needed by new landmark library,
+#                            lmrkbeta.  Add architecure specific area.
+#                            Set LD_LIBRARY_PATH due to landmark now being in
+#                            a shared library.
+#  7. 2003-08-07  Goodger    Add directive NOFSEEKO to linuxab75 platforms.
+#                            Add new platforms sol62-56 and sol62-56_debug.
+#                            This is for solaris compiler version 6.2 and
+#                            operating system version 5.6.  Currently machines
+#                            odi74 and odi90 are on operating system version
+#                            5.6 where other solaris machines are on 5.8.
+#  6. 2003-07-17  Goodger    Correct absoft library path for linuxab80.
+#  5. 2003-07-09  Goodger    Added xarch=generic to sol70 compile.
+#  4. 2003-07-08  Goodger    Add platforms linuxab80, linuxab80_debug.
+#  3. 2003-06-20  Stoeckley  Change CC in non-debug platforms to be optimized,
+#                             and remove CC_OPT.
+#  2. 2003-06-16  Stoeckley  Use new scripts for sun Fortran and C and C++
+#                             compilers; add -compat=4 to sun C++ compiler
+#                             flags; add MATURITY option "none" for when
+#                             ~sps libraries are not needed; add altix71
+#                             platform; add -lfortran and -lffio to sgi
+#                             fortran libraries.
+#  1. 2003-05-13  Stoeckley  Initial version, made from Karen's makefile in
+#                            ~sps/alpha/spsmodules, and an older makefile
+#                            with the same name as this one, which has been
+#                            used in ~spws and Tom's directories for a couple
+#                            of years.  Several obsolete platforms
+#                            have been removed or renamed.  Four new SGI
+#                            platforms have been added, but without correct
+#                            contents which will be determined later.  The
+#                            directive -DTESTLIB was removed.  An improved (and
+#                            simplified) means of verifying the suitability
+#                            of the platform-specific directory is implemented.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+# RCS Id : $Id: makefile.platforms,v 1.55 2006/03/27 21:33:42 Goodger prod sps $
+
+
+##---------------- verify presence of required variables -------------------##
+##---------------- verify presence of required variables -------------------##
+##---------------- verify presence of required variables -------------------##
+
+
+ifeq ($(strip $(SPSDIR)),)
+  $(error environment variable SPSDIR not set)
+endif
+
+ifeq ($(strip $(CFECUSTOMDIR)),)
+  $(error environment variable CFECUSTOMDIR not set)
+endif
+
+ifeq ($(strip $(CFECUSTOMSCRIPTS)),)
+  $(error environment variable CFECUSTOMSCRIPTS not set)
+endif
+
+ifeq ($(strip $(CFECUSTOMPROGRAMS)),)
+  $(error environment variable CFECUSTOMPROGRAMS not set)
+endif
+
+ifeq ($(strip $(ARCHITECTURE)),)
+  $(error environment variable ARCHITECTURE not set)
+endif
+
+ifeq ($(strip $(HOST)),)
+  $(error environment variable HOST not set)
+endif
+
+ifeq ($(strip $(MATURITY)),)
+  $(error makefile variable MATURITY not set)
+endif
+
+ifeq ($(strip $(NEED_MPI)),)
+  NEED_MPI = no
+endif
+
+ifeq ($(strip $(NEED_LANDMARK)),)
+  NEED_LANDMARK = no
+endif
+
+
+##---------------- verify permitted value of maturity ---------------------##
+##---------------- verify permitted value of maturity ---------------------##
+##---------------- verify permitted value of maturity ---------------------##
+
+
+whoops = true
+
+ifeq ($(MATURITY), production)
+  whoops = false
+endif
+
+ifeq ($(MATURITY), beta)
+  whoops = false
+endif
+
+ifeq ($(MATURITY), alpha)
+  whoops = false
+endif
+
+ifeq ($(MATURITY), none)
+  whoops = false
+endif
+
+ifeq ($(whoops), true)
+  $(error illegal MATURITY: $(MATURITY) \
+       - must be alpha or beta or production or none)
+endif
+
+
+##--------------------------- initialization -------------------------------##
+##--------------------------- initialization -------------------------------##
+##--------------------------- initialization -------------------------------##
+
+
+PLATFORM = $(notdir $(PWD))
+PARENT   = $(notdir $(patsubst %/,%, $(dir $(CURDIR))))
+
+### Note: CURDIR is the full path of the current directory.
+###       CURDIR is a gmake variable which is always defined.
+###       CURDIR must be used above instead of PWD for situations where rsh
+###       is used, because rsh apparently retains the previous PWD.
+
+
+##------------------ error detection initialization ------------------------##
+##------------------ error detection initialization ------------------------##
+##------------------ error detection initialization ------------------------##
+
+
+permitted_architectures = unset
+permitted_hosts         = unrestricted
+
+### Note: permitted_architectures must be reset to one or more allowed
+###       architectures.
+
+### Note: permitted_hosts must be reset to one or more allowed hosts, but
+###       only in cases where some hosts with the correct architecture cannot
+###       be used (e.g. missing compiler or wrong version of compiler or wrong
+###       version of operating system).
+
+
+##---------------------------- linuxab75 -----------------------------------##
+##---------------------------- linuxab75 -----------------------------------##
+##---------------------------- linuxab75 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab75)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_O1      = ab75_f90 -c -en -O1 -cpu:p6 -YDEALLOC=MINE
+  FC_FLOATIO = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_INTERPOLATE = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_KMIG    = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_PPIO    = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_UNDER   = ab75_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab75_f90
+
+  CC         = gcc3 -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c  -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c  -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM       -DLINUX -DLINUXA  -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L$(ABSOFT)/lib -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##--------------------------- linuxab75_debug ------------------------------##
+##--------------------------- linuxab75_debug ------------------------------##
+##--------------------------- linuxab75_debug ------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab75_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab75_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_O1      = ab75_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_FLOATIO = ab75_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_INTERPOLATE = ab75_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_KMIG    = ab75_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PPIO    = ab75_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 6 \
+                 -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_UNDER   = ab75_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 6 \
+                 -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab75_f90 -eR
+
+  CC         = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM              -DLINUX -DLINUXA \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L$(ABSOFT)/lib -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##--------------------------- linuxab80_motif_1_2 --------------------------##
+##--------------------------- linuxab80_motif_1_2 --------------------------##
+##--------------------------- linuxab80_motif_1_2 --------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_motif_1_2)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = hoeplc03 hoeplc04
+
+  FC         = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_O1      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_FLOATIO = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_INTERPOLATE = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_KMIG    = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PPIO    = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 6 \
+                 -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_UNDER   = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 6 \
+                 -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90 -eR
+
+  CC         = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM              -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /opt/motif12/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /opt/motif12/include /usr/X11R6/include
+
+endif
+
+
+##--------------------------- linuxab80_motif_2_1 --------------------------##
+##--------------------------- linuxab80_motif_2_1 --------------------------##
+##--------------------------- linuxab80_motif_2_1 --------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_motif_2_1)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = hoeplc03 hoeplc04
+
+  FC         = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_O1      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_FLOATIO = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_INTERPOLATE = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_KMIG    = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PPIO    = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 6 \
+                 -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_UNDER   = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 6 \
+                 -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90 -eR
+
+  CC         = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM              -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /opt/motif21/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+  INCDIRS += /opt/motif21/include /usr/X11R6/include
+
+endif
+
+
+##---------------------------- linuxg95 -----------------------------------##
+##---------------------------- linuxg95 -----------------------------------##
+##---------------------------- linuxg95 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxg95)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = g95 -c -Wall -O2 -fno-second-underscore 
+  FC_O1      = g95 -c -Wall -O1 -fno-second-underscore 
+  FC_FLOATIO = g95 -c -Wall -O2 -fno-second-underscore 
+  FC_INTERPOLATE = g95 -c -Wall -O2 -fno-second-underscore 
+  FC_KMIG    = g95 -c -Wall -O2 -fno-second-underscore 
+  FC_PPIO    = g95 -c -Wall -O2 -fno-second-underscore 
+                                                                     
+  FC_UNDER   = g95 -c -Wall -O2 -fno-second-underscore 
+            
+                                                                    
+  FC_LINK    = g95 
+
+  CC         = gcc3 -c -O2 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O2 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c     -Wall -DLINUX -DLINUXP -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c     -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXP -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -L/home/goodgkp/compiler/g95/install/g95-install/lib/gcc-lib/i686-pc-linux-gnu/4.0.0 \
+                -lf95 -lgcc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+
+endif
+
+##---------------------------- linuxg95_debug --------------------------------##
+##---------------------------- linuxg95_debug --------------------------------##
+##---------------------------- linuxg95_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), linuxg95_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = g95 -c -Wall -g -fno-second-underscore 
+  FC_O1      = g95 -c -Wall -g -fno-second-underscore 
+  FC_FLOATIO = g95 -c -Wall -g -fno-second-underscore 
+  FC_INTERPOLATE = g95 -c -Wall -g -fno-second-underscore 
+  FC_KMIG    = g95 -c -Wall -g -fno-second-underscore 
+                               
+  FC_PPIO    = g95 -c -Wall -g -fno-second-underscore
+                                                                     
+  FC_UNDER   = g95 -c -Wall -g -fno-second-underscore
+           
+                                                                    
+  FC_LINK    = g95 
+
+  CC         = gcc3 -c -g -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -g -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c     -Wall -DLINUX -DLINUXP -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c     -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXP -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -L/apps/compilers/g95-install/lib/gcc-lib/i686-pc-linux-gnu/3.5.0 \
+                -lf95 -lgcc -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+  EXCLUDE = ttrin.f90
+
+endif
+
+##---------------------------- linuxab80 -----------------------------------##
+##---------------------------- linuxab80 -----------------------------------##
+##---------------------------- linuxab80 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_O1      = ab80_f90 -c -en -O1 -cpu:p6 -YDEALLOC=MINE
+  FC_FLOATIO = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_INTERPOLATE = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_KMIG    = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_PPIO    = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_UNDER   = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90
+
+  CC         = gcc -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c     -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++ -c     -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##---------------------------- linuxab80_xeon -------------------------------##
+##---------------------------- linuxab80_xeon -------------------------------##
+##---------------------------- linuxab80_xeon -------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_xeon)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -O2 -cpu:p7 -YDEALLOC=MINE
+  FC_O1      = ab80_f90 -c -en -O1 -cpu:p7 -YDEALLOC=MINE
+  FC_FLOATIO = ab80_f90 -c -en -O2 -cpu:p7 -YDEALLOC=MINE
+  FC_KMIG    = ab80_f90 -c -en -O2 -cpu:p7 -YDEALLOC=MINE
+  FC_INTERPOLATE = ab80_f90 -c -en -O2 -cpu:p7 -YDEALLOC=MINE
+  FC_PPIO    = ab80_f90 -c -en -O2 -cpu:p7 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_UNDER   = ab80_f90 -c -en -O2 -cpu:p7 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90
+
+  CC         = gcc3 -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c     -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c     -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##---------------------------- linuxab80_prof -------------------------------##
+##---------------------------- linuxab80_prof -------------------------------##
+##---------------------------- linuxab80_prof -------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_prof)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE -P
+  FC_O1      = ab80_f90 -c -en -O1 -cpu:p6 -YDEALLOC=MINE -P
+  FC_FLOATIO = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE -P
+  FC_INTERPOLATE = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE -P
+  FC_KMIG    = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE -P
+  FC_PPIO    = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ -P
+  FC_UNDER   = ab80_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ -P
+  FC_LINK    = ab80_f90
+
+  CC         = gcc3 -c -O3 -Wall -DLINUX -DLINUXA -pg -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O3 -Wall -DLINUX -DLINUXA -pg -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c     -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c     -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##--------------------------- linuxab80_debug ------------------------------##
+##--------------------------- linuxab80_debug ------------------------------##
+##--------------------------- linuxab80_debug ------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_O1      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_FLOATIO = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_INTERPOLATE = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_KMIG    = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PPIO    = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_UNDER   = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90 -eR
+
+  CC         = gcc -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc -D_REENTRANT
+
+  CXX        = g++ -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++ -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM              -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                 -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+#               /usr/X11R6/lib/libXp.a \
+#               /usr/X11R6/lib/libXext.a \
+#               /usr/X11R6/lib/libXt.a \
+#               /usr/X11R6/lib/libSM.a \
+#               /usr/X11R6/lib/libICE.a \
+#               /usr/X11R6/lib/libX11.a -ldl
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+##### if -lc is present in MATH_LIBS, and if the main program is a c program
+##### linked using fortran, then a fortran open statement returns status 0
+##### even if an error occurs.
+
+#### if -lc is absent in FOR_LIBS and MATH_LIBS, then libCFE.so has unsatisfied
+#### externals stat, istat, and fstat.
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##--------------------------- linuxab80_kruger ------------------------------##
+##--------------------------- linuxab80_kruger ------------------------------##
+##--------------------------- linuxab80_kruger ------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_kruger)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_O1      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_FLOATIO = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_INTERPOLATE = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_KMIG    = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PPIO    = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_UNDER   = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90 -eR
+
+  CC         = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3 -D_REENTRANT
+
+  CXX        = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM              -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = linuxab80_purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_plus_writeable/cache $(CXX_LINK)
+
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                 -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+#               /usr/X11R6/lib/libXp.a \
+#               /usr/X11R6/lib/libXext.a \
+#               /usr/X11R6/lib/libXt.a \
+#               /usr/X11R6/lib/libSM.a \
+#               /usr/X11R6/lib/libICE.a \
+#               /usr/X11R6/lib/libX11.a -ldl
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+##### if -lc is present in MATH_LIBS, and if the main program is a c program
+##### linked using fortran, then a fortran open statement returns status 0
+##### even if an error occurs.
+
+#### if -lc is absent in FOR_LIBS and MATH_LIBS, then libCFE.so has unsatisfied
+#### externals stat, istat, and fstat.
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##--------------------------- linuxab80_debug_gcc3 --------------------------##
+##--------------------------- linuxab80_debug_gcc3 --------------------------##
+##--------------------------- linuxab80_debug_gcc3 --------------------------##
+
+
+ifeq ($(PLATFORM), linuxab80_debug_gcc3)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_O1      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PC      = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_FLOATIO = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_INTERPOLATE = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_KMIG    = ab80_f90 -c -en -g -YDEALLOC=MINE -eR -et         -T 6
+  FC_PPIO    = ab80_f90 -c     -g -YDEALLOC=MINE -eR -et         -T 7 \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab80_f90 -eR 
+
+  CC         = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3 -D_REENTRANT
+
+  CXX        = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM              -DLINUX -DLINUXA \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                 -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##---------------------------- winab90 -----------------------------------##
+##---------------------------- winab90 -----------------------------------##
+##---------------------------- winab90 -----------------------------------##
+
+
+ifeq ($(PLATFORM), winab90)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_O1         = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_FLOATIO = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_INTERPOLATE = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_KMIG    = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_PPIO    = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_UNDER   = /cygdrive/c/Absoft90/bin/f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = /cygdrive/c/Absoft90/bin/f90
+
+  CC         = gcc3 -c -O3 -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O3 -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c     -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c     -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran80/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+##--------------------------- 32elinuxp60 ------------------------------------##
+##--------------------------- 32elinuxp60 ------------------------------------##
+##--------------------------- 32elinuxp60 ------------------------------------##
+
+
+ifeq ($(PLATFORM), 32elinuxp60)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf3260_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_O1      = pgf3260_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_FLOATIO = pgf3260_f90 -c -Ktrap=fp -Mstandard      inform=inform
+  FC_INTERPOLATE = pgf3260_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_KMIG    = pgf3260_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_PPIO    = pgf3260_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_UNDER   = pgf3260_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_LINK    = pgf3260_f90 -Mnomain
+
+  CC         = gcc -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -O3 -Wall -DLINUX -DLINUXP
+  CXX_IBSMA  = g++ -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXP
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/apps/compilers/pgi/pgi-6.0/linux86/6.0/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /apps/compilers/pgi/pgi-6.0/linux86/6.0/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##---------------------------- linuxab90 -----------------------------------##
+##---------------------------- linuxab90 -----------------------------------##
+##---------------------------- linuxab90 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab90)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab90_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_O1      = ab90_f90 -c -en -O1 -cpu:p6 -YDEALLOC=MINE
+  FC_FLOATIO = ab90_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_INTERPOLATE = ab90_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_KMIG    = ab90_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE
+  FC_PPIO    = ab90_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_ 
+  FC_UNDER   = ab90_f90 -c -en -O2 -cpu:p6 -YDEALLOC=MINE \
+                                         -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab90_f90
+
+  CC         = gcc -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c     -Wall -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++ -c     -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXA -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared 
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran90/lib \
+                -lU77 -lfio -lf90math -lf77math -lV77 -lc 
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread  
+
+
+  OTHER_LIBS = -L/usr/lib/i386-redhat-linux7/lib -lc -L/usr/lib -lc_p \
+               -L/usr/lib/gcc-lib/i386-redhat-linux7/2.96 -lgcc \
+               -L/usr/lib/gcc-lib/i386-redhat-linux/3.2.3 -lsupc++
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##--------------------------- linuxab90_debug ------------------------------##
+##--------------------------- linuxab90_debug ------------------------------##
+##--------------------------- linuxab90_debug ------------------------------##
+
+
+ifeq ($(PLATFORM), linuxab90_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ab90_f90 -c -en -g -YDEALLOC=MINE          
+  FC_O1      = ab90_f90 -c -en -g -YDEALLOC=MINE         
+  FC_FLOATIO = ab90_f90 -c -en -g -YDEALLOC=MINE        
+  FC_INTERPOLATE = ab90_f90 -c -en -g -YDEALLOC=MINE       
+  FC_KMIG    = ab90_f90 -c -en -g -YDEALLOC=MINE       
+  FC_PPIO    = ab90_f90 -c     -g -YDEALLOC=MINE       \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_UNDER   = ab90_f90 -c     -g -YDEALLOC=MINE       \
+                  -YEXT_NAMES=LCS -YEXT_SFX=_
+  FC_LINK    = ab90_f90
+
+  CC         = gcc -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc -D_REENTRANT
+
+  CXX        = g++ -c -gdwarf -Wall -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++ -c -gdwarf -Wall -DLINUX -DLINUXA -D_REENTRANT \
+                                                     -D_LARGEFILE_SOURCE \
+                                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM              -DLINUX -DLINUXA  \
+                                                     -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -p
+
+  FOR_LIBS   = -L/usr/local/compilers/absoft/ProFortran90/lib \
+                 -lU77 -lfio -lf90math -lf77math -lV77 -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+#               /usr/X11R6/lib/libXp.a \
+#               /usr/X11R6/lib/libXext.a \
+#               /usr/X11R6/lib/libXt.a \
+#               /usr/X11R6/lib/libSM.a \
+#               /usr/X11R6/lib/libICE.a \
+#               /usr/X11R6/lib/libX11.a -ldl
+  MATH_LIBS  = -lm -lpthread
+
+##### if -lc is present in MATH_LIBS, and if the main program is a c program
+##### linked using fortran, then a fortran open statement returns status 0
+##### even if an error occurs.
+
+#### if -lc is absent in FOR_LIBS and MATH_LIBS, then libCFE.so has unsatisfied
+#### externals stat, istat, and fstat.
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+  OTHER_LIBS = -L/usr/lib/i386-redhat-linux7/lib -lc -L/usr/lib -lc_p \
+               -L/usr/lib/gcc-lib/i386-redhat-linux7/2.96 -lgcc \
+               -L/usr/lib/gcc-lib/i386-redhat-linux/3.2.3 -lsupc++
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+endif
+
+
+##----------------------------- 64linuxp60 ----------------------------------##
+##----------------------------- 64linuxp60 ----------------------------------##
+##----------------------------- 64linuxp60 ----------------------------------##
+
+
+ifeq ($(PLATFORM), 64linuxp60)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_O1      = pgf60_f90 -c -Ktrap=fp -Mstandard -O1 -Mnoframe -Mlre -tp=k8-64 -mcmodel=medium inform=inform
+  FC_FLOATIO = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform 
+  FC_INTERPOLATE = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_KMIG    = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_PPIO    = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_UNDER   = pgf60_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_LINK    = pgf60_f90 -Mnomain
+
+### gcc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+  CC         = gcc -c -O3 -Wall -mcmodel=medium  -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -O3 -Wall -mcmodel=medium  -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -O3 -Wall -DLINUX -DLINUXP
+  CXX_IBSMA  = g++ -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXP
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/apps/compilers/pgi/pgi-6.0/linux86-64/6.0/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /apps/compilers/pgi/pgi-6.0/linux86-64/6.0/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+##----------------------------- 64linuxp52 ----------------------------------##
+##----------------------------- 64linuxp52 ----------------------------------##
+##----------------------------- 64linuxp52 ----------------------------------##
+
+
+ifeq ($(PLATFORM), 64linuxp52)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_O1      = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_FLOATIO = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform 
+  FC_INTERPOLATE = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_KMIG    = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_PPIO    = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_UNDER   = pgf52_f90 -c -Ktrap=fp -Mstandard -fast -tp=k8-64 -mcmodel=medium inform=inform
+  FC_LINK    = pgf52_f90 -Mnomain
+
+### gcc gave message that -mcmodel=medium not supported in 64 bit mode when using -fPIC
+  CC         = gcc -c -O3 -Wall -mcmodel=medium  -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -O3 -Wall -mcmodel=medium  -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -O3 -Wall -DLINUX -DLINUXP
+  CXX_IBSMA  = g++ -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXP
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/apps/compilers/pgi/pgi-5.2/linux86-64/5.2/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /apps/compilers/pgi/pgi-5.2/linux86-64/5.2/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##----------------------------- 64linuxp52_debug -----------------------------##
+##----------------------------- 64linuxp52_debug -----------------------------##
+##----------------------------- 64linuxp52_debug -----------------------------##
+
+
+ifeq ($(PLATFORM), 64linuxp52_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform
+  FC_O1      = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform
+  FC_FLOATIO = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform 
+  FC_INTERPOLATE = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform
+  FC_KMIG    = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform
+  FC_PPIO    = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform
+  FC_UNDER   = pgf52_f90 -c -Ktrap=fp -Mstandard -g -tp=k8-64 -mcmodel=medium inform=inform
+  FC_LINK    = pgf52_f90 -Mnomain
+
+  CC         = gcc -c -g -Wall -mcmodel=medium -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -g -Wall -mcmodel=medium -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -g -Wall -DLINUX -DLINUXP
+  CXX_IBSMA  = g++ -c -g -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXP
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/apps/compilers/pgi/pgi-5.2/linux86-64/5.2/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /apps/compilers/pgi/pgi-5.2/linux86-64/5.2/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##----------------------------- 32elinuxp50 ----------------------------------##
+##----------------------------- 32elinuxp50 ----------------------------------##
+##----------------------------- 32elinuxp50 ----------------------------------##
+
+
+ifeq ($(PLATFORM), 32elinuxp50)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf3250_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_O1      = pgf3250_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_FLOATIO = pgf3250_f90 -c -Ktrap=fp -Mstandard      inform=inform
+  FC_INTERPOLATE = pgf3250_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_KMIG    = pgf3250_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_PPIO    = pgf3250_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_UNDER   = pgf3250_f90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+##  FC_LINK    = pgf3250_f90 -Mnomain
+  FC_LINK    = pgf3250_f90 
+
+  CC         = gcc -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc
+
+  CXX        = g++ -c -O3 -Wall -DLINUX -DLINUXP
+  CXX_IBSMA  = g++ -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++
+  CXX_DEPEND = g++ -MM          -DLINUX -DLINUXP
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -laspell
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##----------------------------- linuxp -------------------------------------##
+##----------------------------- linuxp -------------------------------------##
+##----------------------------- linuxp -------------------------------------##
+
+
+ifeq ($(PLATFORM), linuxp)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_O1      = pgf90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_FLOATIO = pgf90 -c -Ktrap=fp -Mstandard      inform=inform
+  FC_INTERPOLATE = pgf90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_KMIG    = pgf90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_PPIO    = pgf90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_UNDER   = pgf90 -c -Ktrap=fp -Mstandard -O1  inform=inform
+  FC_LINK    = pgf90 -Mnomain
+
+  CC         = gcc3 -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -O3 -Wall -DLINUX -DLINUXP
+  CXX_IBSMA  = g++3 -c -O3 -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXP
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+
+##-------------------------- linuxp_debug ----------------------------------##
+##-------------------------- linuxp_debug ----------------------------------##
+##-------------------------- linuxp_debug ----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxp_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = pgf90 -c -Ktrap=fp -Mstandard -g  inform=inform
+  FC_O1      = pgf90 -c -Ktrap=fp -Mstandard -g  inform=inform
+  FC_FLOATIO = pgf90 -c -Ktrap=fp -Mstandard -g  inform=inform
+  FC_INTERPOLATE = pgf90 -c -Ktrap=fp -Mstandard     inform=inform
+  FC_KMIG    = pgf90 -c -Ktrap=fp -Mstandard     inform=inform
+  FC_PPIO    = pgf90 -c -Ktrap=fp -Mstandard -g  inform=inform
+  FC_UNDER   = pgf90 -c -Ktrap=fp -Mstandard -g  inform=inform
+  FC_LINK    = pgf90
+
+  CC         = gcc3 -c -g  -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -g  -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -g  -Wall -DLINUX -DLINUXP -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -g  -Wall -DLINUX -DLINUXP -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXP -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+#              -rpath /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+#              -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl -lpgc
+
+  FOR_LIBS   = -L/usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib \
+               -L/usr/lib -L/usr/lib/gcc-lib/i386-redhat-linux/2.96 \
+               -lpgf90 -lpgf90_rpm1 -lpgf902 -lpgf90rtl -lpgftnrtl \
+               /usr/local/compilers/pgi/pgi-5.0/linux86/5.0/lib/libpgc.a -lc
+  GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+                -L/usr/X11R6/lib -dy -lXp -lXext -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+endif
+
+##------------------------------ linuxi81 -----------------------------------##
+##------------------------------ linuxi81 -----------------------------------##
+##------------------------------ linuxi81 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxi81)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ifort -c -O2 
+  FC_O1      = ifort -c -O2 
+  FC_FLOATIO = ifort -c -O2 
+  FC_INTERPOLATE = ifort -c -O2 
+  FC_KMIG    = ifort -c -O 
+  FC_PPIO    = ifort -c -O 
+  FC_UNDER   = ifort -c -O2 
+  FC_LINK    = ifort
+
+# CC         = gcc3 -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+  CC         = gcc -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+# CC_IBSMA   = gcc3 -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+  CC_IBSMA   = gcc -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+# CC_LINK    = gcc3
+  CC_LINK    = gcc
+
+# CXX        = g++3 -c -O3 -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX        = g++  -c -O3 -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+# CXX_IBSMA  = g++3 -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+  CXX_IBSMA  = g++  -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+#                                                 -D_LARGEFILE_SOURCE \
+#                                                 -D_FILE_OFFSET_BITS=64
+# CXX_LINK   = g++3 -v
+  CXX_LINK   = ifort -nofor_main
+# CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX_DEPEND = g++  -MM          -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+# SO_LINK    = g++3 -shared
+  SO_LINK    = g++  -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# must use the following command on hoeplc06
+#   "setenv INTEL 8.1; source /apps/compilers/intel_fc_80/bin/ifortvars.csh;"
+# must add the C++ library since ifort is being used as the linker!
+  FOR_LIBS   = /usr/lib/libstdc++.so.5 \
+               /usr/lib/gcc-lib/i386-redhat-linux/3.2.3/libstdc++.a
+
+# FOR_LIBS   = /usr/lib/crt1.o /usr/lib/crti.o /opt/intel_fc_80/lib/crtxi.o \
+#              -dynamic-linker /lib/ld-linux.so.2 -m elf_i386 -Bdynamic \
+#              -Qy -L/opt/intel_fc_80/lib -L/usr/lib -Bstatic -lifport \
+#              -lifcore -limf -Bdynamic -lm -lcxa -Bstatic -lirc -Bdynamic \
+#              -lunwind -lc -Bstatic -lirc_s /opt/intel_fc_80/lib/crtxn.o \
+#              /usr/lib/crtn.o
+
+# GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+
+  GUI_LIBS   = -L/usr/X11R6/lib -lXm -dy -lXp -lXext -lXt -lX11 
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+#  INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+
+endif
+
+
+##--------------------------- linuxi81_debug --------------------------------##
+##--------------------------- linuxi81_debug --------------------------------##
+##--------------------------- linuxi81_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), linuxi81_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_O1      = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_FLOATIO = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_INTERPOLATE  = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_KMIG    = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_PPIO    = ifort -c -g -OO -pc64 -mp -traceback
+  FC_UNDER   = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_LINK    = ifort
+  CC         = gcc -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                    -D_FILE_OFFSET_BITS=64
+
+# CC         = gcc3 -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+# CC_IBSMA   = gcc3 -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+
+  CC_IBSMA   = gcc -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                  -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+# CC_LINK    = gcc3
+  CC_LINK    = gcc 
+
+# CXX        = g++3 -c -g -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX        = g++  -c -g -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+# CXX_IBSMA  = g++3 -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+  CXX_IBSMA  = g++  -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+# CXX_LINK   = g++3 -v
+  CXX_LINK   = ifort -v -nofor_main
+# CXX_DEPEND = g++3 -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX_DEPEND = g++  -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+# SO_LINK    = g++3 -shared
+  SO_LINK    = g++ -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+# must use the following command on hoeplc06
+#   "setenv INTEL 8.1; source /apps/compilers/intel_fc_80/bin/ifortvars.csh;"
+# must add the C++ library since ifort is being used as the linker!
+  FOR_LIBS   = /usr/lib/libstdc++.so.5 \
+               /usr/lib/gcc-lib/i386-redhat-linux/3.2.3/libstdc++.a
+
+# FOR_LIBS   = /usr/lib/crt1.o /usr/lib/crti.o /opt/intel_fc_80/lib/crtxi.o \
+#              -dynamic-linker /lib/ld-linux.so.2 -m elf_i386 -Bdynamic \
+#              -Qy -L/opt/intel_fc_80/lib -L/usr/lib -Bstatic -lifport \
+#              -lifcore -limf -Bdynamic -lm -lcxa -Bstatic -lirc -Bdynamic \
+#              -lunwind -lc -Bstatic -lirc_s /opt/intel_fc_80/lib/crtxn.o \
+#              /usr/lib/crtn.o
+
+# GUI_LIBS   = /usr/applinux/vendors/openmotif/2.1/lib/libXm.a \
+
+  GUI_LIBS   = -L/usr/X11R6/lib -lXm -dy -lXp -lXext -lXt -lX11 
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+# INCDIRS += /usr/applinux/vendors/openmotif/2.1/include
+
+
+endif
+##------------------------------ linuxi90 -----------------------------------##
+##------------------------------ linuxi90 -----------------------------------##
+##------------------------------ linuxi90 -----------------------------------##
+
+
+ifeq ($(PLATFORM), linuxi90)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ifort -c -O2 
+  FC_O1      = ifort -c -O2 
+  FC_FLOATIO = ifort -c -O2 
+  FC_INTERPOLATE = ifort -c -O2 
+  FC_KMIG    = ifort -c -O 
+  FC_PPIO    = ifort -c -O 
+  FC_UNDER   = ifort -c -O2 
+  FC_LINK    = ifort
+
+  CC         = gcc3 -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -O3 -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -O3 -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                 -D_LARGEFILE_SOURCE \
+                                                 -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM          -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   =
+  GUI_LIBS   =
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+endif
+
+
+##--------------------------- linuxi90_debug --------------------------------##
+##--------------------------- linuxi90_debug --------------------------------##
+##--------------------------- linuxi90_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), linuxi90_debug)
+
+  permitted_architectures = ix86-intel-linux
+  permitted_hosts         = unrestricted
+
+  FC         = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_O1      = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_FLOATIO = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_INTERPOLATE = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_KMIG    = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_PPIO    = ifort -c -g -OO -pc64 -mp -traceback
+  FC_UNDER   = ifort -c -g -O0 -pc64 -mp -traceback
+  FC_LINK    = ifort
+
+  CC         = gcc3 -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                    -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = gcc3 -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                  -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+  CC_LINK    = gcc3
+
+  CXX        = g++3 -c -g -Wall -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = g++3 -c -g -Wall -DLINUX -DLINUXI -D_REENTRANT \
+                                                -D_LARGEFILE_SOURCE \
+                                                -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = g++3
+  CXX_DEPEND = g++3 -MM         -DLINUX -DLINUXI -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = g++3 -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   =
+  GUI_LIBS   =
+  MATH_LIBS  = -lm -lpthread
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/i386/client -ljvm
+
+
+
+endif
+
+
+##---------------------------- 64sol62 ---------------------------------------##
+##---------------------------- 64sol62 ---------------------------------------##
+##---------------------------- 64sol62 ---------------------------------------##
+
+
+ifeq ($(PLATFORM), 64sol62)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol62_f90 -mt -c -fast  -xarch=v9 -Qoption f90comp -fephoenix
+  FC_O1      = sol62_f90 -mt -c -fast  -xarch=v9 -Qoption f90comp -fephoenix
+  FC_FLOATIO = sol62_f90 -mt -c -fast  -xarch=v9 -Qoption f90comp -fephoenix
+  FC_INTERPOLATE    = sol62_f90 -mt -c -fast -O2 -nodepend -xarch=v9 -Qoption f90comp -fephoenix
+  FC_KMIG    = sol62_f90 -mt -c -fast  -xarch=v9 -Qoption f90comp -fephoenix
+  FC_PPIO    = sol62_f90 -mt -c -fast  -xarch=v9 -Qoption f90comp -fephoenix
+  FC_UNDER   = sol62_f90 -mt -c -fast  -xarch=v9 -Qoption f90comp -fephoenix
+  FC_LINK    = sol62_f90 -mt          -xarch=v9 -L/usr/app/SUNWspro/WS6U2/lib/v9 -lmvec
+
+  CC         = sol62_cc -mt -c -xO3 -xarch=v9 -DSOLARIS -DSUN \
+                                              -D_FILE_OFFSET_BITS=64 
+  CC_IBSMA   = sol62_cc -mt -c -xO3 -xarch=v9 -DSOLARIS -DSUN \
+                                         -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol62_cc -mt                   
+
+  CXX        = sol62_CC -mt -c  -compat=4 -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol62_CC -mt -c  -compat=4 -DSOLARIS -DSUN \
+                                         -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol62_CC -mt     -compat=4  
+  CXX_DEPEND = g++3       -MM              -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = sol62_purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol62_f90 -mt -G -xarch=v9
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath 
+
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+# GUI_LIBS   = /usr/dt/lib/libXm.so.4 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+               -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc \
+               -L/usr/app/SUNWspro/WS6U2/lib/v9 -lmvec
+
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/sparcv9/server -ljvm
+
+  JAVA_DIR  = $(JAVA_DIR_ROOT)/sparcv9/server
+
+               
+
+endif
+
+##--------------------------- 64sol62_debug ----------------------------------##
+##--------------------------- 64sol62_debug ----------------------------------##
+##--------------------------- 64sol62_debug ----------------------------------##
+
+
+ifeq ($(PLATFORM), 64sol62_debug)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol62_f90 -mt -c -g -xarch=v9 -Qoption f90comp -fephoenix
+  FC_O1      = sol62_f90 -mt -c -g -xarch=v9 -Qoption f90comp -fephoenix
+  FC_FLOATIO = sol62_f90 -mt -c -g -xarch=v9 -Qoption f90comp -fephoenix
+  FC_INTERPOLATE = sol62_f90 -mt -c              -Qoption f90comp -fephoenix
+  FC_KMIG    = sol62_f90 -mt -c              -Qoption f90comp -fephoenix
+  FC_PPIO    = sol62_f90 -mt -c -g -xarch=v9 -Qoption f90comp -fephoenix
+  FC_UNDER   = sol62_f90 -mt -c -g -xarch=v9 -Qoption f90comp -fephoenix
+  FC_LINK    = sol62_f90 -mt       -xarch=v9
+
+  CC         = sol62_cc -mt -c -g -xarch=v9 -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+                                         
+  CC_IBSMA   = sol62_cc -mt -c -g -xarch=v9 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                  -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol62_cc -mt                  
+
+  CXX        = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN \
+                                            -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                  -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol62_CC -mt       -compat=4  
+  CXX_DEPEND = g++3       -MM            -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = sol62_purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache CC -compat=4
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol62_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+# GUI_LIBS   = /usr/dt/lib/libXm.so.4 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+               -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc
+
+endif
+
+##---------------------------- sol62 ---------------------------------------##
+##---------------------------- sol62 ---------------------------------------##
+##---------------------------- sol62 ---------------------------------------##
+
+
+ifeq ($(PLATFORM), sol62)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_O1      = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_FLOATIO = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_INTERPOLATE = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_KMIG    = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_PPIO    = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_UNDER   = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_LINK    = sol62_f90 -mt
+
+  CC         = sol62_cc -mt -c -xO3           -DSOLARIS -DSUN \
+                                              -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = sol62_cc -mt -c -xO3 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol62_cc -mt                   
+
+  CXX        = sol62_CC -mt -c  -compat=4 -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol62_CC -mt -c  -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol62_CC -mt     -compat=4  
+  CXX_DEPEND = g++3       -MM              -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = sol62_purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol62_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+# GUI_LIBS   = /usr/dt/lib/libXm.so.4 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+               -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc \
+               -L/usr/app/SUNWspro/WS6U2/lib -lmvec
+
+  JAVA_DIR   = $(JAVA_DIR_ROOT)/sparc/server
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/sparcv/server -ljvm
+
+
+endif
+
+
+##--------------------------- sol62_debug ----------------------------------##
+##--------------------------- sol62_debug ----------------------------------##
+##--------------------------- sol62_debug ----------------------------------##
+
+
+ifeq ($(PLATFORM), sol62_debug)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_O1         = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_FLOATIO = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_INTERPOLATE = sol62_f90 -mt -c    -Qoption f90comp -fephoenix
+  FC_KMIG    = sol62_f90 -mt -c    -Qoption f90comp -fephoenix
+  FC_PPIO    = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_UNDER   = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_LINK    = sol62_f90 -mt
+
+  CC         = sol62_cc -mt -c -g -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+                                         
+  CC_IBSMA   = sol62_cc -mt -c -g -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                  -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol62_cc -mt                  
+
+  CXX        = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN \
+                                            -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                  -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol62_CC -mt       -compat=4  
+  CXX_DEPEND = g++3       -MM            -DSOLARIS -DSUN -D_FILE_OFFSET_BITS=64
+
+  PURE_LINK  = sol62_purify -best_effort \
+         -cache-dir=$(SPWSDIR)/purify_4.0_writeable/cache CC -compat=4
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol62_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+# GUI_LIBS   = /usr/dt/lib/libXm.so.4 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+               -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc
+
+  JAVA_DIR   = $(JAVA_DIR_ROOT)/sparc/server
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/sparcv/server -ljvm
+
+
+endif
+
+##---------------------------- sol62-56 ------------------------------------##
+##---------------------------- sol62-56 ------------------------------------##
+##---------------------------- sol62-56 ------------------------------------##
+
+
+ifeq ($(PLATFORM), sol62-56)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_O1         = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_FLOATIO = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_INTERPOLATE = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_KMIG    = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_PPIO    = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_UNDER   = sol62_f90 -mt -c -fast -xarch=generic -Qoption f90comp -fephoenix
+  FC_LINK    = sol62_f90 -mt
+
+  CC         = sol62_cc -mt -c -xO3           -DSOLARIS -DSUN \
+                                              -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = sol62_cc -mt -c -xO3 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol62_cc -mt                    
+
+  CXX        = sol62_CC -mt -c      -compat=4 -DSOLARIS -DSUN \
+                                    -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol62_CC -mt -c -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol62_CC -mt         -compat=4  
+  CXX_DEPEND = g++3       -MM              -DSOLARIS -DSUN
+
+  PURE_LINK  = purify -best_effort \
+         -cache-dir=/u/poepsn03a/spws/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol62_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+# GUI_LIBS   = /usr/dt/lib/libXm.so.4 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+               -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc
+
+endif
+
+
+##--------------------------- sol62-56_debug -------------------------------##
+##--------------------------- sol62-56_debug -------------------------------##
+##--------------------------- sol62-56_debug -------------------------------##
+
+
+ifeq ($(PLATFORM), sol62-56_debug)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_O1      = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_FLOATIO = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_INTERPOLATE = sol62_f90 -mt -c    -Qoption f90comp -fephoenix
+  FC_KMIG    = sol62_f90 -mt -c    -Qoption f90comp -fephoenix
+  FC_PPIO    = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_UNDER   = sol62_f90 -mt -c -g -Qoption f90comp -fephoenix
+  FC_LINK    = sol62_f90 -mt
+
+  CC         = sol62_cc -mt -c -g           -DSOLARIS -DSUN \
+                                            -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = sol62_cc -mt -c -g -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol62_cc -mt                  
+
+  CXX        = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN \
+                                  -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol62_CC -mt -c -g -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol62_CC -mt       -compat=4  
+  CXX_DEPEND = g++3       -MM            -DSOLARIS -DSUN
+
+  PURE_LINK  = purify -best_effort \
+         -cache-dir=/u/poepsn03a/spws/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol62_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/usr/ccs/lib -L/usr/lib     \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+# GUI_LIBS   = /usr/dt/lib/libXm.so.4 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen -lCrun \
+               -L/admin/lib/gcc-lib/sparc-sun-solaris2.8/2.95.3 -lgcc
+
+endif
+
+
+##------------------------------ sol70 ------------------------------------##
+##------------------------------ sol70 ------------------------------------##
+##------------------------------ sol70 ------------------------------------##
+
+
+ifeq ($(PLATFORM), sol70)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol70_f90 -mt -c -fast -xarch=generic -ansi 
+  FC_O1      = sol70_f90 -mt -c -fast -xarch=generic -ansi 
+  FC_FLOATIO = sol70_f90 -mt -c -fast -xarch=generic -ansi 
+  FC_INTERPOLATE = sol70_f90 -mt -c -fast -xarch=generic -ansi 
+  FC_KMIG    = sol70_f90 -mt -c -fast -xarch=generic -ansi 
+  FC_PPIO    = sol70_f90 -mt -c -fast -xarch=generic -ansi 
+  FC_UNDER   = sol70_f90 -mt -c -fast -xarch=generic -ansi
+  FC_LINK    = sol70_f90 -mt
+
+  CC         = sol70_cc -mt -c -xO3           -DSOLARIS -DSUN \
+                                              -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = sol70_cc -mt -c -xO3 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                    -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol70_cc -mt                    
+
+  CXX        = sol70_CC -mt -c      -compat=4 -DSOLARIS -DSUN \
+                                    -D_FILE_OFFSET_BITS=64
+  CXX_IBSMA  = sol70_CC -mt -c -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                                    -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol70_CC -mt         -compat=4  
+  CXX_DEPEND = g++3       -MM              -DSOLARIS -DSUN
+
+  PURE_LINK  = purify -best_effort \
+         -cache-dir=/u/poepsn03a/spws/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol70_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/opt/SUNWpro/lib -L/opt/SUNWspro/WS6U2/lib \
+                -L/usr/ccs/lib -L/usr/lib \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen
+
+endif
+
+
+##------------------------- sol70_debug ------------------------------------##
+##------------------------- sol70_debug ------------------------------------##
+##------------------------- sol70_debug ------------------------------------##
+
+
+ifeq ($(PLATFORM), sol70_debug)
+
+  permitted_architectures = sparc-sun-solaris
+  permitted_hosts         = unrestricted
+
+  FC         = sol70_f90 -mt -c -g -ansi
+  FC_O1      = sol70_f90 -mt -c -g -ansi
+  FC_FLOATIO = sol70_f90 -mt -c -g -ansi
+  FC_INTERPOLATE = sol70_f90 -mt -c    -ansi
+  FC_KMIG    = sol70_f90 -mt -c    -ansi
+  FC_PPIO    = sol70_f90 -mt -c -g -ansi 
+  FC_UNDER   = sol70_f90 -mt -c -g -ansi
+  FC_LINK    = sol70_f90 -mt 
+
+  CC         = sol70_cc -mt -c -g           -DSOLARIS -DSUN \
+                                            -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = sol70_cc -mt -c -g -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = sol70_cc -mt                  
+
+  CXX        = sol70_CC -mt -c -g -compat=4 -DSOLARIS -DSUN
+  CXX_IBSMA  = sol70_CC -mt -c -g -compat=4 -DSOLARIS -DSUN -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = sol70_CC -mt       -compat=4  
+  CXX_DEPEND = g++3       -MM            -DSOLARIS -DSUN
+
+  PURE_LINK  = purify -best_effort \
+         -cache-dir=/u/poepsn03a/spws/purify_4.0_writeable/cache $(CXX_LINK)
+  AR_LINK    = ar -ursv
+  SO_LINK    = sol70_f90 -mt -G
+
+  MODEXT     = .mod
+  MODFLAG    = -M
+
+  FOR_LIBS   = -L/opt/SUNWpro/lib -L/opt/SUNWspro/WS6U2/lib \
+                -L/usr/ccs/lib -L/usr/lib \
+                -lfui -lfai -lfai2 -lfsumai -lfprodai -lfminlai -lfmaxlai \
+                -lfminvai -lfmaxvai -lfsu -lsunmath
+  GUI_LIBS   = /usr/dt/lib/libXm.so.3 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread -lsocket -lnsl -lposix4 -ldl -lgen
+  JAVA_DIR   = $(JAVA_DIR_ROOT)/sparc/server
+  JAVA_LIBS = -L$(JAVA_HOME)/jre/lib/sparcv/server -ljvm
+
+endif
+
+
+##----------------------------- 32sgi73 ------------------------------------##
+##----------------------------- 32sgi73 ------------------------------------##
+##----------------------------- 32sgi73 ------------------------------------##
+
+
+ifeq ($(PLATFORM), 32sgi73)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -O -32
+  FC_O1      = f90 -c -O -32
+  FC_FLOATIO = f90 -c -O -32
+  FC_KMIG    = f90 -c -O -32
+  FC_INTERPOLATE = f90 -c -O -32
+  FC_PPIO    = f90 -c -O -32 
+  FC_UNDER   = f90 -c -O -32
+  FC_LINK    = f90       -32
+
+  CC         = cc  -c -O -32 -DSGI32
+  CC_IBSMA   = cc  -c -O -32 -DSGI32 -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = cc        -32
+
+  CXX        = CC  -c -O -32 -DSGI32 -woff 3252
+  CXX_IBSMA  = CC  -c -O -32 -DSGI32 -woff 3252 -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = CC        -32
+  CXX_DEPEND = g++3 -MM       -DSGI32
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -lXm -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+# On sgi, warning 3252 is given when calling const function arg with non-const
+# variable, there should be no problem with this.  With 3252 suppressed,
+# calling non-const function arg with const variable still gives error,
+# as we want.
+
+
+##--------------------------- 32sgi73_debug --------------------------------##
+##--------------------------- 32sgi73_debug --------------------------------##
+##--------------------------- 32sgi73_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), 32sgi73_debug)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -g -32
+  FC_O1      = f90 -c -g -32
+  FC_FLOATIO = f90 -c -g -32
+  FC_INTERPOLATE = f90 -c -g -32
+  FC_KMIG    = f90 -c -g -32
+  FC_PPIO    = f90 -c -g -32 
+  FC_UNDER   = f90 -c -g -32
+  FC_LINK    = f90       -32
+
+  CC         = cc  -c -g -32 -DSGI32 
+  CC_IBSMA   = cc  -c -g -32 -DSGI32 -D_LARGEFILE_SOURCE \
+                                     -D_FILE_OFFSET_BITS=64
+  CC_LINK    = cc        -32
+
+  CXX        = CC  -c -g -32 -DSGI32 -woff 3252
+  CXX_IBSMA  = CC  -c -g -32 -DSGI32 -woff 3252 -D_LARGEFILE_SOURCE \
+                                     -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = CC        -32
+  CXX_DEPEND = g++3 -MM       -DSGI32
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -lXm -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+endif
+
+
+##----------------------------- 64sgi73 ------------------------------------##
+##----------------------------- 64sgi73 ------------------------------------##
+##----------------------------- 64sgi73 ------------------------------------##
+
+
+ifeq ($(PLATFORM), 64sgi73)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+  FC_O1      = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+  FC_FLOATIO = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+  FC_INTERPOLATE = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+  FC_KMIG    = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+  FC_PPIO    = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2 
+  FC_UNDER   = f90 -c -O -OPT:OLIMIT=6000 -64 -Wl,-multigot -O2
+  FC_LINK    = f90       -64 -Wl,-multigot -O2
+
+  CC         = cc  -c -O -64 -Wl,-multigot -O2 -DSGI64 
+  CC_IBSMA   = cc  -c -O -64 -Wl,-multigot -O2 -DSGI64 -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_LINK    = cc        -64 -Wl,-multigot
+
+  CXX        = CC  -c -O -64 -Wl,-multigot -O2 -DSGI64 -woff 1021
+  CXX_IBSMA  = CC  -c -O -64 -Wl,-multigot -O2 -DSGI64 -woff 1021 \
+                                         -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CXX_LINK   = CC        -64 -Wl,-multigot
+  CXX_DEPEND = g++3 -MM                         -DSGI64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -L/usr/Motif-2.1/lib64 -lXm -lXpm -L/usr/lib64 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  INCDIRS += /usr/Motif-2.1/include
+
+endif
+
+
+##--------------------------- 64sgi73_debug --------------------------------##
+##--------------------------- 64sgi73_debug --------------------------------##
+##--------------------------- 64sgi73_debug --------------------------------##
+
+
+ifeq ($(PLATFORM), 64sgi73_debug)
+
+  permitted_architectures = sgi64
+  permitted_hosts         = hotce20
+
+  FC         = f90 -c -g -64 -Wl,-multigot -O2
+  FC_O1      = f90 -c -g -64 -Wl,-multigot -O2
+  FC_FLOATIO = f90 -c -g -64 -Wl,-multigot -O2
+  FC_INTERPOLATE = f90 -c -g -64 -Wl,-multigot -O2
+  FC_KMIG    = f90 -c -g -64 -Wl,-multigot -O2
+  FC_PPIO    = f90 -c -g -64 -Wl,-multigot -O2 
+  FC_UNDER   = f90 -c -g -64 -Wl,-multigot -O2
+  FC_LINK    = f90       -64 -Wl,-multigot -O2
+
+  CC         = cc  -c -g -64 -Wl,-multigot -O2 -DSGI64 -D_LARGEFILE_SOURCE \
+                                         -D_FILE_OFFSET_BITS=64
+  CC_IBSMA   = cc  -c -g -64 -Wl,-multigot -O2 -DSGI64  
+  CC_LINK    = cc        -64 -Wl,-multigot
+
+  CXX        = CC  -c -g -64 -Wl,-multigot -O2 -DSGI64 -woff 1021
+  CXX_IBSMA  = CC  -c -g -64 -Wl,-multigot -O2 -DSGI64 -woff 1021
+  CXX_LINK   = CC        -64 -Wl,-multigot
+  CXX_DEPEND = g++3 -MM                         -DSGI64
+
+  PURE_LINK  = @echo "purify not available for this platform."
+  AR_LINK    = ar -ursv
+  SO_LINK    = ld -shared
+
+  MODEXT     = .mod
+  MODFLAG    = -I
+
+  FOR_LIBS   = -lc -lm -lfortran -lffio -lftn
+  GUI_LIBS   = -L/usr/Motif-2.1/lib64 -lXm -lXpm -L/usr/lib64 -lXt -lX11
+  MATH_LIBS  = -lm -lpthread
+
+  INCDIRS += /usr/Motif-2.1/include
+
+endif
+
+
+##------------------------------ error -------------------------------------##
+##------------------------------ error -------------------------------------##
+##------------------------------ error -------------------------------------##
+
+
+ifeq ($(permitted_architectures), unset)
+  $(warning )
+  $(warning ***************************************************************)
+  $(warning $(HOST)  $(PARENT)/$(PLATFORM)  $(ARCHITECTURE))
+  $(warning ***************************************************************)
+  $(warning wrong directory.)
+  $(warning you should be in a platform-specific subdirectory.)
+  $(warning ***************************************************************)
+  $(error fatal error)
+endif
+
+architecture = $(findstring $(ARCHITECTURE), $(permitted_architectures))
+ifneq ($(architecture), $(ARCHITECTURE))
+  $(warning )
+  $(warning ***************************************************************)
+  $(warning $(HOST)  $(PARENT)/$(PLATFORM)  $(ARCHITECTURE))
+  $(warning ***************************************************************)
+  $(warning wrong architecture for this platform-specific subdirectory.)
+  $(warning permitted architectures are: $(permitted_architectures).)
+  $(warning ***************************************************************)
+  $(error fatal error)
+endif
+
+ifneq ($(permitted_hosts), unrestricted)
+  host = $(findstring $(HOST), $(permitted_hosts))
+  ifneq ($(host), $(HOST))
+    $(warning )
+    $(warning ***************************************************************)
+    $(warning $(HOST)  $(PARENT)/$(PLATFORM)  $(ARCHITECTURE))
+    $(warning ***************************************************************)
+    $(warning wrong host for this platform-specific subdirectory.)
+    $(warning permitted hosts are: $(permitted_hosts).)
+    $(warning ***************************************************************)
+    $(error fatal error)
+  endif
+endif
+
+
+##------------------------- build SPS_LIBS ---------------------------------##
+##------------------------- build SPS_LIBS ---------------------------------##
+##------------------------- build SPS_LIBS ---------------------------------##
+
+
+regular_libraries  = -lfft -lblzw -lfwcd -ljos -lcgm
+mpi_libraries      = -lmpi_stubs
+landmark_libraries = -llmrk_stubs
+
+##########
+
+ifeq ($(NEED_MPI), yes)
+
+  ifeq ($(ARCHITECTURE), ix86-intel-linux)
+    mpi_libraries = -L/home/sps/lam-6.5.6/lib -llamf77mpi -lmpi -llam
+  endif
+
+endif
+
+##########
+
+ifeq ($(NEED_LANDMARK), yes)
+
+  ifeq ($(ARCHITECTURE), ix86-intel-linux)
+    landmark_libraries = -llmrkprod -L/apps/ow/lib \
+                         -L/apps/ow/lib/pre_WS3.0 -L/apps/ow/SeisWorks/lib \
+                         -lgcc_s -lstdc++ -lwtc8 -lclntsh -lgpr_ctk
+  endif
+
+  ifeq ($(ARCHITECTURE), sparc_sun_solaris)
+    landmark_libraries = -llmrkprod -L/apps/ow/lib -L/apps/ow/SeisWorks/lib
+  endif
+
+endif
+
+##########
+
+SPS_LIBS = -L$(SPSDIR)/lib/$(PLATFORM) \
+           $(regular_libraries) $(mpi_libraries) $(landmark_libraries)
+
+
+##------------------- get maturity-dependent variables ---------------------##
+##------------------- get maturity-dependent variables ---------------------##
+##------------------- get maturity-dependent variables ---------------------##
+
+
+ifeq ($(MATURITY), production)
+  matsym = -DPRODLIB
+  CPSLIB = $(SPSDIR)/lib/$(PLATFORM)/prodlib.a
+endif
+
+ifeq ($(MATURITY), beta)
+  matsym = -DBETALIB
+  CPSLIB = $(SPSDIR)/lib/$(PLATFORM)/betalib.a
+endif
+
+ifeq ($(MATURITY), alpha)
+  matsym = -DALPHALIB
+  CPSLIB = $(SPSDIR)/lib/$(PLATFORM)/alphalib.a
+endif
+
+ifeq ($(MATURITY), none)
+  matsym =
+  CPSLIB =
+  SPS_LIBS =
+endif
+
+
+##------------------------ finish up and return ----------------------------##
+##------------------------ finish up and return ----------------------------##
+##------------------------ finish up and return ----------------------------##
+
+
+includes   = $(patsubst %, -I%,         $(INCDIRS))
+modules    = $(patsubst %, $(MODFLAG)%, $(MODDIRS))
+directives = $(patsubst %, -D%,         $(DIRECTIVES)) $(matsym)
+
+ppio_includes = -I$(SPSDIR)/lam-6.5.6/include/cps
+
+FC         += $(modules)
+FC_FLOATIO += $(modules)
+FC_INTERPOLATE += $(modules)
+FC_KMIG    += $(modules)
+FC_PPIO    += $(modules) $(ppio_includes)
+FC_UNDER   += $(modules)
+CC         += $(directives) $(includes)
+CC_IBSMA   += $(directives) $(includes)
+CC_fPIC   += $(directives) $(includes)
+CXX        += $(directives) $(includes)
+CXX_DEPEND += $(directives) $(includes)
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

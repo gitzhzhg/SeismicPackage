@@ -1,0 +1,94 @@
+#!/bin/bash
+#-- muses "recursive uses" -- calls uses recursively to find all fortran dependencies for a particular fortran module
+#-- Will also find any "modulename.c" and "modulename.h" files if they use the modulename_frou.f90 wrapper method.
+#-- usage: muses fortranprogramname.f90
+#-- 
+function error { 
+	echo $MSG
+} 
+
+function help  {
+	echo "Usage:   $(basename $0) fortranprogram.f90"
+	echo "Purpose: Finds all CPSEIS fortran modules needed for this program, searching recursively. "
+	exit 1
+}
+
+MSG="CPSEIS_INSTALL_DIR is not defined, this will not work without that being set."
+[ -z $CPSEIS_INSTALL_DIR ] && error && help
+MSG="You must supply the name of the fortran program for which you want to find dependencies."
+[ -z $1 ] && error && help
+[ "$1" = "-h" ] && help
+BASE=$(basename $1 .f90)
+EXT=$(echo $1 | awk -F. '{print $NF}')
+MSG="That is not a .f90 file."
+[ "$EXT" != "f90" ] && error && help
+
+SRC=${CPSEIS_INSTALL_DIR}/src
+err=0
+for file in $* ; do
+	MSG="File $file does not exist in this directory or in the $CPSEIS_INSTALL_DIR/src directory."
+	[ ! -f $SRC/$file ] && [ ! -f $file ] && error && err=$((err+1))
+done
+MSG="Missing files, quitting now."
+[ "$((err>0))" = "1" ] && error && help
+
+>.remove.txt
+>.missing.txt
+
+function cleanup {
+	rm -f .remove.txt .missing.txt .uses.txt
+}
+MSG="TERMINATED"
+trap "error;cleanup;exit 1" 1 2 3 4 6 9 11 12 15
+
+function muse {
+	for code in $(cat .uses.txt) ; do
+	  if [ -f $SRC/$code ] ; then
+		uses $SRC/$code |
+		awk 'BEGIN{getline}{
+			name=$1;
+			i=index(name,"_module.mod");
+			snam=substr(name,1,i-1);
+			j=length(snam);
+			if(j>0) print snam".f90";
+		     }'
+	  else
+		bnam=$(basename $code .f90)
+		if [ -f $SRC/${bnam}_frou.f90 ] ; then
+		  echo ${bnam}_frou.f90
+		  echo ${bnam}.c
+		  echo ${bnam}.h
+		  echo $code >>.remove.txt
+		else
+		  echo $code >>.missing.txt
+		fi
+	  fi
+	done >.$$ && sort -u .$$ >.uses.txt
+}
+
+# --- TAKE INPUT ARGS and CREATE .uses.txt
+echo $* | sort -u >.uses.txt
+
+OWC=0
+WC=1
+# --- CYCLE THROUGH ALL FILES recursively
+while [ "$((WC>OWC))" == "1" ] ; do
+	OWC=$WC
+	muse
+	WC=$(wc .uses.txt | awk '{print $1}')
+done
+# --- REMOVE FILES THAT ARE NOT REALLY USED because they use _frou's
+for ofile in $(cat .uses.txt | sort -u) ; do
+	ok=yes
+	for ifile in $(cat .remove.txt) ; do
+		[ "$ifile" = "$ofile" ] && ok=no
+	done
+	[ "$ok" = "yes" ] && echo $ofile
+done
+WC=$(wc -l .missing.txt | awk '{print $1}')
+if [ "$((WC>0))" = "1" ] ; then
+	echo "$(basename $0): You are missing the files below:"
+	cat .missing.txt
+fi
+cleanup
+exit 0

@@ -1,0 +1,90 @@
+#!/bin/sh
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCOPHILLIPS INC. ***
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T   
+#
+# Name   : zap.sh
+# Written: 2003-10-02   by: Bill Menger
+# Revised: 2003-10-02   by: Bill Menger
+# Purpose: This kills processes by name. (After "Jack" (su) and Kernighan&Pike)
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                            DOCUMENTATION
+# Usage: zap process-program-name-to-kill
+#        zap will look on current system for processes owned by you that
+#        are running the program you specify and will then kill -9 those procs.
+#
+# /*********************** self documentation **********************/
+# ZAP - kill processes by name
+#
+# Typical usages:
+#	zap ximage
+#
+# Zap accepts exact matches only for process names.
+#
+# Author: Jack, 6/95 -- after Kernighan and Pike's zap
+#
+# /**************** end self doc ********************************/
+# INSTALLATION:   put in the scripts directory and point to it by name "zap"
+#                 from a binary directory so that user can say "zap processname"
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY                
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2003-10-02  Bill Menger       Initial version.
+#-------------------------------------------------------------------------------
+#</history_doc>
+PATH=/bin:/usr/bin:/usr/ucb
+cmd=`basename $0`
+
+case $# in
+	1) # OK
+;;
+	*) echo "Usage: $cmd process_name" 1>&2 ; exit 1
+;;
+	
+esac
+
+trap "rm -f .zap .zaplist;exit 1" 1 2 3 4 5 6 7 8 9 10 12 15
+
+USER=`whoami`
+PROCESS_NAME=$1
+#echo "PROCESS_NAME=$PROCESS_NAME"
+#ps -e -o pid,user,comm | grep ${USER} | grep ${PROCESS_NAME}
+ps -e -o pid,user,comm | grep ${USER} | grep ${PROCESS_NAME} |
+	grep -v "zap" | grep -v "<defunct>" >.zap
+#cat .zap
+cat .zap | awk '{print $1}' >.zaplist
+# kill them all.
+for i in `cat .zaplist`
+do
+	PNAME=`grep "$i" .zap | awk '{print $3}'`
+	#echo "PNAME=$PNAME"
+	if [ "$PNAME" = "$PROCESS_NAME" ] ; then
+		grep "$i " .zap | awk '{print "Killing " $3"  pid= "$1" ..."}'
+		kill -9 $i 2>/dev/null
+	fi
+done
+rm -f .zap .zaplist
+exit 0

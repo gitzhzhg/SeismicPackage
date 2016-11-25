@@ -1,0 +1,51 @@
+#! /bin/csh -f
+
+# checkout_rcs_files
+#
+# $Id: checkout_rcs_files,v 1.1 2004/05/25 22:03:20 spws Exp spws $
+#
+# Run this script to check out the RCS files in the specified ~spws directory.
+#
+# Simply type this:
+#
+#               checkout_rcs_files  <directory>  <tag>
+#
+# where  <tag>  specifies the tag to be used.
+
+#-------------------------------------------------------------------------------
+
+set directory = $1
+set tag       = $2
+
+if($directory == "") then
+     echo RCS directory argument not set
+     exit
+endif
+
+if($tag == "") then
+     echo tag argument not set
+     exit
+endif
+
+#-------------------------------------------------------------------------------
+
+    cd $directory/..
+
+    echo ""
+    echo "directory $directory"
+    echo ""
+
+    foreach name ($directory/*,v)
+        set name2 = `echo $name | tr ',' '.'`
+        set name3 = $name2:r
+        set name4 = $name3:t
+        co -u -r$tag $name4         >& /dev/null
+        if ($status == 0) then
+             echo "   checked out of RCS using tag ${tag}:        $name4"
+        else
+             echo "   tag ${tag} not found for:                   $name4"
+        endif
+    end
+
+#-------------------------------------------------------------------------------
+

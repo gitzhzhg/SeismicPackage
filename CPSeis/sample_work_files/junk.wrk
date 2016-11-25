@@ -1,0 +1,81 @@
+<CPS_v1 type="WORKFILE"/>
+
+<PROCESS name="PROJECT_DATA">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1)
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  PROJECT = NONE,   ACCOUNT = "",     USER_NAME = mengewm,
+  ROUTING_NAME = "",                  ADDRESS = "",     PHONE   = "",
+  USER_LEVEL = REGULAR,               SURVEY_UNITS = FEET,
+  TR_UNITS_TYP = TIME,                TR_UNITS = SECONDS,
+  MODE = "3D Mode", ORIGIN_EAST = 0,  ORIGIN_NORTH = 0, X_GRID_DIST = 1,
+  Y_GRID_DIST = 1,  ANGLE   = 0,      HANDEDNESS = RIGHT,
+  DX11    = 1,      DX12    = 0,      DX21    = 0,      DX22    = 1,
+  DN11    = 1,      DN12    = 0,      DN21    = 0,      DN22    = 1,
+  SURVEY_EAST = (), SURVEY_NORTH = (),                  GRID_X  = (),
+  GRID_Y  = (),     X_RESIDUAL = (),  Y_RESIDUAL = ()
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="JOB_DATA">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1),       TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 2251,   NWIH    = 64,     NUM_CPUS = 1
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  JOBNAME = junk,   JOB_COMMENT = "", SUB_PROJECT = NONE,
+  QUEUE   = A,      MAIL_OPT = NO,    HISTORY_OPT = MODEL,
+  PDN_USERID = mengewm,               MACHINE = Linux,  RERUN   = NO,
+  PATHNAME_TRCIO = ~mengewm/cpsdata/,
+  PATHNAME_DIR = /d/geoprog/u/mengewm/Spark/cpseis/opencfe/etc/,
+  NUM_CPUS = 1,     NUM_NODES = 1,    PRIORITY = 0,     TSTAMP_INC = 1000,
+  STD_LIBS = CUSTOM,                  REC_KEEPING =
+   "NO    Job Summary File",
+  PCPS_REPORT_OPT = "Do not include worker printout",
+  TRSCAN_OPT = BASIC,                 CALLING_PROGRAM = CPS,
+  DEBUG_LEVEL = "NO DEBUG",           RLOCATION = LOCAL,
+  TRACE_LENGTH = 9, TSTRT   = 0,      DT      = 0.004,  NDPT    = 2251,
+  NWIH    = 64,     CUSTOM_EXEC_B = "",
+  CUSTOM_EXEC_A = "",                 CUSTOM_LAM = NO,
+  CUSTOM_MODULES = (),                CUSTOM_COMPILE = (),
+  CUSTOM_LINK = (), CUSTOM_NODES = (),
+  PROCESS_LIST = (PROJECT_DATA, JOB_DATA, TRIN)
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="TRIN">
+ <GLOBALS>
+  GRID    = (0, 0, 1, 0, 0, 1),       TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 2251,   NWIH    = 64,     NUM_CPUS = 1,     NUMTR   = 1,
+  GATHERED = NO
+ </GLOBALS>
+ <CONTROLS>
+  TWOSETS = NO,     IFTD    = NO,     NDISK   = 0,      SETUP_ONLY = NO,
+  NEED_REQUEST = NO,                  NEED_LABEL = YES
+ </CONTROLS>
+ <PARAMETERS>
+  ABORT   = NORMAL, HISTORY = YES,    ORDER_LOCAL = APPEND,
+  ORDER_PREV = NEW, SELECT_ON_HEADER_WORD = 0,
+  START   = -9.99999E+16,             END     = 9.99999E+16,
+  INCR    = 0,      TR_MAX  = 99999999,                 SKIP_INIT = 0,
+  NUM_DO  = 1,      NUM_SKIP = 0,
+  STATUS_ARRAYSET = (status, pathnames),
+  OPT_FILE = PATHNAMES,               CHECKFILE = NO,
+  PATHNAMES = (/home/mengewm/cpsdata/monolithic.trc),   PATH_LIST = NONE,
+  LATEST_PATHNAME = /home/mengewm/cpsdata/monolithic.trc,
+  SBYTE_ARRAYSET = (SBYTE, BYTES, CPS_HDR, MTYPE),
+  MOD_SEGY = LANDMARK,
+  SBYTE   = (21, 9, 73, 77, 17),
+  BYTES   = (4, 4, 4, 4, 4),
+  CPS_HDR = (7, 8, 17, 18, 37),
+  MTYPE   = (I, I, I, I, I),          OPT_GROUP = NO,   HDR_GROUP = 55,
+  LEN_GROUP = 1
+ </PARAMETERS>
+</PROCESS>

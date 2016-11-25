@@ -1,0 +1,921 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="rtc" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="RTCPROCESS" title="RTC Process" rows="24" columns="80">
+    <Label keyword="COMMENT_RESIDUALTIMECORRECTIONPR" alignment="center">Residual Time Correction Process</Label>
+    <Label keyword="COMMENT_NONSURFACECONSISTENTTRIM" alignment="center">Non-surface consistent trim statics process for 2D</Label>
+    <Label keyword="LABEL_MAX_STATIC" alignment="left">MAX_STATIC=</Label>
+    <Field keyword="MAX_STATIC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_WIN" alignment="left">NUM_WIN=</Label>
+    <Field keyword="NUM_WIN" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FOLD_MAX" alignment="left">FOLD_MAX=</Label>
+    <Field keyword="FOLD_MAX" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REPLACE" alignment="left">REPLACE=</Label>
+    <Field keyword="REPLACE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_CC" alignment="left">HDR_CC=</Label>
+    <Field keyword="HDR_CC" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CC_MIN" alignment="left">CC_MIN=</Label>
+    <Field keyword="CC_MIN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_STAT">Select PATH_STAT</Button>
+    <Label keyword="EQLAB_PATH_STAT" alignment="left">=</Label>
+    <Field keyword="PATH_STAT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_STAT_INFO" type="string" maxLength="69" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_RESIDUALTIMECORRECTIONPR" xPos="21" yPos="0" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_NONSURFACECONSISTENTTRIM" xPos="12" yPos="1" xSize="50" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAX_STATIC" xPos="1" yPos="3" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_STATIC" xPos="12" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_WIN" xPos="39" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_WIN" xPos="47" yPos="3" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FOLD_MAX" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FOLD_MAX" xPos="10" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_REPLACE" xPos="22" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPLACE" xPos="30" yPos="5" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_CC" xPos="39" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_CC" xPos="46" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CC_MIN" xPos="56" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CC_MIN" xPos="63" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_STAT" xPos="1" yPos="7" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_STAT" xPos="17" yPos="7" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_STAT" xPos="18" yPos="7" xSize="63" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_STAT_INFO" xPos="18" yPos="8" xSize="69" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MAX_STATIC">
+      <Tip>Maximum static shift, in ms, for individual traces within a CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - MAX_STATIC<br> Maximum static shift, in ms, for individual traces within a CMP.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0
+ MAX_STATIC cannot be less than MSCTFB.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_WIN">
+      <Tip>Number of windows on a trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - NUM_WIN<br> Number of windows on a trace.</center></b>
+<pre> Default = 1
+ Allowed = integer &gt; 0
+ If there is only one window on a trace, the trace will be statically shifted.
+ If there are two or more windows, the trace will be dynamically shifted
+ such that the center of each window will be shifted based on the correlation
+ of that window with the base trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FOLD_MAX">
+      <Tip>Maximum fold for any input CMP gather.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - FOLD_MAX<br> Maximum fold for any input CMP gather.</center></b>
+<pre> Default = 200
+ Allowed = int &gt; 0
+ If a CMP is input with greater fold than FOLD_MAX, RTC will delete the excess
+ traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPLACE">
+      <Tip>Replace the stacked trace with the base trace?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - REPLACE<br> Replace the stacked trace with the base trace?</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ Whether to replace the stacked trace with the corresponding base trace for
+ forming subsequent base traces?
+ (This has no effect if the base traces are being read from a file.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_CC">
+      <Tip>Header word used to store the trace's correlation coefficient.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - HDR_CC<br> Header word used to store the trace's correlation coefficient.</center></b>
+<pre> Default = 0
+ Allowed = 0 - NWIH
+ HDR_CC is the header word used to store the trace's maximum correlation
+ coefficient.
+ If HDR_CC = 0, then do not store the correlation coefficient.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CC_MIN">
+      <Tip>Minimum correlation coefficient allowed for a trace window.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - CC_MIN<br> Minimum correlation coefficient allowed for a trace window.</center></b>
+<pre> Default = 0.0
+ Allowed = 1.0 &gt; real &gt;= 0.0
+ If the correlation for a window does not exceed CC_MIN, that window will be
+ shifted by the average static found from all windows in the trace not failing
+ this test.  More details in General Description.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_STAT">
+      <Tip>Choose PATH_STAT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - SELECT_PATH_STAT<br> Choose PATH_STAT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_STAT">
+      <Tip>Write an RTC static file to this pathname.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PATH_STAT<br> Write an RTC static file to this pathname.</center></b>
+<pre> Default = -
+ Allowed = char
+ This can be a very large file.  Its use is not recommended since RTC can be
+ rerun at little cost.
+ 
+ If PATH_STAT = NONE, then do not write the RTC static file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_STAT_INFO">
+      <Tip>Status of PATH_STAT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PATH_STAT_INFO<br> Status of PATH_STAT.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="BASETRACESPECIFICATIONS" title="Base Trace Specifications" rows="24" columns="80">
+    <Label keyword="LABEL_FREQ_BEG" alignment="left">FREQ_BEG=</Label>
+    <Field keyword="FREQ_BEG" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_END" alignment="left">FREQ_END=</Label>
+    <Field keyword="FREQ_END" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_METHOD" alignment="left">METHOD=</Label>
+    <Field keyword="METHOD" type="comboBox" maxLength="16" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MSCTFB" alignment="left">MSCTFB=</Label>
+    <Field keyword="MSCTFB" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_LEN" alignment="left">WIN_LEN=</Label>
+    <Field keyword="WIN_LEN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Border keyword="BORDER2"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INIT" alignment="left">X_INIT=</Label>
+    <Field keyword="X_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INIT" alignment="left">Y_INIT=</Label>
+    <Field keyword="Y_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_X_INC" alignment="left">X_INC=</Label>
+    <Field keyword="X_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_Y_INC" alignment="left">Y_INC=</Label>
+    <Field keyword="Y_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_X" alignment="left">BINS_X=</Label>
+    <Field keyword="BINS_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_Y" alignment="left">BINS_Y=</Label>
+    <Field keyword="BINS_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GAP_X" alignment="left">GAP_X=</Label>
+    <Field keyword="GAP_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GAP_Y" alignment="left">GAP_Y=</Label>
+    <Field keyword="GAP_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_X" alignment="left">DIP_X=</Label>
+    <Field keyword="DIP_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_Y" alignment="left">DIP_Y=</Label>
+    <Field keyword="DIP_Y" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_INIT_X" alignment="left">BINS_INIT_X=</Label>
+    <Field keyword="BINS_INIT_X" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_BINS_INIT_Y" alignment="left">BINS_INIT_Y=</Label>
+    <Field keyword="BINS_INIT_Y" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_INC_X" alignment="left">DIP_INC_X=</Label>
+    <Field keyword="DIP_INC_X" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DIP_INC_Y" alignment="left">DIP_INC_Y=</Label>
+    <Field keyword="DIP_INC_Y" type="float" maxLength="13" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_BASE_IN">Select PATH_BASE_IN</Button>
+    <Label keyword="EQLAB_PATH_BASE_IN" alignment="left">=</Label>
+    <Field keyword="PATH_BASE_IN" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_BASE_IN_INFO" type="string" maxLength="74" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATH_BASE_OUT">Select PATH_BASE_OUT</Button>
+    <Label keyword="EQLAB_PATH_BASE_OUT" alignment="left">=</Label>
+    <Field keyword="PATH_BASE_OUT" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATH_BASE_OUT_INFO" type="string" maxLength="74" editable="no" sensitive="yes"/>
+    <Layout>
+     <Constraints component="LABEL_FREQ_BEG" xPos="31" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_BEG" xPos="40" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_END" xPos="53" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_END" xPos="62" yPos="0" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_METHOD" xPos="4" yPos="1" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="METHOD" xPos="11" yPos="1" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MSCTFB" xPos="31" yPos="1" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MSCTFB" xPos="38" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_LEN" xPos="53" yPos="1" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_LEN" xPos="61" yPos="1" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="4" yPos="3" xSize="30" ySize="10"/>
+     <Constraints component="BORDER2" xPos="36" yPos="3" xSize="31" ySize="10"/>
+     <Constraints component="LABEL_HDR_X" xPos="7" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="19" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="39" yPos="4" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="51" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INIT" xPos="7" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INIT" xPos="19" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INIT" xPos="39" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INIT" xPos="51" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_X_INC" xPos="7" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="X_INC" xPos="19" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_Y_INC" xPos="39" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="Y_INC" xPos="51" yPos="6" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_X" xPos="7" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_X" xPos="19" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_Y" xPos="39" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_Y" xPos="51" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GAP_X" xPos="7" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GAP_X" xPos="19" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_GAP_Y" xPos="39" yPos="8" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GAP_Y" xPos="51" yPos="8" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_X" xPos="7" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_X" xPos="19" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_Y" xPos="39" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_Y" xPos="51" yPos="9" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_INIT_X" xPos="7" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_INIT_X" xPos="19" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_BINS_INIT_Y" xPos="39" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BINS_INIT_Y" xPos="51" yPos="10" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_X" xPos="7" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_X" xPos="19" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_DIP_INC_Y" xPos="39" yPos="11" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DIP_INC_Y" xPos="51" yPos="11" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_BASE_IN" xPos="1" yPos="14" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_BASE_IN" xPos="21" yPos="14" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_BASE_IN" xPos="22" yPos="14" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_BASE_IN_INFO" xPos="19" yPos="15" xSize="74" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATH_BASE_OUT" xPos="1" yPos="16" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATH_BASE_OUT" xPos="21" yPos="16" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATH_BASE_OUT" xPos="22" yPos="16" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATH_BASE_OUT_INFO" xPos="19" yPos="17" xSize="74" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="FREQ_BEG">
+      <Tip>Lowest frequency to use for computing correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - FREQ_BEG<br> Lowest frequency to use for computing correlations.</center></b>
+<pre> Default = 5
+ Allowed = real &gt; 0
+ 
+ Bandpass filter is applied only to the base trace being correlated with.
+ Output traces are not bandpass filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_END">
+      <Tip>Highest frequency to use for computing correlations.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - FREQ_END<br> Highest frequency to use for computing correlations.</center></b>
+<pre> Default = 0.5*Nyquist
+ Allowed = FREQ_BEG &lt; real &lt; Nyquist
+ 
+ Bandpass filter is applied only to the base trace being correlated with.
+ Output traces are not bandpass filtered.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="METHOD">
+      <Tip>Method for building the base trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - METHOD<br> Method for building the base trace.</center></b>
+<pre> Default = CORR
+ Allowed = CORR  (Correlate and shift stacked trace windows to form base)
+ Allowed = SDIP  (Do semblance-based dip stack to form base)
+ Allowed = FILE  (Use base traces from TROT file specified by PATH_BASE_IN)
+ Allowed = FILE_THEN_CORR  (Use base traces from TROT file, then CORR method)
+ Allowed = FILE_THEN_SDIP  (Use base traces from TROT file, then SDIP method)
+ 
+ For the IMS process:
+   Method FILE is NOT an allowed option.
+   For method FILE_THEN_CORR, the base traces from the TROT file are used
+    for the first iteration, and method CORR is used to create base traces for
+    the rest of the iterations.
+   For method FILE_THEN_SDIP, the base traces from the TROT file are used
+    for the first iteration, and method SDIP is used to create base traces for
+    the rest of the iterations.
+ 
+ For the RTC process:
+   Methods FILE_THEN_CORR and FILE_THEN_SDIP are NOT allowed options.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="MSCTFB">
+      <Tip>Maximum Shift in the Central Trace used to Form the Base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - MSCTFB<br> Maximum Shift in the Central Trace used to Form the Base.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt;= 0.0
+ 
+ Maximum Shift, in ms, in the Central Trace used to Form the Base.
+ MSCTFB cannot exceed MAX_STATIC.
+ Used for METHOD = CORR and FILE_THEN_CORR only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_LEN">
+      <Tip>Length of the semblance window in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_LEN<br> Length of the semblance window in seconds.</center></b>
+<pre> Default = 0.1
+ Allowed = real &gt; 0.0
+ 
+ Used for METHOD = SDIP and FILE_THEN_SDIP only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Header word designating CMP X grid coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - HDR_X<br> Header word designating CMP X grid coordinates.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Header word designating CMP Y grid coordinates.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - HDR_Y<br> Header word designating CMP Y grid coordinates.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INIT">
+      <Tip>Value of header word HDR_X for the center of any CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - X_INIT<br> Value of header word HDR_X for the center of any CMP.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INIT">
+      <Tip>Value of header word HDR_Y for the center of any CMP.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - Y_INIT<br> Value of header word HDR_Y for the center of any CMP.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ 
+ For 2D data, this number is normally irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="X_INC">
+      <Tip>Increment of header word HDR_X between CMPs (X grid bin width).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - X_INC<br>Increment of header word HDR_X between CMPs (X grid bin width).</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="Y_INC">
+      <Tip>Increment of header word HDR_Y between CMPs (Y grid bin width).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - Y_INC<br>Increment of header word HDR_Y between CMPs (Y grid bin width).</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ 
+ For 2D data, this number is normally irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_X">
+      <Tip>Number of CMPs to stack in the X grid direction to form base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - BINS_X<br> Number of CMPs to stack in the X grid direction to form base.</center></b>
+<pre> Default = 5
+ Allowed = odd int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_Y">
+      <Tip>Number of CMPs to stack in the Y grid direction to form base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - BINS_Y<br> Number of CMPs to stack in the Y grid direction to form base.</center></b>
+<pre> Default = 1
+ Allowed = odd int &gt; 0
+ 
+ For 2D data, this number should be zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAP_X">
+      <Tip>Number of CMPs to leave as a gap in the X grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - GAP_X<br> Number of CMPs to leave as a gap in the X grid direction.</center></b>
+<pre> Default = 0
+ Allowed = 0 or odd int &gt; 0
+ 
+ Number of CMPs in the X grid direction to leave as a gap in the center of
+  the group of CMPs used for the base trace.
+ GAP_X must be less than BINS_X.
+ Not used if METHOD = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GAP_Y">
+      <Tip>Number of CMPs to leave as a gap in the Y grid direction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - GAP_Y<br> Number of CMPs to leave as a gap in the Y grid direction.</center></b>
+<pre> Default = 0
+ Allowed = 0 or odd int &gt; 0
+ 
+ Number of CMPs in the Y grid direction to leave as a gap in the center of
+  the group of CMPs used for the base trace.
+ GAP_Y must be less than BINS_Y.
+ Not used if METHOD = FILE.
+ For 2D data, this number should be zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_X">
+      <Tip>Maximum dip in X grid direction for traces used to form the base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - DIP_X<br> Maximum dip in X grid direction for traces used to form the base.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ Maximum dip in X grid direction, in ms/trace, for traces used to form the
+ base.  Non-zero values allow larger shifts for more distant traces and can
+ help compensate for dips.
+ Not used if METHOD = FILE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_Y">
+      <Tip>Maximum dip in Y grid direction for traces used to form the base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - DIP_Y<br> Maximum dip in Y grid direction for traces used to form the base.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ 
+ Maximum dip in Y grid direction, in ms/trace, for traces used to form the
+ base.  Non-zero values allow larger shifts for more distant traces and can
+ help compensate for dips.
+ Not used if METHOD = FILE.
+ For 2D data, this number should be zero.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_INIT_X">
+      <Tip>Number of CMPs in the X grid direction to use for an initial base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - BINS_INIT_X<br> Number of CMPs in the X grid direction to use for an initial base.</center></b>
+<pre> Default = 1
+ Allowed = odd int &gt; 0
+ 
+ BINS_INIT_X must not exceed BINS_X.
+ Used for METHOD = CORR and FILE_THEN_CORR only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="BINS_INIT_Y">
+      <Tip>Number CMPs in the Y grid direction to use for an initial base.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - BINS_INIT_Y<br> Number CMPs in the Y grid direction to use for an initial base.</center></b>
+<pre> Default = 1
+ Allowed = odd int &gt; 0
+ 
+ BINS_INIT_Y must not exceed BINS_Y.
+ Used for METHOD = CORR and FILE_THEN_CORR only.
+ For 2D data, this number should be one.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_X">
+      <Tip>CMP X grid dip increment in milliseconds/trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - DIP_INC_X<br> CMP X grid dip increment in milliseconds/trace.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0
+ 
+ Used for METHOD = SDIP and FILE_THEN_SDIP only.
+ If DIP_X is zero, this number is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_INC_Y">
+      <Tip>CMP Y grid dip increment in milliseconds/trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - DIP_INC_Y<br> CMP Y grid dip increment in milliseconds/trace.</center></b>
+<pre> Default = 10.0
+ Allowed = real &gt; 0.0
+ 
+ Used for METHOD = SDIP and FILE_THEN_SDIP only.
+ If DIP_Y is zero, this number is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_BASE_IN">
+      <Tip>Choose PATH_BASE_IN using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - SELECT_PATH_BASE_IN<br> Choose PATH_BASE_IN using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_IN">
+      <Tip>Pathname for input TROT file containing base traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PATH_BASE_IN<br> Pathname for input TROT file containing base traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ Used for METHOD = FILE and FILE_THEN_CORR and FILE_THEN_SDIP only.
+ 
+ For the RTC process:
+   If METHOD = FILE, use base traces from the file PATH_BASE_IN.
+   Otherwise create base traces using the other specified parameters.
+ 
+ For the IMS process:
+   If METHOD = FILE_THEN_CORR or FILE_THEN_SDIP, use this file only for the
+    first iteration.
+   Otherwise create base traces using the other specified parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_IN_INFO">
+      <Tip>Status of PATH_BASE_IN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PATH_BASE_IN_INFO<br> Status of PATH_BASE_IN.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATH_BASE_OUT">
+      <Tip>Choose PATH_BASE_OUT using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - SELECT_PATH_BASE_OUT<br> Choose PATH_BASE_OUT using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_OUT">
+      <Tip>Pathname for output TROT file containing base traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PATH_BASE_OUT<br> Pathname for output TROT file containing base traces.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ Base traces are written to the file PATH_BASE_OUT unless the parameter
+ PATH_BASE_OUT = NONE.  The base traces are output regardless of the
+ specified METHOD (with restrictions specified below).
+ 
+ For the RTC process:
+   If METHOD = FILE, base traces are not output because they would be
+    identical to the input base traces.
+ 
+ For the IMS process:
+   Base traces are written after each iteration, overwriting the previous
+    contents of the file.
+   If METHOD = FILE_THEN_CORR or FILE_THEN_SDIP, base traces are not output
+    after the first iteration because they would be identical to the input
+    base traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATH_BASE_OUT_INFO">
+      <Tip>Status of PATH_BASE_OUT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PATH_BASE_OUT_INFO<br> Status of PATH_BASE_OUT.</center></b>
+</html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SCREEN2" title="Multiple Trace Window Specification" rows="24" columns="80">
+    <Label keyword="LABEL_WIN_HDR_X" alignment="left">WIN_HDR_X=</Label>
+    <Field keyword="WIN_HDR_X" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_WIN_HDR_Y" alignment="left">WIN_HDR_Y=</Label>
+    <Field keyword="WIN_HDR_Y" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Array keyword="WIN_COOR_X" type="float" maxLength="10" columnName="WIN_COOR_X" editable="yes" sensitive="yes"/>
+    <Array keyword="WIN_COOR_Y" type="float" maxLength="10" columnName="WIN_COOR_Y" editable="yes" sensitive="yes"/>
+    <ArraySet keyword="COOR_X_ARRAYSET" label="coor_x  coor_y  win WIN_TIM_BEGWIN_TIM_END">
+     <Array keyword="COOR_X" type="string" maxLength="8  " columnName="coor_x" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="COOR_Y" type="string" maxLength="8  " columnName="coor_y" editable="no" sensitive="yes" columnSize="8"/>
+     <Array keyword="WIN" type="string" maxLength="4  " columnName="win" editable="no" sensitive="yes" columnSize="4"/>
+     <Array keyword="WIN_TIM_BEG" type="float" maxLength="11 " columnName="WIN_TIM_BEG" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="WIN_TIM_END" type="float" maxLength="11 " columnName="WIN_TIM_END" editable="yes" sensitive="yes" columnSize="11"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_WIN_HDR_X" xPos="3" yPos="0" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_X" xPos="13" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_WIN_HDR_Y" xPos="17" yPos="0" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_HDR_Y" xPos="27" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="WIN_COOR_X" xPos="3" yPos="1" xSize="13" ySize="22" xStretch="true" yStretch="true"/>
+     <Constraints component="WIN_COOR_Y" xPos="17" yPos="1" xSize="13" ySize="22" xStretch="true" yStretch="true"/>
+     <Constraints component="COOR_X_ARRAYSET" xPos="32" yPos="1" xSize="45" ySize="22" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="WIN_HDR_X">
+      <Tip>Header word designating window coordinate X.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_HDR_X<br> Header word designating window coordinate X.</center></b>
+<pre> Default = 7
+ Allowed = any value from 1 through NWIH.
+ 
+ Header word containing coordinate X to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_HDR_Y">
+      <Tip>Header word designating window coordinate Y.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_HDR_Y<br> Header word designating window coordinate Y.</center></b>
+<pre> Default = 8
+ Allowed = any value from 1 through NWIH.
+ 
+ Header word containing coordinate Y to use for specifying spatially varying
+ windows.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_X">
+      <Tip>Array of coord X values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_COOR_X<br> Array of coord X values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_X values.
+ 
+ If only one X coordinate is specified, its value is irrelevant.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_COOR_Y">
+      <Tip>Array of coord Y values for specifying spatially varying windows.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_COOR_Y<br> Array of coord Y values for specifying spatially varying windows.</center></b>
+<pre> Default = 0.0 (one location).
+ Allowed = up to any number of locations specified by WIN_HDR_Y values.
+ 
+ If only one Y coordinate is specified, its value is irrelevant.
+ For 2D data, only one Y coordinate should be specified.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="COOR_X">
+      <Tip>Coordinate from WIN_COOR_X array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - COOR_X<br> Coordinate from WIN_COOR_X array.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="COOR_Y">
+      <Tip>Coordinate from WIN_COOR_Y array.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - COOR_Y<br> Coordinate from WIN_COOR_Y array.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="WIN">
+      <Tip>Window number.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN<br> Window number.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_BEG">
+      <Tip>Array of window top times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_TIM_BEG<br> Array of window top times (in seconds).</center></b>
+<pre> Default = top of trace (TSTRT) for one window.
+ Default = equally spaced for multiple windows.
+ Allowed = any number of values &gt;= top of trace.
+ 
+ These windows are spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  Each correlation window is interpolated between the specified
+ coordinates, and extrapolated unchanged outside of the grid of coordinates.
+ 
+ The number of values specified is the number of windows on a trace times
+ the number of window locations.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="WIN_TIM_END">
+      <Tip>Array of window bottom times (in seconds).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - WIN_TIM_END<br> Array of window bottom times (in seconds).</center></b>
+<pre> Default = bottom of trace (TSTRT+(NDPT-1)*DT) for one window.
+ Default = equally spaced for multiple windows.
+ Allowed = any number of values &gt; WIN_TIM_BEG and &lt;= bottom of trace.
+ 
+ These windows are spatially varying as given at the (WIN_COOR_X,WIN_COOR_Y)
+ locations.  Each correlation window is interpolated between the specified
+ coordinates, and extrapolated unchanged outside of the grid of coordinates.
+ 
+ The number of values specified is the number of windows on a trace times
+ the number of window locations.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>rtc - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="rtc">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : RTC         (Residual Time Correction)
+ Category   : statics
+ Written    : 1989-02-21   by: Tom Stoeckley and Greg Lazear
+ Revised    : 2006-10-16   by: D. Glover
+ Maturity   : production
+ Purpose    : Non-surface consistent trim statics process for 2D.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ RTC shifts each trace in a CMP according to its correlation with a base
+ trace.  If only one correlation window is specified, the shift is a static
+ shift.  If two or more windows are specified per trace, each window is
+ correlated with the base trace separately and the shift is a dynamic
+ (time-varying) shift.  RTC is not surface consistent.
+ 
+ 
+ 2D and 3D Processing
+ 
+ RTC can be used with 2D data or certain swaths from a 3D survey.  For 3D
+ processing, RTC3D is recommended.
+ 
+ 
+ Minimum Correlation Coefficient
+ 
+ Shifts are picked for each window whose correlation exceeds CC_MIN.  If the
+ correlation for a window fails this test, that window will be shifted by the
+ average static found from all windows on that trace not failing this test.
+ If all of the windows on a trace fail the test, the trace is not shifted.  If
+ only one window passes the test (or only one window is specified), the trace
+ is statically shifted.  Otherwise, the trace is dynamically shifted.
+ 
+ 
+ Storing Correlation Coefficients
+ 
+ If HDR_CC &gt; 0, the maximum correlation coefficient for a trace is stored in
+ this header word.  This header word can then be used later for weighted
+ stacks (weighting by correlation coefficient), or for killing traces (using
+ process SELECT) with small correlation coefficients.
+ 
+ 
+ An Historical Note
+ 
+ RTC is related historically to the Cyber processes MTC, RSIC, RSDP and RTC.
+ RSIC and RSDP replaced stacked traces with base traces, while MTC did not.
+ MTC, RSIC and RSDP employed a static shift, while Cyber RTC (with two or more
+ windows) used a dynamic shift.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ RTC is normally used as the last step in a statics solution to remove any
+ small non-surface consistent residual static that may be present.
+ 
+ Because RTC is not surface consistent, it can be somewhat unstable and is
+ normally used with small values of MAX_STATIC (10 ms or less) to avoid larger
+ shifts that might have resulted from wild correlations.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+028. 2006-10-16  D. Glover  Added NULLIFY statements for Intel compiler.
+027. 2006-01-10  B. Menger  Removed Unused Variables.
+ 26. 2004-01-07  Stoeckley  Fix bug for METHOD=SDIP where traces were treated
+                             as dead since HDS(25) was not set.
+ 25. 2003-06-02  Stoeckley  Fix buffer length sctr(5000) to sctr(obj%ndpt).
+ 24. 2001-10-18  Stoeckley  Fix print format with field not wide enough.
+ 23. 2001-08-24  Stoeckley  Add file selection box and file status message.
+ 22. 2001-02-15  Stoeckley  Change wrapup flag.
+ 21. 2000-10-20  Stoeckley  Add missing required documentation sections.
+ 20. 2000-09-27  Stoeckley  Add workaround code near calls to BASETRACE_BUILD
+                             and MTH_AMPLITUDE_NORMALIZE to circumvent
+                             problems with the Portland Group compiler.
+ 19. 2000-07-20  Stoeckley  Change INL and CRL parameter names to X and Y;
+                             change TEMPFILE back to TEMPTFILE since the
+                             improved throughput turned out to be an NFS issue.
+ 18. 2000-06-21  Stoeckley  Change SHIFT_MAX parameter to MAX_STATIC to be
+                             consistent with other statics processes; fix
+                             subtle bug which sometimes caused RTC to quit
+                             prematurely; replace TEMPTFILE with TEMPFILE to
+                             improve throughput by a factor of five.
+ 17. 2000-06-05  Stoeckley  More changes to be consistent with modifications
+                             to the BASETRACE primitive.
+ 16. 2000-05-18  Stoeckley  Change to be consistent with modifications to
+                             the BASETRACE primitive.
+ 15. 2000-05-01  Stoeckley  Converted from old system.
+ 14. 1998-12-14  K.Goodger  Begin using the fortran90 compiler.
+ 13. 1996-11-11  K.Goodger  If detect a zero record number for DTREAD,
+                             set N to zero and return.
+ 12. 1994-04-04  Troutt     Change header array for STRINI of base trace
+                             file to a dummy array (HDUM).  It was HDS,
+                             which was being used to control flow through
+                             the process.
+ 11. 1993-02-11  Troutt     Increase limit for number of windows from 10 to
+                             25 (new parameter NWTMAX).
+ 10. 1992-08-11  Troutt     Allow UNITS=SHOT. This option uses hwds 37 and
+                             38 to be used for varying the data windows.
+  9. 1992-02-21  Troutt     Added handling of tail mute header word 64. Add
+                             call to MUTEHW.
+  8. 1991-07-30  Troutt     Fix call to FILTERG so that BASE array is not
+                             overrun.
+  7. 1990-12-07  Peterson   Correct error return argument on calls to
+                             CALL CLOSFIL (ARG1,ARG2,*error return address).
+  6. 1990-10-29  Stoeckley  Fix bug which occurred when first CMP bin is
+                             zero.  Also fix STATFILE format to allow
+                             larger offsets.
+  5. 1989-06-12  Stoeckley  Fix graded windows bug with UNITS=DIST.
+  4. 1989-05-30  Stoeckley  Add base trace header word parameters, and
+                             correct problems with 2-dimensional forms of
+                             TRMIX and ICDPREC.
+  3. 1989-05-02  Stoeckley  Added semblance dip option for base trace,
+                             plus some other parameter changes.
+  2. 1989-04-17  Stoeckley  Added parameters CCHDR and FILE, and removed
+                             trace killing.
+  1. 1989-02-21  Stoeckley  Original code built from Greg Lazear's MTC.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

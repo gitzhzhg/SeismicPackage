@@ -1,0 +1,715 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="ezcheck" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="EZCHECKPROCESS" title="ezcheck Process" rows="24" columns="80">
+    <Label keyword="COMMENT_EZCHECKREPORTDIFFERENCES" alignment="center">EZCHECK: Report differences between input and test dataset</Label>
+    <Button keyword="SELECT_TEST_DATA">Select TEST_DATA=</Button>
+    <Label keyword="EQLAB_TEST_DATA" alignment="left">=</Label>
+    <Field keyword="TEST_DATA" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TEST_DATA_INFO" alignment="left">=</Label>
+    <Field keyword="TEST_DATA_INFO" type="string" maxLength="42" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_OUT_DATA" alignment="left">OUT_DATA=</Label>
+    <Field keyword="OUT_DATA" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REPORT" alignment="left">REPORT=</Label>
+    <Field keyword="REPORT" type="comboBox" maxLength="11" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_N_LIMIT" alignment="left">N_LIMIT=</Label>
+    <Field keyword="N_LIMIT" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Label keyword="COMMENT_MODES" alignment="center">Modes</Label>
+    <Label keyword="COMMENT_GLOBALPARAMETERTOLERANCE" alignment="center">Global parameter tolerances</Label>
+    <Label keyword="COMMENT_D" alignment="center">D</Label>
+    <Label keyword="COMMENT_DEFAULT" alignment="center">DEFAULT</Label>
+    <Label keyword="COMMENT_I" alignment="center">I</Label>
+    <Label keyword="COMMENT_IGNORE" alignment="center">IGNORE</Label>
+    <ArraySet keyword="GLOB_NAME_ARRAYSET" label="GLOB_NAME     GLOB_MODE   GLOB_TOL">
+     <Array keyword="GLOB_NAME" type="string" maxLength="14 " columnName="GLOB_NAME" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="GLOB_MODE" type="string" maxLength="12 " columnName="GLOB_MODE" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="GLOB_TOL" type="float" maxLength="12 " columnName="GLOB_TOL" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <Label keyword="COMMENT_E" alignment="center">E</Label>
+    <Label keyword="COMMENT_EQUAL" alignment="center">EQUAL</Label>
+    <Label keyword="COMMENT_S" alignment="center">S</Label>
+    <Label keyword="COMMENT_SAME" alignment="center">SAME</Label>
+    <Label keyword="COMMENT_A" alignment="center">A</Label>
+    <Label keyword="COMMENT_ABS" alignment="center">ABS</Label>
+    <Label keyword="COMMENT_R" alignment="center">R</Label>
+    <Label keyword="COMMENT_REL" alignment="center">REL</Label>
+    <Label keyword="LABEL_GLOB_DEF_MODE" alignment="left">GLOB_DEF_MODE=</Label>
+    <Field keyword="GLOB_DEF_MODE" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_GLOB_DEF_TOL" alignment="left">GLOB_DEF_TOL=</Label>
+    <Field keyword="GLOB_DEF_TOL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_EZCHECKREPORTDIFFERENCES" xPos="1" yPos="0" xSize="58" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_TEST_DATA" xPos="0" yPos="2" xSize="17" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_TEST_DATA" xPos="17" yPos="2" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TEST_DATA" xPos="18" yPos="2" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TEST_DATA_INFO" xPos="16" yPos="3" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TEST_DATA_INFO" xPos="17" yPos="3" xSize="42" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OUT_DATA" xPos="1" yPos="5" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OUT_DATA" xPos="10" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_REPORT" xPos="24" yPos="5" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="REPORT" xPos="31" yPos="5" xSize="11" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_N_LIMIT" xPos="47" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="N_LIMIT" xPos="55" yPos="5" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="3" yPos="6" xSize="45" ySize="17"/>
+     <Constraints component="COMMENT_MODES" xPos="51" yPos="6" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_GLOBALPARAMETERTOLERANCE" xPos="4" yPos="7" xSize="27" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_D" xPos="51" yPos="7" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_DEFAULT" xPos="54" yPos="7" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_I" xPos="51" yPos="8" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_IGNORE" xPos="54" yPos="8" xSize="6" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="GLOB_NAME_ARRAYSET" xPos="4" yPos="9" xSize="41" ySize="9" xStretch="true" yStretch="true"/>
+     <Constraints component="COMMENT_E" xPos="51" yPos="9" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_EQUAL" xPos="54" yPos="9" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_S" xPos="51" yPos="10" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_SAME" xPos="54" yPos="10" xSize="4" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_A" xPos="51" yPos="11" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_ABS" xPos="54" yPos="11" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_R" xPos="51" yPos="12" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_REL" xPos="54" yPos="12" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_GLOB_DEF_MODE" xPos="4" yPos="19" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GLOB_DEF_MODE" xPos="18" yPos="19" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_GLOB_DEF_TOL" xPos="4" yPos="21" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="GLOB_DEF_TOL" xPos="17" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SELECT_TEST_DATA">
+      <Tip>Choose TEST_DATA using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - SELECT_TEST_DATA<br> Choose TEST_DATA using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="TEST_DATA">
+      <Tip>Pathname for test data containing expected results.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - TEST_DATA<br> Pathname for test data containing expected results.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ Path and file name for seismic data to be compared with job input data.
+ 
+ The test data is normally created using the same process and input
+ parameters as the one providing input to EZCHECK in this job.
+ The test data may have used another version of a library, process,
+ compiler, optimization flags, hardware platform or operating system.
+ These variations are not supposed to change the expected results and
+ is the premise upon which EZCHECK regression testing is based.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TEST_DATA_INFO">
+      <Tip>Status of TEST_DATA.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - TEST_DATA_INFO<br> Status of TEST_DATA.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OUT_DATA">
+      <Tip>Select the desired output seismic data .</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - OUT_DATA<br> Select the desired output seismic data .</center></b>
+<pre> Default = INPUT
+ Allowed = INPUT copy input data to output
+ Allowed = TEST  copy test  data to output
+ Allowed = DIFF  output difference, (INPUT - TEST)
+ Allowed = MEAN  output mean, 0.5 * (INPUT + TEST)
+ Allowed = VARIANCE output variance, 0.5 * ((INPUT-MEAN)**2 + (TEST-MEAN)**2)
+ INPUT and TEST can be used to pass EZCHECK input data or known test data
+ through a sequence of regression tests in one job to evaluate
+ standard processing flows.
+ DIFF, MEAN and VARIANCE output can be used to further diagnose problems.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REPORT">
+      <Tip>Level of detail in printout.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - REPORT<br> Level of detail in printout.</center></b>
+<pre> Default = NORMAL
+ Allowed = TERSE   simple PASS/FAIL message.
+ Allowed = NORMAL  statistical results of regression test.
+ Allowed = VERBOSE include details of first N_LIMIT trace anomalies.
+ 
+ Specifies level of detail in printout.
+ 
+ If REPORT=VERBOSE the following trace anomalies are printed:
+   First print line
+     Printed with the following column headings:
+       Failure:     sequential failure number of this anomaly.
+       SeqTrcNum:   sequential trace  number of failing trace.
+       Gather:      sequential gather number of failing trace.
+       NTR:         number of traces within this gather.
+       Trace:       trace number within gather of failing trace.
+       Bad-Hdrs:    number of headers that failed, if any.
+       Bad-Smps:    number of samples that failed, if any.
+       Smp_Err:     sample error statistic
+   Second print line (potentially very long):
+     Printed with the following column headings:
+       HDR:    index of failing header
+       JOB:    value of JOB  trace header at failing index
+       TEST:   value of TEST trace header at failing index
+ 
+ Smp_Err attempts to measure the significance of the failed samples
+ within the non-mute range defined by the TEST trace.
+ If smp_err is much greater than 1.0, one or more samples are very bad.
+ If much less than 1.0, differences may be relatively benign.
+ 
+ CAUTION: the algorithm is hard to justify and may be very misleading.
+ cbyte should be used to examine statistical variations if unsure.
+ 
+             max absolute difference of non-muted failing samples
+ smp_err = ---------------------------------------------------------
+               average absolute value of non-muted TEST samples
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="N_LIMIT">
+      <Tip>Maximum number of trace anomalies to be printed (VERBOSE only).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - N_LIMIT<br> Maximum number of trace anomalies to be printed (VERBOSE only).</center></b>
+<pre> Default = 1000
+ Allowed = 1-20000
+ This option is only used when REPORT=VERBOSE.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GLOB_NAME">
+      <Tip>List of global parameters that are explicitly named.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - GLOB_NAME<br> List of global parameters that are explicitly named.</center></b>
+<pre> Default = -
+ Allowed = char
+ The test mode and tolerance may be individually controlled for
+ any global parameter that is explicitly named.
+ Checks for globals not listed use GLOB_DEF_MODE and GLOB_DEF_TOL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GLOB_MODE">
+      <Tip>Test mode for explicitly named global parameters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - GLOB_MODE<br> Test mode for explicitly named global parameters.</center></b>
+<pre> Default = SAME
+ Allowed = D[EFAULT] check global using GLOB_DEF_MODE and GLOB_DEF_TOL.
+ Allowed = I[GNORE]  PASS all values, do not test.
+ Allowed = E[QUAL]   PASS iff all bits are identical, otherwise FAIL.
+ Allowed = S[AME]    PASS iff floats are approximately equal.
+ Allowed = A[BS]     PASS iff absolute difference is &lt; GLOB_TOL
+ Allowed = R[EL]     PASS iff relative difference is &lt; GLOB_TOL
+ EQUAL is most appropriate for globals with whole integer values
+ and SAME is most appropriate for floating point values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GLOB_TOL">
+      <Tip>Numerical tolerance, used when GLOB_MODE is ABS or REL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - GLOB_TOL<br> Numerical tolerance, used when GLOB_MODE is ABS or REL.</center></b>
+<pre> Default = 0.10
+ Allowed = greater than or equal to zero required.
+ If GLOB_MODE=ABS then PASS iff absolute value of (INPUT-TEST)
+ is less than GLOB_TOL.
+ If GLOB_MODE=REL then PASS iff absolute value of (INPUT-TEST)/(INPUT+TEST)
+ is less than GLOB_TOL, where (INPUT+TEST) is non-zero.
+ 
+ GLOB_TOL is only used when GLOB_MODE is ABS or REL for the entry.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GLOB_DEF_MODE">
+      <Tip>Default test mode for global parameters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - GLOB_DEF_MODE<br> Default test mode for global parameters.</center></b>
+<pre> Default = SAME
+ Allowed = I[GNORE]  PASS all values, do not test.
+ Allowed = E[QUAL]   PASS iff all bits are identical, otherwise FAIL.
+ Allowed = S[AME]    PASS iff floats are approximately equal.
+ Allowed = A[BS]     PASS iff absolute difference is &lt; GLOB_DEF_TOL
+ Allowed = R[EL]     PASS iff relative difference is &lt; GLOB_DEF_TOL
+ EQUAL is most appropriate for globals with whole integer values
+ and SAME is most appropriate for floating point values.
+ 
+ The "global default mode" is used for any global parameter not explicitly
+ mentioned in the GLOB_NAME list and for named parameters that have
+ GLOB_MODE=DEFAULT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="GLOB_DEF_TOL">
+      <Tip>Numerical tolerance, used when GLOB_DEF_MODE is ABS or REL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - GLOB_DEF_TOL<br> Numerical tolerance, used when GLOB_DEF_MODE is ABS or REL.</center></b>
+<pre> Default = 0.10
+ Allowed = greater than or equal to zero required.
+ If GLOB_MODE=ABS then PASS iff absolute value of (INPUT-TEST)
+ is less than GLOB_TOL.
+ If GLOB_MODE=REL then PASS iff absolute value of (INPUT-TEST)/(INPUT+TEST)
+ is less than GLOB_TOL, where (INPUT+TEST) is non-zero.
+ 
+ GLOB_DEF_TOL is only used when GLOB_DEF_MODE is ABS or REL.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="HEADERPARAMETERS" title="Header Parameters" rows="24" columns="80">
+    <Border keyword="BORDER2"/>
+    <Label keyword="EZGUI_COMMENT_1" alignment="center">Modes</Label>
+    <Label keyword="COMMENT_TRACEHEADERTOLERANCES" alignment="center">Trace header tolerances</Label>
+    <Label keyword="EZGUI_COMMENT_2" alignment="center">D</Label>
+    <Label keyword="EZGUI_COMMENT_3" alignment="center">DEFAULT</Label>
+    <Label keyword="EZGUI_COMMENT_4" alignment="center">I</Label>
+    <Label keyword="EZGUI_COMMENT_5" alignment="center">IGNORE</Label>
+    <ArraySet keyword="HDR_NUM_ARRAYSET" label="HDR_NUM    HDR_MODE    HDR_TOL">
+     <Array keyword="HDR_NUM" type="int" maxLength="11 " columnName="HDR_NUM" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="HDR_MODE" type="string" maxLength="12 " columnName="HDR_MODE" editable="yes" sensitive="yes" columnSize="12"/>
+     <Array keyword="HDR_TOL" type="float" maxLength="12 " columnName="HDR_TOL" editable="yes" sensitive="yes" columnSize="12"/>
+    </ArraySet>
+    <Label keyword="EZGUI_COMMENT_6" alignment="center">E</Label>
+    <Label keyword="EZGUI_COMMENT_7" alignment="center">EQUAL</Label>
+    <Label keyword="EZGUI_COMMENT_8" alignment="center">S</Label>
+    <Label keyword="EZGUI_COMMENT_9" alignment="center">SAME</Label>
+    <Label keyword="EZGUI_COMMENT_10" alignment="center">A</Label>
+    <Label keyword="EZGUI_COMMENT_11" alignment="center">ABS</Label>
+    <Label keyword="EZGUI_COMMENT_12" alignment="center">R</Label>
+    <Label keyword="EZGUI_COMMENT_13" alignment="center">REL</Label>
+    <Label keyword="LABEL_HDR_DEF_MODE" alignment="left">HDR_DEF_MODE=</Label>
+    <Field keyword="HDR_DEF_MODE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_DEF_TOL" alignment="left">HDR_DEF_TOL=</Label>
+    <Field keyword="HDR_DEF_TOL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="BORDER2" xPos="3" yPos="0" xSize="41" ySize="17"/>
+     <Constraints component="EZGUI_COMMENT_1" xPos="47" yPos="0" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_TRACEHEADERTOLERANCES" xPos="4" yPos="1" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_2" xPos="47" yPos="1" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_3" xPos="50" yPos="1" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_4" xPos="47" yPos="2" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_5" xPos="50" yPos="2" xSize="6" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="HDR_NUM_ARRAYSET" xPos="4" yPos="3" xSize="38" ySize="9" xStretch="true" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_6" xPos="47" yPos="3" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_7" xPos="50" yPos="3" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_8" xPos="47" yPos="4" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_9" xPos="50" yPos="4" xSize="4" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_10" xPos="47" yPos="5" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_11" xPos="50" yPos="5" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_12" xPos="47" yPos="6" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_13" xPos="50" yPos="6" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_DEF_MODE" xPos="4" yPos="13" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_DEF_MODE" xPos="17" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_DEF_TOL" xPos="4" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_DEF_TOL" xPos="16" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_NUM">
+      <Tip>List of header words that are explicitly named.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - HDR_NUM<br> List of header words that are explicitly named.</center></b>
+<pre> Default = -
+ Allowed = 1 - NWIH
+ The test mode and tolerance may be individually controlled for
+ any header word that is explicitly named.
+ Checks for headers not listed use HDR_DEF_MODE and HDR_DEF_TOL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_MODE">
+      <Tip>Test mode for explicitly listed header words.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - HDR_MODE<br> Test mode for explicitly listed header words.</center></b>
+<pre> Default = SAME
+ Allowed = D[EFAULT] check header using HDR_DEF_MODE and HDR_DEF_TOL.
+ Allowed = I[GNORE]  PASS all values, do not test.
+ Allowed = E[QUAL]   PASS iff all bits are identical, otherwise FAIL.
+ Allowed = S[AME]    PASS iff floats are approximately equal.
+ Allowed = A[BS]     PASS iff absolute difference is &lt; HDR_TOL
+ Allowed = R[EL]     PASS iff relative difference is &lt; HDR_TOL
+ EQUAL is most appropriate for headers with whole integer values
+ and SAME is most appropriate for floating point values.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_TOL">
+      <Tip>Numerical tolerance, used when HDR_MODE is ABS or REL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - HDR_TOL<br> Numerical tolerance, used when HDR_MODE is ABS or REL.</center></b>
+<pre> Default = 0.10
+ Allowed = greater than or equal to zero required.
+ If HDR_MODE=ABS then PASS iff absolute value of (INPUT-TEST)
+ is less than HDR_TOL.
+ If HDR_MODE=REL then PASS iff absolute value of (INPUT-TEST)/(INPUT+TEST)
+ is less than HDR_TOL, where (INPUT+TEST) is non-zero.
+ 
+ HDR_TOL is only used when HDR_MODE is ABS or REL for the entry.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_DEF_MODE">
+      <Tip>Default test mode for header words.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - HDR_DEF_MODE<br> Default test mode for header words.</center></b>
+<pre> Default = SAME
+ Allowed = I[GNORE]  PASS all values, do not test.
+ Allowed = E[QUAL]   PASS iff all bits are identical, otherwise FAIL.
+ Allowed = S[AME]    PASS iff floats are approximately equal.
+ Allowed = A[BS]     PASS iff absolute difference is &lt; HDR_DEF_TOL
+ Allowed = R[EL]     PASS iff relative difference is &lt; HDR_DEF_TOL
+ EQUAL is most appropriate for headers with whole integer values
+ and SAME is most appropriate for floating point values.
+ 
+ The "header default mode" is used for any header word not explicitly
+ mentioned in the HDR_NUM list and for named headers that have
+ HDR_MODE=DEFAULT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_DEF_TOL">
+      <Tip>Numerical tolerance, used when HDR_DEF_MODE is ABS or REL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - HDR_DEF_TOL<br> Numerical tolerance, used when HDR_DEF_MODE is ABS or REL.</center></b>
+<pre> Default = 0.10
+ Allowed = greater than or equal to zero required.
+ If HDR_MODE=ABS then PASS iff absolute value of (INPUT-TEST)
+ is less than HDR_TOL.
+ If HDR_MODE=REL then PASS iff absolute value of (INPUT-TEST)/(INPUT+TEST)
+ is less than HDR_TOL, where (INPUT+TEST) is non-zero.
+ 
+ HDR_DEF_TOL is only used when HDR_DEF_MODE is ABS or REL.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="SAMPLEPARAMETERS" title="Sample Parameters" rows="24" columns="80">
+    <Border keyword="BORDER3"/>
+    <Label keyword="EZGUI_COMMENT_14" alignment="center">Modes</Label>
+    <Label keyword="COMMENT_TRACESAMPLETOLERANCES" alignment="center">Trace sample tolerances</Label>
+    <Label keyword="EZGUI_COMMENT_15" alignment="center">I</Label>
+    <Label keyword="EZGUI_COMMENT_16" alignment="center">IGNORE</Label>
+    <Label keyword="EZGUI_COMMENT_17" alignment="center">E</Label>
+    <Label keyword="EZGUI_COMMENT_18" alignment="center">EQUAL</Label>
+    <Label keyword="LABEL_SMP_MODE" alignment="left">SMP_MODE=</Label>
+    <Field keyword="SMP_MODE" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_19" alignment="center">S</Label>
+    <Label keyword="EZGUI_COMMENT_20" alignment="center">SAME</Label>
+    <Label keyword="EZGUI_COMMENT_21" alignment="center">A</Label>
+    <Label keyword="EZGUI_COMMENT_22" alignment="center">ABS</Label>
+    <Label keyword="LABEL_SMP_TOL" alignment="left">SMP_TOL=</Label>
+    <Field keyword="SMP_TOL" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="EZGUI_COMMENT_23" alignment="center">R</Label>
+    <Label keyword="EZGUI_COMMENT_24" alignment="center">REL</Label>
+    <Label keyword="LABEL_SMP_0_EPS_STATE" alignment="left">SMP_0_EPS_STATE=</Label>
+    <Field keyword="SMP_0_EPS_STATE" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_STATES" alignment="center">States</Label>
+    <Label keyword="COMMENT_ON" alignment="center">ON</Label>
+    <Label keyword="LABEL_SMP_0_EPS" alignment="left">SMP_0_EPS=</Label>
+    <Field keyword="SMP_0_EPS" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_OFF" alignment="center">OFF</Label>
+    <Layout>
+     <Constraints component="BORDER3" xPos="3" yPos="0" xSize="37" ySize="11"/>
+     <Constraints component="EZGUI_COMMENT_14" xPos="43" yPos="0" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_TRACESAMPLETOLERANCES" xPos="4" yPos="1" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_15" xPos="43" yPos="1" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_16" xPos="46" yPos="1" xSize="6" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_17" xPos="43" yPos="2" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_18" xPos="46" yPos="2" xSize="5" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMP_MODE" xPos="4" yPos="3" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMP_MODE" xPos="13" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EZGUI_COMMENT_19" xPos="43" yPos="3" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_20" xPos="46" yPos="3" xSize="4" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_21" xPos="43" yPos="4" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_22" xPos="46" yPos="4" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMP_TOL" xPos="4" yPos="5" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMP_TOL" xPos="12" yPos="5" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_23" xPos="43" yPos="5" xSize="1" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="EZGUI_COMMENT_24" xPos="46" yPos="5" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMP_0_EPS_STATE" xPos="4" yPos="7" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMP_0_EPS_STATE" xPos="20" yPos="7" xSize="12" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="COMMENT_STATES" xPos="43" yPos="7" xSize="6" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_ON" xPos="43" yPos="8" xSize="2" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_SMP_0_EPS" xPos="4" yPos="9" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SMP_0_EPS" xPos="14" yPos="9" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_OFF" xPos="43" yPos="9" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="SMP_MODE">
+      <Tip>Test mode for trace samples.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - SMP_MODE<br> Test mode for trace samples.</center></b>
+<pre> Default = SAME
+ Allowed = I[GNORE  PASS all values, do not test.
+ Allowed = E[QUAL]   PASS iff all bits are identical, otherwise FAIL.
+ Allowed = S[AME]    PASS iff floats are approximately equal.
+ Allowed = A[BS]     PASS iff absolute difference is &lt; SMP_TOL
+ Allowed = R[EL]     PASS iff relative difference is &lt; SMP_TOL
+ SAME is most appropriate for trace samples (floating point values).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMP_TOL">
+      <Tip>Numerical tolerance, used when SMP_MODE is ABS or REL.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - SMP_TOL<br> Numerical tolerance, used when SMP_MODE is ABS or REL.</center></b>
+<pre> Default = 0.10
+ Allowed = greater than or equal to zero required.
+ If SMP_MODE=ABS then PASS iff absolute value of (INPUT-TEST)
+ is less than SMP_TOL.
+ If SMP_MODE=REL then PASS iff absolute value of (INPUT-TEST)/(INPUT+TEST)
+ is less than SMP_TOL, where (INPUT+TEST) is non-zero.
+ 
+ SMP_TOL is only used when SMP_MODE is ABS or REL for the entry.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMP_0_EPS_STATE">
+      <Tip>Sample Zero Epsilon State, either ON or OFF.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - SMP_0_EPS_STATE<br> Sample Zero Epsilon State, either ON or OFF.</center></b>
+<pre> Default = OFF
+ Allowed = OFF   samples close to zero are not treated differently
+ Allowed = ON    samples close to zero are considered zero
+ 
+ If two samples are close to zero consider them to be zero,
+ and therefore equal to each other.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SMP_0_EPS">
+      <Tip>Numerical Sample Zero Epsilon Value, samples within epsilon of zero are conside</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - SMP_0_EPS<br> Numerical Sample Zero Epsilon Value, samples within epsilon of zero are conside</center></b>
+<pre> Default = 0.000001
+ Allowed = greater than or equal to zero required.
+ 
+ If two samples are close to zero consider them to be zero,
+ and therefore equal to each other.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>ezcheck - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="ezcheck">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : ezcheck
+ Category   : miscellaneous
+ Written    : 2001-02-14   by: Randy L. Selzler, Data-Warp, Inc.
+ Revised    : 2007-01-03   by: D. Glover
+ Maturity   : production
+ Purpose    : Report differences between input and test dataset
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ This process reports discrepancies between job input and test data.
+ Its used for regression testing of changes in the system and software.
+ For example, does process "X" still produce the same results after it
+ has been recompiled with optimization or run on different hardware.
+ 
+ Checks are made on global parameters, trace headers and samples.
+ Tolerances may be chosen for each item individually.
+ Its important to choose them carefully for each test suite.
+ If too loose, problems will be missed and testing becomes pointless.
+ If too strict, people will be frustrated and tests will be ignored.
+ 
+ Regression testing can increase confidence in the overall system.
+ It can be used to validate different hardware platforms,
+ compiler versions, OS upgrades, application enhancements and bug "fixes".
+ 
+ Test suites should be maintained and supplemented as needed.
+ Each CPS process should have a test suite to exercise its major options.
+ Test suites should also be provided for major primitives too.
+ 
+ Test job setups must include:
+     1) process to be tested.
+         A) input parameters and seismic data.
+         B) output seismic (passed to ezcheck).
+         C) printout (for manual inspection).
+     2) ezcheck process.
+         A) input parameters (tolerances and options).
+         B) input seismic, provided by (1) above.
+         C) test seismic, containing expected results (pre-existing).
+             Associated job printout is useful for comparison.
+         D) output seismic (for further analysis).
+         E) printout (regression test report).
+ 
+ Other processes are often needed in a test job.
+ For example, an input step and perhaps a gather step may be needed
+ to provide data to the process being tested.
+ 
+ The ezcheck process can output seismic that is a copy of the input data,
+ test data or various statistical relations between them.
+ 
+ The input data or the known test data can be passed through a sequence
+ of regression tests in one job to evaluate standard processing flows.
+ The statistical output from ezcheck can be used to diagnose problems.
+ 
+ NOTE: a statistical algorithm can be applied to the trace samples AND
+ ALL HEADER WORDS, except header word 1 (trace sequence number).
+ The header statistics can be dumped or displayed to reveal problems,
+ but are essentially useless for traditional seismic processing purposes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date        Author                 Description
+     ----        ------                 -----------
+ 12. 2007-01-03  D. Glover              Added relaxed comparisons for samples within epsilon of zero
+                                        New keywords smp_0_eps_state and smp_0_eps
+                                        Fixed logic bug in compare samples EQUAL block
+ 11. 2006-06-06  Stoeckley              Add call to pc_register_array_names for
+                                         SeisSpace.
+ 10. 2003-06-16  Karen Goodger          Add use getlun_module.
+  9. 2002-07-01  Karen Goodger          Change trcio extension to trc.
+  8. 2002-06-12  Karen Goodger          Split into three screens for better
+                                        readability.
+  7. 2002-05-20  C. C. Burch            Increased #digits in verbose prints.
+  6. 2002-03-18  Randy L. Selzler       Clarified VERBOSE description.
+                                        Corrected bug in trace loop logic
+                                        when JOB and TEST trace counts differ.
+                                        Enhanced VERBOSE print out with
+                                        smp_err and detailed header printing.
+  5. 2002-01-17  Randy L. Selzler       Corrected bug in global comparison.
+                                        Add file selection box for test_data.
+                                        Corrected bug in VERBOSE column hdrs.
+  4. 2001-11-09  Randy L. Selzler       Corrected bug in do variable usage.
+  3. 2001-03-30  Randy L. Selzler       Improved print formatting.
+  2. 2001-03-08  Randy L. Selzler       Initial check-in.
+  1. 2001-02-14  Randy L. Selzler       begin development.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,567 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="mdip" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="MDIPPROCESS" title="MDIP Process" rows="24" columns="80">
+    <Label keyword="COMMENT_MDIPPROCESS" alignment="center">MDIP Process</Label>
+    <Label keyword="COMMENT_DIPFILTERINGBYMODELINGDI" alignment="center">Dip filtering by modeling dips in tau-P space.</Label>
+    <Border keyword="BORDER1"/>
+    <Label keyword="LABEL_HDR_GATH" alignment="left">HDR_GATH=</Label>
+    <Field keyword="HDR_GATH" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_WIN" alignment="left">NUM_WIN=</Label>
+    <Field keyword="NUM_WIN" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_INC" alignment="left">NUM_INC=</Label>
+    <Field keyword="NUM_INC" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_HOR" alignment="left">HDR_HOR=</Label>
+    <Field keyword="HDR_HOR" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HOR_INC" alignment="left">HOR_INC=</Label>
+    <Field keyword="HOR_INC" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SCALE_DATA" alignment="left">SCALE_DATA=</Label>
+    <Field keyword="SCALE_DATA" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CLIP" alignment="left">CLIP=</Label>
+    <Field keyword="CLIP" type="float" maxLength="10" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_DIPRANGESTOMODEL" alignment="center">Dip Ranges to Model</Label>
+    <Label keyword="COMMENT_YOUMAYSETNUM_DIPS0ORBLAN" alignment="center">(You may set NUM_DIPS = 0 or blank for unaliased suggestions)</Label>
+    <ArraySet keyword="DIP_MIN_ARRAYSET" label="DIP_MIN    DIP_MAX    SCALE     NUM_DIPS">
+     <Array keyword="DIP_MIN" type="float" maxLength="11 " columnName="DIP_MIN" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="DIP_MAX" type="float" maxLength="11 " columnName="DIP_MAX" editable="yes" sensitive="yes" columnSize="11"/>
+     <Array keyword="SCALE" type="float" maxLength="10 " columnName="SCALE" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="NUM_DIPS" type="int" maxLength="10 " columnName="NUM_DIPS" editable="yes" sensitive="yes" columnSize="10"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="COMMENT_MDIPPROCESS" xPos="33" yPos="0" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_DIPFILTERINGBYMODELINGDI" xPos="17" yPos="1" xSize="46" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="2" yPos="3" xSize="72" ySize="9"/>
+     <Constraints component="LABEL_HDR_GATH" xPos="4" yPos="4" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_GATH" xPos="15" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_WIN" xPos="32" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_WIN" xPos="40" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_INC" xPos="57" yPos="4" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_INC" xPos="65" yPos="4" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_HOR" xPos="4" yPos="6" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_HOR" xPos="15" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HOR_INC" xPos="32" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HOR_INC" xPos="40" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="4" yPos="8" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="15" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="32" yPos="8" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="40" yPos="8" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SCALE_DATA" xPos="4" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SCALE_DATA" xPos="15" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CLIP" xPos="32" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CLIP" xPos="40" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_DIPRANGESTOMODEL" xPos="26" yPos="13" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_YOUMAYSETNUM_DIPS0ORBLAN" xPos="6" yPos="14" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="DIP_MIN_ARRAYSET" xPos="12" yPos="16" xSize="45" ySize="7" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="HDR_GATH">
+      <Tip>Header word designating trace gathers or groups to be filtered.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - HDR_GATH<br> Header word designating trace gathers or groups to be filtered.</center></b>
+<pre> Default = 3
+ Allowed = 0 - NWIH
+ Transitions in header word HDR_GATH denote boundaries between gathers (or
+ groups) of traces. Each such group will be dip filtered separately; in
+ particular, the roll-along windows defined by NUM_WIN and NUM_INC will NOT
+ cross these boundaries.
+ 
+ As typical choices, HDR_GATH may be set to 8 for post-stack and 3 or 7
+ for prestack data.
+ 
+ You may set HDR_GATH = 0 to indicate that your whole data set should be
+ regarded as a single group. In this case input must be as single traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_WIN">
+      <Tip>Number of traces in a window for tau-P transforms.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - NUM_WIN<br> Number of traces in a window for tau-P transforms.</center></b>
+<pre> Default = 21
+ Allowed = int &gt; 2
+ If NUM_WIN is less than about 10 the transform may not be able to distinguish
+ dips properly, but if it is too large, events may not appear linear.
+ NUM_WIN = 21  seems to work well.
+ 
+ The trace windows defined by NUM_WIN will not cross the group boundaries
+ defined by the HDR_GATH parameter.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_INC">
+      <Tip>Increment (in number of traces) from one window to the next.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - NUM_INC<br> Increment (in number of traces) from one window to the next.</center></b>
+<pre> Default = 7
+ Allowed = NUM_WIN &gt; int &gt;= 1
+ (Also, NUM_WIN - NUM_INC must be an EVEN number)
+ 
+ NUM_INC plays a dual role: It's the number of traces by which the roll-along
+ window is advanced. It's also the number of traces output from the MIDDLE of
+ each window after dip modeling (except that more traces must be output from
+ the beginning of the first window and end of the last window in a group).
+ 
+ NUM_INC must be less than NUM_WIN, thus forcing overlap between windows. To
+ minimize artifacts at window transitions, NUM_INC should ideally be as small
+ as possible; however, a smaller value of NUM_INC causes greater execution
+ time because dip modeling must be performed individually for each window.
+ In practice, setting NUM_INC to about one-third of NUM_WIN works well.
+ 
+ To insure that the subset of NUM_INC traces which are output from the middle
+ of each window can be CENTERED within that window, the difference
+ (NUM_WIN - NUM_INC) must be an EVEN number.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_HOR">
+      <Tip>Header word designating traces within the set being filtered.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - HDR_HOR<br> Header word designating traces within the set being filtered.</center></b>
+<pre> Default = 4
+ Allowed = 1 - NWIH
+ HDR_HOR is the header word that designates individual traces within the set
+ of traces that are being dip filtered. As typical choices, HDR_HOR may be
+ set to 7 for post-stack and 1, 4 or 6 for prestack data.
+ 
+ Dips (specified by DIP_MIN and DIP_MAX arrays) are measured in seconds per
+ unit of header word HDR_HOR. Thus, if header HDR_HOR contains a distance in
+ meters, dips are in seconds per meter. If HDR_HOR increments by 1 between
+ successive traces, dips are in seconds per trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HOR_INC">
+      <Tip>Expected increment in HDR_HOR between successive traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - HOR_INC<br> Expected increment in HDR_HOR between successive traces.</center></b>
+<pre> Default = 1.0
+ Allowed = real &gt; 0.0
+ HOR_INC is the expected increment in header word HDR_HOR between successive
+ traces within a group of traces being dip filtered. Your estimated HOR_INC
+ is used to suggest unaliased NUM_DIPS values if you enter zero (or blank)
+ when filling in the NUM_DIPS array.
+ 
+ The default (HOR_INC = 1) is appropriate when header HDR_HOR is a counter or
+ grid index which increments by 1 between successive traces, in which case
+ dips are measured in seconds per trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Minimum time in seconds to model for dip filtering.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - TIM_BEG<br> Minimum time in seconds to model for dip filtering.</center></b>
+<pre> Default = TSTRT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Maximum time in seconds to model for dip filtering.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - TIM_END<br> Maximum time in seconds to model for dip filtering.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TIM_BEG
+ If you leave TIM_END blank, it will be interpreted as end of trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCALE_DATA">
+      <Tip>Scale factor to multiply data prior to addition of modeled dips.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - SCALE_DATA<br> Scale factor to multiply data prior to addition of modeled dips.</center></b>
+<pre> Default = 1.0
+ Allowed = real
+ You may specify any real value for SCALE_DATA but, in practice, the only
+ useful choices are 1.0 and 0.0. For normal MDIP operation, keep the default
+ value (1.0) to avoid altering the data before adding or subtracting the
+ modeled dips.
+ 
+ Set SCALE_DATA = 0.0 if you wish to suppress the original data and display
+ the modeled dips only. (In this case, you might also wish to use +1 instead
+ of -1 in your SCALE array, to avoid reversing polarity of the modeled dips.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CLIP">
+      <Tip>Amount of noise, in standard deviations, to retain in data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - CLIP<br> Amount of noise, in standard deviations, to retain in data.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;= 0.0
+ The CLIP parameter allows reduction of the mixed appearance of the filtered
+ data by preventing noise in the original data from being modeled and
+ subtracted. Modeled amplitudes less than CLIP standard deviations (as
+ measured in the tau-P transform domain for the modeled dips) are interpreted
+ as noise and removed from the dip model; therefore, this noise is *not*
+ removed from your data when the modeled dips are subtracted from the
+ original data (for dip ranges where SCALE = -1).
+ 
+ If CLIP = 0.0, no attempt is made to preserve noise in the data. Larger
+ values of CLIP will remove more noise from the modeled dips, thereby
+ preserving more noise in the data when those modeled dips are subtracted.
+ 
+ Suggestion: Try CLIP = 0 first. If too much mixing occurs, try CLIP = 1 or
+ CLIP = 2.
+ 
+ Alternatively, see if you can reduce the sizes of the dip ranges specified
+ in your DIP_MIN and DIP_MAX arrays by more precise measurement of the dips
+ you want to remove. Mixed appearance of MDIP output is primarily a problem
+ when large dip ranges are modeled.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MIN">
+      <Tip>Minimum dip for a particular range.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - DIP_MIN<br> Minimum dip for a particular range.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ Units are seconds per unit of header word HDR_HOR (e.g., seconds per meter
+ if HDR_HOR contains distance in meters). If HDR_HOR contains a sequential
+ counter, dip units are seconds per trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DIP_MAX">
+      <Tip>Maximum dip for a particular range.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - DIP_MAX<br> Maximum dip for a particular range.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ Units are seconds per unit of header word HDR_HOR (e.g., seconds per meter
+ if HDR_HOR contains distance in meters). If HDR_HOR contains a sequential
+ counter, dip units are seconds per trace.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SCALE">
+      <Tip>Scale factor multiplying modeled dips prior to adding to data.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - SCALE<br> Scale factor multiplying modeled dips prior to adding to data.</center></b>
+<pre> Default = -
+ Allowed = real (linked array)
+ SCALE is the scale factor that multiplies the modeled dip range prior to
+ adding that modeled dip range back to the original data.
+ 
+ Set SCALE = -1 for dip ranges that you wish to subtract from the data.
+ 
+ Set SCALE = 0 for dip ranges that you wish to preserve (This prevents
+ contamination by aliased energy from other dips).
+ 
+ Set SCALE &gt; 0 for dip ranges that you wish to accentuate.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_DIPS">
+      <Tip>Number of dips to model in this range.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - NUM_DIPS<br> Number of dips to model in this range.</center></b>
+<pre> Default = -
+ Allowed = int (linked array)
+ If you enter NUM_DIPS = 0, or leave it blank, the front end will suggest
+ a calculated value intended to avoid aliasing (This value is calculated
+ when you leave the array-set of dip ranges on the CFE screen).</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>mdip - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="mdip">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : MDIP
+ Category   : filters
+ Written    : 1990-08-07   by: Bill Harlan
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Dip filtering by modeling dips in tau-P space.
+ Portability: No known limitations.
+ Parallel   : Yes for gather input
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ MDIP is a tau-P dip filter that operates by transforming input data into the
+ tau-P domain, then multiplying modeled dip ranges by the scale factor SCALE
+ prior to being added back to the original data.
+ 
+       1.  Dips are modeled by a roll-along tau-P transform using a window of
+           NUM_WIN traces for each transform, with an increment of NUM_INC
+           traces between windows.  All specified dips are used first to model
+           the data as well as possible in the least squares sense.  Only data
+           with times between TIM_BEG and TIM_END are modeled by the
+           transform.
+ 
+       2.  Specified dip ranges are identified as pass (SCALE=0.0), accentuate
+           (SCALE&gt;0.0) or reject (SCALE=-1.0).
+ 
+               SCALE = -1.0 causes that dip range to be subtracted from the
+               original data,
+ 
+               SCALE &gt; 0.0 causes that dip range to be accentuated,
+ 
+               SCALE = 0.0 prevents contamination by aliased energy from other
+               dips.
+ 
+           Dips that you wish to preserve in the data should be entered with
+           SCALE = 0.0.  This range of dips will be modeled separately and
+           subtracted from the model before the other dips are modeled.  This
+           prevents aliased energy from other dips from affecting the dip
+           range you wish to preserve.
+ 
+       3.  Dip ranges are multiplied by the associated SCALE value, then
+           inverse transformed and added to the original data.
+ 
+ 
+ NUM_DIPS
+ 
+ To insure that the number of dips to model for a dip range (NUM_DIPS)
+ does not cause aliasing, set
+ 
+          NUM_DIPS &gt;= HOR_INC*FMAX*(DIP_MAX-DIP_MIN)*NUM_WIN + 1,
+ 
+ where HOR_INC is the sample interval between traces in units of header word
+ HDR_HOR and FMAX is the maximum frequency to be modeled without aliasing.
+ If HOR_INC is set to the expected lateral sample interval, and you enter
+ NUM_DIPS = 0 (or leave it blank), the front-end will calculate for you the
+ minimum value of NUM_DIPS to avoid aliasing (using FMAX = 0.4 * Nyquist).
+ 
+ 
+ NUM_INC
+ 
+ The NUM_INC parameter plays a dual role. It is the window increment for
+ tau-P transforms. It is also the number of traces extracted from the center
+ of each window which are passed as output after processing that window.
+ Note: For the first and last window of each gather defined by header word
+ HDR_GATH, the number of output traces is greater than NUM_INC, to insure
+ that MDIP always outputs the same number of traces as are input to it.
+ 
+ 
+ Avoiding Mixed Appearance
+ 
+ When large ranges of dips are modeled and subtracted from the data, the
+ output will have a mixed appearance.  If you wish to suppress some steeply
+ dipping coherent noise, it is best to measure the dip and specify as narrow
+ a dip range as possible.  If you must use a large dip range and wish to
+ minimize the mixed appearance, the CLIP parameter may be helpful.
+ 
+ When CLIP is non-zero, MDIP will attenuate components of the dip model
+ with low amplitudes in the tau-P domain. (Roughly speaking, regions of
+ the tau-P transform of the dip model with amplitudes smaller than
+ CLIP * [standard deviation] are removed from the dip model.) It is assumed
+ that these low amplitude portions of the tau-P transform of the dip model
+ correspond to noise in your original data. Since this noise is removed
+ from the dip model, it is *not* removed from your data when the modeled
+ dips are subtracted from your original data (for dip ranges where you've
+ set SCALE = -1). Preserving this random noise avoids the mixed appearance.
+ 
+ This works because coherent events focus into isolated strong amplitudes in
+ transform space while incoherent noise diffuses into weak amplitudes over
+ all dips.  (Same effect as in FKAP.)
+ 
+ Increasing the value of CLIP will increase the amount of noise which is
+ removed from the dip model and is therefore *not* removed from your data.
+ 
+ 
+ Input Data and Header Words
+ 
+ Input data should be sorted in order of the desired functional gathers, such
+ as CMPs or shot profiles. Input can be gathers or single traces.
+ 
+ HDR_GATH should be set so that HDR_GATH changes between gathers but is
+ constant for a particular gather.  Normally this will be header word 3
+ pre-stack and header word 7 or 8 post-stack.  Set HDR_GATH to zero if only
+ one set of traces is being dip filtered.
+ 
+ HDR_HOR is the header word that designates individual traces within the set
+ of traces that are being dip filtered.  Normally HDR_HOR is set to 8 or 7 for
+ post-stack and either 1, 4 or 6 for prestack.  HOR_INC is the expected
+ increment in HDR_HOR.  (Dip units are simplified if HDR_HOR is chosen so that
+ HOR_INC = 1.)
+ 
+ 
+ Cost
+ 
+ Cost for MDIP is roughly proportional to the sum of the NUM_DIP values for
+ all the dip ranges and also proportional to the number of tau-P transforms.
+ Thus cost can be minimized by using the smallest values of NUM_DIP that do
+ not produce noticeable aliasing and by making NUM_INC no smaller than
+ necessary to achieve the desired dip filtering effect.
+ 
+ F-K filtering will be less expensive than MDIP but may produce undesirable
+ artifacts, especially at edges.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author       Description
+     ----        ------       -----------
+ 16. 2006-09-11  Stoeckley    Add pc_register_array_names for SeisSpace.
+ 15. 2002-06-10  CC Burch     Modify to support gather input and parallelize
+ 14. 2001-01-15  Bob Baumel   Raise NUM_DIPS warning threshold from 51 to 100.
+ 13. 2000-12-07  Bob Baumel   Change wrapped_up flag to skip_wrapup.
+ 12. 2000-10-13  Bob Baumel   Get process working fully.
+ 11. 2000-03-30  Brad Kruse   Converted from old system.
+ 10. 1998-11-20  Vunderink    Begin using the f90 compiler.
+ 9.  1994-06-29  Harlan       Ignore bottom mute of 0, uninitialized.
+ 8.  1994-04-29  Harlan       Add bottom mutes.
+ 7.  1992-03-24  Harlan       Add DXINT to calculate defaults for NDIPS.
+ 6.  1992-03-10  Harlan       Modify documentation, resort subroutines
+ 5.  1990-11-30  Harlan       Check that data are not gathered.
+ 4.  1990-11-08  Harlan       Re-zero mute zone when finished.
+ 3.  1990-10-03  Harlan       Add NHG for prestack groups.
+ 2.  1990-08-30  Harlan       1st, model, subtract dips with 0 scale factors.
+ 1.  1990-08-07  Harlan       Original version.
+ 
+------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

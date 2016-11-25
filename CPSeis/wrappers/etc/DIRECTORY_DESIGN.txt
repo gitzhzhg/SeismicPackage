@@ -1,0 +1,66 @@
+                   DIRECTORY_DESIGN.txt
+
+Here is a somewhat simplified view of the CPSEIS_HOME and CPSEIS_WRAPPERS
+directory structures.  The purpose is to compare these and to decide how
+the two directory trees should be merged.  Some CPSEIS_HOME directories
+which have no counterpart in CPSEIS_WRAPPERS are not shown here.  Files
+within directories are shown in parentheses.
+
+
+                            CPSEIS_HOME
+                                 |
+      --------------------------------------------------------
+      |            |          |          |        |          |
+     etc        scripts   templates   include    src     platforms
+      |            |          |          |        |          |
+ (makefiles)   (scripts) (templates)   (.h)   (.f90.c.h)     |
+    (doc)                          (DUPLICATED)              |
+(config files)                                               |
+  (scripts)                  ------------------------------------
+ (templates)                 |                                  |
+                    x86_64_intel91_lam             x86_64_gfortran_lam
+                             |                                  |
+                ----------------------            ----------------------
+                |                    |            |                    |
+             (.o.mod)               lib        (.o.mod)               lib
+                                     |                                 |
+                           ------------------                       (.so.a)
+                           |                |
+                        (.so.a)            lib
+                                            |
+                                         (.so.a)
+                                       (DUPLICATED)
+
+
+
+                                 CPSEIS_WRAPPERS
+                                      |
+      --------------------------------------------------------------------------------------
+      |            |          |            |                 |                             |
+     etc        scripts   templates       src            platforms                      classes
+      |            |          |            |                 |                             |
+ (makefiles)   (scripts) (templates)       |                 |                            org
+                                          /                  |                             |
+                                         /                   |                          cpseis
+                                        /                    |                             |
+                                       /            x86_64_intel91_lam           ---------------------
+                /---------------------/                      |                   |         |         |
+               /                                  ----------------------        util    wrappers  examples
+              |                                   |        |           |         |         |         |
+             org                                 org      bin         lib     (.class)  (.class)  (.class)
+              |                                   |        |           |
+           cpseis                              cpseis  (programs)   (.so.a)
+              |                                   |
+    ----------------------              ----------------------
+    |         |          |              |         |          |
+   util    wrappers   examples         util    wrappers   examples
+    |         |          |              |         |          |
+  (.f90)    (.f90)     (.f90)        (.o.mod)  (.o.mod)   (.o.mod)
+  (.h.hh)   (.h.hh)    (.h.hh)
+  (.c.cc)   (.c.cc)    (.c.cc)   
+  (.cpp)    (.cpp)     (.cpp)
+  (.java)   (.java)    (.java)
+                       (programs)
+                                                          
+                                                                   
+

@@ -1,0 +1,32 @@
+#! /bin/csh -f
+#--------------------------------------------------------------------------
+#                     recursive_grow_classpath
+#--------------------------------------------------------------------------
+# This script can be sourced to add files with extension .jar to the
+# CLASSPATH environment variable, beginning at the specified current
+# directory and recursively descending into all subdirectories.
+#
+# This script adds to the end of the classpath (not the beginning).
+# 
+# The CPSEIS_WRAPPERS environment variable must be defined.
+#--------------------------------------------------------------------------
+
+set current = $1
+
+if(`echo $current/*` == "") exit 0
+
+# The above test checks for an empty directory.
+# The following foreach loop will abort if the above test is not performed.
+
+foreach file ($current/*) >& /dev/null
+  if($file:e == jar) then
+    source $CPSEIS_WRAPPERS/scripts/grow_path CLASSPATH $file atend
+  else if(-d $file) then
+    source $CPSEIS_WRAPPERS/scripts/recursive_grow_classpath $file
+  endif
+end
+
+##---------------------------- end ----------------------------------------##
+##---------------------------- end ----------------------------------------##
+##---------------------------- end ----------------------------------------##
+

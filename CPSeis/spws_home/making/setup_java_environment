@@ -1,0 +1,31 @@
+#! /bin/csh -f
+
+set HOMECLASSDIR   = "$HOME/sys/com/conocophillips/classes"
+set HOMEJARDIR     = "$HOME/sys/com/conocophillips/jar"
+set SPWSJARDIR     = "$SPWSDIR/sys/com/conocophillips/jar"
+set SPSPRODJARDIR  = "$SPSDIR/production/sys/com/conocophillips/jar"
+set SPSBETAJARDIR  = "$SPSDIR/beta/sys/com/conocophillips/jar"
+set SPSALPHAJARDIR = "$SPSDIR/alpha/sys/com/conocophillips/jar"
+
+set J0 = "$SPWSJARDIR/spws0.jar"
+set J1 = "$SPWSJARDIR/spws1.jar"
+set SPWSJARS = $J0":"$J1
+echo $SPWSJARS
+
+set J0 = "$SPSPRODJARDIR/sps0.jar"
+set J1 = "$SPSPRODJARDIR/sps1.jar"
+set SPSPRODJARS = $J0":"$J1
+echo $SPSPRODJARS
+
+set J0 = "$SPSBETAJARDIR/sps0.jar"
+set J1 = "$SPSBETAJARDIR/sps1.jar"
+set SPSBETAJARS = $J0":"$J1
+echo $SPSBETAJARS
+
+set J0 = "$SPSALPHAJARDIR/sps0.jar"
+set J1 = "$SPSALPHAJARDIR/sps1.jar"
+set SPSALPHAJARS = $J0":"$J1
+echo $SPSALPHAJARS
+
+setenv CLASSPATH $HOMECLASSDIR":"$SPWSJARS":"$SPSPRODJARS":"$SPSBETAJARS":"$SPSALPHAJARS
+echo $CLASSPATH

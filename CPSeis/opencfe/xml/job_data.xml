@@ -1,0 +1,906 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="job_data" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="JOB_DATAPROCESS" title="JOB_DATA Process" rows="25" columns="134">
+    <Label keyword="COMMENT_JOBNAME" alignment="left">Jobname  =</Label>
+    <Field keyword="JOBNAME" type="string" maxLength="16" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_COMMENT" alignment="left">Comment  =</Label>
+    <Field keyword="JOB_COMMENT" type="string" maxLength="58" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_SUB_PROJECT" alignment="left">Sub-Project Name  =</Label>
+    <Field keyword="SUB_PROJECT" type="string" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_REC_KEEPING" alignment="left">Record Keeping  =</Label>
+    <Field keyword="REC_KEEPING" type="comboBox" maxLength="32" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PDN_USERID" alignment="left">PDN Userid  =</Label>
+    <Field keyword="PDN_USERID" type="string" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PCPS_REPORT_OPT" alignment="left">PCPS Report Option =</Label>
+    <Field keyword="PCPS_REPORT_OPT" type="comboBox" maxLength="32" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_CPUS" alignment="left">Number of Exec/node=</Label>
+    <Field keyword="NUM_CPUS" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAIL_OPT" alignment="left">Mail Option  =</Label>
+    <Field keyword="MAIL_OPT" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_NODES" alignment="left">Number of Nodes  =</Label>
+    <Field keyword="NUM_NODES" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HISTORY_OPT" alignment="left">History Option  =</Label>
+    <Field keyword="HISTORY_OPT" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_QUEUE" alignment="left">Queue  =</Label>
+    <Field keyword="QUEUE" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STD_LIBS" alignment="left">Standard Libraries =</Label>
+    <Field keyword="STD_LIBS" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PRIORITY" alignment="left">Priority  =</Label>
+    <Field keyword="PRIORITY" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MACHINE" alignment="left">Machine  =</Label>
+    <Field keyword="MACHINE" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TRSCAN_OPT" alignment="left">TRSCAN Option  =</Label>
+    <Field keyword="TRSCAN_OPT" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RERUN" alignment="left">Rerunable  =</Label>
+    <Field keyword="RERUN" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEBUG_LEVEL" alignment="left">Debug Level  =</Label>
+    <Field keyword="DEBUG_LEVEL" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TSTAMP_INC" alignment="left">Time Stamp Increment  =</Label>
+    <Field keyword="TSTAMP_INC" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RLOCATION" alignment="left">Remote Location  =</Label>
+    <Field keyword="RLOCATION" type="comboBox" maxLength="15" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CALLING_PROGRAM" alignment="left">Calling_Program       =</Label>
+    <Field keyword="CALLING_PROGRAM" type="comboBox" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIME_LIMIT" alignment="left">Time Limit  =</Label>
+    <Field keyword="TIME_LIMIT" type="int" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAILINGADDRESS" alignment="left">MailingAddress        =</Label>
+    <Field keyword="MAILINGADDRESS" type="string" maxLength="99" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1" title=" Default PATHNAME Parameter"/>
+    <Label keyword="LABEL_PATHNAME_TRCIO" alignment="left">Trace Data Directory  =</Label>
+    <Field keyword="PATHNAME_TRCIO" type="string" maxLength="67" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME_DIR" alignment="left">Other Data Directory  =</Label>
+    <Field keyword="PATHNAME_DIR" type="string" maxLength="67" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER2" title=" Trace Length and Sample Rate"/>
+    <Label keyword="LABEL_TRACE_LENGTH" alignment="left">Length of traces (seconds) =</Label>
+    <Field keyword="TRACE_LENGTH" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DT" alignment="left">DT (sample interval (seconds)) =</Label>
+    <Field keyword="DT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TSTRT" alignment="left">TSTRT (start time (seconds)) =</Label>
+    <Field keyword="TSTRT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NDPT" alignment="left">NDPT (# samples/trace) =</Label>
+    <Field keyword="NDPT" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NWIH" alignment="left">NWIH (#words in header) =</Label>
+    <Field keyword="NWIH" type="int" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_JOBNAME" xPos="10" yPos="1" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="JOBNAME" xPos="33" yPos="1" xSize="16" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_COMMENT" xPos="10" yPos="2" xSize="18" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="JOB_COMMENT" xPos="33" yPos="2" xSize="58" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_SUB_PROJECT" xPos="10" yPos="3" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SUB_PROJECT" xPos="33" yPos="3" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_REC_KEEPING" xPos="58" yPos="3" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="REC_KEEPING" xPos="78" yPos="3" xSize="32" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_PDN_USERID" xPos="10" yPos="4" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PDN_USERID" xPos="33" yPos="4" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PCPS_REPORT_OPT" xPos="58" yPos="4" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PCPS_REPORT_OPT" xPos="78" yPos="4" xSize="32" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_NUM_CPUS" xPos="10" yPos="5" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="NUM_CPUS" xPos="33" yPos="5" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAIL_OPT" xPos="58" yPos="5" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MAIL_OPT" xPos="78" yPos="5" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_NUM_NODES" xPos="10" yPos="6" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="NUM_NODES" xPos="33" yPos="6" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HISTORY_OPT" xPos="58" yPos="6" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="HISTORY_OPT" xPos="78" yPos="6" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="COMMENT_QUEUE" xPos="10" yPos="7" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="QUEUE" xPos="33" yPos="7" xSize="12" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_STD_LIBS" xPos="58" yPos="7" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="STD_LIBS" xPos="78" yPos="7" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_PRIORITY" xPos="96" yPos="7" xSize="11" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PRIORITY" xPos="107" yPos="7" xSize="3" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MACHINE" xPos="10" yPos="8" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MACHINE" xPos="33" yPos="8" xSize="12" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_TRSCAN_OPT" xPos="58" yPos="8" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TRSCAN_OPT" xPos="78" yPos="8" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_RERUN" xPos="10" yPos="9" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="RERUN" xPos="33" yPos="9" xSize="12" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_DEBUG_LEVEL" xPos="58" yPos="9" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="DEBUG_LEVEL" xPos="78" yPos="9" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_TSTAMP_INC" xPos="10" yPos="10" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TSTAMP_INC" xPos="33" yPos="10" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RLOCATION" xPos="58" yPos="10" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="RLOCATION" xPos="78" yPos="10" xSize="15" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_CALLING_PROGRAM" xPos="10" yPos="11" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="CALLING_PROGRAM" xPos="33" yPos="11" xSize="12" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_TIME_LIMIT" xPos="70" yPos="11" xSize="15" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TIME_LIMIT" xPos="85" yPos="11" xSize="7" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MAILINGADDRESS" xPos="10" yPos="12" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="MAILINGADDRESS" xPos="33" yPos="12" xSize="99" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="7" yPos="13" xSize="96" ySize="5"/>
+     <Constraints component="LABEL_PATHNAME_TRCIO" xPos="10" yPos="15" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_TRCIO" xPos="33" yPos="15" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_DIR" xPos="10" yPos="16" xSize="23" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_DIR" xPos="33" yPos="16" xSize="67" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER2" xPos="7" yPos="19" xSize="96" ySize="6"/>
+     <Constraints component="LABEL_TRACE_LENGTH" xPos="9" yPos="21" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TRACE_LENGTH" xPos="39" yPos="21" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_DT" xPos="57" yPos="21" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="DT" xPos="89" yPos="21" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_TSTRT" xPos="9" yPos="22" xSize="30" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="TSTRT" xPos="39" yPos="22" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NDPT" xPos="57" yPos="22" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="NDPT" xPos="89" yPos="22" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_NWIH" xPos="57" yPos="23" xSize="32" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="NWIH" xPos="89" yPos="23" xSize="12" ySize="1" xStretch="true" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="JOBNAME">
+      <Tip>Name used to identify the job being built.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - JOBNAME<br> Name used to identify the job being built.</center></b>
+<pre> Default =
+ Allowed = char*15
+ Name used to identify the job being built.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="JOB_COMMENT">
+      <Tip>Descriptive text entered by the user as documentation for the job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - JOB_COMMENT<br> Descriptive text entered by the user as documentation for the job.</center></b>
+<pre> Default =
+ Allowed = char*132
+ Descriptive text entered by the user as documentation for the job.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SUB_PROJECT">
+      <Tip>Name used to identify the sub-project within the current project.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - SUB_PROJECT<br> Name used to identify the sub-project within the current project.</center></b>
+<pre> Default =
+ Allowed = char*10
+ 
+ The name given to the sub-project within the current project.  This field
+ is used in the default PDN descriptor to catalog output tape data sets.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="REC_KEEPING">
+      <Tip>Controls whether or not a Job Summary File is created</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - REC_KEEPING<br>Controls whether or not a Job Summary File is created</center></b>
+<pre> Default = "No    Job Summary File"
+ Allowed = "Yes   Job Summary File"
+           "No    Job Summary File"
+ 
+The Job Summary File will be named SUB_PROJECT_NAME.FOLDER and written into the
+current working directory.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PDN_USERID">
+      <Tip>The user name under which output tape data sets will be cataloged.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PDN_USERID<br> The user name under which output tape data sets will be cataloged.</center></b>
+<pre> Default =
+ Allowed = char*10
+ This field is used in the default PDN descriptor to catalog output tape data
+ sets.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PCPS_REPORT_OPT">
+      <Tip>Controls disposition worker printout</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PCPS_REPORT_OPT<br>Controls disposition worker printout</center></b>
+<pre> Default = "Include worker printout"
+ Allowed = "Include worker printout"
+           "Do not include worker printout"
+ 
+Controls whether or not worker printout is included in the final report file.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_CPUS">
+      <Tip>The number of CPUs or PEs (tasks, execs, cores...) requested per node to execut</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - NUM_CPUS<br> The number of CPUs or PEs (tasks, execs, cores...) requested per node to execut</center></b>
+<pre> Default = 1
+ Allowed = integer
+ The number of CPUs or parallel elements (PEs) (tasks) per node to execute this job.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAIL_OPT">
+      <Tip>Whether or not to be notified when the job has completed.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - MAIL_OPT<br> Whether or not to be notified when the job has completed.</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES (end)
+ Allowed = SE (start and end)
+ Allowed = ABT (abort only)
+ 
+ If NO, do not send mail.  If YES, send mail when job completes. If SE, send
+ mail when job starts and when job ends.  If ABT, send mail only if job aborts.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_NODES">
+      <Tip>The number of machines required to execute this job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - NUM_NODES<br> The number of machines required to execute this job.</center></b>
+<pre> Default = 1
+ Allowed = 0 &gt; int &lt;= NUM_CPUS
+ The number of machines required to execute this job.
+ Example: If there were 12 physical CPUs on each Linux node, then to run on 8 of them per node on 4 nodes:
+   use: NUM_CPUS=8, NUM_NODES=4 (total Number of executables = 4*8=32.
+   to run more execs/node than the physical number of cores, use 0 for NUM_CPUS and the system
+   will balance the request on the NUM_NODES requested.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HISTORY_OPT">
+      <Tip>Select the history option that will be printed to the rpt file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - HISTORY_OPT<br> Select the history option that will be printed to the rpt file.</center></b>
+<pre> Default = MODEL
+ Allowed = MODEL
+ Allowed = ALL
+ Allowed = NONE
+ Allowed = CURRENT
+ 
+ If ALL, print all histories.  If NONE, do not print any histories.  If MODEL,
+ print a set of histories that model job processing.  If
+ CURRENT, print current history only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="QUEUE">
+      <Tip>The batch queue for executing the batch job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - QUEUE<br> The batch queue for executing the batch job.</center></b>
+<pre> Default = B_multi
+ Allowed = B_multi
+ Allowed = B_single
+ Allowed = I_timeproc
+ The batch queue for executing the batch job.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STD_LIBS">
+      <Tip>Select the libraries needed for this job.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - STD_LIBS<br> Select the libraries needed for this job.</center></b>
+<pre> Default = Depends on the library used in linking CFE
+ Allowed = "PRODLIB"  if CFE linked with PRODLIB
+ Allowed = "BETALIB"  if CFE linked with BETALIB
+ Allowed = "ALPHALIB" if CFE linked with ALPHALIB
+ Allowed = "CUSTOM"
+ Select the libraries needed for this job.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PRIORITY">
+      <Tip>The priority of job (-5 to 5).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PRIORITY<br> The priority of job (-5 to 5).</center></b>
+<pre> Default = 0
+ Allowed = integer
+ The priority of the job may range from -5 to 5.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MACHINE">
+      <Tip>The computer system for job execution.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - MACHINE<br> The computer system for job execution.</center></b>
+<pre> Default = Linux
+ Allowed = Linux
+ Allowed = Solaris
+ Allowed = Custom
+ The name of the computer system for job execution.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRSCAN_OPT">
+      <Tip>Select the mode of TRSCAN operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - TRSCAN_OPT<br> Select the mode of TRSCAN operation.</center></b>
+<pre> Default = BASIC
+ Allowed = BASIC
+ Allowed = ADVANCED
+ TRSCAN collects statistics on the traces passing thru each process and
+ prints them when NTR = NO_MORE_TRACES.  In ADVANCED mode, TRSCAN prints
+ a histogram of the data.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RERUN">
+      <Tip>Whether or not this job is rerunnable.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - RERUN<br> Whether or not this job is rerunnable.</center></b>
+<pre> Default = NO
+ Allowed = NO
+ Allowed = YES
+ If set to YES, PBS may try to rerun the job if it has encountered problems,
+ such as node failure.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEBUG_LEVEL">
+      <Tip>Controls the level of debug printout in the report file</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - DEBUG_LEVEL<br>Controls the level of debug printout in the report file</center></b>
+<pre> Default = "NO DEBUG"
+ Allowed = "NO DEBUG"
+           "LEVEL 1"
+           "LEVEL 2"
+           "LEVEL 3"
+ 
+Sets the JDATA parameter DEBUG_LEVEL to 0, 1, 2 or 3 for the user desired
+level of debug printout in the report file.  It is up to each individual
+process to decide what is printed.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSTAMP_INC">
+      <Tip>Number of traces between writing of progress time stamp.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - TSTAMP_INC<br> Number of traces between writing of progress time stamp.</center></b>
+<pre> Default = 1000
+ Allowed = int &gt;= 0
+ 
+ The batch job will write the current date and time, process number and
+ trace headers 1, 3, and 4 to a file named time_stamp after every additional
+ TSTAMP_INC traces are output by a process.
+ 
+ TSTAMP_INC = 0 disables the writes.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RLOCATION">
+      <Tip>Build job for remote location rather than local location</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - RLOCATION<br>Build job for remote location rather than local location</center></b>
+<pre> Default = "LOCAL"
+ Allowed = "LOCAL"
+           "ALASKA"
+           "PONY"
+ 
+This information is passed to the job builder.  If RLOCATION is not LOCAL
+the job will be built to be submitted from here and run at the remote site.
+Report file will come back to the local site.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CALLING_PROGRAM">
+      <Tip>This tells the processes what system they are running within.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CALLING_PROGRAM<br> This tells the processes what system they are running within.</center></b>
+<pre> Default = CPS
+ Allowed = CPS
+ Allowed = SEISSPACE
+ Calling_Program tells each process that needs the information what system
+ has invoked the process.  This allows processes to behave appropriately
+ for the particular system in which they are running.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIME_LIMIT">
+      <Tip>Tell system to abort job after TIME_LIMIT seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - TIME_LIMIT<br>Tell system to abort job after TIME_LIMIT seconds.</center></b>
+<pre> Default = "3600"
+ Allowed = "any + integer"
+ This sets the time limit for batch queue submission only.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAILINGADDRESS">
+      <Tip>Enter email address for use with the "mail" option.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - MAILINGADDRESS<br>  Enter email address for use with the "mail" option.</center></b>
+<pre> Default = NO DEFAULT
+ Allowed = Any email address
+ This is where output status will be sent if using any email options.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_TRCIO">
+      <Tip>The default directory name for process trace file parameters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PATHNAME_TRCIO<br>The default directory name for process trace file parameters.</center></b>
+<pre> Default = ~userid/cpsdata
+ Allowed = char*80
+ A valid directory name to use in building a default for process trace file
+ PATHNAME parameters.  PATHNAME_TRCIO may include sub-directories.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_DIR">
+      <Tip>The default directory name for process PATHNAME parameters.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PATHNAME_DIR<br> The default directory name for process PATHNAME parameters.</center></b>
+<pre> Default = Front-end directory
+ Allowed = char*80
+ A valid directory name to use in building a default for process PATHNAME
+ parameters.  PATHNAME_DIR may include sub-directories.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRACE_LENGTH">
+      <Tip>Length of the trace in trace sample units.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - TRACE_LENGTH<br> Length of the trace in trace sample units.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;0.0
+ The length of the trace in trace sample units.  NDPT=(TRACE_LENGTH/DT)+1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DT">
+      <Tip>Sample interval for the data set.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - DT<br> Sample interval for the data set.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;0.0
+ The sample interval for the data set in trace sample units.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TSTRT">
+      <Tip>Start time of the trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - TSTRT<br> Start time of the trace.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt;=0.0
+ Start time of the trace in the trace sample units.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NDPT">
+      <Tip>Number of samples in the trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - NDPT<br> Number of samples in the trace.</center></b>
+<pre> Default = 0
+ Allowed = int&gt;0
+ The number of samples in the trace.  NDPT=(TRACE_LENGTH/DT)+1</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NWIH">
+      <Tip>Number of words in the trace header.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - NWIH<br> Number of words in the trace header.</center></b>
+<pre> Default = 64
+ Allowed = int&gt;=64
+ The number of words in the trace header.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <Screen keyword="CUSTOMPARAMETERS" title="Custom Parameters" rows="30" columns="88">
+    <Array keyword="CUSTOM_COMPILE" type="string" maxLength="82" columnName="CUSTOM_COMPILE" editable="yes" sensitive="yes"/>
+    <Array keyword="CUSTOM_MODULES" type="string" maxLength="82" columnName="CUSTOM_MODULES" editable="yes" sensitive="yes"/>
+    <Array keyword="CUSTOM_LINK" type="string" maxLength="82" columnName="CUSTOM_LINK" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER3" title=" CUSTOM_EXECUTE = mpirun EXEC_B executeable EXEC_A"/>
+    <Label keyword="LABEL_CUSTOM_EXEC_B" alignment="left">EXEC_B =</Label>
+    <Field keyword="CUSTOM_EXEC_B" type="string" maxLength="28" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CUSTOM_EXEC_A" alignment="left">EXEC_A =</Label>
+    <Field keyword="CUSTOM_EXEC_A" type="string" maxLength="28" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_CUSTOM_NODES_PATH">Select CUSTOM_NODES...</Button>
+    <Label keyword="LABEL_CUSTOMLAMBOOT" alignment="center">Custom lamboot ?</Label>
+    <Field keyword="CUSTOM_LAM" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Field keyword="CUSTOM_NODES_PATH" type="string" maxLength="140" editable="yes" sensitive="yes"/>
+    <Array keyword="CUSTOM_NODES" type="string" maxLength="19" columnName="CUSTOM_NODES" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="CUSTOM_COMPILE" xPos="1" yPos="1" xSize="85" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="CUSTOM_MODULES" xPos="1" yPos="7" xSize="85" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="CUSTOM_LINK" xPos="1" yPos="13" xSize="85" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="BORDER3" xPos="1" yPos="19" xSize="85" ySize="3"/>
+     <Constraints component="LABEL_CUSTOM_EXEC_B" xPos="2" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CUSTOM_EXEC_B" xPos="10" yPos="20" xSize="28" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CUSTOM_EXEC_A" xPos="46" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CUSTOM_EXEC_A" xPos="54" yPos="20" xSize="28" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_CUSTOM_NODES_PATH" xPos="1" yPos="23" xSize="22" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_CUSTOMLAMBOOT" xPos="31" yPos="23" xSize="17" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="CUSTOM_LAM" xPos="48" yPos="23" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="CUSTOM_NODES_PATH" xPos="1" yPos="24" xSize="22" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="CUSTOM_NODES" xPos="1" yPos="25" xSize="22" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="CUSTOM_COMPILE">
+      <Tip>Custom compile statements.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_COMPILE<br> Custom compile statements.</center></b>
+<pre> Default =
+ Allowed = char*80
+ 
+ Allows the user to specify compile statments to be added to the job before
+ the compile and link of the job executable.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_MODULES">
+      <Tip>Custom Fortran 90 modules directory.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_MODULES<br> Custom Fortran 90 modules directory.</center></b>
+<pre> Default =
+ Allowed = char*80
+ 
+ Allows the user to specify a custom Fortran 90 modules directory to be used
+ in compiling the job executable (main).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_LINK">
+      <Tip>Custom link for building the job executable.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_LINK<br> Custom link for building the job executable.</center></b>
+<pre> Default =
+ Allowed = char*80
+ 
+ Allows the user to specify a custom link for building the job executable
+ (main).  When using a custom link, the user must specify all object code
+ (except for main.o) and libraries in the desired order. The backslash will
+ be added to the end of each line  by the job builder to concatenate them
+ into a single command.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_EXEC_B">
+      <Tip>Custom execution of the job executable.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_EXEC_B<br> Custom execution of the job executable.</center></b>
+<pre> Default =
+ Allowed = char*80
+ 
+ Allows the user to specify a custom execution statement.  This feature is
+ intended for parallel development but can be used for any job.  The format
+ of the execution statement for parallel jobs will be
+ 
+       mpirun CUSTOM_EXEC_B executable CUSTOM_EXEC_A
+ 
+ where  CUSTOM_EXEC_B and/or CUSTOM_EXEC_A are provided by the user.
+ 
+ The format for single-cpu jobs will be
+ 
+      CUSTOM_EXEC_B executable CUSTOM_EXEC_A
+ 
+ where  CUSTOM_EXEC_B and/or CUSTOM_EXEC_A are provided by the user.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_EXEC_A">
+      <Tip>Custom execution of the job executable.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_EXEC_A<br> Custom execution of the job executable.</center></b>
+<pre> Default =
+ Allowed = char*80
+ 
+ Allows the user to specify a custom execution statement.  This feature is
+ intended for parallel development but can be used for any job.  The format
+ of the execution statement for parallel jobs will be
+ 
+       mpirun CUSTOM_EXEC_B executable CUSTOM_EXEC_A
+ 
+ where  CUSTOM_EXEC_B and/or CUSTOM_EXEC_A are provided by the user.
+ 
+ The format for single-cpu jobs will be
+ 
+      CUSTOM_EXEC_B executable CUSTOM_EXEC_A
+ 
+ where  CUSTOM_EXEC_B and/or CUSTOM_EXEC_A are provided by the user.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_CUSTOM_NODES_PATH">
+      <Tip>This button accesses the Select CUSTOM_NODES dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - SELECT_CUSTOM_NODES_PATH<br> This button accesses the Select CUSTOM_NODES dialog box.</center></b>
+<pre>Input CUSTOM_NODES via a file using a file selection dialog.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_LAM">
+      <Tip>Do you want the jobfile include a lamboot ?</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_LAM<br> Do you want the jobfile include a lamboot ?</center></b>
+<pre> Default = YES
+ Allowed = YES
+ Allowed = NO
+ 
+ If YES, the jobfile will include a lamboot using either CUSTOM_NODES or nodes
+ provided by the batch queuing software.
+ 
+ If NO, the user is responsible for the lamboot.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_NODES_PATH">
+      <Tip>Pathname of file containing a list of custom_nodes.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_NODES_PATH<br> Pathname of file containing a list of custom_nodes.</center></b>
+<pre> Default = -
+ Allowed = char
+ 
+ Pathname of file containing a list of custom_nodes to be loaded into the
+ CUSTOM_NODES array.  This file must be an ascii file with one node name on
+ each line. Default directory for file is PATHNAME_DIR and default extension is
+ ".lst".</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CUSTOM_NODES">
+      <Tip>Custom execution node list.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CUSTOM_NODES<br> Custom execution node list.</center></b>
+<pre> Default = -
+ Allowed = char*12
+ 
+ Allows the user to specify a custom list of nodes to be used by the job.  This
+ option may be used for both single-cpu and parallel jobs.
+ 
+ If the job is to be batch and the job is a single-cpu job, the node must be
+ known to the batch queuing software.  If the job is to be batch and the job is
+ a parallel job, the first node must be known to the batch queuing software and
+ all others must not.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<b><center>job_data - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="job_data">
+   <Text><![CDATA[<html><head><base href=file:///home/bmenger/workspace/cpseis/src//>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : JOB_DATA
+ Category   : miscellaneous
+ Written    : 1999-06-15   by: Donna K. Vunderink
+ Revised    : 2011-05-16   by: Bill Menger
+ Maturity   : beta
+ Purpose    : Job-oriented parameter entry for parameters specific to the job.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ 
+ The job-oriented parameter entry for all parameters specific to the particular
+ job being built or executed.  These parameters are likely to vary among
+ different jobs in the same project.
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          ADVICE FOR USERS
+ 
+ 
+ 
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+       Date      Author       Description
+       ----      ------       -----------
+ 74. 2011-05-16  Bill Menger  Modified for simpler specifications on PEs/node
+ 73. 2007-05-10  Goodger      Remove queues B1530, B1260W, B1400W, B1800, P.
+ 72. 2007-04-10  Bill Menger  Added "calling_program" as a data element.
+ 71. 2006-12-04  D. Glover    Added NULLIFY statements for Intel compiler.
+ 70. 2006-06-27  Goodger      Add Queue B2390.  Remove B3060.
+ 69. 2006-06-05  Bill Menger  Added num_cpus to globals.
+ 68. 2006-01-10  B. Menger    Removed Unused Variables.
+ 67. 2005-07-11  Goodger      Add B2210 and B2210TD queues.  Remove B1390 and
+                              below.
+ 66. 2005-04-11  Goodger      Allow all users to use B1400W and B1260
+                              queues.
+ 65. 2005-01-17  Goodger      Add priority parameter.
+ 64. 2004-07-22  Goodger      Remove B3060TD1 and B3060TD2 and add B3060.
+ 63. 2004-07-13  Goodger      Change PONY queue name to B. Add queues
+                              B3060TD1 and B3060TD2.
+ 62. 2004-06-14  Goodger      Add job restart parameter.
+                              Remove SPEED parameter.
+ 61. 2004-05-26  Goodger      Fix nuisance invalid queue message if pony.
+ 60. 2004-04-21  Goodger      Add queue B2000SQ for Alaska which will run
+                              one job at at time.
+ 59. 2004-03-23  Goodger      Change PONY queue from B2800 to B2790.  Add
+                              queue B3060TD.
+ 58. 2004-02-25  Goodger      Increase rlocation menu to 3 to accomodate PONY.
+ 57. 2004-02-13  Goodger      Get the location from the config file.
+                              Allow single cpu jobs into B queues.
+                              Add location PONY.
+ 56  2004-01-28  Goodger      Add queue B1400W for Faqi Liu.
+ 55. 2003-12-18  Goodger      Add B2000 queue for Alaska.
+ 54. 2003-12-09  Goodger      Add remote location parameter.  Remove B queue.
+                              Do not allow blanks in sub-project field.
+                              Add B800SAS queue.
+ 53. 2003-10-20  Goodger      Add queue B1260W.  Allow selection by account
+                              liuf only.  Incorporate Randy Selzler change
+                              of removing a hard-coded reference to poepsn03.
+ 52. 2003-09-09  Goodger      Avoid floating point arithmetic problem with
+                              trace_length parameter by converting to
+                              character.
+ 51. 2003-09-04  Goodger      Add B1800 queue and allow B800 for Houston.
+ 50. 2003-08-01  Goodger      Add B1400TD queue.
+ 49. 2003-06-18  Goodger      Add queues B1000 and B1260.
+ 48. 2003-06-16  Goodger      Call queue trap for front end only.
+ 47. 2003-05-22  Goodger      Add trap for valid queues.
+ 46. 2003-05-07  Goodger      Add location Alaska, queues B800 and A. Remove
+                              Ponca only queues.
+ 45. 2003-04-16  Goodger      Add B1530 and B1390 queues. Added documentation
+                              to the programming notes section.
+ 44. 2003-03-21  Goodger      Remove 250 limit on number of cpus and nodes.
+ 43. 2003-03-18  Goodger      Added P queue. Have only Houston queues show up
+                              if running in Houston, and only Ponca queues
+                              show up in runningIdin Ponca.
+ 42. 2002-09-24  Vunderink    Changed MACHINE option from poepsn03 to Solaris.
+ 41. 2002-08-30  Vunderink    Added PATHNAME_TRCIO parameter.
+ 40. 2002-07-11  Vunderink    Changed STD_LIBS error to warning.
+ 39. 2002-06-13  Vunderink    Enable speed parameter for FXSHOT queue.
+ 38. 2002-06-06  Vunderink    Added NUM_NODES parameter.
+                              Added FXSHOT queue and changed default for
+                                PCPS_REPORT_OPT.
+ 37. 2002-02-27  Vunderink    Added ALPHALIB to libraries.
+ 36. 2002-02-05  Vunderink    Added speed parameter.
+ 35. 2001-11-29  Vunderink    Increased maximum for num_cpus to 250 and added
+                                file input option to custom_nodes.
+ 34. 2001-11-12  Vunderink    Added A2 and S queue and removed warning message.
+ 33. 2001-09-10  Vunderink    Changes required to rename TESTLIB to BETALIB.
+ 32. 2001-08-10  Vunderink    Added job_data_wrapup subroutine and TSTAMP_INC
+                                parameter.
+ 31. 2001-08-03  Goodger      Change history options to be the same as TROT.
+ 30. 2001-07-03  Vunderink    Added PCPS_REPORT_OPT and DEBUG_LEVEL parameters,
+                                modified usage of B and C queues and eliminated
+                                the D queue, removed special handling of pospx1
+                                and pospx3 nodes, improved automatic setting
+                                of STD_LIBS to CUSTOM, and fixed bug keeping
+                                Ctrl+I from working on custom parameter arrays.
+ 29. 2001-03-28  Vunderink    Added CUSTOM_EXEC_B, CUSTOM_EXEC_A, CUSTOM_LAM
+                                and CUSTOM_NODES parameters
+ 28. 2001-02-27  Vunderink    Removed unused parameters max_cart and max_mag,
+                                and added a pc_get FRONTEND_PATH in initialize.
+ 27. 2001-02-22  Vunderink    Force queue=b5 and num_cpus=1 for nodes pospx1
+                                and pospx3
+ 26. 2001-02-15  Vunderink    Added A_short queue and improved queue error
+                                checking
+ 25. 2001-01-29  Vunderink    Removed PARALLEL_NODES and changed MACHINE to
+                                Linux
+ 24. 2001-01-17  Vunderink    Added warnings if custom fields are filled out
+                                but STDLIBS not equal to CUSTOM or vice versa.
+ 23. 2000-12-29  Vunderink    Added parameter PARALLEL_NODES.
+ 22. 2000-12-06  Vunderink    Added CHECKLAV to trscan option menu.
+ 21. 2000-11-07  Vunderink    Added to machine list.
+ 20. 2000-10-12  Vunderink    Added chmod g+rw on folder
+ 19. 2000-10-06  Vunderink    Removed PATHNAME_NODE and PATHNAME_USERID.
+ 18. 2000-09-29  Vunderink    Enable HISTORY_OPT.
+ 17. 2000-09-18  Vunderink    Fixed bug in pc_put_control call.
+ 16. 2000-08-23  Vunderink    Added cps_folder support and added to machine
+                                list.
+ 15. 2000-05-12  Vunderink    Added SETUP_ONLY to control parameters
+ 14. 2000-04-25  Vunderink    Change std_libs_menu to include PRODLIB, TESTLIB,
+                                and CUSTOM when library source is unknown
+ 13. 2000-04-18  Vunderink    Allow pospx3 to be a frontend_node
+ 12. 2000-04-17  Vunderink    Added traps for all option menus
+ 11. 2000-03-30  Vunderink    Adjusted screen labels for TSTRT and NWIH
+ 10. 2000-03-24  Vunderink    Removed TOP.LAY and BOT.LAY includes from gui_def
+                                layout
+  9. 2000-03-07  Vunderink    Set the machine default based on machine list,
+                                fix machine list for frontend move to poepsn03,
+                                removed ndec argument from pc_put calls, and
+                                added parameter NWIH
+  8. 2000-02-23  Vunderink    Remove num_pes parameter, add queue_menu,
+                                modify machine list based on frontend machine,
+                                make queue and num_cpus insensitive until
+                                supported, updated documentation, and added
+                                gui definition to documentation.
+  7. 2000-02-08  Vunderink    Added poeplx04 to machine list
+  6. 2000-02-04  Vunderink    Made parameter, parameter default, and parameter
+                                    character length changes required by
+                                    Chuck I. Burch documentation changes, and
+                                    made HISTORY_OPT insensitive until it is
+                                    supported.
+  5. 2000-02-02  Vunderink    Fixed code not to exceed 80 characters, changed
+                                    LINE_NAME default to SUB_PROJECT from
+                                    PROJECT_DATA process, changed STDLIBS
+                                    choices to be dependent CFE link, restored
+                                    TRSCAN_OPT and changed options to
+                                    BASIC/ADVANCED, and added poeplx03 to
+                                    machine menu.
+  4. 2000-01-17  Vunderink    Updated documentation and added poepsn03 to
+                                    machine list
+  3. 2000-01-04  Vunderink    Commented out unused parameters TIME_LIMIT,
+                                    NUM_PES, RESTRT_CHKPT, and TRSCAN_OPT.
+                              Changed QUEUE default to b5.
+                              Added new parameters PATHNAME_NODE,
+                                    PATHNAME_USERID, and PATHNAME_DIR.
+  2. 1999-09-13  Vunderink    Made parameter cache named constants changes
+  1. 1999-06-16  Vunderink    Initial version.
+ 
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

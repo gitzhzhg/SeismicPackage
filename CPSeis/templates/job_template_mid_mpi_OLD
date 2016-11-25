@@ -1,0 +1,29 @@
+COMMAND_TIMEOUT="command_timeout"
+######## Set up the LAM/MPI environment ########
+awk -f /usr/app/vendors/sps/scripts/catuniq.awk  $PBS_NODEFILE > lamhosts
+cp lamhosts mpd.hosts
+echo " lamhosts file..." >> err.out
+cat lamhosts >> err.out
+/usr/app/vendors/sps/scripts/scrub_all lamhosts $PBS_JOBID >> err.out
+/usr/app/vendors/sps/scripts/scrub_tmp lamhosts >> err.out
+/usr/app/vendors/sps/bin/ix86-intel-linux/bldmntscr
+chmod 755 ./hold_automounts.sh
+/usr/app/vendors/sps/bin/ix86-intel-linux/multi_rsh 50 10 /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID/lamhosts "/btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID/hold_automounts.sh >& /dev/null &"
+######## Set up trap for exit ########
+trap "$COMMAND_TIMEOUT 900 wipe lamhosts;exit 1" 1 2 3 4 5 6 7 8 9 10 12 13 14 15 16
+/usr/app/vendors/sps/bin/ix86-intel-linux/multi_rsh 50 10 /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID/lamhosts "/usr/app/vendors/sps/bin/ix86-intel-linux/checknfs.sh /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID $MPIHOME"
+if [ -f /btmp/$DISKNODE/batchtmp/UUUUU/JJJJJ_$PBS_REQID/core ] ; then
+exit
+fi
+######## Get ready to run the job ########
+NODES=NNNNN
+$COMMAND_TIMEOUT 1800 $MPIHOME/bin/mpdboot -v -n $NODES >> err.out
+touch PPPPP/JJJJJ_$PBS_REQID.started 
+export LD_LIBRARY_PATH=$MPIHOME/lib:/apps/compilers/intel/fc/9.0/lib
+export I_MPI_DEBUG=2
+$MPIHOME/bin/mpiexec -genv PBS_REQID $PBS_REQID -genv PBS_JOBID $PBS_JOBID -perhost 2 -n $NCPUS $TMPDIR/JJJJJ.exe 1>online 2>&1
+######## cleanup and exit  ########
+sleep 10
+$COMMAND_TIMEOUT 900 $MPIHOME/bin/mpdcleanup >> err.out
+$COMMAND_TIMEOUT 900 $MPIHOME/bin/mpdallexit >> err.out
+######## all done ########

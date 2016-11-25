@@ -1,0 +1,58 @@
+#!/bin/bash
+# seismic viewer using SU
+if [ -z $1 ] ; then
+	echo "Seismic viewer, usage: segyview filename [#traces]"
+	exit
+fi
+tape=$1
+shift
+if [ -z $1 ] ; then
+	trmax=1000
+else
+	trmax=$1
+fi
+
+segyread tape=$tape trmax=$trmax | segyclean | suximage perc=95 windowtitle=$tape &
+mv header $tape.EBCDIC
+mv binary $tape.BINARY
+echo "					EBCDIC Header"
+cat $tape.EBCDIC
+
+od -d $tape.BINARY | head -2 | awk 'BEGIN{getline;}{printf("SampleRate=%d NumberSamples=%d\n",$2/1000,$4);}'
+measure=$(od -j 54 -N 2 -d $tape.BINARY | awk '{print $2}')
+echo measure = $measure
+if [ "$measure" == "1" ] ; then
+	echo Measurements in meters
+elif [ "$measure" == "2" ] ; then
+	echo Measurements in feet
+else
+	echo Measurements undefined
+fi
+echo "					BINARY Header"
+od -d $tape.BINARY | awk '{printf("%9d %9d %9d %9d %9d %9d %9d\n",$2,$3,$4,$5,$6,$7,$8);}'
+
+echo "					TRACE 1"
+od -j 3600 -N 240 -d $tape
+seq=$(od -j 3600 -N 4 -t u4 $tape | awk '{print $2}')
+if [ "$seq" != "1" ] ; then
+	dd if=$tape of=.tmp ibs=3600 skip=1 obs=240 count=1 conv=swab
+	od -d .tmp -N 240 && ls -l .tmp
+	seq=$(od        -N 4 -t u4 .tmp | awk '{print $2}')
+	ffn=$(od -j 8   -N 4 -t u4 .tmp | awk '{print $2}')
+	ns=$(od  -j 114 -N 2 -d    .tmp | awk '{print $2}')
+	dt=$(od  -j 116 -N 2 -d    .tmp | awk '{print $2}')
+	cx=$(od  -j 180 -N 4 -d    .tmp | awk '{print $2}')
+	cy=$(od  -j 184 -N 4 -d    .tmp | awk '{print $2}')
+        scl=$(od -j  70 -N 2 -d    .tmp | awk '{print $2}')
+	rm .tmp
+else
+	seq=$(od -j 3600 -N 4 -t u4 $tape | awk '{print $2}')
+	ffn=$(od -j 3608 -N 4 -t u4 $tape | awk '{print $2}')
+	ns=$(od -j 3714 -N 2 -d $tape | awk '{print $2}')
+	ns=$(od -j 3716 -N 2 -d $tape | awk '{print $2}')
+fi
+od -j 3600 -N 240 -d $tape
+#od -j 3600 -N 240 -i $tape
+echo seq = $seq ffn=$ffn ns=$ns dt=$dt cx=$cx cy=$cy scl=$scl
+echo "					TRACE 2"
+wait

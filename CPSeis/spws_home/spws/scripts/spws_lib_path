@@ -1,0 +1,16 @@
+#!/bin/csh -f
+if ($?LD_LIBRARY_PATH == 0) then
+  if ($?OLD_LD_LIBRARY_PATH != 0) then
+    unsetenv OLD_LD_LIBRARY_PATH
+  endif
+else
+  setenv OLD_LD_LIBRARY_PATH ${LD_LIBRARY_PATH}
+endif
+setenv LD_LIBRARY_PATH "."
+foreach LIB_PATH(`cat ${SPWSINSTALLDIR}/lib/${ARCHITECTURE}/spws_libs`)
+     eval setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${LIB_PATH}
+end
+if ($?OLD_LD_LIBRARY_PATH != 0) then
+  setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${OLD_LD_LIBRARY_PATH}
+  unsetenv OLD_LD_LIBRARY_PATH
+endif

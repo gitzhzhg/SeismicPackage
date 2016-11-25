@@ -1,0 +1,609 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="gvs" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="GVSPROCESS" title="GVS Process" rows="27" columns="80">
+    <Label keyword="COMMENT_APPLYGRADEDORCONSTANTVEL" alignment="center">Apply graded or constant velocity NMO corrections to CMP gathers</Label>
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TRIM_PERCENT" alignment="left">TRIM_PERCENT=</Label>
+    <Field keyword="TRIM_PERCENT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME_VEL" alignment="left">PATHNAME_VEL=</Label>
+    <Field keyword="PATHNAME_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_MOD" alignment="left">OPT_MOD=</Label>
+    <Field keyword="OPT_MOD" type="comboBox" maxLength="5" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1"/>
+    <Array keyword="MODS" type="float" maxLength="12" columnName="MODS" editable="yes" sensitive="yes"/>
+    <Array keyword="VELS" type="float" maxLength="12" columnName="VELS" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FAC1" alignment="left">FAC1 =</Label>
+    <Field keyword="FAC1" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL1" alignment="left">VEL1 =</Label>
+    <Field keyword="VEL1" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VMIN" alignment="left">VMIN =</Label>
+    <Field keyword="VMIN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FINC" alignment="left">FINC =</Label>
+    <Field keyword="FINC" type="float" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VINC" alignment="left">VINC =</Label>
+    <Field keyword="VINC" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VINC1" alignment="left">VINC1=</Label>
+    <Field keyword="VINC1" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NFAC" alignment="left">NFAC =</Label>
+    <Field keyword="NFAC" type="int" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NVEL" alignment="left">NVEL =</Label>
+    <Field keyword="NVEL" type="int" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VMAX" alignment="left">VMAX =</Label>
+    <Field keyword="VMAX" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_STACK" alignment="left">STACK=</Label>
+    <Field keyword="STACK" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DOPPLER" alignment="left">DOPPLER=</Label>
+    <Field keyword="DOPPLER" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_BEG" alignment="left">TIM_BEG=</Label>
+    <Field keyword="TIM_BEG" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_END" alignment="left">TIM_END=</Label>
+    <Field keyword="TIM_END" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_APPLYGRADEDORCONSTANTVEL" xPos="1" yPos="1" xSize="64" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_MODE" xPos="1" yPos="3" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="14" yPos="3" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_TRIM_PERCENT" xPos="49" yPos="3" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TRIM_PERCENT" xPos="62" yPos="3" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_VEL" xPos="1" yPos="5" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL" xPos="14" yPos="5" xSize="60" ySize="1" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_OPT_MOD" xPos="3" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_MOD" xPos="11" yPos="7" xSize="5" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="8" yPos="9" xSize="37" ySize="10"/>
+     <Constraints component="MODS" xPos="9" yPos="10" xSize="15" ySize="8" xStretch="true" yStretch="true"/>
+     <Constraints component="VELS" xPos="27" yPos="10" xSize="15" ySize="8" xStretch="true" yStretch="true"/>
+     <Constraints component="LABEL_FAC1" xPos="9" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FAC1" xPos="15" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL1" xPos="27" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL1" xPos="33" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VMIN" xPos="46" yPos="20" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VMIN" xPos="52" yPos="20" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FINC" xPos="9" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FINC" xPos="15" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VINC" xPos="27" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VINC" xPos="33" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VINC1" xPos="46" yPos="21" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VINC1" xPos="52" yPos="21" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NFAC" xPos="9" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NFAC" xPos="15" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NVEL" xPos="27" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NVEL" xPos="33" yPos="22" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VMAX" xPos="46" yPos="22" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VMAX" xPos="52" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_STACK" xPos="2" yPos="24" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="STACK" xPos="10" yPos="24" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DOPPLER" xPos="25" yPos="24" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DOPPLER" xPos="33" yPos="24" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_BEG" xPos="2" yPos="26" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_BEG" xPos="10" yPos="26" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_END" xPos="25" yPos="26" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_END" xPos="33" yPos="26" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>Whether to use graded or constant velocity sequences.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - MODE<br> Whether to use graded or constant velocity sequences.</center></b>
+<pre> Default = CVST
+ Allowed = CVST  (Use constant velocity sequences.)
+ Allowed = GVS   (Use graded velocity sequences.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TRIM_PERCENT">
+      <Tip>Percent of stack to trim (for trimmed mean stack).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - TRIM_PERCENT<br> Percent of stack to trim (for trimmed mean stack).</center></b>
+<pre> Default = 0.0
+ Allowed = 0.0 - 100.0
+ 
+ If TRIM_PERCENT is greater than zero, each stacked sample point in the
+ stacked trace will be calculated from the input points using a trimmed
+ mean calculation.  A median stack is calculated if TRIM_PERCENT is 100.
+ 
+ Execution time is much slower when TRIM_PERCENT is greater than zero.
+ 
+ This parameter is passed to the internally-called STK process.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_VEL">
+      <Tip>Pathname for the GVS reference velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - PATHNAME_VEL<br> Pathname for the GVS reference velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ 
+ If you want to use a single velocity function as the reference velocity
+ field, then the velocity file specified by PATHNAME_VEL must contain
+ only that single desired velocity function.
+ 
+ PATHNAME_VEL is active only if MODE = GVS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_MOD">
+      <Tip>Option whether velocity modifiers are additive or multiplicative.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - OPT_MOD<br> Option whether velocity modifiers are additive or multiplicative.</center></b>
+<pre> Default = MULT
+ Allowed = ADD   (Velocity function modifiers are additive.)
+ Allowed = MULT  (Velocity function modifiers are multiplicative.)
+ 
+ OPT_MOD is active only if MODE = GVS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MODS">
+      <Tip>Array of velocity modifiers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - MODS<br> Array of velocity modifiers.</center></b>
+<pre> Default =  -
+ Allowed = real array (100)
+ If OPT_MOD = ADD, MODS is an array of velocities that add to the reference
+ velocity function.
+ If OPT_MOD = MULT, MODS is an array of fractions that multiply the reference
+ velocity function.
+ 
+ MODS is active only if MODE = GVS.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VELS">
+      <Tip>Array of constant velocities for the CVST mode.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - VELS<br> Array of constant velocities for the CVST mode.</center></b>
+<pre> Default =  -
+ Allowed = real array (100)
+ VELS is an array of constant velocities that constitute the sequence of
+ velocity functions for the CVST mode.
+ 
+ VELS is active only if MODE = CVST.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FAC1">
+      <Tip>First MODS entry.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - FAC1<br> First MODS entry.</center></b>
+<pre> Default = 0.80
+ Allowed = real &gt; 0.0
+ 
+ If OPT_MOD is MULT, FAC1 should be small (0.75 to 0.95).
+ If OPT_MOD is ADD, FAC1 may be large (-700.0, +800.0)
+ 
+ FAC1 is active only if MODE = GVS.
+ FAC1, FINC and NFAC are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL1">
+      <Tip>First VELS entry (linear algorithm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - VEL1<br> First VELS entry (linear algorithm).</center></b>
+<pre> Default = 1500.0
+ Allowed = real &gt; 0.0
+ 
+ VEL1 is active only if MODE = CVST.
+ VEL1, VINC and NVEL are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VMIN">
+      <Tip>First VELS entry (cubic algorithm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - VMIN<br> First VELS entry (cubic algorithm).</center></b>
+<pre> Default = 1500.0
+ Allowed = real &gt; 0.0
+ 
+ VMIN is active only if MODE = CVST.
+ VMIN, VINC1 and VMAX are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FINC">
+      <Tip>Increment for MODS entries.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - FINC<br> Increment for MODS entries.</center></b>
+<pre> Default = 0.02
+ Allowed = real
+ 
+ If OPT_MOD is MULT, FINC should be small (0.01 to 0.05).
+ If OPT_MOD is ADD, FINC may be large (+100.0, +800.0)
+ 
+ FINC is active only if MODE = GVS.
+ FAC1, FINC and NFAC are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINC">
+      <Tip>Increment for VELS entries (linear algorithm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - VINC<br> Increment for VELS entries (linear algorithm).</center></b>
+<pre> Default = 100.0
+ Allowed = real &gt; 0.0
+ 
+ VINC is active only if MODE = CVST.
+ VEL1, VINC and NVEL are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VINC1">
+      <Tip>Increment factor for VELS entries (cubic algorithm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - VINC1<br> Increment factor for VELS entries (cubic algorithm).</center></b>
+<pre> Default = 150.0
+ Allowed = real &gt; 0.0
+ 
+ VINC1 is active only if MODE = CVST.
+ VMIN, VINC1 and VMAX are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NFAC">
+      <Tip>Total number of MODS entries.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - NFAC<br> Total number of MODS entries.</center></b>
+<pre> Default = 0
+ Allowed = 0 &lt;= NFAC &lt;= 100
+ 
+ If a value is entered, the MODS table is recomputed:
+     MODS(1) = FAC1
+     MODS(J) = FAC1 + (J-1) * FINC
+         where J = 2 through NFAC.
+ 
+ After the MODS table is recomputed, NFAC is reset to zero.
+ NFAC is active only if MODE = GVS.
+ FAC1, FINC and NFAC are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NVEL">
+      <Tip>Total number of VELS entries (linear algorithm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - NVEL<br> Total number of VELS entries (linear algorithm).</center></b>
+<pre> Default = 0
+ Allowed = 0 &lt;= NVEL &lt;= 100
+ 
+ If a value is entered, the VELS table is recomputed (linear):
+     VELS(1) = VEL1
+     VELS(J) = VEL1 + (J-1) * VINC
+         where J = 2 through NVEL.
+ 
+ After the VELS table is recomputed, NVEL is reset to zero.
+ NVEL is active only if MODE = CVST.
+ VEL1, VINC and NVEL are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VMAX">
+      <Tip>Maximum VELS entry (cubic algorithm).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - VMAX<br> Maximum VELS entry (cubic algorithm).</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt; 0.0
+ 
+ If a value is entered, the VELS table is recomputed (cubic):
+     VELS(1) = VMIN
+     VELS(J) = VELS(J-1) + VINC1 * (V(J-1) ** 3) / VMIN ** 3
+         where J &lt;= 100 and VELS(J) &lt;= VMAX.
+ 
+ After the VELS table is recomputed, VMAX is reset to zero.
+ VMAX is active only if MODE = CVST.
+ VMIN, VINC1 and VMAX are front-end only parameters.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="STACK">
+      <Tip>Whether to output stacked data (YES) or NMO corrected CMPs (NO).</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - STACK<br> Whether to output stacked data (YES) or NMO corrected CMPs (NO).</center></b>
+<pre> Default = YES
+ Allowed = YES   (Output stacked and sorted data.)
+ Allowed = NO    (Output NMO corrected CMPs.)
+ 
+ If MODE = CVST then data is stacked and sorted (implies STACK=YES).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DOPPLER">
+      <Tip>Doppler mute (stretch mute) parameter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - DOPPLER<br> Doppler mute (stretch mute) parameter.</center></b>
+<pre> Default = 1.7
+ Allowed = real&gt;1.0
+ DOPPLER is the maximum NMO stretch factor allowed by the stretch mute.
+ Larger values of DOPPLER correspond to less severe muting.  DOPPLER = 0.0
+ disables the stretch mute, but allows automatic muting to eliminate crossing
+ events and refractions.  DOPPLER &lt; 0.0 disables all automatic muting in NMC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_BEG">
+      <Tip>Starting time for the output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - TIM_BEG<br> Starting time for the output traces.</center></b>
+<pre> Default = TSTRT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_END">
+      <Tip>Ending time for the output traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - TIM_END<br> Ending time for the output traces.</center></b>
+<pre> Default = end of trace
+ Allowed = real &gt; TSTRT</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>gvs - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="gvs">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                        C P S   P R O C E S S
+ 
+ Name       : GVS    (Graded Velocity Stack)  [Includes former CVST.]
+ Category   : stacks
+ Written    : 1986-07-28   by: John Sinton
+ Revised    : 2006-06-20   by: B. Menger
+ Maturity   : production
+ Purpose    : Apply graded or constant velocity NMO corrections to CMP gathers
+              and (optionally) stack the gathers.
+ Portability: No known limitations.
+ Parallel   : No
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         GENERAL DESCRIPTION
+ 
+ GVS produces NMO corrected CMP gathers and stacked datasets as diagnostics
+ for velocity analysis.  GVS performs the following steps.
+ 
+        1.  Receive input data in CMP gathers.
+ 
+        2.  Perform NMO correction using a sequence of velocity fields.
+            The graded velocity field sequence is defined by a reference
+            velocity file and an array of additive or multiplicative
+            velocity modifiers (MODE = GVS).   In MODE = CVST, the velocity
+            field sequence is defined by an array of constant velocities.
+ 
+        3.  GVS outputs NMO corrected CMP gathers (STACK = NO) or stacks the
+            CMP gathers and outputs stacked traces (STACK = YES).  GVS stacks
+            traces by calling STK internally.
+ 
+        4.  GVS calls BINSORT internally to put traces into order by panels
+            when STACK = YES.  (There are as many panels as velocity fields
+            in the sequence, with one velocity field for each panel.)
+ 
+ On output traces, GVS sets header word 24 to the panel number and header word
+ 63 to the velocity modifier for each panel.   In MODE = CVST, header word 63
+ is set to the constant velocity for that panel.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         ADVICE FOR USERS
+ 
+ PATHNAME_VEL is not active if MODE = CVST.
+ 
+ If you want to use a single velocity function as the reference velocity field
+ in GVS mode, then the velocity file specified by PATHNAME_VEL must contain
+ only that single desired velocity function.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+048. 2006-06-20  B. Menger   Removed Unused Variables.
+ 47. 2004-05-13 Stoeckley  Add trimmed mean stack capability.
+ 46. 2002-04-18 Goodger    Reset TIM_END to global time if global time is
+                           less than TIM_END.
+ 45. 2001-08-27 Chiu       Add error checking to TIM_END.
+ 44. 2001-02-13 Selzler    Changed wrapup logic to use skip_wrapup
+ 43. 2000-11-02 Selzler    Enhanced GUI per user request
+ 42. 2000-10-16 Selzler    Corrected bug in front-end VELS rounding.
+ 41. 2000-10-05 Selzler    Enhanced front-end to compute VELS sequence.
+ 40. 2000-08-30 Selzler    Enhanced velocity function communication
+ 39. 2000-06-07 Selzler    Removed NAME_FUNCT (historical artifact)
+ 38. 2000-05-11 Selzler    Change from TSORT macro to BINSORT primitive
+ 37. 2000-05-10 Selzler    Change OPT_NMO_RES to correspond to old system
+ 36. 2000-04-28 Selzler    Conversion to Fortran 90.
+ 35. 1999-01-11 Vunderink  Begin using the f90 compiler.
+ 34. 1997-11-12 Goodger    Fix problem with header word 63 getting
+                           wiped out.
+ 33. 1997-04-24 Goodger    Set header word 6 as well as 63 to the
+                           velocity modifier.
+ 32. 1997-03-03 Goodger    Allow times 10 sec and over in the reference
+                           function which is printed to the history.
+ 31. 1997-01-28 Vunderink  Fixed problem caused by not all output traces
+                           being initialized to zero.
+ 30. 1996-09-17 Goodger    Allow 6 digits for velocity.
+ 29. 1996-08-07 Goodger    Enclose reference velocity pairs in paren-
+                           theses for history file.
+ 28. 1996-08-01 Goodger    Put reference velocity function in history
+                           file.
+ 27. 1995-12-04 Goodger    Set header word 63 to velocity modifier.
+ 26. 1990-12-06 Ball       Put in compile directive at DO 200 loop
+                           for CFT77 to speed up GVS.
+ 25. 1990-04-06 Howard     Allow VN=NONE for CVST MACRO.
+ 24. 1990-04-02 Troutt     Many changes including the following:
+                      a. Eliminate intermediate velocity interpolation
+                         step to 50-pts.  The input function is now
+                         LINEARLY interpolated to the trace sample rate
+                         (DT) as is the case in Process NMC.
+                      b. De-activate INTT as an input parameter, but
+                         leave its usage in code with a value set to 1.
+                         This process formerly did a linear interp. of
+                         each input trace by factor of INTT (def=4).
+                         Now each sample is interpolated linearly
+                         during nmo (same as Process NMC).
+                      c. De-activate SEMBLANC parameter. Process SVS
+                         no longer exists.
+                      d. De-activate XHMIN and XHMAX parameters. Their
+                         usage to limit offsets was a potential for
+                         misunderstanding. Use Process SELECT ahead of
+                         GVS if you need to discard offsets.
+                      e. Add refraction and cross-over mute per NMC
+                         and apply the same taper.
+ 23. 1990-03-02 Peterson   Number of panels now stored in header word 24.
+                           Also in 27 for now to be backward compatible.
+ 22. 1990-01-31 Troutt     No code changed. Added remarks about scratch
+                           header words (26,27).
+ 21. 1989-10-13 Troutt     Eliminated calls to PUTP and GETP because GVS
+                           is NOT re-enterable.
+ 20. 1989-05-10 Howard     Add ordinal velocity number for sorting.
+ 19. 1989-04-12 Howard     Fix bug in MODE=NMO.
+ 18. 1989-04-07 Howard     Save velocity modifier in scratch header 26.
+ 17. 1989-04-04 Howard     Fix bug in dopler mute, now matches NMO.
+ 16. 1989-03-21 Sinton     Modified dopler muting and use of original
+                           mute value.
+ 15. 1989-03-15 Sinton     Fixed problem with header word 2.
+ 14. 1989-02-22 Sinton     Changed VMOD defaults in CPS version to work
+                           better with DCODE.
+ 13. 1989-01-12 Sinton     Converted to new GETV.
+ 12. 1988-09-23 Howard     NWIH and NWPT conversion.
+ 11. 1988-08-09 Baumel     Put in CPSPRT calls.
+ 10. 1988-07-21 Sinton     Fixed bug with MODE=GVS.
+ 9.  1988-05-23 Sinton     Added SEMBLANC parameter to work with the
+                           SVS process.
+ 8.  1988-04-20 Sinton     Removed parameters MAXCMP, XB, and YB.
+                           Correcter documentation.
+ 7.  1988-03-23 Sinton     Corrected print when MODE=GVS.
+ 6.  1987-09-02 Sinton     Added the MODE parameter and made several
+                           corrections.
+ 5.  1987-07-10 Sinton     Headers 1-6 will now be consistant with out-
+                           put traces and fixed the VMODTYPE=MULTIPLY
+                           option.
+ 4.  1987-05-21 Menger     Fixed GETP call. Now reentrant.
+ 3.  1987-05-20 Menger     Fixed PUTP call, added test for enough scr.
+ 2.  1986-08-05 Sinton     Corrected for use with BTREG in CFT.
+ 1.  1986-07-28 Sinton     First version.
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

@@ -1,0 +1,410 @@
+/****
+!!!                      Primitive Clanguage Template
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                   REVISION HISTORY FOR THIS TEMPLATE
+!!!
+!!!     Date        Author     Description
+!!!     ----        ------     -----------
+!!! 10. 2005-07-21  Stoeckley  Add extern "C" brackets so the code will compile
+!!!                             and link correctly with either C or C++.
+!!!  9. 2002-10-23  Stoeckley  Minor documentation and ident string changes.
+!!!  8. 2001-10-22  Stoeckley  Add advice concerning the RCS ident string;
+!!!                             add code check-in instructions.
+!!!  7. 2001-03-15  Stoeckley  Add missing > bracket in !</header_word_doc>.
+!!!  6. 2001-03-06  Stoeckley  Fix typo in the CPS_v1 line.
+!!!  5. 2000-08-24  Stoeckley  Add information as to which documentation
+!!!                             sections are optional and can be omitted;
+!!!                             fix RCS ident string line to be less likely
+!!!                             to exceed 80 characters.
+!!!  4. 1999-11-11  Stoeckley  Add ident string for RCS.
+!!!  3. 1999-09-22  Stoeckley  Add subdirectory miscellaneous.
+!!!  2. 1999-09-20  Stoeckley  Remove some documentation tags and add
+!!!                             reference to other files.
+!!!  1. 1999-09-10  Stoeckley  Initial version.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         GENERAL INFORMATION
+!!!
+!!! This template for C-language implementation files constitutes part of
+!!! the standards for writing primitive modules for the Conoco Processing
+!!! System.  This template, including the instructions and comments within
+!!! this template, is to be used for creating the implementation files for
+!!! C-language primitives.  Each C-language primitive must have its own
+!!! implementation file and its own header file.
+!!!
+!!! All of the instructions, comments, and sample code in this template are
+!!! commented out with /**** and ****/ and marked with three exclamation
+!!! points to allow new code to be inserted and tested without having to
+!!! delete this information first.
+!!!
+!!! The documentation section of this primitive is identical to that for
+!!! Fortran primitives.  The revision history should include revisions to
+!!! this implementation file only.  The corresponding header file has its
+!!! own revision history.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                         SUPPORTING DOCUMENTS
+!!!
+!!! (1) Documentation accessed by the CPSDOC program.
+!!! (2) Templates for processes and primitives            (in ~sps/templates).
+!!! (3) Coding Standards for Mixing Programming Languages (in ~sps/templates).
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       INITIAL STEPS TO PERFORM
+!!!
+!!! (1) Copy this template to a new file with the name "xxxx.c" where
+!!!     "xxxx" is the name of your C-language primitive.
+!!!
+!!! (2) Make the following replacements in this template wherever they occur:
+!!!     Replace  xxxx or XXXX  with the primitive name.
+!!!     Replace  2001-01-01    with the current check-in date (year-month-day).
+!!!     Replace      NNNN      with your name.
+!!!
+!!! (3) Insert your code (including documentation) into this template at
+!!!     locations where instructions are found.  Make sure all inserted code
+!!!     conforms to the appropriate standards, including naming conventions.
+!!!
+!!! (4) If this primitive is to be called from Fortran, you should either
+!!!     provide a Fortran-90 wrapper for this primitive, or at least
+!!!     provide documentation as to how to call this primitive from Fortran.
+!!!     Functions to be called from Fortran must be written to use the
+!!!     variable types defined in the C2F_INTERFACE header file, and to
+!!!     pass character variables as hollerith arrays (see the Fortran
+!!!     STRING primitive for routines for converting between Fortran
+!!!     character variables and hollerith arrays).
+!!!
+!!! (5) Delete all instructions, comments, and sample code (lines beginning
+!!!     with !!!) in this file.
+!!!
+!!!-----------------------------------------------------------------------------
+!!!                       CODE CHECK-IN INSTRUCTIONS
+!!!
+!!! (1) Test the code thoroughly until you believe that it is ready
+!!!     for BETA TESTING if it is to be placed into betalib, or ALPHA
+!!!     TESTING if it is to be placed into alphalib.
+!!!
+!!! (2) Make sure the code compiles and works on all available compilers.
+!!!
+!!! (3) Set the Revised field (in the brief doc) to current check-in date
+!!!     and author.
+!!!
+!!! (4) Make sure a new entry has been added to the revision history, and
+!!!     set this entry to the current check-in date.
+!!!
+!!! (5) Check the code using the checkc script.
+!!!
+!!! (6) Check in the new code before 3:00 p.m.
+!!!
+!!! (7) If this code is to be included by a user as a custom compile in
+!!!     a CPS job, you should make sure that the RCS ident string includes
+!!!     the file name, revision date, author, and maturity (custom) to
+!!!     insure that the correct information is displayed in the report file.
+!!!
+!!!-----------------------------------------------------------------------------
+
+****/
+
+
+/****
+!<CPS_v1 type="PRIMITIVE"/>
+****/
+/*------------------------------- xxxx.c ----------------------------------*/
+/*------------------------------- xxxx.c ----------------------------------*/
+/*------------------------------- xxxx.c ----------------------------------*/
+ 
+        /* other files are:  xxxx_crou.c  xxxx_frou.f90  xxxx.h */
+ 
+/****
+!!! --> Delete from the above list any other files which do NOT exist.
+!!! --> There must always be a header file.
+!!! --> There must NOT be an xxxx.f90 file.
+****/
+
+
+/****
+!<copyright>
+!*******************************************************************************
+!***********                    COPYRIGHT NOTICE                     ***********
+!*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+!***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+!*******************************************************************************
+!</copyright>
+
+
+!<brief_doc>
+!-------------------------------------------------------------------------------
+!                        C P S   P R I M I T I V E
+!
+! Name       : XXXX 
+! Category   : --> math, filters, io, etc. (subdirectory)
+! Written    : 2001-01-01   by: NNNN
+! Revised    : 2001-01-01   by: NNNN
+! Maturity   : beta
+! Purpose    : --> description for single-line context-sensitive help.
+! Portability: No known limitations.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Choose the category from this list of subdirectories:
+!!!
+!!!      character     math          moves      io           velocity
+!!!      filters       memory        packs      sorts        miscellaneous
+!!!      main_prog     migrations    plot       synthetics
+!!!
+!-------------------------------------------------------------------------------
+!</brief_doc>
+
+
+!<descript_doc>
+!-------------------------------------------------------------------------------
+!                         GENERAL DESCRIPTION
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Description of this particular algorithm, how it differs from other
+!!!  --> algorithms for the general problem and when you may want to use it.
+!!!  --> Include information on whether the process is appropriate for 2D
+!!!  --> and/or 3D work.
+!!!
+!!!  --> If this primitive has specialized or limited use (e.g. needed only
+!!!  --> by the back-end main program), that use should be documented here.
+!
+!-------------------------------------------------------------------------------
+!</descript_doc>
+
+
+!<trace_io_doc>
+!-------------------------------------------------------------------------------
+!                     TRACE INPUT/OUTPUT REQUIREMENTS
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!
+!-------------------------------------------------------------------------------
+!</trace_io_doc>
+
+
+!<global_doc>
+!-------------------------------------------------------------------------------
+!                           GLOBAL PARAMETERS
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!
+!-------------------------------------------------------------------------------
+!</global_doc>
+
+ 
+!<header_word_doc>
+!-------------------------------------------------------------------------------
+!                          TRACE HEADER WORDS
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!
+!-------------------------------------------------------------------------------
+!</header_word_doc>
+
+
+!<calling_doc>
+!-------------------------------------------------------------------------------
+!                      INPUT AND OUTPUT ARGUMENTS
+!
+! For each subroutine or function documented below, each argument is
+! flagged as follows:
+!        i = value required upon INPUT.
+!        o = value set by the routine upon OUTPUT.
+!        b = value BOTH required upon input and changed upon output.
+!
+! For pointers, the flag (i,o,b) refers to the contents pointed to
+! by the pointer, not to the value of the pointer itself.  The pointer
+! value (the address) is required upon INPUT in all cases.
+!
+!-------------------------------------------------------------------------------
+!                          CALLING SEQUENCE
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> This section should list all functions in this primitive, and
+!!!  --> information about their arguments, in a format similar to that
+!!!  --> illustrated here, customized as appropriate.
+!!!
+!!!  --> If this primitive contains several groups of related functions which
+!!!  --> would be more clearly documented separately, or if this primitive
+!!!  --> contains functions which require sufficient documentation to warrant
+!!!  --> a separate section, there can be several sections such as this one,
+!!!  --> appropriately individually titled.
+!
+!                  o                i     b      o
+!                hello = xxxx     (aaaa, cvar , msg)
+!
+!                                   i     b      o
+!                void    xxxx_yyy (bbbb, cvar , msg)
+!
+!                                   i     i      o
+!                void    xxxx_zzz (bbbb, indx, value)
+!
+!!!  --> The type and description of each argument should be shown in a table
+!!!  --> such as that shown below.  
+!
+! char    *aaaa    =    --> description 
+! double   cvar    =    --> description
+! char    *msg     =    --> description 
+! long     hello   =    --> description
+! int      indx    =    --> description
+! double  *value   =    --> description
+!
+!!!  --> Add any additional notes about the use of the functions, or about
+!!!  --> their arguments, here.
+!
+!-------------------------------------------------------------------------------
+!</calling_doc>
+
+
+!<advice_doc>
+!-------------------------------------------------------------------------------
+!                            ADVICE FOR USERS
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Enter here more lengthy or more detailed advice than is appropriate
+!!!  --> for the above documentation.
+!
+!-------------------------------------------------------------------------------
+!</advice_doc>
+
+
+!<history_doc>
+!-------------------------------------------------------------------------------
+!                             REVISION HISTORY
+!
+!     Date        Author     Description
+!     ----        ------     -----------
+!  1. 2001-01-01  NNNN       Initial version.
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted.
+!!!
+!!!  --> Copy the old revision history to this location if it exists,
+!!!  --> and renumber as necessary.
+!!!
+!!!  --> This revision history should pertain only to this implementation
+!!!  --> file.  The revision history in the corresponding header file
+!!!  --> should pertain only to the header file.
+!!!
+!!!  --> The revision history should be listed in descending order, with
+!!!  --> the most recent revision at the top.
+!
+!-------------------------------------------------------------------------------
+!</history_doc>
+
+
+!<portability_doc>
+!-------------------------------------------------------------------------------
+!                         PORTABILITY LIMITATIONS
+!
+! No known limitations.
+! This process requires 8-byte (64-bit) word sizes.
+! This process packs and unpacks values in 8-byte words.
+! This process contains the following platform-dependent code...
+!
+!!!  --> This is a REQUIRED section which CANNOT be omitted, even if empty.
+!!!
+!!!  --> Omit or modify the inappropriate lines above.
+!!!  --> Also you can add additional portability details here.
+!
+!-------------------------------------------------------------------------------
+!</portability_doc>
+
+
+!<compile_doc>
+!-------------------------------------------------------------------------------
+!                      SPECIAL COMPILING REQUIREMENTS
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Description of any special compiler or linking requirements
+!!!  --> or restrictions.
+!
+!-------------------------------------------------------------------------------
+!</compile_doc>
+
+
+!<algorithm_doc>
+!-------------------------------------------------------------------------------
+!                   ALGORITHM DESCRIPTION FOR DEVELOPERS
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Description of this particular algorithm, related theory and
+!!!  --> relevant references.
+!
+!-------------------------------------------------------------------------------
+!</algorithm_doc>
+
+
+!<programming_doc>
+!-------------------------------------------------------------------------------
+!                           PROGRAMMING NOTES
+!
+!!!  --> This is an OPTIONAL section which can be omitted if not needed.
+!!!
+!!!  --> Enter here more lengthy or more detailed information which may be
+!!!  --> required.
+!
+!-------------------------------------------------------------------------------
+!</programming_doc>
+****/
+
+
+/*-------------------------- start of module ------------------------------*/
+/*-------------------------- start of module ------------------------------*/
+/*-------------------------- start of module ------------------------------*/
+
+
+char XXXX_IDENT[100] =
+"$Id: primitive_clanguage_template,v 1.9 2002/10/23 21:10:01 Stoeckley custom sps $";
+
+/****
+!!!
+!!! Put your header files here.
+!!! Commonly needed standard C library header files are shown here.
+!!! A more complete list can be found in the auxiliary_clanguage_template.
+!!!
+****/
+
+#include "xxxx.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#include <assert.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*------------------------- start of functions ----------------------------*/
+/*------------------------- start of functions ----------------------------*/
+/*------------------------- start of functions ----------------------------*/
+
+
+/****
+!!!
+!!! Put your code here.
+!!! There can be separate sections like this one for large functions
+!!! or related groups of functions.
+!!!
+****/
+
+
+/*-------------------------- end of functions -------------------------*/
+/*-------------------------- end of functions -------------------------*/
+/*-------------------------- end of functions -------------------------*/
+
+#ifdef __cplusplus
+}
+#endif
+
+/*-------------------------------- end ------------------------------------*/
+/*-------------------------------- end ------------------------------------*/
+/*-------------------------------- end ------------------------------------*/
+

@@ -1,0 +1,97 @@
+#!/bin/bash
+# June 22, 2009 wmm-This script runs the front-end GUI (opencfe) for cpseis.
+#                   This version uses gfortran64
+# ----------------- Put definitions for the following in your .bashrc file or your system-wide .bashrc:
+#                   HOSTNAME (machine's host name)
+#                   HOME (user's home directory)
+#                   MACHINE (from uname -m)
+#                   CPSEIS_ARCH
+#                   CPSEIS_INSTALL_DIR
+# ----------------- Set CPSEIS_INSTALL_DIR to your installation directory. 
+#                   tar -xvfz cpseis.tgz from /home/Desktop/username puts it where I have shown below.
+
+#--- put in .bashrc: export CPSEIS_INSTALL_DIR=/home/Desktop/username/cpseis
+
+# ----------------- Set CPSEIS_ARCH to point to the 64 bit gfortran build
+#--- put in .cshrc : export CPSEIS_ARCH=gfortran64
+#export CPSEIS_ARCH=gfortran64
+# ----------------- This script sets up all sorts of variables that the CPS system uses.
+#                   Customize this for your site.
+#---
+if [ ! -d $HOME/.cpseis/opencfe-logs ] ; then
+	echo "making ~/.cpseis/opencfe-logs directory"
+	mkdir -p $HOME/.cpseis/opencfe-logs
+fi
+if [ ! -d $HOME/.cpseis/opencfe-logs ] ; then
+	echo "Unable to create log file directory ~/.cpseis/opencfe-logs. Exiting."
+	exit 1
+fi
+LOGFILE="$HOME/.cpseis/opencfe-logs/"$USER"-"$HOST"-"$(date | sed 's/ /_/g')".log"
+touch $LOGFILE
+if [ "$1" = "-debug" ] ; then
+	DEBUG="TRUE"
+else
+	DEBUG="FALSE"
+fi
+if [ -z $SPS_ENVIRONMENT ] ; then
+	echo "No SPS_ENVIRONMENT set up" >>$LOGFILE
+	. ${CPSEIS_INSTALL_DIR}/etc/setup_cpseis_environment.sh >>$LOGFILE
+else
+	echo "SPS_ENVIRONMENT already set up -- make sure it is correct." >>$LOGFILE
+fi
+
+if [ ! -d $HOME/cpsdata ] ; then
+        mkdir $HOME/cpsdata
+fi
+
+if [ ! -d $HOME/cpstemp ] ; then
+        mkdir $HOME/cpstemp
+fi
+
+export CLASSPATH=${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/cop_ngs.jar:\
+${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/cop_seiswrap.jar:\
+${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/edu_mines_jtk.jar:\
+${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/mpijava.jar:\
+${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/org_javaseis.jar:\
+${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/tmi.jar
+
+echo $CLASSPATH
+ls -l ${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux
+ls -l ${CPSEIS_INSTALL_DIR}/spws_home/lib/ix86-64-intel-linux/spws_jars
+#exit
+
+# ----------------- This points to the fortran link libraries from Intel (included with permission).
+#export MPICH_LIBS=${HOME}/thirdparty/lib
+export LD_LIBRARY_PATH=${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/lib:${LD_LIBRARY_PATH}
+echo "LD_LIBRARY_PATH = "$LD_LIBRARY_PATH >>$LOGFILE
+
+# ----------------- I currently have this set to use a 64 bit java 1.6.04 for AMD
+#                   Point this to your java installation         
+export JAVA_HOME=${JAVA_DIRECTORY}
+
+# ----------------- Did not check on these parameters.  Historically used.
+export JAVA_OPTS="-ms64m -mx64m -ss256k -Djava.util.prefs.syncInterval=2000000"
+export JAVA=$JAVA_HOME/bin/java
+
+echo "Using Java Virtual Machine  = "$JAVA -version >>$LOGFILE
+
+# ----------------- This starts up the lock file daemon for the user.
+#                   The site could have one running for all users, and it can run on
+#                   another computer, but... this is how I test the infrastructure.
+
+# ----------------- If one is running, don't start another.
+
+echo " " >>$LOGFILE
+#--- run the job
+export DEBUG=TRUE
+if [ "$DEBUG" = "TRUE" ] ; then
+	echo $LD_LIBRARY_PATH
+	#echo $JAVA $JAVA_OPTS 2>&1 | tee -a $LOGFILE 
+	#($JAVA $JAVA_OPTS 2>&1 | tee -a $LOGFILE)&
+#else
+	#($JAVA $JAVA_OPTS >>$LOGFILE 2>&1)&
+fi
+gdb $(which cbyt)
+sleep 1
+echo " " >>$LOGFILE
+echo "Exit Cbyt"

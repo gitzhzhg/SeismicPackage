@@ -1,0 +1,95 @@
+
+         PLATFORM_MANAGEMENT_PROCEDURES    page 1 of 2       2004-06-02
+--------------------------------------------------------------------------------
+Scripts available:
+                     add_new_platform           <platform>
+                     remove_old_platform        <platform>
+                     add_missing_platforms
+                     replace_spws_makefile_links
+                     make_platform              <platform>  <target>
+                     nightly_make                           <target>
+                     nightly_view
+--------------------------------------------------------------------------------
+# Run this script to create a new platform in all of the ~spws directories:
+#
+#                     add_new_platform <platform>
+#
+# to create a new platform-dependent subdirectory <platform> everywhere one is
+# required, plus the necessary makefile links.
+--------------------------------------------------------------------------------
+# Run this script to remove an old platform in all of the ~spws directories:
+#
+#                     remove_old_platform <platform>
+#
+# to remove an old platform-dependent subdirectory <platform> everywhere,
+# including all of its contents.
+--------------------------------------------------------------------------------
+# Run this script to create any missing platforms in all ~spws directories:
+#
+#                     add_missing_platforms
+#
+# to create a platform-dependent subdirectory everywhere one is missing,
+# plus the necessary makefile links.
+#
+# The nightly_nodes_and_platforms file is used to get a list of all
+# required platforms.
+--------------------------------------------------------------------------------
+# Run this script to replace the makefiles in all oop and util and
+# program directories:
+#
+#                    replace_spws_makefile_links
+#
+# Useful if the location or name of the makefile to link to is moved.
+# Note that the name of the makefile to link to does not have to be makefile.
+# Note that the makefiles to link to are hardwired in this script.
+--------------------------------------------------------------------------------
+      PLATFORM_MANAGEMENT_PROCEDURES    page 2 of 2       2004-06-02
+--------------------------------------------------------------------------------
+# Run this script to make ~spws libraries on one specified platform:
+# 
+#                 make_platform  <platform>  <target>
+#
+# where the required <platform> is a supported platform, and
+# where the optional <target> is any target in makefile.spws.
+#
+# If <platform> is omitted, help is printed.
+# If <platform> is "all", all supported platforms are made.
+# If <target> is omitted, all oop and util targets are made.
+#
+# This script can be executed from any directory on any node, regardless of
+# the specified platform, since rsh is used.
+--------------------------------------------------------------------------------
+# Run this script to make ~spws libraries on all platforms:
+# 
+#                 nightly_make <target>
+#
+# where the optional target is any target in makefile.spws.
+#
+# This script redirects all gmake output to the following files:
+#
+#                 logfile.today          (in $SPWSDIR/making/$platform)
+#                 logfile.yesterday      (in $SPWSDIR/making/$platform)
+#                 logfile.status         (in $SPWSDIR/making/$platform)
+#                 logfile.depend         (in $SPWSDIR/making)
+#
+# This script also sends mail messages if an error occurs.
+#
+# This script can be executed from any directory on any node, regardless of
+# the specified platform, since rsh is used.
+#
+# This script is run as a cron job at 10:00 p.m. Monday-Friday nights.
+#
+# The file nightly_nodes_and_platforms contains a list of nodes and platforms
+# used by this script.
+--------------------------------------------------------------------------------
+# Run this script to easily view the log files produced by the nightly_make
+# script:
+#
+#                nightly_view
+#
+# This script will also concatenate all log files into a single one in case
+# you might want to do something with it (such as print it) without having
+# to deal with several separate log files.
+#
+# This script can be executed from any directory on any node.
+--------------------------------------------------------------------------------

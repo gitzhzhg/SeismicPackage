@@ -1,0 +1,865 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="flexbin" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="FLEXBINPROCESS" title="FLEXBIN Process" rows="24" columns="80">
+    <Label keyword="LABEL_MODE" alignment="left">MODE=</Label>
+    <Field keyword="MODE" type="comboBox" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_TR" alignment="left">MAX_TR=</Label>
+    <Field keyword="MAX_TR" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_ROUGHESTIMATE" alignment="center">(rough estimate)</Label>
+    <Label keyword="LABEL_RESET_HEADERS" alignment="left">RESET_HEADERS=</Label>
+    <Field keyword="RESET_HEADERS" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME_FLEX">Select PATHNAME_FLEX</Button>
+    <Label keyword="EQLAB_PATHNAME_FLEX" alignment="left">=</Label>
+    <Field keyword="PATHNAME_FLEX" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_FLEX_INFO" type="string" maxLength="79" editable="no" sensitive="yes"/>
+    <Label keyword="COMMENT_ANYBINCENTER" alignment="center">any bin center</Label>
+    <Label keyword="COMMENT_BININCREMENT" alignment="center">bin increment</Label>
+    <Label keyword="LABEL_HDR_DUP" alignment="left">HDR_DUP  =</Label>
+    <Field keyword="HDR_DUP" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERFORDUPINFO" alignment="center">(header for dup info)</Label>
+    <Label keyword="LABEL_INL_INIT" alignment="left">INL_INIT=</Label>
+    <Field keyword="INL_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_INL_INC" alignment="left">INL_INC=</Label>
+    <Field keyword="INL_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_AZMTH" alignment="left">HDR_AZMTH=</Label>
+    <Field keyword="HDR_AZMTH" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_HEADERFORAZIMUTH" alignment="center">(header for azimuth)</Label>
+    <Label keyword="LABEL_CRL_INIT" alignment="left">CRL_INIT=</Label>
+    <Field keyword="CRL_INIT" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_CRL_INC" alignment="left">CRL_INC=</Label>
+    <Field keyword="CRL_INC" type="float" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_MAX_DUP" alignment="left">MAX_DUP  =</Label>
+    <Field keyword="MAX_DUP" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="COMMENT_MAXDUPLICATESPERTRACE" alignment="center">(max duplicates per trace)</Label>
+    <Border keyword="BORDER1"/>
+    <ArraySet keyword="OFFSETS_ARRAYSET" label="OFFSETS   OFF_FOLD  OFF_DIST_INL  OFF_DIST_CRL">
+     <Array keyword="OFFSETS" type="float" maxLength="10 " columnName="OFFSETS" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="OFF_FOLD" type="float" maxLength="10 " columnName="OFF_FOLD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="OFF_DIST_INL" type="float" maxLength="14 " columnName="OFF_DIST_INL" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="OFF_DIST_CRL" type="float" maxLength="14 " columnName="OFF_DIST_CRL" editable="yes" sensitive="yes" columnSize="14"/>
+    </ArraySet>
+    <Border keyword="BORDER2"/>
+    <ArraySet keyword="AZIMUTHS_ARRAYSET" label="AZIMUTHS  AZMTH_FOLDAZMTH_DIST_INLAZMTH_DIST_CRL">
+     <Array keyword="AZIMUTHS" type="float" maxLength="10 " columnName="AZIMUTHS" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="AZMTH_FOLD" type="float" maxLength="10 " columnName="AZMTH_FOLD" editable="yes" sensitive="yes" columnSize="10"/>
+     <Array keyword="AZMTH_DIST_INL" type="float" maxLength="14 " columnName="AZMTH_DIST_INL" editable="yes" sensitive="yes" columnSize="14"/>
+     <Array keyword="AZMTH_DIST_CRL" type="float" maxLength="14 " columnName="AZMTH_DIST_CRL" editable="yes" sensitive="yes" columnSize="14"/>
+    </ArraySet>
+    <Layout>
+     <Constraints component="LABEL_MODE" xPos="1" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MODE" xPos="6" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_MAX_TR" xPos="20" yPos="0" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_TR" xPos="27" yPos="0" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ROUGHESTIMATE" xPos="37" yPos="0" xSize="16" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_RESET_HEADERS" xPos="58" yPos="0" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RESET_HEADERS" xPos="72" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="SELECT_PATHNAME_FLEX" xPos="1" yPos="2" xSize="20" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME_FLEX" xPos="21" yPos="2" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_FLEX" xPos="22" yPos="2" xSize="62" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_FLEX_INFO" xPos="22" yPos="3" xSize="79" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_ANYBINCENTER" xPos="1" yPos="5" xSize="14" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_BININCREMENT" xPos="21" yPos="5" xSize="13" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_HDR_DUP" xPos="39" yPos="5" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_DUP" xPos="49" yPos="5" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERFORDUPINFO" xPos="52" yPos="5" xSize="21" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_INL_INIT" xPos="1" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_INIT" xPos="10" yPos="6" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_INL_INC" xPos="21" yPos="6" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="INL_INC" xPos="29" yPos="6" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_AZMTH" xPos="39" yPos="6" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_AZMTH" xPos="49" yPos="6" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_HEADERFORAZIMUTH" xPos="52" yPos="6" xSize="20" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_CRL_INIT" xPos="1" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_INIT" xPos="10" yPos="7" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_CRL_INC" xPos="21" yPos="7" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="CRL_INC" xPos="29" yPos="7" xSize="7" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_MAX_DUP" xPos="39" yPos="7" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="MAX_DUP" xPos="49" yPos="7" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="COMMENT_MAXDUPLICATESPERTRACE" xPos="52" yPos="7" xSize="26" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="BORDER1" xPos="12" yPos="9" xSize="55" ySize="7"/>
+     <Constraints component="OFFSETS_ARRAYSET" xPos="14" yPos="10" xSize="51" ySize="5" xStretch="true" yStretch="true"/>
+     <Constraints component="BORDER2" xPos="12" yPos="17" xSize="55" ySize="7"/>
+     <Constraints component="AZIMUTHS_ARRAYSET" xPos="14" yPos="18" xSize="51" ySize="5" xStretch="true" yStretch="true"/>
+    </Layout>
+    <HelpSection>
+     <Help component="MODE">
+      <Tip>General mode of operation of FLEXBIN.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - MODE<br> General mode of operation of FLEXBIN.</center></b>
+<pre> Default = BUILD_FGD
+ Allowed = BUILD_FGD   (Create a flex-bin file using FGD.)
+ Allowed = BUILD_HDR   (Create a flex-bin file from trace headers.)
+ Allowed = ADD_FGD     (Add to a flex-bin file using FGD.)
+ Allowed = ADD_HDR     (Add to a flex-bin file from trace headers.)
+ Allowed = DUPLICATE   (Use a flex-bin file to duplicate traces.)
+ Allowed = TEST        (Use a flex-bin file to test parameters.)
+ Allowed = SYNTHETIC   (Use a flex-bin file to synthesize unstacked traces.)
+ Allowed = STACK       (Use a flex-bin file to synthesize stacked traces.)
+ 
+ Modes BUILD_FGD, ADD_FGD and TEST are setup-only processes which do not
+ require traces.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_TR">
+      <Tip>Approximate number of traces in this job or on the flexfile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - MAX_TR<br> Approximate number of traces in this job or on the flexfile.</center></b>
+<pre> Default = 1.0E6
+ Allowed = int &gt; 0
+ 
+ Approximate number of traces in this job or on the flexfile.
+ Used to estimate memory allocation.
+ 
+ The MAX_TR parameter is a rough estimate of the number of
+ traces to be read in this job, or the number of traces on the flexfile.
+ This information is needed only by the front end, and is used only
+ to estimate the amount of dynamic memory to be allocated in the
+ processing job.  It need not be accurate since the estimation procedure
+ is only very approximate, and uses other information which can only
+ be guessed anyway at the front end.  The amount of memory ACTUALLY
+ allocated in the processing job is not influenced by this parameter.
+ Here is what your estimate should be for different modes:
+ 
+   MODE = BUILD_FGD: #traces on the JD file.
+   MODE = BUILD_HDR: #traces read in this job.
+   MODE = ADD_FGD:   #traces on JD file  plus #traces already on the flexfile.
+   MODE = ADD_HDR:   #traces in this job plus #traces already on the flexfile.
+   MODE = DUPLICATE: #traces on the flexfile.
+   MODE = TEST:      #traces on the flexfile.
+   MODE = SYNTHETIC: #traces on the flexfile.
+   MODE = STACK:     #traces on the flexfile.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RESET_HEADERS">
+      <Tip>Whether to reset most header words of duplicated traces.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - RESET_HEADERS<br> Whether to reset most header words of duplicated traces.</center></b>
+<pre> Default = YES
+ Allowed = YES   Header words 7,8,17,18,11,12,14,15,33,34,35,36 are reset.
+ Allowed = NO    Only header words 7 and 8 are reset.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME_FLEX">
+      <Tip>Choose PATHNAME_FLEX using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - SELECT_PATHNAME_FLEX<br> Choose PATHNAME_FLEX using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_FLEX">
+      <Tip>Pathname for the flexfile to be used or created.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PATHNAME_FLEX<br> Pathname for the flexfile to be used or created.</center></b>
+<pre> Default = none
+ Allowed = char
+ 
+ This file contains information needed to duplicate traces.
+ 
+ The flexfile is a binary file containing critical header words
+ for each trace.  These header words are 9,10,11,12,14,15.
+ 
+ The default extension for this flexfile is ".flex".
+ 
+ In principle, this file could be used in an interactive program for
+ deriving duplication information or allowing generalized geometry Q/C.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_FLEX_INFO">
+      <Tip>Status of PATHNAME_FLEX.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PATHNAME_FLEX_INFO<br> Status of PATHNAME_FLEX.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="HDR_DUP">
+      <Tip>Header word number to receive duplication information.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - HDR_DUP<br> Header word number to receive duplication information.</center></b>
+<pre> Default = 0
+ Allowed = 0 or 48-55 or &gt;64.
+ 
+ If the user-defined header word HDR_DUP is specified, this header
+ word will be set to a value as follows:
+ 
+       (a) Original traces which were not duplicated: 0.
+       (b) Original traces which were duplicated: #times duplicated (&gt;=1).
+       (c) Duplicated traces: -1.
+ 
+ Scratch header word 60 will always be set to this value.
+ 
+ If HDR_DUP = 0, then record no duplication information.
+ Active only if MODE = DUPLICATE or SYNTHETIC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_INIT">
+      <Tip>Value of header word 7 for any CMP bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - INL_INIT<br> Value of header word 7 for any CMP bin center.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="INL_INC">
+      <Tip>Increment of header word 7 between occupied CMP bin centers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - INL_INC<br> Increment of header word 7 between occupied CMP bin centers.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_AZMTH">
+      <Tip>Header word number to receive source-receiver azimuth.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - HDR_AZMTH<br> Header word number to receive source-receiver azimuth.</center></b>
+<pre> Default = 0
+ Allowed = 0 or 48-55 or &gt;64.
+ 
+ If the user-defined header word HDR_AZMTH is specified, this header
+ word will be set to the source-to-receiver azimuth (degrees),
+ calculated from header words 11, 12, 14, and 15.
+ 
+ Scratch header word 61 will always be set to this value.
+ 
+ Azimuth is calculated from header words 11, 12, 14 and 15 and is expressed as
+ compass angle, in degrees, with north being 0 and 360 degrees, east being 90,
+ south being 180, and west being 270.  If a trace has an offset of zero, it
+ is considered to have an azimuth of 0.
+ 
+ If HDR_AZMTH = 0, then record no azimuth.
+ Active only if MODE = DUPLICATE or SYNTHETIC.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_INIT">
+      <Tip>Value of header word 8 for any CMP bin center.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - CRL_INIT<br> Value of header word 8 for any CMP bin center.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="CRL_INC">
+      <Tip>Increment of header word 8 between occupied CMP bin centers.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - CRL_INC<br> Increment of header word 8 between occupied CMP bin centers.</center></b>
+<pre> Default = 1.0
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="MAX_DUP">
+      <Tip>Maximum number of times a given trace can be duplicated.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - MAX_DUP<br> Maximum number of times a given trace can be duplicated.</center></b>
+<pre> Default = 4
+ Allowed = int &gt;= 0
+ 
+ Maximum number of times a given trace can be duplicated to supplement
+ neighboring CMP bins deficient in offset or azimuth.
+ 
+ If this parameter is 0, traces will be moved instead of duplicated.
+ Only excess traces above the minimum specified fold in a CMP will be moved.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFFSETS">
+      <Tip>Array of offsets defining offset bin boundaries.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - OFFSETS<br> Array of offsets defining offset bin boundaries.</center></b>
+<pre> Default = none
+ Allowed = real &gt; 0.0 (linked array)
+ 
+ Array of offsets, in feet or meters, defining offset bin boundaries.  A bin
+ is defined as a range of offsets beginning at an OFFSETS entry and less than
+ the next OFFSETS entry.  The first bin starts at zero and the last bin is
+ everything equal to or greater than the last OFFSETS entry.
+ 
+ Stated another way:
+ The minimum offset in the first bin is always zero.
+ The minimum offset in any given bin is the stated offset for that bin.
+ The maximum offset in any given bin is the minimum offset in the next bin.
+ The maximum offset in the last bin is infinite.
+ 
+ Offset bins need not be of uniform width.
+ 
+ You do not need to input anything if offset flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_FOLD">
+      <Tip>Minimum desired fold in each offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - OFF_FOLD<br> Minimum desired fold in each offset bin.</center></b>
+<pre> Default = none
+ Allowed = int &gt;= 0 (linked array)
+ 
+ You do not need to input anything if offset flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_DIST_INL">
+      <Tip>Maximum search distance in inline direction for each offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - OFF_DIST_INL<br> Maximum search distance in inline direction for each offset bin.</center></b>
+<pre> Default = none
+ Allowed = real &gt;= 0.0 (linked array)
+ 
+ Units of OFF_DIST_INL are increments of header word 7 such that:
+ 
+    OFF_DIST_INL = 0.5 searches halfway into the adjacent bins.
+    OFF_DIST_INL = 1.0 searches anywhere in the adjacent bins.
+ 
+ You do not need to input anything if offset flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_DIST_CRL">
+      <Tip>Maximum search distance in crossline direction in each offset bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - OFF_DIST_CRL<br> Maximum search distance in crossline direction in each offset bin.</center></b>
+<pre> Default = none
+ Allowed = real &gt;= 0.0 (linked array)
+ 
+ Units of OFF_DIST_CRL are increments of header word 8 such that:
+ 
+    OFF_DIST_CRL = 0.5 searches halfway into the adjacent bins.
+    OFF_DIST_CRL = 1.0 searches anywhere in the adjacent bins.
+ 
+ You do not need to input anything if offset flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AZIMUTHS">
+      <Tip>Array of azimuths defining azimuth bin boundaries.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - AZIMUTHS<br> Array of azimuths defining azimuth bin boundaries.</center></b>
+<pre> Default = none
+ Allowed = real &gt; 0.0 (linked array)
+ 
+ Array of azimuths, in degrees, defining azimuth bin boundaries.  A bin is
+ defined as a range of azimuths beginning at an AZIMUTHS entry and less than
+ the next AZIMUTHS entry.  Azimuth bins are cyclic, and the last bin will
+ be everything equal to or greater than the last AZIMUTHS entry and less than
+ the first AZIMUTHS entry.
+ 
+ Stated another way:
+ The minimum azimuth in any given bin is the stated azimuth for that bin.
+ The maximum azimuth in any given bin is the minimum azimuth in the next bin.
+ The maximum azimuth in the last bin is the minimum azimuth in the first bin.
+ 
+ Azimuth bins need not be of uniform width.
+ Azimuth can be expressed in positive or negative degrees.
+ 
+ You do not need to input anything if azimuth flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AZMTH_FOLD">
+      <Tip>Minimum desired fold in each azimuth bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - AZMTH_FOLD<br> Minimum desired fold in each azimuth bin.</center></b>
+<pre> Default = none
+ Allowed = int &gt;= 0 (linked array)
+ 
+ You do not need to input anything if azimuth flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AZMTH_DIST_INL">
+      <Tip>Maximum search distance in inline direction for each azimuth bin.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - AZMTH_DIST_INL<br> Maximum search distance in inline direction for each azimuth bin.</center></b>
+<pre> Default = none
+ Allowed = real &gt;= 0.0 (linked array)
+ 
+ Units of AZMTH_DIST_INL are increments of header word 7 such that:
+ 
+    AZMTH_DIST_INL = 0.5 searches halfway into the adjacent bins.
+    AZMTH_DIST_INL = 1.0 searches anywhere in the adjacent bins.
+ 
+ You do not need to input anything if azimuth flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="AZMTH_DIST_CRL">
+      <Tip>Maximum search distance in crossline direction for azimuth bins.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - AZMTH_DIST_CRL<br> Maximum search distance in crossline direction for azimuth bins.</center></b>
+<pre> Default = none
+ Allowed = real &gt;= 0.0 (linked array)
+ 
+ Units of AZMTH_DIST_CRL are increments of header word 8 such that:
+ 
+    AZMTH_DIST_CRL = 0.5 searches halfway into the adjacent bins.
+    AZMTH_DIST_CRL = 1.0 searches anywhere in the adjacent bins.
+ 
+ You do not need to input anything if azimuth flex binning is not desired.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>flexbin - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="flexbin">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : FLEXBIN
+ Category   : miscellaneous
+ Written    : 1997-04-15   by: Tom Stoeckley
+ Revised    : 2006-09-11   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : Perform flexbinning of pre-stack data.
+ Portability: No known limitations.
+ Parallel   : No.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ FLEXBIN derives a file (called a "flexfile") which contains information
+ for flex binning, and uses that file to duplicate or move traces for flex
+ binning.  Flex binning is an operation which uses traces from nearby CMP
+ bins to fill in holes (deficiencies) in offsets or source-receiver azimuths.
+ 
+ The flexfile is created by using one of the BUILD modes and may be added to
+ by using one of the ADD modes.  Traces are duplicated or moved for flex
+ binning in the DUPLICATE mode.  TEST, SYNTHETIC and STACK modes are provided
+ for diagnostic purposes and to help in adjusting the parameters, principally
+ the OFF_DIST and AZMTH_DIST parameters.
+ 
+ FLEXBIN will attempt to duplicate or move traces from neighboring CMP bins
+ (subject to the restrictions specified by MAX_DUP, OFF_DIST_INL, and
+ OFF_DIST_CRL) to achieve the minimum desired fold in each offset bin.
+ 
+ FLEXBIN will attempt to duplicate or move traces from neighboring CMP bins
+ (subject to the restrictions specified by MAX_DUP, AZMTH_DIST_INL, and
+ AZMTH_DIST_CRL) to achieve the minimum desired fold in each azimuth bin.
+ 
+ FLEXBIN expects input traces to have values of header words 9 and 10 such
+ that those header word values uniquely identify each input trace.
+ 
+-------------------------------------------------------------------------------
+                            SUMMARY OF MODES
+ 
+    MODE       flexfile  input traces  output traces          notes
+    ----       --------  ------------  -------------   --------------------
+    BUILD_FGD   created     none           none        uses FGD  setup-only
+    BUILD_HDR   created     yes        same as input
+    ADD_FGD     added to    none           none        uses FGD  setup-only
+    ADD_HDR     added to    yes        same as input
+    DUPLICATE   used        yes       input+duplicate
+    TEST        used        none           none                  setup-only
+    SYNTHETIC   used        none    synthetic+duplicate
+    STACK       used        none    synthetic (stacked)
+ 
+                      ----------------------------
+ 
+ MODE = BUILD_FGD or BUILD_HDR or ADD_FGD or ADD_HDR:
+     (a) These modes create a new flexfile, or add data to an existing
+          flexfile.
+     (b) These modes need only the MODE and PATHNAME_FLEX parameters.
+     (c) These modes do not take any significant CPU time.
+ 
+ MODE = DUPLICATE or TEST or SYNTHETIC or STACK:
+     (a) These modes use an existing flexfile to derive trace
+          duplication information.
+     (b) These modes use the globals in this job to derive grid
+          coordinates from survey coordinates.
+     (c) These modes need all parameters.
+     (d) These modes might take about 5 minutes of CPU time (on the Cray,
+          but obviously depending on the CPU speed of the computer being
+          used) for each million traces on the flexfile (or double this
+          time when creating synthetic traces with MODE = SYNTHETIC).
+ 
+                      ----------------------------
+ 
+ MODE = BUILD_FGD:
+     (a) The necessary trace information is obtained from FGD (which
+          uses a JD file) and is saved in a flexfile for future use.
+     (b) The FGD process must reside in the same job, whether or not
+          it is used to attach headers in this job.  If you are not
+          attaching headers in this job, use OPT_HDR = SETUP in FGD.
+     (c) This mode causes this process to run in SETUP ONLY.
+ 
+ MODE = BUILD_HDR:
+     (a) The necessary trace information is obtained from trace headers
+          and is saved in a flexfile for future use.
+     (b) This mode can be used if the JD file is not available.
+ 
+ MODE = ADD_FGD:
+     (a) This mode is the same as BUILD_FGD except information is appended
+          to an existing flexfile.
+     (b) This mode is useful for large 3D surveys which are described
+          by more than one JD file.
+     (c) This mode causes this process to run in SETUP ONLY.
+ 
+ MODE = ADD_HDR:
+     (a) This mode is the same as BUILD_HDR except information is appended
+          to an existing flexfile.
+     (b) This mode is useful for large 3D surveys in situations where
+          the traces are not all available at the same time.
+ 
+                      ----------------------------
+ 
+ MODE = DUPLICATE:
+     (a) The necessary information is read from the flexfile and used
+          to create duplicates of some of the traces passed to the
+          process.
+     (b) The original traces plus the duplicate traces are passed out.
+     (c) This mode can be used as many times as necessary on different
+          sets of input traces.
+ 
+ MODE = TEST:
+     (a) This mode can be used for testing your parameters to get
+          statistics for helping you to fine-tune your parameters
+          before throwing all your traces at the process.
+     (b) This mode is equivalent to using MODE = DUPLICATE, and passing
+          FLEXBIN a few (or no) arbitrary (possibly synthetic) traces.
+     (c) This mode prints information on CMP fold after flex binning in
+          the report (.rpt) file.
+     (d) This mode causes this process to run in SETUP ONLY.
+ 
+ MODE = SYNTHETIC:
+     (a) This mode works like MODE = DUPLICATE, except that synthetic
+          traces are generated (instead of reading real traces).  This
+          process becomes a trace-supplying process.
+     (b) The output traces are the same as those output by MODE = DUPLICATE,
+          except that most of the trace headers are zero, and the amplitude
+          values are specially coded (see below).
+     (c) This mode is useful for supplying synthetic traces for QC purposes.
+     (d) If a JD is available, this mode is similar to running FGD in
+          its synthetic trace generation mode (OPT_HDR = SYN), followed
+          by this process using MODE = DUPLICATE.  In the FGD case, however,
+          all of the trace headers would be present, and the special
+          trace amplitude coding would not be present.
+ 
+ MODE = STACK:
+     (a) This mode works like MODE = DUPLICATE or MODE = TEST, except
+          that synthetic "stacked" traces are generated.  This process
+          becomes a trace-supplying process.
+     (b) The output traces consist of one trace for each CMP bin in a
+          rectangle determined by the minimum and maximum CMP X and Y
+          bins encountered in the flexfile.  Most of the trace headers
+          are zero, but some contain fold and duplication information
+          (see below).  The amplitude values do not contain any
+          special information.
+     (c) This mode is useful for QC purposes, such as getting time
+          slices of header words to find where traces are duplicated.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+ SEARCH DISTANCE PARAMETERS
+ 
+     This process will attempt to duplicate or move traces from neighboring
+     CMP bins (subject to the restrictions specified by MAX_DUP, OFF_DIST_INL,
+     and OFF_DIST_CRL) to achieve the minimum desired fold in each offset bin.
+ 
+     This process will attempt to duplicate or move traces from neighboring
+     CMP bins (subject to restrictions specified by MAX_DUP, AZMTH_DIST_INL,
+     and AZMTH_DIST_CRL) to achieve minimum desired fold in each azimuth bin.
+ 
+     Traces from outside a CMP bin can contribute to the bin only if they
+     fall within the maximum search distance (OFF_DIST_INL, OFF_DIST_CRL)
+     or (AZMTH_DIST_INL, AZMTH_DIST_CRL).  The maximum search distance is
+     measured from the edge of the bin into adjacent bins, in units of the
+     CMP bin increment (not in units of header words 7 and 8).  A trace can
+     contribute to as many as MAX_DUP bins (or one bin if MAX_DUP is zero),
+     but it can contribute only once to any given bin.
+ 
+                        Search Distance Examples
+ 
+     If OFF_DIST_INL and OFF_DIST_CRL are 0.0, no flex binning will occur
+     because this distance does not reach beyond the edge of the CMP bin.
+     If these values are 0.5, this distance reaches to the centers of
+     adjacent CMP bins.  If these values are 1.0, traces can be duplicated
+     for use from anywhere in adjacent CMP bins.  If these values are 1.5,
+     traces can be duplicated for use from adjacent CMP bins, and also from
+     the nearest half of the next CMP bins.  If these values are 2.0,
+     traces can be duplicated for use from adjacent CMP bins, and also from
+     anywhere in the next CMP bins.  OFF_DIST_INL and OFF_DIST_CRL can have
+     different values.
+ 
+-------------------------------------------------------------------------------
+ DUPLICATED TRACE PROPERTIES  (MODE = DUPLICATE and SYNTHETIC)
+ 
+     When traces are duplicated, the following headers of the
+     duplicated traces are changed to make them look as if they
+     reside in the center of the CMP bin where they are needed:
+                            7, 8, 17, 18.
+     The source and receiver header words (11,12,14,15,33,34,35,36)
+     are modified to make them consistent with the CMP headers, by
+     shifting their values by the same amount that the CMP coordinates
+     were changed.
+ 
+     For MODE = DUPLICATE, amplitude values in the duplicated traces are not
+     changed.  For MODE = SYNTHETIC, the traces are synthetic, with amplitudes
+     set as described below.
+ 
+     Only live traces (those with header word 25 not zero) are used
+     for duplication.
+ 
+     Bins which contain no traces originally (i.e. empty CMP gathers)
+     may receive duplicate traces from other bins.  However, empty
+     bins which are outside of the (irregular) boundaries of the survey
+     will not be filled in.  The boundaries of the survey are determined
+     from the minimum and maximum non-empty CMPs in the inline direction for
+     each inline, and from the minimum and maximum non-empty CMPs in the
+     crossline direction for each crossline.  These boundaries are then
+     straightened in places where the boundaries have "inlets", based on the
+     minimum search distance specified by OFF_DIST_INL, OFF_DIST_CRL,
+     AZMTH_DIST_INL and AZMTH_DIST_CRL.
+ 
+-------------------------------------------------------------------------------
+ SYNTHETIC UNSTACKED TRACE PROPERTIES  (MODE = SYNTHETIC)
+ 
+     These trace headers are set: 1,2,5-12,14,15,17,18,25,26,27,33-36,
+     64, plus HDR_DUP and HDR_AZMTH if specified.  All other trace headers
+     are zero.
+ 
+     "Original" traces which are NOT duplicated have non-zero amplitudes
+     only in the bottom 1/2 of the trace.  "Original" traces which ARE
+     duplicated have non-zero amplitudes only in the bottom 3/4 of the trace.
+     "Duplicated" traces have non-zero amplitudes only in the top 1/4 of the
+     trace.  These conventions enable plotting stacks and timeslices of the
+     synthetic traces and easily viewing where duplicate traces were created.
+ 
+-------------------------------------------------------------------------------
+ SYNTHETIC STACKED TRACE PROPERTIES  (MODE = STACK)
+ 
+     These trace headers are set: 1-5,7,8,17,18,25,58-61,64.
+     All other trace headers are zero.  The headers contain their
+     usual values, with the following exceptions:
+     Header word     5  =  fold after duplicate traces were added.
+     Scratch header 58  =  fold before duplicate traces were added.
+     Scratch header 59  =  number of duplicate traces which were added.
+     Scratch header 60  =  inline CMP index (1 to number of inline bins).
+     Scratch header 61  =  crossline CMP index (1 to number of crossline bins).
+ 
+-------------------------------------------------------------------------------
+ ORDER OF TRACE SELECTION FOR DUPLICATION
+ 
+     First, traces are searched for which satisfy deficiencies in both
+     offset and azimuth.  This step is skipped if there is no offset array
+     or if there is no azimuth array.
+ 
+     Second, if there are still deficiencies, traces are searched for which
+     satisfy offset deficiencies by themselves.  This step is skipped if
+     there is no offset array.
+ 
+     Third, if there are still deficiencies, traces are searched for which
+     satisfy azimuth deficiencies by themselves.  This step is skipped if
+     there is no azimuth array.
+ 
+     If both offset and azimuth arrays are specified, a trace will not be
+     used for any of the above steps unless it falls within BOTH the
+     offset and azimuth search distances as determined from the
+     offset and azimuth bins in which the trace falls.
+ 
+     If two or more traces satisfy the same deficiency, the nearest
+     trace is chosen.
+ 
+-------------------------------------------------------------------------------
+ EXAMPLE
+ 
+     For minimum desired fold of 40:
+ 
+            OFFSETS   OFF_FOLD    OFF_DIST_INL    OFF_DIST_CRL
+            -------   --------    ------------    ------------
+                0        8            0.5             0.5
+             2000        8            1.0             1.0
+             4000        8            1.5             1.5
+             6000        8            2.0             2.0
+             8000        8            2.5             2.5
+ 
+            AZMUTHS  AZMTH_FOLD  AZMTH_DIST_INL  AZMTH_DIST_CRL
+            -------  ----------  --------------  --------------
+              -45       10            1.0             0.0
+               45       10            1.0             0.0
+              135       10            1.0             0.0
+              225       10            1.0             0.0
+ 
+     At the smallest offsets (0 to 2000), we look for traces up to only half
+     a bin outside of the original bin (bin increment distance 0.5 from edge
+     of bin).  At the largest offsets (8000 and more), we look 2.5 bin
+     increments away from the edge of the bin.
+ 
+     For each azimuth sector, we look at full neighboring bins (up to 1.0 bin
+     increments from the edge of the bin) in the inline direction, but do not
+     look for traces outside of the bin in the crossline direction.  Note that
+     the azimuth sectors in this example are each 90 degrees wide, and are
+     centered at azimuths 0, 90, 180, and 270 degrees respectively.  The first
+     bin contains azimuths from -45 to +45 (centered at azimuth 0 which is
+     north).  The first azimuth could have been specified as 315 instead of
+     -45.  The last azimuth could have been specified as -135 instead of 225.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                           REVISION HISTORY
+ 
+     Date        Author     Description
+     ----        ------     -----------
+ 22. 2006-09-11  Stoeckley  Add call to pc_register_array_names for SeisSpace.
+ 21. 2006-01-10  B. Menger  Removed Unused Variables.
+ 20. 2003-12-09  Goodger    Add use getlun_module.
+ 19. 2002-09-17  Stoeckley  Move some traps to end traps to reduce the
+                             number of times some error messages occur.
+ 18. 2002-09-03  Stoeckley  Change to use the MTH module for binning.
+ 17. 2001-11-05  Stoeckley  Add error messages for memory allocation errors;
+                             convert some automatic arrays to allocatable
+                             arrays to better catch memory errors.
+ 16. 2001-10-18  Stoeckley  Allow traces to be moved instead of duplicated
+                             by setting MAX_DUP to zero.
+ 15. 2001-08-30  Stoeckley  Add parameter RESET_HEADERS.
+ 14. 2001-08-24  Stoeckley  Add file selection box and file status message.
+ 13. 2001-03-20  Stoeckley  Make minor changes to incorporate additional
+                             capabilities in the TRIPLESORT primitive.
+ 12. 2000-12-08  Stoeckley  Change wrapup flag.
+ 11. 2000-06-19  Stoeckley  Added test for keyword present before getting
+                             globals NUMTR and GATHERED to circumvent a
+                             problem with a new capability in PC.
+ 10. 2000-06-05  Stoeckley  Converted from old system, changing name from FLEX
+                             to FLEXBIN.
+  9. 1998-01-28  Goodger    Recompile and rename binary flex.o.
+  8. 1998-01-23  Stoeckley  Make better use of Fortran90 modules.
+  7. 1998-01-16  Stoeckley  Convert Cray pointers to Fortran90 pointers.
+  6. 1998-01-15  Stoeckley  Add parameter #traces.
+  5. 1997-12-29  Stoeckley  Two bug fixes in flex_verify_dup_info.
+  4. 1997-11-06  Stoeckley  Added several debug tests and printouts.
+  3. 1997-09-29  Stoeckley  Added SAVE=TEMP option.
+  2. 1997-05-27  Stoeckley  Considerable modifications.
+  1. 1997-04-14  Stoeckley  Initial version.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

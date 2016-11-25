@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# This script runs icps but only if environment is set up correctly. wmm
+if [ -z $CPSEIS_INSTALL_DIR ] ; then
+	echo "Must define cpseis installation directory."
+	echo "Add this to your .cshrc: 'setenv CPSEIS_INSTALL_DIR /your_installation_directory/cpseis' "
+	exit 1
+fi
+if [ -z $CPSEIS_ARCH ] ; then
+	echo "Must define cpseis installation directory."
+	echo "Add this to your .cshrc: 'setenv CPSEIS_INSTALL_DIR /your_installation_directory/cpseis' "
+	exit 1
+fi
+WORKFILE=$1
+shift
+#. ${CPSEIS_INSTALL_DIR}/etc/cpseis_bashrc.sh ${MPI} ${CPSEIS_COMPILER}
+
+trap "rm -f .*_license_splash %trin_filenames* %HISTORY_RECORDS time_stamp core hs_err_pid*.log;exit 1" 1 2 9 11 12 15
+if [ -z $CPSEIS_DEBUG ] ; then
+	${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin/icps $WORKFILE
+else
+	gdb ${CPSEIS_INSTALL_DIR}/platforms/${CPSEIS_ARCH}/bin/icps  <<EOF
+	run $WORKFILE
+        where
+	quit
+	y
+EOF
+fi
+rm -f .*_license_splash %trin_filenames* %HISTORY_RECORDS time_stamp core hs_err_pid*.log

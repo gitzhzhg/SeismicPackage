@@ -1,0 +1,1328 @@
+<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : makefile.cpslibs
+# Category   : stand-alone
+# Written    : 2000-06-23   by: Tom Stoeckley
+# Revised    : 2008-12-04   by: Karen Goodger
+# Maturity   : beta
+# Purpose    : Makefile for maintaining CPS libraries.
+# Portability: No known limitations.
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                          GENERAL DESCRIPTION
+#
+# This makefile is designed for compiling new and updated CPS source code
+# and making updated libraries.  The new and updated source code consists
+# of files with the following extensions:
+#
+#                  .f90  .c  .h  .cc  .cpp  .hh  .java
+#
+# This source code can be placed all together in any directory under the
+# ~sps directory or under any developer's home directory.  The only restriction
+# is that the parent directory (above the source code directory) must be
+# named for the desired maturity.
+#
+# For example, for the ~sps manager, the directories containing new and
+# updated source code are normally named "spsmodules" like this:
+#
+#         ~sps/alpha/spsmodules
+#         ~sps/beta/spsmodules
+#         ~sps/production/spsmodules
+#
+# Here is another possibility, where the source code directories are named
+# "newcode" in a developer's directory:
+#
+#         ~anyone/hello/goodby/alpha/newcode
+#         ~anyone/hello/goodby/beta/newcode
+#         ~anyone/hello/goodby/production/newcode
+#
+# NOTE: All references to the spsmodules directories in this documentation
+# should be understood to refer also to the equivalent directories used by a
+# developer.
+#-------------------------------------------------------------------------------
+#                          REQUIRED DIRECTORIES
+#                      (alpha or beta or production)
+#
+# The following directories are TEMPORARY REPOSITORIES for new code:
+# These directories can be in ~sps (as shown here) or in a developer's own
+# directory (as described above):
+#
+#   ~sps/beta/spsmodules                (new and updated source code to compile)
+#   ~sps/beta/spsmodules/<platform>                    (where gmake is executed)
+#   ~sps/beta/spsmodules/xml                             (created automatically)
+#   ~sps/beta/spsmodules/glue                            (created automatically)
+#   ~sps/beta/spsmodules/html/...                        (created automatically)
+#   ~sps/beta/spsmodules/sys/..<packages>..              (created automatically)
+#
+# The following directories are PERMANENT REPOSITORIES for all code:
+# These directories are pointed to by the SPSDIR and COP_PROWESS_HOME environment
+# variables:  This makefile will read from some of these directories, and will
+# compile all the source code in these directories, but will not write into any
+# of these directories:
+#
+#   $SPSDIR/beta/include                          (header files)
+#   $SPSDIR/beta/processes/<category>             (processes)
+#   $SPSDIR/beta/primitives/<category>            (primitives)
+#   $SPSDIR/beta/primitives/auto                  (auto-generated files)
+#   $SPSDIR/lib/<platform>                        (libraries)
+#
+#   /usr/app/vendors/int/Conoco/xml/CFEalpha      (for alpha)
+#   /usr/app/vendors/int/Conoco/xml/CFEbeta       (for beta)
+#   /usr/app/vendors/int/Conoco/xml               (for production)
+#
+#   $COP_PROWESS_HOME/port/..<packages>..         (java source code)
+#   $COP_PROWESS_HOME/sys/..<packages>..          (java class files)
+#   $COP_PROWESS_HOME/port/..<packages>../glue    (help files for CPS processes)
+#   $COP_PROWESS_HOME/port/..<packages>../html    (java html documentation files)
+#
+# NOTE: The auto-generated files include both header and implementation files
+# with extensions .f90 .c .h .cc .hh .cpp (but no auto-generated java files).
+#-------------------------------------------------------------------------------
+#                              PREPARATIONS
+#
+# To prepare to use this makefile, simply include this line in a makefile:
+#
+#              include $(CFECUSTOMDIR)/makefile.cpslibs
+#
+# or simply link to this makefile as follows:
+#
+#              ln -s $(CFECUSTOMDIR)/makefile.cpslibs  makefile
+#
+# The makefile (or the link) should reside in the source code directory, and
+# links to this makefile should reside in each platform-specific directory
+# under the source code directory.
+#
+# This makefile automatically detects and compiles all source code in all
+# of the relevant source code directories.  If these directories contain
+# any source code which should not be used, the files to be excluded can
+# be listed in the EXCLUDE variable (with extension but without path).
+#-------------------------------------------------------------------------------
+#                                  USAGE
+#
+# You must type the following in a platform-specific directory under the
+# source code directory:
+#
+#                         pw.pl gmake [target]
+#
+# where the optional target name is one of the following choices:
+#
+#     (none)        - make junklib.a and junklib.so and test_link.
+#     all           - make junklib.a and junklib.so and test_link.
+#     java          - make .class files and directories.
+#     xml           - make .xml files        (CPS process documentation and gui).
+#     html          - make javadoc html and directories     (java documentation).
+#     glue          - make files which glue java code to native code.
+#     junklib.a     - make the junklib.a  library.
+#     junklib.so    - make the junklib.so library.
+#     test_link     - make and run the test_link program.
+#     test_java     - run the java program JavaTestProgram.
+#     test_generic  - run the java program GenericTestProgram.
+#     test_examples - run the java program ExamplesTestProgram.
+#     klean         - remove all .o and .mod (module) and .a and .so files.
+#     javaclean     - remove all new .class files and directories.
+#     xmlclean      - remove all new .xml   files and directory.
+#     htmlclean     - remove all new  html  files and directories.
+#     glueclean     - remove all new  glue  files and directory.
+#     allclean      - same as klean + javaclean + xmlclean + htmlclean + glueclean.
+#     depend        - make superproc/superwrap files and the makefile.depend file.
+#     finished      - print a finished message with date and time.
+#     list          - list the variables used and created in this makefile.
+#     xxxx.o        - compile the corresponding xxxx.f90 or xxxx.c file.
+#     xxxx.xml      - make xml from the corresponding xxxx.f90.
+#
+# Note that the pw.pl perl script must start the gmake command to add
+# SeisSpace specific items to the CLASSPATH environment variable.  This
+# is required for "gmake java" but is not needed for any other commands.
+#
+# Normally, complete builds can be performed by executing the following
+# commands in the sequence shown:
+#
+#    pw.pl gmake java
+#          gmake glue                  (needs first gmake java)
+#    pw.pl gmake java      (again)     (needs gmake glue)
+#          gmake html      (optional)  (needs second gmake java)
+#          gmake depend                (needs gmake glue)
+#          gmake xml                   (needs gmake depend)
+#          gmake                       (needs gmake depend)
+#-------------------------------------------------------------------------------
+#                            OUTPUT FILES
+#
+# The following output files are created:
+#
+#  (1) gmake
+#      Makes object files, module files, libraries, and executables.
+#      Placed into the platform-specific directory in which gmake is executed.
+#      Does nothing if the target is up to date.
+#
+#          xxxx.o          (from all .f90 .c .cc .cpp files)
+#          XXXX.mod        (from some .f90 files)
+#          junklib.so      (and link libcom_cop_seiswrap_cps_library.so)
+#          junklib.a
+#          test_link       (program from test_link.f90)
+#
+#  (2) gmake xml
+#      Makes XML files.
+#      Placed into the xml directory under the source code directory.
+#      Does nothing if the target is up to date.
+#
+#          xxxx.xml        (for each CPS process and some primitives)
+#
+#  (3) gmake java
+#      Makes java class files and directories.
+#      Placed into package-specific subdirectories under the sys directory
+#       under the source code directory.
+#      Always runs (does not use dependencies).
+#
+#          Xxxx.class      (from all .java files)
+#
+#  (4) gmake html
+#      Makes javadoc HTML java documentation files and directories.
+#      Placed into the html directory and subdirectories under the source 
+#       code directory.
+#      Always runs (does not use dependencies).
+#      This target is optional.
+#
+#  (5) gmake depend
+#      Needed for cfe, cfecustom, and dependencies.
+#      Makes wrapper files, plus certain special files.
+#      Placed into the source code directory.
+#      Always runs (does not use dependencies).
+#
+#          makefile.depend      (fortran, c, c++, xml, and help dependencies)
+#          superproc_frou.f90   (auxiliary file for superproc.f90)
+#          superproc_crou.c     (auxiliary file for superproc.f90)
+#          superwrap.c          (interface to superwrap files for superproc.f90)
+#          xxxx_superwrap.f90   (intermediate file for each CPS process)
+#
+#  (6) gmake glue
+#      Needed for java wrappers and for SeisSpace.
+#      Makes CPS help and wrapper files, plus certain special files.
+#      Placed into the glue directory under the source code directory.
+#      Always runs (does not use dependencies).
+#
+#        cps_process_factory.cc
+#        PROWESS.xml
+#        com_cop_seiswrap_cps_GridTransform.h
+#        com_cop_seiswrap_cps_PC.h
+#        com_cop_seiswrap_cps_BaseCpsProcess.h
+#
+#        xxxx.help                 (documentation for each CPS process)
+#        xxxx_superwrap.f90        (intermediate file for each CPS process)
+#        xxxx_wrapper.cc           (C++ wrapper for each CPS process)
+#        xxxx_wrapper.hh           (C++ wrapper for each CPS process)
+#        CpsProcessXxxx.java       (java wrapper for each CPS process)
+#        CpsSeisspaceXxxxProc.java (SeisSpace frontend wrapper for each process)
+#        CpsSeisspaceXxxxTool.java (SeisSpace backend wrapper for each process)
+#
+#  Note that both (5) and (6) create equivalent files named xxxx_superwrap.f90.
+#  This redundancy exists because (5) and (6) are needed for completely
+#  different reasons which are independent of each other.
+#-------------------------------------------------------------------------------
+#                           INPUT REQUIRMENTS
+#
+# The following environment variables must be set (showing typical values):
+#
+#       SPSDIR            /home/sps
+#       CFECUSTOMDIR      /home/sps/etc
+#       CFECUSTOMSCRIPTS  /usr/app/vendors/sps/scripts
+#       CFECUSTOMPROGRAMS /usr/app/vendors/sps/bin/ix86-intel-linux
+#       COP_PROWESS_HOME  /home/sps/cop_prowess_home             (or similar)
+#       PROWESS_HOME      /home/sps/2003.12.2_nightly/SeisSpace  (or similar)
+#       JAVA_HOME         /home/sps/java/linux/jdk               (or similar)
+#       ARCHITECTURE      ix86-intel-linux  or  sparc-sun-solaris
+#
+# The following makefile include files must exist:
+#
+#       $CFECUSTOMDIR / makefile.platforms
+#
+# The following scripts must exist:
+#
+#       $CFECUSTOMSCRIPTS          / run_ezgui
+#       $CFECUSTOMSCRIPTS          / make_superproc
+#       $CFECUSTOMSCRIPTS          / make_cpslib_dependencies
+#       $COP_PROWESS_HOME/port/bin / make_cps_and_seisspace_glue
+#
+# The following executables (called from the above scripts) must exist:
+#
+#       $CFECUSTOMPROGRAMS         / ezgui
+#       $CFECUSTOMPROGRAMS         / sps_build_superproc
+#       $CFECUSTOMSCRIPTS          / sps_fix_dependencies
+#
+#       com.cop.seiswrap.util.       FortranDependencies
+#       com.cop.seiswrap.util.       XmlDependencies
+#       com.cop.seiswrap.util.       StringUtil
+#       com.cop.seiswrap.util.       GetPackage
+#       com.cop.seiswrap.cps.        SourceFileParser
+#       com.cop.seiswrap.prowess.    UpdateProwessXmlFile
+#
+# The following templates (used by make_superproc) must exist:
+#
+#       $CFECUSTOMDIR / superproc_frou_template
+#       $CFECUSTOMDIR / superproc_crou_template
+#       $CFECUSTOMDIR / fproc_superwrap_template
+#       $CFECUSTOMDIR / superwrap_cproc1_template
+#       $CFECUSTOMDIR / superwrap_cproc2_template
+#
+# The following templates (used by make_cps_and_seisspace_glue) must exist:
+#
+#       $COP_PROWESS_HOME/etc/templates / xxxx_superwrap_f90_template
+#       $COP_PROWESS_HOME/etc/templates / xxxx_wrapper_cc_template
+#       $COP_PROWESS_HOME/etc/templates / xxxx_wrapper_hh_template
+#       $COP_PROWESS_HOME/etc/templates / cps_process_factory_cc_template1
+#       $COP_PROWESS_HOME/etc/templates / cps_process_factory_cc_template2
+#       $COP_PROWESS_HOME/etc/templates / cps_process_factory_cc_template3
+#       $COP_PROWESS_HOME/etc/templates / CpsProcessXxxx_java_template
+#       $COP_PROWESS_HOME/etc/templates / CpsSeisspaceXxxxProc_java_template
+#       $COP_PROWESS_HOME/etc/templates / CpsSeisspaceXxxxTool_java_template
+#-------------------------------------------------------------------------------
+#                           DIRECTORY SEARCH ORDER
+#
+# Note:  Alpha directories are not searched if maturity is beta or production.
+# Note:  Beta directories are not searched if maturity is production.
+#
+# Fortran, C, and C++ source code directories are searched in following order:
+#
+#   $SPSDIR/alpha/spsmodules                                         (new code)
+#   $SPSDIR/alpha/spsmodules/glue                                    (new code)
+#   $SPSDIR/alpha/processes/<category> 
+#   $SPSDIR/alpha/primitives/<category> 
+#
+#   $SPSDIR/beta/spsmodules                                          (new code)
+#   $SPSDIR/beta/spsmodules/glue                                     (new code)
+#   $SPSDIR/beta/processes/<category> 
+#   $SPSDIR/beta/primitives/<category> 
+#
+#   $SPSDIR/production/spsmodules                                    (new code)
+#   $SPSDIR/production/spsmodules/glue                               (new code)
+#   $SPSDIR/production/processes/<category> 
+#   $SPSDIR/production/primitives/<category> 
+#
+# Header file directories are searched in the following order:
+#
+#   $SPSDIR/alpha/spsmodules                                         (new code)
+#   $SPSDIR/alpha/spsmodules/glue                                    (new code)
+#   $SPSDIR/alpha/include
+#   $SPSDIR/alpha/primitives/auto
+#
+#   $SPSDIR/beta/spsmodules                                          (new code)
+#   $SPSDIR/beta/spsmodules/glue                                     (new code)
+#   $SPSDIR/beta/include
+#   $SPSDIR/beta/primitives/auto
+#
+#   $SPSDIR/production/spsmodules                                    (new code)
+#   $SPSDIR/production/spsmodules/glue                               (new code)
+#   $SPSDIR/production/include
+#   $SPSDIR/production/primitives/auto
+#
+# Java source code directories are searched in the following order:
+#
+#   $SPSDIR/alpha/spsmodules                                         (new code)
+#   $SPSDIR/alpha/spsmodules/glue                                    (new code)
+#
+#   $SPSDIR/beta/spsmodules                                          (new code)
+#   $SPSDIR/beta/spsmodules/glue                                     (new code)
+#
+#   $SPSDIR/production/spsmodules                                    (new code)
+#   $SPSDIR/production/spsmodules/glue                               (new code)
+#
+#   $COP_PROWESS_HOME/port/..<packages>..
+#
+# Java class file directories (for java executables) are searched in the
+# following order (as specified by a local version of CLASSPATH):
+#
+#   $SPSDIR/alpha/spsmodules/sys/..<packages>..                      (new code)
+#
+#   $SPSDIR/beta/spsmodules/sys/..<packages>..                       (new code)
+#
+#   $SPSDIR/production/spsmodules/sys/..<packages>..                 (new code)
+#
+#   $COP_PROWESS_HOME/sys/..<packages>..
+#-------------------------------------------------------------------------------
+#                         INSTALLATION PROCEDURES
+#                      (alpha or beta or production)
+#
+# Copy all contents (javadoc html files and directories)
+#
+#    from:          ~sps/beta/spsmodules/html/...
+#    to:            $COP_PROWESS_HOME/port/com/cop/seiswrap/cps/html/...
+#
+# Copy auto-generated files with suffix .help
+#
+#    from:          ~sps/beta/spsmodules/glue    
+#    to:            $COP_PROWESS_HOME/port/com/cop/seiswrap/cps/glue
+#
+# Copy auto-generated SeisSpace menu file PROWESS.xml
+#
+#    from:          ~sps/beta/spsmodules/glue    
+#    to:            $COP_PROWESS_HOME/etc/flowbuilder
+#         
+# Copy auto-generated files with suffix .java
+#
+#    from:          ~sps/beta/spsmodules/glue    
+#    to:            $COP_PROWESS_HOME/port/com/cop/seiswrap/<package>
+#
+# Copy auto-generated files with suffixes .f90 .c .h .cc .hh .cpp
+#
+#    from:          ~sps/beta/spsmodules/glue    
+#    to:            ~sps/beta/primitives/auto
+#
+# Copy auto-generated files with suffix .xml
+#
+#    from:          ~sps/beta/spsmodules/xml
+#    to:            /usr/app/vendors/int/Conoco/xml/CFEalpha   (alpha)
+#    or to:         /usr/app/vendors/int/Conoco/xml/CFEbeta    (beta)
+#    or to:         /usr/app/vendors/int/Conoco/xml            (production)
+#
+# Copy all contents (java .class files and directories)
+#
+#    from:          ~sps/beta/spsmodules/sys/..<packages>..
+#    to:            $COP_PROWESS_HOME/sys/..<packages>..
+#
+# Copy source files with suffix .java
+#
+#    from:          ~sps/beta/spsmodules
+#    to:            $COP_PROWESS_HOME/port/..<packages>..
+#
+# Copy source files with suffixes .f90 .c .h .cc .hh .cpp
+#
+#    from:          ~sps/beta/spsmodules
+#    to:            ~sps/beta/processes/<category> 
+#    or to:         ~sps/beta/primitives/<category> 
+#    or to:         ~sps/beta/include
+#
+# Copy library file junklib.a
+#
+#    from:          ~sps/beta/spsmodules/<platform>
+#    to:            ~sps/lib/<platform>
+#    renaming it:   betalib.a
+#
+# Copy library file junklib.so
+#
+#    from:          ~sps/beta/spsmodules/<platform>
+#    to:            ~sps/lib/<platform>
+#    renaming it:   betalib.so
+#    and to:        $COP_PROWESS_HOME/sys/linux/lib
+#    renaming it:   libcom_cop_seiswrap_cps_library.so      (or create link)
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+# 38. 2008-12-04  Goodger    Special handling for modspec,modgrid,fximp,kray.
+# 37. 2008-08-21  Goodger    Point JAVA_HOME to versions in /home/sps
+#                            If solaris, include makefile.depend_solaris.
+#                            Remove link of libcom_cop_seiswrap_cps_library.so.
+# 36. 2008-08-19  Goodger    Set JAVA_HOME to 1.6 32bit version.
+# 35. 2007-09-26  Goodger    Added LD_LIBRARY_PATH to LIST target.
+# 34. 2007-06-06  Goodger    Echo JAVA_HOME.
+# 33. 2007-05-02  Goodger    Added variable SPSMOD_BETA for /home/sps/beta/spsmodules.
+#                            This needs to be included in the search path for auto
+#                            builds, which happen in /home/sps/updates/beta/newcode.
+# 32. 2006-12-13  Goodger    Added buhci, avovan, and avovit as special
+#                            compiles.  They will not compile without
+#                            warnings on linuxab90_debug, but will if using
+#                            the ab90ep compiler.
+#                            We have limited use of the ab90ep
+#                            compiler due to license issues.
+# 31. 2006-09-21  Goodger    Change the olddepend target to call script
+#                            cpsdepend. This script has arguments to pass
+#                            the basedir and newcode env vars, which allow
+#                            for depend to be run in directories other than
+#                            spsmodules.
+# 30. 2006-09-08  Goodger    Have the finished target write out a file
+#                            which will be tested by a script to determine when
+#                            all platforms are finished.
+# 29. 2006-08-17  Goodger    Add JAVA_HOME. Add JAVA_LIBS to link.
+# 28. 2006-06-29  Goodger    Compile psninv2 with FC_O1 due to 64linuxp60.
+# 27. 2006-04-26  Goodger    Added target olddepend: which executes revision
+#                            3 of make_cpslib_dependencies.  This is the 
+#                            version prior to introducting java/seisspace.
+#                            Added $COP_PROWESS_HOME/sys to classpath.
+# 26. 2006-04-11  Stoeckley  Add ~sps/*/primitives/auto to INCDIRS for vpath;
+#                             change packages from com.conocophillips.xxxx to
+#                             com.cop.seiswrap.xxxx; use java version 1.5
+#                             instead of 1.4; add targets test_generic and
+#                             test_examples and allclean; use COP_PROWESS_HOME
+#                             in addition to PROWESS_HOME.
+# 25. 2006-04-19  Goodger    Using rev3 of make_cpslib_dependencies.
+# 24. 2006-03-17  Goodger    Added OTHER_LIBS to FC_LINK.
+# 23. 2006-02-09  Goodger    Use java environment from /home/sps rather than
+#                            /usr/applinux
+# 22. 2006-02-08  Goodger    Use special compiler options FC_O1 for the array
+#                            routine on the portland 6.0 compiler. It squaks 
+#                            on the -fast flag. memfun.f90 also.
+# 21. 2006-02-06  Goodger    Default java environment to solaris and reset
+#                            if Architecture is linux.  This allows the sgi
+#                            compiler to use the javac command from solaris.
+# 20. 2005-01-18  Goodger    Add FC_INTERPOLATE.  The 64sol62 platform needs
+#                            special options to compile this routine.
+# 19. 2005-10-26  Goodger    Change the java include path from the /apps
+#                            /geophysics area to the /usr/applinux area.
+#                            Change the solaris path to /home/sps/sol/jdk.
+#                            This is to insure stability of the versions.
+# 18. 2005-08-24  Goodger    Add /home/sps/maturity/primitives/auto to
+#                            INCDIR.
+# 17. 2005-08-22  Stoeckley  added target test_java;
+#                             filtered out process file names containing
+#                             _superproc_.
+#                            Add features for compiling java code, including
+#                             generating CPS and SeisSpace java wrappers
+#                             and help for CPS processes; change to compile
+#                             C code with C++ (but comment out this change
+#                             until ready to use it).
+# 16. 2005-08-19  Goodger    Change gcc to gcc3.
+# 15. 2005-07-28  Goodger    Special compile for chuci platform linuxab90.
+# 14. 2005-05-??  Goodger    Special compile for apin_crou due to 64 bit.
+# 13. 2004-10-14  Goodger    Remove FC_PC.
+# 12. 2004-03-16  Goodger    Make symbol FC_PC for special compilarion of 
+#                            pc.f90.  linux debug version are core dumping.
+# 11. 2004-01-02  Goodger    Stop making super.f90.
+# 10. 2003-11-11  Goodger    Add ibsma and adpsub as special cases.
+#  9. 2003-11-03  Stoeckley  Build superproc/superwrap files in addition to
+#                             super (later will remove super).
+#  8. 2003-08-18  Stoeckley  Add maturity argument to run_ezgui; add the
+#                             EXCLUDE variable.
+#  7. 2003-08-12  Stoeckley  Add the int xml directory to the xml vpath.
+#  6. 2003-08-11  Stoeckley  Add back the .so target; add the xml and depend
+#                             and xmlclean targets; remove filter-out of super.
+#  5. 2003-07-22  Goodger    Remove .so from klean target.
+#  4. 2003-07-17  Goodger    Make super.o a dependency for test_link.
+#  3. 2003-07-11  Goodger    Filter out super and add it to target all.  This
+#                            allows test_link to work without super being
+#                            added to junklib.a.
+#  2. 2003-07-08  Goodger    Fix syntax errors.  Remove .so from target all.
+#                            Add more exceptions.  cp junklib to prelib.
+#  1. 2003-06-23  Stoeckley  Initial version.
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-----------------------------------------------------------------------------
+# RCS Id : $Id: makefile.cpslibs,v 1.38 2009/01/22 17:03:26 Goodger prod sps $
+#-----------------------------------------------------------------------------
+
+
+##----------------------- set initial variables ---------------------------##
+##----------------------- set initial variables ---------------------------##
+##----------------------- set initial variables ---------------------------##
+
+
+# The following definitions are automatic based on the
+# platform-specific directory in which gmake is executed.
+# These definitions do not depend on the SPSDIR environment variable.
+
+NEWDIR   := $(patsubst %/,%, $(dir $(CURDIR)))
+MATDIR   := $(patsubst %/,%, $(dir $(NEWDIR)))
+BASEDIR  := $(patsubst %/,%, $(dir $(MATDIR)))
+
+MODDIRS  := $(CURDIR)
+XMLDIR   := $(NEWDIR)/xml
+HTMLDIR  := $(NEWDIR)/html
+CLASSDIR := $(NEWDIR)/sys
+GLUEDIR  := $(NEWDIR)/glue
+
+NEWCODE  := $(notdir $(NEWDIR))
+MATURITY := $(notdir $(MATDIR))
+
+NEWDIR_ALPH := $(BASEDIR)/alpha/$(NEWCODE)
+NEWDIR_BETA := $(BASEDIR)/beta/$(NEWCODE)
+NEWDIR_PROD := $(BASEDIR)/production/$(NEWCODE)
+
+SPSMOD_BETA := /home/sps/beta/spsmodules
+ifeq ($(NEWDIR_BETA),/home/sps/beta/spsmodules)
+    SPSMOD_BETA := ""
+endif
+
+# normal values for the above variables (for beta maturity):
+#
+# CURDIR   = ~sps/beta/spsmodules/$(PLATFORM)   # always defined by make.
+# NEWDIR   = ~sps/beta/spsmodules               # location of new source code.
+# MATDIR   = ~sps/beta
+# BASEDIR  = ~sps
+# 
+# MODDIRS  = ~sps/beta/spsmodules/$(PLATFORM)   # same as $(CURDIR).
+# XMLDIR   = ~sps/beta/spsmodules/xml           # files generated by gmake xml.
+# HTMLDIR  = ~sps/beta/spsmodules/html          # files generated by gmake html.
+# CLASSDIR = ~sps/beta/spsmodules/sys           # files generated by gmake java.
+# GLUEDIR  = ~sps/beta/spsmodules/glue          # files generated by gmake glue.
+# 
+# NEWCODE  = spsmodules
+# MATURITY = beta
+#
+# NEWDIR_ALPH = ~sps/alpha/spsmodules
+# NEWDIR_BETA = ~sps/beta/spsmodules
+# NEWDIR_PROD = ~sps/production/spsmodules
+
+
+##------------------------- set classpath ------------------------------##
+##------------------------- set classpath ------------------------------##
+##------------------------- set classpath ------------------------------##
+
+
+ifeq ($(MATURITY),alpha)
+      classpath :=              $(NEWDIR_ALPH)/sys
+      classpath := $(classpath):$(NEWDIR_BETA)/sys
+      classpath := $(classpath):$(NEWDIR_PROD)/sys
+endif
+
+ifeq ($(MATURITY),beta)
+      classpath :=              $(NEWDIR_BETA)/sys
+      classpath := $(classpath):$(NEWDIR_PROD)/sys
+endif
+
+ifeq ($(MATURITY),production)
+      classpath :=              $(NEWDIR_PROD)/sys
+endif
+
+classpath := ../sys:$(COP_PROWESS_HOME)/sys:$(classpath):$(CLASSPATH)
+
+
+##-------------------------- set INCDIRS ----------------------------------##
+##-------------------------- set INCDIRS ----------------------------------##
+##-------------------------- set INCDIRS ----------------------------------##
+
+
+JAVA_HOME     := /home/sps/java/sol/jdk
+JAVA_INC1_DIR := /home/sps/java/sol/jdk/include
+JAVA_INC2_DIR := /home/sps/sol/jdk/include/solaris
+
+ifeq ($(ARCHITECTURE),ix86-intel-linux)
+      JAVA_HOME       := /home/sps/java/linux/jdk
+      JAVA_INC1_DIR   := /home/sps/java/linux/jdk/include
+      JAVA_INC2_DIR   := /home/sps/java/linux/jdk/include/linux
+endif
+
+INCDIR_ALPH := $(SPSDIR)/alpha/include      $(SPSDIR)/alpha/primitives/auto
+INCDIR_BETA := $(SPSDIR)/beta/include       $(SPSDIR)/beta/primitives/auto
+INCDIR_PROD := $(SPSDIR)/production/include $(SPSDIR)/production/primitives/auto
+
+ifeq ($(MATURITY),alpha)
+      INCDIRS := $(NEWDIR_ALPH)  $(NEWDIR_ALPH)/glue $(INCDIR_ALPH)  \
+                 $(NEWDIR_BETA)  $(NEWDIR_BETA)/glue $(INCDIR_BETA)  \
+                 $(NEWDIR_PROD)  $(NEWDIR_PROD)/glue $(INCDIR_PROD)  \
+                 $(JAVA_INC1_DIR) $(JAVA_INC2_DIR)
+endif
+
+ifeq ($(MATURITY),beta)
+      INCDIRS := $(NEWDIR_BETA)  $(NEWDIR_BETA)/glue $(INCDIR_BETA)  \
+                 $(NEWDIR_PROD)  $(NEWDIR_PROD)/glue $(INCDIR_PROD)  \
+                 $(JAVA_INC1_DIR) $(JAVA_INC2_DIR)
+endif
+
+ifeq ($(MATURITY),production)
+      INCDIRS := $(NEWDIR_PROD)  $(NEWDIR_PROD)/glue $(INCDIR_PROD)  \
+                 $(JAVA_INC1_DIR) $(JAVA_INC2_DIR)
+endif
+
+
+##-------------------------- set SRCDIRS ----------------------------------##
+##-------------------------- set SRCDIRS ----------------------------------##
+##-------------------------- set SRCDIRS ----------------------------------##
+
+
+SRCDIRS_ALPH := $(wildcard $(SPSDIR)/alpha/primitives/*)  \
+                $(wildcard $(SPSDIR)/alpha/processes/*)
+
+SRCDIRS_BETA := $(wildcard $(SPSDIR)/beta/primitives/*)  \
+                $(wildcard $(SPSDIR)/beta/processes/*)
+
+SRCDIRS_PROD := $(wildcard $(SPSDIR)/production/primitives/*)  \
+                $(wildcard $(SPSDIR)/production/processes/*)
+
+ifeq ($(MATURITY),alpha)
+      SRCDIRS := $(NEWDIR_ALPH) $(NEWDIR_ALPH)/glue $(SRCDIRS_ALPH)  \
+                 $(NEWDIR_BETA) $(NEWDIR_BETA)/glue $(SRCDIRS_BETA)  \
+                 $(NEWDIR_PROD) $(NEWDIR_PROD)/glue $(SRCDIRS_PROD)
+endif
+
+ifeq ($(MATURITY),beta)
+      SRCDIRS := $(NEWDIR_BETA) $(SPSMOD_BETA) $(SRCDIRS_BETA)  \
+                 $(NEWDIR_PROD) $(NEWDIR_PROD) $(SRCDIRS_PROD)
+endif
+
+ifeq ($(MATURITY),production)
+      SRCDIRS := $(NEWDIR_PROD) $(NEWDIR_PROD)/glue $(SRCDIRS_PROD)
+endif
+
+
+##------------------------ set PROCDIRS --------------------------------##
+##------------------------ set PROCDIRS --------------------------------##
+##------------------------ set PROCDIRS --------------------------------##
+
+
+PROCDIRS_ALPH := $(wildcard $(SPSDIR)/alpha/processes/*)
+PROCDIRS_BETA := $(wildcard $(SPSDIR)/beta/processes/*)
+PROCDIRS_PROD := $(wildcard $(SPSDIR)/production/processes/*)
+
+PROCDIRS_ALPH := $(filter-out     $(SPSDIR)/alpha/processes/auto,      $(PROCDIRS_ALPH))
+PROCDIRS_BETA := $(filter-out     $(SPSDIR)/beta/processes/auto,       $(PROCDIRS_BETA))
+PROCDIRS_PROD := $(filter-out     $(SPSDIR)/production/processes/auto, $(PROCDIRS_PROD))
+
+PROCDIRS_ALPH := $(filter-out     $(SPSDIR)/alpha/processes/cfe,      $(PROCDIRS_ALPH))
+PROCDIRS_BETA := $(filter-out     $(SPSDIR)/beta/processes/cfe,       $(PROCDIRS_BETA))
+PROCDIRS_PROD := $(filter-out     $(SPSDIR)/production/processes/cfe, $(PROCDIRS_PROD))
+
+ifeq ($(MATURITY),alpha)
+      PROCDIRS := $(NEWDIR_ALPH)  $(PROCDIRS_ALPH)  \
+                  $(NEWDIR_BETA)  $(PROCDIRS_BETA)  \
+                  $(NEWDIR_PROD)  $(PROCDIRS_PROD)
+endif
+
+ifeq ($(MATURITY),beta)
+      PROCDIRS := $(NEWDIR_BETA)  $(PROCDIRS_BETA)  \
+                  $(NEWDIR_PROD)  $(PROCDIRS_PROD)
+endif
+
+ifeq ($(MATURITY),production)
+      PROCDIRS := $(NEWDIR_PROD)  $(PROCDIRS_PROD)
+endif
+
+
+##------------------------ set JAVADIRS --------------------------------##
+##------------------------ set JAVADIRS --------------------------------##
+##------------------------ set JAVADIRS --------------------------------##
+
+
+ifeq ($(MATURITY),alpha)
+      JAVADIRS := $(NEWDIR_ALPH) $(NEWDIR_ALPH)/glue  \
+                  $(NEWDIR_BETA) $(NEWDIR_BETA)/glue  \
+                  $(NEWDIR_PROD) $(NEWDIR_PROD)/glue
+endif
+
+ifeq ($(MATURITY),beta)
+      JAVADIRS := $(NEWDIR_BETA) $(NEWDIR_BETA)/glue  \
+                  $(NEWDIR_PROD) $(NEWDIR_PROD)/glue
+endif
+
+ifeq ($(MATURITY),production)
+      JAVADIRS := $(NEWDIR_PROD) $(NEWDIR_PROD)/glue
+endif
+
+
+##------------------------ set XMLDIRS --------------------------------##
+##------------------------ set XMLDIRS --------------------------------##
+##------------------------ set XMLDIRS --------------------------------##
+
+
+ifeq ($(MATURITY),alpha)
+     XMLDIRS := $(XMLDIR) /usr/app/vendors/int/Conoco/xml/CFEalpha
+endif
+
+ifeq ($(MATURITY),beta)
+     XMLDIRS := $(XMLDIR) /usr/app/vendors/int/Conoco/xml/CFEbeta
+endif
+
+ifeq ($(MATURITY),production)
+     XMLDIRS := $(XMLDIR) /usr/app/vendors/int/Conoco/xml
+endif
+
+
+##----------------------- set misc variables ---------------------------##
+##----------------------- set misc variables ---------------------------##
+##----------------------- set misc variables ---------------------------##
+
+
+# Warning: SRCS_PROC will also include primitives which are in $(NEWDIR):
+
+SRCS_PROC := $(notdir $(wildcard $(addsuffix /*.f90 , $(PROCDIRS) )))
+SRCS_F90  := $(notdir $(wildcard $(addsuffix /*.f90 , $(SRCDIRS)  )))
+SRCS_C    := $(notdir $(wildcard $(addsuffix /*.c   , $(SRCDIRS)  )))
+SRCS_CC   := $(notdir $(wildcard $(addsuffix /*.cc  , $(SRCDIRS)  )))
+SRCS_CPP  := $(notdir $(wildcard $(addsuffix /*.cpp , $(SRCDIRS)  )))
+SRCS_JAVA := $(notdir $(wildcard $(addsuffix /*.java, $(JAVADIRS) )))
+
+SRCS      := $(SRCS_F90) $(SRCS_C) $(SRCS_CC) $(SRCS_CPP)
+
+SRCS_JAVA := $(filter-out      $(EXCLUDE), $(SRCS_JAVA))
+SRCS_JAVA := $(sort                        $(SRCS_JAVA))
+
+SRCS      := $(filter-out   test_link.f90, $(SRCS))
+SRCS      := $(filter-out      $(EXCLUDE), $(SRCS))
+SRCS      := $(sort                        $(SRCS))
+
+SRCS_PROC := $(filter-out     test_link.f90, $(SRCS_PROC))
+SRCS_PROC := $(filter-out   %_superwrap.f90, $(SRCS_PROC))
+SRCS_PROC := $(filter-out %_superproc_%.f90, $(SRCS_PROC))
+SRCS_PROC := $(filter-out        $(EXCLUDE), $(SRCS_PROC))
+SRCS_PROC := $(sort                          $(SRCS_PROC))
+
+OBJS      := $(addsuffix .o    , $(basename $(SRCS)      ))
+XMLS      := $(addsuffix .xml  , $(basename $(SRCS_PROC) ))
+
+JAVADOC   := javadoc -source 1.5 -classpath $(classpath) \
+                        -d $(HTMLDIR) -use -splitIndex
+JAVAH     := javah -jni -force -classpath $(classpath) \
+                        -d $(GLUEDIR)
+JAVAC     := javac -source 1.5 -deprecation -g -classpath $(classpath) \
+                        -d $(CLASSDIR)
+JAVA      := java -ea -classpath $(classpath) -Djava.library.path=.
+
+EZGUI_INCLUDES := $(patsubst %, -I%, $(SRCDIRS))
+
+
+##------------------------- makefile.platforms -----------------------------##
+##------------------------- makefile.platforms -----------------------------##
+##------------------------- makefile.platforms -----------------------------##
+
+
+##### inputs set above:
+#####   MATURITY  INCDIRS  MODDIRS
+
+include $(CFECUSTOMDIR)/makefile.platforms
+
+##### outputs needed below:
+#####   PLATFORM  FC  FC_FLOATIO  FC_KMIG  FC_PPIO  FC_LINK  CXX_DEPEND
+#####   CC  CXX  AR_LINK  SO_LINK  MODEXT  SPS_LIBS  FOR_LIBS  MATH_LIBS
+
+
+##-------------------------------- vpath -----------------------------------##
+##-------------------------------- vpath -----------------------------------##
+##-------------------------------- vpath -----------------------------------##
+
+
+vpath
+vpath %.f90    $(SRCDIRS)
+vpath %.c      $(SRCDIRS)
+vpath %.cc     $(SRCDIRS)
+vpath %.cpp    $(SRCDIRS)
+vpath %.java   $(JAVADIRS)
+vpath %.h      ${INCDIRS}
+vpath %.hh     ${INCDIRS}
+vpath %.xml    $(XMLDIRS)
+vpath %.class  $(CLASSDIRS)
+
+
+##-------------------------- misc commands --------------------------------##
+##-------------------------- misc commands --------------------------------##
+##-------------------------- misc commands --------------------------------##
+
+
+.PHONY : all klean depend olddepend finished list xml xmlclean java javaclean \
+         html htmlclean glue glueclean test_java test_generic test_examples \
+         allclean
+
+all : junklib.a junklib.so test_link
+
+junklib.a: $(OBJS)
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "making junklib.a"
+	@echo "--------------------------------------------------------"
+	$(AR_LINK) $@ $^
+	cp junklib.a prelib.a
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} $@ finished `date`"
+	@echo "----------------------------------------------"
+
+junklib.so: $(OBJS)
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "making junklib.so"
+	@echo "--------------------------------------------------------"
+	$(SO_LINK) -o $@ $^ $(SPS_LIBS) $(FOR_LIBS) $(MATH_LIBS) $(OTHER_LIBS) $(JAVA_LIBS)
+	@echo " "
+	@echo "LD_LIBRARY_PATH = $(LD_LIBRARY_PATH)"
+	@echo " "
+	ldd -r $@
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} $@ finished `date`"
+	@echo "----------------------------------------------"
+
+test_link: test_link.o junklib.a
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "making and running test_link"
+	@echo "--------------------------------------------------------"
+#####	${FC_LINK} -o $@ $^ ${OTHER_LIBS} ${SPS_LIBS} ${MATH_LIBS} ${JAVA_LIBS}
+	${FC_LINK} -o $@ $^ ${OTHER_LIBS} ${SPS_LIBS} ${MATH_LIBS} 
+	./test_link
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} $@ finished `date`"
+	@echo "----------------------------------------------"
+
+test_java: junklib.so
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "running test_java"
+	@echo "--------------------------------------------------------"
+	$(JAVA) com.cop.seiswrap.cps.JavaTestProgram
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} $@ finished `date`"
+	@echo "----------------------------------------------"
+
+test_generic: junklib.so
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "running test_generic"
+	@echo "--------------------------------------------------------"
+	$(JAVA) com.cop.seiswrap.cps.GenericTestProgram
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} $@ finished `date`"
+	@echo "----------------------------------------------"
+
+test_examples: junklib.so
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "running test_examples"
+	@echo "--------------------------------------------------------"
+	$(JAVA) com.cop.seiswrap.examples.ExamplesTestProgram
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} $@ finished `date`"
+	@echo "----------------------------------------------"
+
+klean :
+	\rm -rf *.o *${MODEXT} *.a *.so test_link
+
+htmlclean:
+	\rm -rf $(HTMLDIR)
+
+xmlclean:
+	\rm -rf $(XMLDIR)
+
+javaclean:
+	\rm -rf $(CLASSDIR)
+
+glueclean:
+	\rm -rf $(GLUEDIR)
+
+allclean: klean javaclean xmlclean htmlclean glueclean
+
+xml: $(XMLS)
+
+depend:
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "building superproc and superwrap source files"
+	@echo "--------------------------------------------------------"
+	@cd $(NEWDIR); $(CFECUSTOMSCRIPTS)/make_superproc $(MATURITY)
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo making makefile.depend
+	@echo "--------------------------------------------------------"
+	@cd $(NEWDIR); $(CFECUSTOMSCRIPTS)/make_cpslib_dependencies \
+	               $(MATURITY) $(classpath) "$(CXX_DEPEND)"
+	@echo "--------------------------------------------------------"
+	@echo ""
+
+olddepend:
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "building superproc and superwrap source files"
+	@echo "--------------------------------------------------------"
+	@cd $(NEWDIR); $(CFECUSTOMSCRIPTS)/make_superproc $(MATURITY)
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo making makefile.depend
+	@echo "--------------------------------------------------------"
+	@cd $(NEWDIR); $(CFECUSTOMSCRIPTS)/cpsdepend \
+	               $(MATURITY) "$(CXX_DEPEND)" "$(BASEDIR)" "$(NEWCODE)"
+	@echo "--------------------------------------------------------"
+	@echo ""
+
+glue:
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "making cps and seisspace glue"
+	@echo "--------------------------------------------------------"
+	@-mkdir -p $(GLUEDIR)
+	@echo "--------------------------------------------------------"
+	@cd $(NEWDIR); $(COP_PROWESS_HOME)/port/bin/make_cps_and_seisspace_glue \
+                        $(COP_PROWESS_HOME) "$(PROCDIRS)" "$(EZGUI_INCLUDES)"
+	@cd $(NEWDIR); $(JAVAH)   com.cop.seiswrap.cps.GridTransform
+	@cd $(NEWDIR); $(JAVAH)   com.cop.seiswrap.cps.PC
+	@cd $(NEWDIR); $(JAVAH)   com.cop.seiswrap.cps.BaseCpsProcess
+	@echo "---> created file  glue/com_cop_seiswrap_cps_GridTransform.h"
+	@echo "---> created file  glue/com_cop_seiswrap_cps_PC.h"
+	@echo "---> created file  glue/com_cop_seiswrap_cps_BaseCpsProcess.h"
+	@echo "--------------------------------------------------------"
+	@echo "finished making cps and seisspace glue"
+	@echo "--------------------------------------------------------"
+	@echo ""
+
+html:
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "making html"
+	@echo "--------------------------------------------------------"
+	@-mkdir -p $(HTMLDIR)
+	@cd $(NEWDIR); $(JAVADOC) *.java
+	@echo "--------------------------------------------------------"
+	@echo "finished making html"
+	@echo "--------------------------------------------------------"
+	@echo ""
+
+finished :
+	touch FINISHED
+	@echo " "
+	@echo "----------------------------------------------"
+	@echo "${PLATFORM} finished `date`"
+	@echo "----------------------------------------------"
+
+
+##------------------------- compile commands -----------------------------##
+##------------------------- compile commands -----------------------------##
+##------------------------- compile commands -----------------------------##
+
+ibsma_crou.o : ibsma_crou.c
+	@echo ""
+	$(CC_IBSMA) $<
+#	$(CXX_IBSMA) $<
+
+adpsub_crou.o : adpsub_crou.c
+	@echo ""
+	$(CC_IBSMA) $<
+#	$(CXX_IBSMA) $<
+
+buhci.o : buhci.f90
+	@echo ""
+	$(FC_AB90EP) $<
+
+avovan.o : avovan.f90
+	@echo ""
+	$(FC_AB90EP) $<
+
+avovit.o : avovit.f90
+	@echo ""
+	$(FC_AB90EP) $<
+
+psninv2.o : psninv2.f90
+	@echo ""
+	$(FC_O1) $<
+
+array.o : array.f90
+	@echo ""
+	$(FC_O1) $<
+
+memfun.o : memfun.f90
+	@echo ""
+	$(FC_O1) $<
+
+modspec.o : modspec.f90
+	@echo ""
+	$(FC_NOBOUNDS) $<
+
+modgrid.o : modgrid.f90
+	@echo ""
+	$(FC_NOBOUNDS) $<
+
+kray.o : kray.f90
+	@echo ""
+	$(FC_NOBOUNDS) $<
+
+fximp.o : fximp.f90
+	@echo ""
+	$(FC_NOBOUNDS) $<
+
+statutil.o : statutil.f90
+	@echo ""
+	$(FC_O1) $<
+
+fxex.o : fxex.f90
+	@echo ""
+	$(FC_O1) $<
+
+krayiso.o : krayiso.f90
+	@echo ""
+	$(FC_O1) $<
+
+sva.o : sva.f90
+	@echo ""
+	$(FC_O1) $<
+
+interpolate.o : interpolate.f90
+	@echo ""
+	$(FC_INTERPOLATE) $<
+
+kmig.o : kmig.f90
+	@echo ""
+	$(FC_KMIG) $<
+
+cuhci.o : cuhci.f90
+	@echo ""
+	$(FC_O1) $<
+
+ktable.o : ktable.f90
+	@echo ""
+	$(FC_KMIG) $<
+
+ktime.o : ktime.f90
+	@echo ""
+	$(FC_KMIG) $<
+
+kdmig.o : kdmig.f90
+	@echo ""
+	$(FC_KMIG) $<
+
+ktmig.o : ktmig.f90
+	@echo ""
+	$(FC_KMIG) $<
+
+floatio.o : floatio.f90
+	@echo ""
+	$(FC_FLOATIO) $<
+
+floatio_frou.o : floatio_frou.f90
+	@echo ""
+	$(FC_FLOATIO) $<
+
+ppio.o : ppio.f90
+	@echo ""
+	$(FC_PPIO) $<
+
+process.o : process.f90
+	@echo ""
+	$(FC_KMIG) $<
+
+fft.o : fft.f90 
+	@echo ""
+	gcc -c -E -P -x c $< > tempfft.f90
+	${FC} ${FFLAGS} -o fft.o tempfft.f90
+	\rm -rf tempfft.f90 
+
+%.o : %.f90
+	@echo ""
+	$(FC) $<
+
+%.o : %.c
+	@echo ""
+	$(CC) $<
+#	$(CXX) $<
+
+%.o : %.cc
+	@echo ""
+	$(CXX) $<
+
+%.o : %.cpp
+	@echo ""
+	$(CXX) $<
+
+%.xml : %.f90
+	@echo ""
+	@-mkdir -p $(XMLDIR)
+	@$(CFECUSTOMSCRIPTS)/run_ezgui $< ${XMLDIR}/$*.xml -$(MATURITY) \
+	                          ${EZGUI_INCLUDES}
+
+%.xml : %.c
+	@echo ""
+	@-mkdir -p $(XMLDIR)
+	@$(CFECUSTOMSCRIPTS)/run_ezgui $< ${XMLDIR}/$*.xml -$(MATURITY) \
+	                          ${EZGUI_INCLUDES}
+
+java: $(SRCS_JAVA)
+	@echo ""
+	@echo "--------------------------------------------------------"
+	@echo "making java class files"
+	@echo "--------------------------------------------------------"
+	@-mkdir -p $(CLASSDIR)
+	$(JAVAC) $^
+	@echo "--------------------------------------------------------"
+	@echo "finished making java class files"
+	@echo "--------------------------------------------------------"
+	@echo ""
+
+
+##-------------------------- list command ---------------------------------##
+##-------------------------- list command ---------------------------------##
+##-------------------------- list command ---------------------------------##
+
+
+list:
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  environment variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo SPSDIR ================= $(SPSDIR)
+	@echo CFECUSTOMDIR =========== $(CFECUSTOMDIR)
+	@echo CFECUSTOMSCRIPTS ======= $(CFECUSTOMSCRIPTS)
+	@echo CFECUSTOMPROGRAMS ====== $(CFECUSTOMPROGRAMS)
+	@echo COP_PROWESS_HOME ======= $(COP_PROWESS_HOME)
+	@echo PROWESS_HOME =========== $(PROWESS_HOME)
+	@echo ARCHITECTURE =========== $(ARCHITECTURE)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  initial variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo CURDIR ================= $(CURDIR)
+	@echo NEWDIR ================= $(NEWDIR)
+	@echo MATDIR ================= $(MATDIR)
+	@echo BASEDIR ================ $(BASEDIR)
+	@echo MODDIRS ================ $(MODDIRS)
+	@echo XMLDIR ================= $(XMLDIR)
+	@echo HTMLDIR ================ $(HTMLDIR)
+	@echo CLASSDIR =============== $(CLASSDIR)
+	@echo GLUEDIR ================ $(GLUEDIR)
+	@echo NEWCODE ================ $(NEWCODE)
+	@echo MATURITY =============== $(MATURITY)
+	@echo NEWDIR_ALPH ============ $(NEWDIR_ALPH)
+	@echo NEWDIR_BETA ============ $(NEWDIR_BETA)
+	@echo NEWDIR_PROD ============ $(NEWDIR_PROD)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  directory variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo classpath ============== $(classpath)
+	@echo ""
+	@echo JAVA_INC1_DIR ========== $(JAVA_INC1_DIR)
+	@echo JAVA_INC2_DIR ========== $(JAVA_INC2_DIR)
+	@echo JAVA_HOME ==========++++ $(JAVA_HOME)
+	@echo INCDIR_ALPH ============ $(INCDIR_ALPH)
+	@echo INCDIR_BETA ============ $(INCDIR_BETA)
+	@echo INCDIR_PROD ============ $(INCDIR_PROD)
+	@echo INCDIRS ================ $(INCDIRS)
+	@echo ""
+#	@echo SRCDIRS_ALPH =========== $(SRCDIRS_ALPH)
+#	@echo SRCDIRS_BETA =========== $(SRCDIRS_BETA)
+#	@echo SRCDIRS_PROD =========== $(SRCDIRS_PROD)
+#	@echo SRCDIRS ================ $(SRCDIRS)
+	@echo SRCDIRS_ALPH [1-3] ===== $(wordlist 1,3, $(SRCDIRS_ALPH))
+	@echo SRCDIRS_BETA [1-3] ===== $(wordlist 1,3, $(SRCDIRS_BETA))
+	@echo SRCDIRS_PROD [1-3] ===== $(wordlist 1,3, $(SRCDIRS_PROD))
+	@echo SRCDIRS      [1-3] ===== $(wordlist 1,3, $(SRCDIRS))
+	@echo ""
+#	@echo PROCDIRS_ALPH ========== $(PROCDIRS_ALPH)
+#	@echo PROCDIRS_BETA ========== $(PROCDIRS_BETA)
+#	@echo PROCDIRS_PROD ========== $(PROCDIRS_PROD)
+#	@echo PROCDIRS =============== $(PROCDIRS)
+	@echo PROCDIRS_ALPH [1-3] ==== $(wordlist 1,3, $(PROCDIRS_ALPH))
+	@echo PROCDIRS_BETA [1-3] ==== $(wordlist 1,3, $(PROCDIRS_BETA))
+	@echo PROCDIRS_PROD [1-3] ==== $(wordlist 1,3, $(PROCDIRS_PROD))
+	@echo PROCDIRS      [1-3] ==== $(wordlist 1,3, $(PROCDIRS))
+	@echo ""
+	@echo JAVADIRS =============== $(JAVADIRS)
+	@echo JAVA_LIBS ============== $(JAVA_LIBS)
+	@echo ""
+	@echo XMLDIRS ================ $(XMLDIRS)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  misc variables:"
+	@echo "----------------------------------------------"
+	@echo ""
+#	@echo SRCS_PROC ============== $(SRCS_PROC)
+#	@echo SRCS_F90 =============== $(SRCS_F90)
+#	@echo SRCS_C ================= $(SRCS_C)
+#	@echo SRCS_CC ================ $(SRCS_CC)
+#	@echo SRCS_CPP =============== $(SRCS_CPP)
+#	@echo SRCS_JAVA ============== $(SRCS_JAVA)
+#	@echo SRCS =================== $(SRCS)
+#	@echo OBJS =================== $(OBJS)
+#	@echo XMLS =================== $(XMLS)
+	@echo ""
+	@echo SRCS_PROC [1-3] ======== $(wordlist 1,3, $(SRCS_PROC))
+	@echo SRCS_F90  [1-3] ======== $(wordlist 1,3, $(SRCS_F90))
+	@echo SRCS_C    [1-3] ======== $(wordlist 1,3, $(SRCS_C))
+	@echo SRCS_CC   [1-3] ======== $(wordlist 1,3, $(SRCS_CC))
+	@echo SRCS_CPP  [1-3] ======== $(wordlist 1,3, $(SRCS_CPP))
+	@echo SRCS_JAVA [1-3] ======== $(wordlist 1,3, $(SRCS_JAVA))
+	@echo SRCS      [1-3] ======== $(wordlist 1,3, $(SRCS))
+	@echo OBJS      [1-3] ======== $(wordlist 1,3, $(OBJS))
+	@echo XMLS      [1-3] ======== $(wordlist 1,3, $(XMLS))
+	@echo ""
+	@echo JAVADOC ================ $(JAVADOC)
+	@echo JAVAH ================== $(JAVAH)
+	@echo JAVAC ================== $(JAVAC)
+	@echo JAVA =================== $(JAVA)
+	@echo ""
+#	@echo EZGUI_INCLUDES ========= $(EZGUI_INCLUDES)
+	@echo EZGUI_INCLUDES [1-3] === $(wordlist 1,3, $(EZGUI_INCLUDES))
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  variables input to makefile.platforms:"
+	@echo "----------------------------------------------"
+	@echo ""
+	@echo MATURITY =============== $(MATURITY)
+	@echo MODDIRS ================ $(MODDIRS)
+	@echo INCDIRS ================ $(INCDIRS)
+	@echo ""
+	@echo "-----------------------------------------------------"
+	@echo "  variables output from makefile.platforms:"
+	@echo "-----------------------------------------------------"
+	@echo ""
+	@echo PLATFORM =============== $(PLATFORM)
+	@echo ""
+	@echo FC ===================== $(FC)
+	@echo ""
+	@echo FC_FLOATIO ============= $(FC_FLOATIO)
+	@echo ""
+	@echo FC_KMIG ================ $(FC_KMIG)
+	@echo ""
+	@echo FC_PPIO ================ $(FC_PPIO)
+	@echo ""
+	@echo FC_NOBOUNDS ============ $(FC_NOBOUNDS)
+	@echo ""
+	@echo FC_LINK ================ $(FC_LINK)
+	@echo ""
+	@echo CXX_DEPEND ============= $(CXX_DEPEND)
+	@echo ""
+	@echo CC ===================== $(CC)
+	@echo ""
+	@echo CXX ==================== $(CXX)
+	@echo ""
+	@echo AR_LINK ================ $(AR_LINK)
+	@echo SO_LINK ================ $(SO_LINK)
+	@echo MODEXT ================= $(MODEXT)
+	@echo ""
+	@echo SPS_LIBS =============== $(SPS_LIBS)
+	@echo ""
+	@echo FOR_LIBS =============== $(FOR_LIBS)
+	@echo ""
+	@echo MATH_LIBS ============== $(MATH_LIBS)
+	@echo ""
+	@echo OTHER_LIBS ============== $(OTHER_LIBS)
+	@echo ""
+	@echo LD_LIBRARY_PATH  ============== $(LD_LIBRARY_PATH)
+	@echo ""
+	@echo "----------------------------------------------"
+	@echo "  end of list"
+	@echo "----------------------------------------------"
+	@echo ""
+
+
+##-------------------------- makefile.depend -------------------------------##
+##-------------------------- makefile.depend -------------------------------##
+##-------------------------- makefile.depend -------------------------------##
+
+ifeq ($(ARCHITECTURE),ix86-intel-linux)
+-include $(NEWDIR)/makefile.depend
+endif
+
+ifeq ($(ARCHITECTURE),sparc-sun-solaris)
+-include $(NEWDIR)/makefile.depend_solaris
+endif
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

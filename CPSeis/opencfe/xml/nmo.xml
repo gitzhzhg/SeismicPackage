@@ -1,0 +1,983 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="nmo" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="NMOPROCESS" title="NMO Process" rows="25" columns="80">
+    <Label keyword="COMMENT_TOAPPLYORREMOVENMOCORREC" alignment="center">To apply or remove NMO corrections to seismic data.</Label>
+    <Label keyword="LABEL_OPT_NMO" alignment="left">OPT_NMO=</Label>
+    <Field keyword="OPT_NMO" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VELSOURCE" alignment="left">OPT_VELSOURCE=</Label>
+    <Field keyword="OPT_VELSOURCE" type="comboBox" maxLength="22" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_X" alignment="left">HDR_X=</Label>
+    <Field keyword="HDR_X" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_HDR_Y" alignment="left">HDR_Y=</Label>
+    <Field keyword="HDR_Y" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME">Select PATHNAME</Button>
+    <Label keyword="EQLAB_PATHNAME" alignment="left">=</Label>
+    <Field keyword="PATHNAME" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME_INFO" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATHNAME_MORE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Button keyword="SELECT_PATHNAME4">Select PATHNAME4</Button>
+    <Label keyword="EQLAB_PATHNAME4" alignment="left">=</Label>
+    <Field keyword="PATHNAME4" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Field keyword="PATHNAME4_INFO" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Field keyword="PATHNAME4_MORE" type="string" maxLength="128" editable="no" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_INTERP" alignment="left">OPT_INTERP=</Label>
+    <Field keyword="OPT_INTERP" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DOPPLER" alignment="left">DOPPLER=</Label>
+    <Field keyword="DOPPLER" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_NMO_RES" alignment="left">OPT_NMO_RES=</Label>
+    <Field keyword="OPT_NMO_RES" type="comboBox" maxLength="4" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_ORDER_MO" alignment="left">ORDER_MO=</Label>
+    <Field keyword="ORDER_MO" type="comboBox" maxLength="23" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DEMULT" alignment="left">OPT_DEMULT=</Label>
+    <Field keyword="OPT_DEMULT" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Border keyword="BORDER1" title=" Demult Parameters"/>
+    <Label keyword="LABEL_OFF_MIN" alignment="left">OFF_MIN=</Label>
+    <Field keyword="OFF_MIN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_MAX" alignment="left">OFF_MAX=</Label>
+    <Field keyword="OFF_MAX" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_NUM_OFF" alignment="left">NUM_OFF=</Label>
+    <Field keyword="NUM_OFF" type="int" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_RES" alignment="left">TIM_RES=</Label>
+    <Field keyword="TIM_RES" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_MIN" alignment="left">VEL_MIN=</Label>
+    <Field keyword="VEL_MIN" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_MUTE" alignment="left">VEL_MUTE=</Label>
+    <Field keyword="VEL_MUTE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_ADD" alignment="left">TIM_ADD=</Label>
+    <Field keyword="TIM_ADD" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OFF_MUTE" alignment="left">OFF_MUTE=</Label>
+    <Field keyword="OFF_MUTE" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RATIO" alignment="left">RATIO=</Label>
+    <Field keyword="RATIO" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_FREQ_MEAN" alignment="left">FREQ_MEAN=</Label>
+    <Field keyword="FREQ_MEAN" type="float" maxLength="8" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_TOAPPLYORREMOVENMOCORREC" xPos="11" yPos="1" xSize="51" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_NMO" xPos="1" yPos="3" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_NMO" xPos="9" yPos="3" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_VELSOURCE" xPos="21" yPos="3" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VELSOURCE" xPos="35" yPos="3" xSize="22" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_HDR_X" xPos="59" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_X" xPos="65" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_HDR_Y" xPos="70" yPos="3" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="HDR_Y" xPos="76" yPos="3" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME" xPos="1" yPos="5" xSize="15" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME" xPos="16" yPos="5" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME" xPos="17" yPos="5" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_INFO" xPos="17" yPos="6" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME_MORE" xPos="17" yPos="7" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="SELECT_PATHNAME4" xPos="1" yPos="9" xSize="16" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="EQLAB_PATHNAME4" xPos="17" yPos="9" xSize="1" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME4" xPos="18" yPos="9" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME4_INFO" xPos="18" yPos="10" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="PATHNAME4_MORE" xPos="18" yPos="11" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_OPT_INTERP" xPos="1" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_INTERP" xPos="13" yPos="13" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DOPPLER" xPos="22" yPos="13" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DOPPLER" xPos="31" yPos="13" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_NMO_RES" xPos="1" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_NMO_RES" xPos="13" yPos="15" xSize="4" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_ORDER_MO" xPos="22" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="ORDER_MO" xPos="31" yPos="15" xSize="23" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DEMULT" xPos="1" yPos="17" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DEMULT" xPos="13" yPos="17" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="BORDER1" xPos="1" yPos="19" xSize="76" ySize="6"/>
+     <Constraints component="LABEL_OFF_MIN" xPos="3" yPos="20" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MIN" xPos="13" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MAX" xPos="29" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MAX" xPos="38" yPos="20" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_NUM_OFF" xPos="54" yPos="20" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="NUM_OFF" xPos="63" yPos="20" xSize="3" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_RES" xPos="3" yPos="21" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_RES" xPos="13" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_MIN" xPos="29" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_MIN" xPos="38" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_MUTE" xPos="54" yPos="21" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_MUTE" xPos="63" yPos="21" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_ADD" xPos="3" yPos="22" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_ADD" xPos="13" yPos="22" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OFF_MUTE" xPos="29" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OFF_MUTE" xPos="38" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RATIO" xPos="54" yPos="22" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RATIO" xPos="63" yPos="22" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_FREQ_MEAN" xPos="3" yPos="23" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="FREQ_MEAN" xPos="13" yPos="23" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="OPT_NMO">
+      <Tip>Type of NMO operation to perform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OPT_NMO<br> Type of NMO operation to perform.</center></b>
+<pre> Default = FORWARD
+ Allowed = FORWARD  (Apply NMO correction.)
+ Allowed = REVERSE  (Remove NMO correction.)
+ Allowed = STK_VEL  (Put stacking velocity field into output traces.)
+ Allowed = DIX_VEL  (Put Dix interval velocity field into output traces.)
+ Allowed = PARTIAL  (Partial NMO correction - not available from CFE.)
+ 
+ Options FORWARD and REVERSE apply NMO correction and remove NMO correction in
+ the normal manner.  Option STK_VEL takes the interpolated input stacking
+ velocity field and puts the velocity values in the output traces.  Option
+ DIX_VEL is the same as STK_VEL except that the Dix interval velocity is first
+ calculated from the input stacking velocity field and put into the output
+ traces.
+ 
+ Output traces have head and tail mute header words set to 1 and NDPT
+ respectively in options STK_VEL and DIX_VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VELSOURCE">
+      <Tip>Source of velocities to use for NMO correction.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OPT_VELSOURCE<br> Source of velocities to use for NMO correction.</center></b>
+<pre> Default = CPS VELOCITY FILE
+ Allowed = CPS VELOCITY FILE      (standard CPS velocity file or modspec file)
+ Allowed = VELOCITY TRACE FILE    (trace file containing velocity traces)
+ Allowed = VELOCITY TRACE INPUT   (velocity traces input with trace gathers)
+ 
+ CPS VELOCITY FILE:
+ 
+ A standard CPS velocity file (normally with the extension .vel) is the
+ traditional source of velocity functions.  The velocities on this file
+ typically contain the time/velocity pairs picked using a program such as
+ VA.  The velocity functions on this file are usually sparsely distributed
+ through the seismic survey.  They must be distributed on a sorted rectangular
+ grid to allow bilinear interpolation.  The velocity functions must be
+ of type VTNM or VTRM (RMS velocity versus time).
+ 
+ Modspec files containing velocities can also be read using this option.
+ Velocities in modspec files are always interval velocities, but may be
+ in either the time or depth domain.  They will be converted to NMO velocities
+ versus time when they are read from the file.
+ 
+ VELOCITY TRACE FILE:
+ 
+ A velocity trace file (normally with extension .trc or .trc8 or .tr8)
+ is a much larger file.  The velocities on this file are already sampled
+ to the trace sample rate.  Currently, the velocity trace order on the file
+ must match the order of the input seismic traces, and velocity traces
+ matching the input seismic trace CMP locations must reside on the file,
+ although this requirement may be relaxed in the future.  Also, the seismic
+ traces and velocity traces must have the same sample rate, and the velocity
+ traces must start at zero time.
+ 
+ VELOCITY TRACE INPUT:
+ 
+ With this option, no velocity file is read.  Instead, the velocity function
+ is passed to NMO as a velocity trace along with the gather of traces to
+ which the velocity function is to be applied.  The traces must be gathered
+ by CMP with this option.  The velocity function is simply the last trace
+ in the gather.  With this option, the traces must start at zero time.
+ 
+ SOMETIMES TWO VELOCITY SETS ARE REQUIRED:
+ 
+ If velocities are required for both 2nd order and 4th order moveout, then
+ two CPS velocity files, or two velocity trace files, or two input velocity
+ traces are required.  If two input velocity traces are required, they will
+ be the last two traces in the gather, with the stacking velocity being the
+ first trace of the two.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_X">
+      <Tip>Trace header word containing X coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - HDR_X<br> Trace header word containing X coordinate.</center></b>
+<pre> Default = 7
+ Allowed = 1 - NWIH
+ 
+ This header word must be specified when OPT_VELSOURCE is VELOCITY TRACE FILE.
+ 
+ This header word is obtained from the CPS velocity files when
+ OPT_VELSOURCE is CPS VELOCITY FILE.
+ 
+ This header word is not used when OPT_VELSOURCE is VELOCITY TRACE INPUT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="HDR_Y">
+      <Tip>Trace header word containing Y coordinate.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - HDR_Y<br> Trace header word containing Y coordinate.</center></b>
+<pre> Default = 8
+ Allowed = 1 - NWIH
+ 
+ This header word must be specified when OPT_VELSOURCE is VELOCITY TRACE FILE.
+ 
+ This header word is obtained from the CPS velocity files when
+ OPT_VELSOURCE is CPS VELOCITY FILE.
+ 
+ This header word is not used when OPT_VELSOURCE is VELOCITY TRACE INPUT.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME">
+      <Tip>Choose PATHNAME using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - SELECT_PATHNAME<br> Choose PATHNAME using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME">
+      <Tip>Pathname for the velocity file to be used for the NMO operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PATHNAME<br> Pathname for the velocity file to be used for the NMO operation.</center></b>
+<pre> Default = NONE
+ Allowed = character string
+ 
+ This file must contain the stacking velocities needed for 2nd order moveout.
+ 
+ This file is needed for all ORDER_MO choices except ORDER_MO = 4:
+ 
+ If OPT_VELSOURCE is CPS VELOCITY FILE, this file must be a standard CPS
+ velocity file (normally with the extension .vel) . This file must contain
+ velocities of type VTNM or VTRM (stacking or RMS velocity versus time).
+ 
+ If OPT_VELSOURCE is VELOCITY TRACE FILE, this file must be a velocity trace
+ file (normally with the extension .trc or .trc8 or .tr8).
+ 
+ If OPT_VELSOURCE is VELOCITY TRACE INPUT, this file name is not used;
+ a velocity trace is input with a seismic trace gather instead.
+ 
+ NOTE REGARDING MODSPEC FILES:  If OPT_VELSOURCE is CPS VELOCITY FILE,
+ this file can also be a modspec file which contains velocities in either
+ the time or depth domain.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_INFO">
+      <Tip>Status of PATHNAME.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PATHNAME_INFO<br> Status of PATHNAME.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_MORE">
+      <Tip>Origin of stacking velocities used in this process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PATHNAME_MORE<br> Origin of stacking velocities used in this process.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="SELECT_PATHNAME4">
+      <Tip>Choose PATHNAME4 using a file selection dialog box.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - SELECT_PATHNAME4<br> Choose PATHNAME4 using a file selection dialog box.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME4">
+      <Tip>Pathname for the velocity file to be used for the NMO operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PATHNAME4<br> Pathname for the velocity file to be used for the NMO operation.</center></b>
+<pre> Default = NONE
+ Allowed = character string
+ 
+ This file must contain the residual "velocity" or ETA parameters needed
+ for 4th order moveout.
+ 
+ This file is needed for all ORDER_MO choices except ORDER_MO = 2:
+ 
+ If OPT_VELSOURCE is CPS VELOCITY FILE, this file must be a standard CPS
+ velocity file (normally with the extension .vel). This file must contain
+ velocities of type VTNM or VTRM (stacking or RMS velocity versus time).
+ 
+ If OPT_VELSOURCE is VELOCITY TRACE FILE, this file must be a velocity trace
+ file (normally with the extension .trc or .trc8 or .tr8).
+ 
+ If OPT_VELSOURCE is VELOCITY TRACE INPUT, this file name is not used;
+ a velocity trace is input with a seismic trace gather instead.
+ 
+ NOTE REGARDING MODSPEC FILES:  If OPT_VELSOURCE is CPS VELOCITY FILE,
+ this file can also be a modspec file which contains velocities in either
+ the time or depth domain.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME4_INFO">
+      <Tip>Status of PATHNAME4.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PATHNAME4_INFO<br> Status of PATHNAME4.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="PATHNAME4_MORE">
+      <Tip>Origin of 4th order or ETA parameters used in this process.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PATHNAME4_MORE<br> Origin of 4th order or ETA parameters used in this process.</center></b>
+</html>]]></Text>
+     </Help>
+     <Help component="OPT_INTERP">
+      <Tip>Type of interpolation within velocity function.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OPT_INTERP<br> Type of interpolation within velocity function.</center></b>
+<pre> Default = LINEAR
+ Allowed = LINEAR  (Linear interpolation)
+ Allowed = SPLINE  (Spline interpolation)
+ 
+ This interpolation is used to resample the velocity function picks to the
+ trace sample spacing.
+ 
+ LINEAR is the more robust (and recommended) option.  The SPLINE option gives
+ potentially smoother results but can swing wildly if picks are not well
+ behaved.
+ 
+ This OPT_INTERP parameter is used only with CPS velocity files, since
+ velocity functions obtained otherwise are already resampled to the trace
+ sample spacing.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DOPPLER">
+      <Tip>Doppler mute (stretch mute) parameter.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - DOPPLER<br> Doppler mute (stretch mute) parameter.</center></b>
+<pre> Default = 1.7
+ Allowed = real &gt;  1.0  (enables all muting)
+ Allowed = real =  0.0  (enables all muting except the stretch mute)
+ Allowed = real = -1.0  (enables only time reversal muting)
+ 
+ DOPPLER is the maximum stretch factor allowed by the stretch mute.
+ Larger values of DOPPLER correspond to less severe muting.
+ Values of DOPPLER which are set &lt;= 1.0 are reset to 0.0 or -1.0.
+ 
+ The top and bottom mute header words (2 and 64) will first be adjusted up
+ or down by the same amount as the corresponding trace sample moves according
+ to the moveout adjustment.  Then further adjustments may be performed
+ depending on the DOPPLER parameter.  The top of the trace will then be
+ muted down to the doppler mute, and a mute taper will be applied.  See
+ the MOVEOUT primitive for further details.
+ 
+ This DOPPLER parameter is not used if OPT_NMO is STK_VEL or DIX_VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_NMO_RES">
+      <Tip>Type of resampling to perform within the NMO operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OPT_NMO_RES<br> Type of resampling to perform within the NMO operation.</center></b>
+<pre> Default = FFT4
+ Allowed = NONE  (No interpolation.)
+ Allowed = FFT2  (FFT interpolation to 2 times more samples.)
+ Allowed = FFT4  (FFT interpolation to 4 times more samples.)
+ Allowed = FFT8  (FFT interpolation to 8 times more samples.)
+ Allowed = CUB4  (4 point cubic spline interpolation.)
+ 
+ Interpolating the trace data prior to NMO correction reduces attenuation at
+ high frequencies, with finer interpolation producing less attenuation.
+ 4-fold FFT interpolation gives good results at normal seismic frequencies
+ (FFT4 option), but 4 point cubic spline interpolation (CUB4 option) gives
+ nearly as good results at lower cost.
+ 
+ This OPT_NMO_RES parameter is not used if OPT_NMO is STK_VEL or DIX_VEL.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="ORDER_MO">
+      <Tip>Order of moveout expansion series to perform.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - ORDER_MO<br> Order of moveout expansion series to perform.</center></b>
+<pre> Default = 2
+ Allowed = 2         (Normal 2nd order hyperbolic moveout.)
+ Allowed = 4         (4th order non-hyperbolic residual moveout.)
+ Allowed = ETA4      (4th order non-hyperbolic residual moveout using ETA.)
+ Allowed = ETA       ("Exact" non-hyperbolic residual moveout using ETA.)
+ Allowed = 2 + 4     (2nd order plus 4th order moveout combined.)
+ Allowed = 2 + ETA4  (2nd order plus 4th order moveout combined using ETA.)
+ Allowed = 2 + ETA   (2nd order plus "Exact" moveout combined using ETA.)
+ 
+ Ordinary NMO is 2nd order, hyperbolic, NMO.  If the theoretical moveout
+ expression is expanded in a series, the first non-zero term is the typical
+ 2nd order, hyperbolic, NMO.  The next non-zero term is 4th order,
+ non-hyperbolic, moveout.
+ 
+ ORDER_MO allows choice between 2nd order moveout, three different residual
+ moveout operations, or the combination of 2nd order plus residual moveout.
+ If residual moveout only is chosen, NMO assumes that 2nd order (regular NMO)
+ correction has already been applied to the input data.
+ 
+ If ORDER_MO is not 2, it is reset to 2 in the following cases:
+  - whenever OPT_NMO is set to something other than FORWARD or REVERSE.
+  - (however, it is OK for ORDER_MO to be 4 when OPT_NMO is STK_VEL).</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DEMULT">
+      <Tip>Option whether to perform special moveout for F-K demultiple.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OPT_DEMULT<br> Option whether to perform special moveout for F-K demultiple.</center></b>
+<pre> Default = NO
+ Allowed = YES/NO
+ 
+ See Advice for Users for more information on running F-K demultiple.
+ 
+ If OPT_DEMULT is YES, it is reset to NO in the following cases:
+  - whenever OPT_NMO is set to something other than FORWARD or REVERSE.
+  - whenever ORDER_MO is set to something other than 2.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MIN">
+      <Tip>Minimum offset in dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OFF_MIN<br> Minimum offset in dataset.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;0.0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MAX">
+      <Tip>Maximum offset in dataset.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OFF_MAX<br> Maximum offset in dataset.</center></b>
+<pre> Default = 5000.0
+ Allowed = real&gt;0.0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="NUM_OFF">
+      <Tip>Maximum number of offsets in a shot profile.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - NUM_OFF<br> Maximum number of offsets in a shot profile.</center></b>
+<pre> Default = 120
+ Allowed = int&gt;0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_RES">
+      <Tip>Temporal resampling interval for demult velocity, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - TIM_RES<br> Temporal resampling interval for demult velocity, in seconds.</center></b>
+<pre> Default = 0.35
+ Allowed = real&gt;=0.2
+ 
+ A new velocity function is calculated for NMO correction prior to F-K
+ filtering.  TIM_RES is the temporal sample interval of this demult velocity
+ function.
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_MIN">
+      <Tip>Minimum demult velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - VEL_MIN<br> Minimum demult velocity.</center></b>
+<pre> Default = 1200.0
+ Allowed = real&gt;0.0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_MUTE">
+      <Tip>Velocity mute parameter for mute in demult operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - VEL_MUTE<br> Velocity mute parameter for mute in demult operation.</center></b>
+<pre> Default = 1500.0
+ Allowed = real&gt;0.0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_ADD">
+      <Tip>Additional mute time for mute in demult operation, in seconds.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - TIM_ADD<br> Additional mute time for mute in demult operation, in seconds.</center></b>
+<pre> Default = 0.0
+ Allowed = real
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OFF_MUTE">
+      <Tip>Minimum offset for mute in demult operation.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OFF_MUTE<br> Minimum offset for mute in demult operation.</center></b>
+<pre> Default = 0.0
+ Allowed = real&gt;=0.0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RATIO">
+      <Tip>Desired ratio of primary event amplitudes, after vs. before dmult.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - RATIO<br> Desired ratio of primary event amplitudes, after vs. before dmult.</center></b>
+<pre> Default = 0.7
+ Allowed = 1.0&gt;real&gt;0.0
+ 
+ Desired ratio of stacked primary event amplitude after demult to stacked
+ primary event amplitude without demult.
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="FREQ_MEAN">
+      <Tip>Mean frequency in data, in Hz.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - FREQ_MEAN<br> Mean frequency in data, in Hz.</center></b>
+<pre> Default = 20.0
+ Allowed = real&gt;0.0
+ 
+ This parameter is used only if OPT_DEMULT is YES.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>nmo - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="nmo">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>------------------------------------------------------------------------------
+                        C P S   P R O C E S S
+ 
+ Name       : NMO  (Normal MoveOut correction)
+ Category   : transforms
+ Written    : 1990-03-15   by: John B. Sinton, Bob Baumel, and Bill Troutt
+ Revised    : 2005-01-31   by: Tom Stoeckley
+ Maturity   : production
+ Purpose    : To apply or remove NMO corrections to seismic data.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                           GENERAL DESCRIPTION
+ 
+ NMO has several modes of operation: perform normal moveout correction
+ on seismic data, restore normal moveout to seismic data, perform partial
+ moveout, and put velocity values into output traces.
+ 
+ NMO requires that the velocities in the input velocity file are stacking
+ velocities and will abort if they are not type VTNM (NMO velocities versus
+ time) or VTRM (RMS velocities versus time). The front-end will attempt to
+ read the specified velocity file and will post the coordinate header word
+ numbers used by that velocity file in the read-only parameters HDR_INL and
+ HDR_CRL.
+ 
+ There is no limit to the maximum number of time/depth/velocity picks on
+ any velocity function.
+ 
+ Order of Moveout Term
+ 
+ The NMO parameter ORDER_MO allows choice between 2nd order moveout and
+ 4th order residual moveout, or both combined.  2nd order is ordinary,
+ hyperbolic, NMO and is the default.  If 4th order residual moveout is
+ chosen (but not both combined), NMO assumes that the 2nd order correction
+ has already been applied to the input data.  There are three options for
+ the 4th order moveout, one using the traditional fourth order "velocity"
+ parameter and two using the eta (anisotropic moveout) parameter.
+ 
+ Stretch Muting
+ 
+ Stretch muting is applied in both forward and reverse NMO.  A cosine taper
+ (of length 15 samples) is applied to the mute in FORWARD (but not REVERSE)
+ NMO.
+ 
+ Partial NMO
+ 
+ NMO has a "partial NMO" option which transforms a trace from its input
+ offset to the offset specified in scratch header 32.  The offset header
+ word 6 will be swapped with scratch header 32 before exiting the process.
+ This option is used by DMOPREP and is available by internal call only, not
+ in CFE.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                         ADVICE FOR USERS
+ 
+ Demultiple:
+ 
+ NMO provides parameters that allow the user to perform F-K demultiple in
+ conjunction with the CPS process FKF.  This functionality is provided for
+ diagnostic or experimental tasks; normally RADON demultiple, such as
+ provided by CPS process RMUL, yields superior demultiple results.
+ 
+ F-K demultiple is performed jointly by CPS processes NMO and FKF as
+ follows:
+ 
+ 1.  Apply NMO with OPT_DEMULT = Y and OPT_NMO = FORWARD.  This moves out the
+ data so that primaries and multiples will have opposite dip in CMPs.  In this
+ mode NMO expects stacking velocities that will flatten the primaries and
+ will calculate special dmult velocity functions for the forward dmult NMO
+ operation.
+ 
+ 2.  Run FKF in DEMULT mode to zero the half of the F-K plane occupied by the
+ multiples.
+ 
+ 3.  Run NMO with OPT_DEMULT = Y and OPT_NMO = REVERSE to restore the
+ moveout to the data.  NMO expects the same input velocities as in step 1.
+ (Typically velocity analysis is run after this step.)
+ 
+-------------------------------------------------------------------------------
+                         PARAMETERS NOT IN CFE
+ 
+ The parameters VEL_BIAS and VEL_SCALE are used to modify the velocity
+ function as needed by GVS.
+ These parameters are not available on the NMO front-end GUI.
+ VEL_BIAS and VEL_SCALE default to 0.0 and 1.0 respectively.
+ This is effectively a no-op if NMO is not called by GVS.
+ 
+ The parameter TRACEMUTE controls whether or not the trace is muted.
+ If TRACEMUTE is true (default), the trace is muted as determined by the
+ doppler mute parameter.  If TRACEMUTE is false, the trace is not muted
+ although the mute header words are still set as if the trace were muted.
+ This parameter is primarily intended for the VA program and is not available
+ on the NMO front-end GUI.
+ 
+------------------------------------------------------------------------------
+                       TYPES OF CPS VELOCITY FILES
+ 
+ The following CPS velocity file formats can be read by NMO:
+ 
+  (1) old-style CPS ascii  velocity files.
+  (2) self-defining ascii  velocity files.
+  (3) self-defining hybrid velocity files.
+  (4) self-defining binary velocity files.
+  (5) modspec files containing velocities.
+ 
+ Velocities in modspec files are always interval velocities, but may be
+ in either the time or depth domain.  They will be converted to NMO velocities
+ versus time when they are read from the file.
+ 
+ Velocities in the other types of files must be NMO velocities versus time
+ (either type VTNM or VTRM); no velocity conversion will occur.  Otherwise
+ NMO will generate a fatal error message.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          REVISION HISTORY
+ 
+     Date       Author     Description
+     ----       ------     -----------
+ 86. 2005-01-31 Stoeckley  Add ability to read modspec files (documentation
+                            change only).  Fix to allow filename to be omitted
+                            when vel_bias is not zero.
+ 85. 2004-10-14 Stoeckley  Add error dialog box when trying to read a velocity
+                            trace file in a parallel job (interim problem
+                            until an unsolved bug is fixed).
+ 84. 2004-05-11 Stoeckley  Add additional velocity input options; add
+                            additional moveout options including use of
+                            the eta parameter.
+ 83. 2003-11-03 Stoeckley  Documentation changes to reflect changes in
+                            several primitives; this includes reinstatement
+                            and improvement of some doppler mute capabilities.
+ 82. 2003-10-27 Stoeckley  Fix several long-standing bugs (such as array
+                            out-of-bounds bugs) which sometimes caused aborts
+                            (particularly for less-used combinations of
+                            parameters); add protective code to guard against
+                            sqrt(negative) and uninitialization problems;
+                            prohibit certain inadvisable parameter
+                            combinations; move most code to the new primitive
+                            NMOPRIM (and to several additional new primitives
+                            used by NMOPRIM) in order to enhance reusability
+                            and simplify maintenance.
+                           The new primitives have some changes and additions,
+                            such as a test for valid velocity function type
+                            on file, and use of trace bin numbers (nearest
+                            integer) rather than exact coordinates when
+                            deciding whether it is necessary to interpolate
+                            a new velocity function.
+                           The new primitives also eliminate the use of a
+                            temp file to store resampled velocity functions.
+                           There is no longer any limit to the maximum number
+                            of time/velocity picks on any velocity function.
+                           The old NMO had the curious habit of muting time
+                            reversals with doppler&lt;0 but not with doppler=0,
+                            (probably the reverse of what was intended), and
+                            muting refractions with doppler &lt;=0 and &gt;2 (but
+                            not between 0 and 2); therefore this new NMO
+                            eliminates the refraction mute, and always mutes
+                            time reversals since it is dangerous not to do so.
+ 81. 2003-10-14 R.S.Day    Move location of scratch velocity file to /tmp/.
+                           Return from update if temporary-file open fails.
+ 80. 2003-06-17 Stoeckley  Increase maximum time/velocity pair limit from 100
+                            to 401 as a stopgap measure prior to more complete
+                            overhauls.
+ 79. 2002-05-20 Goodger    Remove TIM_BEG and TIM_END parameters.
+ 78. 2002-05-06 Vunderink  Added parallel control parameters
+ 77. 2002-04-17 Goodger    Expand message when resetting TIM_END to indicate
+                           old and new time.
+ 76. 2001-12-10 Selzler    Removed reference to spline_module (not needed).
+ 75. 2001-10-12 Selzler    Temporarily back out parallel support
+ 74. 2001-10-11 Selzler    Clarified backend error message if does not exist.
+ 73. 2001-10-04 Selzler    Added GUI file selection for input velocity file
+                           and warning if the file does not exist.
+ 72. 2001-08-03 Selzler    Added PCPS call for parallelization
+ 71. 2001-04-30 Selzler    Corrected print_lun initialization and NMC usage.
+ 70. 2001-02-20 Selzler    Changed default for pathcheck extension.
+ 69. 2000-12-11 Selzler    Changed wrapup logic to use skip_wrapup
+ 68. 2000-11-07 Selzler    Eliminated double msg when velio open has an error.
+ 67. 2000-06-07 Selzler    Fix minor bug in gui_def.
+ 66. 2000-06-01 Selzler    Fix minor bug in parameter validation.
+ 65. 2000-05-11 Selzler    Inserted EZGUI layout
+ 64. 2000-05-10 Selzler    Corrected sensitivity for OPT_DEMULT parms
+ 63. 2000-05-02 Selzler    Removed PARTIAL from gui put options field.
+ 62. 2000-04-27 Selzler    Added VEL_BIAS and VEL_SCALE for GVS
+ 61. 2000-02-23 Selzler    Workaround velio_open_read error reporting
+ 60. 2000-02-10 Selzler    Corrected bug in wrapup logic
+ 59. 2000-02-07 Selzler    improved gui support
+ 58. 2000-02-02 Selzler    Added support for GUI and general cleanup
+ 57. 2000-01-13 Selzler    Corrected FFT scale factor, 2nd try
+ 56. 2000-01-12 Selzler    Corrected FFT scale factor
+ 55. 2000-01-11 Selzler    fixed bug with unitialized variable
+ 54. 2000-01-03 Selzler    fixed bug with hdr word for vel coordinate
+ 53. 1999-12-07 Selzler    fixed bug with conversion to gridcheck primitive
+ 52. 1999-11-23 Selzler    fixed lines that exeeded 80 characters.
+ 51. 1999-11-12 Selzler    fixed bug regarding Y coordinate
+ 50. 1999-10-27 Selzler    Added RCS "Id" strings to tag executeable
+ 49. 1999-10-20 Selzler    Updated velio calls to new version.
+ 48. 1999-09-29 Selzler    Conversion to f90.
+ 47. 1998-11-10 Vunderink  Begin using the f90 compiler.
+ 46. 1998-07-20 Vunderink  Added NMOT=PARTIAL for use by DMOPREP.
+ 45. 1998-03-03 Stoeckley  Add IRES = -1 option for cubic interpolation.
+ 44. 1997-11-17 Goodger    Fix bug when IPRT=1.  The calls to cpsprt
+                           were invalid.
+ 43. 1997-08-18 Hanson     Add do loops 1029 and 1129 to compute
+                           istrt and istop when NHOSIGN&lt;0.
+ 42. 1997-04-29 Vunderink  Increased length NCODE format statemetns.
+ 41. 1997-04-23 Vunderink  Added moveout order information to history
+                           and CPR printout
+ 40. 1996-10-03 Hanson     Added nonhyperbolic moveout correction.
+                           t(offset) = sqrt(t(offset=0)**2 + NHOSIGN *
+                                     (offset - velocity)**NHOEXP)
+ 39. 1996-07-11 Vunderink  Added FFT interpolation to reverse NMO
+                           correction.
+ 38. 1996-07-08 Vunderink  Added IRES parameter and FFT interpolation to
+                           forward NMO correction.
+ 37. 1994-05-06 Troutt     Make minor changes to VTRC=YES for Bill Harlan.
+                           Avoid reciprocals, squares, and square roots
+                           so that negative and zero "velocities" from
+                           VPICK will survive.
+ 36. 1994-04-26 Troutt     Make internally callable (always putp,repp,
+                           getp)
+ 35. 1993-07-27 Troutt     Change muting for NMOT=FORWARD, TAU_P=NO, and
+                           DOPLER=-1 to match that for NMOT=REVERSE (i.e.
+                           it is now more severe than before, but less
+                           severe than DOPLER=0).  The zone of decreasing
+                           travel times (TX's) is removed in both cases.
+ 34. 1993-02-23 Troutt     Change default for RATO from 1.0 to 0.7 and
+                           abort if RATO.GE.1.0 when DEMULT=YES.
+ 33. 1992-10-08 Troutt     Allow DOPLER=-1 for NMOT=REVERSE.
+ 32. 1992-02-28 Troutt     Add logic for tail mute HW64 (call MUTEHW).
+ 31. 1990-12-07 Ball       Put in compile directive CDIR$ IVDEP on
+                           SQRTFN loops for performance.
+ 30. 1990-06-18 Troutt     Clarify "functions read from disk" message at
+                           N=0 time.
+ 29. 1990-04-20 Troutt     If DOPLER&lt;0.0, then disable the "Refraction"
+                           and "Event-crossing" mute logic. This option
+                           available only for NMOT=FORWARD and TAU_P=NO.
+ 28. 1990-03-15 Troutt     CHANGED PROCESS NAME TO "NMO" due to major
+                           algorithm changes in velocity interpolation
+                           (using NMO to back out corrections made via
+                           NMO - or vice versa - would not be valid).
+                              *** Specific changes *********
+                           a. All input functions are ultimately resampled
+                           to the trace sample interval "DT" at setup
+                           for ALL process OPTIONS.  Furthermore, the
+                           1-V**2 operation on velocities (TAU_P=NO)
+                           now takes place AFTER interpolation to a
+                           rate of DT.  These changes allow functions
+                           for TAU_P=NO (and DEMULT=NO) to be faithfully
+                           interpolated in time when ITPTYP=LINEAR.
+                           (i.e. For "regular" nmo of x-t data, the
+                           function "knees" are completely honored).
+                           DeMult functions are still INITIALLY resampled
+                           to "VRSP" for purposes of calculating multiple
+                           velocities.
+                           b. If there are more than 4 fns., all fns. are
+                           are managed via DTWRITE-DTREAD (in Buffer
+                           Memory if available).  The algorithm only does
+                           spatial vel. interpolation when the trace
+                           header words (NXB# and-or NYB#) change, and
+                           only retrieves fns. from "disk" when the needed
+                           input fns. change.
+                           *** MINIMAL function I-O is achieved when ****
+                           *** traces come in in CDP order.          ****
+                           c. VTR! and DEMULT must be "NO" for TAU_P=YES.
+                           d. Added VTRC=DIX option.
+                           e. Added checks at setup for velocity function
+                           locations: must be on a grid, and locations
+                           must increase (x within y) else abort.
+ 
+.                          *******
+.                          All revisions through #27 apply to process name NMO
+.                          *******
+ 
+ 27. 1990-01-04 Troutt     Added parameter VTRC to capture moveout
+                           velocities in trace. Also added printout
+                           of zero-offset table times for IPRT=1
+ 26. 1989-08-15 Baumel     Allow ITPTYP=LINEAR with TAU_P=YES.
+ 25. 1989-08-10 Baumel     Taper mute in FORWARD NMO.
+ 24. 1989-08-09 Baumel     Fix mute to better suppress crossing events
+                           and refractions.  Also fix SCRATCH pointers.
+ 23. 1989-01-23 Sinton     Added missing pointer IBCOF.
+ 22. 1988-12-29 Sinton     Added VELFILE parameter.
+ 21. 1988-09-26 Howard     NWIH and NWPT conversion.
+ 20. 1988-08-26 Baumel     Change $ALL_VEL to ALL_VEL for future
+                           compatibility with UNICOS.
+ 19. 1988-06-20 Baumel     Interpolate on the fly in forward NMO (inacti-
+                           vates INTT); reverse NMO for TAU_P=YES has
+                           doppler mute, interpolates same as TAU_P=NO;
+                           some additional cleanup.
+ 18. 1988-06-06 Baumel     New convention for mute header word.
+ 17. 1988-05-17 Sinton     Modified doppler mute and reverse NMO for
+                           TAU_P=NO mode.
+ 16. 1988-04-06 Sinton     Added linear interpolation of velocities as
+                           the default for TAU_P=NO mode. Also corrected
+                           an error in scratch memory calculation.
+ 15. 1988-02-16 Sinton     Changed FOLDOFST parameter to NOFFSET.
+ 14. 1988-01-20 Sinton     Corrected NMOT=REVERSE option to use
+                           velocity as a function of offset travel time.
+ 13. 1987-12-10 Sinton     Modified space-time NMO correction for the
+                           NMOT=REVERSE (Produces better results).
+ 12. 1987-11-30 Sinton     Added DE-MULT option.
+ 11. 1987-06-19 Sinton     Increased NVELF from 100 to 500.
+ 10. 1987-05-15 Sinton     Added parameter OFFSET to override header
+                           value.  Added the vf_name=$ALL_VEL option.
+ 9.  1987-05-03 Baumel     Split off velocity function interpolation
+                           into a new primitive routine INTPVELF.
+ 8.  1987-04-28 Baumel     Fix a bug in interpolating velocity functions.
+ 7.  1987-04-13 Baumel     Remove the now-inactive NOFF and OFFMAX parms.
+ 6.  1987-04-09 Hanson     Add NCODE for history records.
+ 5.  1987-03-31 Baumel     Correct layered moveout in TAU_P option,
+                           more correct doppler mute with either option.
+ 4.  1986-09-15 Sinton     Fixed a problem with interp_2d_var_lin_real and
+                             interp_2d_var_lin_int.
+ 3.  1986-08-25 Sinton     Added TAU_P=YES modification for eliptical
+                           NMO.
+ 2.  1986-07-30 Sinton     A call to CSPPRTF was added to print STORAGE,
+                           SCRATCH, and PARAMETERs.
+                           Change input parameter NMOT from numeric to
+                           alphanumeric
+                           (see INPUT PARAMETERS below).
+ 1.  1986-07-14 Sinton     A call to RDEOF was added.
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

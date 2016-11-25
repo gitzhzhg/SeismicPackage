@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<!DOCTYPE Gui SYSTEM "gui.dtd">
+<Gui>
+ <Window keyword="stretch" width="1024" height="700">
+  <HelpPanel keyword="HELPPANELKEYWORD" position="bottom"/>
+  <CommandArea keyword="CommandArea">
+   <TopAreaComponent>
+    <Screen keyword="TOPSCREEN" title="TopScreen" rows="3" columns="80">
+     <Field keyword="PROCESSDEFAULTS" type="comboBox" maxLength="20" editable="yes" sensitive="yes"/>
+     <Label keyword="MWBLABEL" alignment="center"> ----------  Mouse Button 1 click on field to change  ----------</Label>
+     <Layout>
+      <Constraints component="PROCESSDEFAULTS" xPos="1" yPos="1" xSize="20" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="MWBLABEL" xPos="1" yPos="1" xSize="81" ySize="1" xStretch="true" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="PROCESSDEFAULTS">
+       <Tip>Menu allowing user choice of stored parameter defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PROCESSDEFAULTS<br> Menu allowing user choice of stored parameter defaults.</center></b>
+<pre> Default = SYSTEM
+ Allowed = SYSTEM
+ Allowed = PROJECT
+ Allowed = USER
+ SYSTEM defaults are the defaults listed in the CPS documentation.
+ 
+ PROJECT defaults are defaults the user has saved via the Save as Project
+ Default button.
+ 
+ USER defaults are defaults the user has saved via the Save as User Default
+ button.
+ </pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </TopAreaComponent>
+   <Screen keyword="STRETCHPROCESS" title="STRETCH Process" rows="24" columns="80">
+    <Label keyword="COMMENT_STOLTTRACESTRETCHINCLUDE" alignment="center">Stolt Trace Stretch (includes former SSTRANS) Process</Label>
+    <Label keyword="COMMENT_APPLYSTOLTTRACESTRETCHFO" alignment="center">Apply Stolt trace stretch for F-K and phase-shift migrations.</Label>
+    <Label keyword="LABEL_PATHNAME_VEL" alignment="left">PATHNAME_VEL=</Label>
+    <Field keyword="PATHNAME_VEL" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_PATHNAME_REF" alignment="left">PATHNAME_REF=</Label>
+    <Field keyword="PATHNAME_REF" type="string" maxLength="128" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VELNAME_REF" alignment="left">VELNAME_REF=</Label>
+    <Field keyword="VELNAME_REF" type="string" maxLength="21" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_CONST" alignment="left">VEL_CONST=</Label>
+    <Field keyword="VEL_CONST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DIR" alignment="left">OPT_DIR=</Label>
+    <Field keyword="OPT_DIR" type="comboBox" maxLength="7" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_SMOOTH" alignment="left">OPT_SMOOTH=</Label>
+    <Field keyword="OPT_SMOOTH" type="comboBox" maxLength="6" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_DEGREE_SMOOTH" alignment="left">DEGREE_SMOOTH=</Label>
+    <Field keyword="DEGREE_SMOOTH" type="int" maxLength="2" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_CALC_CV" alignment="left">OPT_CALC_CV  =</Label>
+    <Field keyword="OPT_CALC_CV" type="comboBox" maxLength="8" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_COMMON_ANGLE" alignment="left">OPT_COMMON_ANGLE=</Label>
+    <Field keyword="OPT_COMMON_ANGLE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_ZERO_ANGLE" alignment="left">OPT_ZERO_ANGLE=</Label>
+    <Field keyword="OPT_ZERO_ANGLE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_DOPPLER_MUTE" alignment="left">OPT_DOPPLER_MUTE=</Label>
+    <Field keyword="OPT_DOPPLER_MUTE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_OPT_VEL_SCALE" alignment="left">OPT_VEL_SCALE=</Label>
+    <Field keyword="OPT_VEL_SCALE" type="comboBox" maxLength="3" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_VEL_SCALE" alignment="left">VEL_SCALE=</Label>
+    <Field keyword="VEL_SCALE" type="float" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_TOT" alignment="left">TIM_TOT=</Label>
+    <Field keyword="TIM_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INIT" alignment="left">TIM_INIT=</Label>
+    <Field keyword="TIM_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_LAST" alignment="left">TIM_LAST=</Label>
+    <Field keyword="TIM_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_TIM_INC" alignment="left">TIM_INC=</Label>
+    <Field keyword="TIM_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_TOT" alignment="left">RAY_TOT=</Label>
+    <Field keyword="RAY_TOT" type="int" maxLength="9" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_INIT" alignment="left">RAY_INIT=</Label>
+    <Field keyword="RAY_INIT" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_LAST" alignment="left">RAY_LAST=</Label>
+    <Field keyword="RAY_LAST" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Label keyword="LABEL_RAY_INC" alignment="left">RAY_INC=</Label>
+    <Field keyword="RAY_INC" type="float" maxLength="12" editable="yes" sensitive="yes"/>
+    <Layout>
+     <Constraints component="COMMENT_STOLTTRACESTRETCHINCLUDE" xPos="4" yPos="1" xSize="53" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="COMMENT_APPLYSTOLTTRACESTRETCHFO" xPos="1" yPos="2" xSize="61" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_VEL" xPos="1" yPos="4" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_VEL" xPos="14" yPos="4" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_PATHNAME_REF" xPos="1" yPos="6" xSize="13" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="PATHNAME_REF" xPos="14" yPos="6" xSize="60" ySize="1" xStretch="true" yStretch="false"/>
+     <Constraints component="LABEL_VELNAME_REF" xPos="1" yPos="8" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VELNAME_REF" xPos="15" yPos="8" xSize="21" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_VEL_CONST" xPos="1" yPos="10" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_CONST" xPos="11" yPos="10" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_DIR" xPos="24" yPos="10" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DIR" xPos="32" yPos="10" xSize="7" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_SMOOTH" xPos="41" yPos="10" xSize="11" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_SMOOTH" xPos="52" yPos="10" xSize="6" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_DEGREE_SMOOTH" xPos="60" yPos="10" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="DEGREE_SMOOTH" xPos="74" yPos="10" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_OPT_CALC_CV" xPos="1" yPos="11" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_CALC_CV" xPos="15" yPos="11" xSize="8" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_COMMON_ANGLE" xPos="24" yPos="11" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_COMMON_ANGLE" xPos="41" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_ZERO_ANGLE" xPos="45" yPos="11" xSize="15" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_ZERO_ANGLE" xPos="60" yPos="11" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_DOPPLER_MUTE" xPos="1" yPos="12" xSize="17" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_DOPPLER_MUTE" xPos="18" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_OPT_VEL_SCALE" xPos="24" yPos="12" xSize="14" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="OPT_VEL_SCALE" xPos="38" yPos="12" xSize="3" ySize="1" xStretch="false" yStretch="true"/>
+     <Constraints component="LABEL_VEL_SCALE" xPos="44" yPos="12" xSize="10" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="VEL_SCALE" xPos="54" yPos="12" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_TOT" xPos="1" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_TOT" xPos="9" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INIT" xPos="19" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INIT" xPos="28" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_LAST" xPos="41" yPos="14" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_LAST" xPos="50" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_TIM_INC" xPos="63" yPos="14" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="TIM_INC" xPos="71" yPos="14" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_TOT" xPos="1" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_TOT" xPos="9" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_INIT" xPos="19" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_INIT" xPos="28" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_LAST" xPos="41" yPos="15" xSize="9" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_LAST" xPos="50" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="LABEL_RAY_INC" xPos="63" yPos="15" xSize="8" ySize="1" xStretch="false" yStretch="false"/>
+     <Constraints component="RAY_INC" xPos="71" yPos="15" xSize="12" ySize="1" xStretch="false" yStretch="false"/>
+    </Layout>
+    <HelpSection>
+     <Help component="PATHNAME_VEL">
+      <Tip>Pathname for stacking velocity file.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PATHNAME_VEL<br> Pathname for stacking velocity file.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ Pathname for velocity file containing stacking velocity field to be used for
+ migration.
+ If PATHNAME_VEL = NONE, stretch is not applied in Stolt migration.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="PATHNAME_REF">
+      <Tip>Pathname for velocity file specifying reference velocity function.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PATHNAME_REF<br> Pathname for velocity file specifying reference velocity function.</center></b>
+<pre> Default = NONE
+ Allowed = char
+ If PATHNAME_REF = NONE, use VEL_CONST as a constant velocity Stolt migration.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VELNAME_REF">
+      <Tip>Name of the desired velocity function within PATHNAME_REF.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - VELNAME_REF<br> Name of the desired velocity function within PATHNAME_REF.</center></b>
+<pre> Default = FIRST
+ Allowed = char
+ If VELNAME_REF = FIRST, then the first velocity function in the velocity file
+ PATHNAME_REF will be used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_CONST">
+      <Tip>Constant velocity for Stolt F-K migration.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - VEL_CONST<br> Constant velocity for Stolt F-K migration.</center></b>
+<pre> Default = 1500.0
+ Allowed = real &gt; 0.0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DIR">
+      <Tip>Whether to perform a forward or inverse stretch.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_DIR<br> Whether to perform a forward or inverse stretch.</center></b>
+<pre> Default = FORWARD
+ Allowed = FORWARD (Stretch from input velocity to reference velocity field.)
+ Allowed = INVERSE (Unstretch from reference velocity to input velocity field.)</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_SMOOTH">
+      <Tip>Smooth the velocity field by interpolation or polynomial fitting.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_SMOOTH<br> Smooth the velocity field by interpolation or polynomial fitting.</center></b>
+<pre> Default = FIT
+ Allowed = FIT
+ Allowed = INTERP
+ If OPT_SMOOTH = FIT, then smooth the migration velocity field by using a
+ least-squares fit to a polynomial of degree specified by the DEGREE_SMOOTH
+ parameter.
+ 
+ If OPT_SMOOTH = INTERP, then do linear interpolation between velocity
+ function locations (and use constant extrapolation at the ends).
+ WARNING:  this option may cause chevron shaped artifacts unless the velocity
+ field is naturally very smooth or you have previously smoothed it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="DEGREE_SMOOTH">
+      <Tip>Degree of polynomial to use when OPT_SMOOTH = FIT.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - DEGREE_SMOOTH<br> Degree of polynomial to use when OPT_SMOOTH = FIT.</center></b>
+<pre> Default = 1
+ Allowed = int .ge. 0
+ Normally DEGREE_SMOOTH should not exceed 2 or 3.
+ DEGREE_SMOOTH = 0 allows no lateral
+ variation.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_CALC_CV">
+      <Tip>Method to use for calculating constant velocity.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_CALC_CV<br> Method to use for calculating constant velocity.</center></b>
+<pre> Default = MIN_STR
+ Allowed = MIN_STR  (Use minimum stretching criteria.)
+ Allowed = USER     (Constant velocity is input by the user.)
+ Method to use for calculating constant velocity for Stolt F-K migration.
+ Normally the default is used.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_COMMON_ANGLE">
+      <Tip>Use common angle imaging.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_COMMON_ANGLE<br> Use common angle imaging.</center></b>
+<pre> Default = NO
+ Allowed = NO  STRETCH will not use a comon angle imaging algorithm.
+ Allowed = YES STRETCH will     use a comon angle imaging algorithm.
+ 
+ If OPT_COMMON_ANGLE=NO XTRECTH will apply a stretch which trys to match the
+ shape of a hyperbola as offset approaches zero.
+ 
+ If OPT_COMMON_ANGLE=YES XTRECTH will apply a stretch which trys to match the
+ travel time of a ray with ray parameter = header word (HDR_OFFSET) * 1.e-6
+ within a v(z) or v(t) media.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_ZERO_ANGLE">
+      <Tip>Set the ray parameter to zero for the stretch.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_ZERO_ANGLE<br> Set the ray parameter to zero for the stretch.</center></b>
+<pre> Default = NO  STRETCH will use the ray parameter
+ from header word (HDR_OFFSET) * 1.e-6
+ Allowed = YES STRETCH will set the ray parameter to zero.
+ This is appropriate for the inverse stretch after migration.
+ </pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_DOPPLER_MUTE">
+      <Tip>Scale the input velocity field.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_DOPPLER_MUTE<br> Scale the input velocity field.</center></b>
+<pre> Default = YES
+ Allowed = YES STRETCH will     apply a doppler mute.
+ Allowed = NO  STRETCH will not apply a doppler mute.
+ 
+ If OPT_DOPPLER_MUTE = YES,
+ Allowed = YES STRETCH will mute the end of the output trace from the
+ last output sample at which the input sample was changing.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="OPT_VEL_SCALE">
+      <Tip>Scale the input velocity field.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OPT_VEL_SCALE<br> Scale the input velocity field.</center></b>
+<pre> Default = NO
+ Allowed = YES STRETCH will     scale the input velocity field.
+ Allowed = NO  STRETCH will not scale the input velocity field.
+ 
+ IF OPT_DIR = FORWARD STRETCH applies a forward stretche from the lateraly
+ and veritcaly varying local velocity field, VEL_LOCAL to the lateraly
+ constant, verticaly varying reference velocity field VEL_REFERENCE.
+ 
+ IF OPT_DIR = INVERSE STRETCH applies an inverse stretch from the lateraly
+ constant, verticaly varying reference velocity field VEL_REFERENCE, to the
+ 
+ If OPT_VEL_SCALE= = YES,
+ the lateraly varying local velocity field STRETCH actualy uses can
+ VEL_LOCAL_USE = ( 1. - VEL_SCALE ) * VEL_REFERENCE + VEL_SCALE * VEL_LOCAL
+ using a value of VEL_SCALE = 1. means STRETCH use the true local velocity
+ field and hence applies the full stretch correction.
+ using a value of VEL_SCALE = 0. means STRETCH uses the reference velocity
+ and hence their is no effective stretch applied.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="VEL_SCALE">
+      <Tip>Velocity scale factor.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - VEL_SCALE<br> Velocity scale factor.</center></b>
+<pre> Default = 1.
+ Allowed = real &gt; 0.0
+ 
+ IF OPT_DIR = FORWARD STRETCH applies a forward stretche from the lateraly
+ and veritcaly varying local velocity field, VEL_LOCAL to the lateraly
+ constant, verticaly varying reference velocity field VEL_REFERENCE.
+ 
+ IF OPT_DIR = INVERSE STRETCH applies an inverse stretch from the lateraly
+ constant, verticaly varying reference velocity field VEL_REFERENCE, to the
+ 
+ If OPT_VEL_SCALE= = YES,
+ the lateraly varying local velocity field STRETCH actualy uses can
+ VEL_LOCAL_USE = ( 1. - VEL_SCALE ) * VEL_REFERENCE + VEL_SCALE * VEL_LOCAL
+ using a value of VEL_SCALE = 1. means STRETCH use the true local velocity
+ field and hence applies the full stretch correction.
+ using a value of VEL_SCALE = 0. means STRETCH uses the reference velocity
+ and hence their is no effective stretch applied.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_TOT">
+      <Tip>Number of time samples of the forward stretched trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - TIM_TOT<br> Number of time samples of the forward stretched trace.</center></b>
+<pre> Default = NDPT
+ Allowed = int &gt; 0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INIT">
+      <Tip>Time of the first sample of the forward stretched trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - TIM_INIT<br> Time of the first sample of the forward stretched trace.</center></b>
+<pre> Default = TSTRT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_LAST">
+      <Tip>Time of the last sample of the forward stretched trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - TIM_LAST<br> Time of the last sample of the forward stretched trace.</center></b>
+<pre> Default = TSTRT+(NDPT-1)*DT
+ Allowed = real</pre></head></html>]]></Text>
+     </Help>
+     <Help component="TIM_INC">
+      <Tip>Sample interval of the forward stretched trace.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - TIM_INC<br> Sample interval of the forward stretched trace.</center></b>
+<pre> Default = 0.0
+ Allowed = real &gt; = 0.0
+ If TIM_INC = 0.0, then TIM_TOT and TIM_INC are computed internally to
+ ensure that sampling is fine enough to avoid aliasing.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_TOT">
+      <Tip>Number of ray parameter groups.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - RAY_TOT<br> Number of ray parameter groups.</center></b>
+<pre> Default = 1
+ Allowed = int&gt;0</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_INIT">
+      <Tip>Minimum ray parameter in the output image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - RAY_INIT<br> Minimum ray parameter in the output image.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are defined by velocity and are in microseconds per distance unit.
+ If an input traces ray parameter is outside the range defined by
+ RAY_TOT,RAY_INIT,RAY_LAST,RAY_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_LAST">
+      <Tip>Maximum ray parameter in the output image.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - RAY_LAST<br> Maximum ray parameter in the output image.</center></b>
+<pre> Default = 0
+ Allowed = real
+ Units are defined by velocity and are in microseconds per distance unit.
+ If an input traces ray parameter is outside the range defined by
+ RAY_TOT,RAY_INIT,RAY_LAST,RAY_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+     <Help component="RAY_INC">
+      <Tip>Output image ray parameter spacing.</Tip>
+      <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - RAY_INC<br> Output image ray parameter spacing.</center></b>
+<pre> Default = 2
+ Allowed = real
+ Units are defined by velocity and are in microseconds per distance unit.
+ If an input traces ray parameter is outside the range defined by
+ RAY_TOT,RAY_INIT,RAY_LAST,RAY_INC the trace is discarded without migrating it.</pre></head></html>]]></Text>
+     </Help>
+    </HelpSection>
+   </Screen>
+   <BottomAreaComponent>
+    <Screen keyword="BOTTOMSCREEN" title="BottomScreen" rows="2" columns="100">
+     <Button keyword="CLOSE">CLOSE</Button>
+     <Button keyword="OK">OK</Button>
+     <Button keyword="APPLY">Apply</Button>
+     <Button keyword="CANCEL">Cancel</Button>
+     <Button keyword="RESET">Reset</Button>
+     <Button keyword="PROCESSLISTLEFT">&lt;&lt;</Button>
+     <Field keyword="PROCESSLIST" type="comboBox" maxLength="19" editable="yes" sensitive="yes"/>
+     <Button keyword="PROCESSLISTRIGHT">&gt;&gt;</Button>
+     <Button keyword="PROJECTDEFAULT">Save As&#xa;Project Default</Button>
+     <Button keyword="USERDEFAULT">Save As&#xa;User Default</Button>
+     <Button keyword="HELP">Help</Button>
+     <Layout>
+      <Constraints component="CLOSE" xPos="0" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="OK" xPos="1" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="APPLY" xPos="7" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="CANCEL" xPos="15" yPos="0" xSize="6" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="RESET" xPos="24" yPos="0" xSize="5" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLISTLEFT" xPos="33" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROCESSLIST" xPos="39" yPos="0" xSize="19" ySize="1" xStretch="true" yStretch="false"/>
+      <Constraints component="PROCESSLISTRIGHT" xPos="59" yPos="0" xSize="2" ySize="1" xStretch="false" yStretch="false"/>
+      <Constraints component="PROJECTDEFAULT" xPos="66" yPos="0" xSize="11" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="USERDEFAULT" xPos="81" yPos="0" xSize="8" ySize="2" xStretch="false" yStretch="false"/>
+      <Constraints component="HELP" xPos="94" yPos="0" xSize="4" ySize="1" xStretch="false" yStretch="false"/>
+     </Layout>
+     <HelpSection>
+      <Help component="CLOSE">
+       <Tip>Button that removes this process parameter screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - CLOSE<br> Button that removes this process parameter screen.</center></b>
+<pre> Default =
+ Allowed =
+ Appears only on the view-only process parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="OK">
+       <Tip>Button to accept parameter values, run traps and remove screen.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - OK<br> Button to accept parameter values, run traps and remove screen.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values, runs the parameter traps and removes
+ the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="APPLY">
+       <Tip>Button that accepts parameter values and runs the parameter traps.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - APPLY<br> Button that accepts parameter values and runs the parameter traps.</center></b>
+<pre> Default =
+ Allowed =
+ Button that accepts parameter values and runs the parameter traps but does
+ not remove the parameter screen.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="CANCEL">
+       <Tip>Button to remove the parameter screen without changing parameters.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - CANCEL<br> Button to remove the parameter screen without changing parameters.</center></b>
+<pre> Default =
+ Allowed =</pre></head></html>]]></Text>
+      </Help>
+      <Help component="RESET">
+       <Tip>Set parameters to their initial value or last applied value.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - RESET<br> Set parameters to their initial value or last applied value.</center></b>
+<pre> Default =
+ Allowed =
+ Button that sets the parameters back to their values when the screen appeared
+ or to their last applied value.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTLEFT">
+       <Tip>Accept the current parameters and move to the previous process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PROCESSLISTLEFT<br> Accept the current parameters and move to the previous process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the previous process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLIST">
+       <Tip>Menu of processes in the current workfile and their number.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PROCESSLIST<br> Menu of processes in the current workfile and their number.</center></b>
+<pre> Default =
+ Allowed =
+ Menu that allows the user to accept the current parameter values, run the
+ parameter traps and move to any chosen process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROCESSLISTRIGHT">
+       <Tip>Accept the current parameters and move to the next process.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PROCESSLISTRIGHT<br> Accept the current parameters and move to the next process.</center></b>
+<pre> Default =
+ Allowed =
+ Button that allows the user to accept the current parameter values, run the
+ parameter traps and move to the next process in the current workfile.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="PROJECTDEFAULT">
+       <Tip>Save the current parameter values as Project Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - PROJECTDEFAULT<br> Save the current parameter values as Project Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as Project Defaults for this
+ process.  There will be one set of Project Defaults for a project.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="USERDEFAULT">
+       <Tip>Save the current parameter values as User Defaults.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - USERDEFAULT<br> Save the current parameter values as User Defaults.</center></b>
+<pre> Default =
+ Allowed =
+ Button that saves the current parameter values as User Defaults for this
+ process.  There will be one set of User Defaults for a userid.</pre></head></html>]]></Text>
+      </Help>
+      <Help component="HELP">
+       <Tip>Allows the user to access the pop-up Help Window.</Tip>
+       <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<b><center>stretch - HELP<br> Allows the user to access the pop-up Help Window.</center></b>
+<pre> Default =
+ Allowed =
+ The Help Window allows access to three kinds of help:  Parameter Help, CPS
+ Process Help and Application (CFE) Help.</pre></head></html>]]></Text>
+      </Help>
+     </HelpSection>
+    </Screen>
+   </BottomAreaComponent>
+  </CommandArea>
+  <Help component="stretch">
+   <Text><![CDATA[<html><head><base href=file:///usr/app/vendors/int/Conoco/xml/help/>
+<pre>-------------------------------------------------------------------------------
+                         C P S   P R O C E S S
+ 
+ Name       : STRETCH    (Stolt Trace Stretch)  [includes former SSTRANS]
+ Category   : transforms
+ Written    : 1994-12-01   by: Douglas Hanson
+ Revised    : 2006-12-04   by: D. Glover
+ Maturity   : production
+ Purpose    : Apply Stolt trace stretch for F-K and phase-shift migrations.
+ Portability: No known limitations.
+ Parallel   : Yes.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                          GENERAL DESCRIPTION
+ 
+ STRETCH assumes the input traces represent reflections from an earth model
+ whose velocity structure is given by the stacking velocity field in
+ PATHNAME_VEL.  STRETCH performs a Stolt stretch on the input traces so that
+ they are consistent with an earth model whose velocity structure is given by
+ the reference stacking velocity function in PATHNAME_REF.
+ 
+ STRETCH will stretch traces so they are consistent with a single reference
+ velocity function (for phase-shift migration) or so they are consistent with
+ a constant velocity (for Stolt F-K migration).
+ 
+ IF OPT_DIR = FORWARD STRETCH applies a forward stretche from the lateraly
+ and veritcaly varying local velocity field, VEL_LOCAL to the lateraly
+ constant, verticaly varying reference velocity field VEL_REFERENCE.
+ 
+ IF OPT_DIR = INVERSE STRETCH applies an inverse stretch from the lateraly
+ constant, verticaly varying reference velocity field VEL_REFERENCE, to the
+ 
+ If OPT_VEL_SCALE = YES,
+ the lateraly varying local velocity field STRETCH actualy uses can
+ VEL_LOCAL_USE = ( 1. - VEL_SCALE ) * VEL_REFERENCE + VEL_SCALE * VEL_LOCAL
+ using a value of VEL_SCALE = 1. means STRETCH use the true local velocity
+ field and hence applies the full stretch correction.
+ using a value of VEL_SCALE = 0. means STRETCH uses the reference velocity
+ and hence their is no effective stretch applied.
+ 
+ If OPT_COMMON_ANGLE=NO XTRECTH will apply a stretch which trys to match the
+ shape of a hyperbola as offset approaches zero.
+ 
+ If OPT_COMMON_ANGLE=YES XTRECTH will apply a stretch which trys to match the
+ travel time of a ray with ray parameter = header word (HDR_OFFSET) * 1.e-6
+ within a v(z) or v(t) media.
+ 
+ If OPT_ZERO_ANGLE = YES, STRETCH will set the ray parameter to zero.
+ This is appropriate for the inverse stretch after migration.
+ 
+ If OPT_ZERO_ANGLE = NO, STRETCH will use the ray parameter
+ from header word (HDR_OFFSET) * 1.e-6
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                            ADVICE FOR USERS
+ 
+ 
+ Time migration requires a smooth migration velocity field.  If your migration
+ velocity field is not naturally smooth and if you have not already smoothed
+ it, then you should probably use the OPT_SMOOTH = FIT option and smooth the
+ velocity field by using a polynomial fit.
+ 
+ If the file of PATHNAME_VEL is specified, it requires either the parameter of
+ PATHNAME_REF or VEL_CONST to calculate the stretch.
+ 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                             REVISION HISTORY
+ 
+     Date       Author         Description
+     ----       ------         -----------
+ 19. 2006-12-04 D. Glover      Added NULLIFY statements for Intel compiler.
+ 18. 2006-01-10 B. Menger      Removed Unused Variables.
+ 17. 2005-09-13 R.S.Day        Fix bug in stretch_compute_max_time that
+                               was uncovered by behavior with intel compiler.
+ 16. 2004-09-07 Douglas Hanson Add common angle stretch.
+ 15. 2001-12-10 Chiu           Change local variables to double precision and
+                               check for mapping limit in routine
+                               stretch_map_apply.
+ 14. 2001-11-08 Chiu           Replace array(*) by array(:).
+ 13. 2001-02-14 Chiu           Change wrapped_up to skip_wrapup.
+ 12. 2000-11-29 Chiu           Fix problems of rw_fac and sq_fac by not
+                               resettingthem to 1.
+ 11. 2000-09-05 Chiu           Initialize rw_fac and sq_fac to 1.
+ 10. 2000-06-14 Chiu           Reset the coarse grid back to 10*dt and fix
+                               the timing shifts by polynomial smoothing the
+                               velocities instead of the stretch times.
+ 9.  2000-05-22 Chiu           Set the interpolation to every second sample.
+ 8.  2000-05-05 Chiu           Match stretch velocity with Cray's version.
+ 7.  2000-04-25 Chiu           Fix Gui problems.
+ 6.  2000-04-06 Chiu           Add Gui.
+ 5.  2000-04-04 Chiu           Convert into new CPS.
+ 4.  1999-02-08 Hanson         Add internal setup.
+                               Begin using the fortran90 compiler.
+ 3.  1998-07-23 Goodger        Moved to conlib.
+ 2.  1998-04-28 Hanson         T3E port.  Read velocity on pe 0 and broadcast
+                               to the rest.  Print info on pe only.
+ 1.  1994-12-01 Hanson         Original version
+ 
+ 
+-------------------------------------------------------------------------------</pre></head></html>]]></Text>
+  </Help>
+ </Window>
+</Gui>

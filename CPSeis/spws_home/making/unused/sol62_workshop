@@ -1,0 +1,74 @@
+#!/bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+
+#<copyright>
+#*******************************************************************************
+#*******                        COPYRIGHT NOTICE                         *******
+#******* CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCOPHILLIPS INC. *******
+#*******      PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK      *******
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T   
+#
+# Name   : sol62_workshop
+# Written: 2003-06-25   by: Tom Stoeckley
+# Revised: 2004-04-16   by: Tom Stoeckley
+# Purpose: Run the Solaris workshop which goes with the Fortran 6.2 compiler.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                            DOCUMENTATION
+#
+# Run the Solaris workshop which goes with the Fortran 6.2 compiler.
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY                
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  2. 2004-04-16  Stoeckley  Change license manager location to 27029@holm.
+#  1. 2003-06-25  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+if($?PATH == 0) then
+   setenv PATH /usr/app/SUNWspro/bin
+else
+   setenv PATH /usr/app/SUNWspro/bin:$PATH
+endif
+
+if($?MANPATH == 0) then
+   setenv MANPATH /usr/app/SUNWspro/man
+   setenv MANPATH /usr/app/SUNWspro/lib:$MANPATH
+else
+   setenv MANPATH /usr/app/SUNWspro/man:$MANPATH
+   setenv MANPATH /usr/app/SUNWspro/lib:$MANPATH
+endif
+
+#setenv LM_LICENSE_FILE 4570@hotce06
+setenv LM_LICENSE_FILE 27029@holm
+
+if ($?LD_LIBRARY_PATH == 0) then
+   setenv LD_LIBRARY_PATH /usr/app/SUNWspro/lib
+else
+   setenv LD_LIBRARY_PATH /usr/app/SUNWspro/lib:$LD_LIBRARY_PATH
+endif
+
+workshop $*
+

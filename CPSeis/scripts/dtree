@@ -1,0 +1,63 @@
+#!/bin/bash
+# do a directory walk 
+# usage: dtree [level] [dir] (if you specify a dir, you must specify a level.)
+# default level is 3 and dir is current directory.
+
+
+CSI="["
+OFF=${CSI}"0m"
+BOLD=${CSI}"1m"
+BLINK=${CSI}"6m"
+INVERSE=${CSI}"7m"
+ULINE=${CSI}"4m"
+GREEN=${CSI}"32m"
+RED=${CSI}"31m"
+
+if [ -z $1 ] ; then
+        MAX=3
+else
+        MAX=$1
+fi
+
+HERE=$(pwd)
+trap "cd $HERE ; exit 1" 1 2 3 6 9 11 12 15
+tabs () {
+        NUM=$LEVEL
+        while [ "$((NUM>0))" = "1" ] ; do
+                echo -n "   "
+                NUM=$((NUM-1))
+        done
+}
+
+dir () {
+        for file in $(ls) ; do
+                if [ -d $file ] ; then
+                        tabs
+                        if [ -h $file ] ; then
+                                echo -n ${OFF}${INVERSE}${GREEN}
+                                echo $file
+                                echo -n ${OFF}
+                        else
+                                echo $file
+                        fi
+                fi
+                if [ -d $file -a ! -h $file ] ; then
+                        LEVEL=$((LEVEL+1))
+                        if [ "$((LEVEL<=MAX))" = "1" ] ; then
+                                cd $file
+                                dir
+                                cd ..
+                        fi
+                        LEVEL=$((LEVEL-1))
+                fi
+        done
+}
+HERE=$(pwd)
+LEVEL=1
+if [ -z $2 ] ; then
+        pwd
+else
+        cd $2
+fi
+dir
+cd $HERE

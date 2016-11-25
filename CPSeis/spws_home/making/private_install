@@ -1,0 +1,176 @@
+#! /bin/csh -f
+#<CPS_v1 type="SCRIPT" pretag="#"/>
+
+#<copyright>
+#*******************************************************************************
+#***********                    COPYRIGHT NOTICE                     ***********
+#*********** CONFIDENTIAL AND PROPRIETARY INFORMATION OF CONOCO INC. ***********
+#***********  PROTECTED BY THE COPYRIGHT LAW AS AN UNPUBLISHED WORK  ***********
+#*******************************************************************************
+#</copyright>
+
+
+#<brief_doc>
+#-------------------------------------------------------------------------------
+#                         C P S   S C R I P T
+#
+# Name       : private_install
+# Category   : stand-alone
+# Written    : 2004-05-21   by: Tom Stoeckley
+# Revised    : 2004-05-21   by: Tom Stoeckley
+# Maturity   : beta
+# Purpose    : Shell script workhorse for installing spws programs and scripts.
+# Portability: No known limitations.
+#
+#-------------------------------------------------------------------------------
+#</brief_doc>
+
+
+#<descript_doc>
+#-------------------------------------------------------------------------------
+#                             DOCUMENTATION
+#
+# This private script is called from the following public scripts:
+#
+#                    install_spws_program
+#                    install_spws_script
+#
+# This script installs a file for public use.
+#
+# The file will normally be one of the following:
+#
+#                    program executable
+#                    script
+#                    app-defaults file
+#                    help file
+#
+# You must call the following:
+#
+#        private_install  <source_file>  <install_file>  <link_file>
+#
+# Example of file names and locations specified by caller:
+#
+#     source_file:    /home/spws/programs/glotch/linuxab80_debug/glotch
+#    install_file:    /usr/app/vendors/spws/bin/ix86-intel-linux/glotch
+#       link_file:                          /apps/geophysics/bin/glotch
+#
+# Example of installed files and links:
+#
+#   source:      /home/spws/programs/glotch/linuxab80_debug/glotch
+#   installed:   /usr/app/vendors/spws/bin/ix86-intel-linux/glotch.21May2004 (1)
+#   link to (1): /usr/app/vendors/spws/bin/ix86-intel-linux/glotch           (2)
+#   link to (2):                       /apps/geophysics/bin/glotch
+#
+# The full path must be specified if <source_file> is not in local directory.
+#
+# Scripts calling this script must be run on a node for each supported
+# architecture.
+#
+#-------------------------------------------------------------------------------
+#                            INPUT REQUIRMENTS
+#
+# The following environment variable must be set:
+#
+#                   USER    must be spws
+#
+#-------------------------------------------------------------------------------
+#</descript_doc>
+
+
+#<history_doc>
+#-------------------------------------------------------------------------------
+#                           REVISION HISTORY
+#
+#     Date        Author     Description
+#     ----        ------     -----------
+#  1. 2004-05-21  Stoeckley  Initial version.
+#
+#-------------------------------------------------------------------------------
+#</history_doc>
+
+
+#-------------------------------------------------------------------------------
+# RCS Id : $Id: private_install,v 1.1 2004/05/21 18:52:12 spws Exp $
+#-------------------------------------------------------------------------------
+
+
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+##-------------------- verify environment variables ------------------------##
+
+
+if($?USER == 0 || $USER != "spws") then
+     echo environment variable USER must be spws.
+     exit
+endif
+
+
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+##------------------------- get input variables ---------------------------##
+
+
+set source_file  = $1
+set install_file = $2
+set link_file    = $3
+set extension    = ".`date +%d``date +%b``date +%Y`"
+
+if($source_file == "") then
+  echo "missing source_file name"
+  exit 1
+endif
+
+if($install_file == "") then
+  echo "missing install_file name"
+  exit 1
+endif
+
+if($link_file == "") then
+  echo "missing link_file name"
+  exit 1
+endif
+
+if($source_file == $source_file:t) then
+  set source_file = `pwd`/$source_file
+endif
+
+##----------------------------- do the work --------------------------------##
+##----------------------------- do the work --------------------------------##
+##----------------------------- do the work --------------------------------##
+
+
+echo ""
+
+if(-f $source_file) then
+
+  \cp $source_file $install_file$extension
+
+  if(-e $install_file) \rm $install_file
+  ln -s $install_file$extension $install_file
+
+  if(-e $link_file) \rm $link_file
+  ln -s $install_file $link_file
+
+  echo "source file     `\ls $source_file`"
+  echo "installed file  `\ls $install_file$extension`"
+  echo "installed link  `\ls $install_file`"
+  echo "installed link  `\ls $link_file`"
+
+# echo "`\ls -l $source_file`"
+# echo "`\ls -l $install_file$extension`"
+# echo "`\ls -l $install_file`"
+# echo "`\ls -l $link_file`"
+
+else
+
+  echo "$source_file  not found"
+
+endif
+
+echo ""
+
+
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+##-------------------------------- end -------------------------------------##
+

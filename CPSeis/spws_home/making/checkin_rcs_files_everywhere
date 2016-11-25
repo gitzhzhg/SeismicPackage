@@ -1,0 +1,60 @@
+#! /bin/csh -f
+
+# checkin_rcs_files_everywhere
+#
+# $Id: checkin_rcs_files_everywhere,v 1.1 2004/05/25 22:01:40 spws Exp spws $
+#
+# Run this script to check in the RCS files in all of the ~spws directories.
+#
+# Simply type this:
+#
+#                    checkin_rcs_files_everywhere  option
+#
+# where  <option>  (optional) specifies which files should be listed.
+#
+#     option   files listed
+#     ------   ------------
+#       -1     those for which action is taken.
+#       -2     those for which action is taken.
+#       -3     all files.
+#
+# Option -2 is used for any other option (or unspecified option).
+#
+# This script makes sure that all checked-in RCS files in <directory> are
+# up to date.  The following actions are performed:
+#
+#  (1) If a file has never been checked in, it is checked in, and then checked
+#      out as read-only.
+#
+#  (2) If a file is different from the checked-in file, it is checked in,
+#      and then checked out as read-only.
+#
+#  (3) If a file is not checked out, it is checked out as read-only.
+#
+#  (4) If a file is the same as the checked-in file, nothing is done if the
+#      file is read-only.  If it is read-write, it is changed to read-only.
+#
+# The output of this script goes to standard out and to a log file.
+# The log file will be in ~spws/making.
+# If the user is not spws, the log file will be in the user's home directory.
+#
+# The environment variables SPWSDIR and SPWSMAKEDIR must be set.
+
+#-------------------------------------------------------------------------------
+
+if($?SPWSDIR == 0 || $SPWSDIR == "") then
+     echo SPWSDIR not set
+     exit
+endif
+
+if($?SPWSMAKEDIR == 0 || $SPWSMAKEDIR == "") then
+     echo SPWSMAKEDIR not set
+     exit
+endif
+
+set option = $1
+
+$SPWSMAKEDIR/private_rcs_everywhere checkin_rcs_files $option
+
+#-------------------------------------------------------------------------------
+

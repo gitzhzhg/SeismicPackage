@@ -1,0 +1,170 @@
+<CPS_v1 type="WORKFILE"/>
+
+<PROCESS name="PROJECT_DATA">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1)
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  PROJECT = NONE,   ACCOUNT = TEST,   USER_NAME = sps,
+  ROUTING_NAME = burton,              ADDRESS = 4466rw, PHONE = 767-5638,
+  SURVEY_UNITS = FEET,                TR_UNITS_TYP = TIME,
+  TR_UNITS = " SECONDS",              MODE = "3D Mode",
+  ORIGIN_EAST = 7827.7,               ORIGIN_NORTH = 0,
+  X_GRID_DIST = 32.8,                 Y_GRID_DIST = 1,  ANGLE   = 0,
+  HANDEDNESS = RIGHT,                 DX11    = 32.8,   DX12    = 0,
+  DX21    = 0,      DX22    = 1,      DN11    = 0.03048780487804878,
+  DN12    = 0,      DN21    = 0,      DN22    = 1,      SURVEY_EAST = (),
+  SURVEY_NORTH = (),                  GRID_X  = (),     GRID_Y  = (),
+  X_RESIDUAL = (),  Y_RESIDUAL = (),  USER_LEVEL = REGULAR
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="JOB_DATA">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1),                 TSTRT   = 0,
+  DT      = 0.004,  NDPT    = 2751,   NWIH    = 64,     NUM_CPUS = 1
+ </GLOBALS>
+ <CONTROLS>
+  NSCRATCH = 0,     NSTORE  = 0,      SETUP_ONLY = YES
+ </CONTROLS>
+ <PARAMETERS>
+  JOBNAME = rmuljava16,               JOB_COMMENT = "",
+  SUB_PROJECT = NONE,                 QUEUE   = A,      MAIL_OPT = NO,
+  HISTORY_OPT = ALL,                  PDN_USERID = burtomm,
+  MACHINE = Linux,  RERUN   = NO,     PATHNAME_TRCIO = ~sps/cpsdata/,
+  PATHNAME_DIR = ~/cpsdata/betalib,   NUM_CPUS = 1,     NUM_NODES = 1,
+  PRIORITY = 0,     TSTAMP_INC = 1000,                  STD_LIBS = BETALIB,
+  REC_KEEPING = "NO    Job Summary File",
+  PCPS_REPORT_OPT = "Include worker printout",
+  TRSCAN_OPT = BASIC,                 CALLING_PROGRAM = CPS,
+  DEBUG_LEVEL = "NO DEBUG",           RLOCATION = LOCAL,
+  TRACE_LENGTH = 11,                  TSTRT   = 0,      DT      = 0.004,
+  NDPT    = 2751,   NWIH    = 64,     CUSTOM_EXEC_B = "",
+  CUSTOM_EXEC_A = "",                 CUSTOM_LAM = NO,
+  CUSTOM_MODULES = (),                CUSTOM_COMPILE = (),
+  CUSTOM_LINK = (), CUSTOM_NODES = (),
+  PROCESS_LIST = (PROJECT_DATA, JOB_DATA, TRIN, SELECT, GATHER, RMUL,
+   EZCHECK),
+  FRONTEND_PATH = /d/geoprog/u/mengewm/Spark/cpseis/opencfe/etc/
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="TRIN">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1),                 TSTRT   = 0,
+  DT      = 0.004,  NDPT    = 2751,   NWIH    = 64,     NUM_CPUS = 1,
+  NUMTR   = 1,      GATHERED = NO
+ </GLOBALS>
+ <CONTROLS>
+  TWOSETS = NO,     IFTD    = NO,     NDISK   = 0,      SETUP_ONLY = NO,
+  NEED_REQUEST = NO,                  NEED_LABEL = YES
+ </CONTROLS>
+ <PARAMETERS>
+  ABORT   = NORMAL, HISTORY = YES,    ORDER_LOCAL = APPEND,
+  ORDER_PREV = NEW, SELECT_ON_HEADER_WORD = 0,
+  START   = -9.99999E+17,             END     = 9.99999E+17,
+  INCR    = 0,      TR_MAX  = 99999999,                 SKIP_INIT = 0,
+  NUM_DO  = 1,      NUM_SKIP = 0,
+  STATUS_ARRAYSET = (status, pathnames),
+  OPT_FILE = PATHNAMES,               CHECKFILE = NO,
+  PATHNAMES = (/d/cps/auto/inputs/nmo1512.trc),         PATH_LIST = NONE,
+  LATEST_PATHNAME = /d/cps/auto/inputs/nmo1512.trc,
+  SBYTE_ARRAYSET = (SBYTE, BYTES, CPS_HDR, MTYPE),      MOD_SEGY = NO,
+  SBYTE   = (),     BYTES   = (),     CPS_HDR = (),     MTYPE   = (),
+  OPT_GROUP = NO,   HDR_GROUP = 55,   LEN_GROUP = 1
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="SELECT">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1),                 TSTRT   = 0,
+  DT      = 0.004,  NDPT    = 2751,   NWIH    = 64,     NUM_CPUS = 1,
+  NUMTR   = 1,      GATHERED = NO
+ </GLOBALS>
+ <CONTROLS>
+  NEED_REQUEST = YES
+ </CONTROLS>
+ <PARAMETERS>
+  ENTRIES_A_ARRAYSET = (COMMENT_A, ENTRIES_A),
+  ENTRIES_B_ARRAYSET = (COMMENT_B, ENTRIES_B),
+  ENTRIES_C_ARRAYSET = (COMMENT_C, ENTRIES_C),
+  ENTRIES_D_ARRAYSET = (COMMENT_D, ENTRIES_D),          ACTION  = SAVE,
+  HDR_FLAG = 48,    METHOD_A = RANGES,
+  ENTRIES_A = (1120, 1320),           HDR_SEL_A = 7,    COMPLEMENT_A = NO,
+  METHOD_B = DISABLED,                ENTRIES_B = (),   HDR_SEL_B = 1,
+  COMPLEMENT_B = NO,                  METHOD_C = DISABLED,
+  ENTRIES_C = (),   HDR_SEL_C = 1,    COMPLEMENT_C = NO,
+  METHOD_D = DISABLED,                ENTRIES_D = (),   HDR_SEL_D = 1,
+  COMPLEMENT_D = NO,                  COMBINE = MEETS_ALL
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="GATHER">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1),                 TSTRT   = 0,
+  DT      = 0.004,  NDPT    = 2751,   NWIH    = 64,     NUM_CPUS = 1,
+  NUMTR   = 57,     GATHERED = YES
+ </GLOBALS>
+ <CONTROLS>
+  NEED_REQUEST = YES,                 NEED_LABEL = YES, TWOSETS = YES,
+  SETUP_ONLY = NO
+ </CONTROLS>
+ <PARAMETERS>
+  HDR_GATHER = 3,   GATHER_INIT = 1,  GATHER_INC = 1,   NUM_TR_MAX = 57
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="RMUL">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1),                 TSTRT   = 0,
+  DT      = 0.004,  NDPT    = 2751,   NWIH    = 64,     NUM_CPUS = 1,
+  NUMTR   = 81,     GATHERED = YES
+ </GLOBALS>
+ <CONTROLS>
+  NSTORE  = 23040,  NSCRATCH = 789582,                  PARALLEL_SAFE =
+   YES,             PCPS_SEND_MODE = PCPS_SEND_FIRST_AVAIL,
+  PCPS_RECEIVE_MODE = PCPS_RECEIVE_PASSTHRU,
+  PCPS_BUNCH_MODE = PCPS_BUNCH_TRACE_GROUPS,
+  PCPS_SEND_EOF_MODE = PCPS_SEND_ALL_EOF,
+  PCPS_ALT_SEND_MODE = PCPS_SEND_ALL,
+  PCPS_ALT_RECEIVE_MODE = PCPS_RECEIVE_ALL_EOF
+ </CONTROLS>
+ <PARAMETERS>
+  RMO_PRI_MIN = -0.1,                 RMO_PRI_MAX = 0.1,
+  RMO_MUL_MIN = 0.11,                 RMO_MUL_MAX = 1.5,
+  SCAN_INC = 0.02,  FREQ_BEG = 5,     FREQ_END = 70,    TIM_MUTE = 11,
+  WIN_BEG_FCTR = 1, WIN_BEG_ADD = 0.004,                WIN_END = 11,
+  OPT_RMUL = RADON, OPT_OPER = PARABOLIC,               POINT_SOURCE = NO,
+  FREQ_BAL = NO,    OPT_OUTPUT = RMUL,                  ZREF    = "",
+  DIAG_LOAD = 5,    FILE_HEAD = NONE, FILE_TAIL = NONE, HDR_PMUTE = 6
+ </PARAMETERS>
+</PROCESS>
+
+<PROCESS name="EZCHECK">
+ <GLOBALS>
+  GRID    = (7827.7, 0, 32.8, 0, 0, 1),                 TSTRT   = 0,
+  DT      = 0.004,  NDPT    = 2751,   NWIH    = 64,     NUM_CPUS = 1,
+  NUMTR   = 81,     GATHERED = YES
+ </GLOBALS>
+ <CONTROLS>
+  NEED_REQUEST = YES,                 NEED_LABEL = YES
+ </CONTROLS>
+ <PARAMETERS>
+  GLOB_NAME_ARRAYSET = (glob_name, glob_mode, glob_tol),
+  HDR_NUM_ARRAYSET = (hdr_num, hdr_mode, hdr_tol),
+  TEST_DATA = /d/cps/auto/ezcheck/rmul7.trc,            OUT_DATA = INPUT,
+  REPORT = VERBOSE, N_LIMIT = 1000,
+  GLOB_NAME = (NUMTR, GATHERED, NWIH, NDPT, TSTRT, DT, GRID),
+  GLOB_MODE = (IGNORE, IGNORE, EQUAL, EQUAL, SAME, SAME, SAME),
+  GLOB_TOL = (0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1),
+  GLOB_DEF_MODE = SAME,               GLOB_DEF_TOL = 0.1,
+  HDR_NUM = (1, 3, 4, 25),
+  HDR_MODE = (EQUAL, EQUAL, EQUAL, ABS),
+  HDR_TOL = (0, 0, 0, 0.0001),        HDR_DEF_MODE = REL,
+  HDR_DEF_TOL = 0.0001,               SMP_MODE = ABS,   SMP_TOL = 0.0001,
+  SMP_0_EPS_STATE = ON,               SMP_0_EPS = 1.E-07
+ </PARAMETERS>
+</PROCESS>

@@ -1,0 +1,270 @@
+#----- Bill's version of makefile for cpseis ...
+#----- This does not make jobmon (cluster job monitoring tool)
+#-----                 or cfe (the graphical user interface for cpseis)
+#----- AND it is dependent upon you having an ABSOFT fortran compiler
+#----- AND it only builds on linux.
+#----- To make CFE( the front end gui) go to cpseis/opencfe/src and find the Makefile.
+#----- Much better make files exist that build for many platforms and build the
+#----- other tools, but this is all that I have time for (now!).
+#----- Bill Menger bill.menger@conocophillips.com
+#----- DO THIS:
+#-----    Create a cpseis directory, put an src directory underneath it for all the source.
+#-----    Put a lib and etc underneath it for your builds.  I put architecture-specific dirs
+#-----    underneath those as well.
+#-----    Modify the FFLAGS and CFLAGS to suit.
+#-----    Install the Absoft fortran environment
+#-----    Build fftw version 2.1.5 and locate it where the make can find it (see below) 
+#-----    Build mpich2 version 1.0.8 (or mpich or lam) and do the same (see below)
+#-----    make clean;make all
+#-----    test system with icps by running it through test.wrk with the following:
+#-----    LD_LIBRARY_PATH=path to your fftw/lib:path to your mpich2/lib
+#-----    ldd ./cpseis/bin/linux32/icps -- make sure none say "not found"
+#-----    ./cpseis/bin/icps ./cpseis/etc/testfunction.wrk
+#-----    You will need to set your LD_LIBRARY_PATH correctly if some are not found.
+
+CPSEIS_HOME = /home/mengewm/workspace/cpseis
+#JAVA_HOME = 
+SRCDIR = $(CPSEIS_HOME)/src
+LIBDIR = $(CPSEIS_HOME)/lib/linux32
+BINDIR = $(CPSEIS_HOME)/bin/linux32
+MODDIR = $(CPSEIS_HOME)/src
+#
+
+ICPS =					$(BINDIR)/icps                # "interactive" cpseis (non parallel version)
+EZCPS =					$(BINDIR)/ezcps               # Tool to build a template for adding a new module (tool) to cpseis
+EZGUI =					$(BINDIR)/ezgui               # Tool for laying out the gui for your new module.
+SPS_BUILD_SUPERPROC =	$(BINDIR)/sps_build_superproc # This builds wrapper code
+CMDTIM =                $(BINDIR)/command_timeout     # wraps a shell command with a signal timer to kill if it takes too long.
+BLDSUP =				$(BINDIR)/bldsup			  # builds the super.f90 program for CFE building.
+CFEBLD =				$(BINDIR)/cfebld              # Builds stand-alone jobs from work files.
+CFESER =                $(BINDIR)/cfeseries           # Creates a job series by using one workfile template and generating many.
+CFESUB =                $(BINDIR)/cfesub              # submits jobs from cfe front end gui.
+CHECKC =				$(BINDIR)/checkc              # Looks over your code to see if it meets the old conoco standards.
+CFE =					$(BINDIR)/cfe                 # This is the front end system (not built yet)
+CKCOMLOGS =				$(BINDIR)/ckcomlogs           # extracts information from the log files.
+COLOR2CGM =				$(BINDIR)/color2cgm           # for the splt and color tools, this creates cgm output for plotter hardcopy
+CPSACCTPRG =			$(BINDIR)/cpsacct             # Looks at the accounting logs to do run statistics extraction.
+FILERESERVE =			$(BINDIR)/filereserve         # reserves file space for an output by prewriting blocks of zeroes.
+FILERESERVENA =			$(BINDIR)/filereservena       # Does the same on network appliance systems (requires root access to the NA)
+FX2FR =					$(BINDIR)/fx2fr               # Can't remember what this does.
+FSIZE =					$(BINDIR)/fsize               # Attempts to tell you how large your file will be based on number of traces.
+JUNK2BLANK =			$(BINDIR)/junk2blank          # Strips out nonprintable characters from a file.
+PERMSAVE =				$(BINDIR)/permsave            # Helps you create a file list for copy to tape for archiving.
+PFTOOLS =				$(BINDIR)/pftools             # creates prm, pcp, psz... which allow you to do file operations on the
+                                                      # multiple-extent files from cpseis.  If you just to an "rm" on one of these
+                                                      # then you will only remove the link that points to the first file extent and
+                                                      # you will leave lots of data orphaned on your file system.  Read the documentation
+                                                      # in pfio, cio, bfio, pftools.
+PICKMERGE =				$(BINDIR)/pickmerge           # Merges pick files but I don't know what to do with this. 
+REFRESHLOCK =			$(BINDIR)/refreshlock         # If you choose to start up lock files for your data, this is a daemon that
+                                                      # needs to be running on your lock file server.  It attempts to restart lock
+                                                      # servers that are hung.  Doesn't always work.  I LOVE nfs. :^(
+RSH_TIMEOUT =			$(BINDIR)/rsh_timeout         # Wraps an rsh command in a timer that kills it after a wait period.
+SD2FG =					$(BINDIR)/sd2fg               # This is for geometry set up for the fg module (field geometry).
+SEGYFIX =				$(BINDIR)/segyfix             # Allows you to modify segy files (don't know how useful it is.)
+SEGYVIEW =				$(BINDIR)/segyview            # REALLY cheezy non-graphical segy file viewer.  It will REMAP the segy headers
+                                                      # into cpseis headers so it won't always tell you what you need, but it does
+                                                      # a tab plot shamelessly borrowed from cwp's su system.
+
+STATIC_EXT = .a
+SHARED_EXT = .so
+#--------------- Here is where you need to modify the make file to point to your fft and mpich2 library.
+FFTW_LDFLAGS = /d/geoprog/u/mengewm/fftw/linux32a/lib -lfftw -lrfftw
+MPI_LDFLAGS  = /d/geoprog/u/mengewm/mpich2/linux32a/lib -lmpich
+CPS_LDFLAGS  = ../lib/linux32 -lcps -lcgm
+F90_LDFLAGS  = ../lib/absoft32
+
+# For absoft's 64 bit version 9 compiler
+F90 = ab90_f90 
+CC  = gcc 
+STATIC_LINKER = $(F90) 
+SHARED_LINKER = $(F90) -shared
+#
+FFLAGS = -g -fPIC -en -YDEALLOC=MINE -YEXT_NAMES=LCS -YEXT_SFX=_ -p$(MODDIR)
+CFLAGS = -g -fPIC -Wall -DLINUXI -DNEED_UNDERSCORE -D_REENTRANT -D_FILE_OFFSET_BITS=64 -I.
+#
+#Linker flags
+LDFLAGS = -L$(F90_LDFLAGS) -lf77math -lf90math -lfio -lU77 -lV77 -L$(CPS_LDFLAGS) -L$(FFTW_LDFLAGS) -lm -lpthread -L$(MPI_LDFLAGS)
+STATIC_LDFLAGS = -L$(FFTW_LDFLAGS) -L$(MPI_LDFLAGS) -lm -lpthread
+
+STATIC_LIBCPS = $(LIBDIR)/libcps$(STATIC_EXT)
+SHARED_LIBCPS = $(LIBDIR)/libcps$(SHARED_EXT)
+
+STATIC_LIBCGM = $(LIBDIR)/libcgm$(STATIC_EXT)
+SHARED_LIBCGM = $(LIBDIR)/libcgm$(SHARED_EXT)
+
+# put your installation directory here.
+INSTALL_DIR = /home/mengewm/sbin/
+
+all :	static shared icps cfebld ezcps ezgui \
+		sps_build_superproc command_timeout cfeseries \
+		cfesub ckcomlogs cpsacct filereserve filereservena \
+		color2cgm fx2fr fsize pftools pickmerge refreshlock \
+		rsh_timeout sd2fg segyfix segyview junk2blank \
+		permsave checkc objs scripts
+
+scripts:
+	cp $(CPSEIS_HOME)/scripts/* $(BINDIR)
+
+install:
+	cp $(CPSEIS_HOME)/scripts/* $(BINDIR)
+	cp $(BINDIR)/* $(INSTALL_DIR)
+
+clean : 
+	rm -f $(INSTALL_DIR)libcgm.a $(INSTALL_DIR)libcgm.so $(INSTALL_DIR)libopencfe.so $(INSTALL_DIR)libcps.a $(INSTALL_DIR)libcps.so
+	rm -f $(STATIC_LIBCPS) $(SHARED_LIBCPS) $(STATIC_LIBCGM) $(SHARED_LIBCGM)
+	rm -f *.o $(MODDIR)/*.mod $(BINDIR)/*
+
+static : $(STATIC_LIBCPS) $(STATIC_LIBCGM)
+
+shared : $(SHARED_LIBCPS) $(SHARED_LIBCGM)
+
+include $(CPSEIS_HOME)/etc/makefile_cpseis.depend
+
+OBJS = $(COBJS) $(FOBJS) $(FPROBJS) $(CPROBJS) $(CGMOBJS)
+
+objs : $(OBJS)
+
+progs : objs icps cfebld ezcps ezgui sps_build_superproc command_timeout cfeseries \
+        cfesub ckcomlogs cpsacct filereserve filereservena \
+        color2cgm fx2fr fsize pftools pickmerge refreshlock \
+        rsh_timeout sd2fg segyfix segyview junk2blank \
+        permsave checkc
+
+icps : icps.o $(STATIC_LIBCPS) $(FPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(ICPS) icps.o engine.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+ezcps : ezcps.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(EZCPS) ezcps.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+bldsup : bldsup.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(BLDSUP) bldsup.o build_super.o \
+	$(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+checkc : checkc.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CHECKC) checkc.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+ezgui : ezgui.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(EZGUI) ezgui.o ezgui_frou.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+permsave : permsave.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(PERMSAVE) permsave.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+junk2blank : junk2blank.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(JUNK2BLANK) junk2blank.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+command_timeout : command_timeout.o
+	$(STATIC_LINKER) $(FFLAGS) -o $(CMDTIM) command_timeout.o $(STATIC_LDFLAGS)
+
+sps_build_superproc : sps_build_superproc.f90 \
+	alphasort.o getsys.o putsys.o string.o named_constants.o sizeof.o string_crou.o \
+	sizeof_crou.o cgetsys.o str.o cputsys.o cnfg.o cnfg_crou.o unix.o unix_crou.o sizeof_crou.o
+	$(STATIC_LINKER) $(FFLAGS) -o $(SPS_BUILD_SUPERPROC) sps_build_superproc.f90 \
+	alphasort.o getsys.o putsys.o string.o named_constants.o sizeof.o sizeof_crou.o \
+	string_crou.o cgetsys.o str.o cputsys.o cnfg.o cnfg_crou.o unix.o unix_crou.o $(STATIC_LDFLAGS)
+
+cfebld : cfebldbeta.c buildjob.f90 cfebld_frou.f90 $(STATIC_LIBCPS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CFEBLD) cfebldbeta.o buildjob.o cfebld_frou.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+cfeseries : cfeseries.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CFESER) cfeseries.o cfeseries_frou.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+cfesub : cfesub.o $(STATIC_LIBCPS) $(FPROBJS) $(CPROBJS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CFESUB) cfesub.o cfesub_frou.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+ckcomlogs : ckcomlogs.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CKCOMLOGS) ckcomlogs.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+cpsacct : cpsacctprg.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(CPSACCTPRG) cpsacctprg.o cnfg.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+filereserve : filereserve.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FILERESERVE) filereserve.o pfio.o str.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+filereservena : filereservenetapps.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FILERESERVENA) filereservenetapps.o pfio.o cnfg.o \
+	$(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+color2cgm : color2cgm.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(COLOR2CGM) color2cgm.o $(STATIC_LIBCPS) $(STATIC_LIBCGM) $(STATIC_LDFLAGS)
+
+fx2fr : fx2fr.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FX2FR) fx2fr.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+fsize : fsize.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(FSIZE) fsize.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+pftools : pftools.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(PFTOOLS) pftools.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+	ln -f $(PFTOOLS) $(BINDIR)/psz
+	ln -f $(PFTOOLS) $(BINDIR)/pcp
+	ln -f $(PFTOOLS) $(BINDIR)/pchmod
+	ln -f $(PFTOOLS) $(BINDIR)/pmv
+	ln -f $(PFTOOLS) $(BINDIR)/prcp
+	ln -f $(PFTOOLS) $(BINDIR)/prm
+	ln -f $(PFTOOLS) $(BINDIR)/ulf
+	ln -f $(PFTOOLS) $(BINDIR)/lfd
+
+pickmerge : pickmerge.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(PICKMERGE) pickmerge.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+refreshlock : refreshlock.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(REFRESHLOCK) refreshlock.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+rsh_timeout : rsh_timeout.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(RSH_TIMEOUT) rsh_timeout.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+sd2fg : sd2fg.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(SD2FG) sd2fg.o $(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+segyfix : segyfix.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(SEGYFIX) segyfix.o modgrid.o modgrid_frou.o \
+	$(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+segyview : segyview.o $(STATIC_LIBCPS)
+	$(STATIC_LINKER) $(FFLAGS) -o $(SEGYVIEW) segyview.o cio.o named_constants.o put.o segy.o \
+	swap.o trcio.o wrdc.o put_crou.o segy_crou.o \
+	$(STATIC_LIBCPS) $(STATIC_LDFLAGS)
+
+$(STATIC_LIBCPS) : $(COBJS) $(FOBJS)
+	ar crv $@ $?
+
+$(SHARED_LIBCPS) : $(COBJS) $(FOBJS)
+	$(SHARED_LINKER) -o $@ $? 
+
+$(STATIC_LIBCGM) : $(CGMOBJS) cgm.o
+	ar crv $@ $?
+
+$(SHARED_LIBCGM) : $(CGMOBJS) cgm.o
+	$(SHARED_LINKER) -o $@ $? 
+
+$(COBJS) : %.o : %.c
+	$(CC) -c -o $@ $(CFLAGS) $<
+
+$(FOBJS) : %.o : %.f90
+	$(F90) -c -o $@ $(FFLAGS) $<
+
+$(FPROBJS) : %.o : %.f90
+	$(F90) -c -o $@ $(FFLAGS) $<
+
+$(CPROBJS) : %.o : %.c
+	$(CC) -c -o $@ $(CFLAGS) $<
+
+$(CGMOBJS) : %.o : %.c
+	$(CC) -c -o $@ $(CFLAGS) $<
+
+#%.f90 : 
+#	cp `findcps $@` $@
+
+#%.h :
+#	cp `findcps $@` $@
+
+#%.c :
+#	cp `findcps $@` $@
+
+.PHONY: all clean static shared icps cfebld ezcps ezgui \
+		sps_build_superproc command_timeout cfeseries \
+		cfesub ckcomlogs cpsacct filereserve filereservena \
+		color2cgm fx2fr fsize pftools pickmerge refreshlock \
+		rsh_timeout sd2fg segyfix segyview junk2blank \
+		permsave checkc objs progs

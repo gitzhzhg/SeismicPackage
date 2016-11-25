@@ -1,0 +1,31 @@
+#! /bin/csh -f
+
+
+##------------------------ define ARCHITECTURE --------------------##
+##------------------------ define ARCHITECTURE --------------------##
+##------------------------ define ARCHITECTURE --------------------##
+
+if(`uname` == Linux) then
+  if(`uname -m` == x86_64) then
+    setenv ARCHITECTURE ix86-64-intel-linux
+  else
+    setenv ARCHITECTURE ix86-intel-linux
+  endif
+else
+  echo ++++ setup_sps_environment unsupported architecture:
+  echo ++++ `uname -a`
+  exit
+endif
+
+
+##---------------------- setup SPWS environment -------------------##
+##---------------------- setup SPWS environment -------------------##
+##---------------------- setup SPWS environment -------------------##
+##---------------------- setup SPWS environment -------------------##
+echo "source ${SPWSINSTALLDIR}/scripts/setup_spws_environment"
+source ${SPWSINSTALLDIR}/scripts/setup_spws_environment
+#echo USAGE_HOST $USAGE_HOST
+#set USGPID=`$COPPATH/bin/appltrkinit $0`
+echo "${SPWSINSTALLDIR}/bin/${ARCHITECTURE}/$1 $*"
+${SPWSINSTALLDIR}/bin/${ARCHITECTURE}/$1 $*
+#$COPPATH/bin/appltrkexit $0 $USGPID $? "$*"
